@@ -90,7 +90,7 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="{{asset("dist/img/user2-160x160.jpg")}}" class="user-image" alt="User Image">
-              <span class="hidden-xs">Alexander Pierce</span>
+              <span class="hidden-xs">{{auth::user()->name}}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -175,13 +175,13 @@
           </a>
         </li>
         <li>
-          <a href="{{route('home')}}">
+          <a href="{{route('clients')}}">
             <i class="fa fa-user-circle"></i><span>Client</span>
           </a>
         </li>
         <li>
           <a href="{{route('home')}}">
-            <i class="fa fa-plus-square"></i><span>Project and Services Registration</span>
+            <i class="fa fa-plus-square"></i><span>Product and Services Registration</span>
           </a>
         </li>
         <li>
@@ -230,8 +230,10 @@
 
     <!-- Main content -->
     <section class="content">
+      <div class="container">
      @yield('content')
     </section>
+    </div>
         <!-- right col -->
   </div>
       <!-- /.row (main row) -->

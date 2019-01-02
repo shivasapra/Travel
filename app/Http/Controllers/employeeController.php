@@ -75,6 +75,8 @@ class employeeController extends Controller
         $employee->bank_address = $request->bank_address;
         $employee->income_tax_no = $request->income_tax_no;
         $employee->national_insurance_no = $request->national_insurance_no;
+        $unique_id = 'cldtrvl'. mt_rand(100000, 999999);
+        $employee->unique_id = $unique_id;
         $employee->save();
         return redirect()->route('employees');
     }

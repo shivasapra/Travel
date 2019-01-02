@@ -208,7 +208,7 @@ Employee Registration
 					<div class="col-md-3">
 					<div class="form-group">
 						<label for="hiring_date">Hiring Date</label>
-						<input type="text" name='hiring_date' class="form-control">
+						<input type="date" name='hiring_date' class="form-control">
 					</div>
 					</div>
 					<div class="col-md-2">

@@ -9,9 +9,9 @@ Employees
                       <tr>
                         <th>Sno.</th>
                         <th>Name</th>
+                        <th>Unique Id</th>
                         <th>Passport</th>
                         <th>country</th>
-                        <th>Address</th>
                         <th>Department</th>
                         <th>Hiring Date</th>
                         <th>Rate Contract</th>
@@ -24,9 +24,9 @@ Employees
 	                    	@foreach($employees as $employee)
 	                    		<td>{{$i++}}</td>
 	                    		<td>{{$employee->first_name}}</td>
+	                    		<td>{{$employee->unique_id}}</td>
 	                    		<td>{{$employee->passport}}</td>
 	                    		<td>{{$employee->country}}</td>
-	                    		<td>{{$employee->permanent_address}}</td>
 	                    		<td>{{$employee->hired_for_dep}}</td>
 	                    		<td>{{$employee->hiring_date}}</td>
 	                    		<td>{{$employee->rate}}</td>

@@ -42,3 +42,33 @@ Route::get('/employee/delete/{id}',[
 		'uses' => 'employeeController@destroy',
 		'as' => 'delete.employee'
 	]);
+
+
+Route::get('/clients',[
+		'uses' => 'clientController@index',
+		'as' => 'clients'
+	]);
+Route::get('/client/registration',[
+		'uses' => 'clientController@create',
+		'as' => 'create.client'
+	]);
+Route::post('/client/store',[
+		'uses' => 'clientController@store',
+		'as' => 'store.client'
+	]);
+Route::post('/client/update/{id}',[
+		'uses' => 'clientController@update',
+		'as' => 'update.client'
+	]);
+Route::get('/client/edit/{id}',[
+		'uses' => 'clientController@edit',
+		'as' => 'edit.client'
+	]);
+Route::get('/client/view/{id}',[
+		'uses' => 'clientController@show',
+		'as' => 'view.client'
+	]);
+Route::get('/client/delete/{id}',[
+		'uses' => 'clientController@destroy',
+		'as' => 'delete.client'
+	]);
