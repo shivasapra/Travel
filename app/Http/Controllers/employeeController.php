@@ -86,8 +86,9 @@ class employeeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
+    {   
+        $employee = employee::find($id);
+        return view('employee.show')->with('employee',$employee);
     }
 
     /**
@@ -163,6 +164,8 @@ class employeeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $employee = employee::find($id);
+        $employee->delete();
+        return redirect()->route('employees');
     }
 }

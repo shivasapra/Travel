@@ -34,3 +34,11 @@ Route::get('/employee/edit/{id}',[
 		'uses' => 'employeeController@edit',
 		'as' => 'edit.employee'
 	]);
+Route::get('/employee/view/{id}',[
+		'uses' => 'employeeController@show',
+		'as' => 'view.employee'
+	]);
+Route::get('/employee/delete/{id}',[
+		'uses' => 'employeeController@destroy',
+		'as' => 'delete.employee'
+	]);
