@@ -14,8 +14,23 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
-
+Route::get('/employees',[
+		'uses' => 'employeeController@index',
+		'as' => 'employees'
+	]);
 Route::get('/employee/registration',[
 		'uses' => 'employeeController@create',
 		'as' => 'create.employee'
+	]);
+Route::post('/employee/store',[
+		'uses' => 'employeeController@store',
+		'as' => 'store.employee'
+	]);
+Route::post('/employee/update/{id}',[
+		'uses' => 'employeeController@update',
+		'as' => 'update.employee'
+	]);
+Route::get('/employee/edit/{id}',[
+		'uses' => 'employeeController@edit',
+		'as' => 'edit.employee'
 	]);

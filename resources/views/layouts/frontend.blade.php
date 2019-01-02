@@ -170,7 +170,7 @@
           </a>
         </li>
         <li>
-          <a href="{{route('home')}}">
+          <a href="{{route('employees')}}">
             <i class="fa fa-pencil-square-o"></i><span>Employee</span>
           </a>
         </li>
