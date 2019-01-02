@@ -3,6 +3,10 @@
 client
 @endsection
 @section('content')
+<div class="container">
+	<div class="box">
+		<div class="box-body">
+			
 	<table class="table table-hover mb-0">
 					<tbody>
 						<div class="row">
@@ -66,5 +70,8 @@ client
 							</tr>
 						</div>
 					</tbody>
-				</table>
+	</table>
+	</div>
+	</div>
+</div>
 @endsection

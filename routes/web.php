@@ -72,3 +72,28 @@ Route::get('/client/delete/{id}',[
 		'uses' => 'clientController@destroy',
 		'as' => 'delete.client'
 	]);
+
+Route::get('/products',[
+	'uses'=>'controller@products',
+	'as'=>'products'
+	]);
+Route::post('/add/product',[
+	'uses'=>'controller@addProduct',
+	'as'=>'product.add'
+	]);
+Route::get('/delete/product/{id}',[
+	'uses'=>'controller@destroyProduct',
+	'as'=>'product.delete'
+	]);
+Route::get('/airlines',[
+	'uses'=>'controller@airlines',
+	'as'=>'airlines'
+	]);
+Route::post('/add/airline',[
+	'uses'=>'controller@addAirline',
+	'as'=>'airline.add'
+	]);
+Route::get('/delete/airline/{id}',[
+	'uses'=>'controller@destroyAirline',
+	'as'=>'airline.delete'
+	]);

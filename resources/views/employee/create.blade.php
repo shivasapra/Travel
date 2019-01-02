@@ -16,9 +16,10 @@ Employee Registration
 
 
 
+		<div class="box">
+		<div class="boxbody">
 	<div class="container">
-		<div class="card-header">Add Employee</div>
-		<div class="card-body">
+		<div class="container">
 			<form action="{{route('store.employee')}}" method="post">
 				@csrf
 				<div class="text-center"><h4><strong>{{"Personal Inforamtion"}}</strong></h4></div>
@@ -322,6 +323,8 @@ Employee Registration
 				</div>
 				
 			</form>
+		</div>
+		</div>
 		</div>
 	</div>
 

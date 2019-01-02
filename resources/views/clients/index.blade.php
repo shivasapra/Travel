@@ -4,6 +4,10 @@ Clients
 @endsection
 @section('content')
 	<div class="container">
+		<div class="box">
+			<div class="box-body">
+				
+			
 			<table class="table table-hover mb-0">
                     <thead>
                       <tr>
@@ -36,11 +40,13 @@ Clients
 	                    	@endforeach
                     	@endif
                     </tbody>
-                </table>
+            </table>
 		<div class="text-center">
 			<a href="{{route('create.client')}}">
 				<button class="btn btn-success">Add Client</button>
 			</a>
+		</div>
+		</div>
 		</div>
 	</div>
 @endsection

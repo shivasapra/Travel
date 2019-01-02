@@ -180,12 +180,12 @@
           </a>
         </li>
         <li>
-          <a href="{{route('home')}}">
+          <a href="{{route('products')}}">
             <i class="fa fa-plus-square"></i><span>Product and Services Registration</span>
           </a>
         </li>
         <li>
-          <a href="{{route('home')}}">
+          <a href="{{route('airlines')}}">
             <i class="fa fa-plane"></i><span>Airlines Name Registration</span>
           </a>
         </li>
@@ -232,15 +232,11 @@
     <section class="content">
       <div class="container">
      @yield('content')
-    </section>
     </div>
+    </section>
         <!-- right col -->
   </div>
       <!-- /.row (main row) -->
-
-    </section>
-    <!-- /.content -->
-  </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
     <div class="pull-right hidden-xs">

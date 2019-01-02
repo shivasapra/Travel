@@ -17,8 +17,8 @@ Client Registration
 
 
 	<div class="container">
-		<div class="card-header">Add client</div>
-		<div class="card-body">
+		<div class="box">
+		<div class="box-body">
 			<form action="{{route('store.client')}}" method="post">
 				@csrf
 				<div class="row">
@@ -99,6 +99,7 @@ Client Registration
 				</div>
 				
 			</form>
+		</div>
 		</div>
 	</div>
 

@@ -17,8 +17,8 @@ Edit Client
 
 
 	<div class="container">
-		<div class="card-header">Edit client</div>
-		<div class="card-body">
+		<div class="box">
+		<div class="box-body">
 			<form action="{{route('update.client',['id'=>$client->id])}}" method="post">
 				@csrf
 				<div class="row">
@@ -99,6 +99,7 @@ Edit Client
 				</div>
 				
 			</form>
+		</div>
 		</div>
 	</div>
 

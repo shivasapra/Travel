@@ -4,8 +4,8 @@ Edit employee
 @endsection
 @section('content')
 	<div class="container">
-		<div class="card-header">Edit Employee</div>
-		<div class="card-body">
+		<div class="box">
+		<div class="box-body">
 			<form action="{{route('update.employee',['id'=>$employee->id])}}" method="post">
 				@csrf
 				<div class="text-center"><h4><strong>{{"Personal Inforamtion"}}</strong></h4></div>
@@ -307,6 +307,7 @@ Edit employee
 				<button class="btn btn-success">Update</button>
 		</div>
 			</form>
+		</div>
 		</div>
 	</div>
 @endsection
