@@ -65,6 +65,7 @@ class wageController extends Controller
         $time2 = substr($wage->login,0,2);
         $diff = $time1-$time2;
         $total = $diff * $hourly;
+        $wage->hours = $diff;
         $wage->wage = $total;
         $wage->save();
     }
@@ -145,5 +146,24 @@ class wageController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function generateSlip(){
+        return view('wage.slipGenerate');
+    }
+
+    public function slip(Request $request){
+        $employee = employee::take(1)->where('unique_id',$request->unique)->take(1)->get();
+        $emp = employee::find(1);
+        $wages = wage::where('unique_id',$request->unique)->get();
+        // dd($request->from);
+        $total_wage = 0;
+        $total_hours = 0;
+        foreach($wages as $wage){
+            $total_wage = $total_wage + $wage->wage;
+            $total_hours = $total_hours + $wage->hours;
+        }
+        return view('wage.slip')->with('employee',$emp)
+                                ->with('total_wage',$total_wage)
+                                ->with('total_hours',$total_hours);
     }
 }

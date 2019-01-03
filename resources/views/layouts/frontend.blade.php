@@ -200,6 +200,11 @@
           </a>
         </li>
         <li>
+          <a href="{{route('slip.generate')}}">
+            <i class="fa fa-paperclip"></i><span>Generate Salary Slip</span>
+          </a>
+        </li>
+        <li>
           <a href="{{route('home')}}">
             <i class="fa fa-money"></i><span>Daily Expense Entry</span>
           </a>

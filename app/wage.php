@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class wage extends Model
 {
     protected $fillable = ['employee_id','unique_id','login','logout','date','hourly',
-    'wage'];
+    'wage','hours'];
 
     public function employee()
     {

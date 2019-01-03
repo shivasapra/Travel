@@ -40,6 +40,14 @@ Route::get('/employee/wage/log/{id}',[
 		'as' => 'wage.log'
 	]);
 
+Route::get('/generate/slip',[
+		'uses' => 'wageController@generateSlip',
+		'as' => 'slip.generate'
+	]);
+Route::post('/slip',[
+		'uses' => 'wageController@slip',
+		'as' => 'slip'
+	]);
 
 
 Route::get('/employees',[
