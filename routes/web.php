@@ -31,6 +31,11 @@ Route::get('/log/logout/{id}',[
 		'as' => 'log.logout'
 	]);
 
+Route::get('/wage',[
+		'uses' => 'wageController@index',
+		'as' => 'wage'
+	]);
+
 
 
 

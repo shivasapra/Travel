@@ -195,7 +195,7 @@
           </a>
         </li>
         <li>
-          <a href="{{route('home')}}">
+          <a href="{{route('wage')}}">
             <i class="fa fa-wrench"></i><span>Staff Wage Management</span>
           </a>
         </li>

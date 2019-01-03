@@ -70,8 +70,13 @@ class wageController extends Controller
     }
 
     public function index()
-    {
-        //
+    {   
+        // $wage = wage::orderBy('created_at','desc')->first();
+        // $employee = employee::find(1);
+        // $wages = $employee->wage;
+        // dd($wages->orderBy('created_at','desc')->first());
+        return view('wage.index')->with('employees',employee::all());
+                                // ->with('wage',$wage);
     }
 
     /**
