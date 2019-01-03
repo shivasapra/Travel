@@ -3,24 +3,10 @@
 Products and services
 @stop
 @section('content')
-	<div class="box">
+<div class="row">
+	<div class="col-md-8">
+	<div class="box box-info">
 		<div class="box-body">
-			<div class="container">
-			<div class="row">
-				<form action="{{route('product.add')}}" method="post">
-					@csrf
-				<div class="col-md-8">
-				<div class="form-group">
-					<input type="text" name="service" class="form-control" placeholder="service name">
-				</div>
-				</div>
-				<div class="col-md-2">
-					
-						<button class="btn btn-xs btn-success" type="submit">Add</button>
-					
-				</div>
-			</form>
-			</div>
 			<table class="table table-hover">
 				<thead>
 					<th>Sno.</th>
@@ -47,4 +33,29 @@ Products and services
 			</div>
 		</div>
 	</div>
+	<div class="col-md-4">
+	<div class="box box-success">
+		<div class="box-body">
+			
+			<div class="row">
+				<form action="{{route('product.add')}}" method="post">
+					@csrf
+				<div class="col-md-8">
+				<div class="form-group">
+					<input type="text" name="service" class="form-control" placeholder="service name">
+				</div>
+				</div>
+				<div class="col-md-2">
+					
+						<button class="btn btn-xs btn-success" type="submit">Add</button>
+					
+				</div>
+			</form>
+			</div>
+		</div>
+	</div>
+	</div>
+	
+</div>
+	
 @stop

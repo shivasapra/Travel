@@ -3,8 +3,7 @@
 Employees
 @endsection
 @section('content')
-	<div class="container">
-		<div class="box">
+		<div class="box box-info">
 			<div class="box-body">
 				
 			<table class="table table-hover mb-0">
@@ -44,13 +43,13 @@ Employees
                     	@endif
                     </tbody>
                 </table>
+		
+			</div>
+		</div>
 		<div class="text-center">
 			<a href="{{route('create.employee')}}">
 				<button class="btn btn-success">Add employee</button>
 			</a>
 		</div>
-		
-			</div>
-		</div>
-	</div>
+	
 @endsection

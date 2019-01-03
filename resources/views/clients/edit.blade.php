@@ -16,11 +16,11 @@ Edit Client
 
 
 
-	<div class="container">
-		<div class="box">
-		<div class="box-body">
+	
 			<form action="{{route('update.client',['id'=>$client->id])}}" method="post">
 				@csrf
+		<div class="box box-success">
+		<div class="box-body">
 				<div class="row">
 					<div class="col-md-6">
 					<div class="form-group">
@@ -92,16 +92,16 @@ Edit Client
 					</div>
 				</div>
 				
+				
+		</div>
+		</div>
+			</form>
 				<div class="form-group">
 					<div class="text-center">
 						<button class="btn btn-success" type="submit">Add client</button>
 					</div>
 				</div>
-				
-			</form>
-		</div>
-		</div>
-	</div>
+	
 
 
 @stop

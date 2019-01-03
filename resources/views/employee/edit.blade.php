@@ -3,11 +3,11 @@
 Edit employee
 @endsection
 @section('content')
-	<div class="container">
-		<div class="box">
-		<div class="box-body">
+		
 			<form action="{{route('update.employee',['id'=>$employee->id])}}" method="post">
 				@csrf
+				<div class="box box-info">
+			<div class="box-body">
 				<div class="text-center"><h4><strong>{{"Personal Inforamtion"}}</strong></h4></div>
 				<div class="row">
 					<div class="col-md-4">
@@ -129,6 +129,10 @@ Edit employee
 					</div>
 					</div>
 				</div>
+			</div>
+		</div>
+		<div class="box box-success">
+			<div class="box-body">
 				<div class="text-center"><h4><strong>{{"Contact Information"}}</strong></h4></div>
 				<div class="row">
 					<div class="col-md-4">
@@ -164,6 +168,10 @@ Edit employee
 					</div>
 					</div>
 				</div>
+			</div>
+		</div>
+		<div class="box box-info">
+			<div class="box-body">
 				<div class="text-center"><h4><strong>{{"Professional Information"}}</strong></h4></div>
 				<div class="row">
 					<div class="col-md-4">
@@ -224,6 +232,10 @@ Edit employee
 					</div>
 					</div>
 				</div>
+			</div>
+		</div>
+		<div class="box box-danger">
+			<div class="box-body">
 				<div class="text-center"><h4><strong>{{"Emergency Contact Information"}}</strong></h4></div>
 				<div class="row">
 					<div class="col-md-6">
@@ -259,6 +271,10 @@ Edit employee
 					</div>
 					</div>
 				</div>
+			</div>
+		</div>
+		<div class="box box-info">
+			<div class="box-body">
 				<div class="text-center"><h4><strong>{{"Account Information"}}</strong></h4></div>
 				<div class="row">
 					<div class="col-md-6">
@@ -302,12 +318,14 @@ Edit employee
 					</div>
 					</div>
 				</div>
+			</div>
+		</div>
+
 				
 		<div class="text-center">
 				<button class="btn btn-success">Update</button>
 		</div>
 			</form>
-		</div>
-		</div>
-	</div>
+		
+	
 @endsection

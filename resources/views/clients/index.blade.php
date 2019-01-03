@@ -3,8 +3,8 @@
 Clients
 @endsection
 @section('content')
-	<div class="container">
-		<div class="box">
+	
+		<div class="box box-info">
 			<div class="box-body">
 				
 			
@@ -41,12 +41,12 @@ Clients
                     	@endif
                     </tbody>
             </table>
+		</div>
+		</div>
 		<div class="text-center">
 			<a href="{{route('create.client')}}">
 				<button class="btn btn-success">Add Client</button>
 			</a>
 		</div>
-		</div>
-		</div>
-	</div>
+	
 @endsection

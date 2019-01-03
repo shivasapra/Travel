@@ -16,11 +16,10 @@ Client Registration
 
 
 
-	<div class="container">
-		<div class="box">
-		<div class="box-body">
 			<form action="{{route('store.client')}}" method="post">
 				@csrf
+		<div class="box box-primary">
+		<div class="box-body">
 				<div class="row">
 					<div class="col-md-6">
 					<div class="form-group">
@@ -92,16 +91,15 @@ Client Registration
 					</div>
 				</div>
 				
+				
+		</div>
+		</div>
 				<div class="form-group">
 					<div class="text-center">
 						<button class="btn btn-success" type="submit">Add client</button>
 					</div>
 				</div>
-				
 			</form>
-		</div>
-		</div>
-	</div>
 
 
 @stop
