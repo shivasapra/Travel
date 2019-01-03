@@ -14,8 +14,8 @@ Airlines
     </section>
 @stop
 @section('content')
-<div class="row">
-	<div class="col-md-4">
+	<div class="row">
+	<div class="col-md-6">
 	<div class="box box-success">
 		<div class="box-body">
 			<div class="row">
@@ -23,10 +23,10 @@ Airlines
 				@csrf
 				<div class="col-md-8">
 				<div class="form-group">
-					<input type="text" name="name" class="form-control" placeholder="service name">
+					<input type="text" name="name" class="form-control" placeholder="airline name">
 				</div>
 				</div>
-				<div class="col-md-2">
+				<div class="col-md-4">
 					
 						<button class="btn  btn-success" type="submit">Add</button>
 					
@@ -36,7 +36,9 @@ Airlines
 	</div>
 	</div>
 	</div>
-	<div class="col-md-8">
+	</div>
+	
+	
 	<div class="box box-info">
 	<div class="box-body">
 		<table class="table table-hover">
@@ -64,6 +66,6 @@ Airlines
 		</table>
 		</div>
 	</div>
-	</div>
-</div>
+	
+
 @stop

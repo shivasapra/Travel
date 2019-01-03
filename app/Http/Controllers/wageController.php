@@ -51,6 +51,7 @@ class wageController extends Controller
         $wage->date = $date;
         $wage->hourly = $employee[0]->currency.$employee[0]->rate;
         $wage->save();
+        return redirect()->route('log');
     }
 
     public function logout(Request $request,$id){
@@ -68,6 +69,7 @@ class wageController extends Controller
         $wage->hours = $diff;
         $wage->wage = $total;
         $wage->save();
+        return redirect()->route('log');
     }
 
     public function index()
