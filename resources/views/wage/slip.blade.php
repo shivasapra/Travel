@@ -2,6 +2,17 @@
 @section('title')
 Slip
 @endsection
+@section('header')
+    <section class="content-header">
+      <h1>
+        Salary Slip
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active"><i class="fa fa-paperclip"></i> Salary Slip</li>
+      </ol>
+    </section>
+@stop
 @section('content')
 	
 	@if(count($errors)>0)
@@ -49,6 +60,7 @@ Slip
 		<div class="box-body">
 			<table class="table table-hover mb-0">
 				<tbody>
+					@if($employee)
 					<div class="text-center"><strong><h4>Salary Slip</h4></strong></div>
 					<div class="row">
 						<tr>
@@ -68,6 +80,7 @@ Slip
 							<td>{{'$'.$total_wage}}</td>
 						</tr>
 					</div>
+					@endif
 				</tbody>
 			</table>
 		</div>

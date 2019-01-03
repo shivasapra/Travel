@@ -2,6 +2,18 @@
 @section('title')
 Employee
 @endsection
+@section('header')
+	<section class="content-header">
+      <h1>
+        View Employee
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="{{route('employees')}}"><i class="fa fa-pencil-square-o"></i>Employess</a></li>
+        <li class="active">View Employee</li>
+      </ol>
+    </section>
+@stop
 @section('content')
 	<div class="box box-info">
 	<div class="box-body">

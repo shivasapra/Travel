@@ -2,6 +2,17 @@
 @section('title')
 Airlines
 @stop
+@section('header')
+	<section class="content-header">
+      <h1>
+        Airlines
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active"><i class="fa fa-plane"></i> Airlines</li>
+      </ol>
+    </section>
+@stop
 @section('content')
 <div class="row">
 	<div class="col-md-4">

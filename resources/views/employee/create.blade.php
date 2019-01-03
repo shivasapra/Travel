@@ -2,6 +2,18 @@
 @section('title')
 Employee Registration
 @endsection
+@section('header')
+	<section class="content-header">
+      <h1>
+        Add Employee
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="{{route('employees')}}"><i class="fa fa-pencil-square-o"></i>Employess</a></li>
+        <li class="active">Add Employee</li>
+      </ol>
+    </section>
+@stop
 @section('content')
 	
 	@if(count($errors)>0)

@@ -2,6 +2,17 @@
 @section('title')
 Products and services
 @stop
+@section('header')
+	<section class="content-header">
+      <h1>
+        Products
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active"><i class="fa fa-plus-square"></i> Products</li>
+      </ol>
+    </section>
+@stop
 @section('content')
 <div class="row">
 	<div class="col-md-8">

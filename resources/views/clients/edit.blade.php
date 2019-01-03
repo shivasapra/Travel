@@ -2,6 +2,18 @@
 @section('title')
 Edit Client
 @endsection
+@section('header')
+	<section class="content-header">
+      <h1>
+        Edit Client
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="{{route('clients')}}"><i class="fa fa-user-circle"></i> clients</a></li>
+        <li class="active">Edit Client</li>
+      </ol>
+    </section>
+@stop
 @section('content')
 	
 	@if(count($errors)>0)
