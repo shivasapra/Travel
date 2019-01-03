@@ -1,6 +1,6 @@
 @extends('layouts.frontend')
 @section('title')
-Staff wage management
+Employee wage log
 @endsection
 @section('content')
 		<div class="box box-info">
@@ -10,33 +10,27 @@ Staff wage management
                 <thead>
                     <tr>
                     	<th>Sno.</th>
-                    	<th>Employee</th>
                     	<th>Unique Id</th>
                     	<th>Login Time</th>
                     	<th>Logout Time</th>
                     	<th>Date</th>
                     	<th>Hourly Wage</th>
                     	<th>Today's wage</th>
-                    	<th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                	@if($employees->count()>0)
             		<?php $i=1;?>
-            		@foreach($employees as $employee)
+            		@foreach($employee->wage as $wage)
             		<tr>
             		<td>{{$i++}}</td>
-            		<td>{{$employee->first_name}}</td>
             		<td>{{$employee->unique_id}}</td>
-            		<td>{{$employee->wage->last()->login}}</td>
-                    <td>{{$employee->wage->last()->logout}}</td>
-                    <td>{{$employee->wage->last()->date}}</td>
-                    <td>{{$employee->wage->last()->hourly}}</td>
-                    <td>{{$employee->wage->last()->wage}}</td>
-                    <td><a href="{{route('wage.log',['id'=>$employee->id])}}"><button class="btn btn-info btn-xs">View</button></a></td>
+            		<td>{{$wage->login}}</td>
+                    <td>{{$wage->logout}}</td>
+                    <td>{{$wage->date}}</td>
+                    <td>{{$wage->hourly}}</td>
+                    <td>{{$wage->wage}}</td>
             		</tr>
-					@endforeach	
-                	@endif
+					@endforeach
                 </tbody>
             </table>
 		</div>

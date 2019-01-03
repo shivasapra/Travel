@@ -35,7 +35,10 @@ Route::get('/wage',[
 		'uses' => 'wageController@index',
 		'as' => 'wage'
 	]);
-
+Route::get('/employee/wage/log/{id}',[
+		'uses' => 'wageController@show',
+		'as' => 'wage.log'
+	]);
 
 
 

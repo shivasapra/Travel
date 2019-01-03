@@ -98,7 +98,7 @@ class wageController extends Controller
     public function store(Request $request)
     {
         
-
+        //
     }
 
     /**
@@ -109,7 +109,8 @@ class wageController extends Controller
      */
     public function show($id)
     {
-        //
+        $employee = employee::find($id);
+        return view('wage.show')->with('employee',$employee);
     }
 
     /**
