@@ -41,7 +41,7 @@ class CreateEmployeesTable extends Migration
             $table->string('hired_for_dep');
             $table->string('hiring_date');
             $table->string('currency');
-            $table->string('rate');
+            $table->integer('rate');
             $table->string('per');
             $table->string('emer_contact_name');
             $table->string('emer_contact_address');

@@ -230,9 +230,7 @@
 
     <!-- Main content -->
     <section class="content">
-      <div class="container">
      @yield('content')
-    </div>
     </section>
         <!-- right col -->
   </div>

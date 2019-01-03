@@ -14,6 +14,26 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/log',[
+		'uses' => 'wageController@log',
+		'as' => 'log'
+	]);
+Route::post('/logs',[
+		'uses' => 'wageController@logs',
+		'as' => 'logs'
+	]);
+Route::post('/log/login/{id}',[
+		'uses' => 'wageController@login',
+		'as' => 'log.login'
+	]);
+Route::get('/log/logout/{id}',[
+		'uses' => 'wageController@logout',
+		'as' => 'log.logout'
+	]);
+
+
+
+
 Route::get('/employees',[
 		'uses' => 'employeeController@index',
 		'as' => 'employees'

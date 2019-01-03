@@ -16,14 +16,13 @@ Employee Registration
 
 
 
-		<div class="box">
-		<div class="boxbody">
-	<div class="container">
-		<div class="container">
-			<form action="{{route('store.employee')}}" method="post">
+	<form action="{{route('store.employee')}}" method="post">
 				@csrf
-				<div class="text-center"><h4><strong>{{"Personal Inforamtion"}}</strong></h4></div>
-				<div class="row">
+		
+			<div class="box box-info">
+			<div class="box-body">
+			<div class="text-center"><h4><strong>{{"Personal Inforamtion"}}</strong></h4></div><br>
+			<div class="row">
 					<div class="col-md-4">
 					<div class="form-group">
 						<label for="first_name">First Name</label>
@@ -42,8 +41,8 @@ Employee Registration
 						<input type="text" name='last_name' required class="form-control">
 					</div>
 					</div>
-				</div>
-				<div class="row">
+					</div>
+					<div class="row">
 					<div class="col-md-6">
 					<div class="form-group">
 						<label for="father_name">Father's Name</label>
@@ -56,8 +55,8 @@ Employee Registration
 						<input type="text" name='mother_name' class="form-control" required>
 					</div>
 					</div>
-				</div>
-				<div class="row">
+					</div>
+					<div class="row">
 					<div class="col-md-4">
 					<div class="form-group">
 						<label for="gender">Gender</label>
@@ -87,8 +86,8 @@ Employee Registration
 						</select>
 					</div>
 					</div>
-				</div>
-				<div class="row">
+					</div>
+					<div class="row">
 					<div class="col-md-4">
 					<div class="form-group">
 						<label for="disability">Disability</label>
@@ -122,8 +121,8 @@ Employee Registration
 						<input type="text" name='country' class="form-control"required>
 					</div>
 					</div>
-				</div>
-				<div class="row">
+					</div>
+					<div class="row">
 					<div class="col-md-4">
 					<div class="form-group">
 						<label for="passport">Passport</label>
@@ -142,8 +141,13 @@ Employee Registration
 						<input type="date" name='visa_expired' class="form-control"required>
 					</div>
 					</div>
-				</div>
-				<div class="text-center"><h4><strong>{{"Contact Information"}}</strong></h4></div>
+					</div>
+			</div>
+			</div>
+		
+			<div class="box box-success">
+			<div class="box-body">
+			<div class="text-center"><h4><strong>{{"Contact Information"}}</strong></h4></div><br>
 				<div class="row">
 					<div class="col-md-4">
 					<div class="form-group">
@@ -178,7 +182,11 @@ Employee Registration
 					</div>
 					</div>
 				</div>
-				<div class="text-center"><h4><strong>{{"Professional Information"}}</strong></h4></div>
+				</div>
+				</div>
+			<div class="box box-info">
+			<div class="box-body">
+			<div class="text-center"><h4><strong>{{"Professional Information"}}</strong></h4></div><br>
 				<div class="row">
 					<div class="col-md-4">
 					<div class="form-group">
@@ -238,7 +246,11 @@ Employee Registration
 					</div>
 					</div>
 				</div>
-				<div class="text-center"><h4><strong>{{"Emergency Contact Information"}}</strong></h4></div>
+				</div>
+			</div>
+			<div class="box box-danger">
+			<div class="box-body">
+			<div class="text-center"><h4><strong>{{"Emergency Contact Information"}}</strong></h4></div><br>
 				<div class="row">
 					<div class="col-md-6">
 					<div class="form-group">
@@ -273,7 +285,11 @@ Employee Registration
 					</div>
 					</div>
 				</div>
-				<div class="text-center"><h4><strong>{{"Account Information"}}</strong></h4></div>
+				</div>
+			</div>
+			<div class="box box-info">
+			<div class="box-body">
+			<div class="text-center"><h4><strong>{{"Account Information"}}</strong></h4></div><br>
 				<div class="row">
 					<div class="col-md-6">
 					<div class="form-group">
@@ -316,17 +332,17 @@ Employee Registration
 					</div>
 					</div>
 				</div>
-				<div class="form-group">
-					<div class="text-center">
-						<button class="btn btn-success" type="submit">Add employee</button>
-					</div>
+			</div>
+			</div>
+			<div class="form-group">
+				<div class="text-center">
+					<button class="btn btn-success" type="submit">Add employee</button>
 				</div>
-				
+			</div>
+			
 			</form>
-		</div>
-		</div>
-		</div>
-	</div>
+		
+		
 
 
 @stop

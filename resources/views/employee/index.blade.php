@@ -25,6 +25,7 @@ Employees
                     	@if($employees->count()>0)
                     	<?php $i = 1; ?>
 	                    	@foreach($employees as $employee)
+	                    	<tr>
 	                    		<td>{{$i++}}</td>
 	                    		<td>{{$employee->first_name}}</td>
 	                    		<td>{{$employee->unique_id}}</td>
@@ -38,6 +39,7 @@ Employees
 	                    			<a href="{{route('edit.employee',['id'=>$employee->id])}}" class="btn btn-info btn-xs">edit</a>
 	                    			<a href="{{route('delete.employee',['id'=>$employee->id])}}" class="btn btn-danger btn-xs">Delete</a>
 	                    		</td>
+	                    	</tr>
 	                    	@endforeach
                     	@endif
                     </tbody>
