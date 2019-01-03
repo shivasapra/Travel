@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\employee;
 use App\client;
+use App\expenses;
 class HomeController extends Controller
 {
     /**
@@ -23,8 +24,14 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
+    {   
+        $expenses = expenses::all();
+        $total_amount = 0;
+        foreach ($expenses as $expense) {
+            $total_amount = $total_amount + $expense->amount; 
+        }
         return view('home')->with('employees',employee::all())
-                            ->with('clients',client::all());
+                            ->with('clients',client::all())
+                            ->with('expense',$total_amount);
     }
 }
