@@ -205,7 +205,7 @@
           </a>
         </li>
         <li>
-          <a href="{{route('home')}}">
+          <a href="{{route('expenses.get')}}">
             <i class="fa fa-money"></i><span>Daily Expense Entry</span>
           </a>
         </li>

@@ -133,3 +133,16 @@ Route::get('/delete/airline/{id}',[
 	'uses'=>'controller@destroyAirline',
 	'as'=>'airline.delete'
 	]);
+Route::get('/expense',[
+	'uses'=>'expensesController@index',
+	'as'=>'expenses.get'
+	]);
+Route::post('/expenses',[
+	'uses'=>'expensesController@index',
+	'as'=>'expenses'
+	]);
+Route::get('/expense/delete/{id}',[
+	'uses'=>'expensesController@destroy',
+	'as'=>'expense.delete'
+	]);
+
