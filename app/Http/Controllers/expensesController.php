@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\expenses;
+use Carbon\Carbon;
 class expensesController extends Controller
 {
     /**
@@ -20,7 +21,13 @@ class expensesController extends Controller
             $expense->description = $request->description;
             $expense->save();
         }
-        return view('expenses.index')->with('expenses',expenses::all());
+        $dt = Carbon::now();
+        $dt->timezone('Asia/Kolkata');
+        $date_today = $dt->timezone('Europe/London');
+        $date = $date_today->toDateString();
+        // dd($date);
+        return view('expenses.index')->with('expenses',expenses::all())
+                                        ->with('date',$date);
     }
 
     /**
