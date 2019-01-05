@@ -110,27 +110,27 @@ Route::get('/client/delete/{id}',[
 	]);
 
 Route::get('/products',[
-	'uses'=>'controller@products',
+	'uses'=>'HomeController@products',
 	'as'=>'products'
 	]);
 Route::post('/add/product',[
-	'uses'=>'controller@addProduct',
+	'uses'=>'HomeController@addProduct',
 	'as'=>'product.add'
 	]);
 Route::get('/delete/product/{id}',[
-	'uses'=>'controller@destroyProduct',
+	'uses'=>'HomeController@destroyProduct',
 	'as'=>'product.delete'
 	]);
 Route::get('/airlines',[
-	'uses'=>'controller@airlines',
+	'uses'=>'HomeController@airlines',
 	'as'=>'airlines'
 	]);
 Route::post('/add/airline',[
-	'uses'=>'controller@addAirline',
+	'uses'=>'HomeController@addAirline',
 	'as'=>'airline.add'
 	]);
 Route::get('/delete/airline/{id}',[
-	'uses'=>'controller@destroyAirline',
+	'uses'=>'HomeController@destroyAirline',
 	'as'=>'airline.delete'
 	]);
 Route::get('/expense',[
