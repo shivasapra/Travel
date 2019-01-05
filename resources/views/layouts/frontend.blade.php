@@ -132,9 +132,7 @@
             </ul>
           </li>
           <!-- Control Sidebar Toggle Button -->
-          <li>
-            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-          </li>
+          
         </ul>
       </div>
     </nav>
@@ -184,7 +182,7 @@
         </li>
         <li>
           <a href="{{route('products')}}">
-            <i class="fa fa-plus-square"></i><span>Product and Services Registration</span>
+            <i class="fa fa-plus-square"></i><span>Product and Services<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Registration</span>
           </a>
         </li>
         <li>
@@ -221,7 +219,7 @@
         </li>
         <li>
           <a href="{{route('home')}}">
-            <i class="fa fa-clock-o"></i> <span>Daily Appointment Management</span>
+            <i class="fa fa-clock-o"></i> <span>Daily Appointment<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Management</span>
           </a>
         </li>
       </ul>

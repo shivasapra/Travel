@@ -57,8 +57,9 @@ Slip
 		
 		<div class="col-md-6 ">
 		<div class="box box-info">
-		<div class="box-body">
+		<div class="box-body" id="print">
 			<table class="table table-hover mb-0">
+					
 				<tbody>
 					@if($employee)
 					<div class="text-center"><strong><h4>Salary Slip</h4></strong></div>
@@ -82,6 +83,7 @@ Slip
 					</div>
 					@endif
 				</tbody>
+				
 			</table>
 		</div>
 		</div>
@@ -91,7 +93,13 @@ Slip
 		</div>
 		<script>
 			function myFunction(){
-				window.print();
+				var prtContent = document.getElementById("print");
+				var WinPrint = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
+				WinPrint.document.write(prtContent.innerHTML);
+				WinPrint.document.close();
+				WinPrint.focus();
+				WinPrint.print();
+				WinPrint.close();
 			}
 		</script>
 
