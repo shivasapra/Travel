@@ -8,6 +8,7 @@ use App\client;
 use App\expenses;
 use App\products;
 use App\airlines;
+use App\wage;
 class HomeController extends Controller
 {
     /**
@@ -32,6 +33,7 @@ class HomeController extends Controller
         foreach ($expenses as $expense) {
             $total_amount = $total_amount + $expense->amount; 
         }
+          
         return view('home')->with('employees',employee::all())
                             ->with('clients',client::all())
                             ->with('expense',$total_amount);
