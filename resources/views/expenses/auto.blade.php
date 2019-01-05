@@ -48,7 +48,7 @@ Auto Deduction
 					<div class="col-md-2">
 					<div class="form-group">
 						<label for="end_date">End Date:</label>
-						<input type="date" name='end_date' required  class="form-control">
+						<input type="date" name='end_date' required min="{{$date}}" class="form-control">
 					</div>
 					</div>
 					<div class="col-md-2">
@@ -98,6 +98,7 @@ Auto Deduction
                         <th>Deduction Date</th>
                         <th>Amount</th>
                         <th>Description</th>
+                        <th>Status</th>
                         <th>Delete</th>
                       </tr>
                     	</thead>
@@ -112,6 +113,13 @@ Auto Deduction
 	                    		<td>{{$expense->deduction_date}}</td>
 	                    		<td>{{$expense->amount}}</td>
 	                    		<td>{{$expense->description}}</td>
+	                    		<td>
+	                    			@if($expense->status == 0)
+	                    			<div class="text-danger"><strong>Expired</strong></div>
+	                    			@elseif($expense->status==1)
+	                    			<div class="text-info"><strong>Active</strong></div>
+	                    			@endif
+	                    		</td>
 	                    		<td>
 	                    			<a href="{{route('expense.delete',['id'=>$expense->id])}}" class="btn btn-danger btn-xs">Delete</a>
 	                    		</td>

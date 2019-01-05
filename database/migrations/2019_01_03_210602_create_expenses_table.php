@@ -22,6 +22,8 @@ class CreateExpensesTable extends Migration
             $table->string('deduction_date')->nullable();
             $table->Date('start_date')->nullable();
             $table->Date('end_date')->nullable();
+            $table->boolean('status')->nullable();
+            $table->Date('latest')->nullable();
             $table->timestamps();
         });
     }

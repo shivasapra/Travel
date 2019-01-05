@@ -14,6 +14,29 @@ class expensesController extends Controller
      */
     public function index(Request $request)
     {   
+        $dt = Carbon::now();
+        $dt->timezone('Asia/Kolkata');
+        $date_today = $dt->timezone('Europe/London');
+        $date = $date_today->toDateString();
+        $day = $dt->day;
+        $all_auto_active = expenses::where('auto',1)->where('status',1)->get();
+        foreach($all_auto_active as $active){
+            if($active->deduction_date == $day and $active->latest != $date){
+                $new_expense = new expenses;
+                $new_expense->amount = $active->amount;
+                $new_expense->date = $date;
+                $new_expense->description = $active->description;
+                $new_expense->save();
+                $active->latest = $date;
+                $active->save();
+            }
+        }
+        
+        
+
+
+
+
         if ($request->date) {
             $expense = new expenses;
             $expense->date = $request->date;
@@ -21,10 +44,6 @@ class expensesController extends Controller
             $expense->description = $request->description;
             $expense->save();
         }
-        $dt = Carbon::now();
-        $dt->timezone('Asia/Kolkata');
-        $date_today = $dt->timezone('Europe/London');
-        $date = $date_today->toDateString();
         // dd($date);
         $expenses = expenses::where('auto',0)->get();
         return view('expenses.index')->with('expenses',$expenses)
@@ -32,6 +51,19 @@ class expensesController extends Controller
     }
 
     public function auto(Request $request){
+
+        $dt = Carbon::now();
+        $dt->timezone('Asia/Kolkata');
+        $date_today = $dt->timezone('Europe/London');
+        $date = $date_today->toDateString();
+        $all_auto_active = expenses::where('auto',1)->where('status',1)->get();
+        foreach ($all_auto_active as $active) {
+            if ($active->end_date < $date) {
+                $active->status = 0;
+                $active->save();
+            }
+        }
+
         if ($request->deduction_date) {
             $expense = new expenses;
             $expense->deduction_date = $request->deduction_date;
@@ -40,6 +72,7 @@ class expensesController extends Controller
             $expense->amount = $request->amount;
             $expense->description = $request->description;
             $expense->auto = 1;
+            $expense->status = 1; 
             $expense->save();
         }
         $dt = Carbon::now();
