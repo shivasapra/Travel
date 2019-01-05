@@ -27,7 +27,7 @@ class HomeController extends Controller
      */
     public function index()
     {   
-        $expenses = expenses::all();
+        $expenses = expenses::where('auto',0)->get();
         $total_amount = 0;
         foreach ($expenses as $expense) {
             $total_amount = $total_amount + $expense->amount; 
