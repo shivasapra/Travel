@@ -53,8 +53,8 @@ Auto Deduction
 					</div>
 					<div class="col-md-2">
 					<div class="form-group">
-						<label for="date">Deduction Date:</label>
-						<input type="date" name='date' required  class="form-control">
+						<label for="deduction_date">Deduction Date:</label>
+						<input type="text" name='deduction_date' required  class="form-control">
 					</div>
 					</div>
 					<div class="col-md-3">
@@ -109,7 +109,7 @@ Auto Deduction
 	                    		<td>{{$i++}}</td>
 	                    		<td>{{$expense->start_date}}</td>
 	                    		<td>{{$expense->end_date}}</td>
-	                    		<td>{{$expense->date}}</td>
+	                    		<td>{{$expense->deduction_date}}</td>
 	                    		<td>{{$expense->amount}}</td>
 	                    		<td>{{$expense->description}}</td>
 	                    		<td>

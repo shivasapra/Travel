@@ -32,9 +32,9 @@ class expensesController extends Controller
     }
 
     public function auto(Request $request){
-        if ($request->date) {
+        if ($request->deduction_date) {
             $expense = new expenses;
-            $expense->date = $request->date;
+            $expense->deduction_date = $request->deduction_date;
             $expense->start_date = $request->start_date;
             $expense->end_date = $request->end_date;
             $expense->amount = $request->amount;
