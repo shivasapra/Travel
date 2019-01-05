@@ -21,7 +21,7 @@ class CreateInvoicesTable extends Migration
             $table->string('invoice_no');
             $table->string('item_name');
             $table->string('item_subname');
-            $table-integer('quantity');
+            $table->integer('quantity');
             $table->string('currency');
             $table->integer('price');
             $table->integer('amount');
