@@ -31,6 +31,7 @@ Employee wage log
                     </tr>
                 </thead>
                 <tbody>
+                    @if($employee->wage->count()>0)
             		<?php $i=1;?>
             		@foreach($employee->wage as $wage)
             		<tr>
@@ -43,6 +44,7 @@ Employee wage log
                     <td>{{$wage->wage}}</td>
             		</tr>
 					@endforeach
+                    @endif
                 </tbody>
             </table>
 		</div>

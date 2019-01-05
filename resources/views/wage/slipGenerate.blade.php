@@ -46,8 +46,8 @@ Generate Salary Slip
 					</div>
 					<div class="col-md-4">
 					<div class="form-group">
-						<label for="address">To:</label>
-						<input type="date" name='address' required class="form-control">
+						<label for="to">To:</label>
+						<input type="date" name='to' required class="form-control">
 					</div>
 					</div>
 				</div>

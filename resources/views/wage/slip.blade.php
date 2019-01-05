@@ -41,8 +41,8 @@ Slip
 						<input type="date" name='from' required class="form-control">
 					</div>
 					<div class="form-group">
-						<label for="address">To:</label>
-						<input type="date" name='address' required class="form-control">
+						<label for="to">To:</label>
+						<input type="date" name='to' required class="form-control">
 					</div>
 
 		</div>

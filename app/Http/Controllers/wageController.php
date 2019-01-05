@@ -21,6 +21,10 @@ class wageController extends Controller
         $dt = Carbon::now();
         $dt->timezone('Europe/London');
         $date = $dt->toDateString();
+        $emp = employee::where('unique_id',$request->unique)->get();
+        if ($emp->count() == 0){
+            return view('wage.notFound');
+        }
         $wages = wage::where('unique_id',$request->unique)->where('date',$date)->take(1)->get();
         if($wages->count()>0){
             $wage = wage::find($wages[0]->id);
@@ -154,10 +158,17 @@ class wageController extends Controller
     }
 
     public function slip(Request $request){
-        $employee = employee::take(1)->where('unique_id',$request->unique)->take(1)->get();
-        $emp = employee::find(1);
-        $wages = wage::where('unique_id',$request->unique)->get();
-        // dd($request->from);
+        $employee = employee::where('unique_id',$request->unique)->take(1)->get();
+        // dd($employee);
+        if ($employee->count()>0) {
+            $emp = employee::find($employee[0]->id);
+        }
+        else{
+            return redirect()->route('slip.generate');
+        }
+        // dd($request->to);
+        $wages = wage::where('unique_id',$request->unique)->whereDate('date','>=',$request->from)->whereDate('date','<=',$request->to)->get();
+        // dd($wages);
         $total_wage = 0;
         $total_hours = 0;
         foreach($wages as $wage){

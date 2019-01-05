@@ -39,11 +39,15 @@ Staff wage management
             		<td>{{$i++}}</td>
             		<td>{{$employee->first_name}}</td>
             		<td>{{$employee->unique_id}}</td>
+                    @if($employee->wage->count()>0)
             		<td>{{$employee->wage->last()->login}}</td>
                     <td>{{$employee->wage->last()->logout}}</td>
                     <td>{{$employee->wage->last()->date}}</td>
                     <td>{{$employee->wage->last()->hourly}}</td>
                     <td>{{$employee->wage->last()->wage}}</td>
+                    @else
+                    <td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td>
+                    @endif
                     <td><a href="{{route('wage.log',['id'=>$employee->id])}}"><button class="btn btn-info btn-xs">View</button></a></td>
             		</tr>
 					@endforeach	
