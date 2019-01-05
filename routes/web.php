@@ -141,6 +141,14 @@ Route::post('/expenses',[
 	'uses'=>'expensesController@index',
 	'as'=>'expenses'
 	]);
+Route::get('/Auto/deduction',[
+	'uses'=>'expensesController@auto',
+	'as'=>'auto.get'
+	]);
+Route::post('/auto/deduction',[
+	'uses'=>'expensesController@auto',
+	'as'=>'auto',
+	]);
 Route::get('/expense/delete/{id}',[
 	'uses'=>'expensesController@destroy',
 	'as'=>'expense.delete'

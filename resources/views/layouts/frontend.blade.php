@@ -207,10 +207,17 @@
             <i class="fa fa-paperclip"></i><span>Generate Salary Slip</span>
           </a>
         </li>
-        <li>
-          <a href="{{route('expenses.get')}}">
+        <li class="treeview">
+          <a href="">
             <i class="fa fa-money"></i><span>Daily Expense Entry</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
           </a>
+          <ul class="treeview-menu">
+            <li><a href="{{route('expenses.get')}}"><i class="fa fa-circle-o"></i>Expenses</a></li>
+            <li><a href="{{route('auto.get')}}"><i class="fa fa-circle-o"></i>Auto Deduction</a></li>
+          </ul>
         </li>
         <li>
           <a href="{{route('home')}}">

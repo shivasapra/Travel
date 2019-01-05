@@ -26,7 +26,28 @@ class expensesController extends Controller
         $date_today = $dt->timezone('Europe/London');
         $date = $date_today->toDateString();
         // dd($date);
-        return view('expenses.index')->with('expenses',expenses::all())
+        $expenses = expenses::where('auto',0)->get();
+        return view('expenses.index')->with('expenses',$expenses)
+                                        ->with('date',$date);
+    }
+
+    public function auto(Request $request){
+        if ($request->date) {
+            $expense = new expenses;
+            $expense->date = $request->date;
+            $expense->start_date = $request->start_date;
+            $expense->end_date = $request->end_date;
+            $expense->amount = $request->amount;
+            $expense->description = $request->description;
+            $expense->auto = 1;
+            $expense->save();
+        }
+        $dt = Carbon::now();
+        $dt->timezone('Asia/Kolkata');
+        $date_today = $dt->timezone('Europe/London');
+        $date = $date_today->toDateString();
+        $expenses = expenses::where('auto',1)->get();
+        return view('expenses.auto')->with('expenses',$expenses)
                                         ->with('date',$date);
     }
 

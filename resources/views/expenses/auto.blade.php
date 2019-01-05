@@ -1,15 +1,15 @@
 @extends('layouts.frontend')
 @section('title')
-Expenses
+Auto Deduction
 @endsection
 @section('header')
     <section class="content-header">
       <h1>
-        Expenses
+        Auto Deduction
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active"><i class="fa fa-money"></i> Expenses</li>
+        <li class="active"><i class="fa fa-money"></i> Auto Deduction</li>
       </ol>
     </section>
 @stop
@@ -25,13 +25,11 @@ Expenses
 		</ul>
 	@endif
 
-	
-
-	<form action="{{route('expenses')}}" method="post">
+	<form action="{{route('auto')}}" method="post">
 		@csrf
-		<div class="box box-primary">
+		<div class="box box-danger">
 			<div class="box-header with-border">
-                  <h3 class="box-title"><strong>{{"Daily Expense"}}</strong></h3>
+                  <h3 class="box-title"><strong>{{"Auto Deduction"}}</strong></h3>
                   <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                     </button>
@@ -43,40 +41,46 @@ Expenses
 				<div class="row">
 					<div class="col-md-2">
 					<div class="form-group">
-						<label for="date">Date:</label>
-						<input type="date" name='date' max="{{$date}}" required  class="form-control">
+						<label for="start_date">Start Date:</label>
+						<input type="date" name='start_date' min="{{$date}}" required  class="form-control">
 					</div>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-2">
+					<div class="form-group">
+						<label for="end_date">End Date:</label>
+						<input type="date" name='end_date' required  class="form-control">
+					</div>
+					</div>
+					<div class="col-md-2">
+					<div class="form-group">
+						<label for="date">Deduction Date:</label>
+						<input type="date" name='date' required  class="form-control">
+					</div>
+					</div>
+					<div class="col-md-3">
 					<div class="form-group">
 						<label for="amount">Amount:</label>
 						<input type="text" name='amount' required class="form-control">
 					</div>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-3">
 					<div class="form-group">
 						<label for="description">Description:</label>
 						<input type="text" name='description' required class="form-control">
 					</div>
 					</div>
-					<div class="col-md-2">
+					<div class="text-center">
 					<div class="form-group">
-						<br><br><button class="btn btn-success btn-xs" name="button" type="submit">Add Expense</button>
+						<br><br><button class="btn btn-info btn-xs" name="button" type="submit">Save</button>
 					</div>
 					</div>
 				</div>
 		</div>
 		</div>
 	</form>
-
-	
-	
-
-
-
 	<div class="box box-info">
 		<div class="box-header with-border">
-                  <h3 class="box-title"><strong>{{"Expenses"}}</strong></h3>
+                  <h3 class="box-title"><strong>{{"Entries"}}</strong></h3>
                   <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                     </button>
@@ -89,7 +93,9 @@ Expenses
                     <thead>
                       <tr>
                         <th>Sno.</th>
-                        <th>Date</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Deduction Date</th>
                         <th>Amount</th>
                         <th>Description</th>
                         <th>Delete</th>
@@ -101,6 +107,8 @@ Expenses
 	                    	@foreach($expenses as $expense)
 	                    	<tr>
 	                    		<td>{{$i++}}</td>
+	                    		<td>{{$expense->start_date}}</td>
+	                    		<td>{{$expense->end_date}}</td>
 	                    		<td>{{$expense->date}}</td>
 	                    		<td>{{$expense->amount}}</td>
 	                    		<td>{{$expense->description}}</td>
