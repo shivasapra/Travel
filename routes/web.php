@@ -165,3 +165,7 @@ Route::post('/store/invoice',[
 	'uses'=>'InvoiceController@store',
 	'as'=>'invoice.store'
 	]);
+Route::get('/delete/invoice/{id}',[
+	'uses'=>'InvoiceController@destroy',
+	'as'=>'invoice.delete'
+	]);

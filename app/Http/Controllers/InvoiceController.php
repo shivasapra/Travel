@@ -118,6 +118,8 @@ class InvoiceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $invoice = invoice::find($id);
+        $invoice->delete();
+        return redirect()->back()->with('invoices',invoice::all());
     }
 }
