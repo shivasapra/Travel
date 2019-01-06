@@ -169,3 +169,11 @@ Route::get('/delete/invoice/{id}',[
 	'uses'=>'InvoiceController@destroy',
 	'as'=>'invoice.delete'
 	]);
+Route::get('/edit/invoice/{id}',[
+	'uses'=>'InvoiceController@edit',
+	'as'=>'invoice.edit'
+	]);
+Route::post('/update/invoice/{id}',[
+	'uses'=>'InvoiceController@update',
+	'as'=>'invoice.update'
+	]);

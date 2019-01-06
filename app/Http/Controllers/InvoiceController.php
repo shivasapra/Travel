@@ -95,7 +95,8 @@ class InvoiceController extends Controller
      */
     public function edit($id)
     {
-        //
+        $invoice = invoice::find($id);
+        return view('invoice.edit')->with('invoice',$invoice);
     }
 
     /**
@@ -106,8 +107,24 @@ class InvoiceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    {   
+        $invoice = invoice::find($id);
+        foreach($request->item_name as $index => $item_name){
+            $invoice->receiver_name = $request->receiver_name;
+            $invoice->billing_address = $request->billing_address;
+            $invoice->invoice_date = $request->invoice_date;
+            $invoice->invoice_no = $request->invoice_no;
+            $invoice->item_name = $item_name;
+            $invoice->item_subname = $request->item_subname[$index];
+            $invoice->quantity = $request->quantity[$index];
+            $invoice->currency = $request->currency[$index];
+            $invoice->price = $request->price[$index];
+            $invoice->amount = $request->price[$index] * $request->quantity[$index];
+            $invoice->status = $request->status[$index];
+            $invoice->save();
+
+        }
+            return redirect()->route('invoice')->with('invoices',invoice::all());
     }
 
     /**

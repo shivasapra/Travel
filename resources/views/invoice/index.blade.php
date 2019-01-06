@@ -45,7 +45,7 @@ Invoices
 	                    		@else
 	                    		<td><div class="text-danger">{{'Unpaid'}}</div></td>
 	                    		@endif
-	                    		<td><a href="" class="btn btn-info btn-xs"><span class="fa fa-edit"></span></a></td>
+	                    		<td><a href="{{route('invoice.edit',['id'=>$invoice->id])}}" class="btn btn-info btn-xs"><span class="fa fa-edit"></span></a></td>
 	                    		<td><a href="{{route('invoice.delete',['id'=>$invoice->id])}}" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span></a></td>
 	                    	</tr>
 	                    	@endforeach

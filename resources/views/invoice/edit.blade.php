@@ -28,7 +28,7 @@ Edit Invoice
 
 
 
-	<form action="" method="post">
+	<form action="{{route('invoice.update',['id'=>$invoice->id])}}" method="post">
 		@csrf
 		<div class="box box-primary">
 		<div class="box-body">
@@ -48,14 +48,14 @@ Edit Invoice
 			<div class="row">
 				<div class="col-md-8">
 				<div class="form-group">
-					<input type="text" name='receiver_name' required class="form-control" placeholder="Enter Receiver Name">
-					<textarea name="billing_address" required class="form-control" placeholder="Enter Billing Adress"></textarea>
+					<input type="text" name='receiver_name' value="{{$invoice->receiver_name}}" required class="form-control" placeholder="Enter Receiver Name">
+					<textarea name="billing_address" required class="form-control" placeholder="Enter Billing Adress">{{$invoice->billing_address}}</textarea>
 				</div>
 				</div>
 				<div class="col-md-4">
 				<div class="form-group">
-					<input type="text" name='invoice_no' integer placeholder="Enter Invoice No." required class="form-control">
-					<input type="date" name='invoice_date' placeholder="Select Invoice date" required class="form-control">
+					<input type="text" name='invoice_no' integer placeholder="Enter Invoice No." required class="form-control" value="{{$invoice->invoice_no}}">
+					<input type="date" name='invoice_date' placeholder="Select Invoice date" required class="form-control" value="{{$invoice->invoice_date}}">
 				</div>
 				</div>
 			</div>
@@ -81,46 +81,35 @@ Edit Invoice
 						<th>1.</th>
 						<td>
 							<select required name="item_name[]" class="form-control" id="">
-								<option value="">--select--</option>
-								@if($products->count()>0)
-								@foreach($products as $product)
-									<option value="{{$product->service}}">{{$product->service}}</option>
-								@endforeach
-								@endif
+								<option value="{{$invoice->item_name}}">{{$invoice->item_name}}</option>
 							</select>
 						</td>
 						<td>
-							<select required name="item_subname[]" class="form-control" id="">
-								<option value="">--select--</option>
-								@if($airlines->count()>0)
-								@foreach($airlines as $airline)
-									<option value="{{$airline->name}}">{{$airline->name}}</option>
-								@endforeach
-								@endif
-							
+							<select required name="item_subname[]" class="form-control" id=""><option value="{{$invoice->item_subname}}">{{$invoice->item_subname}}</option>
 							</select>
 						</td>
-						<td><input type="text" id="quantity" name='quantity[]' required class="form-control"></td>
+						<td><input type="text" id="quantity" name='quantity[]' required class="form-control" value="{{$invoice->quantity}}"></td>
 						<td><select name="currency[]" class="form-control" id="currency">
-							<option value="$">$</option>
-							<option value="&#163;">&#163;</option>
+							<option value="{{$invoice->currency}}">{{$invoice->currency}}</option>
 							</select>
 						</td>
-						<td><input id="price" type="text" name='price[]' required class="form-control"></td>
-						<td><input id="amount" type="text" name='amount[]' required class="form-control" readonly></td>
+						<td><input id="price" type="text" name='price[]' required class="form-control" value="{{$invoice->price}}"></td>
+						<td><input id="amount" type="text" name='amount[]' required class="form-control" readonly value="{{$invoice->amount}}"></td>
 						<td><select name="status[]" class="form-control" id="" required>
-							<option value="">--select--</option>
-							<option value='1'>Paid</option>
-							<option value='0'>UnPaid</option>
+							@if($invoice->status == 1)
+							<option value="1">Paid</option>
+							@else
+							<option value="0">Unpaid</option>
+							@endif
 							</select>
 						</td>
 					</tr>
 
                 </tbody>
 	        </table>
-			<div class="text-center"  style="margin-top: 5px">
+			{{-- <div class="text-center"  style="margin-top: 5px">
 			<button class="btn btn-success btn-sm" type="button" id="add">+</button>
-			</div>
+			</div> --}}
 		</div>
 		</div>
 		<div class="box box-default">
@@ -136,31 +125,14 @@ Edit Invoice
 			
 			<div class="form-group">
 			<div class="text-center">
-				<button class="btn btn-primary" type="submit">Create</button>
+				<button class="btn btn-primary" type="submit">Update</button>
 			</div>
 			</div>
 	</form>
 
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<script type="text/javascript">
-	$(document).ready(function(){
-    $("#add").click(function(){
-    	var options1 = "";
-    		@if($products->count()>0)
-				@foreach($products as $product)
-				options1 = options1 + "<option value='{{$product->service}}'>{{$product->service}}</option>";
-				@endforeach
-			@endif
-		var options2 = "";
-		@if($airlines->count()>0)
-			@foreach($airlines as $airline)
-			options2 = options2 + "<option value='{{$airline->name}}'>{{$airline->name}}</option>";
-			@endforeach
-		@endif
-    	var append = '<tr id="row"><th>.</th><td><select required name="item_name[]" class="form-control" id=""><option value="">--select--</option>'+options1+'</select></td><td><select required name="item_subname[]" class="form-control" id=""><option value="">--select--</option>'+options2+'</select></td><td><input type="text" name="quantity[]" id="quantity" required class="form-control"></td><td><select name="currency[]" class="form-control" id=""><option value="$">$</option><option value="&#163;">&#163;</option></select></td><td><input type="text" name="price[]" id="price" required class="form-control"></td><td><input id="amount" type="text" name="amount[]" required class="form-control" readonly></td><td><select name="status[]" required class="form-control" id=""><option value="">--select--</option><option value="1">Paid</option><option value="0">UnPaid</option></select></td></tr>';
-        $("#target").append(append);   
-        });
-    });
+	
 
     $(document).ready(function(){
     $("#target").hover(function(){
