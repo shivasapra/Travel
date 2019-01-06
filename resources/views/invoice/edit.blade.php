@@ -99,7 +99,8 @@ Edit Invoice
 						</td>
 						<td><input type="text" id="quantity" name='quantity[]' required class="form-control" value="{{$invoice->quantity}}"></td>
 						<td><select name="currency[]" class="form-control" id="currency">
-							<option value="{{$invoice->currency}}">{{$invoice->currency}}</option>
+							<option value="$" {{($invoice->currency == '$' )?"selected":" "}}>$</option>
+							<option value="&#163;" {{($invoice->currency =="&#163;" )?"selected":" "}}>&#163;</option></option>
 							</select>
 						</td>
 						<td><input id="price" type="text" name='price[]' required class="form-control" value="{{$invoice->price}}"></td>

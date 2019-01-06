@@ -39,7 +39,7 @@ Invoices
 	                    		<td>{{$invoice->invoice_no}}</td>
 	                    		<td>{{$invoice->invoice_date}}</td>
 	                    		<td>{{$invoice->receiver_name}}</td>
-	                    		<td>{{$invoice->amount}}</td>
+	                    		<td>{{$invoice->currency.$invoice->amount}}</td>
 	                    		@if($invoice->status == 1)
 	                    		<td><div class="text-success">{{'Paid'}}</div></td>
 	                    		@else

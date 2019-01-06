@@ -119,7 +119,7 @@ Create Invoice
                 </tbody>
 	        </table>
 			<div class="text-center"  style="margin-top: 5px">
-			<button class="btn btn-success btn-sm" type="button" id="add">+</button>
+			<button class="btn btn-success btn-sm" disabled type="button" id="add">+</button>
 			</div>
 		</div>
 		</div>
