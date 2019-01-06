@@ -154,3 +154,7 @@ Route::get('/expense/delete/{id}',[
 	'as'=>'expense.delete'
 	]);
 
+Route::get('/create/invoice',[
+	'uses'=>'InvoiceController@create',
+	'as'=>'invoice.create'
+	]);
