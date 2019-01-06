@@ -28,8 +28,8 @@ Create Invoice
 
 
 
-			<form action="" method="post">
-				@csrf
+	<form action="{{route('invoice.store')}}" method="post">
+		@csrf
 		<div class="box box-primary">
 		<div class="box-body">
 			<section class="content-header">
@@ -77,11 +77,10 @@ Create Invoice
                   </tr>
                 	</thead>
                 <tbody id="target">
-                	<?php $i=1;?>
-                	<tr>
+                	<tr id="row">
 						<th>1.</th>
 						<td>
-							<select name="item_name[]" class="form-control" id="">
+							<select required name="item_name[]" class="form-control" id="">
 								<option value="">--select--</option>
 								@if($products->count()>0)
 								@foreach($products as $product)
@@ -91,7 +90,7 @@ Create Invoice
 							</select>
 						</td>
 						<td>
-							<select name="item_subname[]" class="form-control" id="">
+							<select required name="item_subname[]" class="form-control" id="">
 								<option value="">--select--</option>
 								@if($airlines->count()>0)
 								@foreach($airlines as $airline)
@@ -101,14 +100,15 @@ Create Invoice
 							
 							</select>
 						</td>
-						<td><input type="text" name='quantity[]' required class="form-control"></td>
-						<td><select name="item_name[]" class="form-control" id="">
+						<td><input type="text" id="quantity" name='quantity[]' required class="form-control"></td>
+						<td><select name="currency[]" class="form-control" id="currency">
 							<option value="$">$</option>
+							<option value="&#163;">&#163;</option>
 							</select>
 						</td>
-						<td><input type="text" name='price[]' required class="form-control"></td>
-						<td><input type="text" name='amount[]' required class="form-control" readonly></td>
-						<td><select name="status[]" class="form-control" id="">
+						<td><input id="price" type="text" name='price[]' required class="form-control"></td>
+						<td><input id="amount" type="text" name='amount[]' required class="form-control" readonly></td>
+						<td><select name="status[]" class="form-control" id="" required>
 							<option value="">--select--</option>
 							<option value='1'>Paid</option>
 							<option value='0'>UnPaid</option>
@@ -139,15 +139,36 @@ Create Invoice
 				<button class="btn btn-primary" type="submit">Create</button>
 			</div>
 			</div>
-		</form>
+	</form>
 
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function(){
     $("#add").click(function(){
-    	var append = '<tr><th>1.</th><td><select name="item_name[]" class="form-control" id=""><option value="">--select--</option><option value=""></option></select></td><td><select name="item_subname[]" class="form-control" id=""><option value="">--select--</option><option value=""></option></select></td><td><input type="text" name="quantity[]" required class="form-control"></td><td><select name="item_name[]" class="form-control" id=""><option value="$">$</option></select></td><td><input type="text" name="price[]" required class="form-control"></td><td><input type="text" name="amount[]" required class="form-control" readonly></td><td><select name="status[]" class="form-control" id=""><option value="">--select--</option><option value="1">Paid</option><option value="0">UnPaid</option></select></td></tr>';
+    	var options1 = "";
+    		@if($products->count()>0)
+				@foreach($products as $product)
+				options1 = options1 + "<option value='{{$product->service}}'>{{$product->service}}</option>";
+				@endforeach
+			@endif
+		var options2 = "";
+		@if($airlines->count()>0)
+			@foreach($airlines as $airline)
+			options2 = options2 + "<option value='{{$airline->name}}'>{{$airline->name}}</option>";
+			@endforeach
+		@endif
+    	var append = '<tr id="row"><th>.</th><td><select required name="item_name[]" class="form-control" id=""><option value="">--select--</option>'+options1+'</select></td><td><select required name="item_subname[]" class="form-control" id=""><option value="">--select--</option>'+options2+'</select></td><td><input type="text" name="quantity[]" id="quantity" required class="form-control"></td><td><select name="currency[]" class="form-control" id=""><option value="$">$</option><option value="&#163;">&#163;</option></select></td><td><input type="text" name="price[]" id="price" required class="form-control"></td><td><input id="amount" type="text" name="amount[]" required class="form-control" readonly></td><td><select name="status[]" required class="form-control" id=""><option value="">--select--</option><option value="1">Paid</option><option value="0">UnPaid</option></select></td></tr>';
         $("#target").append(append);   
         });
+    });
+
+    $(document).ready(function(){
+    $("#row").hover(function(){
+    	
+    	var actual_amount =  document.getElementsByName("price[]")[0].value * document.getElementsByName("quantity[]")[0].value;
+    	document.getElementsByName("amount[]")[0].value =document.getElementsByName("currency[]")[0].value+ " "+actual_amount;
+    	
+    });
     });
    	</script>
 

@@ -158,3 +158,7 @@ Route::get('/create/invoice',[
 	'uses'=>'InvoiceController@create',
 	'as'=>'invoice.create'
 	]);
+Route::post('/store/invoice',[
+	'uses'=>'InvoiceController@store',
+	'as'=>'invoice.store'
+	]);
