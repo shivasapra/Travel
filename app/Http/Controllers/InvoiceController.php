@@ -96,7 +96,10 @@ class InvoiceController extends Controller
     public function edit($id)
     {
         $invoice = invoice::find($id);
-        return view('invoice.edit')->with('invoice',$invoice);
+        return view('invoice.edit')->with('invoice',$invoice)
+                                    ->with('products',products::all())
+                                    ->with('airlines',airlines::all());
+
     }
 
     /**

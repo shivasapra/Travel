@@ -81,11 +81,20 @@ Edit Invoice
 						<th>1.</th>
 						<td>
 							<select required name="item_name[]" class="form-control" id="">
-								<option value="{{$invoice->item_name}}">{{$invoice->item_name}}</option>
+								@if($products->count()>0)
+								@foreach($products as $product)
+									<option value="{{$product->service}}" {{($invoice->item_name ==$product->service )?"selected":" "}}>{{$product->service}}</option>
+								@endforeach
+								@endif
 							</select>
 						</td>
 						<td>
-							<select required name="item_subname[]" class="form-control" id=""><option value="{{$invoice->item_subname}}">{{$invoice->item_subname}}</option>
+							<select required name="item_subname[]" class="form-control" id="">
+								@if($airlines->count()>0)
+								@foreach($airlines as $airline)
+									<option value="{{$airline->name}}" {{($invoice->item_subname ==$airline->name )?"selected":" "}}>{{$airline->name}}</option>
+								@endforeach
+								@endif
 							</select>
 						</td>
 						<td><input type="text" id="quantity" name='quantity[]' required class="form-control" value="{{$invoice->quantity}}"></td>
@@ -96,11 +105,8 @@ Edit Invoice
 						<td><input id="price" type="text" name='price[]' required class="form-control" value="{{$invoice->price}}"></td>
 						<td><input id="amount" type="text" name='amount[]' required class="form-control" readonly value="{{$invoice->amount}}"></td>
 						<td><select name="status[]" class="form-control" id="" required>
-							@if($invoice->status == 1)
-							<option value="1">Paid</option>
-							@else
-							<option value="0">Unpaid</option>
-							@endif
+							<option value='1' {{($invoice->status ==1 )?"selected":" "}}>Paid</option>
+							<option value='0' {{($invoice->status ==0 )?"selected":" "}}>UnPaid</option>
 							</select>
 						</td>
 					</tr>
