@@ -191,7 +191,7 @@
           </a>
         </li>
         <li>
-          <a href="{{route('invoice.create')}}">
+          <a href="{{route('invoice')}}">
             <i class="fa fa-paperclip"></i><span>Invoice Generation</span>
           </a>
         </li>

@@ -14,8 +14,9 @@ class InvoiceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
+    {   
+        // $invoice = invoice::where(invoice_no);
+        return view('invoice.index')->with('invoices',invoice::all());
     }
 
     /**

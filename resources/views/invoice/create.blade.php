@@ -9,7 +9,7 @@ Create Invoice
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href=""><i class="fa fa-paperclip"></i> Invoice</a></li>
+        <li><a href="{{route('invoice')}}"><i class="fa fa-paperclip"></i> Invoice</a></li>
         <li class="active">Create Invoice</li>
       </ol>
     </section>
@@ -163,7 +163,7 @@ Create Invoice
     });
 
     $(document).ready(function(){
-    $("#row").hover(function(){
+    $("#target").hover(function(){
     	
     	var actual_amount =  document.getElementsByName("price[]")[0].value * document.getElementsByName("quantity[]")[0].value;
     	document.getElementsByName("amount[]")[0].value =document.getElementsByName("currency[]")[0].value+ " "+actual_amount;
