@@ -60,7 +60,7 @@ Dashboard
         </div>
         <!-- /.col -->
       </div>
-
+  @if(Auth::user()->admin)
       <div class="box box-success">
                 <div class="box-header with-border">
                   <h3 class="box-title"><strong>EMPLOYEES</strong></h3>
@@ -91,6 +91,7 @@ Dashboard
                   </ul>
                   <!-- /.users-list -->
                 </div>
+  @endif
       <!-- /.row -->
 {{-- <div class="container">
     <div class="row justify-content-center">

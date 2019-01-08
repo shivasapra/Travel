@@ -108,23 +108,27 @@
                     @else
                       src="{{asset('app/images/user-placeholder.jpg')}}"
                     @endif 
-                 class="img-circle" alt="User Image">
+                 class="img-circle" alt="User Image"><br>
+                  <div class="text-center">
+                    <strong>{{auth::user()->name}}</strong>
+                  </div>
+                  <div class="text-center">
+                    {{auth::user()->email}}
+                  </div>
               </li>
               <!-- Menu Body -->
               {{-- <li class="user-body">
                 <div class="row">
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Followers</a>
+                  <div class="text-center">
+                    {{auth::user()->name}}
                   </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Sales</a>
+                </div>
+                <div class="row">
+                  <div class="text-center">
+                    {{auth::user()->email}}
                   </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Friends</a>
-                  </div>
-                </div> --}}
-                <!-- /.row -->
-              {{-- </li> --}}
+                </div>
+              </li> --}}
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
