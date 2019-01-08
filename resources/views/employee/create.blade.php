@@ -109,13 +109,13 @@ Employee Registration
 					</div>
 					</div>
 					<div class="row">
-					<div class="col-md-4">
+					<div class="col-md-3">
 					<div class="form-group">
 						<label for="disability">Disability</label>
 						<input type="text" name='disability' class="form-control"required>
 					</div>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-3">
 					<div class="form-group">
 						<label for="blood_group">Blood Group</label>
 						<select name="blood_group" class="form-control"required>
@@ -136,10 +136,16 @@ Employee Registration
 						</select>
 					</div>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-3">
 					<div class="form-group">
 						<label for="country">Country</label>
 						<input type="text" name='country' class="form-control"required>
+					</div>
+					</div>
+					<div class="col-md-3">
+					<div class="form-group">
+						<label for="county">County</label>
+						<input type="text" name='county' class="form-control"required>
 					</div>
 					</div>
 					</div>
@@ -376,10 +382,16 @@ Employee Registration
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-6">
+					<div class="col-md-3">
 					<div class="form-group">
 						<label for="income_tax_no">Income Tax No.</label>
 						<input type="text" name='income_tax_no' class="form-control"required>
+					</div>
+					</div>
+					<div class="col-md-3">
+					<div class="form-group">
+						<label for="tax_ref_no">Tax Ref No.</label>
+						<input type="text" name='tax_ref_no' class="form-control"required>
 					</div>
 					</div>
 					<div class="col-md-6">

@@ -27,6 +27,8 @@ class CreateEmployeesTable extends Migration
             $table->string('disability')->nullable();
             $table->string('blood_group');
             $table->string('country');
+            $table->string('county');
+            $table->string('tax_ref_no');
             $table->string('passport');
             $table->string('visa');
             $table->string('visa_expired');

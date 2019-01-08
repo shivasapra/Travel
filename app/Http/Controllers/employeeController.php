@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\employee;
+use App\User;
 
 class employeeController extends Controller
 {
@@ -47,6 +48,7 @@ class employeeController extends Controller
         $employee->disability = $request->disability;
         $employee->blood_group = $request->blood_group;
         $employee->country = $request->country;
+        $employee->county = $request->county;
         $employee->passport = $request->passport;
         $employee->visa = $request->visa;
         $employee->visa_expired = $request->visa_expired;
@@ -74,10 +76,16 @@ class employeeController extends Controller
         $employee->bank_name = $request->bank_name;
         $employee->bank_address = $request->bank_address;
         $employee->income_tax_no = $request->income_tax_no;
+        $employee->tax_ref_no = $request->tax_ref_no;
         $employee->national_insurance_no = $request->national_insurance_no;
         $unique_id = 'cldtrvl'. mt_rand(100000, 999999);
         $employee->unique_id = $unique_id;
         $employee->save();
+        $user = new User;
+        $user->name = $employee->first_name ." ". $employee->last_name;
+        $user->email = $employee->email;
+        $user->password = bcrypt('pass@123');
+        $user->save();
         return redirect()->route('employees');
     }
 
@@ -126,6 +134,7 @@ class employeeController extends Controller
         $employee->disability = $request->disability;
         $employee->blood_group = $request->blood_group;
         $employee->country = $request->country;
+        $employee->county = $request->county;
         $employee->passport = $request->passport;
         $employee->visa = $request->visa;
         $employee->visa_expired = $request->visa_expired;
@@ -153,6 +162,7 @@ class employeeController extends Controller
         $employee->bank_name = $request->bank_name;
         $employee->bank_address = $request->bank_address;
         $employee->income_tax_no = $request->income_tax_no;
+        $employee->tax_ref_no = $request->tax_ref_no;
         $employee->national_insurance_no = $request->national_insurance_no;
         $employee->save();
         return redirect()->route('employees');
