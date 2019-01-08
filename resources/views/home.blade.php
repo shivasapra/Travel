@@ -16,6 +16,7 @@ Dashboard
 @section('content')
 
     <div class="row">
+      @if(Auth::user()->admin)
         <div class="col-md-4 col-sm-6 col-xs-12">
           <div class="info-box">
             <span class="info-box-icon bg-aqua"><i class="ion ion-android-person"></i></span>
@@ -58,6 +59,37 @@ Dashboard
           </div>
           <!-- /.info-box -->
         </div>
+      @else
+      <div class="col-md-6 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-red"><i class="fa fa-users"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text"><strong>Clients</strong></span>
+              <span class="info-box-number">{{$clients->count()}}</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+
+        <!-- fix for small devices only -->
+        <div class="clearfix visible-sm-block"></div>
+        <!-- /.col -->
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-yellow"><i class="fa fa-money"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text"><strong>Expenses</strong></span>
+              <span class="info-box-number">{{$expense}}</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+      @endif
         <!-- /.col -->
       </div>
   @if(Auth::user()->admin)
@@ -77,7 +109,13 @@ Dashboard
                   <ul class="users-list clearfix">
                     @foreach($employees as $employee)
                     <li>
-                      <img src="{{asset("dist/img/avatar5.png")}}" style="height: 100px" alt="User Image">
+                      <img 
+                      @if($employee->user->avatar)
+                        src="{{asset($employee->user->avatar)}}"
+                      @else
+                        src="{{asset('app/images/user-placeholder.jpg')}}"
+                      @endif 
+                      style="height: 100px" alt="User Image">
                       <a class="users-list-name" href="{{route('view.employee',['id'=>$employee->id])}}">{{$employee->first_name}}</a>
                       <span class="users-list-date">
                         @if($employee->wage->count()>0)
@@ -117,3 +155,4 @@ Dashboard
     </div>
 </div> --}}
 @endsection
+

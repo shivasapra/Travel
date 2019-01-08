@@ -91,6 +91,8 @@ class employeeController extends Controller
         $user->email = $employee->email;
         $user->password = bcrypt('pass@123');
         $user->save();
+        $employee->user_id = $user->id;
+        $employee->save();
         return redirect()->route('employees');
     }
 

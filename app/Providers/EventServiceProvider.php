@@ -28,7 +28,12 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         parent::boot();
+        Event::listen('auth.login',function($user){
+            $user->last_login = new DateTime;
+            $user->save();
+        });
 
         //
     }
+
 }

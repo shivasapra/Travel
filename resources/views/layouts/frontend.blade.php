@@ -114,7 +114,12 @@
                   </div>
                   <div class="text-center">
                     {{auth::user()->email}}
-                  </div>
+                  
+                  <div class="text-center">
+                    @if(!Auth::user()->admin)
+                   {{Auth::user()->employee[0]->unique_id}}
+                   @endif
+                   </div>
               </li>
               <!-- Menu Body -->
               {{-- <li class="user-body">
@@ -191,16 +196,19 @@
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
+        @if(Auth::user()->admin)
         <li>
           <a href="{{route('employees')}}">
             <i class="fa fa-pencil-square-o"></i><span>Employee</span>
           </a>
         </li>
+        @endif
         <li>
           <a href="{{route('clients')}}">
             <i class="fa fa-user-circle"></i><span>Client</span>
           </a>
         </li>
+        @if(Auth::user()->admin)
         <li>
           <a href="{{route('products')}}">
             <i class="fa fa-plus-square"></i><span>Product and Services<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Registration</span>
@@ -211,11 +219,13 @@
             <i class="fa fa-plane"></i><span>Airlines Name Registration</span>
           </a>
         </li>
+        @endif
         <li>
           <a href="{{route('invoice')}}">
             <i class="fa fa-paperclip"></i><span>Invoice Generation</span>
           </a>
         </li>
+        @if(Auth::user()->admin)
         <li>
           <a href="{{route('wage')}}">
             <i class="fa fa-wrench"></i><span>Staff Wage Management</span>
@@ -226,6 +236,7 @@
             <i class="fa fa-paperclip"></i><span>Generate Salary Slip</span>
           </a>
         </li>
+        @endif
         <li class="treeview">
           <a href="">
             <i class="fa fa-money"></i><span>Daily Expense Entry</span>
@@ -235,14 +246,30 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="{{route('expenses.get')}}"><i class="fa fa-circle-o"></i>Expenses</a></li>
+            @if(Auth::user()->admin)
             <li><a href="{{route('auto.get')}}"><i class="fa fa-circle-o"></i>Auto Deduction</a></li>
+            @endif
           </ul>
         </li>
+        @if(Auth::user()->admin)
         <li>
           <a href="{{route('home')}}">
             <i class="fa fa-clock-o"></i> <span>Daily Appointment<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Management</span>
           </a>
         </li>
+        @else
+        <li>
+          <a href="{{route('log')}}">
+            <i class="fa fa-clock-o"></i> <span>Manage Session
+            @if(Auth::user()->employee[0]->wage->last()->logout == null)
+            <span class="text-success"><strong>(Logged In)</strong></span>
+            @else
+            <span class="text-warning"><strong>(Logged Out)</strong></span>
+            @endif
+            </span>
+          </a>
+        </li>
+        @endif
       </ul>
     </section>
     <!-- /.sidebar -->

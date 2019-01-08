@@ -42,20 +42,20 @@ Route::get('/log/logout/{id}',[
 Route::get('/wage',[
 		'uses' => 'wageController@index',
 		'as' => 'wage'
-	]);
+	])->middleware('admin');
 Route::get('/employee/wage/log/{id}',[
 		'uses' => 'wageController@show',
 		'as' => 'wage.log'
-	]);
+	])->middleware('admin');
 
 Route::get('/generate/slip',[
 		'uses' => 'wageController@generateSlip',
 		'as' => 'slip.generate'
-	]);
+	])->middleware('admin');
 Route::post('/slip',[
 		'uses' => 'wageController@slip',
 		'as' => 'slip'
-	]);
+	])->middleware('admin');
 
 
 Route::get('/employees',[
