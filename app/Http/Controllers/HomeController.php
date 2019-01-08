@@ -9,6 +9,7 @@ use App\expenses;
 use App\products;
 use App\airlines;
 use App\wage;
+use Carbon\Carbon;
 class HomeController extends Controller
 {
     /**
@@ -28,15 +29,23 @@ class HomeController extends Controller
      */
     public function index()
     {   
+        $dt = Carbon::now();
+        $date_today = $dt->timezone('Europe/London');
+        $date = $date_today->toDateString();
         $expenses = expenses::where('auto',0)->get();
         $total_amount = 0;
         foreach ($expenses as $expense) {
             $total_amount = $total_amount + $expense->amount; 
         }
-          
+        $logged_in = wage::where('date',$date)->where('login', '!=', null)->where('logout',null)->get();
+        $logged_out = wage::where('date',$date)->where('login', '!=', null)->where('logout', '!=',null)->get();
+
+
         return view('home')->with('employees',employee::all())
                             ->with('clients',client::all())
-                            ->with('expense',$total_amount);
+                            ->with('expense',$total_amount)
+                            ->with('logged_in',$logged_in)
+                            ->with('logged_out',$logged_out);
     }
     public function products(){
         return view('products')->with('products',products::all());

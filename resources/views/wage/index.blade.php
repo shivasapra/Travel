@@ -23,11 +23,11 @@ Staff wage management
                     	<th>Sno.</th>
                     	<th>Employee</th>
                     	<th>Unique Id</th>
-                    	<th>Login Time</th>
-                    	<th>Logout Time</th>
                     	<th>Date</th>
+                        <th>Login Time</th>
+                        <th>Logout Time</th>
                     	<th>Hourly Wage</th>
-                    	<th>Today's wage</th>
+                    	<th>Total wage</th>
                     	<th>Action</th>
                     </tr>
                 </thead>
@@ -40,9 +40,9 @@ Staff wage management
             		<td>{{$employee->first_name}}</td>
             		<td>{{$employee->unique_id}}</td>
                     @if($employee->wage->count()>0)
-            		<td>{{$employee->wage->last()->login}}</td>
-                    <td>{{$employee->wage->last()->logout}}</td>
                     <td>{{$employee->wage->last()->date}}</td>
+                    <td>{{$employee->wage->last()->login}}</td>
+                    <td>{{$employee->wage->last()->logout}}</td>
                     <td>{{$employee->wage->last()->hourly}}</td>
                     <td>{{$employee->wage->last()->wage}}</td>
                     @else
