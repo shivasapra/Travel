@@ -13,6 +13,11 @@ class employeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
+
     public function index()
     {
         return view('employee.index')->with('employees',employee::all());

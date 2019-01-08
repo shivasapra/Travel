@@ -27,6 +27,7 @@
   <link rel="stylesheet" href="{{asset('bower_components/bootstrap-daterangepicker/daterangepicker.css')}}">
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="{{asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
+  <link href="{{ asset('/css/toastr.min.css') }}" rel="stylesheet">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -487,6 +488,21 @@
 <script src="{{asset("dist/js/pages/dashboard.js")}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset("dist/js/demo.js")}}"></script>
+    <script src="{{ asset('/js/toastr.min.js') }}"></script>
+    <script>
+        @if(Session::has('success'))
+            toastr.success("{{Session::get('success')}}")
+        @endif
+        @if(Session::has('info'))
+            toastr.info("{{Session::get('info')}}")
+        @endif
+        @if(Session::has('warning'))
+            toastr.warning("{{Session::get('warning')}}")
+        @endif
+        @if(Session::has('danger'))
+            toastr.danger("{{Session::get('danger')}}")
+        @endif
+    </script>
 @yield('js')
 </body>
 </html>

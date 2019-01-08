@@ -112,27 +112,27 @@ Route::get('/client/delete/{id}',[
 Route::get('/products',[
 	'uses'=>'HomeController@products',
 	'as'=>'products'
-	]);
+	])->middleware('admin');
 Route::post('/add/product',[
 	'uses'=>'HomeController@addProduct',
 	'as'=>'product.add'
-	]);
+	])->middleware('admin');
 Route::get('/delete/product/{id}',[
 	'uses'=>'HomeController@destroyProduct',
 	'as'=>'product.delete'
-	]);
+	])->middleware('admin');
 Route::get('/airlines',[
 	'uses'=>'HomeController@airlines',
 	'as'=>'airlines'
-	]);
+	])->middleware('admin');
 Route::post('/add/airline',[
 	'uses'=>'HomeController@addAirline',
 	'as'=>'airline.add'
-	]);
+	])->middleware('admin');
 Route::get('/delete/airline/{id}',[
 	'uses'=>'HomeController@destroyAirline',
 	'as'=>'airline.delete'
-	]);
+	])->middleware('admin');
 Route::get('/expense',[
 	'uses'=>'expensesController@index',
 	'as'=>'expenses.get'
