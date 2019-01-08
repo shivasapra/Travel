@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\employee;
 use App\User;
+use Carbon\Carbon;
 
 class employeeController extends Controller
 {
@@ -29,8 +30,12 @@ class employeeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view('employee.create');
+    {   
+        $dt = Carbon::now();
+        $dt->timezone('Asia/Kolkata');
+        $date_today = $dt->timezone('Europe/London');
+        $date = $date_today->toDateString();
+        return view('employee.create')->with('date',$date);
     }
 
     /**
@@ -189,5 +194,11 @@ class employeeController extends Controller
         $employee = employee::find($id);
         $employee->delete();
         return redirect()->route('employees');
+    }
+    public function status(){
+        $dt = Carbon::now();
+        $date_today = $dt->timezone('Europe/London');
+        $date = $date_today->toDateString();
+        return view('employee.status')->with('date',$date)->with('employees',employee::all());
     }
 }

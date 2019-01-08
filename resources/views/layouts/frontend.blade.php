@@ -253,8 +253,8 @@
         </li>
         @if(Auth::user()->admin)
         <li>
-          <a href="{{route('home')}}">
-            <i class="fa fa-clock-o"></i> <span>Daily Appointment<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Management</span>
+          <a href="{{route('status')}}">
+            <i class="fa fa-clock-o"></i> <span>Employee Status</span>
           </a>
         </li>
         @else

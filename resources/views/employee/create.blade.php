@@ -92,7 +92,7 @@ Employee Registration
 					<div class="col-md-4">
 					<div class="form-group">
 						<label for="DOB">Date of Birth</label>
-						<input type="date" name='DOB' class="form-control"required>
+						<input type="date" name='DOB' max="{{$date}}" class="form-control"required>
 					</div>
 					</div>
 					<div class="col-md-4">
