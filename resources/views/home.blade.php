@@ -96,7 +96,7 @@ Dashboard
             </ul>
          </div>
       </div>
-    </div>
+     </div>
      <div class="col-md-4">
       <div class="box box-warning">
           <div class="box-header with-border">
@@ -128,6 +128,62 @@ Dashboard
                   
                 </span>
               </li>
+              @endforeach
+            </ul>
+         </div>
+      </div>
+     </div>
+     <div class="col-md-4">
+      <div class="box box-danger">
+          <div class="box-header with-border">
+            <h3 class="box-title"><strong>EMPLOYEES <span class="text-danger">Absent</span></strong></h3>
+
+            <div class="box-tools pull-right">
+              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+              </button>
+              <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
+              </button>
+            </div>
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body no-padding">
+            <ul class="users-list clearfix">
+              @foreach($employees as $employee)
+              @if($employee->wage->count()>0)
+                @if($employee->wage->last()->date != $date)
+                <li>
+                  <img 
+                  @if($employee->user->avatar)
+                    src="{{asset($employee->user->avatar)}}"
+                  @else
+                    src="{{asset('app/images/user-placeholder.jpg')}}"
+                  @endif 
+                  style="height: 50px" alt="User Image">
+                  <a class="users-list-name" href="{{route('view.employee',['id'=>$employee->id])}}">{{$employee->first_name}}</a>
+                  {{-- <span class="users-list-date">
+                    
+                    {{$logout->logout}}
+                    
+                  </span> --}}
+                </li>
+                @endif
+                @else
+                <li>
+                  <img 
+                  @if($employee->user->avatar)
+                    src="{{asset($employee->user->avatar)}}"
+                  @else
+                    src="{{asset('app/images/user-placeholder.jpg')}}"
+                  @endif 
+                  style="height: 50px" alt="User Image">
+                  <a class="users-list-name" href="{{route('view.employee',['id'=>$employee->id])}}">{{$employee->first_name}}</a>
+                  {{-- <span class="users-list-date">
+                    
+                    {{$logout->logout}}
+                    
+                  </span> --}}
+                </li>
+              @endif
               @endforeach
             </ul>
          </div>

@@ -45,7 +45,8 @@ class HomeController extends Controller
                             ->with('clients',client::all())
                             ->with('expense',$total_amount)
                             ->with('logged_in',$logged_in)
-                            ->with('logged_out',$logged_out);
+                            ->with('logged_out',$logged_out)
+                            ->with('date',$date);
     }
     public function products(){
         return view('products')->with('products',products::all());

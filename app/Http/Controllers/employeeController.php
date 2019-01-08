@@ -151,6 +151,9 @@ class employeeController extends Controller
         $employee->home_phone = $request->home_phone;
         $employee->mobile_phone = $request->mobile_phone;
         $employee->email = $request->email;
+        $user = User::find($employee->user_id);
+        $user->email = $request->email;
+        $user->save();
         $employee->qualification = $request->qualification;
         $employee->experience = $request->experience;
         $employee->exp_in_dept = $request->exp_in_dept;
