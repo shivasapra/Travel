@@ -30,10 +30,11 @@ Edit Invoice
 
 	<form action="{{route('invoice.update',['id'=>$invoice->id])}}" method="post">
 		@csrf
+	<div id="tblCustomers">	
 		<div class="box box-primary">
 		<div class="box-body">
 			<section class="content-header">
-				<h1 class="text-center">Edit Invoice</h1>
+				<h1 class="text-center">Invoice</h1>
 			</section>
 			<hr>
 			<div class="row">
@@ -129,10 +130,12 @@ Edit Invoice
 			</table>
 		</div>
 		</div>
+	</div>
 			
 			<div class="form-group">
 			<div class="text-center">
 				<button class="btn btn-primary" type="submit">Update</button>
+			<button id="btnExport" class=" btn btn-success" onclick="Export()">PDF</button>
 			</div>
 			</div>
 	</form>
@@ -150,5 +153,24 @@ Edit Invoice
     });
     });
    	</script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <script type="text/javascript">
+        function Export() {
+            html2canvas(document.getElementById('tblCustomers'), {
+                onrendered: function (canvas) {
+                    var data = canvas.toDataURL();
+                    var docDefinition = {
+                        content: [{
+                            image: data,
+                            width: 550
+                        }]
+                    };
+                    pdfMake.createPdf(docDefinition).download("Table.pdf");
+                }
+            });
+        }
+    </script>
 
 @stop

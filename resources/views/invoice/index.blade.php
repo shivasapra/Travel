@@ -19,14 +19,15 @@ Invoices
 			<div class="box-body">
 				
 			
-			<table class="table table-bordered">
-                    <thead>
+			<table id="myTable" class="table table-striped">
+                    <thead id="ignorePDF">
                       <tr>
                         <th>Invoice No.</th>
                         <th>Invoice Date</th>
                         <th>Receiver Name</th>
                         <th>Amount</th>
                         <th>Status</th>
+                        {{-- <th>PDF</th> --}}
                         <th>Edit</th>
                         <th>Delete</th>
                       </tr>
@@ -45,6 +46,7 @@ Invoices
 	                    		@else
 	                    		<td><div class="text-danger">{{'Unpaid'}}</div></td>
 	                    		@endif
+	                    		{{-- <td><button class="btn btn-xs btn-success" id="pdf">PDF</button></td> --}}
 	                    		<td><a href="{{route('invoice.edit',['id'=>$invoice->id])}}" class="btn btn-info btn-xs"><span class="fa fa-edit"></span></a></td>
 	                    		<td><a href="{{route('invoice.delete',['id'=>$invoice->id])}}" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span></a></td>
 	                    	</tr>
@@ -52,6 +54,7 @@ Invoices
                     	@endif
                     </tbody>
             </table>
+        
 		</div>
 		</div>
 		<div class="text-center">
@@ -59,5 +62,18 @@ Invoices
 				<button class="btn btn-success">Create</button>
 			</a>
 		</div>
-	
 @endsection
+@section('js')
+<script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
+<script>
+	$(document).ready(function(){
+    $("#pdf").click(function(){
+	var doc = new jsPDF()
+	var source = document.getElementById('myTable');
+	doc.fromHTML(source);
+	doc.output("dataurlnewwindow");
+	});
+	});
+</script>
+@stop
+
