@@ -90,6 +90,10 @@ Route::get('/status',[
 		'uses' => 'employeeController@status',
 		'as' => 'status'
 	]);
+Route::post('/employee/status',[
+		'uses' => 'employeeController@status2',
+		'as' => 'status2'
+	]);
 
 
 Route::get('/clients',[

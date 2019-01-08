@@ -201,4 +201,9 @@ class employeeController extends Controller
         $date = $date_today->toDateString();
         return view('employee.status')->with('date',$date)->with('employees',employee::all());
     }
+    public function status2(Request $request){
+        
+        $date = $request->date;
+        return view('employee.status2')->with('date',$date)->with('employees',employee::all());
+    }
 }
