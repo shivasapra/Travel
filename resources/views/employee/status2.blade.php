@@ -18,14 +18,16 @@ Employees Status
 	<div class="col-md-9">
 		<div class="box box-info">
 			<div class="box-body">
-				
+			<section class="content-header">
+				<h1 class="text-center text-danger">{{$date}}</h1>
+			</section>
+			<hr>	
 			<table class="table table-hover mb-0">
                     <thead>
                       <tr>
                         <th>Sno.</th>
                         <th>Name</th>
                         <th>Unique Id</th>
-                        <th>Date</th>
                         <th>Status</th>
                       </tr>
                     	</thead>
@@ -37,7 +39,6 @@ Employees Status
 	                    		<td>{{$i++}}</td>
 	                    		<td>{{$employee->first_name}}</td>
 	                    		<td>{{$employee->unique_id}}</td>
-	                    		<td>{{$date}}</td>
 	                    		<?php $j=0;?>
 	                    		@if($employee->wage->count()>0)
 		                    		@foreach($employee->wage as $wage)
