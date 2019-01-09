@@ -24,8 +24,8 @@ Clients
                       <tr>
                         <th>Sno.</th>
                         <th>Name</th>
-                        <th>Postal Code</th>
                         <th>Country</th>
+                        <th>Postal Code</th>
                         <th>Contact</th>
                         <th>DOB</th>
                         <th>Email</th>
@@ -38,8 +38,8 @@ Clients
 	                    	@foreach($clients as $client)
 	                    		<td>{{$i++}}</td>
 	                    		<td>{{$client->first_name}}</td>
-	                    		<td>{{$client->postal_code}}</td>
 	                    		<td>{{$client->country}}</td>
+	                    		<td>{{$client->postal_code}}</td>
 	                    		<td>{{$client->phone}}</td>
 	                    		<td>{{$client->DOB}}</td>
 	                    		<td>{{$client->email}}</td>

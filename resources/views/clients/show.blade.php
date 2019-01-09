@@ -35,20 +35,14 @@ client
 					</div>
 					<div class="row">
 						<tr>
-							<td><strong>DOB:</strong></td>
-							<td>{{$client->DOB}}</td>
-						</tr>
-					</div>
-					<div class="row">
-						<tr>
 							<td><strong>Country:</strong></td>
 							<td>{{$client->country}}</td>
 						</tr>
 					</div>
 					<div class="row">
 						<tr>
-							<td><strong>Address:</strong></td>
-							<td>{{$client->address}}</td>
+							<td><strong>County:</strong></td>
+							<td>{{$client->county}}</td>
 						</tr>
 					</div>
 					<div class="row">
@@ -65,8 +59,8 @@ client
 					</div>
 					<div class="row">
 						<tr>
-							<td><strong>County:</strong></td>
-							<td>{{$client->county}}</td>
+							<td><strong>Address:</strong></td>
+							<td>{{$client->address}}</td>
 						</tr>
 					</div>
 					<div class="row">
@@ -79,6 +73,12 @@ client
 						<tr>
 							<td><strong>Email:</strong></td>
 							<td>{{$client->email}}</td>
+						</tr>
+					</div>
+					<div class="row">
+						<tr>
+							<td><strong>DOB:</strong></td>
+							<td>{{$client->DOB}}</td>
 						</tr>
 					</div>
 				</tbody>
