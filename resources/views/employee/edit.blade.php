@@ -230,6 +230,7 @@ Edit employee
 						<select name="currency" class="form-control"required>
 							<option value="" class="form-control" ></option>
 							<option value="$" class="form-control" {{($employee->currency == '$')?"selected":" "}}>$</option>
+							<option value="&#163;" class="form-control" {{($employee->currency != '$')?"selected":" "}}>&#163;</option>
 						</select>
 					</div>
 					</div>

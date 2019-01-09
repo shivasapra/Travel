@@ -43,7 +43,7 @@ Employees
 	                    		<td>{{$employee->country}}</td>
 	                    		<td>{{$employee->hired_for_dep}}</td>
 	                    		<td>{{$employee->hiring_date}}</td>
-	                    		<td>{{$employee->rate}}</td>
+	                    		<td>{{$employee->currency.$employee->rate}}</td>
 	                    		<td>
 	                    			<a href="{{route('view.employee',['id'=>$employee->id])}}" class="btn btn-success btn-xs"><span class="fa fa-eye"></span></a>
 	                    			<a href="{{route('edit.employee',['id'=>$employee->id])}}" class="btn btn-info btn-xs"><span class="fa fa-edit"></span></a>

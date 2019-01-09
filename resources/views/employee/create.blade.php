@@ -271,6 +271,7 @@ Employee Registration
 						<select name="currency" class="form-control"required>
 							<option value="" class="form-control"></option>
 							<option value="$" class="form-control">$</option>
+							<option value="&#163;">&#163;</option>
 						</select>
 					</div>
 					</div>

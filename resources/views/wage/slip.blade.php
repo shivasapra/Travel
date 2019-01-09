@@ -79,7 +79,7 @@ Slip
 					<div class="row">
 						<tr>
 							<td><strong>Total Wage:</strong></td>
-							<td>{{'$'.$total_wage}}</td>
+							<td>{{$employee->currency.$total_wage}}</td>
 						</tr>
 					</div>
 					@endif
