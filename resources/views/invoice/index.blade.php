@@ -29,7 +29,7 @@ Invoices
                         <th>Status</th>
                         {{-- <th>PDF</th> --}}
                         <th>Edit</th>
-                        <th>Delete</th>
+                        {{-- <th>Delete</th> --}}
                       </tr>
                     	</thead>
                     <tbody>
@@ -48,7 +48,7 @@ Invoices
 	                    		@endif
 	                    		{{-- <td><button class="btn btn-xs btn-success" id="pdf">PDF</button></td> --}}
 	                    		<td><a href="{{route('invoice.edit',['id'=>$invoice->id])}}" class="btn btn-info btn-xs"><span class="fa fa-edit"></span></a></td>
-	                    		<td><a href="{{route('invoice.delete',['id'=>$invoice->id])}}" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span></a></td>
+	                    		{{-- <td><a href="{{route('invoice.delete',['id'=>$invoice->id])}}" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span></a></td> --}}
 	                    	</tr>
 	                    	@endforeach
                     	@endif

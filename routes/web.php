@@ -183,12 +183,12 @@ Route::post('/store/invoice',[
 Route::get('/delete/invoice/{id}',[
 	'uses'=>'InvoiceController@destroy',
 	'as'=>'invoice.delete'
-	]);
+	])->middleware('admin');
 Route::get('/edit/invoice/{id}',[
 	'uses'=>'InvoiceController@edit',
 	'as'=>'invoice.edit'
-	]);
+	])->middleware('admin');
 Route::post('/update/invoice/{id}',[
 	'uses'=>'InvoiceController@update',
 	'as'=>'invoice.update'
-	]);
+	])->middleware('admin');
