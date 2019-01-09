@@ -88,7 +88,10 @@ class employeeController extends Controller
         $employee->income_tax_no = $request->income_tax_no;
         $employee->tax_ref_no = $request->tax_ref_no;
         $employee->national_insurance_no = $request->national_insurance_no;
-        $unique_id = 'cldtrvl'. mt_rand(100000, 999999);
+        $unique_id = 'CLD'. mt_rand(100000, 999999);
+        while (employee::where('unique_id',$unique_id)->get()->count()>0) {
+           $unique_id = 'CLD'. mt_rand(100000, 999999); 
+        }
         $employee->unique_id = $unique_id;
         $employee->save();
         $user = new User;
