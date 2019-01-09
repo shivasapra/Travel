@@ -59,7 +59,14 @@ class wageController extends Controller
         $wage->date = $date;
         $wage->hourly = $employee[0]->currency.$employee[0]->rate;
         $wage->save();
-        return redirect()->route('log');
+        $logged_in = wage::where('date',$date)->where('login', '!=', null)->where('logout',null)->get();
+        $logged_out = wage::where('date',$date)->where('login', '!=', null)->where('logout', '!=',null)->get();
+
+
+        return view('home')->with('logged_in',$logged_in)
+                            ->with('logged_out',$logged_out)
+                            ->with('date',$date);
+        
     }
 
     public function logout(Request $request,$id){
@@ -77,7 +84,13 @@ class wageController extends Controller
         $wage->hours = $diff;
         $wage->wage = $total;
         $wage->save();
-        return redirect()->route('log');
+        $logged_in = wage::where('date',$date)->where('login', '!=', null)->where('logout',null)->get();
+        $logged_out = wage::where('date',$date)->where('login', '!=', null)->where('logout', '!=',null)->get();
+
+
+        return view('home')->with('logged_in',$logged_in)
+                            ->with('logged_out',$logged_out)
+                            ->with('date',$date);
     }
 
     public function index()

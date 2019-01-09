@@ -1,3 +1,9 @@
+<?php 
+  use Carbon\Carbon;
+  $dt = Carbon::now();
+  $date_today = $dt->timezone('Europe/London');
+  $date = $date_today->toDateString();
+ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -258,14 +264,17 @@
           </a>
         </li>
         @else
+
         <li>
           <a href="{{route('log')}}">
             <i class="fa fa-clock-o"></i> <span>Manage Session
             @if(Auth::user()->employee[0]->wage->count()>0)
-              @if(Auth::user()->employee[0]->wage->last()->logout == null and Auth::user()->employee[0]->wage->last()->login != null)
-              <span class="text-success"><strong>(Logged In)</strong></span>
-              @elseif(Auth::user()->employee[0]->wage->last()->logout != null and Auth::user()->employee[0]->wage->last()->login != null)
-              <span class="text-warning"><strong>(Logged Out)</strong></span>
+              @if(Auth::user()->employee[0]->wage->last()->date == $date)
+                @if(Auth::user()->employee[0]->wage->last()->logout == null and Auth::user()->employee[0]->wage->last()->login != null)
+                <span class="text-success"><strong>(Logged In)</strong></span>
+                @elseif(Auth::user()->employee[0]->wage->last()->logout != null and Auth::user()->employee[0]->wage->last()->login != null)
+                <span class="text-warning"><strong>(Logged Out)</strong></span>
+                @endif
               @endif
             @endif
             </span>
