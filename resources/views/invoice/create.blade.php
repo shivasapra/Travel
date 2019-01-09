@@ -54,7 +54,7 @@ Create Invoice
 				</div>
 				<div class="col-md-4">
 				<div class="form-group">
-					<input type="text" name='invoice_no' integer placeholder="Enter Invoice No." required class="form-control">
+					<input type="text" name='invoice_no' readonly class="form-control" value="{{$invoice_no}}">
 					<input type="date" name='invoice_date' placeholder="Select Invoice date" required class="form-control">
 				</div>
 				</div>
@@ -118,9 +118,9 @@ Create Invoice
 
                 </tbody>
 	        </table>
-			<div class="text-center"  style="margin-top: 5px">
-			<button class="btn btn-success btn-sm" disabled type="button" id="add">+</button>
-			</div>
+			{{-- <div class="text-center"  style="margin-top: 5px">
+			<button class="btn btn-success btn-sm"  type="button" id="add">+</button>
+			</div> --}}
 		</div>
 		</div>
 		<div class="box box-default">

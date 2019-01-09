@@ -25,9 +25,14 @@ class InvoiceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    {   
+        $invoice_no = 'CLD'. mt_rand(10000, 99999);
+        while (invoice::where('invoice_no',$invoice_no)->get()->count()>0) {
+           $invoice_no = 'CLD'. mt_rand(10000, 99999); 
+        }
         return view('invoice.create')->with('products',products::all())
-                                    ->with('airlines',airlines::all());
+                                    ->with('airlines',airlines::all())
+                                    ->with('invoice_no',$invoice_no);
     }
 
     /**
@@ -38,7 +43,7 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
-        $invoice = new invoice;
+        
         // $array = array_combine($request->receiver_name,$request->billing_address,$request->invoice_date,$request->invoice_no,$request->item_name,$request->item_subname,$request->quantity,$request->currency,$request->price,$request->amount,
         //     $request->status);
         // foreach($array as $receiver_name => $billing_address => $invoice_date 
@@ -58,6 +63,7 @@ class InvoiceController extends Controller
         //     $invoice->save();
         // }
         foreach($request->item_name as $index => $item_name){
+            $invoice = new invoice;
             $invoice->receiver_name = $request->receiver_name;
             $invoice->billing_address = $request->billing_address;
             $invoice->invoice_date = $request->invoice_date;
