@@ -42,6 +42,12 @@ class expensesController extends Controller
             $expense->date = $request->date;
             $expense->amount = $request->amount;
             $expense->description = $request->description;
+            if ($request->company_name != null) {
+                $expense->company_name = $request->company_name;
+            }
+            if ($request->invoice_no != null) {
+                $expense->invoice_no = $request->invoice_no;
+            }
             $expense->save();
         }
         // dd($date);

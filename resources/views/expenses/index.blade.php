@@ -41,22 +41,34 @@ Expenses
                 </div>
 		<div class="box-body">
 				<div class="row">
-					<div class="col-md-4">
+					<div class="col-md-3">
+					<div class="form-group">
+						<label for="description">Description:</label>
+						<input type="text" name='description' required class="form-control">
+					</div>
+					</div>
+					<div class="col-md-2">
 					<div class="form-group">
 						<label for="date">Date:</label>
 						<input type="date" name='date' max="{{$date}}" required  class="form-control">
 					</div>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-3">
 					<div class="form-group">
 						<label for="amount">Amount:</label>
 						<input type="text" name='amount' required class="form-control">
 					</div>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-2">
 					<div class="form-group">
-						<label for="description">Description:</label>
-						<input type="text" name='description' required class="form-control">
+						<label for="company_name">Company Name:</label>
+						<input type="text" name='company_name' class="form-control">
+					</div>
+					</div>
+					<div class="col-md-2">
+					<div class="form-group">
+						<label for="invoice_no">Invoice No.</label>
+						<input type="text" name='invoice_no' class="form-control">
 					</div>
 					</div>
 					<div class="text-center">
@@ -92,6 +104,8 @@ Expenses
                         <th>Date</th>
                         <th>Amount</th>
                         <th>Description</th>
+                        <th>Company Name</th>
+                        <th>Invoice No</th>
                         <th>Delete</th>
                       </tr>
                     	</thead>
@@ -104,6 +118,20 @@ Expenses
 	                    		<td>{{$expense->date}}</td>
 	                    		<td>{{$expense->amount}}</td>
 	                    		<td>{{$expense->description}}</td>
+	                    		<td>
+	                    			@if($expense->company_name)
+	                    				{{$expense->company_name}}
+	                    			@else
+	                    				<strong>{{"N/A"}}</strong>
+	                    			@endif
+	                    		</td>
+	                    		<td>
+	                    			@if($expense->invoice_no)
+	                    				{{$expense->invoice_no}}
+	                    			@else
+	                    				<strong>{{"N/A"}}</strong>
+	                    			@endif
+	                    		</td>
 	                    		<td>
 	                    			<a href="{{route('expense.delete',['id'=>$expense->id])}}" class="btn btn-danger btn-xs">Delete</a>
 	                    		</td>
