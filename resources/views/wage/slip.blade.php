@@ -56,13 +56,14 @@ Slip
 		</form>
 		
 		<div class="col-md-6 ">
+		<div id="tblCustomers">	
 		<div class="box box-info">
 		<div class="box-body" id="print">
-			<table class="table table-hover mb-0">
+			<table  class="table table-hover mb-0">
 					
 				<tbody>
 					@if($employee)
-					<div class="text-center"><strong><h4>Salary Slip</h4></strong></div>
+					<tr><div class="text-center"><strong><h4>Salary Slip</h4></strong></div></tr>
 					<div class="row">
 						<tr>
 							<td><strong>Employee Name:</strong></td>
@@ -87,20 +88,28 @@ Slip
 			</table>
 		</div>
 		</div>
+	</div>
 		<div class="text-center">
-		<button onclick='myFunction()' class="btn btn-success btn-sm">Print</button></div>
+		<button id="btnExport" class=" btn btn-success" onclick="Export()">PDF</button>
 		</div>
 		</div>
-		<script>
-			function myFunction(){
-				var prtContent = document.getElementById("print");
-				var WinPrint = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
-				WinPrint.document.write(prtContent.innerHTML);
-				WinPrint.document.close();
-				WinPrint.focus();
-				WinPrint.print();
-				WinPrint.close();
-			}
-		</script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <script type="text/javascript">
+        function Export() {
+            html2canvas(document.getElementById('tblCustomers'), {
+                onrendered: function (canvas) {
+                    var data = canvas.toDataURL();
+                    var docDefinition = {
+                        content: [{
+                            image: data,
+                            width: 550
+                        }]
+                    };
+                    pdfMake.createPdf(docDefinition).download("Table.pdf");
+                }
+            });
+        }
+    </script>
 
 @stop
