@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\client;
+use Session;
 class clientController extends Controller
 {
     /**
@@ -46,6 +47,7 @@ class clientController extends Controller
         $client->email = $request->email;
         $client->phone = $request->phone;
         $client->save();
+        Session::flash('success','Client Created Successfully');
         return redirect()->route('clients');
     }
 
@@ -108,6 +110,7 @@ class clientController extends Controller
     {
         $client = client::find($id);
         $client->delete();
+        Session::flash('success','Client Deleted Successfully');
         return redirect()->route('clients');
     }
 }

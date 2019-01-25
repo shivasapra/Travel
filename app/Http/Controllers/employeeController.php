@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\employee;
 use App\User;
 use Carbon\Carbon;
+use Session;
 
 class employeeController extends Controller
 {
@@ -101,6 +102,7 @@ class employeeController extends Controller
         $user->save();
         $employee->user_id = $user->id;
         $employee->save();
+        Session::flash('success','Employee created Successfully')
         return redirect()->route('employees');
     }
 

@@ -36,6 +36,7 @@ Clients
                     	@if($clients->count()>0)
                     	<?php $i = 1; ?>
 	                    	@foreach($clients as $client)
+	                    	<tr>
 	                    		<td>{{$i++}}</td>
 	                    		<td>{{$client->first_name}}</td>
 	                    		<td>{{$client->country}}</td>
@@ -48,6 +49,7 @@ Clients
 	                    			<a href="{{route('edit.client',['id'=>$client->id])}}" class="btn btn-info btn-xs">edit</a>
 	                    			<a href="{{route('delete.client',['id'=>$client->id])}}" class="btn btn-danger btn-xs">Delete</a>
 	                    		</td>
+	                    		</tr>
 	                    	@endforeach
                     	@endif
                     </tbody>
