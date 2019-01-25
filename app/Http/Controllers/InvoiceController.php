@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\airlines;
 use App\products;
 use App\invoice;
+use Session;
 class InvoiceController extends Controller
 {
     /**
@@ -78,6 +79,7 @@ class InvoiceController extends Controller
             $invoice->save();
 
         }
+        Session::flash('success','Invoice Created Successfully');
             return redirect()->back();
         
     }
@@ -133,6 +135,7 @@ class InvoiceController extends Controller
             $invoice->save();
 
         }
+        Session::flash('success','Invoice Updated Successfully');
             return redirect()->route('invoice')->with('invoices',invoice::all());
     }
 
@@ -146,6 +149,7 @@ class InvoiceController extends Controller
     {
         $invoice = invoice::find($id);
         $invoice->delete();
+        Session::flash('success','Invoice Deleted Successfully');
         return redirect()->back()->with('invoices',invoice::all());
     }
 }

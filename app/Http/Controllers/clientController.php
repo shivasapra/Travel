@@ -97,6 +97,7 @@ class clientController extends Controller
         $client->email = $request->email;
         $client->phone = $request->phone;
         $client->save();
+        Session::flash('success','Client Updated Successfully');
         return redirect()->route('clients');
     }
 

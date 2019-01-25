@@ -10,6 +10,7 @@ use App\products;
 use App\airlines;
 use App\wage;
 use Carbon\Carbon;
+use Session;
 class HomeController extends Controller
 {
     /**
@@ -55,11 +56,13 @@ class HomeController extends Controller
         $product = new products;
         $product->service = $request->service;
         $product->save();
+        Session::flash('success','Producr Added Successfully');
         return redirect()->route('products')->with('products',products::all());
     }
     public function destroyProduct($id){
         $product = products::find($id);
         $product->delete();
+        Session::flash('success','Product Deleted Successfully');
         return redirect()->route('products')->with('products',products::all());
     }
 
@@ -70,11 +73,13 @@ class HomeController extends Controller
         $airline = new airlines;
         $airline->name = $request->name;
         $airline->save();
+        Session::flash('success','Airline Added Successfully');
         return redirect()->route('airlines')->with('airlines',airlines::all());
     }
     public function destroyAirline($id){
         $airline = airlines::find($id);
         $airline->delete();
+        Session::flash('success','Airline Deleted Successfully');
         return redirect()->route('airlines')->with('airlines',airlines::all());
     }
 }

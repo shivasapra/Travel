@@ -102,7 +102,7 @@ class employeeController extends Controller
         $user->save();
         $employee->user_id = $user->id;
         $employee->save();
-        Session::flash('success','Employee created Successfully')
+        Session::flash('success','Employee created Successfully');
         return redirect()->route('employees');
     }
 
@@ -185,6 +185,7 @@ class employeeController extends Controller
         $employee->tax_ref_no = $request->tax_ref_no;
         $employee->national_insurance_no = $request->national_insurance_no;
         $employee->save();
+        Session::flash('success','Employee Updated Successfully');
         return redirect()->route('employees');
     }
 
@@ -198,6 +199,7 @@ class employeeController extends Controller
     {
         $employee = employee::find($id);
         $employee->delete();
+        Session::flash('success','Employee Deleted Successfully');
         return redirect()->route('employees');
     }
     public function status(){

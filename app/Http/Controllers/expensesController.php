@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\expenses;
 use Carbon\Carbon;
+use Session;
 class expensesController extends Controller
 {
     /**
@@ -49,6 +50,7 @@ class expensesController extends Controller
                 $expense->invoice_no = $request->invoice_no;
             }
             $expense->save();
+            Session::flash('success','Expense Added');
         }
         // dd($date);
         $expenses = expenses::where('auto',0)->get();
@@ -155,6 +157,7 @@ class expensesController extends Controller
     {
         $expense = expenses::find($id);
         $expense->delete();
+        Session::flash('success','Expense Deleted');
         return redirect()->route('expenses.get')->with('expenses',expenses::all());
     }
 }
