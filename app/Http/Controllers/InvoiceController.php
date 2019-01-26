@@ -20,6 +20,13 @@ class InvoiceController extends Controller
         return view('invoice.index')->with('invoices',invoice::all());
     }
 
+    public function invoicePrint($id)
+    {   
+        return view('invoice-print')->with('invoice',invoice::find($id))
+                                        ->with('products',products::all())
+                                        ->with('airlines',airlines::all());
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -92,7 +99,9 @@ class InvoiceController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('invoice')->with('invoice',invoice::find($id))
+                                ->with('products',products::all())
+                                    ->with('airlines',airlines::all());
     }
 
     /**

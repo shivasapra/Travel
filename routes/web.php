@@ -21,6 +21,10 @@ Route::post('/update/profile',[
 		]);
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/invoice/print',[
+			'uses'=> 'InvoiceController@invoicePrint',
+			'as'=>'invoice.print'
+		]);
 Route::get('/log',[
 		'uses' => 'wageController@log',
 		'as' => 'log'
@@ -172,6 +176,14 @@ Route::get('/invoice',[
 	'uses'=>'InvoiceController@index',
 	'as'=>'invoice'
 	]);
+Route::get('/invoice/view/{id}',[
+	'uses'=>'InvoiceController@show',
+	'as'=>'invoice.view'
+	]);
+Route::get('/invoice/print/{id}',[
+			'uses'=> 'InvoiceController@invoicePrint',
+			'as'=>'invoice.print'
+		]);
 Route::get('/create/invoice',[
 	'uses'=>'InvoiceController@create',
 	'as'=>'invoice.create'
