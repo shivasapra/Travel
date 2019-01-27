@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\airlines;
 use App\products;
 use App\invoice;
+use App\invoiceInfo;
 use Session;
 use GuzzleHttp;
 class InvoiceController extends Controller
@@ -17,17 +18,7 @@ class InvoiceController extends Controller
      */
     public function index()
     {   
-        // $invoice = invoice::where(invoice_no);
-        // $client = new GuzzleHttp\Client();
-        // $res = $client->get('https://api.postcodes.io/postcodes?q=OX495NU');
-        // dd($res);
-        // dd($res->getStatusCode());
-        // $json = json_decode(file_get_contents('https://api.postcodes.io/postcodes?q=OX495NU'), true);
-        // $result = json_decode(file_get_contents('https://api.postcodes.io/postcodes?q=OX495NU'), true);
-        // dd($result);
-        // dd($json['result'][0]['postcode']);
-        // $request = Request::create('http://api.postcodes.io/postcodes/B289EU', 'GET');
-        // dd($request);
+        
         return view('invoice.index')->with('invoices',invoice::all());
     }
 
@@ -63,38 +54,24 @@ class InvoiceController extends Controller
     public function store(Request $request)
     {
         
-        // $array = array_combine($request->receiver_name,$request->billing_address,$request->invoice_date,$request->invoice_no,$request->item_name,$request->item_subname,$request->quantity,$request->currency,$request->price,$request->amount,
-        //     $request->status);
-        // foreach($array as $receiver_name => $billing_address => $invoice_date 
-        //     => $invoice_no => $item_name => $item_subname => $quantity => $currency
-        //     => $price => $amount => $status){
-        //     $invoice->receiver_name = $receiver_name;
-        //     $invoice->billing_address = $billing_address;
-        //     $invoice->invoice_date = $invoice_date;
-        //     $invoice->invoice_no = $invoice_no;
-        //     $invoice->item_name = $item_name;
-        //     $invoice->item_subname = $item_subname;
-        //     $invoice->quantity = $quantity;
-        //     $invoice->currency = $currency;
-        //     $invoice->price = $price;
-        //     $invoice->amount = $amount;
-        //     $invoice->status = $status;
-        //     $invoice->save();
-        // }
+        $invoice = new invoice;
+        $invoice->receiver_name = $request->receiver_name;
+        $invoice->billing_address = $request->billing_address;
+        $invoice->invoice_date = $request->invoice_date;
+        $invoice->invoice_no = $request->invoice_no;
+        $invoice->save();
+        
         foreach($request->item_name as $index => $item_name){
-            $invoice = new invoice;
-            $invoice->receiver_name = $request->receiver_name;
-            $invoice->billing_address = $request->billing_address;
-            $invoice->invoice_date = $request->invoice_date;
-            $invoice->invoice_no = $request->invoice_no;
-            $invoice->item_name = $item_name;
-            $invoice->item_subname = $request->item_subname[$index];
-            $invoice->quantity = $request->quantity[$index];
-            $invoice->currency = $request->currency[$index];
-            $invoice->price = $request->price[$index];
-            $invoice->amount = $request->price[$index] * $request->quantity[$index];
-            $invoice->status = $request->status[$index];
-            $invoice->save();
+            $invoice_info = new invoiceInfo;
+            $invoice_info->invoice_id = $invoice->id;
+            $invoice_info->item_name = $item_name;
+            $invoice_info->item_subname = $request->item_subname[$index];
+            $invoice_info->quantity = $request->quantity[$index];
+            $invoice_info->currency = $request->currency[$index];
+            $invoice_info->price = $request->price[$index];
+            $invoice_info->amount = $request->price[$index] * $request->quantity[$index];
+            $invoice_info->status = $request->status[$index];
+            $invoice_info->save();
 
         }
         Session::flash('success','Invoice Created Successfully');
@@ -173,3 +150,18 @@ class InvoiceController extends Controller
         return redirect()->back()->with('invoices',invoice::all());
     }
 }
+
+
+
+
+// $invoice = invoice::where(invoice_no);
+        // $client = new GuzzleHttp\Client();
+        // $res = $client->get('https://api.postcodes.io/postcodes?q=OX495NU');
+        // dd($res);
+        // dd($res->getStatusCode());
+        // $json = json_decode(file_get_contents('https://api.postcodes.io/postcodes?q=OX495NU'), true);
+        // $result = json_decode(file_get_contents('https://api.postcodes.io/postcodes?q=OX495NU'), true);
+        // dd($result);
+        // dd($json['result'][0]['postcode']);
+        // $request = Request::create('http://api.postcodes.io/postcodes/B289EU', 'GET');
+        // dd($request);
