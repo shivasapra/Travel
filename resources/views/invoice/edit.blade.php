@@ -67,7 +67,6 @@ Edit Invoice
 			<table class="table table-bordered">
                 <thead>
                   <tr>
-                    <th width="7%">Sno.</th>
                     <th width="15%">Item Name</th>
                     <th width="15%">Item Sub Name</th>
                     <th width="7%">Quantity</th>
@@ -78,13 +77,13 @@ Edit Invoice
                   </tr>
                 	</thead>
                 <tbody id="target">
+                	@foreach($invoice->invoiceInfo as $info)
                 	<tr id="row">
-						<th>1.</th>
 						<td>
 							<select required name="item_name[]" class="form-control" id="">
 								@if($products->count()>0)
 								@foreach($products as $product)
-									<option value="{{$product->service}}" {{($invoice->item_name ==$product->service )?"selected":" "}}>{{$product->service}}</option>
+									<option value="{{$product->service}}" {{($info->item_name ==$product->service )?"selected":" "}}>{{$product->service}}</option>
 								@endforeach
 								@endif
 							</select>
@@ -93,25 +92,26 @@ Edit Invoice
 							<select required name="item_subname[]" class="form-control" id="">
 								@if($airlines->count()>0)
 								@foreach($airlines as $airline)
-									<option value="{{$airline->name}}" {{($invoice->item_subname ==$airline->name )?"selected":" "}}>{{$airline->name}}</option>
+									<option value="{{$airline->name}}" {{($info->item_subname ==$airline->name )?"selected":" "}}>{{$airline->name}}</option>
 								@endforeach
 								@endif
 							</select>
 						</td>
-						<td><input type="text" id="quantity" name='quantity[]' required class="form-control" value="{{$invoice->quantity}}"></td>
+						<td><input type="text" id="quantity" name='quantity[]' required class="form-control" value="{{$info->quantity}}"></td>
 						<td><select name="currency[]" class="form-control" id="currency">
-							<option value="$" {{($invoice->currency == '$' )?"selected":" "}}>$</option>
-							<option value="&#163;" {{($invoice->currency !="$" )?"selected":" "}}>&#163;</option></option>
+							<option value="$" {{($info->currency == '$' )?"selected":" "}}>$</option>
+							<option value="&#163;" {{($info->currency !="$" )?"selected":" "}}>&#163;</option></option>
 							</select>
 						</td>
-						<td><input id="price" type="text" name='price[]' required class="form-control" value="{{$invoice->price}}"></td>
-						<td><input id="amount" type="text" name='amount[]' required class="form-control" readonly value="{{$invoice->amount}}"></td>
+						<td><input id="price" type="text" name='price[]' required class="form-control" value="{{$info->price}}"></td>
+						<td><input id="amount" type="text" name='amount[]' required class="form-control" readonly value="{{$info->currency.$info->amount}}"></td>
 						<td><select name="status[]" class="form-control" id="" required>
-							<option value='1' {{($invoice->status ==1 )?"selected":" "}}>Paid</option>
-							<option value='0' {{($invoice->status ==0 )?"selected":" "}}>UnPaid</option>
+							<option value='1' {{($info->status ==1 )?"selected":" "}}>Paid</option>
+							<option value='0' {{($info->status ==0 )?"selected":" "}}>UnPaid</option>
 							</select>
 						</td>
 					</tr>
+					@endforeach
 
                 </tbody>
 	        </table>
@@ -125,7 +125,12 @@ Edit Invoice
 			<table class="table table-bordered">
 				<tr>
 					<td class="col-md-8" align="right"><strong>Total:</strong></td>
-					<td class="col-md-4"><input type="text" required class="form-control" readonly></td>
+						<?php $amount = 0;?>
+            			@foreach($invoice->invoiceInfo as $info)
+            			<?php 
+            				$amount = $amount + $info->amount;	
+            			?>
+						@endforeach					<td class="col-md-4"><input type="text" required class="form-control" value="{{$invoice->invoiceInfo[0]->currency.$amount}}" readonly></td>
 				</tr>
 			</table>
 		</div>
@@ -135,8 +140,6 @@ Edit Invoice
 			<div class="form-group">
 			<div class="text-center">
 			<button class="btn btn-primary" type="submit">Update</button>
-			{{-- <input type="button" value="Export" 
-            id="btPrint" class="btn btn-sm btn-success" onclick="createPDF()" /> --}}
 			</div>
 			</div>
 	</form>
@@ -154,32 +157,7 @@ Edit Invoice
     });
     });
    	</script>
-   	{{--  <script>
-    function createPDF() {
-        var sTable = document.getElementById('tab').innerHTML;
-
-        var style = "<style>";
-        style = style + "table {width: 100%;font: 17px Calibri;}";
-        style = style + "table, th, td {border: solid 1px #DDD; border-collapse: collapse;";
-        style = style + "padding: 2px 3px;text-align: center;}";
-        style = style + "</style>";
-
-        // CREATE A WINDOW OBJECT.
-        var win = window.open('', '', 'height=700,width=700');
-
-        win.document.write('<html><head>');
-        
-        win.document.write(style);          // ADD STYLE INSIDE THE HEAD TAG.
-        win.document.write('</head>');
-        win.document.write('<body>');
-        win.document.write(sTable);         // THE TABLE CONTENTS INSIDE THE BODY TAG.
-        win.document.write('</body></html>');
-
-        win.document.close(); 	// CLOSE THE CURRENT WINDOW.
-
-        win.print();    // PRINT THE CONTENTS.
-    }
-</script> --}}
+   
 
     
 
