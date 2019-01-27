@@ -17,5 +17,13 @@ class UsersTableSeeder extends Seeder
         	'password' => bcrypt('password'),
             'admin' => 1
         ]);
+
+        $user = App\User::create([
+            'name' => 'himsoft',
+            'email' => 'info@himsoftsolution.',
+            'password' => bcrypt('password'),
+            'admin' => 1
+        ]);
+
     }
 }
