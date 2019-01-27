@@ -71,13 +71,15 @@ Invoice
             </tr>
             </thead>
             <tbody>
+            @foreach($invoice->invoiceInfo as $info)
             <tr id="row">
-            <td>{{$invoice->item_name}}</td>
-            <td>{{$invoice->item_subname}}</td>
-            <td>{{$invoice->quantity}}</td>
+            <td>{{$info->item_name}}</td>
+            <td>{{$info->item_subname}}</td>
+            <td>{{$info->quantity}}</td>
             {{-- <td>{{$invoice->currency}}</td> --}}
-            <td>{{$invoice->price}}</td>
-            <td>{{$invoice->amount}}</td>
+            <td>{{$info->price}}</td>
+            <td>{{$info->currency.$info->amount}}</td>
+            @endforeach
             {{-- <td>@if($invoice->status ==1)
                 {{'Paid'}}
                 @else
@@ -112,21 +114,27 @@ Invoice
 
           <div class="table-responsive">
             <table class="table">
+              <?php $amount = 0;?>
+                  @foreach($invoice->invoiceInfo as $info)
+                  <?php 
+                    $amount = $amount + $info->amount;  
+                  ?>
+            @endforeach 
               <tr>
                 <th style="width:50%">Subtotal:</th>
-                <td>{{$invoice->currency}} {{$invoice->amount}}</td>
+                <td>{{$invoice->invoiceInfo[0]->currency}} {{$amount}}</td>
               </tr>
               <tr>
                 <th>Tax (0.0%)</th>
-                <td>{{$invoice->currency}} 0.00</td>
+                <td>{{$invoice->invoiceInfo[0]->currency}} 0.00</td>
               </tr>
               <tr>
                 <th>Shipping:</th>
-                <td>{{$invoice->currency}} 0.00</td>
+                <td>{{$invoice->invoiceInfo[0]->currency}} 0.00</td>
               </tr>
               <tr>
                 <th>Total:</th>
-                <td>{{$invoice->currency}} {{$invoice->amount}}</td>
+                <td>{{$invoice->invoiceInfo[0]->currency}} {{$amount}}</td>
               </tr>
             </table>
           </div>
