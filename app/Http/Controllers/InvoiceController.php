@@ -7,7 +7,7 @@ use App\airlines;
 use App\products;
 use App\invoice;
 use Session;
-use GuzzleHttp\Client;
+use GuzzleHttp;
 class InvoiceController extends Controller
 {
     /**
@@ -18,10 +18,14 @@ class InvoiceController extends Controller
     public function index()
     {   
         // $invoice = invoice::where(invoice_no);
-        $client = new Client();
-        $res = $client->request('POST', 'https://api.postcodes.io/postcodes/B289EU');
-        
-        dd($res->getStatusCode());
+        // $client = new GuzzleHttp\Client();
+        // $res = $client->get('https://api.postcodes.io/postcodes?q=OX495NU');
+        // dd($res);
+        // dd($res->getStatusCode());
+        // $json = json_decode(file_get_contents('https://api.postcodes.io/postcodes?q=OX495NU'), true);
+        // $result = json_decode(file_get_contents('https://api.postcodes.io/postcodes?q=OX495NU'), true);
+        // dd($result);
+        // dd($json['result'][0]['postcode']);
         // $request = Request::create('http://api.postcodes.io/postcodes/B289EU', 'GET');
         // dd($request);
         return view('invoice.index')->with('invoices',invoice::all());

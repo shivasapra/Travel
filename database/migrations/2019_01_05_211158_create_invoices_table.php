@@ -19,13 +19,13 @@ class CreateInvoicesTable extends Migration
             $table->string('billing_address');
             $table->Date('invoice_date');
             $table->string('invoice_no');
-            $table->string('item_name');
-            $table->string('item_subname');
-            $table->integer('quantity');
-            $table->string('currency');
-            $table->integer('price');
-            $table->integer('amount');
-            $table->boolean('status')->default(0);
+            // $table->string('item_name');
+            // $table->string('item_subname');
+            // $table->integer('quantity');
+            // $table->string('currency');
+            // $table->integer('price');
+            // $table->integer('amount');
+            // $table->boolean('status')->default(0);
             $table->timestamps();
         });
     }

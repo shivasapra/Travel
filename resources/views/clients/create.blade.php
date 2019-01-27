@@ -1,3 +1,6 @@
+<?php
+use Illuminate\Http\Request;
+?>
 @extends('layouts.frontend')
 @section('title')
 Client Registration
@@ -30,7 +33,7 @@ Client Registration
 
 			<form action="{{route('store.client')}}" method="post">
 				@csrf
-		<div class="box box-primary">
+		<div class="box box-primary" id="action">
 		<div class="box-body">
 				<div class="row">
 					<div class="col-md-6">
@@ -47,16 +50,17 @@ Client Registration
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-6">
+					<div class="col-md-4">
 					<div class="form-group">
 						<label for="country">Country</label>
-						<input type="text" name='country' required class="form-control">
+						<input id="country" type="text" name='country' required class="form-control">
 					</div>
 					</div>
-					<div class="col-md-6">
+					
+					<div class="col-md-4">
 					<div class="form-group">
 						<label for="county">County</label>
-						<input type="text" name='county' required class="form-control">
+						<input id="county" type="text" name='county' required class="form-control">
 					</div>
 					</div>
 					
@@ -65,13 +69,13 @@ Client Registration
 					<div class="col-md-6">
 					<div class="form-group">
 						<label for="postal_code">Postal Code</label>
-						<input type="text" name='postal_code' required class="form-control">
+						<input id="postal_code" type="text" name='postal_code' required class="form-control">
 					</div>
 					</div>
 					<div class="col-md-6">
 					<div class="form-group">
 						<label for="city">City</label>
-						<input type="text" name='city' required class="form-control">
+						<input id="city" type="text" name='city' required class="form-control">
 					</div>
 					</div>
 				</div>
@@ -115,4 +119,17 @@ Client Registration
 			</form>
 
 
+@stop
+@section('js')
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	{{-- <script>
+		$(document).ready(function(){
+    $("#country").click(function(){
+    	 var postal_code = document.getElementById('postal_code').value;
+
+    	document.getElementById('country').value = '{{json_decode(file_get_contents('https://api.postcodes.io/postcodes?q='.postal_code), true)['result'][0]['admin_ward']}}';
+    	 
+    	});
+	});
+	</script> --}}
 @stop
