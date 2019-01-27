@@ -48,8 +48,18 @@ Create Invoice
 			<div class="row">
 				<div class="col-md-8">
 				<div class="form-group">
-					<input type="text" name='receiver_name' required class="form-control" placeholder="Enter Receiver Name">
-					<textarea name="billing_address" required class="form-control" placeholder="Enter Billing Adress"></textarea>
+					<select required name='receiver_name' class="form-control" id="client">
+						<option value="">--select--</option>
+						@if($clients->count()>0)
+						@foreach($clients as $client)
+							<option value="{{$client->id}}">{{$client->first_name.' '.$client->last_name}}</option>
+						@endforeach
+						@endif
+					</select>
+					{{-- <input type="text" name='receiver_name' required class="form-control" placeholder="Enter Receiver Name"> --}}
+					<div id="address">
+						<textarea name="billing_address" required class="form-control" placeholder="Enter Billing Adress"></textarea>
+					</div>
 				</div>
 				</div>
 				<div class="col-md-4">
@@ -171,6 +181,26 @@ Create Invoice
     	
     });
     });
+
+    $(document).ready(function(){
+    $("#client").change(function(){
+    	var client_id = this.value;
+    	@foreach($clients as $client)
+    		var test = {{$client->id}};
+	    	if (client_id == test) {
+	    		var address = '{{$client->address}}';
+	    		var city = '{{$client->city}}';
+	    		var postal_code = '{{$client->postal_code}}';
+	    		var county = '{{$client->county}}';
+	    		var country = '{{$client->country}}';
+	    	}
+    	@endforeach
+    	var append = '<textarea name="billing_address" required class="form-control" placeholder="Enter Billing Adress">'+address+'&#13;&#10;'+city+'&#13;&#10;'+postal_code+'&#13;&#10;'+county+'&#13;&#10;'+country+'</textarea>';
+    	$("#address").html(append);   
+    	});
+    });
+
+
    	</script>
 
 @stop

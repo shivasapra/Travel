@@ -8,6 +8,7 @@ use App\products;
 use App\invoice;
 use App\invoiceInfo;
 use Session;
+use App\client;
 use GuzzleHttp;
 class InvoiceController extends Controller
 {
@@ -40,9 +41,17 @@ class InvoiceController extends Controller
         while (invoice::where('invoice_no',$invoice_no)->get()->count()>0) {
            $invoice_no = 'CLD'. mt_rand(10000, 99999); 
         }
+        if(client::all()->count()==0){
+            session::flash('warning','you must have atleast one client to create an invoice');
+            return redirect()->back();
+        }
+        $test = client::all();
+        $json = json_encode($test);
         return view('invoice.create')->with('products',products::all())
                                     ->with('airlines',airlines::all())
-                                    ->with('invoice_no',$invoice_no);
+                                    ->with('invoice_no',$invoice_no)
+                                    ->with('clients',client::all())
+                                    ->with('json',$json);
     }
 
     /**
@@ -60,7 +69,7 @@ class InvoiceController extends Controller
         $invoice->invoice_date = $request->invoice_date;
         $invoice->invoice_no = $request->invoice_no;
         $invoice->save();
-        
+
         foreach($request->item_name as $index => $item_name){
             $invoice_info = new invoiceInfo;
             $invoice_info->invoice_id = $invoice->id;

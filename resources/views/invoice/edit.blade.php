@@ -49,7 +49,13 @@ Edit Invoice
 			<div class="row">
 				<div class="col-md-8">
 				<div class="form-group">
-					<input type="text" name='receiver_name' value="{{$invoice->receiver_name}}" required class="form-control" placeholder="Enter Receiver Name">
+					<select required name='receiver_name' class="form-control" id="client">
+						
+						
+							<option value="{{$invoice->receiver_name}}">{{$invoice->receiver_name}}</option>
+						
+					</select>
+					{{-- <input type="text" name='receiver_name' value="{{$invoice->receiver_name}}" required class="form-control" placeholder="Enter Receiver Name"> --}}
 					<textarea name="billing_address" required class="form-control" placeholder="Enter Billing Adress">{{$invoice->billing_address}}</textarea>
 				</div>
 				</div>
