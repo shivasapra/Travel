@@ -40,7 +40,15 @@ Invoices
 	                    		<td>{{$invoice->invoice_no}}</td>
 	                    		<td>{{$invoice->invoice_date}}</td>
 	                    		<td>{{$invoice->receiver_name}}</td>
-	                    		<td>{{$invoice->currency.$invoice->amount}}</td>
+	                    		<td>
+	                    			<?php $amount = 0;?>
+	                    			@foreach($invoice->invoiceInfo as $info)
+	                    			<?php 
+	                    				$amount = $amount + $info->amount;	
+	                    			?>
+									@endforeach
+	                    			{{$info->currency.$amount}}
+	                    		</td>
 	                    		@if($invoice->status == 1)
 	                    		<td><div class="text-success">{{'Paid'}}</div></td>
 	                    		@else
