@@ -42,7 +42,7 @@ Create Invoice
 					<h3>RECEIVER (BILL TO)</h3>
 				</div>
 				<div class="col-md-4">
-					<h3>Reverse Charge</h3>
+					{{-- <h3>Reverse Charge</h3> --}}
 				</div>
 			</div>
 			<div class="row">
@@ -168,7 +168,7 @@ Create Invoice
 			@endforeach
 		@endif
 		var currency = document.getElementById('currency').value;
-    	var append = '<tr id="row"><td><select required name="item_name[]" class="form-control" id=""><option value="">--select--</option>'+options1+'</select></td><td><select required name="item_subname[]" class="form-control" id=""><option value="">--select--</option>'+options2+'</select></td><td><input type="text" name="quantity[]" id="quantity" required class="form-control"></td><td><select name="currency[]" class="form-control" id=""><option value='+currency+'>'+currency+'</option></select></td><td><input type="text" name="price[]" id="price" required class="form-control"></td><td><input id="amount" type="text" name="amount[]" required class="form-control" readonly></td><td><select name="status[]" required class="form-control" id=""><option value="">--select--</option><option value="1">Paid</option><option value="0">UnPaid</option></select></td></tr>';
+    	var append = '<tr id="row"><td><select required name="item_name[]" class="form-control" id=""><option value="">--select--</option>'+options1+'</select></td><td><select required name="item_subname[]" class="form-control" id=""><option value="">--select--</option>'+options2+'</select></td><td><input type="text" name="quantity[]" id="quantity" required class="form-control"></td><td><select name="currency[]" class="form-control" id=""><option value='+currency+'>'+currency+'</option></select></td><td><input type="text" name="price[]" id="price" required class="form-control"></td><td><input id="amount" type="text" name="amount[]" required class="form-control" readonly></td><td><select name="status[]" required class="form-control" id=""><option value="">--select--</option><option value="paid">Paid</option><option value="unpaid">UnPaid</option></select></td></tr>';
         $("#target").append(append);   
         });
     });

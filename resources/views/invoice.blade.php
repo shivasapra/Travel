@@ -44,7 +44,7 @@ Invoice
         </div>
         <!-- /.col -->
         <div class="col-sm-4 invoice-col">
-          Reverse Charge: <br><br>
+          {{-- Reverse Charge: <br><br> --}}
           <b>Invoice: {{$invoice->invoice_no}}</b>
           <br>
           <b>Date: </b>{{$invoice->invoice_date}}<br>
