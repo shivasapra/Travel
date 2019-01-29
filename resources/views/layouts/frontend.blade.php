@@ -54,6 +54,7 @@
     <!-- Logo -->
     <a href="{{route('home')}}" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
+      {{-- <img src="{{asset('/uploads/logo.jpg')}}" class="img-circle" alt="User Image"> --}}
       <span class="logo-mini"><b>C</b>T</span>
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg"><b>Cloud</b>Travel</span>

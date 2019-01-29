@@ -21,7 +21,7 @@ Invoice
       <div class="row">
         <div class="col-xs-12">
           <h2 class="page-header">
-            <span style="color:#0066FF;"> CloudTravel</span>
+            <img src="{{asset('/uploads/logo.jpg')}}" style="width: 150px; height: 70px" alt="User Image">
             <small class="pull-right"></small>
           </h2>
         </div>

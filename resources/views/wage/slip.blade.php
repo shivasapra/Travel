@@ -82,6 +82,22 @@ Slip
 							<td>{{$employee->currency.$total_wage}}</td>
 						</tr>
 					</div>
+					<div class="row">
+						<tr>
+							<td><strong>House Rent Allowance:</strong></td>
+							<td>{{$employee->currency.'0.0'}}</td>
+						</tr>
+					</div>
+					<div class="row">
+						<tr><td><strong>Medical Allowance:</strong></td>
+							<td>{{$employee->currency.'0.0'}}</td>
+						</tr>
+					</div>
+					<div class="row">
+						<tr><td><strong>Other Expenses:</strong></td>
+							<td>{{$employee->currency.'0.0'}}</td>
+						</tr>
+					</div>
 					@endif
 				</tbody>
 				
