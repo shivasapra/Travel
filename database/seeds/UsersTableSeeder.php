@@ -25,5 +25,10 @@ class UsersTableSeeder extends Seeder
             'admin' => 1
         ]);
 
+        $tax = App\settings::create([
+            'tax' => 0,
+            'enable' => 'yes',
+        ]);
+
     }
 }

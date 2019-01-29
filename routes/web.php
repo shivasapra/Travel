@@ -15,6 +15,14 @@ Route::get('/edit/profile',[
 			'uses'=> 'UserController@index',
 			'as'=>'edit.profile'
 		]);
+Route::get('/tax',[
+			'uses'=> 'HomeController@tax',
+			'as'=>'tax'
+		]);
+Route::post('/tax/update/',[
+			'uses'=> 'HomeController@taxUpdate',
+			'as'=>'tax.update'
+		]);
 Route::post('/update/profile',[
 			'uses'=> 'UserController@update',
 			'as'=>'update.profile'

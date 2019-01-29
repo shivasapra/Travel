@@ -12,6 +12,7 @@ use App\wage;
 use Carbon\Carbon;
 use Session;
 use App\invoice;
+use App\settings;
 class HomeController extends Controller
 {
     /**
@@ -89,5 +90,17 @@ class HomeController extends Controller
         $airline->delete();
         Session::flash('success','Airline Deleted Successfully');
         return redirect()->route('airlines')->with('airlines',airlines::all());
+    }
+
+    public function tax()
+    {
+        return view('tax')->with('tax',settings::all());
+    }
+    public function taxUpdate(Request $request){
+        $tax = settings::find(1);
+        $tax->tax = $request->tax;
+        $tax->enable = $request->enable;
+        $tax->save();
+        return view('tax')->with('tax',settings::all());
     }
 }
