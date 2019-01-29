@@ -33,16 +33,16 @@ Create Invoice
 		<div class="box box-primary">
 		<div class="box-body">
 			<section class="content-header">
-				<h1 class="text-center">Create Invoice</h1>
+				<h1 class="text-center"><span style="color:#0066FF;">Create Invoice</span></h1>
 			</section>
 			<hr>
 			<div class="row">
 				<div class="col-md-8">
-					<h4>To,</h4>
-					<h4>RECEIVER (BILL TO)</h4>
+					<h3>To,</h3>
+					<h3>RECEIVER (BILL TO)</h3>
 				</div>
 				<div class="col-md-4">
-					<h4>Reverse Charge</h4>
+					<h3>Reverse Charge</h3>
 				</div>
 			</div>
 			<div class="row">
@@ -64,26 +64,26 @@ Create Invoice
 				</div>
 				<div class="col-md-4">
 				<div class="form-group">
-					<input type="text" name='invoice_no' readonly class="form-control" value="{{$invoice_no}}">
+					<input style="color:white;font-weight:500;background-color:#0066FF;" type="text" name='invoice_no' readonly class="form-control" value="{{$invoice_no}}">
 					<input type="date" name='invoice_date' placeholder="Select Invoice date" required class="form-control">
 				</div>
 				</div>
 			</div>
 		</div>
 		</div>
-		<div class="box box-success">
+		<div class="box box-primary">
 		<div class="box-body">
 			<table class="table table-bordered">
                 <thead>
                   <tr>
                     {{-- <th width="7%">Sno.</th> --}}
-                    <th width="15%">Item Name</th>
-                    <th width="15%">Item Sub Name</th>
-                    <th width="7%">Quantity</th>
-                    <th width="8%">Currency</th>
-                    <th width="13%">Price</th>
-                    <th width="12%">Actual Amt.</th>
-                    <th width="12%">Status</th>
+                    <th width="15%" style="color:white;font-weight:500;background-color:#0066FF;">Item Name</th>
+                    <th width="15%" style="color:white;font-weight:500;background-color:#0066FF;">Item Sub Name</th>
+                    <th width="7%" style="color:white;font-weight:500;background-color:#0066FF;">Quantity</th>
+                    <th width="8%" style="color:white;font-weight:500;background-color:#0066FF;">Currency</th>
+                    <th width="13%" style="color:white;font-weight:500;background-color:#0066FF;">Price</th>
+                    <th width="12%" style="color:white;font-weight:500;background-color:#0066FF;">Actual Amt.</th>
+                    <th width="12%" style="color:white;font-weight:500;background-color:#0066FF;">Status</th>
                   </tr>
                 	</thead>
                 <tbody id="target">
@@ -138,7 +138,7 @@ Create Invoice
 			<table class="table table-bordered">
 				<tr>
 					<td class="col-md-8" align="right"><strong>Total:</strong></td>
-					<td class="col-md-4"><input type="text" required class="form-control" readonly></td>
+					<td class="col-md-4"><input style="color:white;font-weight:500;background-color:#0066FF;" type="text" required class="form-control" readonly></td>
 				</tr>
 			</table>
 		</div>

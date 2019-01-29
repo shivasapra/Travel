@@ -11,7 +11,7 @@ Invoice
       <div class="row">
         <div class="col-xs-12">
           <h2 class="page-header">
-            <i class="fa fa-globe"></i> CloudTravel
+            <span style="color:#0066FF;"> CloudTravel</span>
             <small class="pull-right"></small>
           </h2>
         </div>
@@ -51,12 +51,12 @@ Invoice
           <table class="table table-striped">
             <thead>
             <tr>
-                <th width="15%">Item Name</th>
-                <th width="15%">Item Sub Name</th>
-                <th width="7%">Quantity</th>
+                <th width="15%" style="color:white;font-weight:500;background-color:#0066FF;">Item Name</th>
+                <th width="15%" style="color:white;font-weight:500;background-color:#0066FF;">Item Sub Name</th>
+                <th width="7%" style="color:white;font-weight:500;background-color:#0066FF;">Quantity</th>
                 {{-- <th width="8%">Currency</th> --}}
-                <th width="13%">Price</th>
-                <th width="12%">Actual Amt.</th>
+                <th width="13%" style="color:white;font-weight:500;background-color:#0066FF;">Price</th>
+                <th width="12%" style="color:white;font-weight:500;background-color:#0066FF;">Actual Amt.</th>
                 {{-- <th width="12%">Status</th> --}}
             </tr>
             </thead>
@@ -118,13 +118,13 @@ Invoice
                 <th>Tax (0.0%)</th>
                 <td>{{$invoice->invoiceInfo[0]->currency}} 0.00</td>
               </tr>
-              <tr>
+              {{-- <tr>
                 <th>Shipping:</th>
                 <td>{{$invoice->invoiceInfo[0]->currency}} 0.00</td>
-              </tr>
+              </tr> --}}
               <tr>
                 <th>Total:</th>
-                <td>{{$invoice->invoiceInfo[0]->currency}} {{$amount}}</td>
+                <td style="color:white;font-weight:500;background-color:#0066FF;">{{$invoice->invoiceInfo[0]->currency}} {{$amount}}</td>
               </tr>
             </table>
           </div>
