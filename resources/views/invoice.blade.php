@@ -124,17 +124,25 @@ Invoice
                 <th style="width:50%">Subtotal:</th>
                 <td>{{$invoice->invoiceInfo[0]->currency}} {{$amount}}</td>
               </tr>
+              @if($tax[0]->enable == 'yes')
               <tr>
-                <th>Tax (0.0%)</th>
-                <td>{{$invoice->invoiceInfo[0]->currency}} 0.00</td>
+                <th>Tax ({{$tax[0]->tax}}%)</th>
+                <?php $taxed = ($tax[0]->tax/100*$amount) ?>
+                <td>{{$invoice->invoiceInfo[0]->currency}} {{$taxed}}</td>
               </tr>
+              @endif
               {{-- <tr>
                 <th>Shipping:</th>
                 <td>{{$invoice->invoiceInfo[0]->currency}} 0.00</td>
               </tr> --}}
               <tr>
                 <th>Total:</th>
-                <td style="color:white;font-weight:500;background-color:#0066FF;">{{$invoice->invoiceInfo[0]->currency}} {{$amount}}</td>
+                @if($tax[0]->enable == 'yes')
+                <?php $total = $amount + $taxed ?>
+                <td style="color:white;font-weight:500;background-color:#0066FF;">{{$invoice->invoiceInfo[0]->currency}} {{$total}}</td>
+                @else
+                  <td style="color:white;font-weight:500;background-color:#0066FF;">{{$invoice->invoiceInfo[0]->currency}} {{$amount}}</td>
+                @endif
               </tr>
             </table>
           </div>

@@ -10,6 +10,7 @@ use App\invoiceInfo;
 use Session;
 use App\client;
 use GuzzleHttp;
+use App\settings;
 class InvoiceController extends Controller
 {
     /**
@@ -27,7 +28,8 @@ class InvoiceController extends Controller
     {   
         return view('invoice-print')->with('invoice',invoice::find($id))
                                         ->with('products',products::all())
-                                        ->with('airlines',airlines::all());
+                                        ->with('airlines',airlines::all())
+                                        ->with('tax',settings::all());
     }
 
     /**
@@ -104,7 +106,8 @@ class InvoiceController extends Controller
     {
         return view('invoice')->with('invoice',invoice::find($id))
                                 ->with('products',products::all())
-                                    ->with('airlines',airlines::all());
+                                    ->with('airlines',airlines::all())
+                                    ->with('tax',settings::all());
     }
 
     /**
