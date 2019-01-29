@@ -104,7 +104,7 @@ Edit Client
 					</div>
 					</div>
 				</div>
-				@if($client->passport == 'yes')
+				@if($client->passport == 1)
 				<div class="text-center"><h3>Passport Details</h3></div><hr>
 				<div class="row">
 					<div class="col-md-6">
@@ -139,12 +139,12 @@ Edit Client
 				
 		</div>
 		</div>
-			</form>
 				<div class="form-group">
 					<div class="text-center">
 						<button class="btn btn-success" type="submit">Update</button>
 					</div>
 				</div>
+			</form>
 	
 
 

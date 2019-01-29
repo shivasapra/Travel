@@ -101,8 +101,8 @@ Client Registration
 					</div>
 					<div class="form-group">
 						<label for="passport">Do you have passport</label>
-						<input type="radio" name='passport' required id="yespassport">Yes
-						<input type="radio" name='passport' required id="nopassport">No
+						<input type="radio" name='passport' required id="yespassport" value=1>Yes
+						<input type="radio" name='passport' required id="nopassport" checked value=0>No
 					</div>
 					</div>
 					<div class="col-md-6">

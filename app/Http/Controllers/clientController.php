@@ -46,6 +46,14 @@ class clientController extends Controller
         $client->DOB = $request->DOB;
         $client->email = $request->email;
         $client->phone = $request->phone;
+        $client->passport = $request->passport;
+        if ($request->passport == 1 ) {
+            $client->passport_no = $request->passport_no;
+            $client->passport_expiry_date = $request->passport_expiry_date;
+            $client->passport_issue_date = $request->passport_issue_date;
+            $client->passport_place = $request->passport_place;
+
+        }
         $client->save();
         Session::flash('success','Client Created Successfully');
         return redirect()->route('clients');
@@ -96,6 +104,13 @@ class clientController extends Controller
         $client->DOB = $request->DOB;
         $client->email = $request->email;
         $client->phone = $request->phone;
+        if ($request->passport_no != null ) {
+            $client->passport_no = $request->passport_no;
+            $client->passport_expiry_date = $request->passport_expiry_date;
+            $client->passport_issue_date = $request->passport_issue_date;
+            $client->passport_place = $request->passport_place;
+
+        }
         $client->save();
         Session::flash('success','Client Updated Successfully');
         return redirect()->route('clients');
