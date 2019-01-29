@@ -56,7 +56,8 @@ class HomeController extends Controller
                             ->with('logged_out',$logged_out)
                             ->with('date',$date)
                             ->with('invoices',$invoices)
-                            ->with('total_wage',$total_wage);
+                            ->with('total_wage',$total_wage)
+                            ->with('expenses',expenses::where('auto',0)->orderBy('created_at','desc')->take(7)->get());
     }
     public function products(){
         return view('products')->with('products',products::all());

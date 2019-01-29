@@ -191,7 +191,93 @@ Dashboard
       </div>
      </div>
     </div>
+    
+    <div class="row">
+      <div class="col-md-6">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Recently Added Expenses</h3>
 
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <ul class="products-list product-list-in-box">
+                @if($expenses->count()>0)
+                @foreach($expenses as $expense)
+                <li class="item">
+                  {{-- <div class="product-img">
+                    <img src="dist/img/default-50x50.gif" alt="Product Image">
+                  </div> --}}
+                  <div class="product-info">
+                    {{$expense->description}}
+                      <span class="label label-success pull-right">{{'$'.$expense->amount}}</span>
+                    <span class="product-description">
+                          {{$expense->date}}
+                        </span>
+                  </div>
+                </li>
+                @endforeach
+                @endif
+              </ul>
+            </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="box box-primary">
+          <div class="box-body">
+            <section class="content-header">
+              <h1 class="text-center"><span style="color:#0066FF;">Invoices</span></h1><hr>
+            </section>
+              {{-- <h3>Total paid invoices {{$invoice->invoiceInfo()->where('status','1')->count()}}, unpaid {{$invoice->where('status','0')->count()}}.</h3> --}}
+            <div class="table-responsive">
+              <table id="recent-orders" class="table table-hover mb-0 ps-container ps-theme-default">
+                <thead>
+                  <tr>
+                    <th>Invoice No.</th>
+                    <th>Invoice Date</th>
+                    <th>Receiver Name</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @if($invoices->count()>0)
+                  
+                    @foreach($invoices as $invoice)
+                    <tr>
+                      <td><a href="{{route('invoice.view',['id'=>$invoice->id])}}">{{$invoice->invoice_no}}</a></td>
+                      <td>{{$invoice->invoice_date}}</td>
+                      <td>{{$invoice->receiver_name}}</td>
+                      <td>
+                        <?php $amount = 0;?>
+                        @foreach($invoice->invoiceInfo as $info)
+                        <?php 
+                          $amount = $amount + $info->amount;  
+                        ?>
+              @endforeach
+                        {{$info->currency.$amount}}
+                      </td>
+                      @if($info->status == 1)
+                      <td><small class="label label-success">Paid</small></td>
+                      @else
+                      <td><small class="label label-danger">Unpaid</small></td>
+                      @endif
+                      
+                    </tr>
+                    @endforeach
+                  @endif
+                </tbody>
+              </table>
+            </div>
+          </div>
+          </div>
+      </div>
+    </div>
     
 
 
@@ -343,54 +429,6 @@ Dashboard
         </div>
 
         <div class="col-md-5">
-          <div class="box box-primary">
-          <div class="box-body">
-            <section class="content-header">
-              <h1 class="text-center"><span style="color:#0066FF;">Invoices</span></h1><hr>
-            </section>
-              {{-- <h3>Total paid invoices {{$invoice->invoiceInfo()->where('status','1')->count()}}, unpaid {{$invoice->where('status','0')->count()}}.</h3> --}}
-            <div class="table-responsive">
-              <table id="recent-orders" class="table table-hover mb-0 ps-container ps-theme-default">
-                <thead>
-                  <tr>
-                    <th>Invoice No.</th>
-                    <th>Invoice Date</th>
-                    <th>Receiver Name</th>
-                    <th>Amount</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @if($invoices->count()>0)
-                  
-                    @foreach($invoices as $invoice)
-                    <tr>
-                      <td><a href="{{route('invoice.view',['id'=>$invoice->id])}}">{{$invoice->invoice_no}}</a></td>
-                      <td>{{$invoice->invoice_date}}</td>
-                      <td>{{$invoice->receiver_name}}</td>
-                      <td>
-                        <?php $amount = 0;?>
-                        @foreach($invoice->invoiceInfo as $info)
-                        <?php 
-                          $amount = $amount + $info->amount;  
-                        ?>
-              @endforeach
-                        {{$info->currency.$amount}}
-                      </td>
-                      @if($info->status == 1)
-                      <td><small class="label label-success">Paid</small></td>
-                      @else
-                      <td><small class="label label-danger">Unpaid</small></td>
-                      @endif
-                      
-                    </tr>
-                    @endforeach
-                  @endif
-                </tbody>
-              </table>
-            </div>
-          </div>
-          </div>
           <div class="small-box bg-blue">
             <div class="inner">
               <h3>{{$total_wage}}</h3>
