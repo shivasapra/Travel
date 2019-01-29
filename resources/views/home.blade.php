@@ -190,6 +190,60 @@ Dashboard
       </div>
      </div>
     </div>
+
+    <div class="row">
+          <div class="col-md-8">
+            <div class="box box-primary">
+              <div class="box-body">
+                <section class="content-header">
+                  <h1 class="text-center"><span style="color:#0066FF;">Invoices</span></h1><hr>
+                </section>
+                  {{-- <h3>Total paid invoices {{$invoice->invoiceInfo()->where('status','1')->count()}}, unpaid {{$invoice->where('status','0')->count()}}.</h3> --}}
+                  
+                </div>
+                <div class="table-responsive">
+                  <table id="recent-orders" class="table table-hover mb-0 ps-container ps-theme-default">
+                    <thead>
+                      <tr>
+                        <th>Invoice No.</th>
+                        <th>Invoice Date</th>
+                        <th>Receiver Name</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @if($invoices->count()>0)
+                      
+                        @foreach($invoices as $invoice)
+                        <tr>
+                          <td><a href="{{route('invoice.view',['id'=>$invoice->id])}}">{{$invoice->invoice_no}}</a></td>
+                          <td>{{$invoice->invoice_date}}</td>
+                          <td>{{$invoice->receiver_name}}</td>
+                          <td>
+                            <?php $amount = 0;?>
+                            @foreach($invoice->invoiceInfo as $info)
+                            <?php 
+                              $amount = $amount + $info->amount;  
+                            ?>
+                  @endforeach
+                            {{$info->currency.$amount}}
+                          </td>
+                          @if($invoice->status == 1)
+                          <td><small class="label label-success">Paid</small></td>
+                          @else
+                          <td><small class="label label-danger">Unpaid</small></td>
+                          @endif
+                          
+                        </tr>
+                        @endforeach
+                      @endif
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
       @else
 
     <div class="box box-success">

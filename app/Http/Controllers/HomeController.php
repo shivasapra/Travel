@@ -11,6 +11,7 @@ use App\airlines;
 use App\wage;
 use Carbon\Carbon;
 use Session;
+use App\invoice;
 class HomeController extends Controller
 {
     /**
@@ -41,13 +42,14 @@ class HomeController extends Controller
         $logged_in = wage::where('date',$date)->where('login', '!=', null)->where('logout',null)->get();
         $logged_out = wage::where('date',$date)->where('login', '!=', null)->where('logout', '!=',null)->get();
 
-
+        $invoices = invoice::orderBy('created_at','desc')->take(7)->get();
         return view('home')->with('employees',employee::all())
                             ->with('clients',client::all())
                             ->with('expense',$total_amount)
                             ->with('logged_in',$logged_in)
                             ->with('logged_out',$logged_out)
-                            ->with('date',$date);
+                            ->with('date',$date)
+                            ->with('invoices',$invoices);
     }
     public function products(){
         return view('products')->with('products',products::all());
