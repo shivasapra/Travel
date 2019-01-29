@@ -80,7 +80,12 @@ class InvoiceController extends Controller
             $invoice_info->currency = $request->currency[$index];
             $invoice_info->price = $request->price[$index];
             $invoice_info->amount = $request->price[$index] * $request->quantity[$index];
-            $invoice_info->status = $request->status[$index];
+            if ($request->status[$index]=='paid') {
+                $invoice_info->status = 1;
+            }
+            if ($request->status[$index]=='unpaid') {
+                $invoice_info->status = 0;
+            }
             $invoice_info->save();
 
         }
@@ -127,19 +132,22 @@ class InvoiceController extends Controller
     public function update(Request $request, $id)
     {   
         $invoice = invoice::find($id);
+        $invoice->receiver_name = $request->receiver_name;
+        $invoice->billing_address = $request->billing_address;
+        $invoice->invoice_date = $request->invoice_date;
+        $invoice->invoice_no = $request->invoice_no;
+        $invoice->save();
         foreach($request->item_name as $index => $item_name){
-            $invoice->receiver_name = $request->receiver_name;
-            $invoice->billing_address = $request->billing_address;
-            $invoice->invoice_date = $request->invoice_date;
-            $invoice->invoice_no = $request->invoice_no;
-            $invoice->item_name = $item_name;
-            $invoice->item_subname = $request->item_subname[$index];
-            $invoice->quantity = $request->quantity[$index];
-            $invoice->currency = $request->currency[$index];
-            $invoice->price = $request->price[$index];
-            $invoice->amount = $request->price[$index] * $request->quantity[$index];
-            $invoice->status = $request->status[$index];
-            $invoice->save();
+            $invoice_info = invoiceInfo::where();
+            $invoice_info->invoice_id = $invoice->id;
+            $invoice_info->item_name = $item_name;
+            $invoice_info->item_subname = $request->item_subname[$index];
+            $invoice_info->quantity = $request->quantity[$index];
+            $invoice_info->currency = $request->currency[$index];
+            $invoice_info->price = $request->price[$index];
+            $invoice_info->amount = $request->price[$index] * $request->quantity[$index];
+            $invoice_info->status = $request->status[$index];
+            $invoice_info->save();
 
         }
         Session::flash('success','Invoice Updated Successfully');

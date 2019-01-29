@@ -112,8 +112,8 @@ Edit Invoice
 						<td><input id="price" type="text" name='price[]' required class="form-control" value="{{$info->price}}"></td>
 						<td><input id="amount" type="text" name='amount[]' required class="form-control" readonly value="{{$info->currency.$info->amount}}"></td>
 						<td><select name="status[]" class="form-control" id="" required>
-							<option value='1' {{($info->status ==1 )?"selected":" "}}>Paid</option>
-							<option value='0' {{($info->status ==0 )?"selected":" "}}>UnPaid</option>
+							<option value='1' {{($info->status == 1 )?"selected":" "}}>Paid</option>
+							<option value='0' {{($info->status == 0 )?"selected":" "}}>UnPaid</option>
 							</select>
 						</td>
 					</tr>

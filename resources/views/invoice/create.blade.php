@@ -120,8 +120,8 @@ Create Invoice
 						<td><input id="amount" type="text" name='amount[]' required class="form-control" readonly></td>
 						<td><select name="status[]" class="form-control" id="" required>
 							<option value="">--select--</option>
-							<option value='1'>Paid</option>
-							<option value='0'>UnPaid</option>
+							<option value='paid'>Paid</option>
+							<option value='unpaid'>UnPaid</option>
 							</select>
 						</td>
 					</tr>

@@ -229,7 +229,7 @@ Dashboard
                   @endforeach
                             {{$info->currency.$amount}}
                           </td>
-                          @if($invoice->status == 1)
+                          @if($info->status == 1)
                           <td><small class="label label-success">Paid</small></td>
                           @else
                           <td><small class="label label-danger">Unpaid</small></td>
