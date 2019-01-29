@@ -41,6 +41,11 @@ class HomeController extends Controller
         }
         $logged_in = wage::where('date',$date)->where('login', '!=', null)->where('logout',null)->get();
         $logged_out = wage::where('date',$date)->where('login', '!=', null)->where('logout', '!=',null)->get();
+        $today_wage = wage::where('date',$date)->get();
+        $total_wage = 0;
+        foreach ($today_wage as $wage) {
+            $total_wage = $total_wage + $wage->wage;
+        }
 
         $invoices = invoice::orderBy('created_at','desc')->take(7)->get();
         return view('home')->with('employees',employee::all())
@@ -49,7 +54,8 @@ class HomeController extends Controller
                             ->with('logged_in',$logged_in)
                             ->with('logged_out',$logged_out)
                             ->with('date',$date)
-                            ->with('invoices',$invoices);
+                            ->with('invoices',$invoices)
+                            ->with('total_wage',$total_wage);
     }
     public function products(){
         return view('products')->with('products',products::all());
