@@ -104,6 +104,37 @@ Edit Client
 					</div>
 					</div>
 				</div>
+				@if($client->passport == 'yes')
+				<div class="text-center"><h3>Passport Details</h3></div><hr>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="passport_no">Passport Number</label>
+							<input type="text" name="passport_no" required class="form-control" value="{{$client->passport_no}}">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="passport_expiry_date">Passport Expire date</label>
+							<input type="date" name="passport_expiry_date" required class="form-control" value="{{$client->passport_expiry_date}}">
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="passport_place">Place of Issue</label>
+							<input type="text" name="passport_place" required class="form-control" value="{{$client->passport_place}}">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="passport_issue_date">Date Of Issue</label>
+							<input type="date" name="passport_issue_date" required class="form-control" value="{{$client->passport_issue_date}}">
+						</div>
+					</div>
+				</div>
+				@endif
 				
 				
 		</div>

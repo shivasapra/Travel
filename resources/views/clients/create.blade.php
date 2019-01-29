@@ -97,7 +97,12 @@ Client Registration
 					<div class="col-md-6">
 					<div class="form-group">
 						<label for="email">Email</label>
-						<input type="text" name='email' required class="form-control">
+						<input type="email" name='email' required class="form-control">
+					</div>
+					<div class="form-group">
+						<label for="passport">Do you have passport</label>
+						<input type="radio" name='passport' required id="yespassport">Yes
+						<input type="radio" name='passport' required id="nopassport">No
 					</div>
 					</div>
 					<div class="col-md-6">
@@ -106,6 +111,9 @@ Client Registration
 						<input type="date" name='DOB' required class="form-control">
 					</div>
 					</div>
+				</div>
+				<hr>
+				<div id="passport">
 				</div>
 				
 				
@@ -122,6 +130,21 @@ Client Registration
 @stop
 @section('js')
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript">
+		
+		$(document).ready(function(){
+	    $("#yespassport").click(function(){
+	    	var data = '<div class="text-center"><h3>Passport Details</h3></div><hr><div class="row"><div class="col-md-6"><div class="form-group"><label for="passport_no">Passport Number</label><input type="text" name="passport_no" required class="form-control"></div></div><div class="col-md-6"><div class="form-group"><label for="passport_expiry_date">Passport Expire date</label><input type="date" name="passport_expiry_date" required class="form-control"></div></div></div><div class="row"><div class="col-md-6"><div class="form-group"><label for="passport_place">Place of Issue</label><input type="text" name="passport_place" required class="form-control"></div></div><div class="col-md-6"><div class="form-group"><label for="passport_issue_date">Date Of Issue</label><input type="date" name="passport_issue_date" required class="form-control"></div></div></div>';
+	        $("#passport").html(data);   
+	        });
+	    });
+	    $(document).ready(function(){
+	    $("#nopassport").click(function(){
+	    	var data = '';
+	        $("#passport").html(data);   
+	        });
+	    });
+	</script>
 	{{-- <script>
 		$(document).ready(function(){
     $("#country").click(function(){

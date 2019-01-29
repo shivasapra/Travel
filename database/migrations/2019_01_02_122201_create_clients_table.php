@@ -25,6 +25,11 @@ class CreateClientsTable extends Migration
             $table->string('phone');
             $table->string('DOB');
             $table->string('email');
+            $table->boolean('passport')->default(0);
+            $table->string('passport_no')->nullable();
+            $table->date('passport_expiry_date')->nullable();
+            $table->date('passport_issue_date')->nullable();
+            $table->string('passport_place')->nullable();
             $table->timestamps();
         });
     }
