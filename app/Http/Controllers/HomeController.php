@@ -62,6 +62,7 @@ class HomeController extends Controller
                 }
                 $todo->save();
             }
+            $yesterday_date = Carbon::now()->addDays(-1)->toDateString();
         $todos = todo::where('date',$date_today)->orderBy('created_at','desc')->take(6)->get();
         $missed_todos = todo::where('date',$yesterday_date)->where('status',3)->get();
         $missed_todos_five = todo::where('date',$yesterday_date)->where('status',3)->take(5)->get();
