@@ -17,7 +17,7 @@ Dashboard
 
       @if(Auth::user()->admin)
     <div class="row">
-        <div class="col-md-4 col-sm-6 col-xs-12">
+        <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
             <span class="info-box-icon bg-aqua"><i class="ion ion-android-person"></i></span>
 
@@ -30,7 +30,7 @@ Dashboard
           <!-- /.info-box -->
         </div>
         <!-- /.col -->
-        <div class="col-md-4 col-sm-6 col-xs-12">
+        <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
             <span class="info-box-icon bg-red"><i class="fa fa-users"></i></span>
 
@@ -47,7 +47,7 @@ Dashboard
         <!-- fix for small devices only -->
         <div class="clearfix visible-sm-block"></div>
         <!-- /.col -->
-        <div class="col-md-4 col-sm-6 col-xs-12">
+        <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
             <span class="info-box-icon bg-yellow"><i class="fa fa-money"></i></span>
 
@@ -58,6 +58,21 @@ Dashboard
             <!-- /.info-box-content -->
           </div>
           <!-- /.info-box -->
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="small-box bg-blue">
+              <div class="inner">
+                <h3>{{$total_wage}}</h3>
+
+                <p>Today's Total Wage</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+              </div>
+              <a href="{{route('wage')}}" class="small-box-footer">
+                More info <i class="fa fa-arrow-circle-right"></i>
+              </a>
+            </div>
         </div>
     </div>
     
@@ -279,203 +294,186 @@ Dashboard
       </div>
     </div>
     <div class="row">
-        <div class="col-md-7">
-          <div class="box box-info">
+       <div class="col-md-7">
+          
+          <div class="box box-solid bg-green-gradient">
             <div class="box-header">
-              <h4 class="card-title"><strong>Todo</strong><span id="addtodo"><button class="btn btn-sm btn-primary">Add</button></span></h4>
-              <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-              <div class="heading-elements">
-                <ul class="list-inline mb-0">
-                  <li><strong>{{$date}}</strong></li>
-                </ul>
+              <i class="fa fa-calendar"></i>
+
+              <h3 class="box-title">Calendar</h3>
+              <!-- tools box -->
+              <div class="pull-right box-tools">
+                <!-- button with a dropdown -->
+                <div class="btn-group">
+                  {{-- <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown"> --}}
+                    {{-- <i class="fa fa-bars"></i></button> --}}
+                  {{-- <ul class="dropdown-menu pull-right" role="menu"> --}}
+                    {{-- <li></li> --}}
+                    {{-- <li><a href="#">Clear events</a></li> --}}
+                    {{-- <li class="divider"></li>
+                    <li><a href="#">View calendar</a></li>--}}                  
+                  {{-- </ul> --}}
+                </div>
+                <button class="btn btn-sm btn-success" id="create">Add new event</button>
+                <button type="button" class="btn btn-success btn-sm" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                {{-- <button type="button" class="btn btn-success btn-sm" data-widget="remove"><i class="fa fa-times"></i> --}}
+                </button>
               </div>
+              <!-- /. tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <!--The calendar -->
+              <div id="calendar" style="width: 100%"></div>
+            </div>
+            <!-- /.box-body -->
+            {{-- <div class="box-footer text-black">
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="clearfix">
+                    <span class="pull-left">Task #1</span>
+                    <small class="pull-right">90%</small>
+                  </div>
+                  <div class="progress xs">
+                    <div class="progress-bar progress-bar-green" style="width: 90%;"></div>
+                  </div>
+
+                  <div class="clearfix">
+                    <span class="pull-left">Task #2</span>
+                    <small class="pull-right">70%</small>
+                  </div>
+                  <div class="progress xs">
+                    <div class="progress-bar progress-bar-green" style="width: 70%;"></div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="clearfix">
+                    <span class="pull-left">Task #3</span>
+                    <small class="pull-right">60%</small>
+                  </div>
+                  <div class="progress xs">
+                    <div class="progress-bar progress-bar-green" style="width: 60%;"></div>
+                  </div>
+
+                  <div class="clearfix">
+                    <span class="pull-left">Task #4</span>
+                    <small class="pull-right">40%</small>
+                  </div>
+                  <div class="progress xs">
+                    <div class="progress-bar progress-bar-green" style="width: 40%;"></div>
+                  </div>
+                </div>
+              </div>
+            </div> --}}
+          </div>
+        </div>
+      <div class="col-md-5">
+        {{-- <div class="box box-info">
+          <div class="box-header">
+            <h4 class="card-title"><strong>Todo</strong><span id="addtodo"><button class="btn btn-sm btn-primary">Add</button></span></h4>
+            <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+            <div class="heading-elements">
+              <ul class="list-inline mb-0">
+                <li><strong>{{$date}}</strong></li>
+              </ul>
+            </div>
+          </div>
+          <div class="box-body">
+            <div id="todo"></div>
+            <div id="daily-activity" class="table-responsive height-350">
+              <table class="table table-hover mb-0">
+                <thead>
+                  <tr>
+                    <th>
+                    </th>
+                    <th>Time</th>
+                    <th>Activity</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @if($todos->count()>0)
+                  @foreach($todos as $todo)
+                    <tr>
+                      <td class="text-truncate">
+                        <form action="{{route('update.todo',['id'=>$todo->id])}}" method="post">
+                          @csrf
+                          @if($todo->status==1)
+                          <button id="updateTodo" type="submit" class="btn btn-primary btn-sm" disabled><span class="fa fa-check"></span>
+                          @else
+                          <button id="updateTodo" type="submit" class="btn btn-danger btn-sm"><span class="fa fa-eye"></span>
+                          @endif
+                          </button>
+                          
+                        </form>
+                      </td>
+                      <td class="text-truncate">{{$todo->time}}</td>
+                      <td class="text-truncate">{{$todo->activity}}</td>
+                      <td class="text-truncate">
+                        @if($todo->status == 0)
+                        <span class="badge badge-default badge-info">Pending</span>
+                        @elseif($todo->status == 1)
+                        <span class="badge badge-default badge-success">Done</span>
+                        @elseif($todo->status == 2)
+                        <span class="badge badge-default badge-warning">Delayed</span>
+                        @elseif($todo->status == 3)
+                        <span class="badge badge-default badge-delete">Missed</span>
+                        @endif
+                      </td>
+                    </tr>
+                  @endforeach
+                  @endif
+                </tbody>
+              </table>
+            
+              <div class="text-center">
+                <a class="btn btn-sm btn-warning" href="{{route('todos',['target_date'=>$date])}}"  style="margin-top: 7px">All Todos</a>
+              </div>
+            
+            </div>
+          </div>
+        </div> --}}
+        <div class="box box-info">
+            <div class="box-header">
+              <i class="fa fa-envelope"></i>
+
+              <h3 class="box-title">Quick Email</h3>
+              <!-- tools box -->
+              <div class="pull-right box-tools">
+                <button type="button" class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip"
+                        title="Remove">
+                  <i class="fa fa-times"></i></button>
+              </div>
+              <!-- /. tools -->
             </div>
             <div class="box-body">
-              <div id="todo"></div>
-              <div id="daily-activity" class="table-responsive height-350">
-                <table class="table table-hover mb-0">
-                  <thead>
-                    <tr>
-                      <th>
-                      </th>
-                      <th>Time</th>
-                      <th>Activity</th>
-                      <th>Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    @if($todos->count()>0)
-                    @foreach($todos as $todo)
-                      <tr>
-                        <td class="text-truncate">
-                          <form action="{{route('update.todo',['id'=>$todo->id])}}" method="post">
-                            @csrf
-                            @if($todo->status==1)
-                            <button id="updateTodo" type="submit" class="btn btn-primary btn-sm" disabled><span class="fa fa-check"></span>
-                            @else
-                            <button id="updateTodo" type="submit" class="btn btn-danger btn-sm"><span class="fa fa-eye"></span>
-                            @endif
-                            </button>
-                            
-                          </form>
-                        </td>
-                        <td class="text-truncate">{{$todo->time}}</td>
-                        <td class="text-truncate">{{$todo->activity}}</td>
-                        <td class="text-truncate">
-                          @if($todo->status == 0)
-                          <span class="badge badge-default badge-info">Pending</span>
-                          @elseif($todo->status == 1)
-                          <span class="badge badge-default badge-success">Done</span>
-                          @elseif($todo->status == 2)
-                          <span class="badge badge-default badge-warning">Delayed</span>
-                          @elseif($todo->status == 3)
-                          <span class="badge badge-default badge-delete">Missed</span>
-                          @endif
-                        </td>
-                      </tr>
-                    @endforeach
-                    @endif
-                  </tbody>
-                </table>
-              
-                <div class="text-center">
-                  {{-- <input type="text" name="date" hidden value="{{$date}}"> --}}
-                  <a class="btn btn-sm btn-warning" href="{{route('todos',['target_date'=>$date])}}"  style="margin-top: 7px">All Todos</a>
+              <form action="#" method="post">
+                <div class="form-group">
+                  <input type="email" class="form-control" name="emailto" placeholder="Email to:">
                 </div>
-              
-              </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" name="subject" placeholder="Subject">
+                </div>
+                <div>
+                  <textarea class="textarea" placeholder="Message"
+                            style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                </div>
+              </form>
             </div>
-          </div>
-
-          <div class="box box-info">
-              <div class="box-header">
-                <i class="fa fa-envelope"></i>
-
-                <h3 class="box-title">Quick Email</h3>
-                <!-- tools box -->
-                <div class="pull-right box-tools">
-                  <button type="button" class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip"
-                          title="Remove">
-                    <i class="fa fa-times"></i></button>
-                </div>
-                <!-- /. tools -->
-              </div>
-              <div class="box-body">
-                <form action="#" method="post">
-                  <div class="form-group">
-                    <input type="email" class="form-control" name="emailto" placeholder="Email to:">
-                  </div>
-                  <div class="form-group">
-                    <input type="text" class="form-control" name="subject" placeholder="Subject">
-                  </div>
-                  <div>
-                    <textarea class="textarea" placeholder="Message"
-                              style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
-                  </div>
-                </form>
-              </div>
-              <div class="box-footer clearfix">
-                <button type="button" class="pull-right btn btn-default" id="sendEmail">Send
-                  <i class="fa fa-arrow-circle-right"></i></button>
-              </div>
-          </div>
+            <div class="box-footer clearfix">
+              <button type="button" class="pull-right btn btn-default" id="sendEmail">Send
+                <i class="fa fa-arrow-circle-right"></i></button>
+            </div>
         </div>
-        <div class="col-md-5">
-          <div class="small-box bg-blue">
-            <div class="inner">
-              <h3>{{$total_wage}}</h3>
-
-              <p>Today's Total Wage</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-pie-graph"></i>
-            </div>
-            <a href="{{route('wage')}}" class="small-box-footer">
-              More info <i class="fa fa-arrow-circle-right"></i>
-            </a>
-          </div>
-         
-        </div>
-    </div>
-    <div class="row">
-      <div class="col-md-8">
-        <div class="box box-solid bg-red-gradient">
-              <div class="box-header">
-                <i class="fa fa-calendar"></i>
-
-                <h3 class="box-title">Calendar</h3>
-                <!-- tools box -->
-                <div class="pull-right box-tools">
-                  <!-- button with a dropdown -->
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
-                      <i class="fa fa-bars"></i></button>
-                    <ul class="dropdown-menu pull-right" role="menu">
-                      <li><a href="#">Add new event</a></li>
-                      {{-- <li><a href="#">Clear events</a></li> --}}
-                      {{-- <li class="divider"></li> --}}
-                      {{-- <li><a href="#">View calendar</a></li> --}}
-                    </ul>
-                  </div>
-                  <button type="button" class="btn btn-primary btn-sm" data-widget="collapse"><i class="fa fa-minus"></i>
-                  </button>
-                  {{-- <button type="button" class="btn btn-success btn-sm" data-widget="remove"><i class="fa fa-times"></i> --}}
-                  {{-- </button> --}}
-                </div>
-                <!-- /. tools -->
-              </div>
-              <!-- /.box-header -->
-              <div class="box-body no-padding">
-                <!--The calendar -->
-                <div id="calendar" style="width: 100%"></div>
-              </div>
-              <!-- /.box-body -->
-              {{-- <div class="box-footer text-black">
-                <div class="row">
-                  <div class="col-sm-6">
-                    
-                    <div class="clearfix">
-                      <span class="pull-left">Task #1</span>
-                      <small class="pull-right">90%</small>
-                    </div>
-                    <div class="progress xs">
-                      <div class="progress-bar progress-bar-green" style="width: 90%;"></div>
-                    </div>
-
-                    <div class="clearfix">
-                      <span class="pull-left">Task #2</span>
-                      <small class="pull-right">70%</small>
-                    </div>
-                    <div class="progress xs">
-                      <div class="progress-bar progress-bar-green" style="width: 70%;"></div>
-                    </div>
-                  </div>
-                  
-                  <div class="col-sm-6">
-                    <div class="clearfix">
-                      <span class="pull-left">Task #3</span>
-                      <small class="pull-right">60%</small>
-                    </div>
-                    <div class="progress xs">
-                      <div class="progress-bar progress-bar-green" style="width: 60%;"></div>
-                    </div>
-
-                    <div class="clearfix">
-                      <span class="pull-left">Task #4</span>
-                      <small class="pull-right">40%</small>
-                    </div>
-                    <div class="progress xs">
-                      <div class="progress-bar progress-bar-green" style="width: 40%;"></div>
-                    </div>
-                  </div>
-                  
-                </div>
-                
-              </div> --}}
+        <div class="box box-success">
+        <div id="createEvent"></div>
         </div>
       </div>
+
+       
+
     </div>
-    
 
     
       @else
@@ -515,7 +513,15 @@ Dashboard
     </div>
   </div>
 
-  
+  <div class="row">
+    
+
+<h3>Calendar</h3>
+
+<div id='calendar'></div>
+
+
+  </div>
 
 
       @endif
@@ -546,12 +552,21 @@ Dashboard
     </div>
     </div>
 </div> --}}
+
 @endsection
 @section('js')
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js'></script>
 <script>
+    $(document).ready(function(){
+      $("#create").click(function(){
+
+        var data = '<form action="{{ route('tasks.store') }}" method="post">{{ csrf_field() }}<label for="name">Task Name</label><input type="text" name="name" class="form-control" /><label for="description">Task Description</label><textarea name="description" class="form-control"></textarea><label for="task_date">Task Date:</label><input type="date" name="task_date" class="date form-control" /><div class="text-center"><input type="submit" value="Save" class="btn btn-sm btn-info" /></div></form>';
+          $("#createEvent").html(data);   
+          });
+      });
+
     $(document).ready(function() {
         // page is now ready, initialize the calendar...
         $('#calendar').fullCalendar({
