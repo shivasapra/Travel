@@ -11,6 +11,7 @@
 |
 */
 Auth::routes();
+Route::resource('tasks', 'TasksController');
 Route::get('/edit/profile',[
 			'uses'=> 'UserController@index',
 			'as'=>'edit.profile'

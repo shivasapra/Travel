@@ -14,6 +14,7 @@ use Carbon\Carbon;
 use Session;
 use App\invoice;
 use App\settings;
+use App\Task;
 class HomeController extends Controller
 {
     /**
@@ -67,6 +68,7 @@ class HomeController extends Controller
         $missed_todos = todo::where('date',$yesterday_date)->where('status',3)->get();
         $missed_todos_five = todo::where('date',$yesterday_date)->where('status',3)->take(5)->get();
         $invoices = invoice::orderBy('created_at','desc')->take(7)->get();
+        $tasks = Task::all();
         return view('home')->with('employees',employee::all())
                             ->with('clients',client::all())
                             ->with('expense',$total_amount)
@@ -78,7 +80,8 @@ class HomeController extends Controller
                             ->with('expenses',expenses::where('auto',0)->orderBy('created_at','desc')->take(7)->get())
                             ->with('todos',$todos)
                             ->with('missed_todos',$missed_todos)
-                            ->with('missed_todos_five',$missed_todos_five);
+                            ->with('missed_todos_five',$missed_todos_five)
+                            ->with('tasks',$tasks);
     }
     public function products(){
         return view('products')->with('products',products::all());
