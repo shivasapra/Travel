@@ -134,6 +134,26 @@ Edit Client
 						</div>
 					</div>
 				</div>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="passport_front">Passport Front</label>
+							<input type="file" name="passport_front" required class="form-control" value="{{$client->passport_front}}">
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="passport_back">Passport Back</label>
+							<input type="file" name="passport_back" required class="form-control" value="{{$client->passport_back}}">
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="letter">Letter:</label>
+							<input type="file" name="letter" required class="form-control" value="{{$client->letter}}">
+						</div>
+					</div>
+				</div>
 				@endif
 				
 				

@@ -81,6 +81,56 @@ client
 							<td>{{$client->DOB}}</td>
 						</tr>
 					</div>
+					@if($client->passport == 1)
+						<div class="row">
+						<tr>
+							<td><strong>Passport Number:</strong></td>
+							<td>{{$client->passport_no}}</td>
+						</tr>
+						</div>
+						<div class="row">
+						<tr>
+							<td><strong>Passport Expiry Date:</strong></td>
+							<td>{{$client->passport_expiry_date}}</td>
+						</tr>
+						</div>
+						<div class="row">
+						<tr>
+							<td><strong>Passport Date Of Issue:</strong></td>
+							<td>{{$client->passport_issue_date}}</td>
+						</tr>
+						</div>
+						<div class="row">
+						<tr>
+							<td><strong>Passport Place Of Issue:</strong></td>
+							<td>{{$client->passport_place}}</td>
+						</tr>
+						</div>
+						<div class="row">
+						<tr>
+							<td><strong>Passport Front:</strong></td>
+							<td>
+								<img src="{{asset($client->passport_front)}}" alt="passport front" height="300px" width="300px" style="border-radius:20px">
+							</td>
+						</tr>
+						</div>
+						<div class="row">
+						<tr>
+							<td><strong>Passport Back:</strong></td>
+							<td>
+								<img src="{{asset($client->passport_back)}}" alt="passport back" height="300px" width="300px" style="border-radius:20px">
+							</td>
+						</tr>
+						</div>
+						<div class="row">
+						<tr>
+							<td><strong>Letter:</strong></td>
+							<td>
+								<img src="{{asset($client->letter)}}" alt="letter" height="300px" width="300px" style="border-radius:20px">
+							</td>
+						</tr>
+						</div>
+					@endif
 				</tbody>
 			</table>
 		</div>

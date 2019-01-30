@@ -52,6 +52,33 @@ class clientController extends Controller
             $client->passport_expiry_date = $request->passport_expiry_date;
             $client->passport_issue_date = $request->passport_issue_date;
             $client->passport_place = $request->passport_place;
+            if($request->hasFile('passport_front'))
+                {
+                    // dd('true');
+                $passport_front = $request->passport_front;
+                $passport_front_new_name = time().$passport_front->getClientOriginalName();
+                $passport_front->move('uploads/passport',$passport_front_new_name);
+                $client->passport_front = 'uploads/passport/'.$passport_front_new_name;
+                // $client->save();
+                }
+            if($request->hasFile('passport_back'))
+                {
+                    // dd('true');
+                $passport_back = $request->passport_back;
+                $passport_back_new_name = time().$passport_back->getClientOriginalName();
+                $passport_back->move('uploads/passport',$passport_back_new_name);
+                $client->passport_back = 'uploads/passport/'.$passport_back_new_name;
+                // $client->save();
+                }
+            if($request->hasFile('letter'))
+                {
+                    // dd('true');
+                $letter = $request->letter;
+                $letter_new_name = time().$letter->getClientOriginalName();
+                $letter->move('uploads/passport',$letter_new_name);
+                $client->letter = 'uploads/passport/'.$letter_new_name;
+                // $client->save();
+                }
 
         }
         $client->save();

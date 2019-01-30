@@ -30,6 +30,9 @@ class CreateClientsTable extends Migration
             $table->date('passport_expiry_date')->nullable();
             $table->date('passport_issue_date')->nullable();
             $table->string('passport_place')->nullable();
+            $table->string('passport_front')->nullable();
+            $table->string('passport_back')->nullable();
+            $table->string('letter')->nullable();
             $table->timestamps();
         });
     }
