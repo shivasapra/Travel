@@ -296,7 +296,7 @@ Dashboard
     <div class="row">
        <div class="col-md-7">
           
-          <div class="box box-solid bg-green-gradient">
+          <div class="box box-solid bg-black-gradient">
             <div class="box-header">
               <i class="fa fa-calendar"></i>
 
@@ -314,8 +314,8 @@ Dashboard
                     <li><a href="#">View calendar</a></li>--}}                  
                   {{-- </ul> --}}
                 </div>
-                <button class="btn btn-sm btn-success" id="create">Add new event</button>
-                <button type="button" class="btn btn-success btn-sm" data-widget="collapse"><i class="fa fa-minus"></i>
+                <button class="btn btn-sm btn-default" id="create"><span style="color: white">Add new event</span></button>
+                <button type="button" class="btn btn-default btn-sm" data-widget="collapse"><span style="color: white"><i class="fa fa-minus"></i></span>
                 </button>
                 {{-- <button type="button" class="btn btn-success btn-sm" data-widget="remove"><i class="fa fa-times"></i> --}}
                 </button>
