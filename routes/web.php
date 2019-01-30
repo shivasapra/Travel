@@ -212,3 +212,28 @@ Route::post('/update/invoice/{id}',[
 	'uses'=>'InvoiceController@update',
 	'as'=>'invoice.update'
 	])->middleware('admin');
+
+Route::post('/add/todo',[
+			'uses'=> 'HomeController@addTodo',
+			'as'=>'add.todo'
+		]);
+Route::post('/update/todo/{id}',[
+			'uses'=> 'HomeController@updateTodo',
+			'as'=>'update.todo'
+		]);
+Route::get('/todos/{target_date}',[
+			'uses'=> 'HomeController@todos',
+			'as'=>'todos'
+		]);
+Route::post('/todos/',[
+			'uses'=> 'HomeController@todosCustom',
+			'as'=>'todos.custom'
+		]);
+Route::get('/pastWeekTodos',[
+			'uses'=> 'HomeController@pastWeekTodos',
+			'as'=>'pastWeekTodos'
+		]);
+Route::get('/pastMonthTodos',[
+			'uses'=> 'HomeController@pastMonthTodos',
+			'as'=>'pastMonthTodos'
+		]);

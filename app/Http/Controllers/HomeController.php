@@ -9,6 +9,7 @@ use App\expenses;
 use App\products;
 use App\airlines;
 use App\wage;
+use App\todo;
 use Carbon\Carbon;
 use Session;
 use App\invoice;
@@ -48,6 +49,22 @@ class HomeController extends Controller
             $total_wage = $total_wage + $wage->wage;
         }
 
+        $all_todos = todo::all();
+            foreach ($all_todos as $todo) {
+                if ($todo->status != 1) {
+                
+                    if ($todo->date < $date_today) {
+                        $todo->status = 3;  //misssed
+                    }
+                    if ($todo->date == $date_today and $todo->time < $time_now) {
+                        $todo->status = 2;  //delayed
+                    }
+                }
+                $todo->save();
+            }
+        $todos = todo::where('date',$date_today)->orderBy('created_at','desc')->take(6)->get();
+        $missed_todos = todo::where('date',$yesterday_date)->where('status',3)->get();
+        $missed_todos_five = todo::where('date',$yesterday_date)->where('status',3)->take(5)->get();
         $invoices = invoice::orderBy('created_at','desc')->take(7)->get();
         return view('home')->with('employees',employee::all())
                             ->with('clients',client::all())
@@ -57,7 +74,10 @@ class HomeController extends Controller
                             ->with('date',$date)
                             ->with('invoices',$invoices)
                             ->with('total_wage',$total_wage)
-                            ->with('expenses',expenses::where('auto',0)->orderBy('created_at','desc')->take(7)->get());
+                            ->with('expenses',expenses::where('auto',0)->orderBy('created_at','desc')->take(7)->get())
+                            ->with('todos',$todos)
+                            ->with('missed_todos',$missed_todos)
+                            ->with('missed_todos_five',$missed_todos_five);
     }
     public function products(){
         return view('products')->with('products',products::all());
@@ -103,5 +123,83 @@ class HomeController extends Controller
         $tax->enable = $request->enable;
         $tax->save();
         return view('tax')->with('tax',settings::all());
+    }
+
+    public function addTodo(Request $request){
+        $todo = new todo;
+        // dd();
+        $todo->date = $request->date;
+        $todo->time = $request->time;
+        $todo->activity = $request->activity;
+        $todo->save();
+        Session::flash('success','You successfully created a Todo!!');
+        return redirect()->route('home');
+    }
+
+    public function updateTodo(Request $request,$id){
+        $todo = todo::find($id);
+            $todo->status = 1;
+            $todo->save();
+            Session::flash('info','You successfully completed a Task!!');
+        return redirect()->route('home');
+    }
+
+
+    public function todos($target_date){
+        $dt = Carbon::now();
+        $dt->timezone('Asia/Kolkata');
+        $date_today = $dt->toDateString();
+        $time_now =Carbon::now()->timezone('Asia/Kolkata')->format('h:i');
+        $todos = todo::where('date',$target_date)->orderBy('created_at','desc')->get();
+        return view('todo')->with('todos',$todos)
+                            ->with('date_today',$date_today)
+                            ->with('time',$time_now)
+                            ->with('date',$target_date);
+    }
+
+    public function todosCustom(Request $request){
+        $dt = Carbon::now();
+        $dt->timezone('Asia/Kolkata');
+        $date_today = $dt->toDateString();
+        $time_now =Carbon::now()->timezone('Asia/Kolkata')->format('h:i');
+        $todos = todo::where('date',$request->date)->orderBy('created_at','desc')->get();
+        return view('todo')->with('todos',$todos)
+                            ->with('date_today',$date_today)
+                            ->with('time',$time_now)
+                            ->with('date',$request->date);
+    }
+
+    public function pastWeekTodos(){
+        $dt = Carbon::now();
+        $dt->timezone('Asia/Kolkata');
+        $time_now =Carbon::now()->timezone('Asia/Kolkata')->format('h:i');
+        $week_start_date = $dt->addDays(-7)->toDateString();
+        // dd($week_start_date);
+        $date_today = Carbon::now()->toDateString();
+        $todos = todo::whereBetween('date',[$week_start_date,$date_today])->orderBy('date','desc')->paginate(10);
+        $date = null;
+        // dd($todos);
+        return view('todo')->with('todos',$todos)
+                            ->with('time',$time_now)
+                            ->with('date_today',$date_today)
+                            ->with('week_start_date',$week_start_date)
+                            ->with('date',$date);
+    }
+
+    public function pastMonthTodos(){
+        $dt = Carbon::now();
+        $dt->timezone('Asia/Kolkata');
+        $time_now =Carbon::now()->timezone('Asia/Kolkata')->format('h:i');
+        $month_start_date = $dt->addDays(-30)->toDateString();
+        // dd($week_start_date);
+        $date_today = Carbon::now()->toDateString();
+        $todos = todo::whereBetween('date',[$month_start_date,$date_today])->orderBy('date','desc')->paginate(10);
+        $date = null;
+        // dd($todos);
+        return view('todo')->with('todos',$todos)
+                            ->with('time',$time_now)
+                            ->with('date_today',$date_today)
+                            ->with('month_start_date',$month_start_date)
+                            ->with('date',$date);
     }
 }
