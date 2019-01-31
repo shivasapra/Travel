@@ -60,7 +60,7 @@ class employeeController extends Controller
         $employee->blood_group = $request->blood_group;
         $employee->country = $request->country;
         $employee->county = $request->county;
-        $employee->passport = $request->passport;
+        // $employee->passport = $request->passport;
         $employee->visa = $request->visa;
         $employee->visa_expired = $request->visa_expired;
         $employee->permanent_address = $request->permanent_address;
@@ -89,6 +89,30 @@ class employeeController extends Controller
         $employee->income_tax_no = $request->income_tax_no;
         $employee->tax_ref_no = $request->tax_ref_no;
         $employee->national_insurance_no = $request->national_insurance_no;
+         $employee->passport = $request->passport;
+        if ($request->passport == 1 ) {
+            $employee->passport_no = $request->passport_no;
+            $employee->passport_expiry_date = $request->passport_expiry_date;
+            $employee->passport_issue_date = $request->passport_issue_date;
+            $employee->passport_place = $request->passport_place;
+            if($request->hasFile('passport_front'))
+                {
+                    // dd('true');
+                $passport_front = $request->passport_front;
+                $passport_front_new_name = time().$passport_front->getClientOriginalName();
+                $passport_front->move('uploads/passport',$passport_front_new_name);
+                $employee->passport_front = 'uploads/passport/'.$passport_front_new_name;
+                // $client->save();
+                }
+            if($request->hasFile('passport_back'))
+                {
+                    // dd('true');
+                $passport_back = $request->passport_back;
+                $passport_back_new_name = time().$passport_back->getClientOriginalName();
+                $passport_back->move('uploads/passport',$passport_back_new_name);
+                $employee->passport_back = 'uploads/passport/'.$passport_back_new_name;
+                // $client->save();
+                }}
         $unique_id = 'CLD'. mt_rand(100000, 999999);
         while (employee::where('unique_id',$unique_id)->get()->count()>0) {
            $unique_id = 'CLD'. mt_rand(100000, 999999); 
@@ -152,7 +176,7 @@ class employeeController extends Controller
         $employee->blood_group = $request->blood_group;
         $employee->country = $request->country;
         $employee->county = $request->county;
-        $employee->passport = $request->passport;
+        // $employee->passport = $request->passport;
         $employee->visa = $request->visa;
         $employee->visa_expired = $request->visa_expired;
         $employee->permanent_address = $request->permanent_address;
@@ -184,6 +208,13 @@ class employeeController extends Controller
         $employee->income_tax_no = $request->income_tax_no;
         $employee->tax_ref_no = $request->tax_ref_no;
         $employee->national_insurance_no = $request->national_insurance_no;
+        if ($request->passport_no != null ) {
+            $employee->passport_no = $request->passport_no;
+            $employee->passport_expiry_date = $request->passport_expiry_date;
+            $employee->passport_issue_date = $request->passport_issue_date;
+            $employee->passport_place = $request->passport_place;
+
+        }
         $employee->save();
         Session::flash('success','Employee Updated Successfully');
         return redirect()->route('employees');

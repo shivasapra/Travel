@@ -30,7 +30,7 @@ class CreateEmployeesTable extends Migration
             $table->string('country');
             $table->string('county');
             $table->string('tax_ref_no');
-            $table->string('passport');
+            // $table->string('passport');
             $table->string('visa');
             $table->string('visa_expired');
             $table->string('permanent_address');

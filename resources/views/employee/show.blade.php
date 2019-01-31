@@ -125,19 +125,19 @@ Employee
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-4">
+					{{-- <div class="col-md-4">
 					<div class="form-group">
 						<label for="passport">Passport</label>
 						<input type="text" name='passport' value="{{$employee->passport}}" class="form-control"required readonly>
 					</div>
-					</div>
-					<div class="col-md-4">
+					</div> --}}
+					<div class="col-md-6">
 					<div class="form-group">
 						<label for="visa">Visa</label>
 						<input type="text" value="{{$employee->visa}}" name='visa' class="form-control"required readonly>
 					</div>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-6">
 					<div class="form-group">
 						<label for="visa_expired">Visa valid upto</label>
 						<input type="date" value="{{$employee->visa_expired}}" name='visa_expired' class="form-control"required readonly>
@@ -342,5 +342,61 @@ Employee
 				</div>
 			</div>
 		</div>
+		@if($employee->passport == 1)
+		<div class="box box-info">
+			<div class="box-header with-border">
+				<h3 class="box-title"><strong>{{"Passport Information"}}</strong></h3>
+				<div class="box-tools pull-right"><button type="button" class="btn btn-box-tool" data-widget="collapse">
+					<i class="fa fa-minus"></i>
+				</button>
+				<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+			</div>
+			</div>
+			<div class="box-body">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="passport_no">Passport Number</label>
+							<input type="text" name="passport_no" required class="form-control" value="{{$employee->passport_no}}" readonly>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="passport_expiry_date">Passport Expire date</label>
+							<input type="date" name="passport_expiry_date" required class="form-control" value="{{$employee->passport_expiry_date}}" readonly>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="passport_place">Place of Issue</label>
+							<input type="text" name="passport_place" required class="form-control" value="{{$employee->passport_place}}" readonly>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="passport_issue_date">Date Of Issue</label>
+							<input type="date" name="passport_issue_date" required class="form-control" value="{{$employee->passport_issue_date}}" readonly>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="passport_front">Passport Front:</label>
+							<img src="{{asset($employee->passport_front)}}" alt="passport back" height="300px" width="300px" style="border-radius:20px">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="passport_back">Passport Back:</label>
+							<img src="{{asset($employee->passport_back)}}" alt="passport back" height="300px" width="300px" style="border-radius:20px">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>			
+		@endif
 
 @endsection

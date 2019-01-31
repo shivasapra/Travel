@@ -28,7 +28,7 @@ Employee Registration
 
 
 
-	<form action="{{route('store.employee')}}" method="post">
+	<form action="{{route('store.employee')}}" method="post" enctype="multipart/form-data">
 				@csrf
 		
 			<div class="box box-info">
@@ -150,19 +150,19 @@ Employee Registration
 					</div>
 					</div>
 					<div class="row">
-					<div class="col-md-4">
+					{{-- <div class="col-md-4">
 					<div class="form-group">
 						<label for="passport">Passport</label>
 						<input type="text" name='passport' class="form-control"required>
 					</div>
-					</div>
-					<div class="col-md-4">
+					</div> --}}
+					<div class="col-md-6">
 					<div class="form-group">
 						<label for="visa">Visa</label>
 						<input type="text" name='visa' class="form-control"required>
 					</div>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-6">
 					<div class="form-group">
 						<label for="visa_expired">Visa valid upto</label>
 						<input type="date" name='visa_expired' class="form-control"required>
@@ -352,8 +352,8 @@ Employee Registration
                     </button>
                   </div>
                 </div>
-			<div class="box-body">
-			{{-- <div class="text-center"><h4><strong>{{"Account Information"}}</strong></h4></div><br> --}}
+				<div class="box-body">
+				{{-- <div class="text-center"><h4><strong>{{"Account Information"}}</strong></h4></div><br> --}}
 				<div class="row">
 					<div class="col-md-6">
 					<div class="form-group">
@@ -402,8 +402,18 @@ Employee Registration
 					</div>
 					</div>
 				</div>
+				</div>
 			</div>
+			<div class="form-group">
+						<label for="passport">Do you have passport</label>
+						<input type="radio" name='passport' required id="yespassport" value=1>Yes
+						<input type="radio" name='passport' required id="nopassport" checked value=0>No
+					</div>
+			
+			<div id="passport">
+				
 			</div>
+			
 			<div class="form-group">
 				<div class="text-center">
 					<button class="btn btn-success" type="submit">Add employee</button>
@@ -415,4 +425,22 @@ Employee Registration
 		
 
 
+@stop
+@section('js')
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript">
+		
+		$(document).ready(function(){
+	    $("#yespassport").click(function(){
+	    	var data = '<div class="box box-info"><div class="box-header with-border"><h3 class="box-title"><strong>{{"Passport Information"}}</strong></h3><div class="box-tools pull-right"><button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button><button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button></div></div><div class="box-body"><div class="row"><div class="col-md-6"><div class="form-group"><label for="passport_no">Passport Number</label><input type="text" name="passport_no" required class="form-control"></div></div><div class="col-md-6"><div class="form-group"><label for="passport_expiry_date">Passport Expire date</label><input type="date" name="passport_expiry_date" required class="form-control"></div></div></div><div class="row"><div class="col-md-6"><div class="form-group"><label for="passport_place">Place of Issue</label><input type="text" name="passport_place" required class="form-control"></div></div><div class="col-md-6"><div class="form-group"><label for="passport_issue_date">Date Of Issue</label><input type="date" name="passport_issue_date" required class="form-control"></div></div></div><div class="row"><div class="col-md-6"><div class="form-group"><label for="passport_front">Passport Front:</label><input type="file" name="passport_front" class="form-control"></div></div><div class="col-md-6"><div class="form-group"><label for="passport_back">Passport Back:</label><input type="file" name="passport_back" class="form-control"></div></div></div></div></div>';
+	        $("#passport").html(data);   
+	        });
+	    });
+	    $(document).ready(function(){
+	    $("#nopassport").click(function(){
+	    	var data = '';
+	        $("#passport").html(data);   
+	        });
+	    });
+	</script>
 @stop
