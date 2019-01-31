@@ -314,7 +314,8 @@ Dashboard
                     <li><a href="#">View calendar</a></li>--}}                  
                   {{-- </ul> --}}
                 </div>
-                <button class="btn btn-sm btn-default" id="create"><span style="color: white">Add new event</span></button>
+                <button type="button" class="btn btn-sm btn-default" data-toggle="modal" data-target="#modal-info"><span style="color: white">Add new event</span></button>
+                {{-- <button class="btn btn-sm btn-default" id="create"><span style="color: white">Add new event</span></button> --}}
                 <button type="button" class="btn btn-default btn-sm" data-widget="collapse"><span style="color: white"><i class="fa fa-minus"></i></span>
                 </button>
                 {{-- <button type="button" class="btn btn-success btn-sm" data-widget="remove"><i class="fa fa-times"></i> --}}
@@ -466,9 +467,9 @@ Dashboard
                 <i class="fa fa-arrow-circle-right"></i></button>
             </div>
         </div>
-        <div class="box box-success">
+        {{-- <div class="box box-success">
         <div id="createEvent"></div>
-        </div>
+        </div> --}}
       </div>
 
        
@@ -553,19 +554,52 @@ Dashboard
     </div>
 </div> --}}
 
+ <div class="modal fade" id="modal-info">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="color:white;font-weight:500;background-color:#0066FF;">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Create New Event</h4>
+      </div>
+      <form action="{{ route('tasks.store') }}" method="post">
+        @csrf
+      <div class="modal-body">
+          <label for="name">Task Name</label>
+          <input type="text" name="name" class="form-control" />
+          <label for="description">Task Description</label>
+          <textarea name="description" class="form-control"></textarea>
+          <label for="task_date">Task Date:</label>
+          <input type="date" name="task_date" class="date form-control" />
+          {{-- <div class="text-center">
+            <input type="submit" value="Save" class="btn btn-sm btn-info" />
+          </div> --}}
+        {{-- <p>One fine body&hellip;</p> --}}
+      </div>
+      <div class="modal-footer" style="color:white;font-weight:500;background-color:#0066FF;">
+        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-outline">Save</button>
+      </div>
+      </form>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 @endsection
 @section('js')
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js'></script>
 <script>
-    $(document).ready(function(){
-      $("#create").click(function(){
+    // $(document).ready(function(){
+    //   $("#create").click(function(){
 
-        var data = '<form action="{{ route('tasks.store') }}" method="post">{{ csrf_field() }}<label for="name">Task Name</label><input type="text" name="name" class="form-control" /><label for="description">Task Description</label><textarea name="description" class="form-control"></textarea><label for="task_date">Task Date:</label><input type="date" name="task_date" class="date form-control" /><div class="text-center"><input type="submit" value="Save" class="btn btn-sm btn-info" /></div></form>';
-          $("#createEvent").html(data);   
-          });
-      });
+    //     var data = '<form action="{{ route('tasks.store') }}" method="post">{{ csrf_field() }}<label for="name">Task Name</label><input type="text" name="name" class="form-control" /><label for="description">Task Description</label><textarea name="description" class="form-control"></textarea><label for="task_date">Task Date:</label><input type="date" name="task_date" class="date form-control" /><div class="text-center"><input type="submit" value="Save" class="btn btn-sm btn-info" /></div></form>';
+    //       $("#createEvent").html(data);   
+    //       });
+    //   });
 
     $(document).ready(function() {
         // page is now ready, initialize the calendar...
