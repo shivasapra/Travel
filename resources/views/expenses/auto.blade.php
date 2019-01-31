@@ -57,16 +57,22 @@ Auto Deduction
 						<input type="text" name='deduction_date' required  class="form-control">
 					</div>
 					</div>
-					<div class="col-md-3">
+					<div class="col-md-2">
 					<div class="form-group">
 						<label for="amount">Amount:</label>
 						<input type="text" name='amount' required class="form-control">
 					</div>
 					</div>
-					<div class="col-md-3">
+					<div class="col-md-2">
 					<div class="form-group">
 						<label for="description">Description:</label>
 						<input type="text" name='description' required class="form-control">
+					</div>
+					</div>
+					<div class="col-md-2">
+					<div class="form-group">
+						<label for="company_name">Company Name:</label>
+						<input type="text" required name='company_name' class="form-control">
 					</div>
 					</div>
 					<div class="text-center">
@@ -98,6 +104,7 @@ Auto Deduction
                         <th>Deduction Date</th>
                         <th>Amount</th>
                         <th>Description</th>
+                        <th>Company Name</th>
                         <th>Status</th>
                         <th>Delete</th>
                       </tr>
@@ -113,6 +120,7 @@ Auto Deduction
 	                    		<td>{{$expense->deduction_date}}</td>
 	                    		<td>{{$expense->amount}}</td>
 	                    		<td>{{$expense->description}}</td>
+	                    		<td>{{$expense->company_name}}</td>
 	                    		<td>
 	                    			@if($expense->status == 0)
 	                    			<div class="text-danger"><strong>Expired</strong></div>
