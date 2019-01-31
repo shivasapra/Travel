@@ -554,7 +554,7 @@ Dashboard
     </div>
 </div> --}}
 
- <div class="modal fade" id="modal-info">
+<div class="modal fade" id="modal-info">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header" style="color:white;font-weight:500;background-color:#0066FF;">
@@ -587,6 +587,7 @@ Dashboard
   <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+
 @endsection
 @section('js')
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
