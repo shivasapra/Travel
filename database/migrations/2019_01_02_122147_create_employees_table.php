@@ -57,6 +57,15 @@ class CreateEmployeesTable extends Migration
             $table->string('bank_address');
             $table->string('income_tax_no');
             $table->string('national_insurance_no');
+            $table->boolean('passport')->default(0);
+            $table->string('passport_no')->nullable();
+            $table->date('passport_expiry_date')->nullable();
+            $table->date('passport_issue_date')->nullable();
+            $table->string('passport_place')->nullable();
+            $table->string('passport_front')->nullable();
+            $table->string('passport_back')->nullable();
+            $table->string('work_permit')->nullable();
+            $table->string('utility_bill')->nullable();
             $table->timestamps();
         });
     }
