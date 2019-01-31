@@ -112,7 +112,26 @@ class employeeController extends Controller
                 $passport_back->move('uploads/passport',$passport_back_new_name);
                 $employee->passport_back = 'uploads/passport/'.$passport_back_new_name;
                 // $client->save();
-                }}
+                }
+            }
+            if($request->hasFile('utility_bill'))
+                {
+                    // dd('true');
+                $utility_bill = $request->utility_bill;
+                $utility_bill_new_name = time().$utility_bill->getClientOriginalName();
+                $utility_bill->move('uploads/passport',$utility_bill_new_name);
+                $employee->utility_bill = 'uploads/passport/'.$utility_bill_new_name;
+                // $client->save();
+                }
+            if($request->hasFile('work_permit'))
+            {
+                // dd('true');
+            $work_permit = $request->work_permit;
+            $work_permit = time().$work_permit->getClientOriginalName();
+            $work_permit->move('uploads/passport',$work_permit_new_name);
+            $employee->work_permit = 'uploads/passport/'.$work_permit_new_name;
+            // $client->save();
+            }
         $unique_id = 'CLD'. mt_rand(100000, 999999);
         while (employee::where('unique_id',$unique_id)->get()->count()>0) {
            $unique_id = 'CLD'. mt_rand(100000, 999999); 
@@ -215,6 +234,24 @@ class employeeController extends Controller
             $employee->passport_place = $request->passport_place;
 
         }
+        if($request->hasFile('utility_bill'))
+                {
+                    // dd('true');
+                $utility_bill = $request->utility_bill;
+                $utility_bill_new_name = time().$utility_bill->getClientOriginalName();
+                $utility_bill->move('uploads/passport',$utility_bill_new_name);
+                $employee->utility_bill = 'uploads/passport/'.$utility_bill_new_name;
+                // $client->save();
+                }
+        if($request->hasFile('work_permit'))
+            {
+                // dd('true');
+            $work_permit = $request->work_permit;
+            $work_permit_new_name = time().$work_permit->getClientOriginalName();
+            $work_permit->move('uploads/passport',$work_permit_new_name);
+            $employee->work_permit = 'uploads/passport/'.$work_permit_new_name;
+            // $client->save();
+            }
         $employee->save();
         Session::flash('success','Employee Updated Successfully');
         return redirect()->route('employees');

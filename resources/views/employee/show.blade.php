@@ -248,6 +248,24 @@ Employee
 					</div>
 					</div>
 				</div>
+				<div class="row">
+				@if($employee->work_permit)
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="passport_front">Work Permit:</label>
+							<img src="{{asset($employee->work_permit)}}" alt="passport back" height="300px" width="300px" style="border-radius:20px">
+						</div>
+					</div>
+				@endif
+				@if($employee->utility_bill)
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="passport_back">Utility Bill:</label>
+							<img src="{{asset($employee->utility_bill)}}" alt="passport back" height="300px" width="300px" style="border-radius:20px">
+						</div>
+					</div>
+				@endif
+				</div>
 			</div>
 		</div>
 		<div class="box box-danger">

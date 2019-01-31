@@ -292,6 +292,20 @@ Employee Registration
 					</div>
 					</div>
 				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="work_permit">Work Permit:</label>
+							<input type="file" name="work_permit" class="form-control">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="utility_bill">Utility Bill:</label>
+							<input type="file" name="utility_bill" class="form-control">
+						</div>
+					</div>
+				</div>
 				</div>
 			</div>
 			<div class="box box-danger">
