@@ -133,12 +133,12 @@ Create Invoice
 			</div>
 		</div>
 		</div>
-		<div class="box box-default">
+		<div class="box box-default" id="targetTotal">
 		<div class="box-body">
 			<table class="table table-bordered">
 				<tr>
 					<td class="col-md-8" align="right"><strong>Total:</strong></td>
-					<td class="col-md-4"><input style="color:white;font-weight:500;background-color:#0066FF;" type="text" required class="form-control" readonly></td>
+					<td class="col-md-4"><input name="total" style="color:white;font-weight:500;background-color:#0066FF;" type="text" id="total" required class="form-control" readonly></td>
 				</tr>
 			</table>
 		</div>
@@ -150,7 +150,8 @@ Create Invoice
 			</div>
 			</div>
 	</form>
-
+@stop
+@section('js')
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function(){
@@ -176,8 +177,23 @@ Create Invoice
     $(document).ready(function(){
     $("#target").hover(function(){
     	
-    	var actual_amount =  document.getElementsByName("price[]")[0].value * document.getElementsByName("quantity[]")[0].value;
-    	document.getElementsByName("amount[]")[0].value =document.getElementsByName("currency[]")[0].value+ " "+actual_amount;
+    	for (var i = 0; i < document.getElementsByName("price[]").length; i++) {
+    		var actual_amount = document.getElementsByName("price[]")[i].value * document.getElementsByName("quantity[]")[i].value;
+    		document.getElementsByName("amount[]")[i].value =document.getElementsByName("currency[]")[i].value+ " "+actual_amount;
+    		
+    	}
+    	
+    });
+    });
+
+    $(document).ready(function(){
+    $("#target").hover(function(){
+    	var total_amount = 0;
+    	for (var i = 0; i < document.getElementsByName("amount[]").length; i++) {
+    		var total_amount = total_amount + (document.getElementsByName("price[]")[i].value * document.getElementsByName("quantity[]")[i].value);
+    	}
+		document.getElementsByName("total")[0].value =document.getElementsByName("currency[]")[0].value+ " "+total_amount;
+    	
     	
     });
     });
@@ -202,5 +218,4 @@ Create Invoice
 
 
    	</script>
-
 @stop
