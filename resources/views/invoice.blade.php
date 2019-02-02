@@ -114,20 +114,15 @@ Invoice
 
           <div class="table-responsive">
             <table class="table">
-              <?php $amount = 0;?>
-                  @foreach($invoice->invoiceInfo as $info)
-                  <?php 
-                    $amount = $amount + $info->amount;  
-                  ?>
-            @endforeach 
+              
               <tr>
                 <th style="width:50%">Subtotal:</th>
-                <td>{{$invoice->invoiceInfo[0]->currency}} {{$amount}}</td>
+                <td>{{$invoice->invoiceInfo[0]->currency}} {{$invoice->total}}</td>
               </tr>
               @if($tax[0]->enable == 'yes')
               <tr>
                 <th>Tax ({{$tax[0]->tax}}%)</th>
-                <?php $taxed = ($tax[0]->tax/100*$amount) ?>
+                <?php $taxed = ($tax[0]->tax/100*$invoice->total) ?>
                 <td>{{$invoice->invoiceInfo[0]->currency}} {{$taxed}}</td>
               </tr>
               @endif
@@ -138,10 +133,10 @@ Invoice
               <tr>
                 <th>Total:</th>
                 @if($tax[0]->enable == 'yes')
-                <?php $total = $amount + $taxed ?>
+                <?php $total = $invoice->total + $taxed ?>
                 <td style="color:white;font-weight:500;background-color:#0066FF;">{{$invoice->invoiceInfo[0]->currency}} {{$total}}</td>
                 @else
-                  <td style="color:white;font-weight:500;background-color:#0066FF;">{{$invoice->invoiceInfo[0]->currency}} {{$amount}}</td>
+                  <td style="color:white;font-weight:500;background-color:#0066FF;">{{$invoice->invoiceInfo[0]->currency}} {{$invoice->total}}</td>
                 @endif
               </tr>
             </table>

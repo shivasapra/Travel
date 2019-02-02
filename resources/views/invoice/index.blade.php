@@ -25,7 +25,7 @@ Invoices
                         <th>Invoice No.</th>
                         <th>Invoice Date</th>
                         <th>Receiver Name</th>
-                        <th>Amount</th>
+                        <th>Total</th>
                         <th>Status</th>
                         {{-- <th>PDF</th> --}}
                         <th>Action</th>
@@ -40,16 +40,8 @@ Invoices
 	                    		<td>{{$invoice->invoice_no}}</td>
 	                    		<td>{{$invoice->invoice_date}}</td>
 	                    		<td>{{$invoice->receiver_name}}</td>
-	                    		<td>
-	                    			<?php $amount = 0;?>
-	                    			@foreach($invoice->invoiceInfo as $info)
-	                    			<?php 
-	                    				$amount = $amount + $info->amount;	
-	                    			?>
-									@endforeach
-	                    			{{$info->currency.$amount}}
-	                    		</td>
-	                    		@if($info->status == 1)
+	                    		<td>{{$invoice->invoiceInfo[0]->currency}}{{$invoice->total}}</td>
+	                    		@if($invoice->invoiceInfo[0]->status == 1)
 	                    		<td><div class="text-success">{{'Paid'}}</div></td>
 	                    		@else
 	                    		<td><div class="text-danger">{{'Unpaid'}}</div></td>

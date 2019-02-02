@@ -179,7 +179,7 @@ Create Invoice
     	
     	for (var i = 0; i < document.getElementsByName("price[]").length; i++) {
     		var actual_amount = document.getElementsByName("price[]")[i].value * document.getElementsByName("quantity[]")[i].value;
-    		document.getElementsByName("amount[]")[i].value =document.getElementsByName("currency[]")[i].value+ " "+actual_amount;
+    		document.getElementsByName("amount[]")[i].value =document.getElementsByName("currency[]")[i].value+actual_amount;
     		
     	}
     	
@@ -192,7 +192,7 @@ Create Invoice
     	for (var i = 0; i < document.getElementsByName("amount[]").length; i++) {
     		var total_amount = total_amount + (document.getElementsByName("price[]")[i].value * document.getElementsByName("quantity[]")[i].value);
     	}
-		document.getElementsByName("total")[0].value =document.getElementsByName("currency[]")[0].value+ " "+total_amount;
+		document.getElementsByName("total")[0].value =document.getElementsByName("currency[]")[0].value+total_amount;
     	
     	
     });

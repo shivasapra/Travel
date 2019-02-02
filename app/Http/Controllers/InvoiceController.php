@@ -82,6 +82,13 @@ class InvoiceController extends Controller
         $invoice->billing_address = $request->billing_address;
         $invoice->invoice_date = $request->invoice_date;
         $invoice->invoice_no = $request->invoice_no;
+        $invoice->total = 0;
+        if ($request->currency[0] == '$') {
+            $invoice->total = substr($request->total,1,3)*1;
+        }
+        else{
+            $invoice->total = substr($request->total,2,4)*1;
+        }
         $invoice->save();
 
         foreach($request->item_name as $index => $item_name){
@@ -92,7 +99,12 @@ class InvoiceController extends Controller
             $invoice_info->quantity = $request->quantity[$index];
             $invoice_info->currency = $request->currency[$index];
             $invoice_info->price = $request->price[$index];
-            $invoice_info->amount = $request->price[$index] * $request->quantity[$index];
+            if ($request->currency[0] == '$') {
+                $invoice_info->amount = substr($request->amount[$index],1,3)*1;
+            }
+            else{
+                $invoice_info->amount = substr($request->amount[$index],2,4)*1;
+            }
             if ($request->status[$index]=='paid') {
                 $invoice_info->status = 1;
             }
@@ -150,6 +162,12 @@ class InvoiceController extends Controller
         $invoice->billing_address = $request->billing_address;
         $invoice->invoice_date = $request->invoice_date;
         $invoice->invoice_no = $request->invoice_no;
+        if ($request->currency[0] == '$') {
+            $invoice->total = substr($request->total,1,3)*1;
+        }
+        else{
+            $invoice->total = substr($request->total,2,4)*1;
+        }
         $invoice->save();
         foreach($request->item_name as $index => $item_name){
             $invoice_info = invoiceInfo::where();
@@ -159,7 +177,12 @@ class InvoiceController extends Controller
             $invoice_info->quantity = $request->quantity[$index];
             $invoice_info->currency = $request->currency[$index];
             $invoice_info->price = $request->price[$index];
-            $invoice_info->amount = $request->price[$index] * $request->quantity[$index];
+            if ($request->currency[0] == '$') {
+                $invoice_info->amount = substr($request->amount[$index],1,3)*1;
+            }
+            else{
+                $invoice_info->amount = substr($request->amount[$index],2,4)*1;
+            }
             $invoice_info->status = $request->status[$index];
             $invoice_info->save();
 

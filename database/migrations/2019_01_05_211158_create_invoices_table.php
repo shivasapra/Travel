@@ -19,6 +19,7 @@ class CreateInvoicesTable extends Migration
             $table->string('billing_address');
             $table->Date('invoice_date');
             $table->string('invoice_no');
+            $table->string('total');
             $table->integer('pending_amount')->nullable();
             $table->integer('discount')->nullable();
             $table->boolean('credit')->default(0);
