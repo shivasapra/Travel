@@ -111,6 +111,7 @@ class InvoiceController extends Controller
          
         $invoice = new invoice;
         $client = client::find($request->receiver_name);
+        $invoice->client_id = $client->id;
         $invoice->receiver_name = $client->first_name.' '.$client->last_name;
         $invoice->billing_address = $request->billing_address;
         $invoice->invoice_date = $request->invoice_date;
