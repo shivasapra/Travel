@@ -97,8 +97,37 @@ Invoice
       <div class="row">
         <!-- accepted payments column -->
         <div class="col-xs-6">
-          {{-- <p class="lead">Payment Methods:</p>
-          <img src="../../dist/img/credit/visa.png" alt="Visa">
+          <p class="lead">Payment Methods:</p>
+          <div class="table-responsive">
+            <table class="table">
+              @if($invoice->credit)
+              <tr>
+                <th style="width:50%"><button class="btn btn-xs bg-maroon btn-flat">Credit Card</button></th>
+                <td>{{$invoice->invoiceInfo[0]->currency. $invoice->credit_amount}}</td>
+              </tr>
+              @endif
+
+              @if($invoice->debit)
+              <tr>
+                <th style="width:50%"><button class="btn btn-xs bg-purple btn-flat">Debit Card</button></th>
+                <td>{{$invoice->invoiceInfo[0]->currency. $invoice->debit_amount}}</td>
+              </tr>
+              @endif
+              @if($invoice->cash)
+                <tr>
+                <th style="width:50%"><button class="btn btn-xs bg-navy btn-flat">Cash</button></th>
+                <td>{{$invoice->invoiceInfo[0]->currency. $invoice->cash_amount}}</td>
+              </tr>
+              @endif
+              @if($invoice->bank)
+                <tr>
+                <th style="width:50%"><button class="btn btn-xs bg-olive btn-flat">Bank Transfer</button></th>
+                <td>{{$invoice->invoiceInfo[0]->currency. $invoice->bank_amount}}</td>
+              </tr>
+              @endif
+            </table>
+          </div>
+          {{-- <img src="../../dist/img/credit/visa.png" alt="Visa">
           <img src="../../dist/img/credit/mastercard.png" alt="Mastercard">
           <img src="../../dist/img/credit/american-express.png" alt="American Express">
           <img src="../../dist/img/credit/paypal2.png" alt="Paypal"> --}}
