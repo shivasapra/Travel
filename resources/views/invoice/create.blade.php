@@ -138,7 +138,15 @@ Create Invoice
 			<table class="table table-bordered">
 				<tr>
 					<td class="col-md-8" align="right"><strong>Total:</strong></td>
-					<td class="col-md-4"><input name="total" style="color:white;font-weight:500;background-color:#0066FF;" type="text" id="total" required class="form-control" readonly></td>
+					<td class="col-md-4"><input name="total"  type="text" id="total" required class="form-control" readonly></td>
+				</tr>
+				<tr>
+					<td class="col-md-8" align="right"><strong>Discount:</strong></td>
+					<td class="col-md-4"><input name="discount" type="text" id="discount" required class="form-control" value="0"></td>
+				</tr>
+				<tr>
+					<td class="col-md-8" align="right"><strong>Discounted Total:</strong></td>
+					<td class="col-md-4"><input name="discounted_total" type="text" id="discounted_total" style="color:white;font-weight:500;background-color:#0066FF;" required class="form-control" readonly></td>
 				</tr>
 			</table>
 		</div>
@@ -193,6 +201,8 @@ Create Invoice
     		var total_amount = total_amount + (document.getElementsByName("price[]")[i].value * document.getElementsByName("quantity[]")[i].value);
     	}
 		document.getElementsByName("total")[0].value =document.getElementsByName("currency[]")[0].value+total_amount;
+		var discounted = total_amount - document.getElementsByName("discount")[0].value
+		document.getElementsByName("discounted_total")[0].value =document.getElementsByName("currency[]")[0].value+ discounted;
     	
     	
     });

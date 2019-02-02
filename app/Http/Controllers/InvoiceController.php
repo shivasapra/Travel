@@ -21,7 +21,8 @@ class InvoiceController extends Controller
     public function index()
     {   
         
-        return view('invoice.index')->with('invoices',invoice::all());
+        return view('invoice.index')->with('invoices',invoice::all())
+                                    ->with('tax',settings::all());;
     }
 
     public function invoicePrint($id)
@@ -82,12 +83,14 @@ class InvoiceController extends Controller
         $invoice->billing_address = $request->billing_address;
         $invoice->invoice_date = $request->invoice_date;
         $invoice->invoice_no = $request->invoice_no;
-        $invoice->total = 0;
+        $invoice->discount = $request->discount;
         if ($request->currency[0] == '$') {
             $invoice->total = substr($request->total,1,3)*1;
+            $invoice->discounted_total = substr($request->discounted_total,1,3)*1;
         }
         else{
             $invoice->total = substr($request->total,2,4)*1;
+            $invoice->discounted_total = substr($request->discounted_total,2,4)*1;
         }
         $invoice->save();
 
@@ -162,11 +165,14 @@ class InvoiceController extends Controller
         $invoice->billing_address = $request->billing_address;
         $invoice->invoice_date = $request->invoice_date;
         $invoice->invoice_no = $request->invoice_no;
+        $invoice->discount = $request->discount;
         if ($request->currency[0] == '$') {
             $invoice->total = substr($request->total,1,3)*1;
+            $invoice->discounted_total = substr($request->discounted_total,1,3)*1;
         }
         else{
             $invoice->total = substr($request->total,2,4)*1;
+            $invoice->discounted_total = substr($request->discounted_total,2,4)*1;
         }
         $invoice->save();
         foreach($request->item_name as $index => $item_name){

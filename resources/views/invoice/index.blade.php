@@ -40,7 +40,17 @@ Invoices
 	                    		<td>{{$invoice->invoice_no}}</td>
 	                    		<td>{{$invoice->invoice_date}}</td>
 	                    		<td>{{$invoice->receiver_name}}</td>
-	                    		<td>{{$invoice->invoiceInfo[0]->currency}}{{$invoice->total}}</td>
+								@if($tax[0]->enable == 'yes')
+					                <?php $taxed = ($tax[0]->tax/100*$invoice->total) ?>
+					             @endif
+								@if($tax[0]->enable == 'yes')
+					                <?php $total = $invoice->discounted_total + $taxed ?>
+					                <td>{{$invoice->invoiceInfo[0]->currency}} {{$total}}</td>
+				                @else
+				                  	<td>{{$invoice->invoiceInfo[0]->currency}} {{$invoice->total}}</td>
+				                @endif
+
+
 	                    		@if($invoice->invoiceInfo[0]->status == 1)
 	                    		<td><div class="text-success">{{'Paid'}}</div></td>
 	                    		@else

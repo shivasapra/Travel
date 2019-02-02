@@ -104,10 +104,18 @@ Invoice
 
           <div class="table-responsive">
             <table class="table">
-               
+              
               <tr>
                 <th style="width:50%">Subtotal:</th>
                 <td>{{$invoice->invoiceInfo[0]->currency}} {{$invoice->total}}</td>
+              </tr>
+              <tr>
+                <th>Discount:</th>
+                <td>{{$invoice->invoiceInfo[0]->currency}} {{$invoice->discount}}</td>
+              </tr>
+              <tr>
+                <th>Discounted Total:</th>
+                <td>{{$invoice->invoiceInfo[0]->currency}} {{$invoice->discounted_total}}</td>
               </tr>
               @if($tax[0]->enable == 'yes')
               <tr>
@@ -123,12 +131,13 @@ Invoice
               <tr>
                 <th>Total:</th>
                 @if($tax[0]->enable == 'yes')
-                <?php $total = $invoice->total + $taxed ?>
+                <?php $total = $invoice->discounted_total + $taxed ?>
                 <td style="color:white;font-weight:500;background-color:#0066FF;">{{$invoice->invoiceInfo[0]->currency}} {{$total}}</td>
                 @else
                   <td style="color:white;font-weight:500;background-color:#0066FF;">{{$invoice->invoiceInfo[0]->currency}} {{$invoice->total}}</td>
                 @endif
               </tr>
+              
             </table>
           </div>
         </div>
