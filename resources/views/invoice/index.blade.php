@@ -41,13 +41,13 @@ Invoices
 	                    		<td>{{$invoice->invoice_date}}</td>
 	                    		<td>{{$invoice->receiver_name}}</td>
 								@if($tax[0]->enable == 'yes')
-					                <?php $taxed = ($tax[0]->tax/100*$invoice->total) ?>
+					                <?php $taxed = ($tax[0]->tax/100*$invoice->discounted_total) ?>
 					             @endif
 								@if($tax[0]->enable == 'yes')
 					                <?php $total = $invoice->discounted_total + $taxed ?>
 					                <td>{{$invoice->invoiceInfo[0]->currency}} {{$total}}</td>
 				                @else
-				                  	<td>{{$invoice->invoiceInfo[0]->currency}} {{$invoice->total}}</td>
+				                  	<td>{{$invoice->invoiceInfo[0]->currency}} {{$invoice->discounted_total}}</td>
 				                @endif
 
 

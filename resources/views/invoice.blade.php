@@ -130,7 +130,7 @@ Invoice
               @if($tax[0]->enable == 'yes')
               <tr>
                 <th>Tax ({{$tax[0]->tax}}%)</th>
-                <?php $taxed = ($tax[0]->tax/100*$invoice->total) ?>
+                <?php $taxed = ($tax[0]->tax/100*$invoice->discounted_total) ?>
                 <td>{{$invoice->invoiceInfo[0]->currency}} {{$taxed}}</td>
               </tr>
               @endif
@@ -144,8 +144,16 @@ Invoice
                 <?php $total = $invoice->discounted_total + $taxed ?>
                 <td style="color:white;font-weight:500;background-color:#0066FF;">{{$invoice->invoiceInfo[0]->currency}} {{$total}}</td>
                 @else
-                  <td style="color:white;font-weight:500;background-color:#0066FF;">{{$invoice->invoiceInfo[0]->currency}} {{$invoice->total}}</td>
+                  <td style="color:white;font-weight:500;background-color:#0066FF;">{{$invoice->invoiceInfo[0]->currency}} {{$invoice->discounted_total}}</td>
                 @endif
+              </tr>
+              <tr>
+                <th class="text-success">Paid:</th>
+                <td>{{$invoice->invoiceInfo[0]->currency}} {{$invoice->paid}}</td>
+              </tr>
+              <tr>
+                <th class="text-danger">Pending:</th>
+                <td>{{$invoice->invoiceInfo[0]->currency}} {{$invoice->pending_amount}}</td>
               </tr>
               
             </table>

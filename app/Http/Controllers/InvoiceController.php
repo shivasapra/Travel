@@ -20,7 +20,22 @@ class InvoiceController extends Controller
      */
     public function index()
     {   
-        
+        $tax = settings::all();
+        if($tax[0]->enable == 'yes'){
+            foreach (invoice::all() as $invoice) {
+            $taxed = ($tax[0]->tax/100)*$invoice->discounted_total;
+            $total = $invoice->discounted_total + $taxed;
+            $invoice->pending_amount = $total - $invoice->paid;
+            $invoice->save();
+            }
+        }
+        else{
+            foreach (invoice::all() as $invoice){ 
+                $invoice->pending = $discounted_total - $invoice->paid;
+                $invoice->save();
+            }
+        }
+
         return view('invoice.index')->with('invoices',invoice::all())
                                     ->with('tax',settings::all());;
     }
@@ -75,8 +90,10 @@ class InvoiceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
         
+
+         
         $invoice = new invoice;
         $client = client::find($request->receiver_name);
         $invoice->receiver_name = $client->first_name.' '.$client->last_name;
@@ -91,6 +108,28 @@ class InvoiceController extends Controller
         else{
             $invoice->total = substr($request->total,2,4)*1;
             $invoice->discounted_total = substr($request->discounted_total,2,4)*1;
+        }
+        $invoice->paid = 0;
+        $invoice->pending_amount=0;
+        if($request->credit != null){
+            $invoice->credit = 1;
+            $invoice->credit_amount = $request->credit_amount;
+            $invoice->paid = $invoice->paid + $request->credit_amount;
+        }
+        if($request->debit != null){
+            $invoice->debit = 1;
+            $invoice->debit_amount = $request->debit_amount;
+            $invoice->paid = $invoice->paid + $request->debit_amount;
+        }
+        if($request->cash != null){
+            $invoice->cash = 1;
+            $invoice->cash_amount = $request->cash_amount;
+            $invoice->paid = $invoice->paid + $request->cash_amount;
+        }
+        if($request->bank != null){
+            $invoice->bank = 1;
+            $invoice->bank_amount = $request->bank_amount;
+            $invoice->paid = $invoice->paid + $request->bank_amount;
         }
         $invoice->save();
 
@@ -118,7 +157,7 @@ class InvoiceController extends Controller
 
         }
         Session::flash('success','Invoice Created Successfully');
-            return redirect()->back();
+            return redirect()->route('invoice');
         
     }
 

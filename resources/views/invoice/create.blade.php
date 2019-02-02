@@ -133,7 +133,7 @@ Create Invoice
 			</div>
 		</div>
 		</div>
-		<div class="box box-default" id="targetTotal">
+		<div class="box box-primary" id="targetTotal">
 		<div class="box-body">
 			<table class="table table-bordered">
 				<tr>
@@ -150,6 +150,43 @@ Create Invoice
 				</tr>
 			</table>
 		</div>
+		</div>
+		<div class="box box-primary">
+			<div class="box-body">
+				<table class="table table-bordered">
+
+					<tr>
+					<td class="col-md-8" align="right">
+						<p class="lead">Payment Methods</p>
+					</td>
+					<td class="col-md-4"></td>
+					</tr>
+					<tr>
+					<td class="col-md-8" align="right">
+						<input type="checkbox" id="credit" name="credit"> <strong>Credit card:</strong>
+					</td>
+					<td class="col-md-4" id="creditInput"></td>
+					</tr>
+					<tr>
+					<td class="col-md-8" align="right">
+						<input type="checkbox" id="debit" name="debit"> <strong>Debit card:</strong>
+					</td>
+					<td class="col-md-4" id="debitInput"></td>
+					</tr>
+					<tr>
+					<td class="col-md-8" align="right">
+						<input type="checkbox" id="cash" name="cash"> <strong>Cash:</strong>
+					</td>
+					<td class="col-md-4" id="cashInput"></td>
+					</tr>
+					<tr>
+					<td class="col-md-8" align="right">
+						<input type="checkbox" id="bank" name="bank"> <strong>Bank Transfer:</strong>
+					</td>
+					<td class="col-md-4" id="bankInput"></td>
+					</tr>
+				</table>
+			</div>
 		</div>
 			
 			<div class="form-group">
@@ -195,7 +232,7 @@ Create Invoice
     });
 
     $(document).ready(function(){
-    $("#target").hover(function(){
+    $("#targetTotal").hover(function(){
     	var total_amount = 0;
     	for (var i = 0; i < document.getElementsByName("amount[]").length; i++) {
     		var total_amount = total_amount + (document.getElementsByName("price[]")[i].value * document.getElementsByName("quantity[]")[i].value);
@@ -203,10 +240,33 @@ Create Invoice
 		document.getElementsByName("total")[0].value =document.getElementsByName("currency[]")[0].value+total_amount;
 		var discounted = total_amount - document.getElementsByName("discount")[0].value
 		document.getElementsByName("discounted_total")[0].value =document.getElementsByName("currency[]")[0].value+ discounted;
-    	
-    	
     });
     });
+
+    $(document).ready(function(){
+    $("#credit").click(function(){
+    	var input = '<input name="credit_amount" type="text" required class="form-control">';
+    	$("#creditInput").html(input);
+    });
+	});
+	$(document).ready(function(){
+    $("#debit").click(function(){
+    	var input = '<input name="debit_amount" type="text" required class="form-control">';
+    	$("#debitInput").html(input);
+    });
+	});
+	$(document).ready(function(){
+    $("#cash").click(function(){
+    	var input = '<input name="cash_amount" type="text" required class="form-control">';
+    	$("#cashInput").html(input);
+    });
+	});
+	$(document).ready(function(){
+    $("#bank").click(function(){
+    	var input = '<input name="bank_amount" type="text" required class="form-control">';
+    	$("#bankInput").html(input);
+    });
+	});
 
     $(document).ready(function(){
     $("#client").change(function(){
