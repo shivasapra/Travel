@@ -9,17 +9,19 @@ use Carbon\Carbon;
 use Session;
 
 class employeeController extends Controller
-{
+{   
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('admin');
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        $this->middleware('admin');
-    }
-
+    
     public function index()
     {
         return view('employee.index')->with('employees',employee::all());

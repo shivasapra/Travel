@@ -7,7 +7,12 @@ use App\wage;
 use App\employee;
 use Carbon\Carbon;
 class wageController extends Controller
-{
+{   
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *

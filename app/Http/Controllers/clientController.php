@@ -6,7 +6,11 @@ use Illuminate\Http\Request;
 use App\client;
 use Session;
 class clientController extends Controller
-{
+{   
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
