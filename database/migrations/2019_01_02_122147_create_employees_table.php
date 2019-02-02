@@ -26,7 +26,7 @@ class CreateEmployeesTable extends Migration
             $table->string('DOB');
             $table->string('marital_status');
             $table->string('disability')->nullable();
-            $table->string('blood_group');
+            $table->string('blood_group')->nullable();
             $table->string('country');
             $table->string('county');
             $table->string('tax_ref_no');
@@ -55,7 +55,7 @@ class CreateEmployeesTable extends Migration
             $table->string('account_no');
             $table->string('bank_name');
             $table->string('bank_address');
-            $table->string('income_tax_no');
+            $table->string('income_tax_no')->nullable();
             $table->string('national_insurance_no');
             $table->boolean('passport')->default(0);
             $table->string('passport_no')->nullable();

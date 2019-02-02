@@ -112,13 +112,13 @@ Employee Registration
 					<div class="col-md-3">
 					<div class="form-group">
 						<label for="disability">Disability</label>
-						<input type="text" name='disability' class="form-control"required>
+						<input type="text" name='disability' class="form-control">
 					</div>
 					</div>
 					<div class="col-md-3">
 					<div class="form-group">
 						<label for="blood_group">Blood Group</label>
-						<select name="blood_group" class="form-control"required>
+						<select name="blood_group" class="form-control">
 							<option value="">{{"---Select one---"}}</option>
 							<option value="A+" class="form-control">A+</option>
 							<option value="A-" class="form-control">A-</option>
@@ -308,6 +308,15 @@ Employee Registration
 				</div>
 				</div>
 			</div>
+			<div class="form-group">
+						<label for="passport">Do you have passport</label>
+						<input type="radio" name='passport' required id="yespassport" value=1>Yes
+						<input type="radio" name='passport' required id="nopassport" checked value=0>No
+					</div>
+			
+			<div id="passport">
+				
+			</div>
 			<div class="box box-danger">
 				<div class="box-header with-border">
                   <h3 class="box-title"><strong>{{"Emergency Contact Information"}}</strong></h3>
@@ -397,13 +406,13 @@ Employee Registration
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-3">
+					{{-- <div class="col-md-3">
 					<div class="form-group">
 						<label for="income_tax_no">Income Tax No.</label>
 						<input type="text" name='income_tax_no' class="form-control"required>
 					</div>
-					</div>
-					<div class="col-md-3">
+					</div> --}}
+					<div class="col-md-6">
 					<div class="form-group">
 						<label for="tax_ref_no">Tax Ref No.</label>
 						<input type="text" name='tax_ref_no' class="form-control"required>
@@ -418,15 +427,7 @@ Employee Registration
 				</div>
 				</div>
 			</div>
-			<div class="form-group">
-						<label for="passport">Do you have passport</label>
-						<input type="radio" name='passport' required id="yespassport" value=1>Yes
-						<input type="radio" name='passport' required id="nopassport" checked value=0>No
-					</div>
 			
-			<div id="passport">
-				
-			</div>
 			
 			<div class="form-group">
 				<div class="text-center">

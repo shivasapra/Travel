@@ -56,8 +56,12 @@ class employeeController extends Controller
         $employee->gender = $request->gender;
         $employee->DOB = $request->DOB;
         $employee->marital_status = $request->marital_status;
-        $employee->disability = $request->disability;
-        $employee->blood_group = $request->blood_group;
+        if($request->blood_group!= null){
+            $employee->blood_group = $request->blood_group;
+        }
+        if($request->disability!= null){
+            $employee->disability = $request->disability;
+        }
         $employee->country = $request->country;
         $employee->county = $request->county;
         // $employee->passport = $request->passport;
@@ -86,7 +90,7 @@ class employeeController extends Controller
         $employee->account_no = $request->account_no;
         $employee->bank_name = $request->bank_name;
         $employee->bank_address = $request->bank_address;
-        $employee->income_tax_no = $request->income_tax_no;
+        // $employee->income_tax_no = $request->income_tax_no;
         $employee->tax_ref_no = $request->tax_ref_no;
         $employee->national_insurance_no = $request->national_insurance_no;
          $employee->passport = $request->passport;
@@ -191,8 +195,12 @@ class employeeController extends Controller
         $employee->gender = $request->gender;
         $employee->DOB = $request->DOB;
         $employee->marital_status = $request->marital_status;
-        $employee->disability = $request->disability;
-        $employee->blood_group = $request->blood_group;
+        if($request->blood_group!= null){
+            $employee->blood_group = $request->blood_group;
+        }
+        if($request->disability!= null){
+            $employee->disability = $request->disability;
+        }
         $employee->country = $request->country;
         $employee->county = $request->county;
         // $employee->passport = $request->passport;
@@ -224,7 +232,7 @@ class employeeController extends Controller
         $employee->account_no = $request->account_no;
         $employee->bank_name = $request->bank_name;
         $employee->bank_address = $request->bank_address;
-        $employee->income_tax_no = $request->income_tax_no;
+        // $employee->income_tax_no = $request->income_tax_no;
         $employee->tax_ref_no = $request->tax_ref_no;
         $employee->national_insurance_no = $request->national_insurance_no;
         if ($request->passport_no != null ) {

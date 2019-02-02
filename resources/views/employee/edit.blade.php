@@ -90,13 +90,13 @@ Edit employee
 					<div class="col-md-3">
 					<div class="form-group">
 						<label for="disability">Disability</label>
-						<input type="text" name='disability' value="{{$employee->disability}}" class="form-control"required>
+						<input type="text" name='disability' value="{{$employee->disability}}" class="form-control">
 					</div>
 					</div>
 					<div class="col-md-3">
 					<div class="form-group">
 						<label for="blood_group">Blood Group</label>
-						<select name="blood_group" class="form-control"required>
+						<select name="blood_group" class="form-control">
 							<option value="">{{"---Select one---"}}</option>
 							<option value="A+" class="form-control" {{($employee->blood_group == 'A+')?"selected":" "}}>A+</option>
 							<option value="A-" class="form-control" {{($employee->blood_group == 'A-')?"selected":" "}}>A-</option>
@@ -267,6 +267,62 @@ Edit employee
 				</div>
 			</div>
 		</div>
+		@if($employee->passport == 1)
+		<div class="box box-info">
+			<div class="box-header with-border">
+				<h3 class="box-title"><strong>{{"Passport Information"}}</strong></h3>
+				<div class="box-tools pull-right"><button type="button" class="btn btn-box-tool" data-widget="collapse">
+					<i class="fa fa-minus"></i>
+				</button>
+				<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+			</div>
+			</div>
+			<div class="box-body">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="passport_no">Passport Number</label>
+							<input type="text" name="passport_no" required class="form-control" value="{{$employee->passport_no}}" >
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="passport_expiry_date">Passport Expire date</label>
+							<input type="date" name="passport_expiry_date" required class="form-control" value="{{$employee->passport_expiry_date}}" >
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="passport_place">Place of Issue</label>
+							<input type="text" name="passport_place" required class="form-control" value="{{$employee->passport_place}}" >
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="passport_issue_date">Date Of Issue</label>
+							<input type="date" name="passport_issue_date" required class="form-control" value="{{$employee->passport_issue_date}}" >
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="passport_front">Passport Front:</label>
+							<input type="file" name="passport_front" class="form-control" value="{{$employee->passport_front}}">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="passport_back">Passport Back:</label>
+							<input type="file" name="passport_back" class="form-control" value="{{$employee->passport_back}}">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>			
+		@endif
 		<div class="box box-danger">
 			<div class="box-body">
 				<div class="text-center"><h4><strong>{{"Emergency Contact Information"}}</strong></h4></div>
@@ -338,13 +394,13 @@ Edit employee
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-3">
+					{{-- <div class="col-md-3">
 					<div class="form-group">
 						<label for="income_tax_no">Income Tax No.</label>
 						<input type="text" value="{{$employee->income_tax_no}}" name='income_tax_no' class="form-control"required>
 					</div>
-					</div>
-					<div class="col-md-3">
+					</div> --}}
+					<div class="col-md-6">
 					<div class="form-group">
 						<label for="tax_ref_no">Tax Ref No.</label>
 						<input type="text" value="{{$employee->tax_ref_no}}" name='tax_ref_no' class="form-control"required>
@@ -359,62 +415,7 @@ Edit employee
 				</div>
 			</div>
 		</div>
-		@if($employee->passport == 1)
-		<div class="box box-info">
-			<div class="box-header with-border">
-				<h3 class="box-title"><strong>{{"Passport Information"}}</strong></h3>
-				<div class="box-tools pull-right"><button type="button" class="btn btn-box-tool" data-widget="collapse">
-					<i class="fa fa-minus"></i>
-				</button>
-				<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-			</div>
-			</div>
-			<div class="box-body">
-				<div class="row">
-					<div class="col-md-6">
-						<div class="form-group">
-							<label for="passport_no">Passport Number</label>
-							<input type="text" name="passport_no" required class="form-control" value="{{$employee->passport_no}}" >
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="form-group">
-							<label for="passport_expiry_date">Passport Expire date</label>
-							<input type="date" name="passport_expiry_date" required class="form-control" value="{{$employee->passport_expiry_date}}" >
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-6">
-						<div class="form-group">
-							<label for="passport_place">Place of Issue</label>
-							<input type="text" name="passport_place" required class="form-control" value="{{$employee->passport_place}}" >
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="form-group">
-							<label for="passport_issue_date">Date Of Issue</label>
-							<input type="date" name="passport_issue_date" required class="form-control" value="{{$employee->passport_issue_date}}" >
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-6">
-						<div class="form-group">
-							<label for="passport_front">Passport Front:</label>
-							<input type="file" name="passport_front" class="form-control" value="{{$employee->passport_front}}">
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="form-group">
-							<label for="passport_back">Passport Back:</label>
-							<input type="file" name="passport_back" class="form-control" value="{{$employee->passport_back}}">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>			
-		@endif
+		
 				
 		<div class="text-center">
 				<button class="btn btn-success">Update</button>
