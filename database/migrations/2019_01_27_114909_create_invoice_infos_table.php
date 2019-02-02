@@ -22,7 +22,6 @@ class CreateInvoiceInfosTable extends Migration
             $table->string('currency');
             $table->integer('price');
             $table->integer('amount');
-            $table->boolean('status')->default(0);
             $table->timestamps();
         });
     }

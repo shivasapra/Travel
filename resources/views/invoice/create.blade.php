@@ -83,7 +83,7 @@ Create Invoice
                     <th width="8%" style="color:white;font-weight:500;background-color:#0066FF;">Currency</th>
                     <th width="13%" style="color:white;font-weight:500;background-color:#0066FF;">Price</th>
                     <th width="12%" style="color:white;font-weight:500;background-color:#0066FF;">Actual Amt.</th>
-                    <th width="12%" style="color:white;font-weight:500;background-color:#0066FF;">Status</th>
+                    {{-- <th width="12%" style="color:white;font-weight:500;background-color:#0066FF;">Status</th> --}}
                   </tr>
                 	</thead>
                 <tbody id="target">
@@ -118,12 +118,12 @@ Create Invoice
 						</td>
 						<td><input id="price" type="text" name='price[]' required class="form-control"></td>
 						<td><input id="amount" type="text" name='amount[]' required class="form-control" readonly></td>
-						<td><select name="status[]" class="form-control" id="" required>
+						{{-- <td><select name="status[]" class="form-control" id="" required>
 							<option value="">--select--</option>
 							<option value='paid'>Paid</option>
 							<option value='unpaid'>UnPaid</option>
 							</select>
-						</td>
+						</td> --}}
 					</tr>
 
                 </tbody>
@@ -214,7 +214,7 @@ Create Invoice
 			@endforeach
 		@endif
 		var currency = document.getElementById('currency').value;
-    	var append = '<tr id="row"><td><select required name="item_name[]" class="form-control" id=""><option value="">--select--</option>'+options1+'</select></td><td><select required name="item_subname[]" class="form-control" id=""><option value="">--select--</option>'+options2+'</select></td><td><input type="text" name="quantity[]" id="quantity" required class="form-control"></td><td><select name="currency[]" class="form-control" id=""><option value='+currency+'>'+currency+'</option></select></td><td><input type="text" name="price[]" id="price" required class="form-control"></td><td><input id="amount" type="text" name="amount[]" required class="form-control" readonly></td><td><select name="status[]" required class="form-control" id=""><option value="">--select--</option><option value="paid">Paid</option><option value="unpaid">UnPaid</option></select></td></tr>';
+    	var append = '<tr id="row"><td><select required name="item_name[]" class="form-control" id=""><option value="">--select--</option>'+options1+'</select></td><td><select required name="item_subname[]" class="form-control" id=""><option value="">--select--</option>'+options2+'</select></td><td><input type="text" name="quantity[]" id="quantity" required class="form-control"></td><td><select name="currency[]" class="form-control" id=""><option value='+currency+'>'+currency+'</option></select></td><td><input type="text" name="price[]" id="price" required class="form-control"></td><td><input id="amount" type="text" name="amount[]" required class="form-control" readonly></td></tr>';
         $("#target").append(append);   
         });
     });

@@ -35,6 +35,15 @@ class InvoiceController extends Controller
                 $invoice->save();
             }
         }
+        foreach (invoice::all() as $invoice) {
+            if ($invoice->pending_amount > 0) {
+                $invoice->status = 0;
+            }
+            else{
+                $invoice->status =1;
+            }
+            $invoice->save();
+        }
 
         return view('invoice.index')->with('invoices',invoice::all())
                                     ->with('tax',settings::all());;
@@ -147,12 +156,12 @@ class InvoiceController extends Controller
             else{
                 $invoice_info->amount = substr($request->amount[$index],2,4)*1;
             }
-            if ($request->status[$index]=='paid') {
-                $invoice_info->status = 1;
-            }
-            if ($request->status[$index]=='unpaid') {
-                $invoice_info->status = 0;
-            }
+            // if ($request->status[$index]=='paid') {
+            //     $invoice_info->status = 1;
+            // }
+            // if ($request->status[$index]=='unpaid') {
+            //     $invoice_info->status = 0;
+            // }
             $invoice_info->save();
 
         }

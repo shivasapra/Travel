@@ -51,7 +51,7 @@ Invoices
 				                @endif
 
 
-	                    		@if($invoice->invoiceInfo[0]->status == 1)
+	                    		@if($invoice->status == 1)
 	                    		<td><div class="text-success">{{'Paid'}}</div></td>
 	                    		@else
 	                    		<td><div class="text-danger">{{'Unpaid'}}</div></td>

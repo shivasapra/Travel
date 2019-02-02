@@ -32,6 +32,7 @@ class CreateInvoicesTable extends Migration
             $table->string('bank_amount')->nullable();
             $table->integer('paid')->nullable();
             $table->integer('pending_amount')->nullable();
+            $table->boolean('status')->default(0);
             $table->timestamps();
         });
     }
