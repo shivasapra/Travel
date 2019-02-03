@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\invoice;
 use App\settings;
+use App\expenses;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
@@ -18,4 +19,10 @@ class ReportController extends Controller
     	->with('tax',settings::all())
     	->with('invoices',invoice::where('status',0)->get());
     }
+
+    public function expenses(){
+        return view('reports.expenses')
+        ->with('expenses',expenses::all());
+    }
+
 }

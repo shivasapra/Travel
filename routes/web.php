@@ -18,6 +18,10 @@ Route::get('/unpaidInvoice/report',[
 			'uses'=> 'ReportController@unpaidInvoice',
 			'as'=>'unpaidInvoice.report'
 		]);
+Route::get('/expenses/report',[
+			'uses'=> 'ReportController@expenses',
+			'as'=>'expenses.report'
+		]);
 
 
 

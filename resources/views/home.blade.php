@@ -214,7 +214,7 @@ Dashboard
               <h3 class="box-title"><strong>Expenses({{$expenses->count()}})</strong></h3>
 
               <div class="box-tools pull-right">
-                <a href="" class="btn btn-xs bg-olive">Report</a>
+                <a href="{{route('expenses.report')}}" class="btn btn-xs bg-olive">Report</a>
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
                 <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
