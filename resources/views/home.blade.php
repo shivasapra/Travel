@@ -211,9 +211,10 @@ Dashboard
       <div class="col-md-6">
         <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title"><strong>Recently Added Expenses</strong></h3>
+              <h3 class="box-title"><strong>Expenses({{$expenses->count()}})</strong></h3>
 
               <div class="box-tools pull-right">
+                <a href="" class="btn btn-xs bg-olive">Report</a>
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
                 <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -222,7 +223,7 @@ Dashboard
             <!-- /.box-header -->
             <div class="box-body">
               <ul class="products-list product-list-in-box">
-                @if($expenses->count()>0)
+                @if($recent_expenses->count()>0)
                 @foreach($expenses as $expense)
                 <li class="item">
                   {{-- <div class="product-img">
