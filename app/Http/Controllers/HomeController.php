@@ -51,16 +51,7 @@ class HomeController extends Controller
         foreach ($today_wage as $wage) {
             $total_wage = $total_wage + $wage->wage;
         }
-        foreach (client::all() as $client) {
-            if($client->mail_sent == 0){
-                if($client->passport_expiry_date == $date_today->addMonths(6)->toDateString()){
-                    // dd(true);
-                    Mail::to($client->email)->send(new \App\Mail\passportMail);
-                    $client->mail_sent == 1;
-                    $client->save();
-                }
-            }
-        }
+
         $all_todos = todo::all();
             foreach ($all_todos as $todo) {
                 if ($todo->status != 1) {
@@ -80,6 +71,20 @@ class HomeController extends Controller
         $missed_todos_five = todo::where('date',$yesterday_date)->where('status',3)->take(5)->get();
         $invoices = invoice::orderBy('created_at','desc')->take(7)->get();
         $tasks = Task::all();
+        $clients = client::all();
+        foreach ($clients as $client) {
+            if($client->mail_sent == 0){
+                if($client->passport_expiry_date == $date_today->addMonths(6)->toDateString()){
+                    // dd(true);
+                    Mail::to($client->email)->send(new \App\Mail\passportMail);
+                    
+                    $client->mail_sent = 1;
+                    $client->save();
+                    // Session::flash('success','Email Sent');
+                    
+                }
+            }
+        }
         return view('home')->with('employees',employee::all())
                             ->with('clients',client::all())
                             ->with('expense',$total_amount)
