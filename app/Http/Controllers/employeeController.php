@@ -133,7 +133,7 @@ class employeeController extends Controller
             {
                 // dd('true');
             $work_permit = $request->work_permit;
-            $work_permit = time().$work_permit->getClientOriginalName();
+            $work_permit_new_name = time().$work_permit->getClientOriginalName();
             $work_permit->move('uploads/passport',$work_permit_new_name);
             $employee->work_permit = 'uploads/passport/'.$work_permit_new_name;
             // $client->save();

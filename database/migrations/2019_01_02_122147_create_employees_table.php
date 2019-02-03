@@ -66,6 +66,7 @@ class CreateEmployeesTable extends Migration
             $table->string('passport_back')->nullable();
             $table->string('work_permit')->nullable();
             $table->string('utility_bill')->nullable();
+            $table->boolean('mail_sent')->default(0);
             $table->timestamps();
         });
     }

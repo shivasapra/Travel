@@ -71,26 +71,33 @@ class HomeController extends Controller
         $missed_todos_five = todo::where('date',$yesterday_date)->where('status',3)->take(5)->get();
         $tasks = Task::all();
 
-        $passport_emails = array();
+        $client_passport_emails = array();
         $mail_clients = client::where('mail_sent',0)->where('passport_expiry_date',Carbon::now()->addMonths(6)->toDateString())->get();
         foreach ($mail_clients as $client) {
-           array_push($passport_emails,$client->email);
+           array_push($client_passport_emails,$client->email);
            $client->mail_sent = 1;
            $client->save();
+           }
+
+        $employee_passport_emails = array();
+        $mail_employees = employee::where('mail_sent',0)->where('passport_expiry_date',Carbon::now()->addMonths(6)->toDateString())->get();
+        foreach ($mail_employees as $employee) {
+           array_push($employee_passport_emails,$employee->email);
+           $employee->mail_sent = 1;
+           $employee->save();
            }
 
 
         $invoice_emails = array();
         $mail_invoices = invoice::where('status',0)->where('mail_sent',Carbon::now()->addDays(-7)->toDateString())->get();
-        // dd($mail_invoices);
         foreach ($mail_invoices as $invoice) {
            array_push($invoice_emails,$invoice->client->email);
            $invoice->mail_sent = $date;
            $invoice->save();
            }
-        // dd($invoice_emails);
 
-         Mail::to($passport_emails)->send(new \App\Mail\passportMail);
+         Mail::to($client_passport_emails)->send(new \App\Mail\passportMail);
+         Mail::to($employee_passport_emails)->send(new \App\Mail\passportMail);
          Mail::to($invoice_emails)->send(new \App\Mail\invoiceMail);
         
         return view('home')->with('employees',employee::all())
