@@ -25,6 +25,7 @@ class CreateClientsTable extends Migration
             $table->string('phone');
             $table->string('DOB');
             $table->string('email');
+            $table->boolean('mail_sent')->default(0);
             $table->boolean('passport')->default(0);
             $table->string('passport_no')->nullable();
             $table->date('passport_expiry_date')->nullable();
