@@ -15,6 +15,7 @@ use Session;
 use App\invoice;
 use App\settings;
 use App\Task;
+use Mail;
 class HomeController extends Controller
 {
     /**
@@ -36,6 +37,7 @@ class HomeController extends Controller
     {   
         $dt = Carbon::now();
         $date_today = $dt->timezone('Europe/London');
+        // dd($date_today->addMonths(6));
         $date = $date_today->toDateString();
         $expenses = expenses::where('auto',0)->get();
         $total_amount = 0;
@@ -49,7 +51,12 @@ class HomeController extends Controller
         foreach ($today_wage as $wage) {
             $total_wage = $total_wage + $wage->wage;
         }
-
+        foreach ($client::all() as $client) {
+            if($client->passport_expiry_date == $date_today->addMonths(6)->toDateString()){
+                dd(true);
+                Mail::to($client->email)->send(new \App\Mail\passportMail);
+            }
+        }
         $all_todos = todo::all();
             foreach ($all_todos as $todo) {
                 if ($todo->status != 1) {
