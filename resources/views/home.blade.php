@@ -211,7 +211,7 @@ Dashboard
       <div class="col-md-6">
         <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Recently Added Expenses</h3>
+              <h3 class="box-title"><strong>Recently Added Expenses</strong></h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -241,12 +241,23 @@ Dashboard
               </ul>
             </div>
         </div>
+        
       </div>
       <div class="col-md-6">
         <div class="box box-primary">
           <div class="box-body">
+            
+              
+            
             <section class="content-header">
-              <h1 class="text-center"><span style="color:#0066FF;">Invoices</span></h1><hr>
+              <span class="pull-right"><a href="{{route('invoice.report')}}" class="btn btn-xs bg-maroon">Report</a></span>
+              <h1 class="text-center">
+                <a href="{{route('invoice')}}"><span style="color:#0066FF;">Invoices({{$invoices->count()}})</span>
+                </a>
+              </h1>
+
+              <hr>
+
             </section>
               {{-- <h3>Total paid invoices {{$invoice->invoiceInfo()->where('status','1')->count()}}, unpaid {{$invoice->where('status','0')->count()}}.</h3> --}}
             <div class="table-responsive">
@@ -292,7 +303,60 @@ Dashboard
               </table>
             </div>
           </div>
+          <div class="box-body">
+            <div class="col-md-6">
+            <div class="info-box bg-green">
+              <span class="info-box-icon"><i class="fa fa-thumbs-o-up"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Paid Invoices</span>
+                <span class="info-box-number">{{$paid_invoices->count()}}</span>
+
+                <div class="progress">
+                  <div class="progress-bar" style="width: @if($invoices->count()>0)
+                  {{(($paid_invoices->count()/$invoices->count())*100)}}%
+                  @else
+                  0%
+                  @endif"></div>
+                </div>
+                    <span class="progress-description">
+                      @if($invoices->count()>0)
+                      {{(($paid_invoices->count()/$invoices->count())*100)}}%
+                      @else
+                      0%
+                      @endif
+                    </span>
+              </div>
+            </div>
+            </div>
+            <div class="col-md-6">
+            <div class="info-box bg-navy">
+              <span class="info-box-icon"><i class="fa fa-thumbs-o-down"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">UnPaid Invoices</span>
+                <span class="info-box-number">{{$unpaid_invoices->count()}}</span>
+
+                <div class="progress">
+                  <div class="progress-bar" style="width:
+                  @if($invoices->count()>0)
+                  {{(($unpaid_invoices->count()/$invoices->count())*100)}}%
+                  @else
+                  0%
+                  @endif"></div>
+                </div>
+                    <span class="progress-description">
+                      @if($invoices->count()>0)
+                      {{(($unpaid_invoices->count()/$invoices->count())*100)}}%
+                      @else
+                      0%
+                      @endif
+                    </span>
+              </div>
+            </div>
+            </div>
           </div>
+        </div>
       </div>
     </div>
     <div class="row">
@@ -371,7 +435,7 @@ Dashboard
             </div> --}}
           </div>
         </div>
-      <div class="col-md-5">
+        <div class="col-md-5">
         {{-- <div class="box box-info">
           <div class="box-header">
             <h4 class="card-title"><strong>Todo</strong><span id="addtodo"><button class="btn btn-sm btn-primary">Add</button></span></h4>
@@ -472,12 +536,8 @@ Dashboard
         {{-- <div class="box box-success">
         <div id="createEvent"></div>
         </div> --}}
-      </div>
-
-       
-
+        </div>
     </div>
-
     
       @else
 

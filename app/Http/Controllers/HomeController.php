@@ -96,10 +96,12 @@ class HomeController extends Controller
            $invoice->save();
            }
 
-         Mail::to($client_passport_emails)->send(new \App\Mail\passportMail);
-         Mail::to($employee_passport_emails)->send(new \App\Mail\passportMail);
-         Mail::to($invoice_emails)->send(new \App\Mail\invoiceMail);
-        
+         // Mail::to($client_passport_emails)->send(new \App\Mail\passportMail);
+         // Mail::to($employee_passport_emails)->send(new \App\Mail\passportMail);
+         // Mail::to($invoice_emails)->send(new \App\Mail\invoiceMail);
+        $paid_invoices = invoice::where('status',1)->get();
+        $unpaid_invoices = invoice::where('status',0)->get();
+        // dd($unpaid_invoices);
         return view('home')->with('employees',employee::all())
                            
                             ->with('clients',client::all())
@@ -114,7 +116,9 @@ class HomeController extends Controller
                             ->with('missed_todos',$missed_todos)
                             ->with('missed_todos_five',$missed_todos_five)
                             ->with('tasks',$tasks)
-                            ->with('tax',settings::all());
+                            ->with('tax',settings::all())
+                            ->with('paid_invoices',$paid_invoices)
+                            ->with('unpaid_invoices',$unpaid_invoices);
     }
     public function products(){
         return view('products')->with('products',products::all());
