@@ -37,7 +37,7 @@ class HomeController extends Controller
     {   
         $dt = Carbon::now();
         $date_today = $dt->timezone('Europe/London');
-        // dd($date_today->addMonths(6));
+        // dd($date_today);
         $date = $date_today->toDateString();
         $expenses = expenses::where('auto',0)->get();
         $total_amount = 0;
@@ -69,16 +69,29 @@ class HomeController extends Controller
         $todos = todo::where('date',$date_today)->orderBy('created_at','desc')->take(6)->get();
         $missed_todos = todo::where('date',$yesterday_date)->where('status',3)->get();
         $missed_todos_five = todo::where('date',$yesterday_date)->where('status',3)->take(5)->get();
-        $invoices = invoice::orderBy('created_at','desc')->take(7)->get();
         $tasks = Task::all();
-        $emails = array();
-        $clients = client::where('mail_sent',0)->where('passport_expiry_date',$date_today->addMonths(6)->toDateString())->get();
-        foreach ($clients as $client) {
-           array_push($emails,$client->email);
+
+        $passport_emails = array();
+        $mail_clients = client::where('mail_sent',0)->where('passport_expiry_date',Carbon::now()->addMonths(6)->toDateString())->get();
+        foreach ($mail_clients as $client) {
+           array_push($passport_emails,$client->email);
            $client->mail_sent = 1;
            $client->save();
            }
-         Mail::to($emails)->send(new \App\Mail\passportMail);
+
+
+        $invoice_emails = array();
+        $mail_invoices = invoice::where('status',0)->where('mail_sent',Carbon::now()->addDays(-7)->toDateString())->get();
+        // dd($mail_invoices);
+        foreach ($mail_invoices as $invoice) {
+           array_push($invoice_emails,$invoice->client->email);
+           $invoice->mail_sent = $date;
+           $invoice->save();
+           }
+        // dd($invoice_emails);
+
+         Mail::to($passport_emails)->send(new \App\Mail\passportMail);
+         Mail::to($invoice_emails)->send(new \App\Mail\invoiceMail);
         
         return view('home')->with('employees',employee::all())
                            
@@ -87,7 +100,7 @@ class HomeController extends Controller
                             ->with('logged_in',$logged_in)
                             ->with('logged_out',$logged_out)
                             ->with('date',$date)
-                            ->with('invoices',$invoices)
+                            ->with('invoices',invoice::orderBy('created_at','desc')->take(7)->get())
                             ->with('total_wage',$total_wage)
                             ->with('expenses',expenses::where('auto',0)->orderBy('created_at','desc')->take(7)->get())
                             ->with('todos',$todos)

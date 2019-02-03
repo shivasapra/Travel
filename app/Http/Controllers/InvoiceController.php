@@ -11,6 +11,7 @@ use Session;
 use App\client;
 use GuzzleHttp;
 use App\settings;
+use Carbon\Carbon;
 class InvoiceController extends Controller
 {
     /**
@@ -70,7 +71,7 @@ class InvoiceController extends Controller
      */
     public function create()
     {   
-
+        
         $invoice = invoice::where('invoice_no','CLD0001')->get();
         if ($invoice->count()>0) {
             $latest = invoice::orderBy('created_at','desc')->take(1)->get();
@@ -108,7 +109,9 @@ class InvoiceController extends Controller
     {   
         
 
-         
+         $dt = Carbon::now();
+        $date_today = $dt->timezone('Europe/London');
+        $date = $date_today->toDateString();
         $invoice = new invoice;
         $client = client::find($request->receiver_name);
         $invoice->client_id = $client->id;
@@ -147,6 +150,7 @@ class InvoiceController extends Controller
             $invoice->bank_amount = $request->bank_amount;
             $invoice->paid = $invoice->paid + $request->bank_amount;
         }
+        $invoice->mail_sent = $date;
         $invoice->save();
 
         foreach($request->item_name as $index => $item_name){

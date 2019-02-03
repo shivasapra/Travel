@@ -34,6 +34,7 @@ class CreateInvoicesTable extends Migration
             $table->integer('paid')->nullable();
             $table->integer('pending_amount')->nullable();
             $table->boolean('status')->default(0);
+            $table->Date('mail_sent');
             $table->timestamps();
         });
     }
