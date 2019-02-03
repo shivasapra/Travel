@@ -250,7 +250,7 @@ Dashboard
               
             
             <section class="content-header">
-              <span class="pull-right"><a href="{{route('invoice.report')}}" class="btn btn-xs bg-maroon">Report</a></span>
+              {{-- <span class="pull-right"><a href="{{route('invoice.report')}}" class="btn btn-xs bg-maroon">Report</a></span> --}}
               <h1 class="text-center">
                 <a href="{{route('invoice')}}"><span style="color:#0066FF;">Invoices({{$invoices->count()}})</span>
                 </a>
@@ -305,7 +305,8 @@ Dashboard
           </div>
           <div class="box-body">
             <div class="col-md-6">
-            <div class="info-box bg-green">
+            <a href="{{route('paidInvoice.report')}}">
+              <div class="info-box bg-green">
               <span class="info-box-icon"><i class="fa fa-thumbs-o-up"></i></span>
 
               <div class="info-box-content">
@@ -328,8 +329,10 @@ Dashboard
                     </span>
               </div>
             </div>
+            </a>
             </div>
             <div class="col-md-6">
+            <a href="{{route('unpaidInvoice.report')}}">
             <div class="info-box bg-navy">
               <span class="info-box-icon"><i class="fa fa-thumbs-o-down"></i></span>
 
@@ -354,6 +357,7 @@ Dashboard
                     </span>
               </div>
             </div>
+          </a>
             </div>
           </div>
         </div>

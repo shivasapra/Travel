@@ -10,6 +10,17 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/paidInvoice/report',[
+			'uses'=> 'ReportController@paidInvoice',
+			'as'=>'paidInvoice.report'
+		]);
+Route::get('/unpaidInvoice/report',[
+			'uses'=> 'ReportController@unpaidInvoice',
+			'as'=>'unpaidInvoice.report'
+		]);
+
+
+
 Auth::routes();
 Route::resource('tasks', 'TasksController');
 Route::get('/edit/profile',[
