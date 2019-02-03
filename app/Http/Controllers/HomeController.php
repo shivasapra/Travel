@@ -71,21 +71,17 @@ class HomeController extends Controller
         $missed_todos_five = todo::where('date',$yesterday_date)->where('status',3)->take(5)->get();
         $invoices = invoice::orderBy('created_at','desc')->take(7)->get();
         $tasks = Task::all();
-        $clients = client::all();
+        $emails = array();
+        $clients = client::where('mail_sent',0)->where('passport_expiry_date',$date_today->addMonths(6)->toDateString())->get();
         foreach ($clients as $client) {
-            if($client->mail_sent == 0){
-                if($client->passport_expiry_date == $date_today->addMonths(6)->toDateString()){
-                    // dd(true);
-                    Mail::to($client->email)->send(new \App\Mail\passportMail);
-                    
-                    $client->mail_sent = 1;
-                    $client->save();
-                    // Session::flash('success','Email Sent');
-                    
-                }
-            }
-        }
+           array_push($emails,$client->email);
+           $client->mail_sent = 1;
+           $client->save();
+           }
+         Mail::to($emails)->send(new \App\Mail\passportMail);
+        
         return view('home')->with('employees',employee::all())
+                           
                             ->with('clients',client::all())
                             ->with('expense',$total_amount)
                             ->with('logged_in',$logged_in)
