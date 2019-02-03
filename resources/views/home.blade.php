@@ -268,16 +268,18 @@ Dashboard
                       <td><a href="{{route('invoice.view',['id'=>$invoice->id])}}">{{$invoice->invoice_no}}</a></td>
                       <td>{{$invoice->invoice_date}}</td>
                       <td>{{$invoice->receiver_name}}</td>
-                      <td>
-                        <?php $amount = 0;?>
-                        @foreach($invoice->invoiceInfo as $info)
-                        <?php 
-                          $amount = $amount + $info->amount;  
-                        ?>
-              @endforeach
-                        {{$info->currency.$amount}}
-                      </td>
-                      @if($info->status == 1)
+                      
+                        @if($tax[0]->enable == 'yes')
+                          <?php $taxed = ($tax[0]->tax/100*$invoice->discounted_total) ?>
+                       @endif
+                      @if($tax[0]->enable == 'yes')
+                          <?php $total = $invoice->discounted_total + $taxed ?>
+                          <td>{{$invoice->invoiceInfo[0]->currency}} {{$total}}</td>
+                        @else
+                            <td>{{$invoice->invoiceInfo[0]->currency}} {{$invoice->discounted_total}}</td>
+                        @endif
+                      
+                      @if($invoice->status == 1)
                       <td><small class="label label-success">Paid</small></td>
                       @else
                       <td><small class="label label-danger">Unpaid</small></td>

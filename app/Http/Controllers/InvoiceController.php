@@ -53,7 +53,7 @@ class InvoiceController extends Controller
         }
 
         return view('invoice.index')->with('invoices',invoice::all())
-                                    ->with('tax',settings::all());;
+                                    ->with('tax',settings::all());
     }
 
     public function invoicePrint($id)

@@ -113,7 +113,8 @@ class HomeController extends Controller
                             ->with('todos',$todos)
                             ->with('missed_todos',$missed_todos)
                             ->with('missed_todos_five',$missed_todos_five)
-                            ->with('tasks',$tasks);
+                            ->with('tasks',$tasks)
+                            ->with('tax',settings::all());
     }
     public function products(){
         return view('products')->with('products',products::all());
