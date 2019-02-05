@@ -137,7 +137,7 @@ Create Invoice
 		<div class="box-body">
 			<table class="table table-bordered">
 				<tr>
-					<td class="col-md-8" align="right"><strong>Total:</strong></td>
+					<td class="col-md-8" align="right"><strong>SubTotal:</strong></td>
 					<td class="col-md-4"><input name="total"  type="text" id="total" required class="form-control" readonly></td>
 				</tr>
 				<tr>
@@ -145,7 +145,7 @@ Create Invoice
 					<td class="col-md-4"><input name="discount" type="text" id="discount" required class="form-control" value="0"></td>
 				</tr>
 				<tr>
-					<td class="col-md-8" align="right"><strong>Discounted Total:</strong></td>
+					<td class="col-md-8" align="right"><strong>Total:</strong></td>
 					<td class="col-md-4"><input name="discounted_total" type="text" id="discounted_total" style="color:white;font-weight:500;background-color:#0066FF;" required class="form-control" readonly></td>
 				</tr>
 			</table>
@@ -245,25 +245,25 @@ Create Invoice
 
     $(document).ready(function(){
     $("#credit").click(function(){
-    	var input = '<input name="credit_amount" type="text" required class="form-control">';
+    	var input = '<input name="credit_amount" type="text" class="form-control">';
     	$("#creditInput").html(input);
     });
 	});
 	$(document).ready(function(){
     $("#debit").click(function(){
-    	var input = '<input name="debit_amount" type="text" required class="form-control">';
+    	var input = '<input name="debit_amount" type="text" class="form-control">';
     	$("#debitInput").html(input);
     });
 	});
 	$(document).ready(function(){
     $("#cash").click(function(){
-    	var input = '<input name="cash_amount" type="text" required class="form-control">';
+    	var input = '<input name="cash_amount" type="text" class="form-control">';
     	$("#cashInput").html(input);
     });
 	});
 	$(document).ready(function(){
     $("#bank").click(function(){
-    	var input = '<input name="bank_amount" type="text" required class="form-control">';
+    	var input = '<input name="bank_amount" type="text" class="form-control">';
     	$("#bankInput").html(input);
     });
 	});

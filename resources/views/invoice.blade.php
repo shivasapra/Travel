@@ -152,10 +152,10 @@ Invoice
                 <th>Discount:</th>
                 <td>{{$invoice->invoiceInfo[0]->currency}} {{$invoice->discount}}</td>
               </tr>
-              <tr>
+              {{-- <tr>
                 <th>Discounted Total:</th>
                 <td>{{$invoice->invoiceInfo[0]->currency}} {{$invoice->discounted_total}}</td>
-              </tr>
+              </tr> --}}
               @if($tax[0]->enable == 'yes')
               <tr>
                 <th>VAT ({{$tax[0]->tax}}%)</th>
