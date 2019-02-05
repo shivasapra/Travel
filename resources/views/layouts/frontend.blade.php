@@ -220,7 +220,7 @@
         @if(Auth::user()->admin)
         <li>
           <a href="{{route('products')}}">
-            <i class="fa fa-plus-square"></i><span>Product and Services<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Registration</span>
+            <i class="fa fa-plus-square"></i><span>Services Registration</span>
           </a>
         </li>
         <li>
