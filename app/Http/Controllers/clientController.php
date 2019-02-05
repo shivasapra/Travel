@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\client;
 use Session;
+use Mail;
 class clientController extends Controller
 {   
     public function __construct()
@@ -86,6 +87,21 @@ class clientController extends Controller
 
         }
         $client->save();
+        if ($request->passport == 1 and $client->confirmation == 0) {
+            do {
+                    //generate a random string using Laravel's str_random helper
+                    $token = str_random();
+                } //check if the token already exists and if it does, try again
+                while (client::where('token', $token)->first());
+                $client->token = $token;
+                // send the email
+                $contactEmail = $client->email;
+                $data = array('token'=>$token);
+                Mail::send('emails.clientConfirmation', $data, function($message) use ($contactEmail)
+                {  
+                    $message->to($contactEmail);
+                });
+        }
         Session::flash('success','Client Created Successfully');
         return redirect()->route('clients');
     }
