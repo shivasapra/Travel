@@ -148,7 +148,7 @@ Invoice
               </tr>
               @if($tax[0]->enable == 'yes')
               <tr>
-                <th>Tax ({{$tax[0]->tax}}%)</th>
+                <th>VAT ({{$tax[0]->tax}}%)</th>
                 <?php $taxed = ($tax[0]->tax/100*$invoice->discounted_total) ?>
                 <td>{{$invoice->invoiceInfo[0]->currency}} {{$taxed}}</td>
               </tr>

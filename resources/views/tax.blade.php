@@ -1,6 +1,6 @@
 @extends('layouts.frontend')
 @section('title')
-Tax
+VAT
 @stop
 @section('header')
 	<section class="content-header">
@@ -9,7 +9,7 @@ Tax
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Tax</li>
+        <li class="active">VAT</li>
       </ol>
     </section>
 @stop
@@ -24,7 +24,7 @@ Tax
 						<tbody>
 							<div class="row">
 								<tr>
-									<td><strong>Tax:</strong></td>
+									<td><strong>VAT:</strong></td>
 									<td>
 										<input type="radio" name="enable" value="yes" {{($tax[0]->enable == 'yes')?'checked':''}}>Enable
 										<input type="radio" name="enable" value="no" {{($tax[0]->enable == 'no')?'checked':''}}>Diasble

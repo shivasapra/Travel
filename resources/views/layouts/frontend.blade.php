@@ -265,7 +265,7 @@
             <li><a href="{{route('auto.get')}}"><i class="fa fa-circle-o"></i>Auto Deduction</a></li>
             <li><a href="{{route('slip.generate')}}"><i class="fa fa-circle-o"></i>Generate Salary Slip</a></li>
             <li><a href="{{route('invoice')}}"><i class="fa fa-circle-o"></i>Invoice Generation</a></li>
-            <li><a href="{{route('tax')}}"><i class="fa fa-circle-o"></i>Tax</a></li>
+            <li><a href="{{route('tax')}}"><i class="fa fa-circle-o"></i>VAT</a></li>
           </ul>
         </li>
         @else
