@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\employee;
 use App\User;
 use App\Invite;
+use App\client;
 class InviteController extends Controller
 {
     public function accept($token)
@@ -29,6 +30,22 @@ class InviteController extends Controller
 
         // delete the invite so it can't be used again
         $invite->delete();
+
+        // here you would probably log the user in and show them the dashboard, but we'll just prove it worked
+
+        return redirect()->route('home');
+    }
+
+    public function confirm($token)
+    {
+        // Look up the invite
+        if (!$client = client::where('token', $token)->first()) {
+            //if the invite doesn't exist do something more graceful than this
+            abort(404);
+        }
+
+        $client->confirmation = 1;
+        $client->save();
 
         // here you would probably log the user in and show them the dashboard, but we'll just prove it worked
 

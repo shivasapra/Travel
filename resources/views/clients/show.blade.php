@@ -85,7 +85,12 @@ client
 						<div class="row">
 						<tr>
 							<td><strong>Passport Number:</strong></td>
-							<td>{{$client->passport_no}}</td>
+							<td>{{$client->passport_no}}
+							@if($client->confirmation == 1)
+								<span class="text-success">&nbsp;&nbsp;(Confirmed by client)</span>
+							@else
+							<span class="text-danger">&nbsp;&nbsp;(Not Confirmed Yet)</span>
+							@endif</td>
 						</tr>
 						</div>
 						<div class="row">
