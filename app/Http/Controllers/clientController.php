@@ -94,6 +94,7 @@ class clientController extends Controller
                 } //check if the token already exists and if it does, try again
                 while (client::where('token', $token)->first());
                 $client->token = $token;
+                $client->save();
                 // send the email
                 $contactEmail = $client->email;
                 $data = array('token'=>$token);
