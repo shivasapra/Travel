@@ -99,8 +99,8 @@ class clientController extends Controller
                 $contactEmail = $client->email;
                 $data = array('token'=>$token);
                 Mail::send('emails.clientConfirmation', $data, function($message) use ($contactEmail)
-                {  
-                    $message->to($contactEmail);
+                { 
+                    $message->to($contactEmail)->subject( 'Permission For Keeping Your Details' );
                 });
         }
         Session::flash('success','Client Created Successfully');

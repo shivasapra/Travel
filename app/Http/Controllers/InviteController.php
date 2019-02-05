@@ -51,4 +51,27 @@ class InviteController extends Controller
 
         return redirect()->route('home');
     }
+
+    public function deleteClientPassportData($token)
+    {
+        // Look up the invite
+        if (!$client = client::where('token', $token)->first()) {
+            //if the invite doesn't exist do something more graceful than this
+            abort(404);
+        }
+
+        $client->passport = 0;
+        $client->passport_no = null;
+        $client->passport_expiry_date = null;
+        $client->passport_issue_date = null;
+        $client->passport_place = null;
+        $client->passport_front = null;
+        $client->passport_back = null;
+        $client->letter = null;
+        $client->save();
+
+        // here you would probably log the user in and show them the dashboard, but we'll just prove it worked
+
+        return redirect()->route('home');
+    }
 }
