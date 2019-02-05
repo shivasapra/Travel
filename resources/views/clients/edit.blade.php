@@ -50,23 +50,8 @@ Edit Client
 				<div class="row">
 					<div class="col-md-6">
 					<div class="form-group">
-						<label for="country">Country</label>
-						<input type="text" name='country' required class="form-control" value="{{$client->country}}">
-					</div>
-					</div>
-					<div class="col-md-6">
-					<div class="form-group">
-						<label for="county">County</label>
-						<input type="text" name='county' required class="form-control" value="{{$client->county}}">
-					</div>
-					</div>
-					
-				</div>
-				<div class="row">
-					<div class="col-md-6">
-					<div class="form-group">
-						<label for="postal_code">Postal Code</label>
-						<input type="text" name='postal_code' required class="form-control" value="{{$client->postal_code}}">
+						<label for="address">Street</label>
+						<input type="text" name='address' required class="form-control" value="{{$client->address}}">
 					</div>
 					</div>
 					<div class="col-md-6">
@@ -75,12 +60,30 @@ Edit Client
 						<input type="text" name='city' required class="form-control" value="{{$client->city}}">
 					</div>
 					</div>
+					
+					
 				</div>
 				<div class="row">
 					<div class="col-md-6">
 					<div class="form-group">
-						<label for="address">Client Address</label>
-						<input type="text" name='address' required class="form-control" value="{{$client->address}}">
+						<label for="county">County</label>
+						<input type="text" name='county' required class="form-control" value="{{$client->county}}">
+					</div>
+					</div>
+					<div class="col-md-6">
+					<div class="form-group">
+						<label for="postal_code">Postal Code</label>
+						<input type="text" name='postal_code' required class="form-control" value="{{$client->postal_code}}">
+					</div>
+					</div>
+					
+				</div>
+				<div class="row">
+					
+					<div class="col-md-6">
+					<div class="form-group">
+						<label for="country">Country</label>
+						<input type="text" name='country' required class="form-control" value="{{$client->country}}">
 					</div>
 					</div>
 					<div class="col-md-6">
