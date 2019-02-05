@@ -23,7 +23,6 @@ Employees
                         <th>Sno.</th>
                         <th>Name</th>
                         <th>Unique Id</th>
-                        <th>Passport</th>
                         <th>country</th>
                         <th>Department</th>
                         <th>Hiring Date</th>
@@ -39,7 +38,6 @@ Employees
 	                    		<td>{{$i++}}</td>
 	                    		<td>{{$employee->first_name}}</td>
 	                    		<td>{{$employee->unique_id}}</td>
-	                    		<td>{{$employee->passport}}</td>
 	                    		<td>{{$employee->country}}</td>
 	                    		<td>{{$employee->hired_for_dep}}</td>
 	                    		<td>{{$employee->hiring_date}}</td>

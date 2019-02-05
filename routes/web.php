@@ -12,7 +12,7 @@
 */
 // Route::post('invite', 'employeeController@process')->name('process');
 // {token} is a required parameter that will be exposed to us in the controller method
-Route::get('accept/{token}', 'employeeController@accept')->name('accept');
+Route::get('accept/{token}', 'InviteController@accept')->name('accept');
 
 
 
