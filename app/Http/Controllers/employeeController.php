@@ -7,6 +7,9 @@ use App\employee;
 use App\User;
 use Carbon\Carbon;
 use Session;
+use App\Invite;
+use App\Mail\InviteCreated;
+use Mail;
 
 class employeeController extends Controller
 {   
@@ -144,15 +147,63 @@ class employeeController extends Controller
         }
         $employee->unique_id = $unique_id;
         $employee->save();
-        $user = new User;
-        $user->name = $employee->first_name ." ". $employee->last_name;
-        $user->email = $employee->email;
-        $user->password = bcrypt('pass@123');
-        $user->save();
-        $employee->user_id = $user->id;
-        $employee->save();
+        // $user = new User;
+        // $user->name = $employee->first_name ." ". $employee->last_name;
+        // $user->email = $employee->email;
+        // $user->password = bcrypt('pass@123');
+        // $user->save();
+        // $employee->user_id = $user->id;
+        // $employee->save();
+
+        do {
+            //generate a random string using Laravel's str_random helper
+            $token = str_random();
+        } //check if the token already exists and if it does, try again
+        while (Invite::where('token', $token)->first());
+
+        //create a new invite record
+        $invite = Invite::create([
+            'email' => $employee->email,
+            'token' => $token
+        ]);
+
+        // send the email
+        $contactEmail = $employee->email;
+        $data = array('token'=>$token);
+        Mail::send('emails.invite', $data, function($message) use ($contactEmail)
+        {  
+            $message->to($contactEmail);
+        });
+        // Mail::to($employee->email)->send(new InviteCreated($invite));
         Session::flash('success','Employee created Successfully');
         return redirect()->route('employees');
+    }
+
+    public function accept($token)
+    {
+        // Look up the invite
+        if (!$invite = Invite::where('token', $token)->first()) {
+            //if the invite doesn't exist do something more graceful than this
+            abort(404);
+        }
+
+        // create the user with the details from the invite
+        $employee = employee::where('email',$invite->email)->take(1)->get();
+        // dd($employee);
+        $user = new User;
+        $user->name = $employee[0]->first_name ." ". $employee[0]->last_name;
+        $user->email = $employee[0]->email;
+        $user->password = bcrypt('pass@123');
+        $user->save();
+        $employee[0]->user_id = $user->id;
+        $employee[0]->save();
+
+        // delete the invite so it can't be used again
+        $invite->delete();
+
+        // here you would probably log the user in and show them the dashboard, but we'll just prove it worked
+
+        return redirect()->route('home');
     }
 
     /**

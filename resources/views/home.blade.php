@@ -95,7 +95,7 @@ Dashboard
               @foreach($logged_in as $login)
               <li>
                 <img 
-                @if($login->employee->user->avatar)
+                @if($login->employee->user and $login->employee->user->avatar)
                   src="{{asset($login->employee->user->avatar)}}"
                 @else
                   src="{{asset('app/images/user-placeholder.jpg')}}"
@@ -131,7 +131,7 @@ Dashboard
               @foreach($logged_out as $logout)
               <li>
                 <img 
-                @if($logout->employee->user->avatar)
+                @if($logout->employee->user and $logout->employee->user->avatar)
                   src="{{asset($logout->employee->user->avatar)}}"
                 @else
                   src="{{asset('app/images/user-placeholder.jpg')}}"
@@ -169,7 +169,7 @@ Dashboard
                 @if($employee->wage->last()->date != $date)
                 <li>
                   <img 
-                  @if($employee->user->avatar)
+                  @if($employee->user and $employee->user->avatar)
                     src="{{asset($employee->user->avatar)}}"
                   @else
                     src="{{asset('app/images/user-placeholder.jpg')}}"
@@ -186,7 +186,7 @@ Dashboard
                 @else
                 <li>
                   <img 
-                  @if($employee->user->avatar)
+                  @if($employee->user and $employee->user->avatar)
                     src="{{asset($employee->user->avatar)}}"
                   @else
                     src="{{asset('app/images/user-placeholder.jpg')}}"
