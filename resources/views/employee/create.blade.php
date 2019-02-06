@@ -139,7 +139,7 @@ Employee Registration
 					<div class="col-md-3">
 					<div class="form-group">
 						<label for="county">Nationality</label>
-						<input type="text" name='county' class="form-control"required>
+						<input type="text" id="nationality" name='county' class="form-control"required>
 					</div>
 					</div>
 					<div class="col-md-3">
@@ -157,24 +157,25 @@ Employee Registration
 						<input type="text" name='passport' class="form-control"required>
 					</div>
 					</div> --}}
-					<div class="col-md-4">
-					<div class="form-group">
-						<label for="visa">Work Visa</label>
-						<input type="text" name='visa' class="form-control"required>
-					</div>
-					</div>
-					<div class="col-md-4">
-					<div class="form-group">
-						<label for="visa_expired">Visa Expiry Date</label>
-						<input type="date" name='visa_expired' class="form-control"required>
-					</div>
-					</div>
-					<div class="col-md-4">
+					<div id="optional">
+						<div class="col-md-4">
 						<div class="form-group">
-							<label for="work_permit">Work Permit:</label>
-							<input type="file" name="work_permit" class="form-control">
+							<label for="visa">Work Visa</label>
+							<input type="text" name='visa' class="form-control"required>
 						</div>
-					</div>
+						</div>
+						<div class="col-md-4">
+						<div class="form-group">
+							<label for="visa_expired">Visa Expiry Date</label>
+							<input type="date" name='visa_expired' class="form-control"required>
+						</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="work_permit">Work Permit:</label>
+								<input type="file" name="work_permit" class="form-control">
+							</div>
+						</div>
 					</div>
 			</div>
 			</div>
@@ -460,6 +461,16 @@ Employee Registration
 	    $("#nopassport").click(function(){
 	    	var data = '';
 	        $("#passport").html(data);   
+	        });
+	    });
+
+	    $(document).ready(function(){
+	    $("#nationality").on('keyup',function(){
+	    	var nationality = this.value;
+	    	if (nationality == 'british') {
+	    		var data = '';
+	        	$("#optional").html(data);   
+	    	}
 	        });
 	    });
 
