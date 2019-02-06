@@ -53,7 +53,7 @@ Employee Registration
 					<div class="col-md-4">
 					<div class="form-group">
 						<label for="middle_name">Middle Name</label>
-						<input type="text" name='middle_name'  required class="form-control">
+						<input type="text" name='middle_name' class="form-control">
 					</div>
 					</div>
 					<div class="col-md-4">
@@ -67,13 +67,13 @@ Employee Registration
 					<div class="col-md-6">
 					<div class="form-group">
 						<label for="father_name">Father's Name</label>
-						<input type="text" name='father_name' class="form-control" required>
+						<input type="text" name='father_name' class="form-control" >
 					</div>
 					</div>
 					<div class="col-md-6">
 					<div class="form-group">
 						<label for="mother_name">Mother's Name</label>
-						<input type="text" name='mother_name' class="form-control" required>
+						<input type="text" name='mother_name' class="form-control">
 					</div>
 					</div>
 					</div>
@@ -138,16 +138,17 @@ Employee Registration
 					</div>
 					<div class="col-md-3">
 					<div class="form-group">
-						<label for="country">Country</label>
-						<input type="text" name='country' class="form-control"required>
+						<label for="county">Nationality</label>
+						<input type="text" name='county' class="form-control"required>
 					</div>
 					</div>
 					<div class="col-md-3">
 					<div class="form-group">
-						<label for="county">County</label>
-						<input type="text" name='county' class="form-control"required>
+						<label for="country">Formal Nationality</label>
+						<input type="text" name='country' class="form-control">
 					</div>
 					</div>
+					
 					</div>
 					<div class="row">
 					{{-- <div class="col-md-4">
@@ -156,17 +157,23 @@ Employee Registration
 						<input type="text" name='passport' class="form-control"required>
 					</div>
 					</div> --}}
-					<div class="col-md-6">
+					<div class="col-md-4">
 					<div class="form-group">
-						<label for="visa">Visa</label>
+						<label for="visa">Work Visa</label>
 						<input type="text" name='visa' class="form-control"required>
 					</div>
 					</div>
-					<div class="col-md-6">
+					<div class="col-md-4">
 					<div class="form-group">
-						<label for="visa_expired">Visa valid upto</label>
+						<label for="visa_expired">Visa Expiry Date</label>
 						<input type="date" name='visa_expired' class="form-control"required>
 					</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="work_permit">Work Permit:</label>
+							<input type="file" name="work_permit" class="form-control">
+						</div>
 					</div>
 					</div>
 			</div>
@@ -200,7 +207,7 @@ Employee Registration
 					<div class="col-md-4">
 					<div class="form-group">
 						<label for="home_phone">Home Phone</label>
-						<input type="text" name='home_phone' class="form-control"required>
+						<input type="text" name='home_phone' class="form-control">
 					</div>
 					</div>
 				</div>
@@ -236,19 +243,19 @@ Employee Registration
 					<div class="col-md-4">
 					<div class="form-group">
 						<label for="qualification">Quaification</label>
-						<input type="text" name='qualification' class="form-control"required>
+						<input type="text" name='qualification' class="form-control">
 					</div>
 					</div>
 					<div class="col-md-4">
 					<div class="form-group">
 						<label for="experience">Experience</label>
-						<input type="text" name='experience' class="form-control"required>
+						<input type="text" name='experience' class="form-control">
 					</div>
 					</div>
 					<div class="col-md-4">
 					<div class="form-group">
 						<label for="exp_in_dept">Experience In: Department</label>
-						<input type="text" name='exp_in_dept' class="form-control"required>
+						<input type="text" name='exp_in_dept' class="form-control">
 					</div>
 					</div>
 				</div>
@@ -256,13 +263,13 @@ Employee Registration
 					<div class="col-md-3">
 					<div class="form-group">
 						<label for="hired_for_dep">Hired For: Department</label>
-						<input type="text" name='hired_for_dep' class="form-control"required>
+						<input type="text" name='hired_for_dep' class="form-control">
 					</div>
 					</div>
 					<div class="col-md-3">
 					<div class="form-group">
 						<label for="hiring_date">Hiring Date</label>
-						<input type="date" name='hiring_date' class="form-control"required>
+						<input type="date" name='hiring_date' class="form-control">
 					</div>
 					</div>
 					<div class="col-md-2">
@@ -271,7 +278,7 @@ Employee Registration
 						<select name="currency" class="form-control"required>
 							<option value="" class="form-control"></option>
 							<option value="$" class="form-control">$</option>
-							<option value="&#163;">&#163;</option>
+							<option value="&#163;" selected>&#163;</option>
 						</select>
 					</div>
 					</div>
@@ -288,17 +295,13 @@ Employee Registration
 							<option value="" class="form-control">--Select--</option>
 							<option value="Hour" class="form-control">Hour</option>
 							<option value="Month" class="form-control">Month</option>
+							<option value="weekly" class="form-control">Weekly</option>
 						</select>
 					</div>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-6">
-						<div class="form-group">
-							<label for="work_permit">Work Permit:</label>
-							<input type="file" name="work_permit" class="form-control">
-						</div>
-					</div>
+					
 					<div class="col-md-6">
 						<div class="form-group">
 							<label for="utility_bill">Utility Bill:</label>
@@ -333,13 +336,13 @@ Employee Registration
 					<div class="col-md-6">
 					<div class="form-group">
 						<label for="emer_contact_name">Contact Name</label>
-						<input type="text" name='emer_contact_name' class="form-control"required>
+						<input type="text" name='emer_contact_name' class="form-control">
 					</div>
 					</div>
 					<div class="col-md-6">
 					<div class="form-group">
 						<label for="emer_contact_address">Contact Address</label>
-						<input type="text" name='emer_contact_address' class="form-control"required>
+						<input type="text" name='emer_contact_address' class="form-control">
 					</div>
 					</div>
 				</div>
@@ -347,19 +350,19 @@ Employee Registration
 					<div class="col-md-4">
 					<div class="form-group">
 						<label for="emer_contact_phone">Contact Phone No.</label>
-						<input type="text" name='emer_contact_phone' class="form-control"required>
+						<input type="text" name='emer_contact_phone' class="form-control">
 					</div>
 					</div>
 					<div class="col-md-4">
 					<div class="form-group">
 						<label for="emer_contact_email">Contact Email</label>
-						<input type="text" name='emer_contact_email' class="form-control"required>
+						<input type="text" name='emer_contact_email' class="form-control">
 					</div>
 					</div>
 					<div class="col-md-4">
 					<div class="form-group">
 						<label for="emer_contact_ralation">Relation</label>
-						<input type="text" name='emer_contact_ralation' class="form-control"required>
+						<input type="text" name='emer_contact_ralation' class="form-control">
 					</div>
 					</div>
 				</div>
@@ -415,7 +418,7 @@ Employee Registration
 					<div class="col-md-6">
 					<div class="form-group">
 						<label for="tax_ref_no">Tax Ref No.</label>
-						<input type="text" name='tax_ref_no' class="form-control"required>
+						<input type="text" name='tax_ref_no' class="form-control">
 					</div>
 					</div>
 					<div class="col-md-6">
