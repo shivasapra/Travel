@@ -260,19 +260,28 @@ Employee Registration
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-3">
+					<div class="col-md-4">
 					<div class="form-group">
 						<label for="hired_for_dep">Hired For: Department</label>
 						<input type="text" name='hired_for_dep' class="form-control">
 					</div>
 					</div>
-					<div class="col-md-3">
+					<div class="col-md-4">
 					<div class="form-group">
 						<label for="hiring_date">Hiring Date</label>
 						<input type="date" name='hiring_date' class="form-control">
 					</div>
 					</div>
-					<div class="col-md-2">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="utility_bill">Utility Bill:</label>
+							<input type="file" name="utility_bill" class="form-control">
+						</div>
+					</div>
+					
+				</div>
+				<div class="row">
+					<div class="col-md-4">
 					<div class="form-group">
 						<label for="currency">Currency</label>
 						<select name="currency" class="form-control"required>
@@ -282,13 +291,13 @@ Employee Registration
 						</select>
 					</div>
 					</div>
-					<div class="col-md-2">
+					<div class="col-md-4">
 					<div class="form-group">
 						<label for="rate">Rate Contract</label>
 						<input type="text" name='rate' class="form-control"required>
 					</div>
 					</div>
-					<div class="col-md-2">
+					<div class="col-md-4">
 					<div class="form-group">
 						<label for="per">Per</label>
 						<select name="per" class="form-control"required>
@@ -298,15 +307,6 @@ Employee Registration
 							<option value="weekly" class="form-control">Weekly</option>
 						</select>
 					</div>
-					</div>
-				</div>
-				<div class="row">
-					
-					<div class="col-md-6">
-						<div class="form-group">
-							<label for="utility_bill">Utility Bill:</label>
-							<input type="file" name="utility_bill" class="form-control">
-						</div>
 					</div>
 				</div>
 				</div>

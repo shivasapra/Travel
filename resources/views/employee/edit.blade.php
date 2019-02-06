@@ -31,7 +31,7 @@ Edit employee
 					<div class="col-md-4">
 					<div class="form-group">
 						<label for="middle_name">Middle Name</label>
-						<input type="text" name='middle_name' value="{{$employee->middle_name}}" class="form-control"required>
+						<input type="text" name='middle_name' value="{{$employee->middle_name}}" class="form-control">
 					</div>
 					</div>
 					<div class="col-md-4">
@@ -45,13 +45,13 @@ Edit employee
 					<div class="col-md-6">
 					<div class="form-group">
 						<label for="father_name">Father's Name</label>
-						<input type="text" value="{{$employee->father_name}}" name='father_name' class="form-control"required>
+						<input type="text" value="{{$employee->father_name}}" name='father_name' class="form-control">
 					</div>
 					</div>
 					<div class="col-md-6">
 					<div class="form-group">
 						<label for="mother_name">Mother's Name</label>
-						<input type="text" value="{{$employee->mother_name}}" name='mother_name' class="form-control"required>
+						<input type="text" value="{{$employee->mother_name}}" name='mother_name' class="form-control">
 					</div>
 					</div>
 				</div>
@@ -116,13 +116,13 @@ Edit employee
 					</div>
 					<div class="col-md-3">
 					<div class="form-group">
-						<label for="country">Country</label>
-						<input type="text" name='country' value="{{$employee->country}}" class="form-control"required>
+						<label for="country">Formal Nationality</label>
+						<input type="text" name='country' value="{{$employee->country}}" class="form-control">
 					</div>
 					</div>
 					<div class="col-md-3">
 					<div class="form-group">
-						<label for="county">County</label>
+						<label for="county">Nationality</label>
 						<input type="text" name='county' value="{{$employee->county}}" class="form-control"required>
 					</div>
 					</div>
@@ -136,15 +136,22 @@ Edit employee
 					</div> --}}
 					<div class="col-md-6">
 					<div class="form-group">
-						<label for="visa">Visa</label>
+						<label for="visa">Work Visa</label>
 						<input type="text" value="{{$employee->visa}}" name='visa' class="form-control"required>
 					</div>
 					</div>
 					<div class="col-md-6">
 					<div class="form-group">
-						<label for="visa_expired">Visa valid upto</label>
+						<label for="visa_expired">Visa Expiry Date</label>
 						<input type="date" value="{{$employee->visa_expired}}" name='visa_expired' class="form-control"required>
 					</div>
+					</div>
+
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="work_permit">Work Permit:</label>
+							<input type="file" name="work_permit" class="form-control">
+						</div>
 					</div>
 				</div>
 			</div>
@@ -168,7 +175,7 @@ Edit employee
 					<div class="col-md-4">
 					<div class="form-group">
 						<label for="home_phone">Home Phone</label>
-						<input type="text" value="{{$employee->home_phone}}" name='home_phone' class="form-control"required>
+						<input type="text" value="{{$employee->home_phone}}" name='home_phone' class="form-control">
 					</div>
 					</div>
 				</div>
@@ -195,36 +202,45 @@ Edit employee
 					<div class="col-md-4">
 					<div class="form-group">
 						<label for="qualification">Quaification</label>
-						<input type="text" value="{{$employee->qualification}}" name='qualification' class="form-control"required>
+						<input type="text" value="{{$employee->qualification}}" name='qualification' class="form-control">
 					</div>
 					</div>
 					<div class="col-md-4">
 					<div class="form-group">
 						<label for="experience">Experience</label>
-						<input type="text" name='experience' value="{{$employee->experience}}" class="form-control"required>
+						<input type="text" name='experience' value="{{$employee->experience}}" class="form-control">
 					</div>
 					</div>
 					<div class="col-md-4">
 					<div class="form-group">
 						<label for="exp_in_dept">Experience In: Department</label>
-						<input type="text" value="{{$employee->exp_in_dept}}" name='exp_in_dept' class="form-control"required>
+						<input type="text" value="{{$employee->exp_in_dept}}" name='exp_in_dept' class="form-control">
 					</div>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-3">
+					<div class="col-md-4">
 					<div class="form-group">
 						<label for="hired_for_dep">Hired For: Department</label>
-						<input type="text" name='hired_for_dep' value="{{$employee->hired_for_dep}}" class="form-control"required>
+						<input type="text" name='hired_for_dep' value="{{$employee->hired_for_dep}}" class="form-control">
 					</div>
 					</div>
-					<div class="col-md-3">
+					<div class="col-md-4">
 					<div class="form-group">
 						<label for="hiring_date">Hiring Date</label>
-						<input type="date" value="{{$employee->hiring_date}}"name='hiring_date' class="form-control"required>
+						<input type="date" value="{{$employee->hiring_date}}"name='hiring_date' class="form-control">
 					</div>
 					</div>
-					<div class="col-md-2">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="utility_bill">Utility Bill:</label>
+							<input type="file" name="utility_bill" class="form-control">
+						</div>
+					</div>
+
+				</div>
+				<div class="row">
+					<div class="col-md-4">
 					<div class="form-group">
 						<label for="currency">Currency</label>
 						<select name="currency" class="form-control"required>
@@ -234,36 +250,24 @@ Edit employee
 						</select>
 					</div>
 					</div>
-					<div class="col-md-2">
+					<div class="col-md-4">
 					<div class="form-group">
 						<label for="rate">Rate Contract</label>
 						<input type="text" value="{{$employee->rate}}" name='rate' class="form-control"required>
 					</div>
 					</div>
-					<div class="col-md-2">
+					<div class="col-md-4">
 					<div class="form-group">
 						<label for="per">Per</label>
 						<select name="per" class="form-control"required>
 							<option value="" class="form-control">--Select--</option>
 							<option value="Hour" {{($employee->per == 'Hour')?"selected":" "}} class="form-control">Hour</option>
 							<option value="Month" class="form-control" {{($employee->per == 'Month')?"selected":" "}}>Month</option>
+							<option value="weekly" class="form-control" {{($employee->per == 'weekly')?"selected":" "}}>Weekly</option>
 						</select>
 					</div>
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-6">
-						<div class="form-group">
-							<label for="work_permit">Work Permit:</label>
-							<input type="file" name="work_permit" class="form-control">
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="form-group">
-							<label for="utility_bill">Utility Bill:</label>
-							<input type="file" name="utility_bill" class="form-control">
-						</div>
-					</div>
+					
 				</div>
 			</div>
 		</div>
@@ -330,13 +334,13 @@ Edit employee
 					<div class="col-md-6">
 					<div class="form-group">
 						<label for="emer_contact_name">Contact Name</label>
-						<input type="text" value="{{$employee->emer_contact_name}}" name='emer_contact_name' class="form-control"required>
+						<input type="text" value="{{$employee->emer_contact_name}}" name='emer_contact_name' class="form-control">
 					</div>
 					</div>
 					<div class="col-md-6">
 					<div class="form-group">
 						<label for="emer_contact_address">Contact Address</label>
-						<input type="text" value="{{$employee->emer_contact_address}}" name='emer_contact_address' class="form-control"required>
+						<input type="text" value="{{$employee->emer_contact_address}}" name='emer_contact_address' class="form-control">
 					</div>
 					</div>
 				</div>
@@ -344,19 +348,19 @@ Edit employee
 					<div class="col-md-4">
 					<div class="form-group">
 						<label for="emer_contact_phone">Contact Phone No.</label>
-						<input type="text" value="{{$employee->emer_contact_phone}}" name='emer_contact_phone' class="form-control"required>
+						<input type="text" value="{{$employee->emer_contact_phone}}" name='emer_contact_phone' class="form-control">
 					</div>
 					</div>
 					<div class="col-md-4">
 					<div class="form-group">
 						<label for="emer_contact_email">Contact Email</label>
-						<input type="text" value="{{$employee->emer_contact_email}}" name='emer_contact_email' class="form-control"required>
+						<input type="text" value="{{$employee->emer_contact_email}}" name='emer_contact_email' class="form-control">
 					</div>
 					</div>
 					<div class="col-md-4">
 					<div class="form-group">
 						<label for="emer_contact_ralation">Relation</label>
-						<input type="text" value="{{$employee->emer_contact_relation}}" name='emer_contact_ralation' class="form-control"required>
+						<input type="text" value="{{$employee->emer_contact_relation}}" name='emer_contact_ralation' class="form-control">
 					</div>
 					</div>
 				</div>
@@ -403,7 +407,7 @@ Edit employee
 					<div class="col-md-6">
 					<div class="form-group">
 						<label for="tax_ref_no">Tax Ref No.</label>
-						<input type="text" value="{{$employee->tax_ref_no}}" name='tax_ref_no' class="form-control"required>
+						<input type="text" value="{{$employee->tax_ref_no}}" name='tax_ref_no' class="form-control">
 					</div>
 					</div>
 					<div class="col-md-6">
