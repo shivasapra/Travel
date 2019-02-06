@@ -96,9 +96,9 @@ class HomeController extends Controller
            $invoice->save();
            }
 
-         Mail::to($client_passport_emails)->send(new \App\Mail\passportMail);
-         Mail::to($employee_passport_emails)->send(new \App\Mail\passportMail);
-         Mail::to($invoice_emails)->send(new \App\Mail\invoiceMail);
+         // Mail::to($client_passport_emails)->send(new \App\Mail\passportMail);
+         // Mail::to($employee_passport_emails)->send(new \App\Mail\passportMail);
+         // Mail::to($invoice_emails)->send(new \App\Mail\invoiceMail);
         $paid_invoices = invoice::where('status',1)->get();
         $unpaid_invoices = invoice::where('status',0)->get();
         // dd($unpaid_invoices);

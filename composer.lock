@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "eefac5b6611888be761b3900bebcc479",
+    "content-hash": "f94afce09ce2ebb841c7a16165f87ac9",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -2048,6 +2048,115 @@
                 "uuid"
             ],
             "time": "2018-07-19T23:38:55+00:00"
+        },
+        {
+            "name": "sudiptpa/guid",
+            "version": "1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sudiptpa/guid.git",
+                "reference": "fcf568932d7342ab23c19eb94f7a2020a569ec86"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sudiptpa/guid/zipball/fcf568932d7342ab23c19eb94f7a2020a569ec86",
+                "reference": "fcf568932d7342ab23c19eb94f7a2020a569ec86",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "~1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Sujip\\Guid\\GuidServiceProvider"
+                    ],
+                    "aliases": {
+                        "Guid": "Sujip\\Guid\\Facades\\Guid"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Sujip\\Guid\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sujip Thapa",
+                    "email": "sudiptpa@gmail.com",
+                    "homepage": "https://sujipthapa.co",
+                    "role": "Senior Developer"
+                }
+            ],
+            "description": "A Simple GUID generator Package for PHP.",
+            "keywords": [
+                "guid"
+            ],
+            "time": "2017-10-06T14:18:56+00:00"
+        },
+        {
+            "name": "sudiptpa/ipstack",
+            "version": "v1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sudiptpa/ipstack.git",
+                "reference": "381471a275d459599f243cd43c7d8761635b488f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sudiptpa/ipstack/zipball/381471a275d459599f243cd43c7d8761635b488f",
+                "reference": "381471a275d459599f243cd43c7d8761635b488f",
+                "shasum": ""
+            },
+            "require": {
+                "php": "~7.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.4",
+                "phpro/grumphp": "^0.14.0",
+                "phpunit/phpunit": "~6.0",
+                "squizlabs/php_codesniffer": "^3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Sujip\\Ipstack\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sujip Thapa",
+                    "email": "sudiptpa@gmail.com"
+                }
+            ],
+            "description": "A simple package for IP to Location implementation with PHP.",
+            "keywords": [
+                "geoip",
+                "ip to location",
+                "ipstack"
+            ],
+            "time": "2018-07-18T16:10:08+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
