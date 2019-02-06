@@ -580,18 +580,6 @@ Dashboard
       </table>
     </div>
   </div>
-
-  <div class="row">
-    
-
-<h3>Calendar</h3>
-
-<div id='calendar'></div>
-
-
-  </div>
-
-
       @endif
   
 
