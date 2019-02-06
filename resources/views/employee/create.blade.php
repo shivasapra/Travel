@@ -196,13 +196,13 @@ Employee Registration
 					<div class="col-md-4">
 					<div class="form-group">
 						<label for="permanent_address">Permanent Home Address</label>
-						<input type="text" name='permanent_address' class="form-control"required>
+						<span id="permanent_target"><input type="text" id="Permanent" name='permanent_address' class="form-control"required></span>
 					</div>
 					</div>
 					<div class="col-md-4">
 					<div class="form-group">
 						<label for="temporary_address">Temporary Home Address</label>
-						<input type="text" name='temporary_address' class="form-control"required>
+						<span id="temporary_target"><input type="text" id="temporary" name='temporary_address' class="form-control"required></span>
 					</div>
 					</div>
 					<div class="col-md-4">
@@ -470,6 +470,24 @@ Employee Registration
 	    	if (nationality == 'british') {
 	    		var data = '';
 	        	$("#optional").html(data);   
+	    	}
+	        });
+	    });
+	    $(document).ready(function(){
+	    $("#permanent").on('keyup',function(){
+	    	var nationality = this.value;
+	    	if (nationality != '') {
+	    		var data = '<input type="text" id="temporary" name="temporary_address" class="form-control" >';
+	        	$("#temporary_target").html(data);   
+	    	}
+	        });
+	    });
+	    $(document).ready(function(){
+	    $("#temporary").on('keyup',function(){
+	    	var nationality = this.value;
+	    	if (nationality != '') {
+	    		var data = '<input type="text" id="permanent" name="permanent_address" class="form-control" >';
+	        	$("#permanent_target").html(data);   
 	    	}
 	        });
 	    });

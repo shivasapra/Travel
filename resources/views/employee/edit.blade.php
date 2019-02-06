@@ -163,13 +163,13 @@ Edit employee
 					<div class="col-md-4">
 					<div class="form-group">
 						<label for="permanent_address">Permanent Home Address</label>
-						<input type="text" value="{{$employee->permanent_address}}" name='permanent_address' class="form-control"required>
+						<input type="text" value="{{$employee->permanent_address}}" name='permanent_address' class="form-control">
 					</div>
 					</div>
 					<div class="col-md-4">
 					<div class="form-group">
 						<label for="temporary_address">Temporary Home Address</label>
-						<input type="text" value="{{$employee->temporary_address}}" name='temporary_address' class="form-control"required>
+						<input type="text" value="{{$employee->temporary_address}}" name='temporary_address' class="form-control">
 					</div>
 					</div>
 					<div class="col-md-4">
