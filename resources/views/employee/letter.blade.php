@@ -9,6 +9,7 @@ Employee's Letter
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="{{route('employees')}}"><i class="fa fa-pencil-square-o"></i>Employess</a></li>
         <li class="active"><i class="fa fa-pencil-square-o"></i> employee's letter</li>
       </ol>
     </section>
