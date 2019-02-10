@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\client;
 use Session;
 use Mail;
+use Auth;
 class clientController extends Controller
 {   
     public function __construct()
@@ -41,6 +42,7 @@ class clientController extends Controller
     public function store(Request $request)
     {
         $client = new client;
+        $client->user_id = Auth::user()->id;
         $client->first_name = $request->first_name;
         $client->last_name = $request->last_name;
         $client->address = $request->address;

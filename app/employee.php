@@ -16,4 +16,5 @@ class employee extends Model
     {
     	return $this->belongsTo('App\User');
     }
+    
 }
