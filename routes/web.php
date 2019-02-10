@@ -46,6 +46,10 @@ Route::get('/', [
     ]);
 Auth::routes();
 Route::resource('tasks', 'TasksController');
+Route::get('/task/delete/{id}',[
+			'uses'=> 'TasksController@destroy',
+			'as'=>'task.destroy'
+		]);
 Route::get('/edit/profile',[
 			'uses'=> 'UserController@index',
 			'as'=>'edit.profile'

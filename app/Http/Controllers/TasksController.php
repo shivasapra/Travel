@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Task;
+use Session;
 class TasksController extends Controller
 {   
 
@@ -88,7 +89,10 @@ class TasksController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        //
+    {   
+        $task = Task::find($id);
+        $task->delete();
+        Session::flash('success','Task Deleted Successfully');
+        return redirect()->route('home');
     }
 }

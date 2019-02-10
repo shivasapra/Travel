@@ -1,11 +1,11 @@
 @extends('layouts.frontend')
 @section('title')
-Task Create
+Task Show
 @endsection
 @section('header')
     <section class="content-header">
           <h1>
-            Task Create
+            Task Show
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -29,6 +29,7 @@ Task Create
             <th>Name</th>
             <th>Description</th>
             <th>Task Date</th>
+            <th>Action</th>
           </tr>
           </thead>
         <tbody>
@@ -41,7 +42,7 @@ Task Create
               <td>{{$task->description}}</td>
               <td>{{$task->task_date}}</td>
               <td>
-                <a href="{{route('tasks.destroy',['id'=>$task->id])}}" class="btn btn-danger btn-xs">Delete</a>
+                <a href="{{ route('task.destroy',['id'=>$task->id])}}" class="btn btn-danger btn-xs">Delete</a>
               </td>
               </tr>
             @endforeach
