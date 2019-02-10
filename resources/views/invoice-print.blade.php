@@ -180,11 +180,11 @@ Invoice
         </div>
         <!-- /.col -->
       </div><hr>
-      <p class="text-muted" style="margin-top: 10px;">
+      <p class="text-muted" style="margin-top: 10px; font-size: 10px">
         <strong>*T&C</strong><br>
         Foreign & Commonwealth Office Travel Advice: The Foreign & Commonwealth Office (FCO) issues travel advice on destinations, which includes information on passports, visas, health, safety and security and more. For more information refer to the link: <a href=" https://www.gov.uk/foreign-travel-advice"> https://www.gov.uk/foreign-travel-advice</a> New Security Requirements For Airlines : Phones, laptops and tablets larger than 16.0cm x 9.3cm x 1.5cm not allowed in the cabin on flights to the UK from Turkey, Lebanon, Egypt, Saudi Arabia, Jordan and Tunisia. For more information please see <a href="https://www.gov.uk/government/news/additional-hand-luggage-restrictions-on-some-flights-to-the-uk">https://www.gov.uk/government/news/additional-hand-luggage-restrictions-on-some-flights-to-the-uk</a>
       </p>
-      <p class="text-muted" style="margin-top: 10px;">
+      <p class="text-muted" style="margin-top: 10px; font-size: 10px">
         NOTES :
         Reconfirmation of any onward / return journey is passengers responsibility.
         Valid travel documentation such as valid passport, visa, health precautions are passengers responsibility.
@@ -200,7 +200,7 @@ Invoice
         or by clicking 
         HERE
       </p>
-      <p class="text-muted" style="margin-top: 10px;">
+      <p class="text-muted" style="margin-top: 10px; font-size: 10px">
         If you are travelling to USA, all qualified Visa Waiver Program travellers will be required to obtain electronic travel authorization prior to boarding an air or sea carrier to the United States.
         Electronic System for Travel Authorization (ESTA) to USA
         Travellers who do not receive travel authorization prior to their departure may be denied boarding, experience delays or be denied admission into the United
@@ -210,7 +210,7 @@ Invoice
         Submit your ESTA Application at 
         <a href="WWW.IATA.ORG">WWW.IATA.ORG</a>
       </p>
-      <p class="text-muted" style="margin-top: 10px;">
+      <p class="text-muted" style="margin-top: 10px; font-size: 10px">
         Note : There is no liability if airline(s) above cease to trade, unless Scheduled Airline Failure Insurance (SAFI) has been paid.
         Yours Sincerely
       </p>
