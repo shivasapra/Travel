@@ -93,6 +93,6 @@ class TasksController extends Controller
         $task = Task::find($id);
         $task->delete();
         Session::flash('success','Task Deleted Successfully');
-        return redirect()->route('home');
+        return redirect()->back();
     }
 }
