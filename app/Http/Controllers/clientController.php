@@ -42,6 +42,11 @@ class clientController extends Controller
     public function store(Request $request)
     {
         $client = new client;
+        $unique_id = 'CLD'. mt_rand(100000, 999999);
+        while (client::where('unique_id',$unique_id)->get()->count()>0) {
+           $unique_id = 'CLD'. mt_rand(100000, 999999); 
+        }
+        $client->unique_id = $unique_id;
         $client->user_id = Auth::user()->id;
         $client->first_name = $request->first_name;
         $client->last_name = $request->last_name;
@@ -53,6 +58,11 @@ class clientController extends Controller
         $client->DOB = $request->DOB;
         $client->email = $request->email;
         $client->phone = $request->phone;
+        $client->permanent = $request->permanent;
+        if ($request->permanent == 1 ){
+            $client->currency = $request->currency;
+            $client->credit_limit = $request->credit_limit;
+        }
         $client->passport = $request->passport;
         if ($request->passport == 1 ) {
             $client->passport_no = $request->passport_no;

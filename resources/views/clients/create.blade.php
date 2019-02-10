@@ -113,9 +113,20 @@ Client Registration
 					</div>
 					</div>
 				</div>
-				<hr>
-				<div id="passport">
+				<div id="passport"></div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="passport">Do you want to make this client permanent</label>
+							<input type="radio" name='permanent' required id="yespermanent" value=1>Yes
+							<input type="radio" name='permanent' required id="nopermanent" checked value=0>No
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div id="permanent"></div>
+					</div>
 				</div>
+				
 				
 				
 		</div>
@@ -127,6 +138,9 @@ Client Registration
 				</div>
 			</form>
 
+
+
+
 @stop
 @section('js')
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
@@ -134,7 +148,7 @@ Client Registration
 		
 		$(document).ready(function(){
 	    $("#yespassport").click(function(){
-	    	var data = '<div class="text-center"><h3>Passport Details</h3></div><hr><div class="row"><div class="col-md-6"><div class="form-group"><label for="passport_no">Passport Number</label><input type="text" name="passport_no" required class="form-control"></div></div><div class="col-md-6"><div class="form-group"><label for="passport_expiry_date">Passport Expire date</label><input type="date" name="passport_expiry_date" required class="form-control"></div></div></div><div class="row"><div class="col-md-6"><div class="form-group"><label for="passport_place">Place of Issue</label><input type="text" name="passport_place" required class="form-control"></div></div><div class="col-md-6"><div class="form-group"><label for="passport_issue_date">Date Of Issue</label><input type="date" name="passport_issue_date" required class="form-control"></div></div></div><div class="row"><div class="col-md-4"><div class="form-group"><label for="passport_front">Passport Front:</label><input type="file" name="passport_front" class="form-control"></div></div><div class="col-md-4"><div class="form-group"><label for="passport_back">Passport Back:</label><input type="file" name="passport_back" class="form-control"></div></div><div class="col-md-4"><div class="form-group"><label for="passport_front">Letter:</label><input type="file" name="letter" class="form-control"></div></div></div>';
+	    	var data = '<hr><div class="text-center"><h3>Passport Details</h3></div><hr><div class="row"><div class="col-md-6"><div class="form-group"><label for="passport_no">Passport Number</label><input type="text" name="passport_no" required class="form-control"></div></div><div class="col-md-6"><div class="form-group"><label for="passport_expiry_date">Passport Expire date</label><input type="date" name="passport_expiry_date" required class="form-control"></div></div></div><div class="row"><div class="col-md-6"><div class="form-group"><label for="passport_place">Place of Issue</label><input type="text" name="passport_place" required class="form-control"></div></div><div class="col-md-6"><div class="form-group"><label for="passport_issue_date">Date Of Issue</label><input type="date" name="passport_issue_date" required class="form-control"></div></div></div><div class="row"><div class="col-md-4"><div class="form-group"><label for="passport_front">Passport Front:</label><input type="file" name="passport_front" class="form-control"></div></div><div class="col-md-4"><div class="form-group"><label for="passport_back">Passport Back:</label><input type="file" name="passport_back" class="form-control"></div></div><div class="col-md-4"><div class="form-group"><label for="passport_front">Letter:</label><input type="file" name="letter" class="form-control"></div></div></div><hr>';
 	        $("#passport").html(data);   
 	        });
 	    });
@@ -142,6 +156,19 @@ Client Registration
 	    $("#nopassport").click(function(){
 	    	var data = '';
 	        $("#passport").html(data);   
+	        });
+	    });
+
+	    $(document).ready(function(){
+	    $("#yespermanent").click(function(){
+	    	var data = '<div class="row"><div class="col-md-6"><div class="form-group"><label for="currency">Currency</label><select name="currency" class="form-control" id="currency"><option value="$">$</option><option value="&#163;" selected>&#163;</option></select></div></div><div class="col-md-6"><div class="form-group"><label for="credit_limit">Credit Limit</label><input type="text" name="credit_limit" required class="form-control"></div></div></div>';
+	        $("#permanent").html(data);   
+	        });
+	    });
+	    $(document).ready(function(){
+	    $("#nopermanent").click(function(){
+	    	var data = '';
+	        $("#permanent").html(data);   
 	        });
 	    });
 	</script>

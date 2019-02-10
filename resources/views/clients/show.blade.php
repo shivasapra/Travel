@@ -23,6 +23,12 @@ client
 				<tbody>
 					<div class="row">
 						<tr>
+							<td><strong>Unique Id:</strong></td>
+							<td>{{$client->unique_id}}</td>
+						</tr>
+					</div>
+					<div class="row">
+						<tr>
 							<td><strong>First Name:</strong></td>
 							<td>{{$client->first_name}}</td>
 						</tr>
@@ -83,6 +89,20 @@ client
 							<td>{{$client->DOB}}</td>
 						</tr>
 					</div>
+					@if($client->permanent == 1)
+						<div class="row">
+						<tr>
+							<td><strong>Currency:</strong></td>
+							<td>{{$client->currency}}</td>
+						</tr>
+						</div>
+						<div class="row">
+						<tr>
+							<td><strong>Credit Limit:</strong></td>
+							<td>{{$client->credit_limit}}</td>
+						</tr>
+						</div>
+					@endif
 					@if($client->passport == 1)
 						<div class="row">
 						<tr>
