@@ -143,6 +143,10 @@ Route::get('/employee/delete/{id}',[
 		'uses' => 'employeeController@destroy',
 		'as' => 'delete.employee'
 	]);
+Route::get('/employeeletter/{id}',[
+		'uses' => 'employeeController@letter',
+		'as' => 'letter.employee'
+	]);
 Route::get('/status',[
 		'uses' => 'employeeController@status',
 		'as' => 'status'
