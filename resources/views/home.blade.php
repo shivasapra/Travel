@@ -20,11 +20,12 @@ Dashboard
         <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
             <span class="info-box-icon bg-aqua"><i class="ion ion-android-person"></i></span>
-
-            <div class="info-box-content">
+            <a href="{{route('employees')}}">
+            <div class="info-box-content" style="color: black">
               <span class="info-box-text"><strong>Employees</strong></span>
               <span class="info-box-number">{{$employees->count()}}</span>
             </div>
+            </a>
             <!-- /.info-box-content -->
           </div>
           <!-- /.info-box -->
@@ -33,11 +34,12 @@ Dashboard
         <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
             <span class="info-box-icon bg-red"><i class="fa fa-users"></i></span>
-
-            <div class="info-box-content">
+            <a href="{{route('clients')}}">
+            <div class="info-box-content" style="color: black">
               <span class="info-box-text"><strong>Clients</strong></span>
               <span class="info-box-number">{{$clients->count()}}</span>
             </div>
+          </a>
             <!-- /.info-box-content -->
           </div>
           <!-- /.info-box -->
@@ -50,11 +52,12 @@ Dashboard
         <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
             <span class="info-box-icon bg-yellow"><i class="fa fa-money"></i></span>
-
-            <div class="info-box-content">
+            <a href="{{route('expenses.get')}}">
+            <div class="info-box-content" style="color: black">
               <span class="info-box-text"><strong>Expenses</strong></span>
               <span class="info-box-number">{{$expense}}</span>
             </div>
+          </a>
             <!-- /.info-box-content -->
           </div>
           <!-- /.info-box -->
