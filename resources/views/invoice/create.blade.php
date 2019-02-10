@@ -113,7 +113,7 @@ Create Invoice
 						<td><input type="text" id="quantity" name='quantity[]' required class="form-control"></td>
 						<td><select name="currency[]" class="form-control" id="currency">
 							<option value="$">$</option>
-							<option value="&#163;">&#163;</option>
+							<option value="&#163;" selected>&#163;</option>
 							</select>
 						</td>
 						<td><input id="price" type="text" name='price[]' required class="form-control"></td>
