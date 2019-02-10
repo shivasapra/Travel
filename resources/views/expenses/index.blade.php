@@ -41,10 +41,27 @@ Expenses
                 </div>
 		<div class="box-body">
 				<div class="row">
+					
 					<div class="col-md-3">
 					<div class="form-group">
 						<label for="description">Description:</label>
-						<input type="text" name='description' required class="form-control">
+						<select name="description" id="" required  class="form-control">
+							<option value="Rent Payable">Rent Payable</option>
+							<option value="Insurance">Insurance</option>
+							<option value="Light and Heat">Light and Heat</option>
+							<option value="Repairs and Maintenance">Repairs and Maintenance</option>
+							<option value="Printing Postage and Stationery">Printing Postage and Stationery</option>
+							<option value="Advertising">Advertising</option>
+							<option value="Telephone">Telephone</option>
+							<option value="Travel Expenses">Travel Expenses</option>
+							<option value="Legal and Professional fees">Legal and Professional fees</option>
+							<option value="Accountancy">Accountancy</option>
+							<option value="Bank Charges">Bank Charges</option>
+							<option value="Credit and Charges">Credit and Charges</option>
+							<option value="General Expenses">General Expenses</option>
+							<option value="Bank Interest Paid">Bank Interest Paid</option>
+							<option value="Interest on Overdue taxation">Interest on Overdue taxation</option>
+						</select>
 					</div>
 					</div>
 					<div class="col-md-2">
