@@ -52,7 +52,10 @@ class TasksController extends Controller
      */
     public function show($id)
     {
-        //
+        $task = Task::find($id);
+        $tasks = Task::where('task_date',$task->task_date)->get();
+        // dd($tasks);
+        return view('tasks.show')->with('tasks',$tasks);
     }
 
     /**
@@ -62,7 +65,7 @@ class TasksController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
+    {   
         //
     }
 
