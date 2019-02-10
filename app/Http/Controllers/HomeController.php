@@ -99,18 +99,18 @@ class HomeController extends Controller
          // Mail::to($client_passport_emails)->send(new \App\Mail\passportMail);
          // Mail::to($employee_passport_emails)->send(new \App\Mail\passportMail);
          // Mail::to($invoice_emails)->send(new \App\Mail\invoiceMail);
-         // Mail::to($client_emails)->send(new \App\Mail\clientMail);
+         // Mail::to($client_inactive_emails)->send(new \App\Mail\clientInactiveMail);
         $paid_invoices = invoice::where('status',1)->get();
         $unpaid_invoices = invoice::where('status',0)->get();
         
         // $test = client::find(1);
         // dd($test->created_at->toDateString());
-        $client_emails = array();
+        $client_inactive_emails = array();
         $clients = client::all();
         foreach ($clients as $client) {
-            if ($client->invoice == null and $client->created_at->toDateString() == Carbon::now()->addDays(-1)->toDateString()) {
-                array_push($client_emails,$client->email);
-                dd($client_emails);
+            if ($client->invoice != null and $client->created_at->toDateString() != Carbon::now()->addDays(-1)->toDateString()) {
+                array_push($client_inactive_emails,$client->user->email);
+                dd($client_inactive_emails);
             }
         }
         return view('home')->with('employees',employee::all())
