@@ -16,30 +16,34 @@ Route::get('accept/{token}', 'InviteController@accept')->name('accept');
 Route::get('confirm/{token}', 'InviteController@confirm')->name('confirm');
 Route::get('deleteClientPassportData/{token}', 'InviteController@deleteClientPassportData')->name('deleteClientPassportData');
 
-Route::group(['middleware' => ['authorize', 'auth']], function () {
-    Route::get('/', [
+// Route::group(['middleware' => ['authorize', 'auth']], function () {
+//     Route::get('/', [
+//         'name' => 'home',
+//         'as' => 'home',
+//         'uses' => 'HomeController@index',
+//     ]);
+// });
+
+// Route::group(['middleware' => ['auth']], function () {
+//     Route::get('/authorize/{token}', [
+//         'name' => 'Authorize Login',
+//         'as' => 'authorize.device',
+//         'uses' => 'Auth\AuthorizeController@verify',
+//     ]);
+
+//     Route::post('/authorize/resend', [
+//         'name' => 'Authorize',
+//         'as' => 'authorize.resend',
+//         'uses' => 'Auth\AuthorizeController@resend',
+//     ]);
+// });
+
+
+Route::get('/', [
         'name' => 'home',
         'as' => 'home',
         'uses' => 'HomeController@index',
     ]);
-});
-
-Route::group(['middleware' => ['auth']], function () {
-    Route::get('/authorize/{token}', [
-        'name' => 'Authorize Login',
-        'as' => 'authorize.device',
-        'uses' => 'Auth\AuthorizeController@verify',
-    ]);
-
-    Route::post('/authorize/resend', [
-        'name' => 'Authorize',
-        'as' => 'authorize.resend',
-        'uses' => 'Auth\AuthorizeController@resend',
-    ]);
-});
-
-
-
 Auth::routes();
 Route::resource('tasks', 'TasksController');
 Route::get('/edit/profile',[
