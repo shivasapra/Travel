@@ -189,4 +189,8 @@ class clientController extends Controller
         Session::flash('success','Client Deleted Successfully');
         return redirect()->route('clients');
     }
+
+    public function status(){
+        return view('status');
+    }
 }

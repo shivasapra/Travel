@@ -46,6 +46,10 @@ Route::get('/', [
     ]);
 Auth::routes();
 Route::resource('tasks', 'TasksController');
+Route::get('/client/status',[
+			'uses'=> 'clientController@status',
+			'as'=>'clientStatus'
+		]);
 Route::get('/letter',[
 			'uses'=> 'HomeController@letter',
 			'as'=>'letter'
