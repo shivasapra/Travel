@@ -20,8 +20,8 @@ Employee's Letter
 		<div class="box-body" style="margin-left: 20px">
 			<div class="text-center">
 				<img src="{{asset('/logo.jpg')}}" style="width: 250px; height: 70px" alt="User Image">
-				<h5><strong>SOUTHALL ENTERPRISE CENTRE, UNIT 21 A bRIDGE ROAD, SOUTHALL</strong></h5>
-				<h5><strong>MIDDLESEX UB2 4AE, UNITED KINGDOM</strong></h5>
+				<h5><strong>62 King Street,SOUTHALL</strong></h5>
+				<h5><strong>Middlesex UB2 4DB, UNITED KINGDOM</strong></h5>
 			</div>
 			<div class="row">
 				<div class="col-md-6">

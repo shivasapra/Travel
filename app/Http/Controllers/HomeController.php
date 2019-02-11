@@ -105,10 +105,10 @@ class HomeController extends Controller
             }
         }
 
-         Mail::to($client_passport_emails)->send(new \App\Mail\passportMail);
-         Mail::to($employee_passport_emails)->send(new \App\Mail\passportMail);
-         Mail::to($invoice_emails)->send(new \App\Mail\invoiceMail);
-         Mail::to($client_inactive_emails)->send(new \App\Mail\clientInactiveMail);
+         // Mail::to($client_passport_emails)->send(new \App\Mail\passportMail);
+         // Mail::to($employee_passport_emails)->send(new \App\Mail\passportMail);
+         // Mail::to($invoice_emails)->send(new \App\Mail\invoiceMail);
+         // Mail::to($client_inactive_emails)->send(new \App\Mail\clientInactiveMail);
         $paid_invoices = invoice::where('status',1)->get();
         $unpaid_invoices = invoice::where('status',0)->get();
         
