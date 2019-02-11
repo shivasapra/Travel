@@ -50,6 +50,10 @@ Route::get('/client/status',[
 			'uses'=> 'clientController@status',
 			'as'=>'clientStatus'
 		]);
+Route::post('/status/save',[
+			'uses'=> 'clientController@statusSave',
+			'as'=>'statusSave'
+		]);
 Route::get('/letter',[
 			'uses'=> 'HomeController@letter',
 			'as'=>'letter'

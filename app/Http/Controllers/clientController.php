@@ -193,4 +193,16 @@ class clientController extends Controller
     public function status(){
         return view('status');
     }
+    public function statusSave(Request $request){
+        $client = client::where('unique_id',$request->client_id)->get();
+        $client[0]->status = $request->status;
+        $client[0]->save();
+        $contactEmail = $client[0]->email;
+        $data = array('status'=>$request->status);
+        Mail::send('emails.status', $data, function($message) use ($contactEmail)
+        {  
+            $message->to($contactEmail);
+        });
+        return redirect()->back();
+    }
 }

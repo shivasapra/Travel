@@ -158,6 +158,14 @@ client
 						</tr>
 						</div>
 					@endif
+					@if($client->status != null)
+						<div class="row">
+						<tr>
+							<td><strong>Status:</strong></td>
+							<td>{{$client->status}}</td>
+						</tr>
+						</div>
+					@endif
 				</tbody>
 			</table>
 		</div>

@@ -14,7 +14,7 @@ Status
     </section>
 @stop
 @section('content')
-<form action="" method="post">
+<form action="{{route('statusSave')}}" method="post">
   @csrf
 	<div class="box box-info">
     	<div class="box-body">
@@ -290,13 +290,17 @@ Status
     			</div>
     			<div class="col-md-4">
     				<label for="status">Status:</label>
-    				<select name="status" class="form-control">
+    				
     					<div id="status"></div>
-    				</select>
+    				
     			</div>
     		</div>
     	</div>
 	</div>
+	<div class="text-center">
+		<button type="submit" class="btn btn-xs btn-success">Send</button>
+	</div>
+	
 </form>
 @stop
 @section('js')
@@ -305,7 +309,9 @@ Status
 	$(document).ready(function(){
     $("#country").on('change',function(){
     	var value = this.value;
-		var data = '<option value="Your'+value+'Visa and E_Ticket is Ready for Collection">Your '+value+' Visa and E_Ticket is Ready for Collection</option><option '+value+'="Your '+value+' Visa application has been submitted successfully today">Your '+value+' Visa application has been submitted successfully today</option><option '+value+'="Your Chinese’s Business Visa application has been submitted successfully today">Your Chinese’s Business Visa application has been submitted successfully today</option><option '+value+'="Your China Visa is Ready for Collection">Your China Visa is Ready for Collection</option><option '+value+'="Your '+value+' Visa is Ready for Collection">Your '+value+' Visa is Ready for Collection</option><option '+value+'="Your '+value+' Visa is Ready for Collection">Your '+value+' Visa is Ready for Collection</option><option '+value+'="Your '+value+' Visa and E_Ticket is Ready for Collection">Your '+value+' Visa and E_Ticket is Ready for Collection</option>';
+		var data = '<select name="status" class="form-control"><option value="Your '+value+'Visa and E_Ticket is Ready for Collection">Your '+value+' Visa and E_Ticket is Ready for Collection</option><option '+value+'="Your '+value+' Visa application has been submitted successfully today">Your '+value+' Visa application has been submitted successfully today</option><option '+value+'="Your Chinese’s Business Visa application has been submitted successfully today">Your Chinese’s Business Visa application has been submitted successfully today</option><option '+value+'="Your China Visa is Ready for Collection">Your China Visa is Ready for Collection</option><option '+value+'="Your '+value+' Visa is Ready for Collection">Your '+value+' Visa is Ready for Collection</option><option '+value+'="Your '+value+' Visa is Ready for Collection">Your '+value+' Visa is Ready for Collection</option><option '+value+'="Your '+value+' Visa and E_Ticket is Ready for Collection">Your '+value+' Visa and E_Ticket is Ready for Collection</option></select>';
+    	// console.log(data);
+		$("#status").html(data); 
 	});
 });
 	</script>
