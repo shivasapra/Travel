@@ -46,6 +46,14 @@ Route::get('/', [
     ]);
 Auth::routes();
 Route::resource('tasks', 'TasksController');
+Route::get('/letter',[
+			'uses'=> 'HomeController@letter',
+			'as'=>'letter'
+		]);
+Route::post('/send/letter',[
+			'uses'=> 'HomeController@sendLetter',
+			'as'=>'sendLetter'
+		]);
 Route::get('/task/delete/{id}',[
 			'uses'=> 'TasksController@destroy',
 			'as'=>'task.destroy'

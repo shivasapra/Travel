@@ -267,6 +267,7 @@
             <li><a href="{{route('slip.generate')}}"><i class="fa fa-circle-o"></i>Generate Salary Slip</a></li>
             <li><a href="{{route('invoice')}}"><i class="fa fa-circle-o"></i>Invoice Generation</a></li>
             <li><a href="{{route('tax')}}"><i class="fa fa-circle-o"></i>VAT</a></li>
+            <li><a href="{{route('letter')}}"><i class="fa fa-circle-o"></i>Generate Letter</a></li>
           </ul>
         </li>
         @else

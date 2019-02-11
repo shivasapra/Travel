@@ -257,4 +257,18 @@ class HomeController extends Controller
                             ->with('month_start_date',$month_start_date)
                             ->with('date',$date);
     }
+    public function letter(){
+        return view('letter')->with('date',Carbon::now()->toDateString());
+    }
+
+    public function sendLetter(Request $request){
+        
+        $contactEmail = $request->email_to;
+        $data = array('content'=>$request->content);
+        Mail::send('emails.letter', $data, function($message) use ($contactEmail)
+        {  
+            $message->to($contactEmail);
+        });
+        return redirect()->back();
+    }
 }
