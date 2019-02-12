@@ -31,7 +31,7 @@ Client Registration
 
 
 
-			<form action="{{route('store.client')}}" method="post" enctype="multipart/form-data">
+			<form action="{{route('store.client')}}" method="post" enctype="multipart/form-data" name="myForm">
 				@csrf
 		<div class="box box-primary" id="action">
 		<div class="box-body">
@@ -76,7 +76,7 @@ Client Registration
 					<div class="col-md-6">
 					<div class="form-group">
 						<label for="postal_code">Postal Code</label>
-						<input id="postal_code" type="text" name='postal_code' required class="form-control">
+						<input id="postal_code" type="text" name='postal_code' required class="form-control" onkeyup="fun()">
 					</div>
 					</div>
 				</div>
@@ -171,6 +171,23 @@ Client Registration
 	        $("#permanent").html(data);   
 	        });
 	    });
+	    function fun() {
+			 var x = document.forms["myForm"]["postal_code"].value;
+			 var Url = "http://api.postcodes.io/postcodes/" +x;
+			 var xhr = new XMLHttpRequest();
+			 xhr.open('GET', Url, true);
+			 xhr.send();
+			 xhr.onreadystatechange = processRequest;
+			 function processRequest(e) {
+			 if (xhr.readyState == 4 && xhr.status == 200) {
+			 // alert(xhr.responseText);
+			 var response1 = JSON.parse(xhr.responseText);
+			 document.getElementById("city").value = response1.result.admin_ward;
+			 document.getElementById("country").value = response1.result.country;
+			 document.getElementById("county").value = response1.result.admin_county;
+			 }
+			 }
+			 }
 	</script>
 	{{-- <script>
 		$(document).ready(function(){
@@ -182,4 +199,5 @@ Client Registration
     	});
 	});
 	</script> --}}
+	
 @stop
