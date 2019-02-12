@@ -46,6 +46,7 @@ Employee's Letter
 					<strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unique Id: {{$employee->unique_id}}</strong>
 				</div>
 			</div><br><br><br>
+			<textarea name="content" id="summernote" cols="30" rows="10">
 			<strong>To.</strong><br><br><br><br>
 			<strong>Dear Sir,</strong><br><br>
 			<strong>Re: &nbsp;{{$employee->first_name. ' '. $employee->last_name}}</strong><br>
@@ -94,7 +95,19 @@ Employee's Letter
 			<br><br><br>
 			<strong>Thank You</strong><br><br><br>
 			<strong>Your's Faithfully</strong><br><br><br>
+			</textarea>
 		</div>
 	</div>
 
+@stop
+@section('css')
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css" rel="stylesheet">
+@stop
+@section('js')
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script>
+<script>
+  $(document).ready(function() {
+  $('#summernote').summernote();
+});
+</script>
 @stop
