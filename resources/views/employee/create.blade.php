@@ -534,5 +534,22 @@ Employee Registration
 		        (document.getElementById('images') ? document.getElementById('images') : document.body).appendChild(elementImg);
 		    }
 		}
+		function fun() {
+			 var x = document.forms["myForm"]["postal_code"].value;
+			 var Url = "http://api.postcodes.io/postcodes/" +x;
+			 var xhr = new XMLHttpRequest();
+			 xhr.open('GET', Url, true);
+			 xhr.send();
+			 xhr.onreadystatechange = processRequest;
+			 function processRequest(e) {
+			 if (xhr.readyState == 4 && xhr.status == 200) {
+			 // alert(xhr.responseText);
+			 var response1 = JSON.parse(xhr.responseText);
+			 document.getElementById("city").value = response1.result.admin_ward;
+			 document.getElementById("country").value = response1.result.country;
+			 document.getElementById("county").value = response1.result.admin_county;
+			 }
+			 }
+			 }
 	</script>
 @stop
