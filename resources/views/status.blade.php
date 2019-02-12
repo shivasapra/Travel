@@ -16,7 +16,7 @@ Client Status
           <span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title">Search client</h4>
       </div>
-      <form action="" method="post">
+      <form action="{{route('searchClient')}}" method="post">
         @csrf
       <div class="modal-body">
           <label for="client_name">Client Name</label>
@@ -41,12 +41,53 @@ Client Status
 @section('content')
 <form action="{{route('statusSave')}}" method="post">
   @csrf
+  	<div class="box box-info">
+    	<div class="box-body">
+    		@if($clients->count()>0)
+    		@foreach($clients as $client)
+    		<table class="table table-hover mb-0">
+                    <thead>
+                      <tr>
+                        <th>Sno.</th>
+                        <th>Name</th>
+                        <th>Client Id</th>
+                        <th>Country</th>
+                        <th>Postal Code</th>
+                        <th>Contact</th>
+                        <th>DOB</th>
+                        <th>Email</th>
+                      </tr>
+                    	</thead>
+                    <tbody>
+                    	@if($clients->count()>0)
+                    	<?php $i = 1; ?>
+	                    	@foreach($clients as $client)
+	                    	<tr>
+	                    		<td>{{$i++}}</td>
+	                    		<td>{{$client->first_name.' '.$client->last_name}}</td>
+	                    		<td><input id="unique" type="text" value="{{$client->unique_id}}" readonly></td>
+	                    		<td>{{$client->country}}</td>
+	                    		<td>{{$client->postal_code}}</td>
+	                    		<td>{{$client->phone}}</td>
+	                    		<td>{{$client->DOB}}</td>
+	                    		<td>{{$client->email}}</td>
+	                    		</tr>
+	                    	@endforeach
+                    	@endif
+                    </tbody>
+            </table>
+    		@endforeach
+    			
+    		@endif
+    	</div>
+	</div>
 	<div class="box box-info">
     	<div class="box-body">
+    		
     		<div class="row">
     			<div class="col-md-4">
     				<label for="client_id">Client Id:</label>
-    				<input type="text" name="client_id" required class="form-control">
+    				<input type="text" id="clientId" name="client_id" required class="form-control">
     			</div>
     			<div class="col-md-4">
     				<label for="country">Select Country:</label>
@@ -337,6 +378,9 @@ Client Status
 		var data = '<select name="status" class="form-control"><option value="Your '+value+'Visa and E_Ticket is Ready for Collection">Your '+value+' Visa and E_Ticket is Ready for Collection</option><option '+value+'="Your '+value+' Visa application has been submitted successfully today">Your '+value+' Visa application has been submitted successfully today</option><option '+value+'="Your Chinese’s Business Visa application has been submitted successfully today">Your Chinese’s Business Visa application has been submitted successfully today</option><option '+value+'="Your China Visa is Ready for Collection">Your China Visa is Ready for Collection</option><option '+value+'="Your '+value+' Visa is Ready for Collection">Your '+value+' Visa is Ready for Collection</option><option '+value+'="Your '+value+' Visa is Ready for Collection">Your '+value+' Visa is Ready for Collection</option><option '+value+'="Your '+value+' Visa and E_Ticket is Ready for Collection">Your '+value+' Visa and E_Ticket is Ready for Collection</option></select>';
     	// console.log(data);
 		$("#status").html(data); 
+	});
+	$("#unique").on('click',function(){
+		document.getElementById('clientId').value = this.value;
 	});
 });
 	</script>

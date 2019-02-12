@@ -191,7 +191,8 @@ class clientController extends Controller
     }
 
     public function status(){
-        return view('status');
+        $clients =[];
+        return view('status')->with('clients',$clients);
     }
     public function statusSave(Request $request){
         $client = client::where('unique_id',$request->client_id)->get();
@@ -204,5 +205,10 @@ class clientController extends Controller
             $message->to($contactEmail);
         });
         return redirect()->back();
+    }
+
+    public function search(Request $request){
+        $clients = client::where('first_name', 'like', '%'.request('client_name').'%')->get();
+        return view('status')->with('clients',$clients);
     }
 }

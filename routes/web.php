@@ -37,8 +37,15 @@ Route::get('deleteClientPassportData/{token}', 'InviteController@deleteClientPas
 //         'uses' => 'Auth\AuthorizeController@resend',
 //     ]);
 // });
-
-
+Route::post('/search/client',[
+		'uses' => 'clientController@search',
+		'as' => 'searchClient'
+	]);
+// Route::get('/search/client',['as'=>'searchClient'],function(){
+// 	dd(true);
+// 	$clients = App\client::where('first_name', 'like', '%'.request('client_name').'%')->get();
+// 	return view('status')->with('clients',$clients);
+// });
 Route::get('/', [
         'name' => 'home',
         'as' => 'home',
