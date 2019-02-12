@@ -41,9 +41,9 @@ Client Status
 @section('content')
 <form action="{{route('statusSave')}}" method="post">
   @csrf
+	@if($clients->count()>0)
   	<div class="box box-info">
     	<div class="box-body">
-    		@if($clients->count()>0)
     		@foreach($clients as $client)
     		<table class="table table-hover mb-0">
                     <thead>
@@ -78,9 +78,9 @@ Client Status
             </table>
     		@endforeach
     			
-    		@endif
     	</div>
 	</div>
+    @endif	
 	<div class="box box-info">
     	<div class="box-body">
     		

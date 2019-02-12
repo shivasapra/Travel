@@ -191,7 +191,7 @@ class clientController extends Controller
     }
 
     public function status(){
-        $clients =[];
+        $clients =client::where('passport',2)->get();
         return view('status')->with('clients',$clients);
     }
     public function statusSave(Request $request){
