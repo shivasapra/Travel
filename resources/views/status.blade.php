@@ -1,12 +1,37 @@
 @extends('layouts.frontend')
 @section('title')
-Status
+Client Status
 @endsection
 @section('header')
 	<section class="content-header">
       <h1>
-        Status
+        Client Status
+      <button type="button" data-toggle="modal" data-target="#modal-info" class="btn btn-sm btn-info">Search Client&nbsp;&nbsp;&nbsp;<i class="fa fa-search"></i></button>
       </h1>
+      <div class="modal fade" id="modal-info">
+  		<div class="modal-dialog">
+   			<div class="modal-content">
+      <div class="modal-header" style="color:white;font-weight:500;background-color:#0066FF;">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Search client</h4>
+      </div>
+      <form action="" method="post">
+        @csrf
+      <div class="modal-body">
+          <label for="client_name">Client Name</label>
+          <input type="text" name="client_name" class="form-control" />
+      </div>
+      <div class="modal-footer" style="color:white;font-weight:500;background-color:#0066FF;">
+        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-outline">Search</button>
+      </div>
+      </form>
+    		</div>
+  		</div>
+	</div>
+
+      
       <ol class="breadcrumb">
         <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active"><i class="fa fa-pencil-square-o"></i>Status</li>
