@@ -67,7 +67,7 @@ Expenses
 					<div class="col-md-2">
 					<div class="form-group">
 						<label for="date">Date:</label>
-						<input type="date" name='date' max="{{$date}}" required  class="form-control">
+						<input type="date" name='date' max="{{$date}}" value="{{$date}}" required  class="form-control">
 					</div>
 					</div>
 					<div class="col-md-3">

@@ -42,13 +42,13 @@ Auto Deduction
 					<div class="col-md-2">
 					<div class="form-group">
 						<label for="start_date">Start Date:</label>
-						<input type="date" name='start_date' min="{{$date}}" required  class="form-control">
+						<input type="date" name='start_date' min="{{$date}}" value="{{$date}}" required  class="form-control">
 					</div>
 					</div>
 					<div class="col-md-2">
 					<div class="form-group">
 						<label for="end_date">End Date:</label>
-						<input type="date" name='end_date' required min="{{$date}}" class="form-control">
+						<input type="date" name='end_date' required min="{{$date}}" value="{{$date}}" class="form-control">
 					</div>
 					</div>
 					<div class="col-md-2">

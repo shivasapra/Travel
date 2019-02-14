@@ -71,7 +71,10 @@ class InvoiceController extends Controller
      */
     public function create()
     {   
-        
+        $dt = Carbon::now();
+        $dt->timezone('Asia/Kolkata');
+        $date_today = $dt->timezone('Europe/London');
+        $date = $date_today->toDateString();
         $invoice = invoice::where('invoice_no','CLD0001')->get();
         if ($invoice->count()>0) {
             $latest = invoice::orderBy('created_at','desc')->take(1)->get();
@@ -96,7 +99,8 @@ class InvoiceController extends Controller
                                     ->with('airlines',airlines::all())
                                     ->with('invoice_no',$invoice_no)
                                     ->with('clients',client::all())
-                                    ->with('json',$json);
+                                    ->with('json',$json)
+                                    ->with('date',$date);
     }
 
     /**

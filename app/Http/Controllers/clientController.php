@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\client;
 use Session;
 use Mail;
+use Carbon\Carbon;
 use Auth;
 class clientController extends Controller
 {   
@@ -29,8 +30,12 @@ class clientController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-         return view('clients.create');
+    {   
+        $dt = Carbon::now();
+        $dt->timezone('Asia/Kolkata');
+        $date_today = $dt->timezone('Europe/London');
+        $date = $date_today->toDateString();
+         return view('clients.create')->with('date',$date);
     }
 
     /**

@@ -92,7 +92,7 @@ Employee Registration
 					<div class="col-md-4">
 					<div class="form-group">
 						<label for="DOB">Date of Birth</label>
-						<input type="date" name='DOB' max="{{$date}}" class="form-control"required>
+						<input type="date" name='DOB' max="{{$date}}" value="{{$date}}" class="form-control"required>
 					</div>
 					</div>
 					<div class="col-md-4">
@@ -167,7 +167,7 @@ Employee Registration
 						<div class="col-md-4">
 						<div class="form-group">
 							<label for="visa_expired">Visa Expiry Date</label>
-							<input type="date" name='visa_expired' class="form-control"required>
+							<input type="date" name='visa_expired' value="{{$date}}" class="form-control"required>
 						</div>
 						</div>
 						<div class="col-md-4">
@@ -270,7 +270,7 @@ Employee Registration
 					<div class="col-md-4">
 					<div class="form-group">
 						<label for="hiring_date">Hiring Date</label>
-						<input type="date" name='hiring_date' class="form-control">
+						<input type="date" name='hiring_date' value="{{$date}}" class="form-control">
 					</div>
 					</div>
 					<div class="col-md-4">
@@ -453,7 +453,7 @@ Employee Registration
 		
 		$(document).ready(function(){
 	    $("#yespassport").click(function(){
-	    	var data = '<div class="box box-info"><div class="box-header with-border"><h3 class="box-title"><strong>{{"Passport Information"}}</strong></h3><div class="box-tools pull-right"><button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button><button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button></div></div><div class="box-body"><div class="row"><div class="col-md-6"><div class="form-group"><label for="passport_no">Passport Number</label><input type="text" name="passport_no" required class="form-control"></div></div><div class="col-md-6"><div class="form-group"><label for="passport_expiry_date">Passport Expire date</label><input type="date" name="passport_expiry_date" required class="form-control"></div></div></div><div class="row"><div class="col-md-6"><div class="form-group"><label for="passport_place">Place of Issue</label><input type="text" name="passport_place" required class="form-control"></div></div><div class="col-md-6"><div class="form-group"><label for="passport_issue_date">Date Of Issue</label><input type="date" name="passport_issue_date" required class="form-control"></div></div></div><div class="row"><div class="col-md-6"><div class="form-group"><label for="passport_front">Passport Front:</label><input type="file" name="passport_front" class="form-control"></div></div><div class="col-md-6"><div class="form-group"><label for="passport_back">Passport Back:</label><input type="file" name="passport_back" class="form-control"></div></div></div></div></div>';
+	    	var data = '<div class="box box-info"><div class="box-header with-border"><h3 class="box-title"><strong>{{"Passport Information"}}</strong></h3><div class="box-tools pull-right"><button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button><button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button></div></div><div class="box-body"><div class="row"><div class="col-md-6"><div class="form-group"><label for="passport_no">Passport Number</label><input type="text" name="passport_no" required class="form-control"></div></div><div class="col-md-6"><div class="form-group"><label for="passport_expiry_date">Passport Expire date</label><input type="date" name="passport_expiry_date" value="{{$date}}" required class="form-control"></div></div></div><div class="row"><div class="col-md-6"><div class="form-group"><label for="passport_place">Place of Issue</label><input type="text" name="passport_place" required class="form-control"></div></div><div class="col-md-6"><div class="form-group"><label for="passport_issue_date">Date Of Issue</label><input type="date" name="passport_issue_date" value="{{$date}}" required class="form-control"></div></div></div><div class="row"><div class="col-md-6"><div class="form-group"><label for="passport_front">Passport Front:</label><input type="file" name="passport_front" class="form-control"></div></div><div class="col-md-6"><div class="form-group"><label for="passport_back">Passport Back:</label><input type="file" name="passport_back" class="form-control"></div></div></div></div></div>';
 	        $("#passport").html(data);   
 	        });
 	    });

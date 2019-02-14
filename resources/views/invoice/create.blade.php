@@ -65,7 +65,7 @@ Create Invoice
 				<div class="col-md-4">
 				<div class="form-group">
 					<input style="color:white;font-weight:500;background-color:#0066FF;" type="text" name='invoice_no' readonly class="form-control" value="{{$invoice_no}}">
-					<input type="date" name='invoice_date' placeholder="Select Invoice date" required class="form-control">
+					<input type="date" name='invoice_date' value="{{$date}}" placeholder="Select Invoice date" required class="form-control">
 				</div>
 				</div>
 			</div>
