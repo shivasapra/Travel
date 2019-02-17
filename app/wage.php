@@ -12,4 +12,9 @@ class wage extends Model
     {
     	return $this->belongsTo('App\employee');
     }
+
+    public function wageLog()
+    {
+    	return $this->hasMany('App\wageLog');
+    }
 }
