@@ -17,12 +17,11 @@ class CreateWagesTable extends Migration
             $table->increments('id');
             $table->integer('employee_id');
             $table->string('unique_id');
-            $table->Time('login');
-            $table->Time('logout')->nullable();
             $table->Date('date');
-            $table->string('hourly');
-            $table->string('hours')->nullable();
-            $table->string('wage')->nullable();
+            $table->integer('no_of_logins')->nullable();
+            $table->string('total_hours')->nullable();
+            $table->string('hourly')->nullable();
+            $table->string('today_wage')->nullable();
             $table->timestamps();
         });
     }

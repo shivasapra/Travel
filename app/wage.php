@@ -6,8 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class wage extends Model
 {
-    protected $fillable = ['employee_id','unique_id','login','logout','date','hourly',
-    'wage','hours'];
+    protected $fillable = ['id','employee_id','unique_id','date','no_of_logins','total_hours','hourly','today_wage'];
 
     public function employee()
     {
