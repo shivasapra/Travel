@@ -110,26 +110,15 @@ Route::get('/session',[
 		'uses' => 'wageController@session',
 		'as' => 'session'
 	]);
-Route::post('/testLogin',[
-		'uses' => 'wageController@testLogin',
-		'as' => 'testLogin'
+Route::post('/Login',[
+		'uses' => 'wageController@Login',
+		'as' => 'Login'
 	]);
-Route::post('/testLogout',[
-		'uses' => 'wageController@testLogout',
-		'as' => 'testLogout'
+Route::post('/Logout',[
+		'uses' => 'wageController@Logout',
+		'as' => 'Logout'
 	]);
-Route::post('/logs',[
-		'uses' => 'wageController@logs',
-		'as' => 'logs'
-	]);
-Route::post('/log/login/{id}',[
-		'uses' => 'wageController@login',
-		'as' => 'log.login'
-	]);
-Route::get('/log/logout/{id}',[
-		'uses' => 'wageController@logout',
-		'as' => 'log.logout'
-	]);
+
 
 Route::get('/wage',[
 		'uses' => 'wageController@index',

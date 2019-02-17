@@ -40,7 +40,7 @@ class wageController extends Controller
          }
         return view('wage.session')->with('latest_wageLog',$latest_wageLog);
     }
-    public function testLogout(Request $request){
+    public function Logout(Request $request){
         if (Hash::check($request->password,Auth::user()->password)) {
             $wageLog = wageLog::find($request->wageLogId);
             $wageLog->logout_time = Carbon::now()->totimeString();
@@ -57,7 +57,7 @@ class wageController extends Controller
         }
         dd($wageLog);
     }
-    public function testLogin(Request $request){
+    public function Login(Request $request){
         if (Hash::check($request->password,Auth::user()->password)) {
              $employee = Auth::user()->employee[0];
              $today_wage = wage::where('employee_id',$employee->id)
@@ -101,77 +101,7 @@ class wageController extends Controller
         return redirect()->route('home');
     }
 
-    public function logs(Request $request){
-        $dt = Carbon::now();
-        $dt->timezone('Europe/London');
-        $date = $dt->toDateString();
-        $emp = employee::where('unique_id',$request->unique)->get();
-        if ($emp->count() == 0){
-            return view('wage.notFound');
-        }
-        $wages = wage::where('unique_id',$request->unique)->where('date',$date)->take(1)->get();
-        if($wages->count()>0){
-            $wage = wage::find($wages[0]->id);
-            if($wage->login and !$wage->logout){
-                return view('wage.logs')->with('wage',$wage);
-            }
-            elseif($wage->login and $wage->logout)
-            {   
-                return view('wage.logged');
-            }
-        }
-        $wage = 'No';
-        return view('wage.logs')->with('id',$request->unique)
-                                ->with('wage',$wage);
-    }
-
-    public function login(Request $request,$id){
-        $wage = new wage;
-        $employee = employee::where('unique_id',$id)->take(1)->get();
-        // dd($employee[0]->id);
-        $dt = Carbon::now();
-        $dt->timezone('Europe/London');
-        $date = $dt->toDateString();
-        $time = $dt->toTimeString();
-        $wage->employee_id = $employee[0]->id;
-        $wage->unique_id = $employee[0]->unique_id;
-        $wage->login = $time;
-        $wage->date = $date;
-        $wage->hourly = $employee[0]->currency.$employee[0]->rate;
-        $wage->save();
-        $logged_in = wage::where('date',$date)->where('login', '!=', null)->where('logout',null)->get();
-        $logged_out = wage::where('date',$date)->where('login', '!=', null)->where('logout', '!=',null)->get();
-
-
-        return view('home')->with('logged_in',$logged_in)
-                            ->with('logged_out',$logged_out)
-                            ->with('date',$date);
-        
-    }
-
-    public function logout(Request $request,$id){
-        $dt = Carbon::now();
-        $dt->timezone('Europe/London');
-        $date = $dt->toDateString();
-        $logout = $dt->toTimeString();
-        $wage = wage::find($id);
-        $hourly = $wage->rate;
-        $wage->logout = $logout;
-        $time1 = substr($logout,0,2);
-        $time2 = substr($wage->login,0,2);
-        $diff = $time1-$time2;
-        $total = $diff * $hourly;
-        $wage->hours = $diff;
-        $wage->wage = $total;
-        $wage->save();
-        $logged_in = wage::where('date',$date)->where('login', '!=', null)->where('logout',null)->get();
-        $logged_out = wage::where('date',$date)->where('login', '!=', null)->where('logout', '!=',null)->get();
-
-
-        return view('home')->with('logged_in',$logged_in)
-                            ->with('logged_out',$logged_out)
-                            ->with('date',$date);
-    }
+    
 
     public function index()
     {   

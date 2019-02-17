@@ -27,9 +27,9 @@ Session
     <!-- lockscreen credentials (contains the form) -->
     <form class="lockscreen-credentials" method="post" 
       @if($latest_wageLog != null and $latest_wageLog->logout_time == null)
-        action="{{route('testLogout')}}"
+        action="{{route('Logout')}}"
       @else
-        action="{{route('testLogin')}}"
+        action="{{route('Login')}}"
       @endif
     > 
       @csrf
