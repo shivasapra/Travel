@@ -9,6 +9,7 @@ use App\wage;
 use App\wagelog;
 use App\employee;
 use Carbon\Carbon;
+use Session;
 class wageController extends Controller
 {   
 
@@ -55,7 +56,8 @@ class wageController extends Controller
             $wage->today_wage =  $wage->total_hours * $wage->hourly;
             $wage->save();
         }
-        dd($wageLog);
+        Session::flash('success','Session Ends');
+        return redirect()->back();
     }
     public function Login(Request $request){
         if (Hash::check($request->password,Auth::user()->password)) {
@@ -74,7 +76,6 @@ class wageController extends Controller
                 $wageLog->save();
                 $today_wage[0]->no_of_logins = $today_wage[0]->no_of_logins + 1;
                 $today_wage[0]->save();
-                dd('login karo');
              }
              else {
                 $wage = new wage;
@@ -95,10 +96,11 @@ class wageController extends Controller
             }
          }
          else{
-            dd('check password');
+            Session::flash('warning','Wrong Password');
+            return redirect()->back();
         }
-        dd('bahar');
-        return redirect()->route('home');
+        Session::flash('success','Session Started');
+        return redirect()->back();
     }
 
     
