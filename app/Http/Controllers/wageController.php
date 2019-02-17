@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use Hash;
 use App\wage;
+use App\wagelog;
 use App\employee;
 use Carbon\Carbon;
 class wageController extends Controller
@@ -28,12 +29,38 @@ class wageController extends Controller
         return view('wage.session');
     }
 
-    public function test(Request $request){
+    public function testLogin(Request $request){
         if (Hash::check($request->password,Auth::user()->password)) {
-             dd(true);
+             $employee = Auth::user()->employee[0];
+             $today_wage = wage::where('employee_id',$employee->id)
+                            ->where('date',Carbon::now()->toDateString())->get();
+             if ($today_wage->count()>0) {
+                $today_wageLogs = wageLog::where('wage_id',$today_wage[0]->id)->get();
+                $latest_wageLog = wageLog::where('wage_id',$today_wage[0]->id)
+                                            ->orderBy('created_at','desc')
+                                            ->first();
+                dd($latest_wageLog);
+             }
+             else {
+                $wage = new wage;
+                $wage->employee_id = $employee->id;
+                $wage->unique_id = $employee->unique_id;
+                $wage->date = Carbon::now()->toDateString();
+                $wage->no_of_logins = 1;
+                $wage->hourly = $employee->rate;
+                $wage->save();
 
+                $wageLog = new wageLog;
+                $wageLog->wage_id = $wage->id;
+                $wageLog->date = Carbon::now()->toDateString();
+                $wageLog->login_time = Carbon::now()->totimeString();
+                $wageLog->save();
+            }
          }
-        dd(false);
+         else{
+            dd('check password');
+        }
+        dd('bahar');
         return redirect()->route('home');
     }
 

@@ -25,7 +25,7 @@ Session
     <!-- /.lockscreen-image -->
 
     <!-- lockscreen credentials (contains the form) -->
-    <form class="lockscreen-credentials" method="post" action="{{route('test')}}">
+    <form class="lockscreen-credentials" method="post" action="{{route('testLogin')}}">
       @csrf
       <div class="input-group">
         <input type="text" hidden name="email" value="{{Auth::user()->email}}">
