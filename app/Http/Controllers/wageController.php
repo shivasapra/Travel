@@ -54,6 +54,17 @@ class wageController extends Controller
              $today_wage = wage::where('employee_id',$employee->id)
                             ->where('date',Carbon::now()->toDateString())->get();
              if ($today_wage->count()>0) {
+                $today_wageLogs = wageLog::where('wage_id',$today_wage[0]->id)->get();
+                $latest_wageLog = wageLog::where('wage_id',$today_wage[0]->id)
+                                            ->orderBy('created_at','desc')
+                                            ->first();
+                $wageLog = new wageLog;
+                $wageLog->wage_id = $today_wage[0]->id;
+                $wageLog->date = Carbon::now()->toDateString();
+                $wageLog->login_time = Carbon::now()->totimeString();
+                $wageLog->save();
+                $today_wage[0]->no_of_logins = $today_wage[0]->no_of_logins + 1;
+                $today_wage[0]->save();
                 dd('login karo');
              }
              else {
