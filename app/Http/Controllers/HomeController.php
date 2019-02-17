@@ -8,7 +8,7 @@ use App\client;
 use App\expenses;
 use App\products;
 use App\airlines;
-use App\wage;
+// use App\wage;
 use App\todo;
 use Carbon\Carbon;
 use Session;
@@ -44,13 +44,13 @@ class HomeController extends Controller
         foreach ($expenses as $expense) {
             $total_amount = $total_amount + $expense->amount; 
         }
-        $logged_in = wage::where('date',$date)->where('login', '!=', null)->where('logout',null)->get();
-        $logged_out = wage::where('date',$date)->where('login', '!=', null)->where('logout', '!=',null)->get();
-        $today_wage = wage::where('date',$date)->get();
-        $total_wage = 0;
-        foreach ($today_wage as $wage) {
-            $total_wage = $total_wage + $wage->wage;
-        }
+        // $logged_in = wage::where('date',$date)->where('login', '!=', null)->where('logout',null)->get();
+        // $logged_out = wage::where('date',$date)->where('login', '!=', null)->where('logout', '!=',null)->get();
+        // $today_wage = wage::where('date',$date)->get();
+        // $total_wage = 0;
+        // foreach ($today_wage as $wage) {
+        //     $total_wage = $total_wage + $wage->wage;
+        // }
 
         $all_todos = todo::all();
             foreach ($all_todos as $todo) {
@@ -119,11 +119,11 @@ class HomeController extends Controller
                            
                             ->with('clients',client::all())
                             ->with('expense',$total_amount)
-                            ->with('logged_in',$logged_in)
-                            ->with('logged_out',$logged_out)
+                            // ->with('logged_in',$logged_in)
+                            // ->with('logged_out',$logged_out)
                             ->with('date',$date)
                             ->with('invoices',invoice::orderBy('created_at','desc')->take(7)->get())
-                            ->with('total_wage',$total_wage)
+                            // ->with('total_wage',$total_wage)
                             ->with('expenses',expenses::all())
                             ->with('recent_expenses',expenses::where('auto',0)->orderBy('created_at','desc')->take(7)->get())
                             ->with('todos',$todos)

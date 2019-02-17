@@ -10,7 +10,7 @@ use Session;
 use App\Invite;
 use App\Mail\InviteCreated;
 use Mail;
-use App\wage;
+// use App\wage;
 
 class employeeController extends Controller
 {   
@@ -319,15 +319,15 @@ class employeeController extends Controller
         return view('employee.status2')->with('date',$date)->with('employees',employee::all());
     }
 
-    public function letter($id){
-        $employee = employee::find($id);
-        $wages = wage::where('unique_id',$employee->unique_id)->get();
-        $total_wage = 0;
-        foreach($wages as $wage){
-            $total_wage = $total_wage + $wage->wage;
-        }
-        return view('employee.letter')->with('employee',$employee)
-                                        ->with('date',Carbon::now()->toDateString())
-                                        ->with('wage',$total_wage);
-    }
+    // public function letter($id){
+    //     $employee = employee::find($id);
+    //     $wages = wage::where('unique_id',$employee->unique_id)->get();
+    //     $total_wage = 0;
+    //     foreach($wages as $wage){
+    //         $total_wage = $total_wage + $wage->wage;
+    //     }
+    //     return view('employee.letter')->with('employee',$employee)
+    //                                     ->with('date',Carbon::now()->toDateString())
+    //                                     ->with('wage',$total_wage);
+    // }
 }

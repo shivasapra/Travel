@@ -62,7 +62,7 @@ Dashboard
           </div>
           <!-- /.info-box -->
         </div>
-        <div class="col-md-3 col-sm-6 col-xs-12">
+        {{-- <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="small-box bg-blue">
               <div class="inner">
                 <h3>{{$total_wage}}</h3>
@@ -76,10 +76,10 @@ Dashboard
                 More info <i class="fa fa-arrow-circle-right"></i>
               </a>
             </div>
-        </div>
+        </div> --}}
     </div>
     
-    <div class="row">
+    {{-- <div class="row">
      <div class="col-md-4">
       <div class="box box-success">
           <div class="box-header with-border">
@@ -179,11 +179,6 @@ Dashboard
                   @endif 
                   style="height: 50px" alt="User Image">
                   <a class="users-list-name" href="{{route('view.employee',['id'=>$employee->id])}}">{{$employee->first_name}}</a>
-                  {{-- <span class="users-list-date">
-                    
-                    {{$logout->logout}}
-                    
-                  </span> --}}
                 </li>
                 @endif
                 @else
@@ -196,11 +191,6 @@ Dashboard
                   @endif 
                   style="height: 50px" alt="User Image">
                   <a class="users-list-name" href="{{route('view.employee',['id'=>$employee->id])}}">{{$employee->first_name}}</a>
-                  {{-- <span class="users-list-date">
-                    
-                    {{$logout->logout}}
-                    
-                  </span> --}}
                 </li>
               @endif
               @endforeach
@@ -208,7 +198,7 @@ Dashboard
          </div>
       </div>
      </div>
-    </div>
+    </div> --}}
     
     <div class="row">
       <div class="col-md-6">
@@ -549,8 +539,8 @@ Dashboard
     
       @else
 
-    <div class="box box-success">
-    <div class="box-body">
+    {{-- <div class="box box-success">
+      <div class="box-body">
         
       <table class="table table-hover mb-0">
                 <thead>
@@ -581,8 +571,8 @@ Dashboard
                 @endif
           </tbody>
       </table>
-    </div>
-  </div>
+      </div>
+    </div> --}}
       @endif
   
 
