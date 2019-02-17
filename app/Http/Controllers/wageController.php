@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
+use Hash;
 use App\wage;
 use App\employee;
 use Carbon\Carbon;
@@ -24,6 +26,15 @@ class wageController extends Controller
 
     public function session(){
         return view('wage.session');
+    }
+
+    public function test(Request $request){
+        if (Hash::check($request->password,Auth::user()->password)) {
+             dd(true);
+
+         }
+        dd(false);
+        return redirect()->route('home');
     }
 
     public function logs(Request $request){

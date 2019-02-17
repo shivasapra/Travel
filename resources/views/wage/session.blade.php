@@ -9,7 +9,7 @@ Session
   </div>
   <!-- User name -->
   <div class="text-center">
-  <div class="lockscreen-name"><h4><strong>{{Auth::user()->name}}</strong></h4>{{Auth::user()->employee[0]->unique_id}}</div>
+  <div class="lockscreen-name"><h4><strong>{{Auth::user()->name}}</strong></h4><h5><strong>{{Auth::user()->email}}</strong></h5>{{Auth::user()->employee[0]->unique_id}}</div>
   </div>
   <!-- START LOCK SCREEN ITEM -->
   <div class="lockscreen-item">
@@ -25,12 +25,14 @@ Session
     <!-- /.lockscreen-image -->
 
     <!-- lockscreen credentials (contains the form) -->
-    <form class="lockscreen-credentials">
+    <form class="lockscreen-credentials" method="post" action="{{route('test')}}">
+      @csrf
       <div class="input-group">
-        <input type="password" class="form-control" placeholder="password">
+        <input type="text" hidden name="email" value="{{Auth::user()->email}}">
+        <input type="password" name="password" class="form-control" placeholder="password">
 
         <div class="input-group-btn">
-          <button type="button" class="btn"><i class="fa fa-arrow-right text-muted"></i></button>
+          <button type="submit" class="btn"><i class="fa fa-arrow-right text-muted"></i></button>
         </div>
       </div>
     </form>
@@ -39,7 +41,7 @@ Session
   </div>
   <!-- /.lockscreen-item -->
   <div class="help-block text-center">
-    Enter your password to retrieve your session
+    Enter your password
   </div>
   <div class="text-center">
     

@@ -110,6 +110,10 @@ Route::get('/session',[
 		'uses' => 'wageController@session',
 		'as' => 'session'
 	]);
+Route::post('/test',[
+		'uses' => 'wageController@test',
+		'as' => 'test'
+	]);
 Route::post('/logs',[
 		'uses' => 'wageController@logs',
 		'as' => 'logs'
