@@ -62,7 +62,7 @@ Dashboard
           </div>
           <!-- /.info-box -->
         </div>
-        {{-- <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="small-box bg-blue">
               <div class="inner">
                 <h3>{{$total_wage}}</h3>
@@ -76,130 +76,9 @@ Dashboard
                 More info <i class="fa fa-arrow-circle-right"></i>
               </a>
             </div>
-        </div> --}}
+        </div>
     </div>
-    
-    {{-- <div class="row">
-     <div class="col-md-4">
-      <div class="box box-success">
-          <div class="box-header with-border">
-            <h3 class="box-title"><strong>EMPLOYEES <span class="text-success">Logged In</span></strong></h3>
 
-            <div class="box-tools pull-right">
-              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-              </button>
-              <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
-              </button>
-            </div>
-          </div>
-          <!-- /.box-header -->
-          <div class="box-body no-padding">
-            <ul class="users-list clearfix">
-              @foreach($logged_in as $login)
-              <li>
-                <img 
-                @if($login->employee->user and $login->employee->user->avatar)
-                  src="{{asset($login->employee->user->avatar)}}"
-                @else
-                  src="{{asset('app/images/user-placeholder.jpg')}}"
-                @endif 
-                style="height: 50px" alt="User Image">
-                <a class="users-list-name" href="{{route('view.employee',['id'=>$login->employee->id])}}">{{$login->employee->first_name}}</a>
-                <span class="users-list-date">
-                  
-                  {{$login->login}}
-                  
-                </span>
-              </li>
-              @endforeach
-            </ul>
-         </div>
-      </div>
-     </div>
-     <div class="col-md-4">
-      <div class="box box-warning">
-          <div class="box-header with-border">
-            <h3 class="box-title"><strong>EMPLOYEES <span class="text-warning">Logged Out</span></strong></h3>
-
-            <div class="box-tools pull-right">
-              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-              </button>
-              <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
-              </button>
-            </div>
-          </div>
-          <!-- /.box-header -->
-          <div class="box-body no-padding">
-            <ul class="users-list clearfix">
-              @foreach($logged_out as $logout)
-              <li>
-                <img 
-                @if($logout->employee->user and $logout->employee->user->avatar)
-                  src="{{asset($logout->employee->user->avatar)}}"
-                @else
-                  src="{{asset('app/images/user-placeholder.jpg')}}"
-                @endif 
-                style="height: 50px" alt="User Image">
-                <a class="users-list-name" href="{{route('view.employee',['id'=>$logout->employee->id])}}">{{$logout->employee->first_name}}</a>
-                <span class="users-list-date">
-                  
-                  {{$logout->logout}}
-                  
-                </span>
-              </li>
-              @endforeach
-            </ul>
-         </div>
-      </div>
-     </div>
-     <div class="col-md-4">
-      <div class="box box-danger">
-          <div class="box-header with-border">
-            <h3 class="box-title"><strong>EMPLOYEES <span class="text-danger">Absent</span></strong></h3>
-
-            <div class="box-tools pull-right">
-              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-              </button>
-              <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
-              </button>
-            </div>
-          </div>
-          <!-- /.box-header -->
-          <div class="box-body no-padding">
-            <ul class="users-list clearfix">
-              @foreach($employees as $employee)
-              @if($employee->wage->count()>0)
-                @if($employee->wage->last()->date != $date)
-                <li>
-                  <img 
-                  @if($employee->user and $employee->user->avatar)
-                    src="{{asset($employee->user->avatar)}}"
-                  @else
-                    src="{{asset('app/images/user-placeholder.jpg')}}"
-                  @endif 
-                  style="height: 50px" alt="User Image">
-                  <a class="users-list-name" href="{{route('view.employee',['id'=>$employee->id])}}">{{$employee->first_name}}</a>
-                </li>
-                @endif
-                @else
-                <li>
-                  <img 
-                  @if($employee->user and $employee->user->avatar)
-                    src="{{asset($employee->user->avatar)}}"
-                  @else
-                    src="{{asset('app/images/user-placeholder.jpg')}}"
-                  @endif 
-                  style="height: 50px" alt="User Image">
-                  <a class="users-list-name" href="{{route('view.employee',['id'=>$employee->id])}}">{{$employee->first_name}}</a>
-                </li>
-              @endif
-              @endforeach
-            </ul>
-         </div>
-      </div>
-     </div>
-    </div> --}}
-    
     <div class="row">
       <div class="col-md-6">
         <div class="box box-primary">
@@ -535,6 +414,83 @@ Dashboard
         <div id="createEvent"></div>
         </div> --}}
         </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="box box-success">
+            <div class="box-header with-border">
+              <h3 class="box-title"><strong>EMPLOYEES <span class="text-success">Present</span></strong></h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
+                </button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <ul class="users-list clearfix">
+                @foreach($wages as $wage)
+                <li>
+                  <img 
+                  @if($wage->employee->user and $wage->employee->user->avatar)
+                    src="{{asset($wage->employee->user->avatar)}}"
+                  @else
+                    src="{{asset('app/images/user-placeholder.jpg')}}"
+                  @endif 
+                  style="height: 50px" alt="User Image">
+                  <a class="users-list-name" href="{{route('view.employee',['id'=>$wage->employee->id])}}">{{$wage->employee->first_name}}</a>
+                  <span class="users-list-date">
+                    
+                    {{$wage->login_time}}
+                    
+                  </span>
+                </li>
+                @endforeach
+              </ul>
+           </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="box box-danger">
+            <div class="box-header with-border">
+              <h3 class="box-title"><strong>EMPLOYEES <span class="text-danger">Absent</span></strong></h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
+                </button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <ul class="users-list clearfix">
+                @foreach($employees as $emp)
+                @if(!$emp->wage->count()>0 or $emp->wage->last()->date != Carbon\Carbon::now()->toDateString() )
+                <li>
+                  <img 
+                  @if($emp->user and $emp->user->avatar)
+                    src="{{asset($emp->user->avatar)}}"
+                  @else
+                    src="{{asset('app/images/user-placeholder.jpg')}}"
+                  @endif 
+                  style="height: 50px" alt="User Image">
+                  <a class="users-list-name" href="{{route('view.employee',['id'=>$emp->id])}}">{{$emp->first_name}}</a>
+                  <span class="users-list-date">
+                    
+                    {{-- {{$logout->logout_time}} --}}
+                    
+                  </span>
+                </li>
+                @endif
+                @endforeach
+              </ul>
+           </div>
+        </div>
+      </div>
     </div>
     
       @else

@@ -51,6 +51,11 @@ Session
   <!-- /.lockscreen-item -->
   <div class="help-block text-center">
     Enter your password
+    @if($latest_wageLog != null and $latest_wageLog->logout_time == null) 
+    to end your Session.
+    @else 
+    to start your Session.
+    @endif
   </div>
   <div class="text-center">
     
