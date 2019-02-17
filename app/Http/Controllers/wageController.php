@@ -45,6 +45,15 @@ class wageController extends Controller
             $wageLog = wageLog::find($request->wageLogId);
             $wageLog->logout_time = Carbon::now()->totimeString();
             $wageLog->save();
+            $time1 = substr($wageLog->logout_time,0,2);
+            $time2 = substr($wageLog->login_time,0,2);
+            $wageLog->hours = $time1-$time2;
+            $wageLog->save();
+            $wage = $wageLog->wage;
+            $wage->total_hours =  $wage->total_hours + $wageLog->hours;
+            $wage->save();
+            $wage->today_wage =  $wage->total_hours * $wage->hourly;
+            $wage->save();
         }
         dd($wageLog);
     }
@@ -74,6 +83,8 @@ class wageController extends Controller
                 $wage->date = Carbon::now()->toDateString();
                 $wage->no_of_logins = 1;
                 $wage->hourly = $employee->rate;
+                $wage->total_hours = 0;
+                $wage->today_wage = 0;
                 $wage->save();
 
                 $wageLog = new wageLog;
