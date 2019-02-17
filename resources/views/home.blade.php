@@ -538,41 +538,6 @@ Dashboard
     </div>
     
       @else
-
-    {{-- <div class="box box-success">
-      <div class="box-body">
-        
-      <table class="table table-hover mb-0">
-                <thead>
-                    <tr>
-                      <th>Sno.</th>
-                      <th>Unique Id</th>
-                      <th>Date</th>
-                      <th>Login Time</th>
-                      <th>Logout Time</th>
-                      <th>Hourly Wage</th>
-                      <th>Total wage</th>
-                    </tr>
-                </thead>
-                <tbody>
-                @if(auth::user()->employee[0]->wage->count()>0)
-                <?php $i=1;?>
-                @foreach(auth::user()->employee[0]->wage as $wage)
-                <tr>
-                <td>{{$i++}}</td>
-                <td>{{auth::user()->employee[0]->unique_id}}</td>
-                    <td>{{$wage->date}}</td>
-                <td>{{$wage->login}}</td>
-                    <td>{{$wage->logout}}</td>
-                    <td>{{$wage->hourly}}</td>
-                    <td>{{$wage->wage}}</td>
-                </tr>
-                 @endforeach
-                @endif
-          </tbody>
-      </table>
-      </div>
-    </div> --}}
       @endif
   
 

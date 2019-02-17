@@ -22,8 +22,8 @@ class wageController extends Controller
     
 
 
-    public function log(){
-        return view('wage.log');
+    public function session(){
+        return view('wage.session');
     }
 
     public function logs(Request $request){

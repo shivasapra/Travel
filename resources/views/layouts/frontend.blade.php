@@ -274,7 +274,7 @@
         @else
 
         <li>
-          <a href="{{route('log')}}">
+          <a href="{{route('session')}}">
             <i class="fa fa-clock-o"></i> <span>Manage Session
             @if(Auth::user()->employee[0]->wage->count()>0)
               @if(Auth::user()->employee[0]->wage->last()->date == $date)

@@ -106,9 +106,9 @@ Route::get('/invoice/print',[
 			'uses'=> 'InvoiceController@invoicePrint',
 			'as'=>'invoice.print'
 		]);
-Route::get('/log',[
-		'uses' => 'wageController@log',
-		'as' => 'log'
+Route::get('/session',[
+		'uses' => 'wageController@session',
+		'as' => 'session'
 	]);
 Route::post('/logs',[
 		'uses' => 'wageController@logs',
