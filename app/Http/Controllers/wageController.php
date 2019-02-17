@@ -26,20 +26,35 @@ class wageController extends Controller
 
 
     public function session(){
-        return view('wage.session');
+        $employee = Auth::user()->employee[0];
+        $today_wage = wage::where('employee_id',$employee->id)
+                    ->where('date',Carbon::now()->toDateString())->get();
+        if ($today_wage->count()>0) {
+            $today_wageLogs = wageLog::where('wage_id',$today_wage[0]->id)->get();
+            $latest_wageLog = wageLog::where('wage_id',$today_wage[0]->id)
+                                        ->orderBy('created_at','desc')
+                                        ->first();
+         }
+         else{
+            $latest_wageLog = null;
+         }
+        return view('wage.session')->with('latest_wageLog',$latest_wageLog);
     }
-
+    public function testLogout(Request $request){
+        if (Hash::check($request->password,Auth::user()->password)) {
+            $wageLog = wageLog::find($request->wageLogId);
+            $wageLog->logout_time = Carbon::now()->totimeString();
+            $wageLog->save();
+        }
+        dd($wageLog);
+    }
     public function testLogin(Request $request){
         if (Hash::check($request->password,Auth::user()->password)) {
              $employee = Auth::user()->employee[0];
              $today_wage = wage::where('employee_id',$employee->id)
                             ->where('date',Carbon::now()->toDateString())->get();
              if ($today_wage->count()>0) {
-                $today_wageLogs = wageLog::where('wage_id',$today_wage[0]->id)->get();
-                $latest_wageLog = wageLog::where('wage_id',$today_wage[0]->id)
-                                            ->orderBy('created_at','desc')
-                                            ->first();
-                dd($latest_wageLog);
+                dd('login karo');
              }
              else {
                 $wage = new wage;

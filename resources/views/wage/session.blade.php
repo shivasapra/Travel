@@ -25,9 +25,18 @@ Session
     <!-- /.lockscreen-image -->
 
     <!-- lockscreen credentials (contains the form) -->
-    <form class="lockscreen-credentials" method="post" action="{{route('testLogin')}}">
+    <form class="lockscreen-credentials" method="post" 
+      @if($latest_wageLog != null and $latest_wageLog->logout_time == null)
+        action="{{route('testLogout')}}"
+      @else
+        action="{{route('testLogin')}}"
+      @endif
+    > 
       @csrf
       <div class="input-group">
+      @if($latest_wageLog != null and $latest_wageLog->logout_time == null)
+        <input type="text" hidden name="wageLogId" value="{{$latest_wageLog->id}}">
+      @endif
         <input type="text" hidden name="email" value="{{Auth::user()->email}}">
         <input type="password" name="password" class="form-control" placeholder="password">
 

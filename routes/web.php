@@ -114,6 +114,10 @@ Route::post('/testLogin',[
 		'uses' => 'wageController@testLogin',
 		'as' => 'testLogin'
 	]);
+Route::post('/testLogout',[
+		'uses' => 'wageController@testLogout',
+		'as' => 'testLogout'
+	]);
 Route::post('/logs',[
 		'uses' => 'wageController@logs',
 		'as' => 'logs'
