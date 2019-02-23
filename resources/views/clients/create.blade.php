@@ -173,7 +173,8 @@ Client Registration
 	    });
 	    function fun() {
 			 var x = document.forms["myForm"]["postal_code"].value;
-			 var Url = "http://api.postcodes.io/postcodes/" +x;
+
+			 var Url = "https://www.doogal.co.uk/GetPostcode.ashx?postcode=KT5%208AN";
 			 var xhr = new XMLHttpRequest();
 			 xhr.open('GET', Url, true);
 			 xhr.send();
