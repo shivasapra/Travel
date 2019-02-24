@@ -330,4 +330,9 @@ class employeeController extends Controller
                                         ->with('date',Carbon::now()->toDateString())
                                         ->with('wage',$total_wage);
     }
+
+    public function search(Request $request){
+        $cemployees = employee::where('first_name', 'like', '%'.request('employee_name').'%')->get();
+        return view('employee.assignment')->with('employees',$employees);
+    }
 }

@@ -44,6 +44,10 @@ Route::post('/search/client',[
 		'uses' => 'clientController@search',
 		'as' => 'searchClient'
 	]);
+Route::post('/search/employee',[
+		'uses' => 'employeeController@search',
+		'as' => 'searchEmployee'
+	]);
 // Route::get('/search/client',['as'=>'searchClient'],function(){
 // 	dd(true);
 // 	$clients = App\client::where('first_name', 'like', '%'.request('client_name').'%')->get();

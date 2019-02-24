@@ -17,6 +17,7 @@ class CreateAssignmentsTable extends Migration
             $table->increments('id');
             $table->integer('employee_id');
             $table->string('task');
+            $table->string('task_description');
             $table->boolean('status')->default(0);
             $table->timestamps();
         });
