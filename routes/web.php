@@ -12,6 +12,9 @@
 */
 // Route::post('invite', 'employeeController@process')->name('process');
 // {token} is a required parameter that will be exposed to us in the controller method
+Auth::routes();
+
+
 Route::get('accept/{token}', 'InviteController@accept')->name('accept');
 Route::get('confirm/{token}', 'InviteController@confirm')->name('confirm');
 Route::get('deleteClientPassportData/{token}', 'InviteController@deleteClientPassportData')->name('deleteClientPassportData');
@@ -51,7 +54,11 @@ Route::get('/', [
         'as' => 'home',
         'uses' => 'HomeController@index',
     ]);
-Auth::routes();
+Route::post('sendEmail', [
+        'uses' => 'HomeController@sendEmail',
+        'as' => 'send.email',
+    ]);
+
 Route::resource('tasks', 'TasksController');
 Route::get('/client/status',[
 			'uses'=> 'clientController@status',

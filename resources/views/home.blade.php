@@ -313,71 +313,6 @@ Dashboard
           </div>
         </div>
         <div class="col-md-5">
-        {{-- <div class="box box-info">
-          <div class="box-header">
-            <h4 class="card-title"><strong>Todo</strong><span id="addtodo"><button class="btn btn-sm btn-primary">Add</button></span></h4>
-            <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-            <div class="heading-elements">
-              <ul class="list-inline mb-0">
-                <li><strong>{{$date}}</strong></li>
-              </ul>
-            </div>
-          </div>
-          <div class="box-body">
-            <div id="todo"></div>
-            <div id="daily-activity" class="table-responsive height-350">
-              <table class="table table-hover mb-0">
-                <thead>
-                  <tr>
-                    <th>
-                    </th>
-                    <th>Time</th>
-                    <th>Activity</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @if($todos->count()>0)
-                  @foreach($todos as $todo)
-                    <tr>
-                      <td class="text-truncate">
-                        <form action="{{route('update.todo',['id'=>$todo->id])}}" method="post">
-                          @csrf
-                          @if($todo->status==1)
-                          <button id="updateTodo" type="submit" class="btn btn-primary btn-sm" disabled><span class="fa fa-check"></span>
-                          @else
-                          <button id="updateTodo" type="submit" class="btn btn-danger btn-sm"><span class="fa fa-eye"></span>
-                          @endif
-                          </button>
-                          
-                        </form>
-                      </td>
-                      <td class="text-truncate">{{$todo->time}}</td>
-                      <td class="text-truncate">{{$todo->activity}}</td>
-                      <td class="text-truncate">
-                        @if($todo->status == 0)
-                        <span class="badge badge-default badge-info">Pending</span>
-                        @elseif($todo->status == 1)
-                        <span class="badge badge-default badge-success">Done</span>
-                        @elseif($todo->status == 2)
-                        <span class="badge badge-default badge-warning">Delayed</span>
-                        @elseif($todo->status == 3)
-                        <span class="badge badge-default badge-delete">Missed</span>
-                        @endif
-                      </td>
-                    </tr>
-                  @endforeach
-                  @endif
-                </tbody>
-              </table>
-            
-              <div class="text-center">
-                <a class="btn btn-sm btn-warning" href="{{route('todos',['target_date'=>$date])}}"  style="margin-top: 7px">All Todos</a>
-              </div>
-            
-            </div>
-          </div>
-        </div> --}}
         <div class="box box-info">
             <div class="box-header">
               <i class="fa fa-envelope"></i>
@@ -392,7 +327,8 @@ Dashboard
               <!-- /. tools -->
             </div>
             <div class="box-body">
-              <form action="#" method="post">
+              <form action="{{route('send.email')}}" method="post">
+                @csrf
                 <div class="form-group">
                   <input type="email" class="form-control" name="emailto" placeholder="Email to:">
                 </div>
@@ -400,19 +336,17 @@ Dashboard
                   <input type="text" class="form-control" name="subject" placeholder="Subject">
                 </div>
                 <div>
-                  <textarea class="textarea" placeholder="Message"
+                  <textarea class="textarea" placeholder="Message" name="message" 
                             style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
                 </div>
-              </form>
+              
             </div>
             <div class="box-footer clearfix">
-              <button type="button" class="pull-right btn btn-default" id="sendEmail">Send
+              <button type="submit" class="pull-right btn btn-default" id="sendEmail">Send
                 <i class="fa fa-arrow-circle-right"></i></button>
             </div>
+            </form>
         </div>
-        {{-- <div class="box box-success">
-        <div id="createEvent"></div>
-        </div> --}}
         </div>
     </div>
 

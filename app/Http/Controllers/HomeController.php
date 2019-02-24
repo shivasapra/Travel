@@ -257,4 +257,16 @@ class HomeController extends Controller
         });
         return redirect()->back();
     }
+
+    public function sendEmail(Request $request){
+        $contactEmail = $request->emailto;
+        $subject = $request->subject;
+        $data = array('content'=>$request->message);
+        Mail::send('emails.send', $data, function($message) use ($contactEmail,$subject)
+        { 
+            $message->to($contactEmail)->subject($subject);
+        });
+        Session::flash('success','Mail Sent!');
+        return redirect()->back();
+    }
 }
