@@ -27,7 +27,6 @@ Staff wage management
                         <th>Today's Hours</th>
                     	<th>Hourly Wage</th>
                     	<th>Today's wage</th>
-                    	<th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -36,7 +35,7 @@ Staff wage management
             		@foreach($employees as $employee)
             		<tr>
             		<td>{{$i++}}</td>
-            		<td>{{$employee->first_name}}</td>
+            		<td><a href="{{route('wage.log',['id'=>$employee->id])}}" >{{$employee->first_name.' '.$employee->last_name}}</a></td>
             		<td>{{$employee->unique_id}}</td>
                     @if($employee->wage->count()>0)
                     <td>{{$employee->wage->last()->date}}</td>
@@ -46,7 +45,7 @@ Staff wage management
                     @else
                     <td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td>
                     @endif
-                    <td><a href="{{route('wage.log',['id'=>$employee->id])}}"><button class="btn btn-info btn-xs">View</button></a></td>
+                    {{-- <td><a href="{{route('wage.log',['id'=>$employee->id])}}"><button class="btn btn-info btn-xs">View</button></a></td> --}}
             		</tr>
 					@endforeach	
                 	@endif

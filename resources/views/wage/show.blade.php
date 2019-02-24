@@ -5,7 +5,7 @@ Employee wage log
 @section('header')
     <section class="content-header">
       <h1>
-        Employee Wage log
+        <strong>{{$employee->first_name}}'s</strong> Wage log
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -24,8 +24,7 @@ Employee wage log
                     	<th>Sno.</th>
                     	<th>Unique Id</th>
                     	<th>Date</th>
-                        <th>Login Time</th>
-                        <th>Logout Time</th>
+                        <th>Total Hours</th>
                     	<th>Hourly Wage</th>
                     	<th>Total wage</th>
                     </tr>
@@ -34,17 +33,14 @@ Employee wage log
                     @if($employee->wage->count()>0)
             		<?php $i=1;?>
                     @foreach($employee->wage as $wage)
-                		{{-- @foreach($wage->wageLog as $wageLog) --}}
                 		<tr>
                 		<td>{{$i++}}</td>
                 		<td>{{$employee->unique_id}}</td>
                         <td>{{$wage->date}}</td>
-                        <td>{{$wage->wageLog->last()->login_time}}</td>
-                        <td>{{$wage->wageLog->last()->logout_time}}</td>
+                        <td>{{$wage->total_hours}}</td>
                         <td>{{$wage->hourly}}</td>
                         <td>{{$wage->today_wage}}</td>
                 		</tr>
-    					{{-- @endforeach --}}
                     @endforeach
                     @endif
                 </tbody>
