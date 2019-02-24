@@ -41,10 +41,9 @@ Assign Task
 @section('content')
 <form action="{{route('statusSave')}}" method="post">
   @csrf
-	@if($cemployees->count()>0)
+	@if($employees->count()>0)
   	<div class="box box-info">
     	<div class="box-body">
-    		@foreach($employees as $employee)
     		<table class="table table-hover mb-0">
                     <thead>
                       <tr>
@@ -63,7 +62,7 @@ Assign Task
 	                    	<tr>
 	                    		<td>{{$i++}}</td>
 	                    		<td>{{$employee->first_name.' '.$employee->last_name}}</td>
-	                    		<td><input id="unique" type="text" value="{{$employee->unique_id}}" readonly></td>
+	                    		<td><input class="unique" type="text" value="{{$employee->unique_id}}" readonly></td>
 	                    		<td>{{$employee->email}}</td>
 	                    		<td>{{$employee->country}}</td>
 	                    		<td>{{$employee->rate}}</td>
@@ -73,7 +72,6 @@ Assign Task
                     	@endif
                     </tbody>
             </table>
-    		@endforeach
     			
     	</div>
 	</div>
@@ -86,11 +84,19 @@ Assign Task
     				<label for="employee_id">Employee Id:</label>
     				<input type="text" id="employeeId" name="employee_id" required class="form-control">
     			</div>
+    			<div class="col-md-4">
+    				<label for="employee_id">Task Name:</label>
+    				<input type="text" name="task" required class="form-control">
+    			</div>
+    			<div class="col-md-4">
+    				<label for="employee_id">Task Description:</label>
+    				<textarea name=task_description" required class="form-control"></textarea>
+    			</div>
     		</div>
     	</div>
 	</div>
 	<div class="text-center">
-		<button type="submit" class="btn btn-xs btn-success">Send</button>
+		<button type="submit" class="btn btn-xs btn-warning">Assign Task</button>
 	</div>
 	
 </form>
@@ -99,7 +105,7 @@ Assign Task
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function(){
-	$("#unique").on('click',function(){
+	$(".unique").on('click',function(){
 		document.getElementById('employeeId').value = this.value;
 	});
 });

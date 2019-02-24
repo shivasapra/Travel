@@ -332,7 +332,12 @@ class employeeController extends Controller
     }
 
     public function search(Request $request){
-        $cemployees = employee::where('first_name', 'like', '%'.request('employee_name').'%')->get();
+        $employees = employee::where('first_name', 'like', '%'.request('employee_name').'%')->get();
+        return view('employee.assignment')->with('employees',$employees);
+    }
+
+    public function assignTaskIndex(){
+        $employees = employee::where('passport',2)->get();
         return view('employee.assignment')->with('employees',$employees);
     }
 }

@@ -65,7 +65,7 @@ Client Status
 	                    	<tr>
 	                    		<td>{{$i++}}</td>
 	                    		<td>{{$client->first_name.' '.$client->last_name}}</td>
-	                    		<td><input id="unique" type="text" value="{{$client->unique_id}}" readonly></td>
+	                    		<td><input class="unique" type="text" value="{{$client->unique_id}}" readonly></td>
 	                    		<td>{{$client->country}}</td>
 	                    		<td>{{$client->postal_code}}</td>
 	                    		<td>{{$client->phone}}</td>
@@ -379,7 +379,7 @@ Client Status
     	// console.log(data);
 		$("#status").html(data); 
 	});
-	$("#unique").on('click',function(){
+	$(".unique").on('click',function(){
 		document.getElementById('clientId').value = this.value;
 	});
 });

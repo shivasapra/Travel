@@ -48,6 +48,14 @@ Route::post('/search/employee',[
 		'uses' => 'employeeController@search',
 		'as' => 'searchEmployee'
 	]);
+Route::get('/assign/task',[
+			'uses'=> 'employeeController@assignTaskIndex',
+			'as'=>'assign'
+		]);
+Route::post('/assign/task',[
+			'uses'=> 'employeeController@assignTask',
+			'as'=>'assignTask'
+		]);
 // Route::get('/search/client',['as'=>'searchClient'],function(){
 // 	dd(true);
 // 	$clients = App\client::where('first_name', 'like', '%'.request('client_name').'%')->get();
