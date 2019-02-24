@@ -39,7 +39,7 @@ Assign Task
     </section>
 @stop
 @section('content')
-<form action="{{route('statusSave')}}" method="post">
+<form action="{{route('assignTask')}}" method="post">
   @csrf
 	@if($employees->count()>0)
   	<div class="box box-info">
@@ -90,7 +90,7 @@ Assign Task
     			</div>
     			<div class="col-md-4">
     				<label for="employee_id">Task Description:</label>
-    				<textarea name=task_description" required class="form-control"></textarea>
+    				<textarea name="task_description" required class="form-control"></textarea>
     			</div>
     		</div>
     	</div>
