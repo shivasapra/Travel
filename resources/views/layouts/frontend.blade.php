@@ -80,14 +80,52 @@
             </ul>
           </li>
           <!-- Notifications: style can be found in dropdown.less -->
+          @if(!Auth::user()->admin)
+          <li class="dropdown notifications-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-bell-o"></i>
+              <span class="label label-danger">{{Auth::user()->employee[0]->assignment->where('status',0)->count()}}</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="header">You have {{Auth::user()->employee[0]->assignment->where('status',0)->count()}} notifications</li>
+              <li>
+                <!-- inner menu: contains the actual data -->
+                <ul class="menu">
+                  @foreach(Auth::user()->employee[0]->assignment->where('status',0) as $task)
+                    <li>
+                      <a href="#">
+                        <i class="fa fa-user text-green"></i>New Task: {{$task->task}}
+                      </a>
+                    </li>
+                  @endforeach
+                </ul>
+              </li>
+              <li class="footer"><a href="#">View all</a></li>
+            </ul>
+          </li>
+          @else
           <li class="dropdown notifications-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-bell-o"></i>
               <span class="label label-warning"></span>
             </a>
             <ul class="dropdown-menu">
+              <li class="header"></li>
+              <li>
+                <!-- inner menu: contains the actual data -->
+                <ul class="menu">
+                  <li>
+                    <a href="#">
+                      {{-- <i class="fa fa-users text-green"></i> --}}
+                    </a>
+                  </li>
+                  
+                </ul>
+              </li>
+              <li class="footer"><a href="#">View all</a></li>
             </ul>
           </li>
+          @endif
           <!-- Tasks: style can be found in dropdown.less -->
           <li class="dropdown tasks-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
