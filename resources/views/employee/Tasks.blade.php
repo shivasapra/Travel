@@ -23,7 +23,9 @@ Assignments
                 		<th>Task</th>
                 		<th>Description</th>
                 		<th>Status</th>
+                        @if(!Auth::user()->admin)
                 		<th>Action</th>
+                        @endif
                 	</tr>
                 </thead>
                 <tbody>
@@ -41,7 +43,7 @@ Assignments
 									<span class="text-success">{{'Done'}}</span>
 								@endif
                     		</td>
-                    		@if($assignment->status == 0)
+                    		@if($assignment->status == 0 and !Auth::user()->admin)
                     			<td><a href="{{route('assignmentDone',['id'=>$assignment->id])}}" class="btn btn-xs btn-info"><i class="fa fa-check"></i></a></td>
                     		@endif
                     	</tr>

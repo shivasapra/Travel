@@ -71,9 +71,9 @@
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
-          <li class="dropdown messages-menu">
+          <li class="dropdown notifications-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-envelope-o"></i>
+              <i class="fa fa-bell-o"></i>
               <span class="label label-success"></span>
             </a>
             <ul class="dropdown-menu">
@@ -81,13 +81,13 @@
           </li>
           <!-- Notifications: style can be found in dropdown.less -->
           @if(!Auth::user()->admin)
-          <li class="dropdown notifications-menu">
+          <li class="dropdown messages-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-bell-o"></i>
+              <i class="fa fa-envelope-o"></i>
               <span class="label label-danger">{{Auth::user()->employee[0]->assignment->where('status',0)->count()}}</span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header">You have {{Auth::user()->employee[0]->assignment->where('status',0)->count()}} notifications</li>
+              <li class="header">You have {{Auth::user()->employee[0]->assignment->where('status',0)->count()}} Tasks Pending</li>
               <li>
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu">
@@ -100,7 +100,7 @@
                   @endforeach
                 </ul>
               </li>
-              <li class="footer"><a href="{{route('assignments')}}">View all</a></li>
+              <li class="footer"><a href="{{route('assignments',['id'=>Auth::user()->employee[0]->id])}}">View all</a></li>
             </ul>
           </li>
           @else

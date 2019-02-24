@@ -272,8 +272,8 @@ class HomeController extends Controller
         return redirect()->back();
     }
 
-    public function assignments(){
-        $assignments = Auth::user()->employee[0]->assignment;
+    public function assignments($id){
+        $assignments = employee::find($id)->assignment;
         return view('employee.Tasks')->with('assignments',$assignments);
     }
 

@@ -52,7 +52,7 @@ Route::get('/assign/task',[
 			'uses'=> 'employeeController@assignTaskIndex',
 			'as'=>'assign'
 		]);
-Route::get('/assignments',[
+Route::get('/assignments/{id}',[
 			'uses'=> 'HomeController@assignments',
 			'as'=>'assignments'
 		]);
