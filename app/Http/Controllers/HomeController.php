@@ -16,6 +16,8 @@ use App\invoice;
 use App\settings;
 use App\Task;
 use Mail;
+use Auth;
+use App\assignment;
 class HomeController extends Controller
 {
     /**
@@ -267,6 +269,19 @@ class HomeController extends Controller
             $message->to($contactEmail)->subject($subject);
         });
         Session::flash('success','Mail Sent!');
+        return redirect()->back();
+    }
+
+    public function assignments(){
+        $assignments = Auth::user()->employee[0]->assignment;
+        return view('employee.Tasks')->with('assignments',$assignments);
+    }
+
+    public function assignmentDone($id){
+        $assignment = assignment::find($id);
+        $assignment->status = 1;
+        $assignment->save();
+        Session::flash('info','task Completed');
         return redirect()->back();
     }
 }

@@ -356,4 +356,6 @@ class employeeController extends Controller
         Session::flash('success','Task Assigned to Employee');
         return redirect()->route('home');
     }
+
+    
 }

@@ -52,6 +52,14 @@ Route::get('/assign/task',[
 			'uses'=> 'employeeController@assignTaskIndex',
 			'as'=>'assign'
 		]);
+Route::get('/assignments',[
+			'uses'=> 'HomeController@assignments',
+			'as'=>'assignments'
+		]);
+Route::get('/assignment/Done/{id}',[
+			'uses'=> 'HomeController@assignmentDone',
+			'as'=>'assignmentDone'
+		]);
 Route::post('/assign/task',[
 			'uses'=> 'employeeController@assignTask',
 			'as'=>'assignTask'
