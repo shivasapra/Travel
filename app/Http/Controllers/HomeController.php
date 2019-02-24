@@ -10,7 +10,6 @@ use App\products;
 use App\airlines;
 use App\wage;
 use App\wageLog;
-use App\todo;
 use Carbon\Carbon;
 use Session;
 use App\invoice;
@@ -58,23 +57,8 @@ class HomeController extends Controller
             $total_wage = $total_wage + $wage->today_wage;
         }
 
-        $all_todos = todo::all();
-            foreach ($all_todos as $todo) {
-                if ($todo->status != 1) {
-                
-                    if ($todo->date < $date_today) {
-                        $todo->status = 3;  //misssed
-                    }
-                    if ($todo->date == $date_today and $todo->time < $time_now) {
-                        $todo->status = 2;  //delayed
-                    }
-                }
-                $todo->save();
-            }
             $yesterday_date = Carbon::now()->addDays(-1)->toDateString();
-        $todos = todo::where('date',$date_today)->orderBy('created_at','desc')->take(6)->get();
-        $missed_todos = todo::where('date',$yesterday_date)->where('status',3)->get();
-        $missed_todos_five = todo::where('date',$yesterday_date)->where('status',3)->take(5)->get();
+        
         $tasks = Task::all();
 
         $client_passport_emails = array();
@@ -130,9 +114,6 @@ class HomeController extends Controller
                             ->with('total_wage',$total_wage)
                             ->with('expenses',expenses::all())
                             ->with('recent_expenses',expenses::where('auto',0)->orderBy('created_at','desc')->take(7)->get())
-                            ->with('todos',$todos)
-                            ->with('missed_todos',$missed_todos)
-                            ->with('missed_todos_five',$missed_todos_five)
                             ->with('tasks',$tasks)
                             ->with('tax',settings::all())
                             ->with('paid_invoices',$paid_invoices)
