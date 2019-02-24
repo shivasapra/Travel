@@ -16,5 +16,8 @@ class employee extends Model
     {
     	return $this->belongsTo('App\User');
     }
-    
+    public function assignment()
+    {
+    	return $this->hasMany('App\assignment');
+    }
 }
