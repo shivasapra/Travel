@@ -24,10 +24,9 @@ Staff wage management
                     	<th>Employee</th>
                     	<th>Unique Id</th>
                     	<th>Date</th>
-                        <th>Login Time</th>
-                        <th>Logout Time</th>
+                        <th>Today's Hours</th>
                     	<th>Hourly Wage</th>
-                    	<th>Total wage</th>
+                    	<th>Today's wage</th>
                     	<th>Action</th>
                     </tr>
                 </thead>
@@ -41,10 +40,9 @@ Staff wage management
             		<td>{{$employee->unique_id}}</td>
                     @if($employee->wage->count()>0)
                     <td>{{$employee->wage->last()->date}}</td>
-                    <td>{{$employee->wage->last()->login}}</td>
-                    <td>{{$employee->wage->last()->logout}}</td>
+                    <td>{{$employee->wage->last()->total_hours}}</td>
                     <td>{{$employee->wage->last()->hourly}}</td>
-                    <td>{{$employee->wage->last()->wage}}</td>
+                    <td>{{$employee->wage->last()->today_wage}}</td>
                     @else
                     <td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td>
                     @endif

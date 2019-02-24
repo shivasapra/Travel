@@ -33,17 +33,19 @@ Employee wage log
                 <tbody>
                     @if($employee->wage->count()>0)
             		<?php $i=1;?>
-            		@foreach($employee->wage as $wage)
-            		<tr>
-            		<td>{{$i++}}</td>
-            		<td>{{$employee->unique_id}}</td>
-                    <td>{{$wage->date}}</td>
-                    <td>{{$wage->login}}</td>
-                    <td>{{$wage->logout}}</td>
-                    <td>{{$wage->hourly}}</td>
-                    <td>{{$wage->wage}}</td>
-            		</tr>
-					@endforeach
+                    @foreach($employee->wage as $wage)
+                		{{-- @foreach($wage->wageLog as $wageLog) --}}
+                		<tr>
+                		<td>{{$i++}}</td>
+                		<td>{{$employee->unique_id}}</td>
+                        <td>{{$wage->date}}</td>
+                        <td>{{$wage->wageLog->last()->login_time}}</td>
+                        <td>{{$wage->wageLog->last()->logout_time}}</td>
+                        <td>{{$wage->hourly}}</td>
+                        <td>{{$wage->today_wage}}</td>
+                		</tr>
+    					{{-- @endforeach --}}
+                    @endforeach
                     @endif
                 </tbody>
             </table>
