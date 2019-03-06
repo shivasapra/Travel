@@ -14,6 +14,7 @@ Assign Task
     </section>
 @stop
 @section('content')
+@if(Auth::user->admin)
 <form action="{{route('assignTask')}}" method="post">
   @csrf
 	<div class="box box-info">
@@ -38,6 +39,7 @@ Assign Task
 		<button type="submit" class="btn btn-xs btn-warning">Assign Task</button><br><br><hr>
 	</div>
 </form>
+@endif
 <div class="box box-info">
 	<div class="box-body">
 		
@@ -48,6 +50,7 @@ Assign Task
 				<th>Date</th>
 				<th>Task</th>
 				<th>Task Description</th>
+				<th>Accepted By:</th>
 			</tr>
 			</thead>
 		<tbody>
@@ -59,6 +62,13 @@ Assign Task
 					<td>{{$assignment->date}}</td>
 					<td>{{$assignment->task}}</td>
 					<td>{{$assignment->task_description}}</td>
+					<td>
+						@if($assignment->employee_id != null)
+							{{$assignment->employee->first_name}}
+						@else
+							{{'None'}}
+						@endif
+					</td>
 				</tr>
 				@endforeach
 			@endif
