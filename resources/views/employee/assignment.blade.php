@@ -72,9 +72,11 @@ Assign Task
 					</td>
 					<td>
 							@if($assignment->status == 0)
-								<span class="text-danger"><strong>{{'Pending'}}</strong></span>
-							@else
+								<span class="text-warning"><strong>{{'Pending'}}</strong></span>
+							@elseif($assignment->status == 1)
 								<span class="text-success"><strong>{{'Completed'}}</strong></span>
+								@elseif($assignment->status == 2)
+								<span class="text-danger"><strong>{{'Missed'}}</strong></span>
 							@endif
 						</td>
 				</tr>
@@ -110,8 +112,10 @@ Assign Task
 						<td>
 								@if($assignment->status == 0)
 						<a href="{{route('assignmentDone',['id'=>$assignment->id])}}" class="btn btn-xs btn-success">Done</a>
-						@else
+						@elseif($assignment->status == 1)
 						<span class="text-success"><strong>{{'Completed'}}</strong></span>
+						@elseif($assignment->status == 2)
+								<span class="text-danger"><strong>{{'Missed'}}</strong></span>
 						@endif
 						</td>
 					</tr>
