@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\assignment;
 use Session;
+use Auth;
 class AssignmentController extends Controller
 {
     /**
@@ -15,6 +16,14 @@ class AssignmentController extends Controller
     public function index()
     {
         return view('employee.assignment')->with('assignments',assignment::all());
+    }
+
+    public function accept($id){
+        $assignment = assignment::find($id);
+        $assignment->employee_id = Auth::user()->employee[0]->id;
+        $assignment->save();
+        Session::flash('info','Accepted');
+        return redirect()->back();
     }
 
     /**

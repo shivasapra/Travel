@@ -52,9 +52,13 @@ Route::get('/assign/task',[
 			'uses'=> 'AssignmentController@index',
 			'as'=>'assign'
 		]);
-Route::post('/assign/task',[
+Route::post('/accept/task',[
 	'uses'=> 'AssignmentController@store',
 	'as'=>'assignTask'
+]);
+Route::get('/accept/task/{id}',[
+	'uses'=> 'AssignmentController@accept',
+	'as'=>'task.accept'
 ]);
 Route::get('/assignments/{id}',[
 			'uses'=> 'HomeController@assignments',

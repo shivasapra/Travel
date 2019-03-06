@@ -428,34 +428,61 @@ Dashboard
     </div>
     
       @else
+      <button type="button" data-toggle="modal" id="clickme" data-target="#autoload" hidden class="btn btn-sm btn-info"></button>
+      <div class="modal fade" id="autoload">
+          <div class="modal-dialog">
+             <div class="modal-content">
+          <div class="modal-header" style="color:white;font-weight:500;background-color:#0066FF;">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Assignments</h4>
+          </div>
+          
+          <div class="modal-body">
+              <table class="table table-hover mb-0">
+                  <thead>
+                    <tr>
+                      <th>Sno.</th>
+                      <th>Date</th>
+                      <th>Task</th>
+                      <th>Task Description</th>
+                      <th>Action:</th>
+                    </tr>
+                    </thead>
+                  <tbody>
+                    @if($assignments->count()>0)
+                    <?php $i = 1; ?>
+                      @foreach($assignments as $assignment)
+                      <tr>
+                        <td>{{$i++}}</td>
+                        <td>{{$assignment->date}}</td>
+                        <td>{{$assignment->task}}</td>
+                        <td>{{$assignment->task_description}}</td>
+                        <td>
+                          @if($assignment->employee_id == null)
+                        <a href="{{route('task.accept',['id'=>$assignment->id])}}" class="btn btn-xs btn-info">Accept</a>
+                          @else
+                          {{'Accepted'}}
+                          @endif
+                      </td>
+                      </tr>
+                      @endforeach
+                    @endif
+                  </tbody>
+                </table>
+          </div>
+          <div class="modal-footer" style="color:white;font-weight:500;background-color:#0066FF;">
+            <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+          </div>
+            </div>
+          </div>
+      </div>
+     
       @endif
   
 
  
-      <!-- /.row -->
-{{-- <div class="container">
-    <div class="row justify-content-center">
-        
 
-    <div class="col-lg-6">
-        <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
-            <div class="card-header text-center">Total Employees</div>
-            <div class="card-body bg-light text-dark">
-                <h3 class="card-title text-center">{{$employees->count()}}</h3>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-lg-6">
-        <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
-            <div class="card-header text-center">Total Clients</div>
-            <div class="card-body bg-light text-dark">
-                <h3 class="card-title text-center">{{$clients->count()}}</h3>
-            </div>
-        </div>
-    </div>
-    </div>
-</div> --}}
 
 <div class="modal fade" id="modal-info">
   <div class="modal-dialog">
@@ -519,6 +546,12 @@ Dashboard
                 @endforeach
             ]
         })
+    });
+
+    $(document).ready(function() {
+      window.onload=function(){
+      document.getElementById("clickme").click();
+    };
     });
 </script>
 @stop

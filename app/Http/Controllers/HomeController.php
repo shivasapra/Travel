@@ -120,7 +120,8 @@ class HomeController extends Controller
                             ->with('tax',settings::all())
                             ->with('paid_invoices',$paid_invoices)
                             ->with('unpaid_invoices',$unpaid_invoices)
-                            ->with('wages',$wages);
+                            ->with('wages',$wages)
+                            ->with('assignments',assignment::all());
     }
     public function products(){
         return view('products')->with('products',products::all());

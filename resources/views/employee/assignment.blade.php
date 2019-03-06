@@ -14,7 +14,7 @@ Assign Task
     </section>
 @stop
 @section('content')
-@if(Auth::user->admin)
+@if(Auth::user()->admin)
 <form action="{{route('assignTask')}}" method="post">
   @csrf
 	<div class="box box-info">
@@ -64,7 +64,7 @@ Assign Task
 					<td>{{$assignment->task_description}}</td>
 					<td>
 						@if($assignment->employee_id != null)
-							{{$assignment->employee->first_name}}
+							{{$assignment->employee->first_name.' '.$assignment->employee->last_name}}
 						@else
 							{{'None'}}
 						@endif
