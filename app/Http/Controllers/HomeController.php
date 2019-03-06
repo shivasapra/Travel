@@ -50,6 +50,8 @@ class HomeController extends Controller
             $new_assignment->task = $assignment->task;
             $new_assignment->task_description = $assignment->task_description;
             $new_assignment->save();
+            $assignment->status = 2;
+            $assignment->save();
         }
         $expenses = expenses::where('auto',0)->get();
         $total_amount = 0;

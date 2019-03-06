@@ -19,7 +19,7 @@ class CreateAssignmentsTable extends Migration
             $table->Date('date');
             $table->string('task');
             $table->string('task_description');
-            $table->boolean('status')->default(0);
+            $table->integer('status')->default(0);
             $table->timestamps();
         });
     }
