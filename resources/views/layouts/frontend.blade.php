@@ -84,23 +84,23 @@
           <li class="dropdown messages-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-envelope-o"></i>
-              <span class="label label-danger">{{Auth::user()->employee[0]->assignment->where('status',0)->count()}}</span>
+              <span class="label label-danger">{{Auth::user()->employee[0]->assignment->where('status',2)->count()}}</span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header">You have {{Auth::user()->employee[0]->assignment->where('status',0)->count()}} Tasks Pending</li>
+              <li class="header">You Missed{{Auth::user()->employee[0]->assignment->where('status',2)->count()}} Tasks </li>
               <li>
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu">
-                  @foreach(Auth::user()->employee[0]->assignment->where('status',0) as $task)
+                  @foreach(Auth::user()->employee[0]->assignment->where('status',2) as $task)
                     <li>
-                      <a href="#">
-                        <i class="fa fa-user text-green"></i>New Task: {{$task->task}}
+                      <a href="{{route('assign')}}">
+                        <i class="fa fa-user text-green"></i>Missed Task: {{$task->task}}
                       </a>
                     </li>
                   @endforeach
                 </ul>
               </li>
-              <li class="footer"><a href="{{route('assignments',['id'=>Auth::user()->employee[0]->id])}}">View all</a></li>
+              <li class="footer"><a href="{{route('assign')}}">View all</a></li>
             </ul>
           </li>
           @else
