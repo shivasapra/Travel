@@ -41,6 +41,16 @@ class HomeController extends Controller
         $date_today = $dt->timezone('Europe/London');
         // dd($date_today);
         $date = $date_today->toDateString();
+
+        $assignments = assignment::where('date',Carbon::now()->timezone('Europe/London')->addDays(-1)->toDateString())
+                                    ->where('status',0)->get();
+        foreach ($assignments as $assignment) {
+            $new_assignment = new assignment;
+            $new_assignment->date = $date_today;
+            $new_assignment->task = $assignment->task;
+            $new_assignment->task_description = $assignment->task_description;
+            $new_assignment->save();
+        }
         $expenses = expenses::where('auto',0)->get();
         $total_amount = 0;
         foreach ($expenses as $expense) {
@@ -121,7 +131,8 @@ class HomeController extends Controller
                             ->with('paid_invoices',$paid_invoices)
                             ->with('unpaid_invoices',$unpaid_invoices)
                             ->with('wages',$wages)
-                            ->with('assignments',assignment::where('date',Carbon::now()->timezone('Europe/London')->toDateString())->get());
+                            ->with('assignments',assignment::where('date',Carbon::now()->timezone('Europe/London')->toDateString())
+                                                            ->where('employee_id',null)->get());
     }
     public function products(){
         return view('products')->with('products',products::all());
