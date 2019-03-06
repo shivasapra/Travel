@@ -25,6 +25,13 @@ class AssignmentController extends Controller
         Session::flash('info','Accepted');
         return redirect()->back();
     }
+    public function assignmentDone($id){
+        $assignment = assignment::find($id);
+        $assignment->status = 1;
+        $assignment->save();
+        Session::flash('success','Assignment Done');
+        return redirect()->back();
+    }
 
     /**
      * Show the form for creating a new resource.

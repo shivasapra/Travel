@@ -51,6 +51,7 @@ Assign Task
 				<th>Task</th>
 				<th>Task Description</th>
 				<th>Accepted By:</th>
+				<th>Status:</th>
 			</tr>
 			</thead>
 		<tbody>
@@ -69,6 +70,13 @@ Assign Task
 							{{'None'}}
 						@endif
 					</td>
+					<td>
+							@if($assignment->status == 0)
+								<span class="text-danger"><strong>{{'Pending'}}</strong></span>
+							@else
+								<span class="text-success"><strong>{{'Completed'}}</strong></span>
+							@endif
+						</td>
 				</tr>
 				@endforeach
 			@endif
@@ -100,7 +108,11 @@ Assign Task
 						<td>{{$assignment->task}}</td>
 						<td>{{$assignment->task_description}}</td>
 						<td>
-							
+								@if($assignment->status == 0)
+						<a href="{{route('assignmentDone',['id'=>$assignment->id])}}" class="btn btn-xs btn-success">Done</a>
+						@else
+						<span class="text-success"><strong>{{'Completed'}}</strong></span>
+						@endif
 						</td>
 					</tr>
 					@endforeach

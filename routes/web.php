@@ -65,7 +65,7 @@ Route::get('/assignments/{id}',[
 			'as'=>'assignments'
 		]);
 Route::get('/assignment/Done/{id}',[
-			'uses'=> 'HomeController@assignmentDone',
+			'uses'=> 'AssignmentController@assignmentDone',
 			'as'=>'assignmentDone'
 		]);
 
