@@ -337,25 +337,4 @@ class employeeController extends Controller
         return view('employee.assignment')->with('employees',$employees);
     }
 
-    public function assignTaskIndex(){
-        if (employee::all()->count()==0) {
-            Session::flash('info','You must have one client to assign task');
-            return redirect()->route('home');
-        }
-        $employees = employee::where('passport',2)->get();
-        return view('employee.assignment')->with('employees',$employees);
-    }
-
-    public function assignTask(Request $request){
-        $employee = employee::where('unique_id',$request->employee_id)->get();
-        $assignment = new assignment;
-        $assignment->employee_id = $employee[0]->id;
-        $assignment->task = $request->task;
-        $assignment->task_description = $request->task_description;
-        $assignment->save();
-        Session::flash('success','Task Assigned to Employee');
-        return redirect()->route('home');
-    }
-
-    
 }

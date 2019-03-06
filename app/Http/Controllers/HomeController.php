@@ -271,17 +271,4 @@ class HomeController extends Controller
         Session::flash('success','Mail Sent!');
         return redirect()->back();
     }
-
-    public function assignments($id){
-        $assignments = employee::find($id)->assignment;
-        return view('employee.Tasks')->with('assignments',$assignments);
-    }
-
-    public function assignmentDone($id){
-        $assignment = assignment::find($id);
-        $assignment->status = 1;
-        $assignment->save();
-        Session::flash('info','task Completed');
-        return redirect()->back();
-    }
 }
