@@ -121,7 +121,7 @@ class HomeController extends Controller
                             ->with('paid_invoices',$paid_invoices)
                             ->with('unpaid_invoices',$unpaid_invoices)
                             ->with('wages',$wages)
-                            ->with('assignments',assignment::all());
+                            ->with('assignments',assignment::where('date',Carbon::now()->timezone('Europe/London')->toDateString())->get());
     }
     public function products(){
         return view('products')->with('products',products::all());

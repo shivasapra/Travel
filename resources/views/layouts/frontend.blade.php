@@ -287,6 +287,7 @@
             <li><a href="{{route('expenses.get')}}"><i class="fa fa-circle-o"></i>Expenses</a></li>
           </ul>
         </li>
+        <li><a href="{{route('assign')}}"><i class="fa fa-circle-o"></i>Assignments</a></li>
         @if(Auth::user()->admin)
         <li>
           <a href="{{route('status')}}">
