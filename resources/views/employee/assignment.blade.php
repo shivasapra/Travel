@@ -21,7 +21,7 @@ Assign Task
     		<div class="row">
     			<div class="col-md-4">
     				<label for="employee_id">Employee Id:</label>
-    				<input type="text" id="employeeId" name="employee_id" required class="form-control">
+					<input type="date" name="date" required value="{{Carbon\Carbon::now()->toDateString()}}" readonly class="form-control">
     			</div>
     			<div class="col-md-4">
     				<label for="employee_id">Task Name:</label>
@@ -35,7 +35,35 @@ Assign Task
     	</div>
 	</div>
 	<div class="text-center">
-		<button type="submit" class="btn btn-xs btn-warning">Assign Task</button>
+		<button type="submit" class="btn btn-xs btn-warning">Assign Task</button><br><br><hr>
 	</div>
 </form>
+<div class="box box-info">
+	<div class="box-body">
+		
+	<table class="table table-hover mb-0">
+		<thead>
+			<tr>
+				<th>Sno.</th>
+				<th>Date</th>
+				<th>Task</th>
+				<th>Task Description</th>
+			</tr>
+			</thead>
+		<tbody>
+			@if($assignments->count()>0)
+			<?php $i = 1; ?>
+				@foreach($assignments as $assignment)
+				<tr>
+					<td>{{$i++}}</td>
+					<td>{{$assignment->date}}</td>
+					<td>{{$assignment->task}}</td>
+					<td>{{$assignment->task_description}}</td>
+				</tr>
+				@endforeach
+			@endif
+		</tbody>
+	</table>
+	</div>
+</div>
 @stop

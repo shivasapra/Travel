@@ -49,9 +49,13 @@ Route::post('/search/employee',[
 		'as' => 'searchEmployee'
 	]);
 Route::get('/assign/task',[
-			'uses'=> 'employeeController@assignTaskIndex',
+			'uses'=> 'AssignmentController@index',
 			'as'=>'assign'
 		]);
+Route::post('/assign/task',[
+	'uses'=> 'AssignmentController@store',
+	'as'=>'assignTask'
+]);
 Route::get('/assignments/{id}',[
 			'uses'=> 'HomeController@assignments',
 			'as'=>'assignments'
@@ -60,10 +64,7 @@ Route::get('/assignment/Done/{id}',[
 			'uses'=> 'HomeController@assignmentDone',
 			'as'=>'assignmentDone'
 		]);
-Route::post('/assign/task',[
-			'uses'=> 'employeeController@assignTask',
-			'as'=>'assignTask'
-		]);
+
 // Route::get('/search/client',['as'=>'searchClient'],function(){
 // 	dd(true);
 // 	$clients = App\client::where('first_name', 'like', '%'.request('client_name').'%')->get();
