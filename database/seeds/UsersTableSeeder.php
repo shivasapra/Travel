@@ -20,7 +20,7 @@ class UsersTableSeeder extends Seeder
 
         $user = App\User::create([
             'name' => 'himsoft',
-            'email' => 'info@himsoftsolution.',
+            'email' => 'info@himsoftsolution.com',
             'password' => bcrypt('password'),
             'admin' => 1
         ]);
