@@ -30,5 +30,13 @@ class UsersTableSeeder extends Seeder
             'enable' => 'yes',
         ]);
 
+
+        $user = App\products::create([
+            'service' => 'Flight',
+        ]);
+        $user = App\products::create([
+            'service' => 'Visa Services',
+        ]);
+
     }
 }
