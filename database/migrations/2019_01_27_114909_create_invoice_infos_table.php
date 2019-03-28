@@ -16,12 +16,25 @@ class CreateInvoiceInfosTable extends Migration
         Schema::create('invoice_infos', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('invoice_id');
-            $table->string('item_name');
-            $table->string('item_subname');
-            $table->integer('quantity');
-            $table->string('currency');
-            $table->integer('price');
-            $table->integer('amount');
+            
+            $table->string('service_name')->nullable();
+            $table->string('airline_name')->nullable();
+            $table->string('source')->nullable();
+            $table->string('destination')->nullable();
+            $table->string('date_of_travel')->nullable();
+            $table->string('adult')->nullable();
+            $table->string('child')->nullable();
+            $table->string('infant')->nullable();
+            $table->string('name_of_visa_applicant')->nullable();
+            $table->string('passport_origin')->nullable();
+            $table->string('visa_country')->nullable();
+            $table->string('visa_type')->nullable();
+            $table->string('visa_charges')->nullable();
+
+            $table->integer('quantity')->nullable();
+            $table->string('currency')->nullable();
+            $table->integer('price')->nullable();
+            $table->integer('amount')->nullable();
             $table->timestamps();
         });
     }
