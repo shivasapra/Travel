@@ -31,7 +31,8 @@ class expensesController extends Controller
                 $new_expense->amount = $active->amount;
                 $new_expense->date = $date;
                 $new_expense->description = $active->description;
-                $expense->company_name = $request->company_name;
+                // dd($active);
+                $new_expense->company_name = $active->company_name;
                 $new_expense->save();
                 $active->latest = $date;
                 $active->save();
