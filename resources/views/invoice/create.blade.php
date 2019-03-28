@@ -76,8 +76,8 @@ Create Invoice
 				<div class="row">
 					<div class="col-md-4">
 						<div class="form-group">
-							<label for="service_name">Select Service</label>
-							<select name="service_name" id="service" class="form-control"required>
+							<label for="service_name[]">Select Service</label>
+							<select name="service_name[]" id="service" class="form-control"required>
 									<option value="">--select--</option>
 									@if($products->count()>0)
 									@foreach($products as $product)

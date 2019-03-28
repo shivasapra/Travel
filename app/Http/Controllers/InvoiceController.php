@@ -157,11 +157,22 @@ class InvoiceController extends Controller
         $invoice->mail_sent = $date;
         $invoice->save();
 
-        foreach($request->item_name as $index => $item_name){
+        foreach($request->service_name as $index => $service_name){
             $invoice_info = new invoiceInfo;
             $invoice_info->invoice_id = $invoice->id;
-            $invoice_info->item_name = $item_name;
-            $invoice_info->item_subname = $request->item_subname[$index];
+            $invoice_info->service_name = $service_name;
+            $invoice_info->airline_name = $request->airline_name[$index];
+            $invoice_info->source = $request->source[$index];
+            $invoice_info->destination = $request->destination[$index];
+            $invoice_info->date_of_travel = $request->date_of_travel[$index];
+            $invoice_info->adult = $request->adult[$index];
+            $invoice_info->child = $request->child[$index];
+            $invoice_info->infant = $request->infant[$index];
+            $invoice_info->name_of_visa_applicant = $request->name_of_visa_applicant[$index];
+            $invoice_info->passport_origin = $request->passport_origin[$index];
+            $invoice_info->visa_country = $request->visa_country[$index];
+            $invoice_info->visa_type = $request->visa_type[$index];
+            $invoice_info->visa_charges = $request->visa_charges[$index];
             $invoice_info->quantity = $request->quantity[$index];
             $invoice_info->currency = $request->currency[$index];
             $invoice_info->price = $request->price[$index];
@@ -171,12 +182,6 @@ class InvoiceController extends Controller
             else{
                 $invoice_info->amount = substr($request->amount[$index],2,4)*1;
             }
-            // if ($request->status[$index]=='paid') {
-            //     $invoice_info->status = 1;
-            // }
-            // if ($request->status[$index]=='unpaid') {
-            //     $invoice_info->status = 0;
-            // }
             $invoice_info->save();
 
         }
