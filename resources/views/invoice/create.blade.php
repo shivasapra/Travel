@@ -73,66 +73,27 @@ Create Invoice
 		</div>
 		<div class="box box-primary">
 		<div class="box-body">
-			<table class="table table-bordered">
-                <thead>
-                  <tr>
-                    {{-- <th width="7%">Sno.</th> --}}
-                    <th width="15%" style="color:white;font-weight:500;background-color:#0066FF;">Item Name</th>
-                    <th width="15%" style="color:white;font-weight:500;background-color:#0066FF;">Item Sub Name</th>
-                    <th width="7%" style="color:white;font-weight:500;background-color:#0066FF;">Quantity</th>
-                    <th width="8%" style="color:white;font-weight:500;background-color:#0066FF;">Currency</th>
-                    <th width="13%" style="color:white;font-weight:500;background-color:#0066FF;">Price</th>
-                    <th width="12%" style="color:white;font-weight:500;background-color:#0066FF;">Actual Amt.</th>
-                    {{-- <th width="12%" style="color:white;font-weight:500;background-color:#0066FF;">Status</th> --}}
-                  </tr>
-                	</thead>
-                <tbody id="target">
-                	<tr id="row">
-						{{-- <th>1.</th> --}}
-						<td>
-							<select required name="item_name[]" class="form-control" id="">
-								<option value="">--select--</option>
-								@if($products->count()>0)
-								@foreach($products as $product)
-									<option value="{{$product->service}}">{{$product->service}}</option>
-								@endforeach
-								@endif
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="service_name">Select Service</label>
+							<select name="service_name" id="service" class="form-control"required>
+									<option value="">--select--</option>
+									@if($products->count()>0)
+									@foreach($products as $product)
+										<option value="{{$product->service}}">{{$product->service}}</option>
+									@endforeach
+									@endif
 							</select>
-						</td>
-						<td>
-							<select required name="item_subname[]" class="form-control" id="">
-								<option value="">--select--</option>
-								@if($airlines->count()>0)
-								@foreach($airlines as $airline)
-									<option value="{{$airline->name}}">{{$airline->name}}</option>
-								@endforeach
-								@endif
-							
-							</select>
-						</td>
-						<td><input type="text" id="quantity" name='quantity[]' required class="form-control"></td>
-						<td><select name="currency[]" class="form-control" id="currency">
-							<option value="$">$</option>
-							<option value="&#163;" selected>&#163;</option>
-							</select>
-						</td>
-						<td><input id="price" type="text" name='price[]' required class="form-control"></td>
-						<td><input id="amount" type="text" name='amount[]' required class="form-control" readonly></td>
-						{{-- <td><select name="status[]" class="form-control" id="" required>
-							<option value="">--select--</option>
-							<option value='paid'>Paid</option>
-							<option value='unpaid'>UnPaid</option>
-							</select>
-						</td> --}}
-					</tr>
-
-                </tbody>
-	        </table>
-			<div class="text-center"  style="margin-top: 5px">
-			<button class="btn btn-success btn-sm"  type="button" id="add">+</button>
+						</div>
+					</div>
+				</div>
+				<div id="Insert"></div>
 			</div>
-		</div>
-		</div>
+			</div>
+			{{-- <div class="text-center"  style="margin-top: 5px">
+			<button class="btn btn-success btn-sm"  type="button" id="add">Add Service</button><br><br>
+			</div> --}}
 		<div class="box box-primary" id="targetTotal">
 		<div class="box-body">
 			<table class="table table-bordered">
@@ -197,8 +158,24 @@ Create Invoice
 	</form>
 @stop
 @section('js')
+<script>
+
+</script>
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<script type="text/javascript">
+	$(document).ready(function(){
+    $("#service").change(function(){
+			var value = this.value;
+			if (value == 'Flight') {
+				var data = '<div class="row">		<div class="col-md-4">		<div class="form-group">			<label for="airline_name">Airline Name</label>			<input type="text" name="airline_name" required class="form-control">		</div>		</div>		<div class="col-md-4">		<div class="form-group">			<label for="source">Source</label>			<input type="text" name="source" class="form-control">		</div>		</div>		<div class="col-md-4">		<div class="form-group">			<label for="destination">Destination</label>			<input type="text" name="destination" required class="form-control">		</div>		</div>		</div><div class="row">		<div class="col-md-3">		<div class="form-group">			<label for="date">Date</label>			<input type="text" name="date" required class="form-control">		</div>		</div>		<div class="col-md-3">		<div class="form-group">			<label for="adult">Adult</label>			<input type="text" name="adult" class="form-control">		</div>		</div>		<div class="col-md-3">		<div class="form-group">			<label for="child">Child</label>			<input type="text" name="child" required class="form-control">		</div>		</div>		<div class="col-md-3">				<div class="form-group">					<label for="infant">Infant</label>					<input type="text" name="infant" required class="form-control">				</div>				</div>		</div><div class="row">		<div class="col-md-3">		<div class="form-group">	<label for="quantity">Quantity</label>		<input type="text" id="quantity" name="quantity[]" required class="form-control">		</div>		</div>		<div class="col-md-3">			<div class="form-group">	<label for="currency">Currency</label>		<select name="currency[]" class="form-control" id="currency">				<option value="$">$</option>				<option value="&#163;" selected>&#163;</option>			</select>			</div>		</div>		<div class="col-md-3">			<div class="form-group">	<label for="price">Price</label>		<input id="price" type="text" name="price[]" required class="form-control">			</div>		</div>		<div class="col-md-3">			<div class="form-group">	<label for="amount">Amount</label>		<input id="amount" type="text" name="amount[]" required class="form-control" readonly>			</div>		</div></div>';		
+						$("#Insert").html(data);
+			}
+			if (value == 'Visa Services') {
+				var data = '<div class="row">		<div class="col-md-6">		<div class="form-group">			<label for="name_of_visa_applicant">Name Of Visa Applicant</label>			<input type="text" name="name_of_visa_applicant" required class="form-control">		</div>		</div>		<div class="col-md-6">		<div class="form-group">			<label for="passport_origin">Passport Origin</label>			<input type="text" name="passport_origin" class="form-control">		</div>		</div>		</div>		<div class="row">				<div class="col-md-4">				<div class="form-group">					<label for="visa_country">Visa Country</label>					<input type="text" name="visa_country" required class="form-control">				</div>				</div>				<div class="col-md-4">				<div class="form-group">					<label for="visa_type">Visa Type</label>					<input type="text" name="visa_type" class="form-control">				</div>				</div>				<div class="col-md-4">						<div class="form-group">							<label for="visa_charges">Visa Charges</label>							<input charges="text" name="visa_type" class="form-control">						</div>						</div>				</div><div class="row">		<div class="col-md-3">		<div class="form-group">	<label for="quantity">Quantity</label>		<input type="text" id="quantity" name="quantity[]" required class="form-control">		</div>		</div>		<div class="col-md-3">			<div class="form-group">	<label for="currency">Currency</label>		<select name="currency[]" class="form-control" id="currency">				<option value="$">$</option>				<option value="&#163;" selected>&#163;</option>			</select>			</div>		</div>		<div class="col-md-3">			<div class="form-group">	<label for="price">Price</label>		<input id="price" type="text" name="price[]" required class="form-control">			</div>		</div>		<div class="col-md-3">			<div class="form-group">	<label for="amount">Amount</label>		<input id="amount" type="text" name="amount[]" required class="form-control" readonly>			</div>		</div></div>';
+				$("#Insert").html(data);
+			}
+			})
+		});
 	$(document).ready(function(){
     $("#add").click(function(){
     	var options1 = "";
@@ -220,7 +197,7 @@ Create Invoice
     });
 
     $(document).ready(function(){
-    $("#target").hover(function(){
+    $("#targetTotal").hover(function(){
     	
     	for (var i = 0; i < document.getElementsByName("price[]").length; i++) {
     		var actual_amount = document.getElementsByName("price[]")[i].value * document.getElementsByName("quantity[]")[i].value;
@@ -286,6 +263,46 @@ Create Invoice
     	});
     });
 
-
+		
    	</script>
 @stop
+
+		
+
+{{-- <div class="row">
+		<div class="col-md-4">
+		<div class="form-group">
+			<label for="first_name">First Name</label>
+			<input type="text" name='first_name' required class="form-control">
+		</div>
+		</div>
+		<div class="col-md-4">
+		<div class="form-group">
+			<label for="middle_name">Middle Name</label>
+			<input type="text" name='middle_name' class="form-control">
+		</div>
+		</div>
+		<div class="col-md-4">
+		<div class="form-group">
+			<label for="last_name">Last Name</label>
+			<input type="text" name='last_name' required class="form-control">
+		</div>
+		</div>
+		</div>
+		<div class="row">
+		<div class="col-md-6">
+		<div class="form-group">
+			<label for="father_name">Father's Name</label>
+			<input type="text" name='father_name' class="form-control" >
+		</div>
+		</div>
+		<div class="col-md-6">
+		<div class="form-group">
+			<label for="mother_name">Mother's Name</label>
+			<input type="text" name='mother_name' class="form-control">
+		</div>
+		</div>
+		</div>
+		
+		
+</div> --}}
