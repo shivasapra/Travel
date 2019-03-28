@@ -26,9 +26,11 @@ VAT
 								<tr>
 									<td><strong>VAT:</strong></td>
 									<td>
-										<input type="radio" name="enable" value="yes" {{($tax[0]->enable == 'yes')?'checked':''}}>Enable
-										<input type="radio" name="enable" value="no" {{($tax[0]->enable == 'no')?'checked':''}}>Diasble
-										<input type="text" name="tax" value="{{$tax[0]->tax}}">
+										<input type="radio" id="enable" name="enable" value="yes" {{($tax[0]->enable == 'yes')?'checked':''}}>Enable
+										<input type="radio" id="disable" name="enable" value="no" {{($tax[0]->enable == 'no')?'checked':''}}>Diasble
+										<div id="buttonDisable">
+											<input type="text" name="tax" value="{{$tax[0]->tax}}" class="form-group">
+										</div>
 									</td>
 								</tr>
 							</div>
@@ -42,3 +44,20 @@ VAT
 	</div>
 </form>
 @stop
+@section('js')
+		<script>
+		$(document).ready(function(){
+    $("#disable").click(function(){
+			var data = ' '
+    	$("#buttonDisable").html(data);
+    });
+	});
+
+	$(document).ready(function(){
+    $("#enable").click(function(){
+			var data = '<input type="text" name="tax" value="{{$tax[0]->tax}}" class="form-group">'
+    	$("#buttonDisable").html(data);
+    });
+	});
+		</script>
+@endsection
