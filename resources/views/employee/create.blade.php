@@ -467,7 +467,7 @@ Employee Registration
 	    $(document).ready(function(){
 	    $("#nationality").on('keyup',function(){
 	    	var nationality = this.value;
-	    	if (nationality == 'british') {
+	    	if (nationality == 'british' || nationality == 'British' || nationality == 'England' ||  nationality == 'england' || nationality == 'UK' || nationality == 'uk' || nationality == 'U K' || nationality == 'u k' || nationality == 'U.K' || nationality == 'u.k') {
 	    		var data = '';
 	        	$("#optional").html(data);   
 	    	}
