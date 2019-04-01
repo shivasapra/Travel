@@ -122,6 +122,11 @@ Route::post('/update/profile',[
 			'as'=>'update.profile'
 		]);
 
+
+Route::get('/generate/invoice/pdf/{id}',[
+	'uses'=> 'InvoiceController@generatePdf',
+	'as'=>'pdf.invoice'
+	]);
 Route::get('/paidInvoice/report',[
 			'uses'=> 'ReportController@paidInvoice',
 			'as'=>'paidInvoice.report'

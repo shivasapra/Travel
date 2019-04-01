@@ -12,6 +12,7 @@ use App\client;
 use GuzzleHttp;
 use App\settings;
 use Carbon\Carbon;
+use PDF;
 class InvoiceController extends Controller
 {
     /**
@@ -278,6 +279,19 @@ class InvoiceController extends Controller
         Session::flash('success','Invoice Deleted Successfully');
         return redirect()->back()->with('invoices',invoice::all());
     }
+    public function generatePdf($id) {
+        $data = [
+            'tax'=> settings::all(),
+            'invoice'=> invoice::find($id),
+            'products'=> products::all(),
+            'airlines'=> airlines::all(),
+            ];
+        $pdf = PDF::loadView('invoice',$data);
+        // dd();
+        $pdf->save('generated/pdf/invoice.pdf');
+        $pdf->download('invoice.pdf');
+        return "PDF GENERTATED";
+    }
 }
 
 
@@ -294,3 +308,5 @@ class InvoiceController extends Controller
         // dd($json['result'][0]['postcode']);
         // $request = Request::create('http://api.postcodes.io/postcodes/B289EU', 'GET');
         // dd($request);
+
+    
