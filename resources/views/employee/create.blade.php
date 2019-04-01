@@ -196,7 +196,7 @@ Employee Registration
 					<div class="col-md-4">
 					<div class="form-group">
 						<label for="permanent_address">Permanent Home Address</label>
-						<span id="permanent_target"><input type="text" id="Permanent" name='permanent_address' class="form-control"required></span>
+						<span id="permanent_target"><input type="text" id="permanent" name='permanent_address' class="form-control"required></span>
 					</div>
 					</div>
 					<div class="col-md-4">
@@ -475,8 +475,8 @@ Employee Registration
 	    });
 	    $(document).ready(function(){
 	    $("#permanent").on('keyup',function(){
-	    	var nationality = this.value;
-	    	if (nationality != '') {
+	    	var temp = this.value;
+	    	if (temp != '') {
 	    		var data = '<input type="text" id="temporary" name="temporary_address" class="form-control" >';
 	        	$("#temporary_target").html(data);   
 	    	}
@@ -484,8 +484,8 @@ Employee Registration
 	    });
 	    $(document).ready(function(){
 	    $("#temporary").on('keyup',function(){
-	    	var nationality = this.value;
-	    	if (nationality != '') {
+	    	var temp = this.value;
+	    	if (temp != '') {
 	    		var data = '<input type="text" id="permanent" name="permanent_address" class="form-control" >';
 	        	$("#permanent_target").html(data);   
 	    	}
