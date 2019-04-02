@@ -61,8 +61,8 @@ Invoice
           <table class="table table-striped">
             <thead>
             <tr>
-                <th width="15%" style="color:white;font-weight:500;background-color:#0066FF;">Item Name</th>
-                <th width="15%" style="color:white;font-weight:500;background-color:#0066FF;">Item Sub Name</th>
+                <th width="15%" style="color:white;font-weight:500;background-color:#0066FF;">Service Name</th>
+                <th width="15%" style="color:white;font-weight:500;background-color:#0066FF;"> Sub Name</th>
                 <th width="7%" style="color:white;font-weight:500;background-color:#0066FF;">Quantity</th>
                 {{-- <th width="8%">Currency</th> --}}
                 <th width="13%" style="color:white;font-weight:500;background-color:#0066FF;">Price</th>
@@ -73,8 +73,12 @@ Invoice
             <tbody>
             @foreach($invoice->invoiceInfo as $info)
             <tr id="row">
-            <td>{{$info->item_name}}</td>
-            <td>{{$info->item_subname}}</td>
+            <td>{{$info->service_name}}</td>
+            @if($info->service_name != null)
+            <td>{{$info->airline_name}}</td>
+            @elseif($info->service_name != null)
+            <td>{{$info->visa_type}}</td>
+            @endif
             <td>{{$info->quantity}}</td>
             {{-- <td>{{$invoice->currency}}</td> --}}
             <td>{{$info->price}}</td>
@@ -195,7 +199,7 @@ Invoice
       <!-- this row will not appear when printing -->
       <div class="row no-print">
         <div class="col-xs-12">
-          <a href="{{route('invoice.print',['id'=>$invoice->id])}}" target="_blank" class="btn btn-primary pull-right"><i class="fa fa-print"></i> Print</a>
+          <a href="{{ route('pdf.invoice',['id'=>$invoice->id]) }}" target="_blank" class="btn btn-primary pull-right"><i class="fa fa-print"></i> Print</a>
           {{-- <button type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment
           </button>
           <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">

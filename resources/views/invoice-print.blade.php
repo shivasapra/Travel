@@ -51,8 +51,8 @@ Invoice
           <table class="table table-striped">
             <thead>
             <tr>
-                <th width="15%" style="color:white;font-weight:500;background-color:#0066FF;">Item Name</th>
-                <th width="15%" style="color:white;font-weight:500;background-color:#0066FF;">Item Sub Name</th>
+                <th width="15%" style="color:white;font-weight:500;background-color:#0066FF;">Service Name</th>
+                <th width="15%" style="color:white;font-weight:500;background-color:#0066FF;">Sub Name</th>
                 <th width="7%" style="color:white;font-weight:500;background-color:#0066FF;">Quantity</th>
                 {{-- <th width="8%">Currency</th> --}}
                 <th width="13%" style="color:white;font-weight:500;background-color:#0066FF;">Price</th>
@@ -62,9 +62,8 @@ Invoice
             </thead>
             <tbody>
               @foreach($invoice->invoiceInfo as $info)
-            <tr id="row">
-            <td>{{$info->item_name}}</td>
-            <td>{{$info->item_subname}}</td>
+            <tr id="row"> 
+                <td>{{$info->airline_name}}</td>
             <td>{{$info->quantity}}</td>
             {{-- <td>{{$invoice->currency}}</td> --}}
             <td>{{$info->price}}</td>
