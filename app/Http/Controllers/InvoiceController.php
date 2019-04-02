@@ -169,6 +169,7 @@ class InvoiceController extends Controller
             $invoice_info->adult = $request->adult[$index];
             $invoice_info->child = $request->child[$index];
             $invoice_info->infant = $request->infant[$index];
+            $invoice_info->infant_dob = $request->infant_dob[$index];
             $invoice_info->name_of_visa_applicant = $request->name_of_visa_applicant[$index];
             $invoice_info->passport_origin = $request->passport_origin[$index];
             $invoice_info->visa_country = $request->visa_country[$index];

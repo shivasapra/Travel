@@ -25,6 +25,7 @@ class CreateInvoiceInfosTable extends Migration
             $table->string('adult')->nullable();
             $table->string('child')->nullable();
             $table->string('infant')->nullable();
+            $table->Date('infant_dob')->nullable();
             $table->string('name_of_visa_applicant')->nullable();
             $table->string('passport_origin')->nullable();
             $table->string('visa_country')->nullable();
