@@ -161,7 +161,8 @@ class InvoiceController extends Controller
         foreach($request->service_name as $index => $service_name){
             $invoice_info = new invoiceInfo;
             $invoice_info->invoice_id = $invoice->id;
-            $invoice_info->service_name = $service_name;
+            $invoice_info->service_name = $service_name[$index];
+
             $invoice_info->airline_name = $request->airline_name[$index];
             $invoice_info->source = $request->source[$index];
             $invoice_info->destination = $request->destination[$index];
@@ -170,11 +171,29 @@ class InvoiceController extends Controller
             $invoice_info->child = $request->child[$index];
             $invoice_info->infant = $request->infant[$index];
             $invoice_info->infant_dob = $request->infant_dob[$index];
+
             $invoice_info->name_of_visa_applicant = $request->name_of_visa_applicant[$index];
             $invoice_info->passport_origin = $request->passport_origin[$index];
             $invoice_info->visa_country = $request->visa_country[$index];
             $invoice_info->visa_type = $request->visa_type[$index];
             $invoice_info->visa_charges = $request->visa_charges[$index];
+
+            $invoice->hotel_city = $request->hotel_city[$index];
+            $invoice->hotel_country = $request->hotel_country[$index];
+            $invoice->hotel_name = $request->hotel_name[$index];
+            $invoice->check_in_date = $request->check_in_date[$index];
+            $invoice->check_out_date = $request->check_out_date[$index];
+            $invoice->no_of_children = $request->no_of_children[$index];
+            $invoice->no_of_rooms = $request->no_of_rooms[$index];
+
+            $invoice->name_of_insurance_applicant = $request->name_of_insurance_applicant[$index];
+            
+            $invoice->insurance_remarks = $request->insurance_remarks[$index];
+            $invoice->local_sight_sceen_remarks = $request->local_sight_sceen_remarks[$index];
+            $invoice->other_facilities_remarks = $request->other_facilities_remarks[$index];
+            $invoice->car_rental_remarks = $request->car_rental_remarks[$index];
+            $invoice->local_transport_remarks = $request->local_transport_remarks[$index];
+
             $invoice_info->quantity = $request->quantity[$index];
             $invoice_info->currency = $request->currency[$index];
             $invoice_info->price = $request->price[$index];
