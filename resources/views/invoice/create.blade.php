@@ -71,29 +71,31 @@ Create Invoice
 			</div>
 		</div>
 		</div>
-		<div class="box box-primary">
-		<div class="box-body">
-				<div class="row">
-					<div class="col-md-4">
-						<div class="form-group">
-							<label for="service_name[]">Select Service</label>
-							<select name="service_name[]" id="service" class="form-control"required>
-									<option value="">--select--</option>
-									@if($products->count()>0)
-									@foreach($products as $product)
-										<option value="{{$product->service}}">{{$product->service}}</option>
-									@endforeach
-									@endif
-							</select>
+		<div id="target">
+			<div class="box box-primary">
+			<div class="box-body">
+					<div class="row">
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="service_name[]">Select Service</label>
+								<select name="service_name[]" id="service" class="form-control"required>
+										<option value="">--select--</option>
+										@if($products->count()>0)
+										@foreach($products as $product)
+											<option value="{{$product->service}}">{{$product->service}}</option>
+										@endforeach
+										@endif
+								</select>
+							</div>
 						</div>
 					</div>
+					<div id="Insert"></div>
 				</div>
-				<div id="Insert"></div>
+				</div>
 			</div>
+			<div class="text-center"  style="margin-top: 5px">
+				<button class="btn btn-success btn-sm"  type="button" id="add">Add Service</button><br><br>
 			</div>
-			{{-- <div class="text-center"  style="margin-top: 5px">
-			<button class="btn btn-success btn-sm"  type="button" id="add">Add Service</button><br><br>
-			</div> --}}
 		<div class="box box-primary" id="targetTotal">
 		<div class="box-body">
 			<table class="table table-bordered">
@@ -164,6 +166,18 @@ Create Invoice
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function(){
+    $("#add").click(function(){
+    	var append = '<div class="box box-primary">			<div class="box-body">					<div class="row">						<div class="col-md-4">							<div class="form-group">								<label for="service_name[]">Select Service</label>								<select name="service_name[]" id="service" class="form-control"required>										<option value="">--select--</option>										@if($products->count()>0)										@foreach($products as $product)											<option value="{{$product->service}}">{{$product->service}}</option>										@endforeach										@endif								</select>							</div>						</div>					</div>			<div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					</div>	</div>				</div>';
+        $("#target").append(append);   
+        });
+    });
+	function SomeDeleteRowFunction(btndel) {
+    if (typeof(btndel) == "object") {
+        $(btndel).closest('.box').remove();
+    } else {
+        return false;
+    }}
+	$(document).ready(function(){
     $("#service").change(function(){
 			var value = this.value;
 			if (value == 'Flight') {
@@ -174,27 +188,12 @@ Create Invoice
 				var data = '<div class="row">		<div class="col-md-6">		<div class="form-group">			<label for="name_of_visa_applicant">Name Of Visa Applicant</label>			<input type="text" name="name_of_visa_applicant" required class="form-control">		</div>		</div>		<div class="col-md-6">		<div class="form-group">			<label for="passport_origin">Passport Origin</label>			<input type="text" name="passport_origin" class="form-control">		</div>		</div>		</div>		<div class="row">				<div class="col-md-4">				<div class="form-group">					<label for="visa_country">Visa Country</label>					<input type="text" name="visa_country" required class="form-control">				</div>				</div>				<div class="col-md-4">				<div class="form-group">					<label for="visa_type">Visa Type</label>					<input type="text" name="visa_type" class="form-control">				</div>				</div>				<div class="col-md-4">						<div class="form-group">							<label for="visa_charges">Visa Charges</label>							<input charges="text" name="visa_type" class="form-control">						</div>						</div>				</div><div class="row">		<div class="col-md-3">		<div class="form-group">	<label for="quantity">Quantity</label>		<input type="text" id="quantity" name="quantity[]" required class="form-control">		</div>		</div>		<div class="col-md-3">			<div class="form-group">	<label for="currency">Currency</label>		<select name="currency[]" class="form-control" id="currency">				<option value="$">$</option>				<option value="&#163;" selected>&#163;</option>			</select>			</div>		</div>		<div class="col-md-3">			<div class="form-group">	<label for="price">Price</label>		<input id="price" type="text" name="price[]" required class="form-control">			</div>		</div>		<div class="col-md-3">			<div class="form-group">	<label for="amount">Amount</label>		<input id="amount" type="text" name="amount[]" required class="form-control" readonly>			</div>		</div></div>';
 				$("#Insert").html(data);
 			}
+			if (value == '') {
+				var data = '';
+				$("#Insert").html(data);
+			}
 			})
 		});
-	$(document).ready(function(){
-    $("#add").click(function(){
-    	var options1 = "";
-    		@if($products->count()>0)
-				@foreach($products as $product)
-				options1 = options1 + "<option value='{{$product->service}}'>{{$product->service}}</option>";
-				@endforeach
-			@endif
-		var options2 = "";
-		@if($airlines->count()>0)
-			@foreach($airlines as $airline)
-			options2 = options2 + "<option value='{{$airline->name}}'>{{$airline->name}}</option>";
-			@endforeach
-		@endif
-		var currency = document.getElementById('currency').value;
-    	var append = '<tr id="row"><td><select required name="item_name[]" class="form-control" id=""><option value="">--select--</option>'+options1+'</select></td><td><select required name="item_subname[]" class="form-control" id=""><option value="">--select--</option>'+options2+'</select></td><td><input type="text" name="quantity[]" id="quantity" required class="form-control"></td><td><select name="currency[]" class="form-control" id=""><option value='+currency+'>'+currency+'</option></select></td><td><input type="text" name="price[]" id="price" required class="form-control"></td><td><input id="amount" type="text" name="amount[]" required class="form-control" readonly></td></tr>';
-        $("#target").append(append);   
-        });
-    });
 
     $(document).ready(function(){
     $("#targetTotal").hover(function(){
@@ -263,6 +262,7 @@ Create Invoice
     	});
     });
 
+	
 		
    	</script>
 @stop
