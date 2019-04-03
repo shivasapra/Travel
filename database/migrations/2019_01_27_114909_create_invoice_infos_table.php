@@ -63,9 +63,6 @@ class CreateInvoiceInfosTable extends Migration
 
             $table->string('local_transport_amount')->nullable();
             $table->string('local_transport_remarks')->nullable();
-
-            
-            $table->string('currency')->nullable();
             
             $table->timestamps();
         });
