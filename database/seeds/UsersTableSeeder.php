@@ -52,6 +52,9 @@ class UsersTableSeeder extends Seeder
         $product = App\products::create([
             'service' => 'Other Facilities',
         ]);
+        $product = App\products::create([
+            'service' => 'Car Rental',
+        ]);
 
     }
 }
