@@ -189,6 +189,30 @@ Create Invoice
 				var data = '<div class="box-body"> <div class="row">			<div class="col-md-4">				<div class="form-group">					<label for="service_name[]">Select Service</label>					<select name="service_name[]" class="form-control service" required onChange="SelectService(this);">							<option value="">--select--</option>							@if($products->count()>0)							@foreach($products as $product)								<option value="{{$product->service}}" {{($product->service == "Visa Services")?"selected":''}}>{{$product->service}}</option>							@endforeach							@endif					</select>				</div>			</div>		</div><div class="row">	<div class="col-md-6">		<div class="form-group">			<label for="name_of_visa_applicant">Name Of Visa Applicant</label>			<input type="text" name="name_of_visa_applicant" required class="form-control">		</div>		</div>		<div class="col-md-6">		<div class="form-group">			<label for="passport_origin">Passport Origin</label>			<input type="text" name="passport_origin" class="form-control">		</div>		</div>		</div>		<div class="row">				<div class="col-md-4">				<div class="form-group">					<label for="visa_country">Visa Country</label>					<input type="text" name="visa_country" required class="form-control">				</div>				</div>				<div class="col-md-4">				<div class="form-group">					<label for="visa_type">Visa Type</label>					<input type="text" name="visa_type" class="form-control">				</div>				</div>				<div class="col-md-4">						<div class="form-group">							<label for="visa_charges">Visa Charges</label>							<input charges="text" name="visa_type" class="form-control">						</div>						</div>				</div><div class="row">		<div class="col-md-3">		<div class="form-group">	<label for="quantity">Quantity</label>		<input type="text" id="quantity" name="quantity[]" required class="form-control">		</div>		</div>		<div class="col-md-3">			<div class="form-group">	<label for="currency">Currency</label>		<select name="currency[]" class="form-control" id="currency">				<option value="$">$</option>				<option value="&#163;" selected>&#163;</option>			</select>			</div>		</div>		<div class="col-md-3">			<div class="form-group">	<label for="price">Price</label>		<input id="price" type="text" name="price[]" required class="form-control">			</div>		</div>		<div class="col-md-3">			<div class="form-group">	<label for="amount">Amount</label>		<input id="amount" type="text" name="amount[]" required class="form-control" readonly>			</div>		</div></div><div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					</div>	</div>				</div></div>';
 				$(test).closest(".box").html(data);
 			}
+			if (value == 'Hotel') {
+				var data = '<div class="box-body"> <div class="row">			<div class="col-md-4">				<div class="form-group">					<label for="service_name[]">Select Service</label>					<select name="service_name[]" class="form-control service" required onChange="SelectService(this);">							<option value="">--select--</option>							@if($products->count()>0)							@foreach($products as $product)								<option value="{{$product->service}}" {{($product->service == "Hotel")?"selected":''}}>{{$product->service}}</option>							@endforeach							@endif					</select>				</div>			</div>		</div> <div class="row">		<div class="col-md-6">		<div class="form-group">			<label for="hotel_city">City</label>			<input type="text" name="hotel_city" required class="form-control">		</div>		</div>		<div class="col-md-6">		<div class="form-group">			<label for="hotel_country">Country</label>			<input type="text" name="hotel_country" class="form-control">		</div>		</div>		</div>		<div class="row">		<div class="col-md-4">		<div class="form-group">			<label for="hotel_name">Name</label>			<input type="text" name="hotel_name" required class="form-control">		</div>		</div>		<div class="col-md-4">		<div class="form-group">			<label for="check_in_date">Check In Date</label>			<input type="date" name="check_in_date" required class="form-control">		</div>		</div>		<div class="col-md-4">		<div class="form-group">			<label for="check_out_date">Check Out Date</label>			<input type="date" name="check_out_date" required class="form-control">		</div>		</div>		</div>		<div class="row">		<div class="col-md-3">		<div class="form-group">			<label for="no_of_children">No. Of Children</label>			<input type="text" name="no_of_children" class="form-control" >		</div>		</div>		<div class="col-md-3">		<div class="form-group">			<label for="no_of_rooms">No. Of Rooms</label>			<input type="text" name="no_of_rooms" class="form-control">		</div>		</div>	<div class="col-md-3">			<div class="form-group">	<label for="currency">Currency</label>		<select name="currency[]" class="form-control" id="currency">				<option value="$">$</option>				<option value="&#163;" selected>&#163;</option>			</select>			</div>		</div>	<div class="col-md-3">		<div class="form-group">			<label for="amount[]">Amount</label>			<input type="text" name="amount[]" class="form-control">		</div>		</div>		</div>			</div>		</div></div><div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					</div>	</div>				</div></div>';		
+				$(test).closest(".box").html(data);
+			}
+			if (value == 'Insurance') {
+				var data = '<div class="box-body"> <div class="row">			<div class="col-md-4">				<div class="form-group">					<label for="service_name[]">Select Service</label>					<select name="service_name[]" class="form-control service" required onChange="SelectService(this);">							<option value="">--select--</option>							@if($products->count()>0)							@foreach($products as $product)								<option value="{{$product->service}}" {{($product->service == "Insurance")?"selected":''}}>{{$product->service}}</option>							@endforeach							@endif					</select>				</div>			</div>		</div><div class="row">	<div class="col-md-4">		<div class="form-group">			<label for="name_of_insurance_applicant">Name Of Insurance Applicant</label>			<input type="text" name="name_of_insurance_applicant" required class="form-control">		</div>		</div>		<div class="col-md-4">		<div class="form-group">			<label for="insurance_remarks">Passport Origin</label>			<input type="text" name="insurance_remarks" class="form-control">		</div>		</div>						<div class="col-md-4">				<div class="form-group">					<label for="amount[]">Insurance Amount</label>					<input type="text" name="amount[]" required class="form-control">				</div>				</div>				</div><div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					</div>	</div>				</div></div>';
+				$(test).closest(".box").html(data);
+			}
+			if (value == 'Local Sight Sceen') {
+				var data = '<div class="box-body"> <div class="row">			<div class="col-md-4">				<div class="form-group">					<label for="service_name[]">Select Service</label>					<select name="service_name[]" class="form-control service" required onChange="SelectService(this);">							<option value="">--select--</option>							@if($products->count()>0)							@foreach($products as $product)								<option value="{{$product->service}}" {{($product->service == "Local Sight Sceen")?"selected":''}}>{{$product->service}}</option>							@endforeach							@endif					</select>				</div>			</div>		</div><div class="row">	<div class="col-md-6">		<div class="form-group">			<label for="local_sight_sceen_remarks">Local Sight Sceen Remarks</label>			<input type="text" name="local_sight_sceen_remarks" required class="form-control">		</div>		</div>		<div class="col-md-6">				<div class="form-group">					<label for="amount[]">Sight Sceen Charges</label>					<input type="text" name="amount[]" required class="form-control">				</div>				</div>				</div><div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					</div>	</div>				</div></div>';
+				$(test).closest(".box").html(data);
+			}
+			if (value == 'Local Transport') {
+				var data = '<div class="box-body"> <div class="row">			<div class="col-md-4">				<div class="form-group">					<label for="service_name[]">Select Service</label>					<select name="service_name[]" class="form-control service" required onChange="SelectService(this);">							<option value="">--select--</option>							@if($products->count()>0)							@foreach($products as $product)								<option value="{{$product->service}}" {{($product->service == "Local Transport")?"selected":''}}>{{$product->service}}</option>							@endforeach							@endif					</select>				</div>			</div>		</div><div class="row">	<div class="col-md-6">		<div class="form-group">			<label for="local_transport_remarks">Local Transport Remarks</label>			<input type="text" name="local_transport_remarks" required class="form-control">		</div>		</div>		<div class="col-md-6">				<div class="form-group">					<label for="amount[]">Transport Charges</label>					<input type="text" name="amount[]" required class="form-control">				</div>				</div>				</div><div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					</div>	</div>				</div></div>';
+				$(test).closest(".box").html(data);
+			}
+			if (value == 'Car Rental') {
+				var data = '<div class="box-body"> <div class="row">			<div class="col-md-4">				<div class="form-group">					<label for="service_name[]">Select Service</label>					<select name="service_name[]" class="form-control service" required onChange="SelectService(this);">							<option value="">--select--</option>							@if($products->count()>0)							@foreach($products as $product)								<option value="{{$product->service}}" {{($product->service == "Car Rental")?"selected":''}}>{{$product->service}}</option>							@endforeach							@endif					</select>				</div>			</div>		</div><div class="row">	<div class="col-md-6">		<div class="form-group">			<label for="car_rental_remarks">Car Rental Remarks</label>			<input type="text" name="car_rental_remarks" required class="form-control">		</div>		</div>		<div class="col-md-6">				<div class="form-group">					<label for="amount[]">Car Rental Charges</label>					<input type="text" name="amount[]" required class="form-control">				</div>				</div>				</div><div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					</div>	</div>				</div></div>';
+				$(test).closest(".box").html(data);
+			}
+			if (value == 'Other Facilities') {
+				var data = '<div class="box-body"> <div class="row">			<div class="col-md-4">				<div class="form-group">					<label for="service_name[]">Select Service</label>					<select name="service_name[]" class="form-control service" required onChange="SelectService(this);">							<option value="">--select--</option>							@if($products->count()>0)							@foreach($products as $product)								<option value="{{$product->service}}" {{($product->service == "Other Facilities")?"selected":''}}>{{$product->service}}</option>							@endforeach							@endif					</select>				</div>			</div>		</div><div class="row">	<div class="col-md-6">		<div class="form-group">			<label for="other_facilities_remarks">Other Facilities Remarks</label>			<input type="text" name="other_facilities_remarks" required class="form-control">		</div>		</div>		<div class="col-md-6">				<div class="form-group">					<label for="amount[]">Other Facilities Charges</label>					<input type="text" name="amount[]" required class="form-control">				</div>				</div>				</div><div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					</div>	</div>				</div></div>';
+				$(test).closest(".box").html(data);
+			}
 			if (value == '') {
 				var data = '';
 				$(test).closest(".box").html(data);
@@ -270,39 +294,57 @@ Create Invoice
 		
 
 {{-- <div class="row">
-		<div class="col-md-4">
+		<div class="col-md-6">
 		<div class="form-group">
-			<label for="first_name">First Name</label>
-			<input type="text" name='first_name' required class="form-control">
+			<label for="hotel_city">City</label>
+			<input type="text" name='hotel_city' required class="form-control">
 		</div>
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-6">
 		<div class="form-group">
-			<label for="middle_name">Middle Name</label>
-			<input type="text" name='middle_name' class="form-control">
-		</div>
-		</div>
-		<div class="col-md-4">
-		<div class="form-group">
-			<label for="last_name">Last Name</label>
-			<input type="text" name='last_name' required class="form-control">
+			<label for="hotel_country">Country</label>
+			<input type="text" name='hotel_country' class="form-control">
 		</div>
 		</div>
 		</div>
 		<div class="row">
-		<div class="col-md-6">
+		<div class="col-md-4">
 		<div class="form-group">
-			<label for="father_name">Father's Name</label>
-			<input type="text" name='father_name' class="form-control" >
+			<label for="hotel_name">Name</label>
+			<input type="text" name='hotel_name' required class="form-control">
 		</div>
 		</div>
-		<div class="col-md-6">
+		<div class="col-md-4">
 		<div class="form-group">
-			<label for="mother_name">Mother's Name</label>
-			<input type="text" name='mother_name' class="form-control">
+			<label for="check_in_date">Check In Date</label>
+			<input type="date" name='check_in_date' required class="form-control">
+		</div>
+		</div>
+		<div class="col-md-4">
+		<div class="form-group">
+			<label for="check_out_date">Check Out Date</label>
+			<input type="date" name='check_out_date' required class="form-control">
 		</div>
 		</div>
 		</div>
-		
-		
-</div> --}}
+		<div class="row">
+		<div class="col-md-4">
+		<div class="form-group">
+			<label for="no_of_children">No. Of Children</label>
+			<input type="text" name='no_of_children' class="form-control" >
+		</div>
+		</div>
+		<div class="col-md-4">
+		<div class="form-group">
+			<label for="no_of_rooms">No. Of Rooms</label>
+			<input type="text" name='no_of_rooms' class="form-control">
+		</div>
+		</div>
+		<div class="col-md-4">
+		<div class="form-group">
+			<label for="amount[]">Amount</label>
+			<input type="text" name='amount[]' class="form-control">
+		</div>
+		</div>
+		</div>
+ --}}
