@@ -163,6 +163,10 @@ class InvoiceController extends Controller
         $visa_counter=0;
         $insurance_counter=0;
         $hotel_counter=0;
+        $local_sight_sceen_counter=0;
+        $local_transport_counter=0;
+        $car_rental_counter=0;
+        $other_facilities_counter=0;
         for ($k = 0; $k < count($request->service_name); $k++) {
             if ($request->service_name[$k]=='Flight') {
                 $invoice_info = new invoiceInfo;
@@ -189,7 +193,15 @@ class InvoiceController extends Controller
                         $invoice_info->invoice_id = $invoice->id;
                         $invoice_info->service_name = 'Visa Services';
 
-
+                        if ($service_name == 'Visa Services') {
+                            $invoice_info->name_of_visa_applicant = $request->name_of_visa_applicant[$visa_counter];
+                            $invoice_info->passport_origin = $request->passport_origin[$visa_counter];
+                            $invoice_info->visa_country = $request->visa_country[$visa_counter];
+                            $invoice_info->visa_type = $request->visa_type[$visa_counter];
+                            $invoice_info->visa_charges = $request->visa_charges[$visa_counter];
+                            $invoice_info->service_charge = $request->service_charge[$visa_counter];
+                            $invoice_info->visa_amount = $request->visa_amount[$visa_counter];
+                        }
                         $invoice_info->save();
                         $visa_counter++;
             }
@@ -199,7 +211,11 @@ class InvoiceController extends Controller
                         $invoice_info->invoice_id = $invoice->id;
                         $invoice_info->service_name = 'Insurance';
 
-
+                        if ($service_name == 'Insurance') {
+                            $invoice_info->name_of_insurance_applicant = $request->name_of_insurance_applicant[$insurance_counter];
+                            $invoice_info->insurance_amount = $request->insurance_amount[$insurance_counter];
+                            $invoice_info->insurance_remarks = $request->insurance_remarks[$insurance_counter];
+                        }
                         $invoice_info->save();
                         $insurance_counter++;
             }
@@ -209,80 +225,73 @@ class InvoiceController extends Controller
                         $invoice_info->invoice_id = $invoice->id;
                         $invoice_info->service_name = 'Hotel';
 
-
+                        if ($service_name == 'Hotel') {
+                            $invoice_info->hotel_city = $request->hotel_city[$hotel_counter];
+                            $invoice_info->hotel_country = $request->hotel_country[$hotel_counter];
+                            $invoice_info->hotel_name = $request->hotel_name[$hotel_counter];
+                            $invoice_info->check_in_date = $request->check_in_date[$hotel_counter];
+                            $invoice_info->check_out_date = $request->check_out_date[$hotel_counter];
+                            $invoice_info->no_of_children = $request->no_of_children[$hotel_counter];
+                            $invoice_info->no_of_rooms = $request->no_of_rooms[$hotel_counter];
+                            $invoice_info->hotel_amount = $request->hotel_amount[$hotel_counter];
+                        }
                         $invoice_info->save();
                         $hotel_counter++;
             }
+
+            if ($request->service_name[$k]=='Local Sight Sceen') {
+                $invoice_info = new invoiceInfo;
+                        $invoice_info->invoice_id = $invoice->id;
+                        $invoice_info->service_name = 'Local Sight Sceen';
+
+                        if ($service_name == 'Local Sight Sceen') {
+                            $invoice_info->local_sight_sceen_amount = $request->local_sight_sceen_amount[$local_sight_sceen];
+                            $invoice_info->local_sight_sceen_remarks = $request->local_sight_sceen_remarks[$local_sight_sceen];
+                        }
+                        $invoice_info->save();
+                        $local_sight_sceen_counter++;
+            }
+
+            if ($request->service_name[$k]=='Local Transport') {
+                $invoice_info = new invoiceInfo;
+                        $invoice_info->invoice_id = $invoice->id;
+                        $invoice_info->service_name = 'Local Transport';
+
+                        if ($service_name == 'Local Transport') {
+                            $invoice_info->local_transport_amount = $request->local_transport_amount[$local_transport_counter];
+                            $invoice_info->local_transport_remarks = $request->local_transport_remarks[$local_transport_counter];
+                        }
+                        $invoice_info->save();
+                        $local_transport_counter++;
+            }
+
+            if ($request->service_name[$k]=='Car Rental') {
+                $invoice_info = new invoiceInfo;
+                        $invoice_info->invoice_id = $invoice->id;
+                        $invoice_info->service_name = 'Car Rental';
+
+                        if ($service_name == 'Car Rental') {
+                            $invoice_info->car_rental_amount = $request->car_rental_amount[$car_rental_counter];
+                            $invoice_info->car_rental_remarks = $request->car_rental_remarks[$car_rental_counter];
+                        }
+                        $invoice_info->save();
+                        $car_rental_counter++;
+            }
+
+            if ($request->service_name[$k]=='Other Facilities') {
+                $invoice_info = new invoiceInfo;
+                        $invoice_info->invoice_id = $invoice->id;
+                        $invoice_info->service_name = 'Other Facilities';
+
+                        if ($service_name == 'Other Facilities') {
+                            $invoice_info->other_facilities_amount = $request->other_facilities_amount[$other_facilities_counter];
+                            $invoice_info->other_facilities_remarks = $request->other_facilities_remarks[$other_facilities_counter];
+                        }
+                        $invoice_info->save();
+                        $other_facilities_counter++;
+            }
         }
-        // foreach($request->service_name == 'Flight' as $index => $service_name){
-        //     $invoice_info = new invoiceInfo;
-        //     $invoice_info->invoice_id = $invoice->id;
-        //     $invoice_info->service_name = $service_name;
 
-
-        //     $invoice_info->airline_name = $request->airline_name[$index];
-        //     $invoice_info->source = $request->source[$index];
-        //     $invoice_info->destination = $request->destination[$index];
-        //     $invoice_info->date_of_travel = $request->date_of_travel[$index];
-        //     $invoice_info->adult = $request->adult[$index];
-        //     $invoice_info->child = $request->child[$index];
-        //     $invoice_info->infant = $request->infant[$index];
-        //     $invoice_info->infant_dob = $request->infant_dob[$index];
-        //     $invoice_info->flight_amount = $request->flight_amount[$index];
-        //     $invoice_info->flight_quantity = $request->flight_quantity[$index];
-        //     $invoice_info->flight_price = $request->flight_price[$index];
-        //     $invoice_info->save();
-        // }
-        // if ($service_name == 'Visa Services') {
-        //     $invoice_info->name_of_visa_applicant = $request->name_of_visa_applicant[$index];
-        //     $invoice_info->passport_origin = $request->passport_origin[$index];
-        //     $invoice_info->visa_country = $request->visa_country[$index];
-        //     $invoice_info->visa_type = $request->visa_type[$index];
-        //     $invoice_info->visa_charges = $request->visa_charges[$index];
-        //     $invoice_info->service_charge = $request->service_charge[$index];
-        //     $invoice_info->visa_amount = $request->visa_amount[$index];
-        // }
-
-        // if ($service_name == 'Hotel') {
-        //     $invoice_info->hotel_city = $request->hotel_city[$index];
-        //     $invoice_info->hotel_country = $request->hotel_country[$index];
-        //     $invoice_info->hotel_name = $request->hotel_name[$index];
-        //     $invoice_info->check_in_date = $request->check_in_date[$index];
-        //     $invoice_info->check_out_date = $request->check_out_date[$index];
-        //     $invoice_info->no_of_children = $request->no_of_children[$index];
-        //     $invoice_info->no_of_rooms = $request->no_of_rooms[$index];
-        //     $invoice_info->hotel_amount = $request->hotel_amount[$index];
-        // }
-
-        // if ($service_name == 'Insurance') {
-        //     $invoice_info->name_of_insurance_applicant = $request->name_of_insurance_applicant[$index];
-        //     $invoice_info->insurance_amount = $request->insurance_amount[$index];
-        //     $invoice_info->insurance_remarks = $request->insurance_remarks[$index];
-        // }
-
-        // if ($service_name == 'Local Sight Sceen') {
-        //     $invoice_info->local_sight_sceen_amount = $request->local_sight_sceen_amount[$index];
-        //     $invoice_info->local_sight_sceen_remarks = $request->local_sight_sceen_remarks[$index];
-        // }
-
-        // if ($service_name == 'Other Facilities') {
-        //     $invoice_info->other_facilities_amount = $request->other_facilities_amount[$index];
-        //     $invoice_info->other_facilities_remarks = $request->other_facilities_remarks[$index];
-        // }
-
-        // if ($service_name == 'Car Rental') {
-        //     $invoice_info->car_rental_amount = $request->car_rental_amount[$index];
-        //     $invoice_info->car_rental_remarks = $request->car_rental_remarks[$index];
-        // }
-
-        // if ($service_name == 'Local Transport') {
-        //     $invoice_info->local_transport_amount = $request->local_transport_amount[$index];
-        //     $invoice_info->local_transport_remarks = $request->local_transport_remarks[$index];
-        // }
-
-        //     $invoice_info->save();
-
-        // }
         Session::flash('success','Invoice Created Successfully');
             return redirect()->route('invoice');
 
