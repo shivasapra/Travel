@@ -126,14 +126,9 @@ class InvoiceController extends Controller
         $invoice->invoice_no = $request->invoice_no;
         $invoice->discount = $request->discount;
         $invoice->currency = $request->currency;
-        if ($request->currency[0] == '$') {
-            $invoice->total = substr($request->total,1,3)*1;
-            $invoice->discounted_total = substr($request->discounted_total,1,3)*1;
-        }
-        else{
-            $invoice->total = substr($request->total,2,4)*1;
-            $invoice->discounted_total = substr($request->discounted_total,2,4)*1;
-        }
+        $invoice->total = $request->total;
+        $invoice->discounted_total =$request->total - $request->discount;
+        
         $invoice->paid = 0;
         $invoice->pending_amount=0;
         if($request->credit != null){

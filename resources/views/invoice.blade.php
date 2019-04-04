@@ -57,43 +57,165 @@ Invoice
 
       <!-- Table row -->
       <div class="row">
-        <div class="col-xs-12 table-responsive">
-          <table class="table table-striped">
-            <thead>
-            <tr>
-                <th width="15%" style="color:white;font-weight:500;background-color:#0066FF;">Service Name</th>
-                <th width="15%" style="color:white;font-weight:500;background-color:#0066FF;"> Sub Name</th>
-                <th width="7%" style="color:white;font-weight:500;background-color:#0066FF;">Quantity</th>
-                {{-- <th width="8%">Currency</th> --}}
-                <th width="13%" style="color:white;font-weight:500;background-color:#0066FF;">Price</th>
-                <th width="12%" style="color:white;font-weight:500;background-color:#0066FF;">Actual Amt.</th>
-                {{-- <th width="12%">Status</th> --}}
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($invoice->invoiceInfo as $info)
-            <tr id="row">
-            <td>{{$info->service_name}}</td>
-            @if($info->service_name != null)
-            <td>{{$info->airline_name}}</td>
-            @elseif($info->service_name != null)
-            <td>{{$info->visa_type}}</td>
-            @endif
-            <td>{{$info->quantity}}</td>
-            {{-- <td>{{$invoice->currency}}</td> --}}
-            <td>{{$info->price}}</td>
-            <td>{{$info->currency.$info->amount}}</td>
-            @endforeach
-            {{-- <td>@if($invoice->status ==1)
-                {{'Paid'}}
-                @else
-                {{"UnPaid"}}
-                @endif
-            </td> --}}
-          </tr>
-            </tbody>
-          </table>
-        </div>
+        @foreach($invoice->invoiceInfo as $info)
+        @if($info->service_name == 'Flight')
+            <div class="col-xs-12 table-responsive">
+              <table class="table table-bordered">
+              <thead>
+                <div style="color:white;font-weight:500;background-color:#0066FF;">Service Name: {{'Flight'}}</div>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>{{'Airline Name:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->airline_name}}</td>
+                  <td><strong>{{'Source:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->source}}</td>
+                  <td><strong>{{'Destination:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->destination}}</td>
+                  <td><strong>{{'Date:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->date_of_travel}}</td>
+                </tr>
+                <tr>
+                    <td><strong>{{'Adult:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->adult}}</td>
+                    <td><strong>{{'Child:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->child}}</td>
+                    <td><strong>{{'Infant:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->infant}}</td>
+                    <td><strong>{{'Infant DOB:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->infant_dob}}</td>
+                </tr>
+                <tr>
+                    <td><strong>{{'Quantity:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->flight_quantity}}</td>
+                    <td><strong>{{'Price:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->flight_price}}</td>
+                    <td style="color:white;font-weight:500;background-color:gray;"><strong>{{'Amount:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->flight_amount}}</td>
+                </tr>
+              </tbody>
+              </table>
+            </div>
+          @endif
+
+          @if($info->service_name == 'Visa Services')
+            <div class="col-xs-12 table-responsive">
+              <table class="table table-bordered">
+              <thead>
+                <div style="color:white;font-weight:500;background-color:#0066FF;">Service Name: {{'Visa Services'}}</div>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>{{'Name Of Visa Applicant:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->name_of_visa_applicant}}</td>
+                  <td><strong>{{'Passport Origin:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->passport_origin}}</td>
+                  <td><strong>{{'Visa Country:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->visa_country}}</td>
+                  <td><strong>{{'Visa Type:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->visa_type}}</td>
+                </tr>
+                <tr>
+                    <td><strong>{{'Visa Fee:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->visa_charges}}</td>
+                    <td><strong>{{'Service Charge:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->service_charge}}</td>
+                    <td style="color:white;font-weight:500;background-color:gray;"><strong>{{'Amount:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->visa_amount}}</td>
+                </tr>
+              </tbody>
+              </table>
+            </div>
+          @endif
+
+          @if($info->service_name == 'Hotel')
+            <div class="col-xs-12 table-responsive">
+              <table class="table table-bordered">
+              <thead>
+                <div style="color:white;font-weight:500;background-color:#0066FF;">Service Name: {{'Hotel'}}</div>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>{{'Hotel City:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->hotel_city}}</td>
+                  <td><strong>{{'Hotel Country:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->hotel_country}}</td>
+                  <td><strong>{{'Name:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->hotel_name}}</td>
+                  <td><strong>{{'Check-In-Date:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->check_in_date}}</td>
+                </tr>
+                <tr>
+                    <td><strong>{{'Check-Out_Date:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->check_out_date}}</td>
+                    <td><strong>{{'No. Of Children:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->no_of_children}}</td>
+                    <td><strong>{{'No. Of Rooms:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->no_of_rooms}}</td>
+                    <td style="color:white;font-weight:500;background-color:gray;"><strong>{{'Amount:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->hotel_amount}}</td>
+                </tr>
+              </tbody>
+              </table>
+            </div>
+          @endif
+
+          @if($info->service_name == 'Insurance')
+            <div class="col-xs-12 table-responsive">
+              <table class="table table-bordered">
+              <thead>
+                <div style="color:white;font-weight:500;background-color:#0066FF;">Service Name: {{'Insurance'}}</div>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>{{'Name Of Insurance Applicant:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->name_of_insurance_applicant}}</td>
+                  <td><strong>{{'Insurance Remarks:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->insurance_remarks}}</td>
+                  <td style="color:white;font-weight:500;background-color:gray;"><strong>{{'Amount:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->insurance_amount}}</td>
+                </tr>
+              </tbody>
+              </table>
+            </div>
+          @endif
+
+          @if($info->service_name == 'Local Sight Sceen')
+            <div class="col-xs-12 table-responsive">
+              <table class="table table-bordered">
+              <thead>
+                <div style="color:white;font-weight:500;background-color:#0066FF;">Service Name: {{'Local Sight Sceen'}}</div>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>{{'Local Sight Sceen Remarks:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->local_sight_sceen_remarks}}</td>
+                  <td style="color:white;font-weight:500;background-color:gray;"><strong>{{'Amount:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->local_sight_sceen_amount}}</td>
+                </tr>
+              </tbody>
+              </table>
+            </div>
+          @endif
+
+          @if($info->service_name == 'Local Transport')
+            <div class="col-xs-12 table-responsive">
+              <table class="table table-bordered">
+              <thead>
+                <div style="color:white;font-weight:500;background-color:#0066FF;">Service Name: {{'Local Transport'}}</div>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>{{'Local Transport Remarks:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->local_transport_remarks}}</td>
+                  <td style="color:white;font-weight:500;background-color:gray;"><strong>{{'Amount:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->local_transport_amount}}</td>
+                </tr>
+              </tbody>
+              </table>
+            </div>
+          @endif
+
+          @if($info->service_name == 'Car Rental')
+            <div class="col-xs-12 table-responsive">
+              <table class="table table-bordered">
+              <thead>
+                <div style="color:white;font-weight:500;background-color:#0066FF;">Service Name: {{'Car Rental'}}</div>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>{{'Car Rental Remarks:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->car_rental_remarks}}</td>
+                  <td style="color:white;font-weight:500;background-color:gray;"><strong>{{'Amount:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->car_rental_amount}}</td>
+                </tr>
+              </tbody>
+              </table>
+            </div>
+          @endif
+
+          @if($info->service_name == 'Other Facilities')
+            <div class="col-xs-12 table-responsive">
+              <table class="table table-bordered">
+              <thead>
+                <div style="color:white;font-weight:500;background-color:#0066FF;">Service Name: {{'Other Facilities'}}</div>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>{{'Other Facilities Remarks:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->other_facilities_remarks}}</td>
+                  <td style="color:white;font-weight:500;background-color:gray;"><strong>{{'Amount:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->other_facilities_amount}}</td>
+                </tr>
+              </tbody>
+              </table>
+            </div>
+          @endif
+          @endforeach
+          
         <!-- /.col -->
       </div><br>
       <!-- /.row -->
@@ -150,43 +272,43 @@ Invoice
               
               <tr>
                 <th style="width:50%">Subtotal:</th>
-                <td>{{$invoice->invoiceInfo[0]->currency}} {{$invoice->total}}</td>
+                <td>{{$invoice->currency}} {{$invoice->total}}</td>
               </tr>
               <tr>
                 <th>Discount:</th>
-                <td>{{$invoice->invoiceInfo[0]->currency}} {{$invoice->discount}}</td>
+                <td>{{$invoice->currency}} {{$invoice->discount}}</td>
               </tr>
               {{-- <tr>
                 <th>Discounted Total:</th>
-                <td>{{$invoice->invoiceInfo[0]->currency}} {{$invoice->discounted_total}}</td>
+                <td>{{$invoice->currency}} {{$invoice->discounted_total}}</td>
               </tr> --}}
               @if($tax[0]->enable == 'yes')
               <tr>
                 <th>VAT ({{$tax[0]->tax}}%)</th>
                 <?php $taxed = ($tax[0]->tax/100*$invoice->discounted_total) ?>
-                <td>{{$invoice->invoiceInfo[0]->currency}} {{$taxed}}</td>
+                <td>{{$invoice->currency}} {{$taxed}}</td>
               </tr>
               @endif
               {{-- <tr>
                 <th>Shipping:</th>
-                <td>{{$invoice->invoiceInfo[0]->currency}} 0.00</td>
+                <td>{{$invoice->currency}} 0.00</td>
               </tr> --}}
               <tr>
                 <th>Total:</th>
                 @if($tax[0]->enable == 'yes')
                 <?php $total = $invoice->discounted_total + $taxed ?>
-                <td style="color:white;font-weight:500;background-color:#0066FF;">{{$invoice->invoiceInfo[0]->currency}} {{$total}}</td>
+                <td style="color:white;font-weight:500;background-color:#0066FF;">{{$invoice->currency}} {{$total}}</td>
                 @else
-                  <td style="color:white;font-weight:500;background-color:#0066FF;">{{$invoice->invoiceInfo[0]->currency}} {{$invoice->discounted_total}}</td>
+                  <td style="color:white;font-weight:500;background-color:#0066FF;">{{$invoice->currency}} {{$invoice->discounted_total}}</td>
                 @endif
               </tr>
               <tr>
                 <th class="text-success">Paid:</th>
-                <td>{{$invoice->invoiceInfo[0]->currency}} {{$invoice->paid}}</td>
+                <td>{{$invoice->currency}} {{$invoice->paid}}</td>
               </tr>
               <tr>
                 <th class="text-danger">Pending:</th>
-                <td>{{$invoice->invoiceInfo[0]->currency}} {{$invoice->pending_amount}}</td>
+                <td>{{$invoice->currency}} {{$invoice->pending_amount}}</td>
               </tr>
               
             </table>

@@ -45,9 +45,9 @@ Invoices
 					             @endif
 								@if($tax[0]->enable == 'yes')
 					                <?php $total = $invoice->discounted_total + $taxed ?>
-					                <td>{{$invoice->invoiceInfo[0]->currency}} {{$total}}</td>
+					                <td>{{$invoice->currency}}{{$total}}</td>
 				                @else
-				                  	<td>{{$invoice->invoiceInfo[0]->currency}} {{$invoice->discounted_total}}</td>
+				                  	<td>{{$invoice->currency}}{{$invoice->discounted_total}}</td>
 				                @endif
 
 
