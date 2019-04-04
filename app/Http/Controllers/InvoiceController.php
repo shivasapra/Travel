@@ -20,14 +20,14 @@ class InvoiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    
+
     public function __construct()
     {
         $this->middleware('auth');
     }
 
     public function index()
-    {   
+    {
         $tax = settings::all();
         if($tax[0]->enable == 'yes'){
             foreach (invoice::all() as $invoice) {
@@ -38,7 +38,7 @@ class InvoiceController extends Controller
             }
         }
         else{
-            foreach (invoice::all() as $invoice){ 
+            foreach (invoice::all() as $invoice){
                 $invoice->pending = $discounted_total - $invoice->paid;
                 $invoice->save();
             }
@@ -58,7 +58,7 @@ class InvoiceController extends Controller
     }
 
     public function invoicePrint($id)
-    {   
+    {
         return view('invoice-print')->with('invoice',invoice::find($id))
                                         ->with('products',products::all())
                                         ->with('airlines',airlines::all())
@@ -71,7 +71,7 @@ class InvoiceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {   
+    {
         $dt = Carbon::now();
         $dt->timezone('Asia/Kolkata');
         $date_today = $dt->timezone('Europe/London');
@@ -88,7 +88,7 @@ class InvoiceController extends Controller
         }
         // $invoice_no = 'CLD'. mt_rand(10000, 99999);
         // while (invoice::where('invoice_no',$invoice_no)->get()->count()>0) {
-        //    $invoice_no = 'CLD'. mt_rand(10000, 99999); 
+        //    $invoice_no = 'CLD'. mt_rand(10000, 99999);
         // }
         if(client::all()->count()==0){
             session::flash('warning','you must have atleast one client to create an invoice');
@@ -111,8 +111,8 @@ class InvoiceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
-        
+    {
+
 
          $dt = Carbon::now();
         $date_today = $dt->timezone('Europe/London');
@@ -159,62 +159,133 @@ class InvoiceController extends Controller
         $invoice->mail_sent = $date;
         $invoice->save();
 
-        foreach($request->service_name as $index => $service_name){
-            $invoice_info = new invoiceInfo;
-            $invoice_info->invoice_id = $invoice->id;
-            $invoice_info->service_name = $service_name;
+        $flight_counter=0;
+        $visa_counter=0;
+        $insurance_counter=0;
+        $hotel_counter=0;
+        for ($k = 0; $k < count($request->service_name); $k++) {
+            if ($request->service_name[$k]=='Flight') {
+                $invoice_info = new invoiceInfo;
+                        $invoice_info->invoice_id = $invoice->id;
+                        $invoice_info->service_name = 'Flight';
 
-            $invoice_info->airline_name = $request->airline_name[$index];
-            $invoice_info->source = $request->source[$index];
-            $invoice_info->destination = $request->destination[$index];
-            $invoice_info->date_of_travel = $request->date_of_travel[$index];
-            $invoice_info->adult = $request->adult[$index];
-            $invoice_info->child = $request->child[$index];
-            $invoice_info->infant = $request->infant[$index];
-            $invoice_info->infant_dob = $request->infant_dob[$index];
-            $invoice_info->flight_amount = $request->flight_amount[$index];
-            $invoice_info->flight_quantity = $request->flight_quantity[$index];
-            $invoice_info->flight_price = $request->flight_price[$index];
-            
-            $invoice_info->name_of_visa_applicant = $request->name_of_visa_applicant[$index];
-            $invoice_info->passport_origin = $request->passport_origin[$index];
-            $invoice_info->visa_country = $request->visa_country[$index];
-            $invoice_info->visa_type = $request->visa_type[$index];
-            $invoice_info->visa_charges = $request->visa_charges[$index];
-            $invoice_info->service_charge = $request->service_charge[$index];
-            $invoice_info->visa_amount = $request->visa_amount[$index];
-            
-            $invoice_info->hotel_city = $request->hotel_city[$index];
-            $invoice_info->hotel_country = $request->hotel_country[$index];
-            $invoice_info->hotel_name = $request->hotel_name[$index];
-            $invoice_info->check_in_date = $request->check_in_date[$index];
-            $invoice_info->check_out_date = $request->check_out_date[$index];
-            $invoice_info->no_of_children = $request->no_of_children[$index];
-            $invoice_info->no_of_rooms = $request->no_of_rooms[$index];
-            $invoice_info->hotel_amount = $request->hotel_amount[$index];
-            
-            $invoice_info->name_of_insurance_applicant = $request->name_of_insurance_applicant[$index];
-            $invoice_info->insurance_amount = $request->insurance_amount[$index];
-            $invoice_info->insurance_remarks = $request->insurance_remarks[$index];
+                        $invoice_info->airline_name = $request->airline_name[$flight_counter];
+                        $invoice_info->source = $request->source[$flight_counter];
+                        $invoice_info->destination = $request->destination[$flight_counter];
+                        $invoice_info->date_of_travel = $request->date_of_travel[$flight_counter];
+                        $invoice_info->adult = $request->adult[$flight_counter];
+                        $invoice_info->child = $request->child[$flight_counter];
+                        $invoice_info->infant = $request->infant[$flight_counter];
+                        $invoice_info->infant_dob = $request->infant_dob[$flight_counter];
+                        $invoice_info->flight_amount = $request->flight_amount[$flight_counter];
+                        $invoice_info->flight_quantity = $request->flight_quantity[$flight_counter];
+                        $invoice_info->flight_price = $request->flight_price[$flight_counter];
+                        $invoice_info->save();
+                        $flight_counter++;
+            }
 
-            $invoice_info->local_sight_sceen_amount = $request->local_sight_sceen_amount[$index];
-            $invoice_info->local_sight_sceen_remarks = $request->local_sight_sceen_remarks[$index];
+            if ($request->service_name[$k]=='Visa Services') {
+                $invoice_info = new invoiceInfo;
+                        $invoice_info->invoice_id = $invoice->id;
+                        $invoice_info->service_name = 'Visa Services';
 
-            $invoice_info->other_facilities_amount = $request->other_facilities_amount[$index];
-            $invoice_info->other_facilities_remarks = $request->other_facilities_remarks[$index];
 
-            $invoice_info->car_rental_amount = $request->car_rental_amount[$index];
-            $invoice_info->car_rental_remarks = $request->car_rental_remarks[$index];
-            
-            $invoice_info->local_transport_amount = $request->local_transport_amount[$index];
-            $invoice_info->local_transport_remarks = $request->local_transport_remarks[$index];
+                        $invoice_info->save();
+                        $visa_counter++;
+            }
 
-            $invoice_info->save();
+            if ($request->service_name[$k]=='Insurance') {
+                $invoice_info = new invoiceInfo;
+                        $invoice_info->invoice_id = $invoice->id;
+                        $invoice_info->service_name = 'Insurance';
 
+
+                        $invoice_info->save();
+                        $insurance_counter++;
+            }
+
+            if ($request->service_name[$k]=='Hotel') {
+                $invoice_info = new invoiceInfo;
+                        $invoice_info->invoice_id = $invoice->id;
+                        $invoice_info->service_name = 'Hotel';
+
+
+                        $invoice_info->save();
+                        $hotel_counter++;
+            }
         }
+        // foreach($request->service_name == 'Flight' as $index => $service_name){
+        //     $invoice_info = new invoiceInfo;
+        //     $invoice_info->invoice_id = $invoice->id;
+        //     $invoice_info->service_name = $service_name;
+
+
+        //     $invoice_info->airline_name = $request->airline_name[$index];
+        //     $invoice_info->source = $request->source[$index];
+        //     $invoice_info->destination = $request->destination[$index];
+        //     $invoice_info->date_of_travel = $request->date_of_travel[$index];
+        //     $invoice_info->adult = $request->adult[$index];
+        //     $invoice_info->child = $request->child[$index];
+        //     $invoice_info->infant = $request->infant[$index];
+        //     $invoice_info->infant_dob = $request->infant_dob[$index];
+        //     $invoice_info->flight_amount = $request->flight_amount[$index];
+        //     $invoice_info->flight_quantity = $request->flight_quantity[$index];
+        //     $invoice_info->flight_price = $request->flight_price[$index];
+        //     $invoice_info->save();
+        // }
+        // if ($service_name == 'Visa Services') {
+        //     $invoice_info->name_of_visa_applicant = $request->name_of_visa_applicant[$index];
+        //     $invoice_info->passport_origin = $request->passport_origin[$index];
+        //     $invoice_info->visa_country = $request->visa_country[$index];
+        //     $invoice_info->visa_type = $request->visa_type[$index];
+        //     $invoice_info->visa_charges = $request->visa_charges[$index];
+        //     $invoice_info->service_charge = $request->service_charge[$index];
+        //     $invoice_info->visa_amount = $request->visa_amount[$index];
+        // }
+
+        // if ($service_name == 'Hotel') {
+        //     $invoice_info->hotel_city = $request->hotel_city[$index];
+        //     $invoice_info->hotel_country = $request->hotel_country[$index];
+        //     $invoice_info->hotel_name = $request->hotel_name[$index];
+        //     $invoice_info->check_in_date = $request->check_in_date[$index];
+        //     $invoice_info->check_out_date = $request->check_out_date[$index];
+        //     $invoice_info->no_of_children = $request->no_of_children[$index];
+        //     $invoice_info->no_of_rooms = $request->no_of_rooms[$index];
+        //     $invoice_info->hotel_amount = $request->hotel_amount[$index];
+        // }
+
+        // if ($service_name == 'Insurance') {
+        //     $invoice_info->name_of_insurance_applicant = $request->name_of_insurance_applicant[$index];
+        //     $invoice_info->insurance_amount = $request->insurance_amount[$index];
+        //     $invoice_info->insurance_remarks = $request->insurance_remarks[$index];
+        // }
+
+        // if ($service_name == 'Local Sight Sceen') {
+        //     $invoice_info->local_sight_sceen_amount = $request->local_sight_sceen_amount[$index];
+        //     $invoice_info->local_sight_sceen_remarks = $request->local_sight_sceen_remarks[$index];
+        // }
+
+        // if ($service_name == 'Other Facilities') {
+        //     $invoice_info->other_facilities_amount = $request->other_facilities_amount[$index];
+        //     $invoice_info->other_facilities_remarks = $request->other_facilities_remarks[$index];
+        // }
+
+        // if ($service_name == 'Car Rental') {
+        //     $invoice_info->car_rental_amount = $request->car_rental_amount[$index];
+        //     $invoice_info->car_rental_remarks = $request->car_rental_remarks[$index];
+        // }
+
+        // if ($service_name == 'Local Transport') {
+        //     $invoice_info->local_transport_amount = $request->local_transport_amount[$index];
+        //     $invoice_info->local_transport_remarks = $request->local_transport_remarks[$index];
+        // }
+
+        //     $invoice_info->save();
+
+        // }
         Session::flash('success','Invoice Created Successfully');
             return redirect()->route('invoice');
-        
+
     }
 
     /**
@@ -254,7 +325,7 @@ class InvoiceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {   
+    {
         $invoice = invoice::find($id);
         $invoice->receiver_name = $request->receiver_name;
         $invoice->billing_address = $request->billing_address;
@@ -335,4 +406,3 @@ class InvoiceController extends Controller
         // $request = Request::create('http://api.postcodes.io/postcodes/B289EU', 'GET');
         // dd($request);
 
-    
