@@ -62,6 +62,7 @@ Edit Invoice
 			</div>
 		</div>
 		</div>
+		<div id="target">
 		<?php $i = 1;?>
 			@foreach ($invoice->invoiceInfo as $info)
 				<div class="box box-primary">
@@ -423,7 +424,7 @@ Edit Invoice
 					</div>				
 				</div>
 			@endforeach
-		
+		</div>
 			{{-- <div class="text-center"  style="margin-top: 5px">
 				<button class="btn btn-success btn-sm"  type="button" id="add">Add Service</button><br><br>
 			</div> --}}
@@ -466,25 +467,25 @@ Edit Invoice
 					</tr>
 					<tr>
 					<td class="col-md-8" align="right">
-						<input type="checkbox" id="credit" name="credit"> <strong>Credit card:</strong>
+						<input type="checkbox" id="credit" name="credit" {{($invoice->credit)?'checked':''}}> <strong>Credit card:</strong>
 					</td>
 					<td class="col-md-4" id="creditInput"></td>
 					</tr>
 					<tr>
 					<td class="col-md-8" align="right">
-						<input type="checkbox" id="debit" name="debit"> <strong>Debit card:</strong>
+						<input type="checkbox" id="debit" name="debit" {{($invoice->debit)?'checked':''}}> <strong>Debit card:</strong>
 					</td>
 					<td class="col-md-4" id="debitInput"></td>
 					</tr>
 					<tr>
 					<td class="col-md-8" align="right">
-						<input type="checkbox" id="cash" name="cash"> <strong>Cash:</strong>
+						<input type="checkbox" id="cash" name="cash" {{($invoice->cash)?'checked':''}}> <strong>Cash:</strong>
 					</td>
 					<td class="col-md-4" id="cashInput"></td>
 					</tr>
 					<tr>
 					<td class="col-md-8" align="right">
-						<input type="checkbox" id="bank" name="bank"> <strong>Bank Transfer:</strong>
+						<input type="checkbox" id="bank" name="bank" {{($invoice->bank)?'checked':''}}> <strong>Bank Transfer:</strong>
 					</td>
 					<td class="col-md-4" id="bankInput"></td>
 					</tr>
@@ -643,6 +644,11 @@ Edit Invoice
     	$("#bankInput").html(input);
     });
 	});
+
+	$('input[type="checkbox"]').click(function(){
+        var item = $(this).attr('name');
+        $('input[name="'+item+'"][type="text"]').toggle();
+    });
 
 
 
