@@ -15,7 +15,7 @@ Create Invoice
     </section>
 @stop
 @section('content')
-	
+
 	@if(count($errors)>0)
 		<ul class="list-group">
 			@foreach($errors->all() as $error)
@@ -99,13 +99,13 @@ Create Invoice
 		<div class="box box-primary" id="targetTotal">
 		<div class="box-body">
 			<table class="table table-bordered">
-				<tr>	
+				<tr>
 					<td class="col-md-8" align="right"><strong>Currency:</strong></td>
-					<td class="col-md-4">		
-					<select name="currency" class="form-control" id="currency">				
-						<option value="$">$</option>				
-						<option value="&#163;" selected>&#163;</option>			
-					</select>	
+					<td class="col-md-4">
+					<select name="currency" class="form-control" id="currency">
+						<option value="$">$</option>
+						<option value="&#163;" selected>&#163;</option>
+					</select>
 					</td>
 				</tr>
 				<tr>
@@ -160,7 +160,7 @@ Create Invoice
 				</table>
 			</div>
 		</div>
-			
+
 			<div class="form-group">
 			<div class="text-center">
 				<button class="btn btn-primary" type="submit">Create</button>
@@ -168,7 +168,7 @@ Create Invoice
 			</div>
 	</form>
 
-	
+
 @stop
 @section('js')
 <script>
@@ -179,7 +179,7 @@ Create Invoice
 	$(document).ready(function(){
     $("#add").click(function(){
     	var append = '<div class="box box-primary">			<div class="box-body">					<div class="row">						<div class="col-md-4">							<div class="form-group">								<label for="service_name[]">Select Service</label>								<select name="service_name[]" class="form-control service" onChange="SelectService(this);" required>										<option value="">--select--</option>										@if($products->count()>0)										@foreach($products as $product)											<option value="{{$product->service}}">{{$product->service}}</option>										@endforeach										@endif								</select>							</div>						</div>					</div>	<div class="Insert"></div>		<div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					</div>	</div>				</div>';
-        $("#target").append(append);   
+        $("#target").append(append);
         });
     });
 	function SomeDeleteRowFunction(btndel) {
@@ -191,7 +191,7 @@ Create Invoice
     function SelectService(test){
 			var value = test.value;
 			if (value == 'Flight') {
-				var data = '<div class="box-body"> <div class="row">			<div class="col-md-4">				<div class="form-group">					<label for="service_name[]">Select Service</label>					<select name="service_name[]" class="form-control service" required onChange="SelectService(this);">							<option value="">--select--</option>							@if($products->count()>0)							@foreach($products as $product)								<option value="{{$product->service}}" {{($product->service == "Flight")?"selected":''}}>{{$product->service}}</option>							@endforeach							@endif					</select>				</div>			</div>		</div><div class="row">		<div class="col-md-4">		<div class="form-group">			<label for="airline_name">Airline Name</label>			<input type="text" name="airline_name" required class="form-control">		</div>		</div>		<div class="col-md-4">		<div class="form-group">			<label for="source">Source</label>			<input type="text" name="source" class="form-control">		</div>		</div>		<div class="col-md-4">		<div class="form-group">			<label for="destination">Destination</label>			<input type="text" name="destination" required class="form-control">		</div>		</div>		</div><div class="row">		<div class="col-md-3">		<div class="form-group">			<label for="date">Date</label>			<input type="date" name="date" required class="form-control">		</div>		</div>		<div class="col-md-2">		<div class="form-group">			<label for="adult">Adult</label>			<input type="text" name="adult" class="form-control">		</div>		</div>		<div class="col-md-2">		<div class="form-group">			<label for="child">Child</label>			<input type="text" name="child" required class="form-control">		</div>		</div>		<div class="col-md-2">				<div class="form-group">					<label for="infant">Infant</label>					<input type="text" name="infant" required class="form-control">				</div>				</div>	<div class="col-md-3">		<div class="form-group">			<label for="infant_dob">Infant DOB</label>			<input type="date" name="infant_dob" required class="form-control">		</div>		</div>	</div><div class="row">		<div class="col-md-3">		<div class="form-group">	<label for="flight_quantity[]">Quantity</label>		<input type="text" id="quantity" name="flight_quantity[]" required class="form-control" onKeyUp="FlightAmount()">		</div>		</div>	<div class="col-md-3">			<div class="form-group">	<label for="flight_price[]">Price</label>		<input id="price" type="text" name="flight_price[]" required class="form-control" onKeyUp="FlightAmount()">			</div>		</div>		<div class="col-md-3">			<div class="form-group">	<label for="flight_amount[]">Amount</label>		<input id="amount" type="number" name="flight_amount[]" required class="form-control" readonly>			</div>		</div></div><div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					</div>	</div>				</div></div>';		
+				var data = '<div class="box-body"> <div class="row">			<div class="col-md-4">				<div class="form-group">					<label for="service_name[]">Select Service</label>					<select name="service_name[]" class="form-control service" required onChange="SelectService(this);">							<option value="">--select--</option>							@if($products->count()>0)							@foreach($products as $product)								<option value="{{$product->service}}" {{($product->service == "Flight")?"selected":''}}>{{$product->service}}</option>							@endforeach							@endif					</select>				</div>			</div>		</div><div class="row">		<div class="col-md-4">		<div class="form-group">			<label for="airline_name">Airline Name</label>			<input type="text" name="airline_name" required class="form-control">		</div>		</div>		<div class="col-md-4">		<div class="form-group">			<label for="source">Source</label>			<input type="text" name="source" class="form-control">		</div>		</div>		<div class="col-md-4">		<div class="form-group">			<label for="destination">Destination</label>			<input type="text" name="destination" required class="form-control">		</div>		</div>		</div><div class="row">		<div class="col-md-3">		<div class="form-group">			<label for="date">Date</label>			<input type="date" name="date" required class="form-control">		</div>		</div>		<div class="col-md-2">		<div class="form-group">			<label for="adult[]">Adult</label>			<input type="text" name="adult[]" class="form-control">		</div>		</div>		<div class="col-md-2">		<div class="form-group">			<label for="child[]">Child</label>			<input type="text" name="child[]" required class="form-control">		</div>		</div>		<div class="col-md-2">				<div class="form-group">					<label for="infant[]">Infant</label>					<input type="text" name="infant[]" required class="form-control">				</div>				</div>	<div class="col-md-3">		<div class="form-group">			<label for="infant_dob[]">Infant DOB</label>			<input type="date" name="infant_dob[]" required class="form-control">		</div>		</div>	</div><div class="row">		<div class="col-md-3">		<div class="form-group">	<label for="flight_quantity[]">Quantity</label>		<input type="text" id="quantity" name="flight_quantity[]" required class="form-control" onKeyUp="FlightAmount()">		</div>		</div>	<div class="col-md-3">			<div class="form-group">	<label for="flight_price[]">Price</label>		<input id="price" type="text" name="flight_price[]" required class="form-control" onKeyUp="FlightAmount()">			</div>		</div>		<div class="col-md-3">			<div class="form-group">	<label for="flight_amount[]">Amount</label>		<input id="amount" type="number" name="flight_amount[]" required class="form-control" readonly>			</div>		</div></div><div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					</div>	</div>				</div></div>';
 				$(test).closest(".box").html(data);
 			}
 			if (value == 'Visa Services') {
@@ -199,7 +199,7 @@ Create Invoice
 				$(test).closest(".box").html(data);
 			}
 			if (value == 'Hotel') {
-				var data = '<div class="box-body"> <div class="row">			<div class="col-md-4">				<div class="form-group">					<label for="service_name[]">Select Service</label>					<select name="service_name[]" class="form-control service" required onChange="SelectService(this);">							<option value="">--select--</option>							@if($products->count()>0)							@foreach($products as $product)								<option value="{{$product->service}}" {{($product->service == "Hotel")?"selected":''}}>{{$product->service}}</option>							@endforeach							@endif					</select>				</div>			</div>		</div> <div class="row">		<div class="col-md-6">		<div class="form-group">			<label for="hotel_city">City</label>			<input type="text" name="hotel_city" required class="form-control">		</div>		</div>		<div class="col-md-6">		<div class="form-group">			<label for="hotel_country">Country</label>			<input type="text" name="hotel_country" class="form-control">		</div>		</div>		</div>		<div class="row">		<div class="col-md-4">		<div class="form-group">			<label for="hotel_name">Name</label>			<input type="text" name="hotel_name" required class="form-control">		</div>		</div>		<div class="col-md-4">		<div class="form-group">			<label for="check_in_date">Check In Date</label>			<input type="date" name="check_in_date" required class="form-control">		</div>		</div>		<div class="col-md-4">		<div class="form-group">			<label for="check_out_date">Check Out Date</label>			<input type="date" name="check_out_date" required class="form-control">		</div>		</div>		</div>		<div class="row">		<div class="col-md-3">		<div class="form-group">			<label for="no_of_children">No. Of Children</label>			<input type="text" name="no_of_children" class="form-control" >		</div>		</div>		<div class="col-md-3">		<div class="form-group">			<label for="no_of_rooms">No. Of Rooms</label>			<input type="text" name="no_of_rooms" class="form-control">		</div>		</div>		<div class="col-md-3">		<div class="form-group">			<label for="hotel_amount[]">Amount</label>			<input type="text" name="hotel_amount[]" class="form-control">		</div>		</div>		</div>			</div>		</div></div><div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					</div>	</div>				</div></div>';		
+				var data = '<div class="box-body"> <div class="row">			<div class="col-md-4">				<div class="form-group">					<label for="service_name[]">Select Service</label>					<select name="service_name[]" class="form-control service" required onChange="SelectService(this);">							<option value="">--select--</option>							@if($products->count()>0)							@foreach($products as $product)								<option value="{{$product->service}}" {{($product->service == "Hotel")?"selected":''}}>{{$product->service}}</option>							@endforeach							@endif					</select>				</div>			</div>		</div> <div class="row">		<div class="col-md-6">		<div class="form-group">			<label for="hotel_city">City</label>			<input type="text" name="hotel_city" required class="form-control">		</div>		</div>		<div class="col-md-6">		<div class="form-group">			<label for="hotel_country">Country</label>			<input type="text" name="hotel_country" class="form-control">		</div>		</div>		</div>		<div class="row">		<div class="col-md-4">		<div class="form-group">			<label for="hotel_name">Name</label>			<input type="text" name="hotel_name" required class="form-control">		</div>		</div>		<div class="col-md-4">		<div class="form-group">			<label for="check_in_date">Check In Date</label>			<input type="date" name="check_in_date" required class="form-control">		</div>		</div>		<div class="col-md-4">		<div class="form-group">			<label for="check_out_date">Check Out Date</label>			<input type="date" name="check_out_date" required class="form-control">		</div>		</div>		</div>		<div class="row">		<div class="col-md-3">		<div class="form-group">			<label for="no_of_children">No. Of Children</label>			<input type="text" name="no_of_children" class="form-control" >		</div>		</div>		<div class="col-md-3">		<div class="form-group">			<label for="no_of_rooms">No. Of Rooms</label>			<input type="text" name="no_of_rooms" class="form-control">		</div>		</div>		<div class="col-md-3">		<div class="form-group">			<label for="hotel_amount[]">Amount</label>			<input type="text" name="hotel_amount[]" class="form-control">		</div>		</div>		</div>			</div>		</div></div><div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					</div>	</div>				</div></div>';
 				$(test).closest(".box").html(data);
 			}
 			if (value == 'Insurance') {
@@ -232,7 +232,7 @@ Create Invoice
 		for (var i = 0; i < document.getElementsByName("flight_price[]").length; i++) {
     		var actual_amount = document.getElementsByName("flight_price[]")[i].value * document.getElementsByName("flight_quantity[]")[i].value;
      		document.getElementsByName("flight_amount[]")[i].value = actual_amount;
-    		
+
     	}
 	}
 
@@ -240,11 +240,11 @@ Create Invoice
 		for (var i = 0; i < document.getElementsByName("service_charge[]").length; i++) {
     		var actual_amount = document.getElementsByName("service_charge[]")[i].value - (-document.getElementsByName("visa_charges[]")[i].value);
      		document.getElementsByName("visa_amount[]")[i].value =actual_amount;
-    		
+
     	}
 	}
 
-    
+
 
     $(document).ready(function(){
     $("#targetTotal").hover(function(){
@@ -327,16 +327,16 @@ Create Invoice
 	    	}
     	@endforeach
     	var append = '<textarea name="billing_address" required class="form-control" placeholder="Enter Billing Adress">'+address+'&#13;&#10;'+city+'&#13;&#10;'+postal_code+'&#13;&#10;'+county+'&#13;&#10;'+country+'</textarea>';
-    	$("#address").html(append);   
+    	$("#address").html(append);
     	});
     });
 
-	
-		
+
+
    	</script>
 @stop
 
-		
+
 
 {{-- <div class="row">
 		<div class="col-md-6">
