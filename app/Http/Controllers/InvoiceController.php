@@ -193,7 +193,7 @@ class InvoiceController extends Controller
                         $invoice_info->invoice_id = $invoice->id;
                         $invoice_info->service_name = 'Visa Services';
 
-                        if ($service_name == 'Visa Services') {
+
                             $invoice_info->name_of_visa_applicant = $request->name_of_visa_applicant[$visa_counter];
                             $invoice_info->passport_origin = $request->passport_origin[$visa_counter];
                             $invoice_info->visa_country = $request->visa_country[$visa_counter];
@@ -201,7 +201,7 @@ class InvoiceController extends Controller
                             $invoice_info->visa_charges = $request->visa_charges[$visa_counter];
                             $invoice_info->service_charge = $request->service_charge[$visa_counter];
                             $invoice_info->visa_amount = $request->visa_amount[$visa_counter];
-                        }
+
                         $invoice_info->save();
                         $visa_counter++;
             }
@@ -211,11 +211,11 @@ class InvoiceController extends Controller
                         $invoice_info->invoice_id = $invoice->id;
                         $invoice_info->service_name = 'Insurance';
 
-                        if ($service_name == 'Insurance') {
+
                             $invoice_info->name_of_insurance_applicant = $request->name_of_insurance_applicant[$insurance_counter];
                             $invoice_info->insurance_amount = $request->insurance_amount[$insurance_counter];
                             $invoice_info->insurance_remarks = $request->insurance_remarks[$insurance_counter];
-                        }
+
                         $invoice_info->save();
                         $insurance_counter++;
             }
@@ -225,7 +225,7 @@ class InvoiceController extends Controller
                         $invoice_info->invoice_id = $invoice->id;
                         $invoice_info->service_name = 'Hotel';
 
-                        if ($service_name == 'Hotel') {
+
                             $invoice_info->hotel_city = $request->hotel_city[$hotel_counter];
                             $invoice_info->hotel_country = $request->hotel_country[$hotel_counter];
                             $invoice_info->hotel_name = $request->hotel_name[$hotel_counter];
@@ -234,7 +234,7 @@ class InvoiceController extends Controller
                             $invoice_info->no_of_children = $request->no_of_children[$hotel_counter];
                             $invoice_info->no_of_rooms = $request->no_of_rooms[$hotel_counter];
                             $invoice_info->hotel_amount = $request->hotel_amount[$hotel_counter];
-                        }
+
                         $invoice_info->save();
                         $hotel_counter++;
             }
@@ -244,10 +244,10 @@ class InvoiceController extends Controller
                         $invoice_info->invoice_id = $invoice->id;
                         $invoice_info->service_name = 'Local Sight Sceen';
 
-                        if ($service_name == 'Local Sight Sceen') {
-                            $invoice_info->local_sight_sceen_amount = $request->local_sight_sceen_amount[$local_sight_sceen];
-                            $invoice_info->local_sight_sceen_remarks = $request->local_sight_sceen_remarks[$local_sight_sceen];
-                        }
+
+                            $invoice_info->local_sight_sceen_amount = $request->local_sight_sceen_amount[$local_sight_sceen_counter];
+                            $invoice_info->local_sight_sceen_remarks = $request->local_sight_sceen_remarks[$local_sight_sceen_counter];
+
                         $invoice_info->save();
                         $local_sight_sceen_counter++;
             }
@@ -257,10 +257,10 @@ class InvoiceController extends Controller
                         $invoice_info->invoice_id = $invoice->id;
                         $invoice_info->service_name = 'Local Transport';
 
-                        if ($service_name == 'Local Transport') {
+
                             $invoice_info->local_transport_amount = $request->local_transport_amount[$local_transport_counter];
                             $invoice_info->local_transport_remarks = $request->local_transport_remarks[$local_transport_counter];
-                        }
+
                         $invoice_info->save();
                         $local_transport_counter++;
             }
@@ -270,10 +270,10 @@ class InvoiceController extends Controller
                         $invoice_info->invoice_id = $invoice->id;
                         $invoice_info->service_name = 'Car Rental';
 
-                        if ($service_name == 'Car Rental') {
+
                             $invoice_info->car_rental_amount = $request->car_rental_amount[$car_rental_counter];
                             $invoice_info->car_rental_remarks = $request->car_rental_remarks[$car_rental_counter];
-                        }
+
                         $invoice_info->save();
                         $car_rental_counter++;
             }
@@ -283,10 +283,10 @@ class InvoiceController extends Controller
                         $invoice_info->invoice_id = $invoice->id;
                         $invoice_info->service_name = 'Other Facilities';
 
-                        if ($service_name == 'Other Facilities') {
+
                             $invoice_info->other_facilities_amount = $request->other_facilities_amount[$other_facilities_counter];
                             $invoice_info->other_facilities_remarks = $request->other_facilities_remarks[$other_facilities_counter];
-                        }
+
                         $invoice_info->save();
                         $other_facilities_counter++;
             }
