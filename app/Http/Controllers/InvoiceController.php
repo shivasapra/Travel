@@ -393,6 +393,26 @@ class InvoiceController extends Controller
         $pdf->download('invoice.pdf');
         return "PDF GENERTATED";
     }
+
+    public function search(Request $request)
+    {
+    if($request->ajax())
+    {
+    $output="";
+    $invoice= invoice::where('invoice_no','LIKE','%'.$request->search."%")->get();
+    if($invoice)
+    {
+    foreach ($invoice as $key => $product) {
+    $output.='<tr>'.
+    '<td>'.$product->id.'</td>'.
+    '<td>'.$product->invoice_no.'</td>'.
+    '</tr>';
+    }
+    return Response($output);
+    }
+    }
+    }
+
 }
 
 
