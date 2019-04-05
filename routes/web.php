@@ -123,6 +123,7 @@ Route::post('/update/profile',[
 		]);
 
 Route::get('/searchAirline','InvoiceController@AirlineSearch');
+Route::get('/searchAirport','InvoiceController@AirportSearch');
 Route::get('/generate/invoice/pdf/{id}',[
 	'uses'=> 'InvoiceController@generatePdf',
 	'as'=>'pdf.invoice'

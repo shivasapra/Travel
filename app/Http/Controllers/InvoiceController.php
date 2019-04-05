@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\airlines;
+use App\airports;
 use App\products;
 use App\invoice;
 use App\invoiceInfo;
@@ -394,20 +395,30 @@ class InvoiceController extends Controller
         return "PDF GENERTATED";
     }
 
-    public function AirlineSearch(Request $request)
-    {
-    if($request->ajax())
-    {
-    $output="";
-    $airline= airlines::where('name','LIKE','%'.$request->search."%")->get();
-    if($airline)
-    {
-    foreach ($airline as $key => $product) {
-    $output.='<a onClick="AirlineAssign(this)" value="'.$product->name.'">'.$product->name.'</a>';
+    public function AirlineSearch(Request $request){
+        if($request->ajax()){
+            $output="";
+            $airline= airlines::where('name','LIKE','%'.$request->search."%")->get();
+            if($airline){
+                    foreach ($airline as $key => $product) {
+                        $output.='<a onClick="AirlineAssign(this)" value="'.$product->name.'">'.$product->name.'</a>';
+                    }
+                return Response($output);
+            }
+        }
     }
-    return Response($output);
-    }
-    }
+
+    public function AirportSearch(Request $request){
+        if($request->ajax()){
+            $output="";
+            $airline= airports::where('name','LIKE','%'.$request->search."%")->get();
+            if($airline){
+                    foreach ($airline as $key => $product) {
+                        $output.='<a onClick="AirportAssign(this)" value="'.$product->name.'">'.$product->name.'</a>';
+                    }
+                return Response($output);
+            }
+        }
     }
 
 }
