@@ -399,11 +399,11 @@ class InvoiceController extends Controller
     if($request->ajax())
     {
     $output="";
-    $invoice= client::where('first_name','LIKE','%'.$request->search."%")->get();
-    if($invoice)
+    $airline= App\AirlineData::where('fname','LIKE','%'.$request->search."%")->get();
+    if($airline)
     {
-    foreach ($invoice as $key => $product) {
-    $output.='<a onClick="AirlineAssign(this)" value="'.$product->first_name.'">'.$product->first_name.'</a>';
+    foreach ($airline as $key => $product) {
+    $output.='<a onClick="AirlineAssign(this)" value="'.$product->name.'">'.$product->name.'</a>';
     }
     return Response($output);
     }
