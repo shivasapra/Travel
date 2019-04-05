@@ -401,7 +401,7 @@ class InvoiceController extends Controller
             $airline= airlines::where('name','LIKE','%'.$request->search."%")->get();
             if($airline){
                     foreach ($airline as $key => $product) {
-                        $output.='<a onClick="AirlineAssign(this)" value="'.$product->name.'">'.$product->name.'</a>';
+                        $output.='<a><option onClick="AirlineAssign(this)" value="'.$product->name.'">'.$product->name.'</option></a>';
                     }
                 return Response($output);
             }
@@ -414,7 +414,20 @@ class InvoiceController extends Controller
             $airline= airports::where('name','LIKE','%'.$request->search."%")->get();
             if($airline){
                     foreach ($airline as $key => $product) {
-                        $output.='<a onClick="AirportAssign(this)" value="'.$product->name.'">'.$product->name.'</a>';
+                        $output.='<a><option onClick="AirportAssign(this)" value="'.$product->name.'">'.$product->name.'</option></a>';
+                    }
+                return Response($output);
+            }
+        }
+    }
+
+    public function AirportArrivalSearch(Request $request){
+        if($request->ajax()){
+            $output="";
+            $airline= airports::where('name','LIKE','%'.$request->search."%")->get();
+            if($airline){
+                    foreach ($airline as $key => $product) {
+                        $output.='<a><option onClick="AirportArrivalAssign(this)" value="'.$product->name.'">'.$product->name.'</option></a>';
                     }
                 return Response($output);
             }

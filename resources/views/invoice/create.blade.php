@@ -294,9 +294,16 @@ Create Invoice
 
 	function AirlineAssign(temp){
 		console.log(temp.value);
+		document.getElementsByName('airline_name')[0].value = temp.value;
+		$('#airline_html').html('');
 	  }
 	function AirportAssign(temp){
-	console.log(temp.value);
+		document.getElementsByName('source')[0].value = temp.value;
+		$('#airport_html').html('');
+	}
+	function AirportArrivalAssign(temp){
+		document.getElementsByName('destination')[0].value = temp.value;
+		$('#airportArrival_html').html('');
 	}
 
 	function AirlineDataExtract(test){
@@ -327,7 +334,7 @@ Create Invoice
 			$value=test.value;
 			$.ajax({
 				type : 'get',
-				url : '{{URL::to('searchAirport')}}',
+				url : '{{URL::to('searchAirportArrival')}}',
 				data:{'search':$value},
 				success:function(data){
 				$('#airportArrival_html').html(data);
@@ -351,7 +358,47 @@ Create Invoice
     function SelectService(test){
 			var value = test.value;
 			if (value == 'Flight') {
-				var data = '<div class="box-body"> <div class="row">			<div class="col-md-4">				<div class="form-group">					<label for="service_name[]">Select Service</label>					<select name="service_name[]" class="form-control service" required onChange="SelectService(this);">							<option value="">--select--</option>							@if($products->count()>0)							@foreach($products as $product)								<option value="{{$product->service}}" {{($product->service == "Flight")?"selected":''}}>{{$product->service}}</option>							@endforeach							@endif					</select>				</div>			</div>		</div><div class="row">		<div class="col-md-4">		<div class="form-group">			<label for="airline_name">Airline Name</label>			<div class="dropdown">											<div id="myDropdown" class="dropdown-content">				  								<input type="text" placeholder="Search.." name="airline_name" id="myInput" onkeyup="AirlineDataExtract(this)"  required class="form-control">				  								<div id="airline_html"></div>							</div>			  								</div>		</div>		</div>		<div class="col-md-4">		<div class="form-group">			<label for="source">Departure</label>			<div class="Airportdropdown">												<div id="AirportmyDropdown" class="Airportdropdown-content">				  										<input type="text" placeholder="Search.." name="source" id="AirportmyInput" onkeyup="AirportDataExtract(this)"  required class="form-control">				  										<div id="airport_html"></div>									</div>			  										</div>		</div>		</div>		<div class="col-md-4">		<div class="form-group">			<label for="destination">Arrival</label>			<div class="AirportArrivaldropdown">												<div id="AirportArrivalmyDropdown" class="AirportArrivaldropdown-content">				  										<input type="text" placeholder="Search.." name="destination" id="AirportArrivalmyInput" onkeyup="AirportArrivalDataExtract(this)"  required class="form-control">				  										<div id="airportArrival_html"></div>									</div>			  										</div>		</div>		</div>		</div><div class="row">		<div class="col-md-3">		<div class="form-group">			<label for="date">Date</label>			<input type="date" name="date" required class="form-control">		</div>		</div>		<div class="col-md-2">		<div class="form-group">			<label for="adult[]">Adult</label>			<input type="text" name="adult[]" class="form-control">		</div>		</div>		<div class="col-md-2">		<div class="form-group">			<label for="child[]">Child</label>			<input type="text" name="child[]" required class="form-control">		</div>		</div>		<div class="col-md-2">				<div class="form-group">					<label for="infant[]">Infant</label>					<input type="text" name="infant[]" required class="form-control">				</div>				</div>	<div class="col-md-3">		<div class="form-group">			<label for="infant_dob[]">Infant DOB</label>			<input type="date" name="infant_dob[]" required class="form-control">		</div>		</div>	</div><div class="row">		<div class="col-md-3">		<div class="form-group">	<label for="flight_quantity[]">Quantity</label>		<input type="text" id="quantity" name="flight_quantity[]" required class="form-control" onKeyUp="FlightAmount()">		</div>		</div>	<div class="col-md-3">			<div class="form-group">	<label for="flight_price[]">Price</label>		<input id="price" type="text" name="flight_price[]" required class="form-control" onKeyUp="FlightAmount()">			</div>		</div>		<div class="col-md-3">			<div class="form-group">	<label for="flight_amount[]">Amount</label>		<input id="amount" type="number" name="flight_amount[]" required class="form-control" readonly>			</div>		</div></div><div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					</div>	</div>				</div></div>';
+				var data = '<div class="box-body"> <div class="row">'+
+							'<div class="col-md-4">				<div class="form-group">'+
+							'<label for="service_name[]">Select Service</label>'+
+							'<select name="service_name[]" class="form-control service" required onChange="SelectService(this);">'+
+							'<option value="">--select--</option>							@if($products->count()>0)'+
+							'@foreach($products as $product)	'+
+							'<option value="{{$product->service}}" {{($product->service == "Flight")?"selected":''}}>{{$product->service}}</option>'+
+							'@endforeach							@endif					</select>				</div>'+
+							'</div>		</div><div class="row">		<div class="col-md-4">		<div class="form-group">'+
+							'<label for="airline_name">Airline Name</label>'+
+							'<div class="dropdown">			<div id="myDropdown" class="dropdown-content">'+
+							'<input type="text" placeholder="Search.." name="airline_name" id="myInput" onkeyup="AirlineDataExtract(this)"  required class="form-control">'+
+							'<div id="airline_html"></div>'+
+							'</div>	</div>		</div>		</div>'+
+							'<div class="col-md-4">	<div class="form-group">	<label for="source">Departure</label>'+
+							'<div class="Airportdropdown">	<div id="AirportmyDropdown" class="Airportdropdown-content">'+
+							'<input type="text" placeholder="Search.." name="source" id="AirportmyInput" onkeyup="AirportDataExtract(this)"  required class="form-control">'+
+							'<div id="airport_html"></div>	</div>		</div>		</div>		</div>'+
+							'<div class="col-md-4">		<div class="form-group">			<label for="destination">Arrival</label>'+
+							'<div class="AirportArrivaldropdown">	<div id="AirportArrivalmyDropdown" class="AirportArrivaldropdown-content">'+
+							'<input type="text" placeholder="Search.." name="destination" id="AirportArrivalmyInput" onkeyup="AirportArrivalDataExtract(this)"  required class="form-control">'+
+							'<div id="airportArrival_html"></div>	</div>	</div>		</div>		</div>		</div><hr>'+
+							'<div class="row">		<div class="col-md-3">		<div class="form-group">	<label for="date">Date</label>'+
+							'<input type="date" name="date" required class="form-control">	</div>	</div>'+
+							'<div class="col-md-2">		<div class="form-group">	<label for="adult[]">Adult</label>'+
+							'<input type="text" name="adult[]" class="form-control">	</div>	</div>	<div class="col-md-2">'+
+							'<div class="form-group">	<label for="child[]">Child</label>'+
+							'<input type="text" name="child[]" required class="form-control">	</div>	</div>'+
+							'<div class="col-md-2">	<div class="form-group">	<label for="infant[]">Infant</label>'+
+							'<input type="text" name="infant[]" required class="form-control">	</div>	</div>'+
+							'<div class="col-md-3">	<div class="form-group">	<label for="infant_dob[]">Infant DOB</label>'+
+							'<input type="date" name="infant_dob[]" required class="form-control">	</div>	</div>	</div>'+
+							'<div class="row">	<div class="col-md-3">	<div class="form-group"><label for="flight_quantity[]">Quantity</label>'+
+							'<input type="text" id="quantity" name="flight_quantity[]" required class="form-control" onKeyUp="FlightAmount()">'+
+							'</div>	</div>	<div class="col-md-3">	<div class="form-group">	<label for="flight_price[]">Price</label>'+
+							'<input id="price" type="text" name="flight_price[]" required class="form-control" onKeyUp="FlightAmount()">'+
+							'</div>	</div>	<div class="col-md-3">	<div class="form-group">	<label for="flight_amount[]">Amount</label>'+
+							'<input id="amount" type="number" name="flight_amount[]" required class="form-control" readonly>	'+
+							'</div>		</div></div><div align="right">'+
+							'<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">'+
+							'</div>	</div>	</div></div>';
 				$(test).closest(".box").html(data);
 			}
 			if (value == 'Visa Services') {
