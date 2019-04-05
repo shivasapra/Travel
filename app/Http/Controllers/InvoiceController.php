@@ -394,12 +394,12 @@ class InvoiceController extends Controller
         return "PDF GENERTATED";
     }
 
-    public function search(Request $request)
+    public function AirlineSearch(Request $request)
     {
     if($request->ajax())
     {
     $output="";
-    $airline= App\AirlineData::where('fname','LIKE','%'.$request->search."%")->get();
+    $airline= airlines::where('name','LIKE','%'.$request->search."%")->get();
     if($airline)
     {
     foreach ($airline as $key => $product) {

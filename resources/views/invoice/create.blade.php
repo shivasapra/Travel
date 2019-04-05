@@ -243,6 +243,7 @@ Create Invoice
 			url : '{{URL::to('searchAirline')}}',
 			data:{'search':$value},
 			success:function(data){
+				console.log(data);
 			$('#airline_html').html(data);
 			}
 			});
