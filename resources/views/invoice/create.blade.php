@@ -385,17 +385,17 @@ Create Invoice
 							'<div class="row">		<div class="col-md-3">		<div class="form-group">	<label for="date">Date</label>'+
 							'<input type="date" name="date" required class="form-control">	</div>	</div>'+
 							'<div class="col-md-2">		<div class="form-group">	<label for="adult[]">Adult</label>'+
-							'<input type="text" name="adult[]" class="form-control">	</div>	</div><div class="col-md-2">		<div class="form-group">	<label for="adult_price[]">Adult Price</label>'+
-							'<input type="text" name="adult_price[]" class="form-control">	</div>	</div>	<div class="col-md-2">'+
+							'<input type="text" name="adult[]" class="form-control" onKeyUp="FlightAmount()">	</div>	</div><div class="col-md-2">		<div class="form-group">	<label for="adult_price[]">Adult Price</label>'+
+							'<input type="text" name="adult_price[]" class="form-control" onKeyUp="FlightAmount()">	</div>	</div>	<div class="col-md-2">'+
 							'<div class="form-group">	<label for="child[]">Child</label>'+
-							'<input type="text" name="child[]" required class="form-control">	</div>	</div> <div class="col-md-2">		<div class="form-group">	<label for="child_price[]">Child Price</label>'+
-							'<input type="text" name="child_price[]" class="form-control">	</div>	</div>'+
+							'<input type="text" name="child[]" required class="form-control" onKeyUp="FlightAmount()">	</div>	</div> <div class="col-md-2">		<div class="form-group">	<label for="child_price[]">Child Price</label>'+
+							'<input type="text" name="child_price[]" class="form-control" onKeyUp="FlightAmount()">	</div>	</div>'+
 							'</div>'+
 							'<div class="row"><div class="col-md-2">	<div class="form-group">	<label for="infant[]">Infant</label>'+
-							'<input type="text" name="infant[]" required class="form-control">	</div>	</div> <div class="col-md-2">	<div class="form-group">	<label for="infant_price[]">Infant Price</label>'+
-							'<input type="text" name="infant_price[]" required class="form-control">	</div>	</div>'+
+							'<input type="text" name="infant[]" required class="form-control" onKeyUp="FlightAmount()">	</div>	</div> <div class="col-md-2">	<div class="form-group">	<label for="infant_price[]">Infant Price</label>'+
+							'<input type="text" name="infant_price[]" required class="form-control" onKeyUp="FlightAmount()">	</div>	</div>'+
 							'<div class="col-md-3">	<div class="form-group">	<label for="infant_dob[]">Infant DOB</label>'+
-							'<input type="date" name="infant_dob[]" required class="form-control">	</div>	</div>	<div class="col-md-3">	<div class="form-group">	<label for="flight_amount[]">Amount</label>'+
+							'<input type="date" name="infant_dob[]" required class="form-control">	</div>	</div>		<div class="col-md-3">	<div class="form-group">	<label for="flight_amount[]">Amount</label>'+
 							'<input id="amount" type="number" name="flight_amount[]" required class="form-control" readonly>	'+
 							'</div>		</div></div><div align="right">'+
 							'<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">'+
@@ -437,9 +437,12 @@ Create Invoice
 		}
 
 	function FlightAmount(){
-		for (var i = 0; i < document.getElementsByName("flight_price[]").length; i++) {
-    		var actual_amount = document.getElementsByName("flight_price[]")[i].value * document.getElementsByName("flight_quantity[]")[i].value;
-     		document.getElementsByName("flight_amount[]")[i].value = actual_amount;
+		for (var i = 0; i < document.getElementsByName("adult_price[]").length; i++) {
+			var adult_price = document.getElementsByName("adult_price[]")[i].value * document.getElementsByName("adult[]")[i].value;
+			var child_price = document.getElementsByName("child_price[]")[i].value * document.getElementsByName("child[]")[i].value;
+			var infant_price = document.getElementsByName("infant_price[]")[i].value * document.getElementsByName("infant[]")[i].value;
+			// var actual_amount = document.getElementsByName("flight_price[]")[i].value * document.getElementsByName("flight_quantity[]")[i].value;
+			document.getElementsByName("flight_amount[]")[i].value = Number(adult_price) + Number(child_price) + Number(infant_price);
 
     	}
 	}
