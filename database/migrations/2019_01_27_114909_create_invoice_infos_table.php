@@ -24,8 +24,11 @@ class CreateInvoiceInfosTable extends Migration
             $table->string('destination')->nullable();
             $table->string('date_of_travel')->nullable();
             $table->string('adult')->nullable();
+            $table->string('adult_price')->nullable();
             $table->string('child')->nullable();
+            $table->string('child_price')->nullable();
             $table->string('infant')->nullable();
+            $table->string('infant_price')->nullable();
             $table->string('infant_dob')->nullable();
             $table->string('flight_amount')->nullable();
             $table->integer('flight_quantity')->nullable();

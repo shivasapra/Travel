@@ -385,18 +385,17 @@ Create Invoice
 							'<div class="row">		<div class="col-md-3">		<div class="form-group">	<label for="date">Date</label>'+
 							'<input type="date" name="date" required class="form-control">	</div>	</div>'+
 							'<div class="col-md-2">		<div class="form-group">	<label for="adult[]">Adult</label>'+
-							'<input type="text" name="adult[]" class="form-control">	</div>	</div>	<div class="col-md-2">'+
+							'<input type="text" name="adult[]" class="form-control">	</div>	</div><div class="col-md-2">		<div class="form-group">	<label for="adult_price[]">Adult Price</label>'+
+							'<input type="text" name="adult_price[]" class="form-control">	</div>	</div>	<div class="col-md-2">'+
 							'<div class="form-group">	<label for="child[]">Child</label>'+
-							'<input type="text" name="child[]" required class="form-control">	</div>	</div>'+
-							'<div class="col-md-2">	<div class="form-group">	<label for="infant[]">Infant</label>'+
-							'<input type="text" name="infant[]" required class="form-control">	</div>	</div>'+
+							'<input type="text" name="child[]" required class="form-control">	</div>	</div> <div class="col-md-2">		<div class="form-group">	<label for="child_price[]">Child Price</label>'+
+							'<input type="text" name="child_price[]" class="form-control">	</div>	</div>'+
+							'</div>'+
+							'<div class="row"><div class="col-md-2">	<div class="form-group">	<label for="infant[]">Infant</label>'+
+							'<input type="text" name="infant[]" required class="form-control">	</div>	</div> <div class="col-md-2">	<div class="form-group">	<label for="infant_price[]">Infant Price</label>'+
+							'<input type="text" name="infant_price[]" required class="form-control">	</div>	</div>'+
 							'<div class="col-md-3">	<div class="form-group">	<label for="infant_dob[]">Infant DOB</label>'+
-							'<input type="date" name="infant_dob[]" required class="form-control">	</div>	</div>	</div>'+
-							'<div class="row">	<div class="col-md-3">	<div class="form-group"><label for="flight_quantity[]">Quantity</label>'+
-							'<input type="text" id="quantity" name="flight_quantity[]" required class="form-control" onKeyUp="FlightAmount()">'+
-							'</div>	</div>	<div class="col-md-3">	<div class="form-group">	<label for="flight_price[]">Price</label>'+
-							'<input id="price" type="text" name="flight_price[]" required class="form-control" onKeyUp="FlightAmount()">'+
-							'</div>	</div>	<div class="col-md-3">	<div class="form-group">	<label for="flight_amount[]">Amount</label>'+
+							'<input type="date" name="infant_dob[]" required class="form-control">	</div>	</div>	<div class="col-md-3">	<div class="form-group">	<label for="flight_amount[]">Amount</label>'+
 							'<input id="amount" type="number" name="flight_amount[]" required class="form-control" readonly>	'+
 							'</div>		</div></div><div align="right">'+
 							'<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">'+
