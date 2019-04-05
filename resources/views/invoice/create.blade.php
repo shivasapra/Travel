@@ -315,12 +315,7 @@ Create Invoice
 				url : '{{URL::to('searchAirline')}}',
 				data:{'search':$value},
 				success:function(data){
-					// var newdata = '<input type="text" class="form-control airline-name" placeholder="Search.."  name="airline_name" id="myInput" onkeyup="AirlineDataExtract(this)"  required >'+
-					// 		'<div class="airline_html"></div>'+data;
-					// $(test).closest(".dropdown-content").html(data);
-					div.getElementsByClassName("airline_html").html(data);
-					// $(test).closest(".airline_html").html(data);
-					$('.airline_html').html(data);
+					$(test).next(".airline_html").html(data);
 				}
 			});
 		}
@@ -332,7 +327,7 @@ Create Invoice
 				url : '{{URL::to('searchAirport')}}',
 				data:{'search':$value},
 				success:function(data){
-				$('.airport_html').html(data);
+					$(test).next(".airport_html").html(data);
 				}
 			});
 		}
@@ -344,7 +339,7 @@ Create Invoice
 				url : '{{URL::to('searchAirportArrival')}}',
 				data:{'search':$value},
 				success:function(data){
-				$('.airportArrival_html').html(data);
+					$(test).next(".airportArrival_html").html(data);
 				}
 			});
 		}
