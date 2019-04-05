@@ -73,13 +73,18 @@ Invoice
                 </tr>
                 <tr>
                     <td><strong>{{'Adult:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->adult}}</td>
+                    <td><strong>{{'Adult Price:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->adult_price}}</td>
                     <td><strong>{{'Child:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->child}}</td>
-                    <td><strong>{{'Infant:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->infant}}</td>
-                    <td><strong>{{'Infant DOB:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->infant_dob}}</td>
+                    <td><strong>{{'Child Price:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->child_price}}</td>
                 </tr>
                 <tr>
+                    <td><strong>{{'Infant:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->infant}}</td>
+                    <td><strong>{{'Infant Price:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->infant_price}}</td>
+                    <td><strong>{{'Infant DOB:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->infant_dob}}</td>
+                {{-- </tr>
+                <tr>
                     <td><strong>{{'Quantity:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->flight_quantity}}</td>
-                    <td><strong>{{'Price:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->flight_price}}</td>
+                    <td><strong>{{'Price:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->flight_price}}</td> --}}
                     <td style="color:white;font-weight:500;background-color:gray;"><strong>{{'Amount:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->flight_amount}}</td>
                 </tr>
               </tbody>
