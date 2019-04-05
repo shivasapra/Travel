@@ -14,7 +14,7 @@ Create Invoice
 	display: block;
 	position:absolute;
 	background-color: #f6f6f6;
-	
+	min-width: 340px;
 	border: 1px solid #ddd;
 	z-index: 1;
 	}
