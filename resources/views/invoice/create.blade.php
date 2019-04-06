@@ -293,17 +293,17 @@ Create Invoice
 	  }
 
 	function AirlineAssign(temp){
-		var data = '<input type="text" class="form-control airline-name" placeholder="Search.." value='+temp.value+' name="airline_name" id="myInput" onkeyup="AirlineDataExtract(this)"  required >'+
+		var data = '<input type="text" class="form-control airline-name" placeholder="Search.." value='+temp.value+' name="airline_name[]" id="myInput" onkeyup="AirlineDataExtract(this)"  required >'+
 							'<div class="airline_html"></div>';
 		var div = $(temp).closest(".dropdown-content").html(data);
 	  }
 	function AirportAssign(temp){
-		var data = '<input type="text" placeholder="Search.." name="source" id="AirportmyInput" value='+temp.value+' onkeyup="AirportDataExtract(this)"  required class="form-control">'+
+		var data = '<input type="text" placeholder="Search.." name="source[]" id="AirportmyInput" value='+temp.value+' onkeyup="AirportDataExtract(this)"  required class="form-control">'+
 							'<div class="airport_html"></div>';
 		var div = $(temp).closest(".Airportdropdown-content").html(data);
 	}
 	function AirportArrivalAssign(temp){
-		var data = '<input type="text" placeholder="Search.." name="destination" value='+temp.value+' id="AirportArrivalmyInput" onkeyup="AirportArrivalDataExtract(this)"  required class="form-control">'+
+		var data = '<input type="text" placeholder="Search.." name="destination[]" value='+temp.value+' id="AirportArrivalmyInput" onkeyup="AirportArrivalDataExtract(this)"  required class="form-control">'+
 							'<div class="airportArrival_html"></div>';
 		var div = $(temp).closest(".AirportArrivaldropdown-content").html(data);
 	}
@@ -371,16 +371,16 @@ Create Invoice
 							'</div>		</div><div class="row">		<div class="col-md-4">		<div class="form-group">'+
 							'<label for="airline_name">Airline Name</label>'+
 							'<div class="dropdown">			<div id="myDropdown" class="dropdown-content">'+
-							'<input type="text" class="form-control airline-name" placeholder="Search.." name="airline_name" id="myInput" onkeyup="AirlineDataExtract(this)"  required >'+
+							'<input type="text" class="form-control airline-name" placeholder="Search.." name="airline_name[]" id="myInput" onkeyup="AirlineDataExtract(this)"  required >'+
 							'<div class="airline_html"></div>'+
 							'</div>	</div>		</div>		</div>'+
 							'<div class="col-md-4">	<div class="form-group">	<label for="source">Departure</label>'+
 							'<div class="Airportdropdown">	<div id="AirportmyDropdown" class="Airportdropdown-content">'+
-							'<input type="text" placeholder="Search.." name="source" id="AirportmyInput" onkeyup="AirportDataExtract(this)"  required class="form-control">'+
+							'<input type="text" placeholder="Search.." name="source[]" id="AirportmyInput" onkeyup="AirportDataExtract(this)"  required class="form-control">'+
 							'<div class="airport_html"></div>	</div>		</div>		</div>		</div>'+
 							'<div class="col-md-4">		<div class="form-group">			<label for="destination">Arrival</label>'+
 							'<div class="AirportArrivaldropdown">	<div id="AirportArrivalmyDropdown" class="AirportArrivaldropdown-content">'+
-							'<input type="text" placeholder="Search.." name="destination" id="AirportArrivalmyInput" onkeyup="AirportArrivalDataExtract(this)"  required class="form-control">'+
+							'<input type="text" placeholder="Search.." name="destination[]" id="AirportArrivalmyInput" onkeyup="AirportArrivalDataExtract(this)"  required class="form-control">'+
 							'<div class="airportArrival_html"></div>	</div>	</div>		</div>		</div>		</div><hr>'+
 							'<div class="row">		<div class="col-md-3">		<div class="form-group">	<label for="date">Date</label>'+
 							'<input type="date" name="date" required class="form-control">	</div>	</div>'+
