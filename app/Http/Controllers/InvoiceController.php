@@ -179,8 +179,9 @@ class InvoiceController extends Controller
                         $invoice_info->child_price = $request->child_price[$flight_counter];
                         $invoice_info->infant = $request->infant[$flight_counter];
                         $invoice_info->infant_price = $request->infant_price[$flight_counter];
-                        $invoice_info->infant_dob = $request->infant_dob[$flight_counter];
+                        // $invoice_info->infant_dob = $request->infant_dob[$flight_counter];
                         $invoice_info->flight_amount = $request->flight_amount[$flight_counter];
+                        $invoice_info->flight_remarks = $request->flight_remarks[$flight_counter];
                         // $invoice_info->flight_quantity = $request->flight_quantity[$flight_counter];
                         // $invoice_info->flight_price = $request->flight_price[$flight_counter];
                         $invoice_info->save();

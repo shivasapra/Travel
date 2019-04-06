@@ -394,8 +394,8 @@ Create Invoice
 							'<div class="row"><div class="col-md-2">	<div class="form-group">	<label for="infant[]">Infant</label>'+
 							'<input type="text" name="infant[]" required class="form-control" onKeyUp="FlightAmount()">	</div>	</div> <div class="col-md-2">	<div class="form-group">	<label for="infant_price[]">Infant Price</label>'+
 							'<input type="text" name="infant_price[]" required class="form-control" onKeyUp="FlightAmount()">	</div>	</div>'+
-							'<div class="col-md-3">	<div class="form-group">	<label for="infant_dob[]">Infant DOB</label>'+
-							'<input type="date" name="infant_dob[]" required class="form-control">	</div>	</div>		<div class="col-md-3">	<div class="form-group">	<label for="flight_amount[]">Amount</label>'+
+							'<div class="col-md-4">	<div class="form-group">	<label for="flight_remarks[]">Remarks</label>'+
+							'<input type="text" name="flight_remarks[]" required class="form-control">	</div>	</div>		<div class="col-md-3">	<div class="form-group">	<label for="flight_amount[]">Amount</label>'+
 							'<input id="amount" type="number" name="flight_amount[]" required class="form-control" readonly>	'+
 							'</div>		</div></div><div align="right">'+
 							'<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">'+
