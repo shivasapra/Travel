@@ -80,7 +80,7 @@ Invoice
                 <tr>
                     <td><strong>{{'Infant:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->infant}}</td>
                     <td><strong>{{'Infant Price:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->infant_price}}</td>
-                    <td><strong>{{'Infant DOB:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->infant_dob}}</td>
+                    <td><strong>{{'Remarks:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->flight_remarks}}</td>
                 {{-- </tr>
                 <tr>
                     <td><strong>{{'Quantity:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->flight_quantity}}</td>
