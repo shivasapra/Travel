@@ -107,25 +107,25 @@ Edit Invoice
 										<div class="col-md-2">		
 											<div class="form-group">			
 												<label for="adult[]">Adult</label>			
-												<input type="text" name="adult[]" value="{{$info->adult}}" class="form-control">		
+												<input type="text" name="adult[]" value="{{$info->adult}}" class="form-control" onKeyUp="FlightAmount()">		
 											</div>		
 										</div>
 										<div class="col-md-2">		
 											<div class="form-group">			
 												<label for="adult_price[]">Adult Price</label>			
-												<input type="text" name="adult_price[]" value="{{$info->adult_price}}" class="form-control">		
+												<input type="text" name="adult_price[]" value="{{$info->adult_price}}" class="form-control" onKeyUp="FlightAmount()">		
 											</div>		
 										</div>		
 										<div class="col-md-2">		
 											<div class="form-group">			
 												<label for="child[]">Child</label>			
-												<input type="text" name="child[]" value="{{$info->child}}" required class="form-control">		
+												<input type="text" name="child[]" value="{{$info->child}}" required class="form-control" onKeyUp="FlightAmount()">		
 											</div>		
 										</div>	
 										<div class="col-md-2">		
 											<div class="form-group">			
 												<label for="child_price[]">Child Price</label>			
-												<input type="text" name="child_price[]" value="{{$info->child_price}}" required class="form-control">		
+												<input type="text" name="child_price[]" value="{{$info->child_price}}" required class="form-control" onKeyUp="FlightAmount()">		
 											</div>		
 										</div>
 									</div>
@@ -133,13 +133,13 @@ Edit Invoice
 										<div class="col-md-2">				
 											<div class="form-group">					
 												<label for="infant[]">Infant</label>					
-												<input type="text" name="infant[]" value="{{$info->infant}}" required class="form-control">				
+												<input type="text" name="infant[]" value="{{$info->infant}}" required class="form-control" onKeyUp="FlightAmount()">				
 											</div>				
 										</div>
 										<div class="col-md-2">				
 											<div class="form-group">					
 												<label for="infant_price[]">Infant Price</label>					
-												<input type="text" name="infant_price[]" value="{{$info->infant_price}}" required class="form-control">				
+												<input type="text" name="infant_price[]" value="{{$info->infant_price}}" required class="form-control" onKeyUp="FlightAmount()">				
 											</div>				
 										</div>
 										<div class="col-md-4">			
@@ -522,6 +522,78 @@ Edit Invoice
 </script>
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<script type="text/javascript">
+		$.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
+		</script>
+	<script type="text/javascript">
+	  function filterFunction() {
+		var input, filter, ul, li, a, i;
+		input = document.getElementById("myInput");
+		filter = input.value.toUpperCase();
+		div = document.getElementById("myDropdown");
+		a = div.getElementsByTagName("a");
+		for (i = 0; i < a.length; i++) {
+		  txtValue = a[i].textContent || a[i].innerText;
+		  if (txtValue.toUpperCase().indexOf(filter) > -1) {
+			a[i].style.display = "";
+		  } else {
+			a[i].style.display = "none";
+		  }
+		}
+	  }
+
+	function AirlineAssign(temp){
+		var div = $(temp).closest(".dropdown-content");
+		div.find('.airline-name').val(temp.value);
+		$(temp).closest(".airline_html").html('');
+	  }
+	function AirportAssign(temp){
+		var div = $(temp).closest(".Airportdropdown-content");
+		div.find('.airport-name').val(temp.value);
+		$(temp).closest(".airport_html").html('');
+	}
+	function AirportArrivalAssign(temp){
+		var div = $(temp).closest(".AirportArrivaldropdown-content");
+		div.find('.airport-arrival-name').val(temp.value);
+		$(temp).closest(".airportArrival_html").html('');
+	}
+
+	function AirlineDataExtract(test){
+			$value=test.value;
+			$.ajax({
+				type : 'get',
+				url : '{{URL::to('searchAirline')}}',
+				data:{'search':$value},
+				success:function(data){
+					$(test).next(".airline_html").html(data);
+				}
+			});
+		}
+
+		function AirportDataExtract(test){
+			$value=test.value;
+			$.ajax({
+				type : 'get',
+				url : '{{URL::to('searchAirport')}}',
+				data:{'search':$value},
+				success:function(data){
+					$(test).next(".airport_html").html(data);
+				}
+			});
+		}
+
+		function AirportArrivalDataExtract(test){
+			$value=test.value;
+			$.ajax({
+				type : 'get',
+				url : '{{URL::to('searchAirportArrival')}}',
+				data:{'search':$value},
+				success:function(data){
+					$(test).next(".airportArrival_html").html(data);
+				}
+			});
+		}
+
+
 	$(document).ready(function(){
     $("#add").click(function(){
     	var append = '<div class="box box-primary">			<div class="box-body">					<div class="row">						<div class="col-md-4">							<div class="form-group">								<label for="service_name[]">Select Service</label>								<select name="service_name[]" class="form-control service" onChange="SelectService(this);" required>										<option value="">--select--</option>										@if($products->count()>0)										@foreach($products as $product)											<option value="{{$product->service}}">{{$product->service}}</option>										@endforeach										@endif								</select>							</div>						</div>					</div>	<div class="Insert"></div>		<div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					</div>	</div>				</div>';
@@ -537,11 +609,50 @@ Edit Invoice
     function SelectService(test){
 			var value = test.value;
 			if (value == 'Flight') {
-				var data = '<div class="box-body"> <div class="row">			<div class="col-md-4">				<div class="form-group">					<label for="service_name[]">Select Service</label>					<select name="service_name[]" class="form-control service" required onChange="SelectService(this);">							<option value="">--select--</option>							@if($products->count()>0)							@foreach($products as $product)								<option value="{{$product->service}}" {{($product->service == "Flight")?"selected":''}}>{{$product->service}}</option>							@endforeach							@endif					</select>				</div>			</div>		</div><div class="row">		<div class="col-md-4">		<div class="form-group">			<label for="airline_name">Airline Name</label>			<input type="text" name="airline_name" required class="form-control">		</div>		</div>		<div class="col-md-4">		<div class="form-group">			<label for="source">Source</label>			<input type="text" name="source" class="form-control">		</div>		</div>		<div class="col-md-4">		<div class="form-group">			<label for="destination">Destination</label>			<input type="text" name="destination" required class="form-control">		</div>		</div>		</div><div class="row">		<div class="col-md-3">		<div class="form-group">			<label for="date">Date</label>			<input type="date" name="date" required class="form-control">		</div>		</div>		<div class="col-md-2">		<div class="form-group">			<label for="adult[]">Adult</label>			<input type="text" name="adult[]" class="form-control">		</div>		</div>		<div class="col-md-2">		<div class="form-group">			<label for="child[]">Child</label>			<input type="text" name="child[]" required class="form-control">		</div>		</div>		<div class="col-md-2">				<div class="form-group">					<label for="infant[]">Infant</label>					<input type="text" name="infant[]" required class="form-control">				</div>				</div>	<div class="col-md-3">		<div class="form-group">			<label for="infant_dob[]">Infant DOB</label>			<input type="date" name="infant_dob[]" required class="form-control">		</div>		</div>	</div><div class="row">		<div class="col-md-3">		<div class="form-group">	<label for="flight_quantity[]">Quantity</label>		<input type="text" id="quantity" name="flight_quantity[]" required class="form-control" onKeyUp="FlightAmount()">		</div>		</div>	<div class="col-md-3">			<div class="form-group">	<label for="flight_price[]">Price</label>		<input id="price" type="text" name="flight_price[]" required class="form-control" onKeyUp="FlightAmount()">			</div>		</div>		<div class="col-md-3">			<div class="form-group">	<label for="flight_amount[]">Amount</label>		<input id="amount" type="number" name="flight_amount[]" required class="form-control" readonly>			</div>		</div></div><div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					</div>	</div>				</div></div>';
+				var data = '<div class="box-body"> <div class="row">'+
+							'<div class="col-md-4">				<div class="form-group">'+
+							'<label for="service_name[]">Select Service</label>'+
+							'<select name="service_name[]" class="form-control service" required onChange="SelectService(this);">'+
+							'<option value="">--select--</option>							@if($products->count()>0)'+
+							'@foreach($products as $product)	'+
+							'<option value="{{$product->service}}" {{($product->service == "Flight")?"selected":''}}>{{$product->service}}</option>'+
+							'@endforeach							@endif					</select>				</div>'+
+							'</div>		</div><div class="row">		<div class="col-md-4">		<div class="form-group">'+
+							'<label for="airline_name">Airline Name</label>'+
+							'<div class="dropdown">			<div id="myDropdown" class="dropdown-content">'+
+							'<input type="text" class="form-control airline-name" placeholder="Search.." name="airline_name[]" id="myInput" onkeyup="AirlineDataExtract(this)"  required >'+
+							'<div class="airline_html"></div>'+
+							'</div>	</div>		</div>		</div>'+
+							'<div class="col-md-4">	<div class="form-group">	<label for="source">Departure</label>'+
+							'<div class="Airportdropdown">	<div id="AirportmyDropdown" class="Airportdropdown-content">'+
+							'<input type="text" class="form-control airport-name" placeholder="Search.." name="source[]" id="AirportmyInput" onkeyup="AirportDataExtract(this)"  required >'+
+							'<div class="airport_html"></div>	</div>		</div>		</div>		</div>'+
+							'<div class="col-md-4">		<div class="form-group">			<label for="destination">Arrival</label>'+
+							'<div class="AirportArrivaldropdown">	<div id="AirportArrivalmyDropdown" class="AirportArrivaldropdown-content">'+
+							'<input type="text" class="form-control airport-arrival-name" placeholder="Search.." name="destination[]" id="AirportArrivalmyInput" onkeyup="AirportArrivalDataExtract(this)"  required >'+
+							'<div class="airportArrival_html"></div>	</div>	</div>		</div>		</div>		</div><hr>'+
+							'<div class="row">		<div class="col-md-3">		<div class="form-group">	<label for="date_of_travel">Date</label>'+
+							'<input type="date" name="date_of_travel" required class="form-control">	</div>	</div>'+
+							'<div class="col-md-2">		<div class="form-group">	<label for="adult[]">Adult</label>'+
+							'<input type="text" name="adult[]" class="form-control" onKeyUp="FlightAmount()">	</div>	</div><div class="col-md-2">		<div class="form-group">	<label for="adult_price[]">Adult Price</label>'+
+							'<input type="text" name="adult_price[]" class="form-control" onKeyUp="FlightAmount()">	</div>	</div>	<div class="col-md-2">'+
+							'<div class="form-group">	<label for="child[]">Child</label>'+
+							'<input type="text" name="child[]" required class="form-control" onKeyUp="FlightAmount()">	</div>	</div> <div class="col-md-2">		<div class="form-group">	<label for="child_price[]">Child Price</label>'+
+							'<input type="text" name="child_price[]" class="form-control" onKeyUp="FlightAmount()">	</div>	</div>'+
+							'</div>'+
+							'<div class="row"><div class="col-md-2">	<div class="form-group">	<label for="infant[]">Infant</label>'+
+							'<input type="text" name="infant[]" required class="form-control" onKeyUp="FlightAmount()">	</div>	</div> <div class="col-md-2">	<div class="form-group">	<label for="infant_price[]">Infant Price</label>'+
+							'<input type="text" name="infant_price[]" required class="form-control" onKeyUp="FlightAmount()">	</div>	</div>'+
+							'<div class="col-md-4">	<div class="form-group">	<label for="flight_remarks[]">Remarks</label>'+
+							'<input type="text" name="flight_remarks[]" required class="form-control">	</div>	</div>		<div class="col-md-3">	<div class="form-group">	<label for="flight_amount[]">Amount</label>'+
+							'<input id="amount" type="number" name="flight_amount[]" required class="form-control" readonly>	'+
+							'</div>		</div></div><div align="right">'+
+							'<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">'+
+							'</div>	</div>	</div></div>';
 				$(test).closest(".box").html(data);
 			}
 			if (value == 'Visa Services') {
-				var data = '<div class="box-body"> <div class="row">			<div class="col-md-4">				<div class="form-group">					<label for="service_name[]">Select Service</label>					<select name="service_name[]" class="form-control service" required onChange="SelectService(this);">							<option value="">--select--</option>							@if($products->count()>0)							@foreach($products as $product)								<option value="{{$product->service}}" {{($product->service == "Visa Services")?"selected":''}}>{{$product->service}}</option>							@endforeach							@endif					</select>				</div>			</div>		</div><div class="row">	<div class="col-md-6">		<div class="form-group">			<label for="name_of_visa_applicant">Name Of Visa Applicant</label>			<input type="text" name="name_of_visa_applicant[]" required class="form-control">		</div>		</div>		<div class="col-md-6">		<div class="form-group">			<label for="passport_origin">Passport Origin</label>			<input type="text" name="passport_origin[]" class="form-control">		</div>		</div>		</div>		<div class="row">				<div class="col-md-4">				<div class="form-group">					<label for="visa_country">Visa Country</label>					<input type="text" name="visa_country[]" required class="form-control">				</div>				</div>				<div class="col-md-4">				<div class="form-group">					<label for="visa_type">Visa Type</label>					<input type="text" name="visa_type[]" class="form-control">				</div>				</div>				<div class="col-md-4">						<div class="form-group">							<label for="visa_charges[]">Visa Fee</label>							<input type="text" name="visa_charges[]" class="form-control" onKeyUp="VisaAmount()">						</div>						</div>				</div><div class="row">						<div class="col-md-4">			<div class="form-group">	<label for="service_charge[]">Service Charge</label>		<input id="service_charge" type="text" name="service_charge[]" required class="form-control" onKeyUp="VisaAmount()">			</div>		</div>		<div class="col-md-4">			<div class="form-group">	<label for="visa_amount">Amount</label>		<input id="amount" type="number" name="visa_amount[]" required class="form-control" readonly>			</div>		</div></div><div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					</div>	</div>				</div></div>';
+				var data = '<div class="box-body"> <div class="row">			<div class="col-md-4">				<div class="form-group">					<label for="service_name[]">Select Service</label>					<select name="service_name[]" class="form-control service" required onChange="SelectService(this);">							<option value="">--select--</option>							@if($products->count()>0)							@foreach($products as $product)								<option value="{{$product->service}}" {{($product->service == "Visa Services")?"selected":''}}>{{$product->service}}</option>							@endforeach							@endif					</select>				</div>			</div>		</div><div class="row">	<div class="col-md-6">		<div class="form-group">			<label for="name_of_visa_applicant">Name Of Visa Applicant</label>			<input type="text" name="name_of_visa_applicant[]"  required class="form-control">		</div>		</div>		<div class="col-md-6">		<div class="form-group">			<label for="passport_origin">Passport Origin</label>			<input type="text" name="passport_origin[]" class="form-control">		</div>		</div>		</div>		<div class="row">				<div class="col-md-4">				<div class="form-group">					<label for="visa_country">Visa Country</label>					<input type="text" name="visa_country[]" required class="form-control">				</div>				</div>				<div class="col-md-4">				<div class="form-group">					<label for="visa_type">Visa Type</label>					<input type="text" name="visa_type[]" class="form-control">				</div>				</div>				<div class="col-md-4">						<div class="form-group">							<label for="visa_charges[]">Visa Fee</label>							<input type="text" name="visa_charges[]" class="form-control" onKeyUp="VisaAmount()">						</div>						</div>				</div><div class="row">						<div class="col-md-4">			<div class="form-group">	<label for="service_charge[]">Service Charge</label>		<input id="service_charge" type="text" name="service_charge[]" required class="form-control" onKeyUp="VisaAmount()">			</div>		</div>		<div class="col-md-4">			<div class="form-group">	<label for="visa_amount">Amount</label>		<input id="amount" type="number" name="visa_amount[]" required class="form-control" readonly>			</div>		</div></div><div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					</div>	</div>				</div></div>';
 				$(test).closest(".box").html(data);
 			}
 			if (value == 'Hotel') {
@@ -575,9 +686,12 @@ Edit Invoice
 		}
 
 	function FlightAmount(){
-		for (var i = 0; i < document.getElementsByName("flight_price[]").length; i++) {
-    		var actual_amount = document.getElementsByName("flight_price[]")[i].value * document.getElementsByName("flight_quantity[]")[i].value;
-     		document.getElementsByName("flight_amount[]")[i].value = actual_amount;
+		for (var i = 0; i < document.getElementsByName("adult_price[]").length; i++) {
+			var adult_price = document.getElementsByName("adult_price[]")[i].value * document.getElementsByName("adult[]")[i].value;
+			var child_price = document.getElementsByName("child_price[]")[i].value * document.getElementsByName("child[]")[i].value;
+			var infant_price = document.getElementsByName("infant_price[]")[i].value * document.getElementsByName("infant[]")[i].value;
+			// var actual_amount = document.getElementsByName("flight_price[]")[i].value * document.getElementsByName("flight_quantity[]")[i].value;
+			document.getElementsByName("flight_amount[]")[i].value = Number(adult_price) + Number(child_price) + Number(infant_price);
 
     	}
 	}
@@ -659,13 +773,10 @@ Edit Invoice
     });
 	});
 
-	$('input[type="checkbox"]').click(function(){
-        var item = $(this).attr('name');
-        $('input[name="'+item+'"][type="text"]').toggle();
-    });
-
-
-
-   	</script>
+    
+</script>
+	   
+	   
+		
 @stop
 
