@@ -572,6 +572,13 @@ class InvoiceController extends Controller
         }
     }
 
+    public function canceled(){
+        $invoices = invoice::onlyTrashed()->get();
+        return view('invoice.canceled')->with('invoices',$invoices)
+                                    ->with('tax',settings::all());
+
+    }
+
 }
 
 
