@@ -100,8 +100,8 @@ Edit Invoice
 									<div class="row">		
 										<div class="col-md-3">		
 											<div class="form-group">			
-												<label for="date">Date</label>			
-												<input type="date" name="date[]" value="{{$info->date_of_travel}}" required class="form-control">		
+												<label for="date_of_travel">Date</label>			
+												<input type="date" name="date_of_travel[]" value="{{$info->date_of_travel}}" required class="form-control">		
 											</div>		
 										</div>		
 										<div class="col-md-2">		
