@@ -579,6 +579,15 @@ class InvoiceController extends Controller
 
     }
 
+    public function retrieve($id){
+        $invoice = invoice::withTrashed()->where('id',$id)->first();
+        $invoice->restore();
+        Session::flash('success','Invoice Retreived');
+        return view('invoice.index')->with('invoices',invoice::all())
+                                    ->with('tax',settings::all());
+
+    }
+
 }
 
 
