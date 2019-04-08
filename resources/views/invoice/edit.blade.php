@@ -455,7 +455,7 @@ Edit Invoice
 			</table>
 		</div>
 		</div>
-		<div class="box box-primary">
+		{{-- <div class="box box-primary">
 			<div class="box-body">
 				<table class="table table-bordered">
 
@@ -491,7 +491,7 @@ Edit Invoice
 					</tr>
 				</table>
 			</div>
-		</div>
+		</div> --}}
 
 			<div class="form-group">
 			<div class="text-center">
