@@ -231,27 +231,27 @@ Create Invoice
 					</tr>
 					<tr>
 					<td class="col-md-8" align="right">
-						<input type="checkbox" id="credit" name="credit"> <strong>Credit card:</strong>
+						<strong>Credit card:</strong>
 					</td>
-					<td class="col-md-4" id="creditInput"></td>
+					<td class="col-md-4" id="creditInput"><input name="credit_amount" type="text" value="0" class="form-control"></td>
 					</tr>
 					<tr>
 					<td class="col-md-8" align="right">
-						<input type="checkbox" id="debit" name="debit"> <strong>Debit card:</strong>
+						<strong>Debit card:</strong>
 					</td>
-					<td class="col-md-4" id="debitInput"></td>
+					<td class="col-md-4" id="debitInput"><input name="debit_amount" type="text" value="0" class="form-control"></td>
 					</tr>
 					<tr>
 					<td class="col-md-8" align="right">
-						<input type="checkbox" id="cash" name="cash"> <strong>Cash:</strong>
+						<strong>Cash:</strong>
 					</td>
-					<td class="col-md-4" id="cashInput"></td>
+					<td class="col-md-4" id="cashInput"><input name="cash_amount" type="text" value="0" class="form-control"></td>
 					</tr>
 					<tr>
 					<td class="col-md-8" align="right">
-						<input type="checkbox" id="bank" name="bank"> <strong>Bank Transfer:</strong>
+						<strong>Bank Transfer:</strong>
 					</td>
-					<td class="col-md-4" id="bankInput"></td>
+					<td class="col-md-4" id="bankInput"><input name="bank_amount" type="text" value="0" class="form-control"></td>
 					</tr>
 				</table>
 			</div>
@@ -382,8 +382,8 @@ Create Invoice
 							'<div class="AirportArrivaldropdown">	<div id="AirportArrivalmyDropdown" class="AirportArrivaldropdown-content">'+
 							'<input type="text" class="form-control airport-arrival-name" placeholder="Search.." name="destination[]" id="AirportArrivalmyInput" onkeyup="AirportArrivalDataExtract(this)"  required >'+
 							'<div class="airportArrival_html"></div>	</div>	</div>		</div>		</div>		</div><hr>'+
-							'<div class="row">		<div class="col-md-3">		<div class="form-group">	<label for="date_of_travel">Date</label>'+
-							'<input type="date" name="date_of_travel" required class="form-control">	</div>	</div>'+
+							'<div class="row">		<div class="col-md-3">		<div class="form-group">	<label for="date_of_trave">Date</label>'+
+							'<input type="date" name="date_of_trave" required class="form-control">	</div>	</div>'+
 							'<div class="col-md-2">		<div class="form-group">	<label for="adult[]">Adult</label>'+
 							'<input type="text" name="adult[]" class="form-control" onKeyUp="FlightAmount()">	</div>	</div><div class="col-md-2">		<div class="form-group">	<label for="adult_price[]">Adult Price</label>'+
 							'<input type="text" name="adult_price[]" class="form-control" onKeyUp="FlightAmount()">	</div>	</div>	<div class="col-md-2">'+
@@ -499,30 +499,30 @@ Create Invoice
     });
     });
 
-    $(document).ready(function(){
-    $("#credit").click(function(){
-    	var input = '<input name="credit_amount" type="text" class="form-control">';
-    	$("#creditInput").html(input);
-    });
-	});
-	$(document).ready(function(){
-    $("#debit").click(function(){
-    	var input = '<input name="debit_amount" type="text" class="form-control">';
-    	$("#debitInput").html(input);
-    });
-	});
-	$(document).ready(function(){
-    $("#cash").click(function(){
-    	var input = '<input name="cash_amount" type="text" class="form-control">';
-    	$("#cashInput").html(input);
-    });
-	});
-	$(document).ready(function(){
-    $("#bank").click(function(){
-    	var input = '<input name="bank_amount" type="text" class="form-control">';
-    	$("#bankInput").html(input);
-    });
-	});
+  //   $(document).ready(function(){
+  //   $("#credit").click(function(){
+  //   	var input = '<input name="credit_amount" type="text" class="form-control">';
+  //   	$("#creditInput").html(input);
+  //   });
+	// });
+	// $(document).ready(function(){
+  //   $("#debit").click(function(){
+  //   	var input = '<input name="debit_amount" type="text" class="form-control">';
+  //   	$("#debitInput").html(input);
+  //   });
+	// });
+	// $(document).ready(function(){
+  //   $("#cash").click(function(){
+  //   	var input = '<input name="cash_amount" type="text" class="form-control">';
+  //   	$("#cashInput").html(input);
+  //   });
+	// });
+	// $(document).ready(function(){
+  //   $("#bank").click(function(){
+  //   	var input = '<input name="bank_amount" type="text" class="form-control">';
+  //   	$("#bankInput").html(input);
+  //   });
+	// });
 
     $(document).ready(function(){
     $("#client").change(function(){

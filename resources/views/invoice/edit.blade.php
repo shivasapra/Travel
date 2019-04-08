@@ -469,7 +469,7 @@ Edit Invoice
 			</table>
 		</div>
 		</div>
-		{{-- <div class="box box-primary">
+		<div class="box box-primary">
 			<div class="box-body">
 				<table class="table table-bordered">
 
@@ -481,31 +481,31 @@ Edit Invoice
 					</tr>
 					<tr>
 					<td class="col-md-8" align="right">
-						<input type="checkbox" id="credit" name="credit" {{($invoice->credit)?'checked':''}}> <strong>Credit card:</strong>
+						<strong>Credit card:</strong>
 					</td>
-					<td class="col-md-4" id="creditInput"></td>
+					<td class="col-md-4" id="creditInput"><input name="credit_amount" type="text" value="{{$invoice->credit_amount}}" class="form-control"></td>
 					</tr>
 					<tr>
 					<td class="col-md-8" align="right">
-						<input type="checkbox" id="debit" name="debit" {{($invoice->debit)?'checked':''}}> <strong>Debit card:</strong>
+						<strong>Debit card:</strong>
 					</td>
-					<td class="col-md-4" id="debitInput"></td>
+					<td class="col-md-4" id="debitInput"><input name="debit_amount" type="text" value="{{$invoice->debit_amount}}" class="form-control"></td>
 					</tr>
 					<tr>
 					<td class="col-md-8" align="right">
-						<input type="checkbox" id="cash" name="cash" {{($invoice->cash)?'checked':''}}> <strong>Cash:</strong>
+						<strong>Cash:</strong>
 					</td>
-					<td class="col-md-4" id="cashInput"></td>
+					<td class="col-md-4" id="cashInput"><input name="cash_amount" type="text" value="{{$invoice->cash_amount}}" class="form-control"></td>
 					</tr>
 					<tr>
 					<td class="col-md-8" align="right">
-						<input type="checkbox" id="bank" name="bank" {{($invoice->bank)?'checked':''}}> <strong>Bank Transfer:</strong>
+						<strong>Bank Transfer:</strong>
 					</td>
-					<td class="col-md-4" id="bankInput"></td>
+					<td class="col-md-4" id="bankInput"><input name="bank_amount" type="text" value="{{$invoice->bank_amount}}" class="form-control"></td>
 					</tr>
 				</table>
 			</div>
-		</div> --}}
+		</div>
 
 			<div class="form-group">
 			<div class="text-center">
@@ -748,30 +748,6 @@ Edit Invoice
     });
     });
 
-    $(document).ready(function(){
-    $("#credit").click(function(){
-    	var input = '<input name="credit_amount" type="text" class="form-control">';
-    	$("#creditInput").html(input);
-    });
-	});
-	$(document).ready(function(){
-    $("#debit").click(function(){
-    	var input = '<input name="debit_amount" type="text" class="form-control">';
-    	$("#debitInput").html(input);
-    });
-	});
-	$(document).ready(function(){
-    $("#cash").click(function(){
-    	var input = '<input name="cash_amount" type="text" class="form-control">';
-    	$("#cashInput").html(input);
-    });
-	});
-	$(document).ready(function(){
-    $("#bank").click(function(){
-    	var input = '<input name="bank_amount" type="text" class="form-control">';
-    	$("#bankInput").html(input);
-    });
-	});
 
     
 </script>
