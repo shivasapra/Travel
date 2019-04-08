@@ -85,13 +85,13 @@ Edit Invoice
 										</div>		
 										<div class="col-md-4">		
 											<div class="form-group">			
-												<label for="source">Source</label>			
+												<label for="source">Departure</label>			
 												<input type="text" name="source[]" value="{{$info->source}}" class="form-control">		
 											</div>		
 										</div>		
 										<div class="col-md-4">		
 											<div class="form-group">			
-												<label for="destination">Destination</label>			
+												<label for="destination">Arrival</label>			
 												<input type="text" name="destination[]" value="{{$info->destination}}" required class="form-control">		
 											</div>		
 										</div>		
@@ -108,39 +108,45 @@ Edit Invoice
 												<label for="adult[]">Adult</label>			
 												<input type="text" name="adult[]" value="{{$info->adult}}" class="form-control">		
 											</div>		
+										</div>
+										<div class="col-md-2">		
+											<div class="form-group">			
+												<label for="adult_price[]">Adult Price</label>			
+												<input type="text" name="adult_price[]" value="{{$info->adult_price}}" class="form-control">		
+											</div>		
 										</div>		
 										<div class="col-md-2">		
 											<div class="form-group">			
 												<label for="child[]">Child</label>			
 												<input type="text" name="child[]" value="{{$info->child}}" required class="form-control">		
 											</div>		
-										</div>		
+										</div>	
+										<div class="col-md-2">		
+											<div class="form-group">			
+												<label for="child_price[]">Child Price</label>			
+												<input type="text" name="child_price[]" value="{{$info->child_price}}" required class="form-control">		
+											</div>		
+										</div>
+									</div>
+									<div class="row">		
 										<div class="col-md-2">				
 											<div class="form-group">					
 												<label for="infant[]">Infant</label>					
 												<input type="text" name="infant[]" value="{{$info->infant}}" required class="form-control">				
 											</div>				
-										</div>	
-										<div class="col-md-3">		
-											<div class="form-group">			
-												<label for="infant_dob[]">Infant DOB</label>		
-												<input type="date" name="infant_dob[]" value="{{$info->infant_dob}}" required class="form-control">		
-											</div>		
-										</div>	
-									</div>
-									<div class="row">		
-										<div class="col-md-3">		
+										</div>
+										<div class="col-md-2">				
+											<div class="form-group">					
+												<label for="infant_price[]">Infant Price</label>					
+												<input type="text" name="infant_price[]" value="{{$info->infant_price}}" required class="form-control">				
+											</div>				
+										</div>
+										<div class="col-md-4">			
 											<div class="form-group">	
-												<label for="flight_quantity[]">Quantity</label>		
-												<input type="text" id="quantity" name="flight_quantity[]" value="{{$info->flight_quantity}}" required class="form-control" onKeyUp="FlightAmount()">		
+												<label for="flight_remarks[]">Remarks</label>		
+												<input type="text" name="flight_remarks[]" value="{{$info->flight_remarks}}" required class="form-control">			
 											</div>		
-										</div>	
-										<div class="col-md-3">			
-											<div class="form-group">	
-												<label for="flight_price[]">Price</label>		
-												<input id="price" type="text" name="flight_price[]" value="{{$info->flight_price}}" required class="form-control" onKeyUp="FlightAmount()">			
-											</div>		
-										</div>		
+										</div>
 										<div class="col-md-3">			
 											<div class="form-group">	
 												<label for="flight_amount[]">Amount</label>		

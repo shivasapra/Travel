@@ -336,20 +336,13 @@ class InvoiceController extends Controller
     public function update(Request $request, $id)
     {
         $invoice = invoice::find($id);
-        $invoice->receiver_name = $request->receiver_name;
-        $invoice->billing_address = $request->billing_address;
-        $invoice->invoice_date = $request->invoice_date;
-        $invoice->invoice_no = $request->invoice_no;
         $invoice->discount = $request->discount;
-        if ($request->currency[0] == '$') {
-            $invoice->total = substr($request->total,1,3)*1;
-            $invoice->discounted_total = substr($request->discounted_total,1,3)*1;
-        }
-        else{
-            $invoice->total = substr($request->total,2,4)*1;
-            $invoice->discounted_total = substr($request->discounted_total,2,4)*1;
-        }
+        $invoice->currency = $request->currency;
+        $invoice->total = $request->total;
+        $invoice->discounted_total =$request->total - $request->discount;
         $invoice->save();
+
+
         foreach($request->item_name as $index => $item_name){
             $invoice_info = invoiceInfo::where();
             $invoice_info->invoice_id = $invoice->id;
@@ -358,12 +351,6 @@ class InvoiceController extends Controller
             $invoice_info->quantity = $request->quantity[$index];
             $invoice_info->currency = $request->currency[$index];
             $invoice_info->price = $request->price[$index];
-            if ($request->currency[0] == '$') {
-                $invoice_info->amount = substr($request->amount[$index],1,3)*1;
-            }
-            else{
-                $invoice_info->amount = substr($request->amount[$index],2,4)*1;
-            }
             $invoice_info->status = $request->status[$index];
             $invoice_info->save();
 
