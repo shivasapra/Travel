@@ -68,6 +68,7 @@ Edit Invoice
 				<div class="box box-primary">
 					<div class="box-body">
 							@if($info->service_name == 'Flight')
+							<input type="text" hidden value="{{$info->id}}">
 									<div class="row">
 										<div class="col-md-4">				
 											<div class="form-group">					
@@ -159,6 +160,7 @@ Edit Invoice
 									</div>	 --}}
 							
 							@elseif($info->service_name == 'Visa Services')
+							<input type="text" hidden value="{{$info->id}}">
 									<div class="row">			
 										<div class="col-md-4">				
 											<div class="form-group">					
@@ -220,6 +222,7 @@ Edit Invoice
 									</div>	 --}}
 
 							@elseif($info->service_name == 'Hotel')
+							<input type="text" hidden value="{{$info->id}}">
 									<div class="row">			
 										<div class="col-md-4">				
 											<div class="form-group">					
@@ -287,6 +290,7 @@ Edit Invoice
 									</div> --}}
 
 							@elseif($info->service_name == 'Insurance')
+							<input type="text" hidden value="{{$info->id}}">
 									<div class="row">			
 										<div class="col-md-4">				
 											<div class="form-group">					
@@ -320,6 +324,7 @@ Edit Invoice
 									</div> --}}
 
 							@elseif($info->service_name == 'Local Sight Sceen')
+							<input type="text" hidden value="{{$info->id}}">
 									<div class="row">			
 										<div class="col-md-4">				
 											<div class="form-group">					
@@ -347,6 +352,7 @@ Edit Invoice
 									</div> --}}
 
 							@elseif($info->service_name == 'Local Transport')
+							<input type="text" hidden value="{{$info->id}}">
 								<div class="row">			
 									<div class="col-md-4">				
 										<div class="form-group">					
@@ -374,6 +380,7 @@ Edit Invoice
 								</div> --}}
 
 							@elseif($info->service_name == 'Car Rental')
+							<input type="text" hidden value="{{$info->id}}">
 								<div class="row">			
 									<div class="col-md-4">				
 										<div class="form-group">					
@@ -401,6 +408,7 @@ Edit Invoice
 								</div> --}}
 
 							@elseif($info->service_name == 'Other Facilities')
+							<input type="text" hidden value="{{$info->id}}">
 								<div class="row">			
 									<div class="col-md-4">				
 										<div class="form-group">					
