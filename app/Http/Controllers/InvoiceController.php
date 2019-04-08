@@ -342,22 +342,22 @@ class InvoiceController extends Controller
         $invoice->discounted_total =$request->total - $request->discount;
         $invoice->paid = 0;
         $invoice->pending_amount=0;
-        if($request->credit != '0'){
+        if($request->credit_amount != '0'){
             $invoice->credit = 1;
             $invoice->credit_amount = $request->credit_amount;
             $invoice->paid = $invoice->paid + $request->credit_amount;
         }
-        if($request->debit != '0'){
+        if($request->debit_amount != '0'){
             $invoice->debit = 1;
             $invoice->debit_amount = $request->debit_amount;
             $invoice->paid = $invoice->paid + $request->debit_amount;
         }
-        if($request->cash != '0'){
+        if($request->cash_amount != '0'){
             $invoice->cash = 1;
             $invoice->cash_amount = $request->cash_amount;
             $invoice->paid = $invoice->paid + $request->cash_amount;
         }
-        if($request->bank != '0'){
+        if($request->bank_amount != '0'){
             $invoice->bank = 1;
             $invoice->bank_amount = $request->bank_amount;
             $invoice->paid = $invoice->paid + $request->bank_amount;
@@ -593,6 +593,40 @@ class InvoiceController extends Controller
         $invoice->forceDelete();
         Session::flash('success','Invoice Deleted Permanently');
         return redirect()->back();
+
+    }
+
+    public function pay($id){
+        $invoice = invoice::find($id);
+        return view('invoice.pay')->with('invoice',$invoice);
+
+    }
+
+    public function payy(Request $request,$id){
+        $invoice = invoice::find($id);
+        if($request->credit_amount != '0'){
+            $invoice->credit = 1;
+            $invoice->credit_amount = $request->credit_amount;
+            $invoice->paid = $invoice->paid + $request->credit_amount;
+        }
+        if($request->debit_amount != '0'){
+            $invoice->debit = 1;
+            $invoice->debit_amount = $request->debit_amount;
+            $invoice->paid = $invoice->paid + $request->debit_amount;
+        }
+        if($request->cash_amount != '0'){
+            $invoice->cash = 1;
+            $invoice->cash_amount = $request->cash_amount;
+            $invoice->paid = $invoice->paid + $request->cash_amount;
+        }
+        if($request->bank_amount != '0'){
+            $invoice->bank = 1;
+            $invoice->bank_amount = $request->bank_amount;
+            $invoice->paid = $invoice->paid + $request->bank_amount;
+        }
+        $invoice->save();
+        return redirect()->route('invoice')->with('invoices',invoice::all())
+                                            ->with('tax',settings::all());
 
     }
 

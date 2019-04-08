@@ -17,6 +17,8 @@ Auth::routes();
 Route::get('canceled/invoices',['uses'=>'InvoiceController@canceled','as'=>'canceled.invoices']);
 Route::get('retrieve/invoice/{id}',['uses'=>'InvoiceController@retrieve','as'=>'invoice.retrieve']);
 Route::get('kill/invoice/{id}',['uses'=>'InvoiceController@kill','as'=>'invoice.kill']);
+Route::get('pay/invoice/{id}',['uses'=>'InvoiceController@pay','as'=>'invoice.pay']);
+Route::post('payy/invoice/{id}',['uses'=>'InvoiceController@payy','as'=>'invoice.payy']);
 Route::get('accept/{token}', 'InviteController@accept')->name('accept');
 Route::get('confirm/{token}', 'InviteController@confirm')->name('confirm');
 Route::get('deleteClientPassportData/{token}', 'InviteController@deleteClientPassportData')->name('deleteClientPassportData');
