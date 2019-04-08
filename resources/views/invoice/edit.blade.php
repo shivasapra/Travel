@@ -155,9 +155,9 @@ Edit Invoice
 											</div>		
 										</div>
 									</div>
-									{{-- <div align="right">						
+									<div align="right">						
 										<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					
-									</div>	 --}}
+									</div>	
 							
 							@elseif($info->service_name == 'Visa Services')
 							<input type="text" hidden value="{{$info->id}}">
@@ -217,9 +217,9 @@ Edit Invoice
 											</div>		
 										</div>
 									</div>
-									{{-- <div align="right">						
+									<div align="right">						
 										<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					
-									</div>	 --}}
+									</div>	
 
 							@elseif($info->service_name == 'Hotel')
 							<input type="text" hidden value="{{$info->id}}">
@@ -285,9 +285,9 @@ Edit Invoice
 											</div>		
 										</div>		
 									</div>
-									{{-- <div align="right">						
+									<div align="right">						
 										<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">				
-									</div> --}}
+									</div>
 
 							@elseif($info->service_name == 'Insurance')
 							<input type="text" hidden value="{{$info->id}}">
@@ -319,9 +319,9 @@ Edit Invoice
 											</div>				
 										</div>	
 									</div>			
-									{{-- <div align="right">						
+									<div align="right">						
 										<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					
-									</div> --}}
+									</div>
 
 							@elseif($info->service_name == 'Local Sight Sceen')
 							<input type="text" hidden value="{{$info->id}}">
@@ -347,9 +347,9 @@ Edit Invoice
 											</div>				
 										</div>				
 									</div>
-									{{-- <div align="right">						
+									<div align="right">						
 										<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					
-									</div> --}}
+									</div>
 
 							@elseif($info->service_name == 'Local Transport')
 							<input type="text" hidden value="{{$info->id}}">
@@ -375,9 +375,9 @@ Edit Invoice
 										</div>				
 									</div>				
 								</div>
-								{{-- <div align="right">						
+								<div align="right">						
 									<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					
-								</div> --}}
+								</div>
 
 							@elseif($info->service_name == 'Car Rental')
 							<input type="text" hidden value="{{$info->id}}">
@@ -403,9 +403,9 @@ Edit Invoice
 										</div>				
 									</div>				
 								</div>
-								{{-- <div align="right">						
+								<div align="right">						
 									<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					
-								</div> --}}
+								</div>
 
 							@elseif($info->service_name == 'Other Facilities')
 							<input type="text" hidden value="{{$info->id}}">
@@ -431,17 +431,17 @@ Edit Invoice
 										</div>				
 									</div>				
 								</div>
-								{{-- <div align="right">						
+								<div align="right">						
 									<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					
-								</div> --}}
+								</div>
 							@endif
 					</div>				
 				</div>
 			@endforeach
 		</div>
-			{{-- <div class="text-center"  style="margin-top: 5px">
+			<div class="text-center"  style="margin-top: 5px">
 				<button class="btn btn-success btn-sm"  type="button" id="add">Add Service</button><br><br>
-			</div> --}}
+			</div>
 		<div class="box box-primary" id="targetTotal">
 		<div class="box-body">
 			<table class="table table-bordered">
