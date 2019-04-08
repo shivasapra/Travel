@@ -36,6 +36,7 @@ class CreateInvoicesTable extends Migration
             $table->integer('pending_amount')->nullable();
             $table->boolean('status')->default(0);
             $table->Date('mail_sent');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
