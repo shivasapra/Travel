@@ -516,7 +516,7 @@ class InvoiceController extends Controller
     {
         $invoice = invoice::find($id);
         $invoice->delete();
-        Session::flash('success','Invoice Deleted Successfully');
+        Session::flash('success','Invoice Canceled Successfully');
         return redirect()->back()->with('invoices',invoice::all());
     }
     public function generatePdf($id) {
