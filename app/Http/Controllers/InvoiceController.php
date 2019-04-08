@@ -583,8 +583,16 @@ class InvoiceController extends Controller
         $invoice = invoice::withTrashed()->where('id',$id)->first();
         $invoice->restore();
         Session::flash('success','Invoice Retreived');
-        return view('invoice.index')->with('invoices',invoice::all())
+        return redirect()->route('invoice')->with('invoices',invoice::all())
                                     ->with('tax',settings::all());
+
+    }
+
+    public function kill($id){
+        $invoice = invoice::withTrashed()->where('id',$id)->first();
+        $invoice->forceDelete();
+        Session::flash('success','Invoice Deleted Permanently');
+        return redirect()->back();
 
     }
 

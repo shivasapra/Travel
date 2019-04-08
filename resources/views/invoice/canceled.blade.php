@@ -61,6 +61,7 @@ Canceled Invoices
 	                    			<a href="{{route('invoice.edit',['id'=>$invoice->id])}}" class="btn btn-info btn-xs"><span class="fa fa-edit"></span></a>
                                     <a href="{{route('invoice.view',['id'=>$invoice->id])}}" class="btn btn-info btn-xs"><span class="fa fa-eye"></span></a>
                                     <a href="{{route('invoice.retrieve',['id'=>$invoice->id])}}" class="btn btn-success btn-xs">Retrieve</a>
+                                    <a href="{{route('invoice.kill',['id'=>$invoice->id])}}" class="btn btn-danger btn-xs">Delete</a>
 	                    		</td>
 	                    		{{-- <td><a href="{{route('invoice.delete',['id'=>$invoice->id])}}" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span></a></td> --}}
 	                    	</tr>
@@ -70,11 +71,6 @@ Canceled Invoices
             </table>
         
 		</div>
-		</div>
-		<div class="text-center">
-			<a href="{{route('invoice.create')}}">
-				<button class="btn btn-success">Create</button>
-			</a>
 		</div>
 @endsection
 @section('js')
