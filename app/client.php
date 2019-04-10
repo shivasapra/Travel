@@ -17,7 +17,7 @@ class client extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function Family()
+    public function family()
     {
         return $this->hasMany('App\ClientFamily');
     }

@@ -15,6 +15,7 @@ class CreateClientFamiliesTable extends Migration
     {
         Schema::create('client_families', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('client_id')->nullable();
             $table->string('name')->nullable();
             $table->string('DOB')->nullable();
             $table->string('passport_no')->nullable();
