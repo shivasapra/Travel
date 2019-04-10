@@ -100,17 +100,25 @@ Client Registration
 						<label for="email">Email</label>
 						<input type="email" name='email' required class="form-control">
 					</div>
-					<div class="form-group">
-						<label for="passport">Do you have passport</label>
-						<input type="radio" name='passport' required id="yespassport" value=1>Yes
-						<input type="radio" name='passport' required id="nopassport" checked value=0>No
-					</div>
 					</div>
 					<div class="col-md-6">
 					<div class="form-group">
 						<label for="DOB">DOB</label>
 						<input type="date" name='DOB' value="{{$date}}" required class="form-control">
 					</div>
+					</div>
+				</div>
+				<div class="text-center">
+					<button class="btn btn-sm btn-primary" type="button" id="add">Add Family Member</button>
+				</div>
+				<div id="family-member"></div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="passport">Do you have passport</label>
+							<input type="radio" name='passport' required id="yespassport" value=1>Yes
+							<input type="radio" name='passport' required id="nopassport" checked value=0>No
+						</div>
 					</div>
 				</div>
 				<div id="passport"></div>
@@ -138,14 +146,34 @@ Client Registration
 				</div>
 			</form>
 
-
+<div class="row">
+	<div class="col-md-4">
+		<div class="form-group">
+			<label for="DOB">Name</label>
+			<input type="date" name='DOB' value="{{$date}}" required class="form-control">
+		</div>
+	</div>
+</div>
 
 
 @stop
 @section('js')
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<script type="text/javascript">
-		
+		$(document).ready(function(){
+    $("#add").click(function(){
+    	var append = '<div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					</div>';
+        $("#family-member").append(append);
+        });
+    });
+	function SomeDeleteRowFunction(btndel) {
+    if (typeof(btndel) == "object") {
+        $(btndel).closest('div').remove();
+    } else {
+        return false;
+    }}
+
+
 		$(document).ready(function(){
 	    $("#yespassport").click(function(){
 	    	var data = '<hr><div class="text-center"><h3>Passport Details</h3></div><hr><div class="row"><div class="col-md-6"><div class="form-group"><label for="passport_no">Passport Number</label><input type="text" name="passport_no" required class="form-control"></div></div><div class="col-md-6"><div class="form-group"><label for="passport_expiry_date">Passport Expire date</label><input type="date" name="passport_expiry_date" required class="form-control"></div></div></div><div class="row"><div class="col-md-6"><div class="form-group"><label for="passport_place">Place of Issue</label><input type="text" name="passport_place" required class="form-control"></div></div><div class="col-md-6"><div class="form-group"><label for="passport_issue_date">Date Of Issue</label><input type="date" name="passport_issue_date" required class="form-control"></div></div></div><div class="row"><div class="col-md-4"><div class="form-group"><label for="passport_front">Passport Front:</label><input type="file" name="passport_front" class="form-control"></div></div><div class="col-md-4"><div class="form-group"><label for="passport_back">Passport Back:</label><input type="file" name="passport_back" class="form-control"></div></div><div class="col-md-4"><div class="form-group"><label for="passport_front">Letter:</label><input type="file" name="letter" class="form-control"></div></div></div><hr>';
