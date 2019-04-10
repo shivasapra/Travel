@@ -8,6 +8,7 @@ use Session;
 use Mail;
 use Carbon\Carbon;
 use Auth;
+use App\ClientFamily;
 class clientController extends Controller
 {   
     public function __construct()
@@ -119,6 +120,16 @@ class clientController extends Controller
                 { 
                     $message->to($contactEmail)->subject( 'Permission For Keeping Your Details' );
                 });
+        }
+
+        foreach($request->member_name as $member_name=>$index){
+            $client_family = new ClientFamily;
+            $client_family->client_id = $client->id;
+            $client_family->member_name = $member_name;
+            $client_family->DOB = $request->DOB[$index];
+            $client_family->member_passport_no = $request->member_passport_no[$index];
+            $client_family->save();
+
         }
         Session::flash('success','Client Created Successfully');
         return redirect()->route('clients');

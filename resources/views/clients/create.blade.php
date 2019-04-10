@@ -153,7 +153,7 @@ Client Registration
 	<script type="text/javascript">
 		$(document).ready(function(){
     $("#add").click(function(){
-    	var append = '<div class="row">	<div class="col-md-4">		<div class="form-group">			<label for="member_name[]">Member Name</label>			<input type="text" name="member_name[]" required class="form-control">		</div>	</div>	<div class="col-md-4">		<div class="form-group">			<label for="member_DOB[]">Member DOB</label>			<input type="date" name="member_DOB[]" required class="form-control">		</div>	</div>	<div class="col-md-4">		<div class="form-group">			<label for="member_passport_no[]">Member Passport NO.</label>			<input type="text" name="member_passport_no[]" required class="form-control">		</div>	</div><div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					</div></div>';
+    		var append = '<div class="row">	<div class="col-md-4">		<div class="form-group">			<label for="member_name[]">Member Name</label>			<input type="text" name="member_name[]" required class="form-control">		</div>	</div>	<div class="col-md-4">		<div class="form-group">			<label for="member_DOB[]">Member DOB</label>			<input type="date" name="member_DOB[]" value="{{$date}}" required class="form-control">		</div>	</div>	<div class="col-md-4">		<div class="form-group">			<label for="member_passport_no[]">Member Passport NO.</label>			<input type="text" name="member_passport_no[]" required class="form-control">		</div>	</div><div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					</div></div>';
         $("#family-member").append(append);
         });
     });
