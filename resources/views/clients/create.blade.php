@@ -108,10 +108,10 @@ Client Registration
 					</div>
 					</div>
 				</div>
-				<div class="text-center">
-					<button class="btn btn-sm btn-primary" type="button" id="add">Add Family Member</button>
-				</div>
 				<div id="family-member"></div>
+					<div class="text-center" style="margin-top: 5px">
+						<button class="btn btn-sm btn-primary" type="button" id="add">Add Family Member</button>
+					</div>
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
@@ -146,15 +146,6 @@ Client Registration
 				</div>
 			</form>
 
-<div class="row">
-	<div class="col-md-4">
-		<div class="form-group">
-			<label for="DOB">Name</label>
-			<input type="date" name='DOB' value="{{$date}}" required class="form-control">
-		</div>
-	</div>
-</div>
-
 
 @stop
 @section('js')
@@ -162,13 +153,13 @@ Client Registration
 	<script type="text/javascript">
 		$(document).ready(function(){
     $("#add").click(function(){
-    	var append = '<div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					</div>';
+    	var append = '<div class="row">	<div class="col-md-4">		<div class="form-group">			<label for="member_name[]">Member Name</label>			<input type="text" name="member_name[]" required class="form-control">		</div>	</div>	<div class="col-md-4">		<div class="form-group">			<label for="member_DOB[]">Member DOB</label>			<input type="date" name="member_DOB[]" required class="form-control">		</div>	</div>	<div class="col-md-4">		<div class="form-group">			<label for="member_passport_no[]">Member Passport NO.</label>			<input type="text" name="member_passport_no[]" required class="form-control">		</div>	</div><div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					</div></div>';
         $("#family-member").append(append);
         });
     });
 	function SomeDeleteRowFunction(btndel) {
     if (typeof(btndel) == "object") {
-        $(btndel).closest('div').remove();
+        $(btndel).closest('.row').remove();
     } else {
         return false;
     }}
