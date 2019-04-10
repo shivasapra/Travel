@@ -122,11 +122,11 @@ class clientController extends Controller
                 });
         }
 
-        foreach($request->member_name as $member_name=>$index){
+        foreach($request->member_name as $index=>$member_name){
             $client_family = new ClientFamily;
             $client_family->client_id = $client->id;
             $client_family->member_name = $member_name;
-            $client_family->DOB = $request->DOB[$index];
+            $client_family->member_DOB = $request->member_DOB[$index];
             $client_family->member_passport_no = $request->member_passport_no[$index];
             $client_family->save();
 
