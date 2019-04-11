@@ -14,7 +14,7 @@ Create Invoice
 		display: block;
 		position:absolute;
 		background-color: #f6f6f6;
-		min-width: 340px;
+		min-width: 240px;
 		border: 1px solid #ddd;
 		z-index: 1;
 		}
@@ -43,7 +43,7 @@ Create Invoice
 		display: block;
 		position:absolute;
 		background-color: #f6f6f6;
-		min-width: 340px;
+		min-width: 240px;
 		border: 1px solid #ddd;
 		z-index: 1;
 		}
@@ -72,7 +72,7 @@ Create Invoice
 		display: block;
 		position:absolute;
 		background-color: #f6f6f6;
-		min-width: 340px;
+		min-width: 240px;
 		border: 1px solid #ddd;
 		z-index: 1;
 		}
@@ -368,34 +368,34 @@ Create Invoice
 							'@foreach($products as $product)	'+
 							'<option value="{{$product->service}}" {{($product->service == "Flight")?"selected":''}}>{{$product->service}}</option>'+
 							'@endforeach							@endif					</select>				</div>'+
-							'</div>		</div><div class="row">		<div class="col-md-4">		<div class="form-group">'+
+							'</div>		</div><div class="row">		<div class="col-md-3">		<div class="form-group">'+
 							'<label for="airline_name">Airline Name</label>'+
 							'<div class="dropdown">			<div id="myDropdown" class="dropdown-content">'+
 							'<input type="text" class="form-control airline-name" placeholder="Search.." name="airline_name[]" id="myInput" onkeyup="AirlineDataExtract(this)"  required >'+
 							'<div class="airline_html"></div>'+
 							'</div>	</div>		</div>		</div>'+
-							'<div class="col-md-4">	<div class="form-group">	<label for="source">Departure</label>'+
+							'<div class="col-md-3">	<div class="form-group">	<label for="source">Departure</label>'+
 							'<div class="Airportdropdown">	<div id="AirportmyDropdown" class="Airportdropdown-content">'+
 							'<input type="text" class="form-control airport-name" placeholder="Search.." name="source[]" id="AirportmyInput" onkeyup="AirportDataExtract(this)"  required >'+
 							'<div class="airport_html"></div>	</div>		</div>		</div>		</div>'+
-							'<div class="col-md-4">		<div class="form-group">			<label for="destination">Arrival</label>'+
+							'<div class="col-md-3">		<div class="form-group">			<label for="destination">Arrival</label>'+
 							'<div class="AirportArrivaldropdown">	<div id="AirportArrivalmyDropdown" class="AirportArrivaldropdown-content">'+
 							'<input type="text" class="form-control airport-arrival-name" placeholder="Search.." name="destination[]" id="AirportArrivalmyInput" onkeyup="AirportArrivalDataExtract(this)"  required >'+
-							'<div class="airportArrival_html"></div>	</div>	</div>		</div>		</div>		</div><hr>'+
-							'<div class="row">		<div class="col-md-3">		<div class="form-group">	<label for="date_of_trave">Date</label>'+
-							'<input type="date" name="date_of_trave" required class="form-control">	</div>	</div>'+
-							'<div class="col-md-2">		<div class="form-group">	<label for="adult[]">Adult</label>'+
-							'<input type="text" name="adult[]" class="form-control" onKeyUp="FlightAmount()">	</div>	</div><div class="col-md-2">		<div class="form-group">	<label for="adult_price[]">Adult Price</label>'+
-							'<input type="text" name="adult_price[]" class="form-control" onKeyUp="FlightAmount()">	</div>	</div>	<div class="col-md-2">'+
+							'<div class="airportArrival_html"></div>	</div>	</div>		</div>		</div><div class="col-md-3">		<div class="form-group">	<label for="date_of_trave">Date</label>'+
+							'<input type="date" name="date_of_trave" required class="form-control">	</div>	</div>		</div><hr>'+
+							'<div class="row">	'+
+							'<div class="col-md-4">		<div class="form-group">	<label for="adult[]">Adult</label>'+
+							'<input type="text" name="adult[]" class="form-control" onKeyUp="FlightAmount()">	</div>	</div><div class="col-md-4">		<div class="form-group">	<label for="adult_price[]">Adult Price</label>'+
+							'<input type="text" name="adult_price[]" class="form-control" onKeyUp="FlightAmount()">	</div>	</div></div><div class="row">	<div class="col-md-4">'+
 							'<div class="form-group">	<label for="child[]">Child</label>'+
-							'<input type="text" name="child[]" required class="form-control" onKeyUp="FlightAmount()">	</div>	</div> <div class="col-md-2">		<div class="form-group">	<label for="child_price[]">Child Price</label>'+
+							'<input type="text" name="child[]" required class="form-control" onKeyUp="FlightAmount()">	</div>	</div> <div class="col-md-4">		<div class="form-group">	<label for="child_price[]">Child Price</label>'+
 							'<input type="text" name="child_price[]" class="form-control" onKeyUp="FlightAmount()">	</div>	</div>'+
 							'</div>'+
-							'<div class="row"><div class="col-md-2">	<div class="form-group">	<label for="infant[]">Infant</label>'+
-							'<input type="text" name="infant[]" required class="form-control" onKeyUp="FlightAmount()">	</div>	</div> <div class="col-md-2">	<div class="form-group">	<label for="infant_price[]">Infant Price</label>'+
-							'<input type="text" name="infant_price[]" required class="form-control" onKeyUp="FlightAmount()">	</div>	</div>'+
+							'<div class="row"><div class="col-md-4">	<div class="form-group">	<label for="infant[]">Infant</label>'+
+							'<input type="text" name="infant[]" required class="form-control" onKeyUp="FlightAmount()">	</div>	</div> <div class="col-md-4">	<div class="form-group">	<label for="infant_price[]">Infant Price</label>'+
+							'<input type="text" name="infant_price[]" required class="form-control" onKeyUp="FlightAmount()">	</div>	</div></div><div class="row">'+
 							'<div class="col-md-4">	<div class="form-group">	<label for="flight_remarks[]">Remarks</label>'+
-							'<input type="text" name="flight_remarks[]" required class="form-control">	</div>	</div>		<div class="col-md-3">	<div class="form-group">	<label for="flight_amount[]">Amount</label>'+
+							'<input type="text" name="flight_remarks[]" required class="form-control">	</div>	</div>		<div class="col-md-4">	<div class="form-group">	<label for="flight_amount[]">Amount</label>'+
 							'<input id="amount" type="number" name="flight_amount[]" required class="form-control" readonly>	'+
 							'</div>		</div></div><div align="right">'+
 							'<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">'+
