@@ -121,15 +121,16 @@ class clientController extends Controller
                     $message->to($contactEmail)->subject( 'Permission For Keeping Your Details' );
                 });
         }
+        if($request->member_name){
+            foreach($request->member_name as $index=>$member_name){
+                $client_family = new ClientFamily;
+                $client_family->client_id = $client->id;
+                $client_family->member_name = $member_name;
+                $client_family->member_DOB = $request->member_DOB[$index];
+                $client_family->member_passport_no = $request->member_passport_no[$index];
+                $client_family->save();
 
-        foreach($request->member_name as $index=>$member_name){
-            $client_family = new ClientFamily;
-            $client_family->client_id = $client->id;
-            $client_family->member_name = $member_name;
-            $client_family->member_DOB = $request->member_DOB[$index];
-            $client_family->member_passport_no = $request->member_passport_no[$index];
-            $client_family->save();
-
+            }
         }
         Session::flash('success','Client Created Successfully');
         return redirect()->route('clients');
