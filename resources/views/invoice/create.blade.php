@@ -386,7 +386,10 @@ Create Invoice
 							'<div class="row">	'+
 							'<div class="col-md-4">		<div class="form-group">	<label for="adult[]">Adult</label>'+
 							'<input type="text" name="adult[]" class="form-control" onKeyUp="FlightAmount()">	</div>	</div><div class="col-md-4">		<div class="form-group">	<label for="adult_price[]">Adult Price</label>'+
-							'<input type="text" name="adult_price[]" class="form-control" onKeyUp="FlightAmount()">	</div>	</div></div><div class="row">	<div class="col-md-4">'+
+							'<input type="text" name="adult_price[]" class="form-control" onKeyUp="FlightAmount()">	</div>	</div><div class="col-md-1"><div class="form-group">'+
+							'<label for="child_check[]">Child</label><br><input type="checkbox" name="child_check[]" required></div></div><div class="col-md-1"><div class="form-group">'+
+							'<label for="infant_check[]">Infant</label><br><input type="checkbox" name="infant_check[]" required>'+
+							'</div></div></div><div class="row">	<div class="col-md-4">'+
 							'<div class="form-group">	<label for="child[]">Child</label>'+
 							'<input type="text" name="child[]" required class="form-control" onKeyUp="FlightAmount()">	</div>	</div> <div class="col-md-4">		<div class="form-group">	<label for="child_price[]">Child Price</label>'+
 							'<input type="text" name="child_price[]" class="form-control" onKeyUp="FlightAmount()">	</div>	</div>'+
