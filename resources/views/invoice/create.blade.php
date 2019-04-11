@@ -276,6 +276,27 @@ Create Invoice
 		$.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
 		</script>
 	<script type="text/javascript">
+		function ChildAppend(test){
+			// console.log(test.value);
+			// if($(test).prop("checked") == true){
+			// 	var data='';
+			// $(test).closest(".box-body").append(data);
+			// }
+			// else{
+			// 	$(test).closest(".box-body").append(data);
+			// }
+			var box = $(test).closest(".box-body");
+			box.find('#child-nikaalo').toggle();
+			
+		}
+
+		function InfantAppend(test){
+			var box = $(test).closest(".box-body");
+			box.find('#infant-nikaalo').toggle();
+		}
+
+
+
 	  function filterFunction() {
 		var input, filter, ul, li, a, i;
 		input = document.getElementById("myInput");
@@ -382,21 +403,20 @@ Create Invoice
 							'<div class="AirportArrivaldropdown">	<div id="AirportArrivalmyDropdown" class="AirportArrivaldropdown-content">'+
 							'<input type="text" class="form-control airport-arrival-name" placeholder="Search.." name="destination[]" id="AirportArrivalmyInput" onkeyup="AirportArrivalDataExtract(this)"  required >'+
 							'<div class="airportArrival_html"></div>	</div>	</div>		</div>		</div><div class="col-md-3">		<div class="form-group">	<label for="date_of_trave">Date</label>'+
-							'<input type="date" name="date_of_trave" required class="form-control">	</div>	</div>		</div><hr>'+
+							'<input type="date" name="date_of_travel" required class="form-control">	</div>	</div>		</div><hr>'+
 							'<div class="row">	'+
 							'<div class="col-md-4">		<div class="form-group">	<label for="adult[]">Adult</label>'+
 							'<input type="text" name="adult[]" class="form-control" onKeyUp="FlightAmount()">	</div>	</div><div class="col-md-4">		<div class="form-group">	<label for="adult_price[]">Adult Price</label>'+
 							'<input type="text" name="adult_price[]" class="form-control" onKeyUp="FlightAmount()">	</div>	</div><div class="col-md-1"><div class="form-group">'+
-							'<label for="child_check[]">Child</label><br><input type="checkbox" name="child_check[]" required></div></div><div class="col-md-1"><div class="form-group">'+
-							'<label for="infant_check[]">Infant</label><br><input type="checkbox" name="infant_check[]" required>'+
-							'</div></div></div><div class="row">	<div class="col-md-4">'+
+							'<label for="child_check[]">Child</label><br><input type="checkbox" name="child_check[]" checked onClick="ChildAppend(this)" required></div></div><div class="col-md-1"><div class="form-group">'+
+							'<label for="infant_check[]">Infant</label><br><input type="checkbox" name="infant_check[]" onClick="InfantAppend(this)" checked required>'+
+							'</div></div></div><div class="row"><div id="child-nikaalo"><div class="col-md-3">'+
 							'<div class="form-group">	<label for="child[]">Child</label>'+
-							'<input type="text" name="child[]" required class="form-control" onKeyUp="FlightAmount()">	</div>	</div> <div class="col-md-4">		<div class="form-group">	<label for="child_price[]">Child Price</label>'+
-							'<input type="text" name="child_price[]" class="form-control" onKeyUp="FlightAmount()">	</div>	</div>'+
-							'</div>'+
-							'<div class="row"><div class="col-md-4">	<div class="form-group">	<label for="infant[]">Infant</label>'+
-							'<input type="text" name="infant[]" required class="form-control" onKeyUp="FlightAmount()">	</div>	</div> <div class="col-md-4">	<div class="form-group">	<label for="infant_price[]">Infant Price</label>'+
-							'<input type="text" name="infant_price[]" required class="form-control" onKeyUp="FlightAmount()">	</div>	</div></div><div class="row">'+
+							'<input type="text" name="child[]" required class="form-control" onKeyUp="FlightAmount()">	</div>	</div> <div class="col-md-3">		<div class="form-group">	<label for="child_price[]">Child Price</label>'+
+							'<input type="text" name="child_price[]" class="form-control" onKeyUp="FlightAmount()">	</div>	</div></div><div id="infant-nikaalo">'+
+							'<div class="col-md-3">	<div class="form-group">	<label for="infant[]">Infant</label>'+
+							'<input type="text" name="infant[]" required class="form-control" onKeyUp="FlightAmount()">	</div>	</div> <div class="col-md-3">	<div class="form-group">	<label for="infant_price[]">Infant Price</label>'+
+							'<input type="text" name="infant_price[]" required class="form-control" onKeyUp="FlightAmount()">	</div>	</div></div></div><div class="row">'+
 							'<div class="col-md-4">	<div class="form-group">	<label for="flight_remarks[]">Remarks</label>'+
 							'<input type="text" name="flight_remarks[]" required class="form-control">	</div>	</div>		<div class="col-md-4">	<div class="form-group">	<label for="flight_amount[]">Amount</label>'+
 							'<input id="amount" type="number" name="flight_amount[]" required class="form-control" readonly>	'+
@@ -502,30 +522,6 @@ Create Invoice
     });
     });
 
-  //   $(document).ready(function(){
-  //   $("#credit").click(function(){
-  //   	var input = '<input name="credit_amount" type="text" class="form-control">';
-  //   	$("#creditInput").html(input);
-  //   });
-	// });
-	// $(document).ready(function(){
-  //   $("#debit").click(function(){
-  //   	var input = '<input name="debit_amount" type="text" class="form-control">';
-  //   	$("#debitInput").html(input);
-  //   });
-	// });
-	// $(document).ready(function(){
-  //   $("#cash").click(function(){
-  //   	var input = '<input name="cash_amount" type="text" class="form-control">';
-  //   	$("#cashInput").html(input);
-  //   });
-	// });
-	// $(document).ready(function(){
-  //   $("#bank").click(function(){
-  //   	var input = '<input name="bank_amount" type="text" class="form-control">';
-  //   	$("#bankInput").html(input);
-  //   });
-	// });
 
     $(document).ready(function(){
     $("#client").change(function(){
