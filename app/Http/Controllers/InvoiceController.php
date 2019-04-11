@@ -175,10 +175,24 @@ class InvoiceController extends Controller
                         $invoice_info->date_of_travel = $request->date_of_travel[$flight_counter];
                         $invoice_info->adult = $request->adult[$flight_counter];
                         $invoice_info->adult_price = $request->adult_price[$flight_counter];
-                        $invoice_info->child = $request->child[$flight_counter];
-                        $invoice_info->child_price = $request->child_price[$flight_counter];
-                        $invoice_info->infant = $request->infant[$flight_counter];
-                        $invoice_info->infant_price = $request->infant_price[$flight_counter];
+                        if($request->child[$flight_counter]){
+                            $invoice_info->child = $request->child[$flight_counter];
+                            $invoice_info->child_price = $request->child_price[$flight_counter];
+                        }
+                        else{
+                            $invoice_info->child = 0;
+                            $invoice_info->child_price = 0;
+                        }
+
+                        if($request->infant[$flight_counter]){
+                            $invoice_info->infant = $request->infant[$flight_counter];
+                            $invoice_info->infant_price = $request->infant_price[$flight_counter];
+                        }
+                        else{
+                            $invoice_info->infant = 0;
+                            $invoice_info->infant_price = 0;
+                        }
+
                         // $invoice_info->infant_dob = $request->infant_dob[$flight_counter];
                         $invoice_info->flight_amount = $request->flight_amount[$flight_counter];
                         $invoice_info->flight_remarks = $request->flight_remarks[$flight_counter];
