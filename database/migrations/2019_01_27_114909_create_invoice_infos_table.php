@@ -37,6 +37,8 @@ class CreateInvoiceInfosTable extends Migration
 
             $table->string('name_of_visa_applicant')->nullable();
             $table->string('passport_origin')->nullable();
+            $table->string('passport_member_DOB')->nullable();
+            $table->string('passport_no')->nullable();
             $table->string('visa_country')->nullable();
             $table->string('visa_type')->nullable();
             $table->string('visa_charges')->nullable();
