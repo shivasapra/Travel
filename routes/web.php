@@ -13,7 +13,10 @@
 // Route::post('invite', 'employeeController@process')->name('process');
 // {token} is a required parameter that will be exposed to us in the controller method
 Auth::routes();
-
+Route::get('/find/family/{id}', function ($id) {
+    $family = App\ClientFamily::find($id);
+    return $family;
+});
 Route::get('canceled/invoices',['uses'=>'InvoiceController@canceled','as'=>'canceled.invoices']);
 Route::get('retrieve/invoice/{id}',['uses'=>'InvoiceController@retrieve','as'=>'invoice.retrieve']);
 Route::get('kill/invoice/{id}',['uses'=>'InvoiceController@kill','as'=>'invoice.kill']);
