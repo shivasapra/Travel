@@ -114,14 +114,14 @@ class clientController extends Controller
                 $client_family->member_passport_no = $request->member_passport_no[$index];
                 if($request->hasFile('member_passport_front'))
                 {
-                $member_passport_front = $request->member_passport_front;
+                $member_passport_front = $request->member_passport_front[$index];
                 $member_passport_front_new_name = time().$member_passport_front->getClientOriginalName();
                 $member_passport_front->move('uploads/passport',$member_passport_front_new_name);
                 $client_family->member_passport_front = 'uploads/passport/'.$member_passport_front_new_name;
                 }
             if($request->hasFile('member_passport_back'))
                 {
-                $member_passport_back = $request->member_passport_back;
+                $member_passport_back = $request->member_passport_back[$index];
                 $member_passport_back_new_name = time().$member_passport_back->getClientOriginalName();
                 $member_passport_back->move('uploads/passport',$member_passport_back_new_name);
                 $client_family->member_passport_back = 'uploads/passport/'.$member_passport_back_new_name;
