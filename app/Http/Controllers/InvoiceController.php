@@ -210,6 +210,8 @@ class InvoiceController extends Controller
 
                             $invoice_info->name_of_visa_applicant = $request->name_of_visa_applicant[$visa_counter];
                             $invoice_info->passport_origin = $request->passport_origin[$visa_counter];
+                            $invoice_info->passport_member_dob = $request->passport_member_dob[$visa_counter];
+                            $invoice_info->passport_no = $request->passport_no[$visa_counter];
                             $invoice_info->visa_country = $request->visa_country[$visa_counter];
                             $invoice_info->visa_type = $request->visa_type[$visa_counter];
                             $invoice_info->visa_charges = $request->visa_charges[$visa_counter];
@@ -420,6 +422,8 @@ class InvoiceController extends Controller
 
                             $invoice_info->name_of_visa_applicant = $request->name_of_visa_applicant[$visa_counter];
                             $invoice_info->passport_origin = $request->passport_origin[$visa_counter];
+                            $invoice_info->passport_member_dob = $request->passport_member_dob[$visa_counter];
+                            $invoice_info->passport_no = $request->passport_no[$visa_counter];
                             $invoice_info->visa_country = $request->visa_country[$visa_counter];
                             $invoice_info->visa_type = $request->visa_type[$visa_counter];
                             $invoice_info->visa_charges = $request->visa_charges[$visa_counter];
