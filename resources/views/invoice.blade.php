@@ -29,7 +29,7 @@ Invoice
       </div>
       <!-- info row -->
       <div class="row invoice-info">
-        
+
         <!-- /.col -->
         <div class="col-sm-8 invoice-col">
           To,<br>
@@ -102,10 +102,12 @@ Invoice
                 <tr>
                   <td><strong>{{'Name Of Visa Applicant:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->name_of_visa_applicant}}</td>
                   <td><strong>{{'Passport Origin:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->passport_origin}}</td>
-                  <td><strong>{{'Visa Country:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->visa_country}}</td>
-                  <td><strong>{{'Visa Type:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->visa_type}}</td>
+                  <td><strong>{{'Passport No:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->passport_no}}</td>
+                  <td><strong>{{'DOB:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->passport_member_DOB}}</td>
                 </tr>
                 <tr>
+                    <td><strong>{{'Visa Country:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->visa_country}}</td>
+                    <td><strong>{{'Visa Type:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->visa_type}}</td>
                     <td><strong>{{'Visa Fee:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->visa_charges}}</td>
                     <td><strong>{{'Service Charge:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->service_charge}}</td>
                     <td style="color:white;font-weight:500;background-color:gray;"><strong>{{'Amount:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->visa_amount}}</td>
@@ -220,7 +222,7 @@ Invoice
             </div>
           @endif
           @endforeach
-          
+
         <!-- /.col -->
       </div><br>
       <!-- /.row -->
@@ -274,7 +276,7 @@ Invoice
 
           <div class="table-responsive">
             <table class="table">
-              
+
               <tr>
                 <th style="width:50%">Subtotal:</th>
                 <td>{{$invoice->currency}} {{$invoice->total}}</td>
@@ -315,7 +317,7 @@ Invoice
                 <th class="text-danger">Pending:</th>
                 <td>{{$invoice->currency}} {{$invoice->pending_amount}}</td>
               </tr>
-              
+
             </table>
           </div>
         </div>
@@ -351,7 +353,7 @@ Invoice
         PASSENGER NOTICE :
         Carriage and other services provided by the carrier are subject to conditions of contract, which are hereby incorporated by reference. These conditions may be obtained from the issuing carrier. The itinerary/receipt constitutes the passenger ticket for the purposes of Article 3 of the Warsaw convention, except where the carrier delivers to the passenger another document complying with the requirements of Article 3. If the passenger's journey involves an ultimate destination or stop in a country other than the country of departure the Warsaw Convention may be applicable, and the convention governs, and in most cases limits, the liability of carriers for death or personal injury and in respect of loss of or damage to baggage. See also notices headed Advice to International Passengers on limitation of liability and notice of baggage liability limitations. Full conditions can be found at
         <a href="WWW.IATA.ORG">WWW.IATA.ORG</a>
-        or by clicking 
+        or by clicking
         HERE
       </p>
       <p class="text-muted" style="margin-top: 10px; font-size: 10px">
@@ -361,13 +363,13 @@ Invoice
         States. Applications may be submitted at anytime prior to travel, but no less than 72 hours prior to departure.
         Travel Authorization is obtained through an online registration system known as the Electronic System for Travel Authorization (ESTA). If your registration
         is successful, it will be valid for multiple applications for two years or until the date on which your passport expires, which ever comes first.
-        Submit your ESTA Application at 
+        Submit your ESTA Application at
         <a href="WWW.IATA.ORG">WWW.IATA.ORG</a>
       </p>
       <p class="text-muted" style="margin-top: 10px; font-size: 10px">
         Note : There is no liability if airline(s) above cease to trade, unless Scheduled Airline Failure Insurance (SAFI) has been paid.
         Yours Sincerely
       </p>
-    
+
     </section>
 @stop
