@@ -129,7 +129,7 @@ class InvoiceController extends Controller
         $invoice->currency = $request->currency;
         $invoice->total = $request->total;
         $invoice->discounted_total =$request->total - $request->discount;
-        
+
         $invoice->paid = 0;
         $invoice->pending_amount=0;
         if($request->credit != '0'){
@@ -336,9 +336,11 @@ class InvoiceController extends Controller
     public function edit($id)
     {
         $invoice = invoice::find($id);
+        $client = client::find($invoice->client_id);
         return view('invoice.edit')->with('invoice',$invoice)
                                     ->with('products',products::all())
-                                    ->with('airlines',airlines::all());
+                                    ->with('airlines',airlines::all())
+                                    ->with('client',$client);
 
     }
 

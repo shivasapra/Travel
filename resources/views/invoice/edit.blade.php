@@ -191,7 +191,7 @@ Edit Invoice
 										<div class="col-md-3">
 											<div class="form-group">
 												<label for="passport_member_dob">Passport Member DOB</label>
-												<input type="text" name="passport_member_dob[]" value="{{$info->passport_member_dob}}" class="form-control">
+												<input type="text" name="passport_member_dob[]" value="{{$info->passport_member_DOB}}" class="form-control">
 											</div>
 										</div>
 									</div>
@@ -530,7 +530,6 @@ Edit Invoice
 @stop
 @section('js')
 <script>
-
 </script>
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<script type="text/javascript">
@@ -552,7 +551,6 @@ Edit Invoice
 		  }
 		}
 	  }
-
 	function AirlineAssign(temp){
 		var div = $(temp).closest(".dropdown-content");
 		div.find('.airline-name').val(temp.value);
@@ -568,7 +566,6 @@ Edit Invoice
 		div.find('.airport-arrival-name').val(temp.value);
 		$(temp).closest(".airportArrival_html").html('');
 	}
-
 	function AirlineDataExtract(test){
 			$value=test.value;
 			$.ajax({
@@ -580,7 +577,6 @@ Edit Invoice
 				}
 			});
 		}
-
 		function AirportDataExtract(test){
 			$value=test.value;
 			$.ajax({
@@ -592,7 +588,6 @@ Edit Invoice
 				}
 			});
 		}
-
 		function AirportArrivalDataExtract(test){
 			$value=test.value;
 			$.ajax({
@@ -604,7 +599,6 @@ Edit Invoice
 				}
 			});
 		}
-
         function findFamily(test){
 		if (test.value != 'SELF') {
 			var familyId = test.value;
@@ -622,18 +616,14 @@ Edit Invoice
 			}
 		}
 		else{
-			var client_id = document.getElementById('client').value;
-				@foreach($clients as $client)
-				var fetched_client_id = {!! json_encode($client->id) !!}
-			    	if(fetched_client_id == client_id){
-							var div = $(test).closest(".box-body");
-							div.find('.member_dob').val({!! json_encode($client->DOB) !!});
-							var first_name = {!! json_encode($client->first_name)!!};
-							var last_name = {!! json_encode($client->last_name)!!}
-							div.find('.member_name').val(first_name+" "+last_name);
-							div.find('.passport_no').val({!! json_encode($client->passport_no) !!});
-						}
-			  @endforeach
+
+            var div = $(test).closest(".box-body");
+            div.find('.member_dob').val({!! json_encode($client->DOB) !!});
+            var first_name = {!! json_encode($client->first_name)!!};
+            var last_name = {!! json_encode($client->last_name)!!}
+            div.find('.member_name').val(first_name+" "+last_name);
+            div.find('.passport_no').val({!! json_encode($client->passport_no) !!});
+
 		}
 	}
 	$(document).ready(function(){
@@ -695,20 +685,15 @@ Edit Invoice
 			}
 			if (value == 'Visa Services') {
 				var options = "<option value=''>---SELECT---</option><option value='SELF'>SELF</option>";
-				var client_id = document.getElementById('client').value;
-				@foreach($clients as $client)
-				var fetched_client_id = {!! json_encode($client->id) !!}
-			    	if(fetched_client_id == client_id){
+
 							@foreach($client->family as $family)
 							var temp = {!! json_encode($family->member_name) !!}
 							options = options + "<option value='{{$family->id}}'>{{$family->member_name}}</option>";
 							@endforeach
-						}
-			  @endforeach
+
+
 				var data = '<div class="box-body"> <div class="row">			<div class="col-md-4">				<div class="form-group">					<label for="service_name[]">Select Service</label>					<select name="service_name[]" class="form-control service" required onChange="SelectService(this);">							<option value="">--select--</option>							@if($products->count()>0)							@foreach($products as $product)								<option value="{{$product->service}}" {{($product->service == "Visa Services")?"selected":''}}>{{$product->service}}</option>							@endforeach							@endif					</select>				</div>			</div><div class="col-md-4"><div class="form-group"><label for="visa_applicant">Visa Applicant</label><select name="visa_applicant" id="visa-applicant" class="form-control" onChange="findFamily(this);">'+options+'</select></div></div>		</div><div class="row">	<div class="col-md-3">		<div class="form-group">			<label for="name_of_visa_applicant">Name Of Visa Applicant</label>			<input type="text" name="name_of_visa_applicant[]"  required class="form-control member_name">		</div>		</div>		<div class="col-md-3">		<div class="form-group">			<label for="passport_origin">Passport Origin</label>			<input type="text" name="passport_origin[]" class="form-control">		</div>		</div>	<div class="col-md-3">		<div class="form-group">			<label for="passport_no">Passport No.</label>			<input type="text" name="passport_no[]" class="form-control passport_no">		</div>		</div> <div class="col-md-3">		<div class="form-group">			<label for="passport_member_dob">Passport Member DOB</label>			<input type="text" name="passport_member_dob[]" class="form-control member_dob">		</div>		</div>	</div>		<div class="row">				<div class="col-md-4">				<div class="form-group">					<label for="visa_country">Visa Country</label>					<input type="text" name="visa_country[]" required class="form-control">				</div>				</div>				<div class="col-md-4">				<div class="form-group">					<label for="visa_type">Visa Type</label>					<input type="text" name="visa_type[]" class="form-control">				</div>				</div>				<div class="col-md-4">						<div class="form-group">							<label for="visa_charges[]">Visa Fee</label>							<input type="text" name="visa_charges[]" class="form-control" onKeyUp="VisaAmount()">						</div>						</div>				</div><div class="row">						<div class="col-md-4">			<div class="form-group">	<label for="service_charge[]">Service Charge</label>		<input id="service_charge" type="text" name="service_charge[]" required class="form-control" onKeyUp="VisaAmount()">			</div>		</div>		<div class="col-md-4">			<div class="form-group">	<label for="visa_amount">Amount</label>		<input id="amount" type="number" name="visa_amount[]" required class="form-control" readonly>			</div>		</div></div><div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					</div>	</div>				</div></div>';
-
 				$(test).closest(".box").html(data);
-
 			}
 			if (value == 'Hotel') {
 				var data = '<div class="box-body"> <div class="row">			<div class="col-md-4">				<div class="form-group">					<label for="service_name[]">Select Service</label>					<select name="service_name[]" class="form-control service" required onChange="SelectService(this);">							<option value="">--select--</option>							@if($products->count()>0)							@foreach($products as $product)								<option value="{{$product->service}}" {{($product->service == "Hotel")?"selected":''}}>{{$product->service}}</option>							@endforeach							@endif					</select>				</div>			</div>		</div> <div class="row">		<div class="col-md-6">		<div class="form-group">			<label for="hotel_city">City</label>			<input type="text" name="hotel_city[]" required class="form-control">		</div>		</div>		<div class="col-md-6">		<div class="form-group">			<label for="hotel_country">Country</label>			<input type="text" name="hotel_country[]" class="form-control">		</div>		</div>		</div>		<div class="row">		<div class="col-md-4">		<div class="form-group">			<label for="hotel_name">Name</label>			<input type="text" name="hotel_name[]" required class="form-control">		</div>		</div>		<div class="col-md-4">		<div class="form-group">			<label for="check_in_date">Check In Date</label>			<input type="date" name="check_in_date[]" required class="form-control">		</div>		</div>		<div class="col-md-4">		<div class="form-group">			<label for="check_out_date">Check Out Date</label>			<input type="date" name="check_out_date[]" required class="form-control">		</div>		</div>		</div>		<div class="row">		<div class="col-md-3">		<div class="form-group">			<label for="no_of_children[]">No. Of Children</label>			<input type="text" name="no_of_children[]" class="form-control" >		</div>		</div>		<div class="col-md-3">		<div class="form-group">			<label for="no_of_rooms">No. Of Rooms</label>			<input type="text" name="no_of_rooms[]" class="form-control">		</div>		</div>		<div class="col-md-3">		<div class="form-group">			<label for="hotel_amount[]">Amount</label>			<input type="text" name="hotel_amount[]" class="form-control">		</div>		</div>		</div>			</div>		</div></div><div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					</div>	</div>				</div></div>';
@@ -739,7 +724,6 @@ Edit Invoice
 				$(test).closest(".box").html(data);
 			}
 		}
-
 	function FlightAmount(){
 		for (var i = 0; i < document.getElementsByName("adult_price[]").length; i++) {
 			var adult_price = document.getElementsByName("adult_price[]")[i].value * document.getElementsByName("adult[]")[i].value;
@@ -747,20 +731,14 @@ Edit Invoice
 			var infant_price = document.getElementsByName("infant_price[]")[i].value * document.getElementsByName("infant[]")[i].value;
 			// var actual_amount = document.getElementsByName("flight_price[]")[i].value * document.getElementsByName("flight_quantity[]")[i].value;
 			document.getElementsByName("flight_amount[]")[i].value = Number(adult_price) + Number(child_price) + Number(infant_price);
-
     	}
 	}
-
 	function VisaAmount(){
 		for (var i = 0; i < document.getElementsByName("service_charge[]").length; i++) {
     		var actual_amount = document.getElementsByName("service_charge[]")[i].value - (-document.getElementsByName("visa_charges[]")[i].value);
      		document.getElementsByName("visa_amount[]")[i].value =actual_amount;
-
     	}
 	}
-
-
-
     $(document).ready(function(){
     $("#targetTotal").hover(function(){
 		var total_amount = 0;
@@ -802,12 +780,8 @@ Edit Invoice
 		document.getElementsByName("discounted_total")[0].value = document.getElementById('currency').value + discounted;
     });
     });
-
-
-
 </script>
 
 
 
 @stop
-
