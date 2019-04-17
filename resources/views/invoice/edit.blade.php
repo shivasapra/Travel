@@ -70,384 +70,384 @@ Edit Invoice
 							@if($info->service_name == 'Flight')
 							<input type="text" hidden value="{{$info->id}}">
 									<div class="row">
-										<div class="col-md-4">				
-											<div class="form-group">					
-												<label for="service_name[]"><strong>{{$i++}}.</strong>	Service Name</label>					
+										<div class="col-md-4">
+											<div class="form-group">
+												<label for="service_name[]"><strong>{{$i++}}.</strong>	Service Name</label>
 												<input name="service_name[]" class="form-control service" value="{{$info->service_name}}" readonly required>
-											</div>			
-										</div>		
-									</div>
-									<div class="row">		
-										<div class="col-md-4">		
-											<div class="form-group">			
-												<label for="airline_name">Airline Name</label>			
-												<input type="text" name="airline_name[]" value="{{$info->airline_name}}" required class="form-control">		
-											</div>		
-										</div>		
-										<div class="col-md-4">		
-											<div class="form-group">			
-												<label for="source">Departure</label>			
-												<input type="text" name="source[]" value="{{$info->source}}" class="form-control">		
-											</div>		
-										</div>		
-										<div class="col-md-4">		
-											<div class="form-group">			
-												<label for="destination">Arrival</label>			
-												<input type="text" name="destination[]" value="{{$info->destination}}" required class="form-control">		
-											</div>		
-										</div>		
-									</div>
-									<div class="row">		
-										<div class="col-md-3">		
-											<div class="form-group">			
-												<label for="date_of_travel">Date</label>			
-												<input type="date" name="date_of_travel[]" value="{{$info->date_of_travel}}" required class="form-control">		
-											</div>		
-										</div>		
-										<div class="col-md-2">		
-											<div class="form-group">			
-												<label for="adult[]">Adult</label>			
-												<input type="text" name="adult[]" value="{{$info->adult}}" class="form-control" onKeyUp="FlightAmount()">		
-											</div>		
-										</div>
-										<div class="col-md-2">		
-											<div class="form-group">			
-												<label for="adult_price[]">Adult Price</label>			
-												<input type="text" name="adult_price[]" value="{{$info->adult_price}}" class="form-control" onKeyUp="FlightAmount()">		
-											</div>		
-										</div>		
-										<div class="col-md-2">		
-											<div class="form-group">			
-												<label for="child[]">Child</label>			
-												<input type="text" name="child[]" value="{{$info->child}}" required class="form-control" onKeyUp="FlightAmount()">		
-											</div>		
-										</div>	
-										<div class="col-md-2">		
-											<div class="form-group">			
-												<label for="child_price[]">Child Price</label>			
-												<input type="text" name="child_price[]" value="{{$info->child_price}}" required class="form-control" onKeyUp="FlightAmount()">		
-											</div>		
+											</div>
 										</div>
 									</div>
-									<div class="row">		
-										<div class="col-md-2">				
-											<div class="form-group">					
-												<label for="infant[]">Infant</label>					
-												<input type="text" name="infant[]" value="{{$info->infant}}" required class="form-control" onKeyUp="FlightAmount()">				
-											</div>				
+									<div class="row">
+										<div class="col-md-4">
+											<div class="form-group">
+												<label for="airline_name">Airline Name</label>
+												<input type="text" name="airline_name[]" value="{{$info->airline_name}}" required class="form-control">
+											</div>
 										</div>
-										<div class="col-md-2">				
-											<div class="form-group">					
-												<label for="infant_price[]">Infant Price</label>					
-												<input type="text" name="infant_price[]" value="{{$info->infant_price}}" required class="form-control" onKeyUp="FlightAmount()">				
-											</div>				
+										<div class="col-md-4">
+											<div class="form-group">
+												<label for="source">Departure</label>
+												<input type="text" name="source[]" value="{{$info->source}}" class="form-control">
+											</div>
 										</div>
-										<div class="col-md-4">			
-											<div class="form-group">	
-												<label for="flight_remarks[]">Remarks</label>		
-												<input type="text" name="flight_remarks[]" value="{{$info->flight_remarks}}" required class="form-control">			
-											</div>		
-										</div>
-										<div class="col-md-3">			
-											<div class="form-group">	
-												<label for="flight_amount[]">Amount</label>		
-												<input id="amount" type="number" name="flight_amount[]" value="{{$info->flight_amount}}" required class="form-control" readonly>			
-											</div>		
+										<div class="col-md-4">
+											<div class="form-group">
+												<label for="destination">Arrival</label>
+												<input type="text" name="destination[]" value="{{$info->destination}}" required class="form-control">
+											</div>
 										</div>
 									</div>
-									<div align="right">						
-										<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					
-									</div>	
-							
+									<div class="row">
+										<div class="col-md-3">
+											<div class="form-group">
+												<label for="date_of_travel">Date</label>
+												<input type="date" name="date_of_travel[]" value="{{$info->date_of_travel}}" required class="form-control">
+											</div>
+										</div>
+										<div class="col-md-2">
+											<div class="form-group">
+												<label for="adult[]">Adult</label>
+												<input type="text" name="adult[]" value="{{$info->adult}}" class="form-control" onKeyUp="FlightAmount()">
+											</div>
+										</div>
+										<div class="col-md-2">
+											<div class="form-group">
+												<label for="adult_price[]">Adult Price</label>
+												<input type="text" name="adult_price[]" value="{{$info->adult_price}}" class="form-control" onKeyUp="FlightAmount()">
+											</div>
+										</div>
+										<div class="col-md-2">
+											<div class="form-group">
+												<label for="child[]">Child</label>
+												<input type="text" name="child[]" value="{{$info->child}}" required class="form-control" onKeyUp="FlightAmount()">
+											</div>
+										</div>
+										<div class="col-md-2">
+											<div class="form-group">
+												<label for="child_price[]">Child Price</label>
+												<input type="text" name="child_price[]" value="{{$info->child_price}}" required class="form-control" onKeyUp="FlightAmount()">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-2">
+											<div class="form-group">
+												<label for="infant[]">Infant</label>
+												<input type="text" name="infant[]" value="{{$info->infant}}" required class="form-control" onKeyUp="FlightAmount()">
+											</div>
+										</div>
+										<div class="col-md-2">
+											<div class="form-group">
+												<label for="infant_price[]">Infant Price</label>
+												<input type="text" name="infant_price[]" value="{{$info->infant_price}}" required class="form-control" onKeyUp="FlightAmount()">
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="form-group">
+												<label for="flight_remarks[]">Remarks</label>
+												<input type="text" name="flight_remarks[]" value="{{$info->flight_remarks}}" required class="form-control">
+											</div>
+										</div>
+										<div class="col-md-3">
+											<div class="form-group">
+												<label for="flight_amount[]">Amount</label>
+												<input id="amount" type="number" name="flight_amount[]" value="{{$info->flight_amount}}" required class="form-control" readonly>
+											</div>
+										</div>
+									</div>
+									<div align="right">
+										<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">
+									</div>
+
 							@elseif($info->service_name == 'Visa Services')
 							<input type="text" hidden value="{{$info->id}}">
-									<div class="row">			
-										<div class="col-md-4">				
-											<div class="form-group">					
-												<label for="service_name[]"><strong>{{$i++}}.</strong> Service Name</label>					
-												<input name="service_name[]" class="form-control service" value="{{$info->service_name}}" readonly required>			
-											</div>			
-										</div>		
-									</div>
-									<div class="row">	
-										<div class="col-md-3">		
-											<div class="form-group">			
-												<label for="name_of_visa_applicant">Name Of Visa Applicant</label>			
-												<input type="text" name="name_of_visa_applicant[]" value="{{$info->name_of_visa_applicant}}" required class="form-control">		
-											</div>		
-										</div>		
-										<div class="col-md-3">		
-											<div class="form-group">			
-												<label for="passport_origin">Passport Origin</label>			
-												<input type="text" name="passport_origin[]" value="{{$info->passport_origin}}" class="form-control">		
-											</div>		
-										</div>	
-										<div class="col-md-3">		
-											<div class="form-group">			
-												<label for="passport_no">Passport No.</label>			
-												<input type="text" name="passport_no[]" value="{{$info->passport_no}}" required class="form-control">		
-											</div>		
-										</div>		
-										<div class="col-md-3">		
-											<div class="form-group">			
-												<label for="passport_member_dob">Passport Member DOB</label>			
-												<input type="text" name="passport_member_dob[]" value="{{$info->passport_member_dob}}" class="form-control">		
-											</div>		
-										</div>	
-									</div>		
-									<div class="row">				
-										<div class="col-md-4">				
-											<div class="form-group">					
-												<label for="visa_country">Visa Country</label>					
-												<input type="text" name="visa_country[]" value="{{$info->visa_country}}" required class="form-control">				
-											</div>				
-										</div>				
-										<div class="col-md-4">				
-											<div class="form-group">					
-												<label for="visa_type">Visa Type</label>					
-												<input type="text" name="visa_type[]" value="{{$info->visa_country}}" class="form-control">				
-											</div>				
-										</div>				
-										<div class="col-md-4">						
-											<div class="form-group">							
-												<label for="visa_charges[]">Visa Fee</label>							
-												<input type="text" name="visa_charges[]" value="{{$info->visa_charges}}" class="form-control" onKeyUp="VisaAmount()">						
-											</div>						
-										</div>				
-									</div>
-									<div class="row">						
-										<div class="col-md-4">			
-											<div class="form-group">	
-												<label for="service_charge[]">Service Charge</label>		
-												<input id="service_charge" type="text" name="service_charge[]" value="{{$info->service_charge}}" required class="form-control" onKeyUp="VisaAmount()">			
-											</div>		
-										</div>		
-										<div class="col-md-4">			
-											<div class="form-group">	
-												<label for="visa_amount">Amount</label>		
-												<input id="amount" type="number" name="visa_amount[]" value="{{$info->visa_amount}}" required class="form-control" readonly>			
-											</div>		
+									<div class="row">
+										<div class="col-md-4">
+											<div class="form-group">
+												<label for="service_name[]"><strong>{{$i++}}.</strong> Service Name</label>
+												<input name="service_name[]" class="form-control service" value="{{$info->service_name}}" readonly required>
+											</div>
 										</div>
 									</div>
-									<div align="right">						
-										<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					
-									</div>	
+									<div class="row">
+										<div class="col-md-3">
+											<div class="form-group">
+												<label for="name_of_visa_applicant">Name Of Visa Applicant</label>
+												<input type="text" name="name_of_visa_applicant[]" value="{{$info->name_of_visa_applicant}}" required class="form-control">
+											</div>
+										</div>
+										<div class="col-md-3">
+											<div class="form-group">
+												<label for="passport_origin">Passport Origin</label>
+												<input type="text" name="passport_origin[]" value="{{$info->passport_origin}}" class="form-control">
+											</div>
+										</div>
+										<div class="col-md-3">
+											<div class="form-group">
+												<label for="passport_no">Passport No.</label>
+												<input type="text" name="passport_no[]" value="{{$info->passport_no}}" required class="form-control">
+											</div>
+										</div>
+										<div class="col-md-3">
+											<div class="form-group">
+												<label for="passport_member_dob">Passport Member DOB</label>
+												<input type="text" name="passport_member_dob[]" value="{{$info->passport_member_dob}}" class="form-control">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-4">
+											<div class="form-group">
+												<label for="visa_country">Visa Country</label>
+												<input type="text" name="visa_country[]" value="{{$info->visa_country}}" required class="form-control">
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="form-group">
+												<label for="visa_type">Visa Type</label>
+												<input type="text" name="visa_type[]" value="{{$info->visa_country}}" class="form-control">
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="form-group">
+												<label for="visa_charges[]">Visa Fee</label>
+												<input type="text" name="visa_charges[]" value="{{$info->visa_charges}}" class="form-control" onKeyUp="VisaAmount()">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-4">
+											<div class="form-group">
+												<label for="service_charge[]">Service Charge</label>
+												<input id="service_charge" type="text" name="service_charge[]" value="{{$info->service_charge}}" required class="form-control" onKeyUp="VisaAmount()">
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="form-group">
+												<label for="visa_amount">Amount</label>
+												<input id="amount" type="number" name="visa_amount[]" value="{{$info->visa_amount}}" required class="form-control" readonly>
+											</div>
+										</div>
+									</div>
+									<div align="right">
+										<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">
+									</div>
 
 							@elseif($info->service_name == 'Hotel')
 							<input type="text" hidden value="{{$info->id}}">
-									<div class="row">			
-										<div class="col-md-4">				
-											<div class="form-group">					
-												<label for="service_name[]"><strong>{{$i++}}.</strong> Service Name</label>					
-												<input name="service_name[]" class="form-control service" value="{{$info->service_name}}" readonly required>			
-											</div>			
-										</div>		
+									<div class="row">
+										<div class="col-md-4">
+											<div class="form-group">
+												<label for="service_name[]"><strong>{{$i++}}.</strong> Service Name</label>
+												<input name="service_name[]" class="form-control service" value="{{$info->service_name}}" readonly required>
+											</div>
+										</div>
 									</div>
-									<div class="row">		
-										<div class="col-md-6">		
-											<div class="form-group">			
-												<label for="hotel_city">City</label>			
-												<input type="text" name="hotel_city[]" value="{{$info->hotel_city}}" required class="form-control">		
-											</div>		
-										</div>		
-										<div class="col-md-6">		
-											<div class="form-group">			
-												<label for="hotel_country">Country</label>			
-												<input type="text" name="hotel_country[]" value="{{$info->hotel_country}}" class="form-control">		
-											</div>		
-										</div>		
-									</div>		
-									<div class="row">		
-										<div class="col-md-4">		
-											<div class="form-group">			
-												<label for="hotel_name">Name</label>			
-												<input type="text" name="hotel_name[]" value="{{$info->hotel_name}}" required class="form-control">		
-											</div>		
-										</div>		
-										<div class="col-md-4">		
-											<div class="form-group">			
-												<label for="check_in_date">Check In Date</label>			
-												<input type="date" name="check_in_date[]" value="{{$info->check_in_date}}" required class="form-control">		
-											</div>		
-										</div>		
-										<div class="col-md-4">		
-											<div class="form-group">			
-												<label for="check_out_date">Check Out Date</label>			
-												<input type="date" name="check_out_date[]" value="{{$info->check_out_date}}" required class="form-control">		
-											</div>		
-										</div>		
-									</div>		
-									<div class="row">		
-										<div class="col-md-3">		
-											<div class="form-group">			
-												<label for="no_of_children[]">No. Of Children</label>			
-												<input type="text" name="no_of_children[]" value="{{$info->no_of_children}}" class="form-control" >		
-											</div>		
-										</div>		
-										<div class="col-md-3">		
-											<div class="form-group">			
-												<label for="no_of_rooms">No. Of Rooms</label>			
-												<input type="text" name="no_of_rooms[]" value="{{$info->no_of_rooms}}" class="form-control">		
-											</div>		
-										</div>		
-										<div class="col-md-3">		
-											<div class="form-group">			
-												<label for="hotel_amount[]">Amount</label>			
-												<input type="text" name="hotel_amount[]" value="{{$info->hotel_amount}}" class="form-control">		
-											</div>		
-										</div>		
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="hotel_city">City</label>
+												<input type="text" name="hotel_city[]" value="{{$info->hotel_city}}" required class="form-control">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="hotel_country">Country</label>
+												<input type="text" name="hotel_country[]" value="{{$info->hotel_country}}" class="form-control">
+											</div>
+										</div>
 									</div>
-									<div align="right">						
-										<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">				
+									<div class="row">
+										<div class="col-md-4">
+											<div class="form-group">
+												<label for="hotel_name">Name</label>
+												<input type="text" name="hotel_name[]" value="{{$info->hotel_name}}" required class="form-control">
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="form-group">
+												<label for="check_in_date">Check In Date</label>
+												<input type="date" name="check_in_date[]" value="{{$info->check_in_date}}" required class="form-control">
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="form-group">
+												<label for="check_out_date">Check Out Date</label>
+												<input type="date" name="check_out_date[]" value="{{$info->check_out_date}}" required class="form-control">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-3">
+											<div class="form-group">
+												<label for="no_of_children[]">No. Of Children</label>
+												<input type="text" name="no_of_children[]" value="{{$info->no_of_children}}" class="form-control" >
+											</div>
+										</div>
+										<div class="col-md-3">
+											<div class="form-group">
+												<label for="no_of_rooms">No. Of Rooms</label>
+												<input type="text" name="no_of_rooms[]" value="{{$info->no_of_rooms}}" class="form-control">
+											</div>
+										</div>
+										<div class="col-md-3">
+											<div class="form-group">
+												<label for="hotel_amount[]">Amount</label>
+												<input type="text" name="hotel_amount[]" value="{{$info->hotel_amount}}" class="form-control">
+											</div>
+										</div>
+									</div>
+									<div align="right">
+										<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">
 									</div>
 
 							@elseif($info->service_name == 'Insurance')
 							<input type="text" hidden value="{{$info->id}}">
-									<div class="row">			
-										<div class="col-md-4">				
-											<div class="form-group">					
-												<label for="service_name[]"><strong>{{$i++}}.</strong> Service Name</label>					
-												<input name="service_name[]" class="form-control service" value="{{$info->service_name}}" readonly required>			
-											</div>			
-										</div>		
+									<div class="row">
+										<div class="col-md-4">
+											<div class="form-group">
+												<label for="service_name[]"><strong>{{$i++}}.</strong> Service Name</label>
+												<input name="service_name[]" class="form-control service" value="{{$info->service_name}}" readonly required>
+											</div>
+										</div>
 									</div>
-									<div class="row">	
-										<div class="col-md-4">		
-											<div class="form-group">			
-												<label for="name_of_insurance_applicant">Name Of Insurance Applicant</label>			
-												<input type="text" name="name_of_insurance_applicant[]" value="{{$info->name_of_insurance_applicant}}" required class="form-control">		
-											</div>		
-										</div>		
-										<div class="col-md-4">		
-											<div class="form-group">			
-												<label for="insurance_remarks">Passport Origin</label>			
-												<input type="text" name="insurance_remarks[]" value="{{$info->insurance_remarks}}" class="form-control">		
-											</div>		
-										</div>						
-										<div class="col-md-4">				
-											<div class="form-group">					
-												<label for="insurance_amount[]">Insurance Amount</label>					
-												<input type="text" name="insurance_amount[]" value="{{$info->insurance_amount}}" required class="form-control">				
-											</div>				
-										</div>	
-									</div>			
-									<div align="right">						
-										<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					
+									<div class="row">
+										<div class="col-md-4">
+											<div class="form-group">
+												<label for="name_of_insurance_applicant">Name Of Insurance Applicant</label>
+												<input type="text" name="name_of_insurance_applicant[]" value="{{$info->name_of_insurance_applicant}}" required class="form-control">
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="form-group">
+												<label for="insurance_remarks">Passport Origin</label>
+												<input type="text" name="insurance_remarks[]" value="{{$info->insurance_remarks}}" class="form-control">
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="form-group">
+												<label for="insurance_amount[]">Insurance Amount</label>
+												<input type="text" name="insurance_amount[]" value="{{$info->insurance_amount}}" required class="form-control">
+											</div>
+										</div>
+									</div>
+									<div align="right">
+										<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">
 									</div>
 
 							@elseif($info->service_name == 'Local Sight Sceen')
 							<input type="text" hidden value="{{$info->id}}">
-									<div class="row">			
-										<div class="col-md-4">				
-											<div class="form-group">					
-												<label for="service_name[]"><strong>{{$i++}}.</strong> Service Name</label>					
-												<input name="service_name[]" class="form-control service" value="{{$info->service_name}}" readonly required>			
-											</div>			
-										</div>		
+									<div class="row">
+										<div class="col-md-4">
+											<div class="form-group">
+												<label for="service_name[]"><strong>{{$i++}}.</strong> Service Name</label>
+												<input name="service_name[]" class="form-control service" value="{{$info->service_name}}" readonly required>
+											</div>
+										</div>
 									</div>
-									<div class="row">	
-										<div class="col-md-6">		
-											<div class="form-group">			
-												<label for="local_sight_sceen_remarks">Local Sight Sceen Remarks</label>			
-												<input type="text" name="local_sight_sceen_remarks[]" value="{{$info->local_sight_sceen_remarks}}" required class="form-control">		
-											</div>		
-										</div>		
-										<div class="col-md-6">				
-											<div class="form-group">					
-												<label for="local_sight_sceen_amount[]">Sight Sceen Charges</label>					
-												<input type="text" name="local_sight_sceen_amount[]" value="{{$info->local_sight_sceen_amount}}" required class="form-control">				
-											</div>				
-										</div>				
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="local_sight_sceen_remarks">Local Sight Sceen Remarks</label>
+												<input type="text" name="local_sight_sceen_remarks[]" value="{{$info->local_sight_sceen_remarks}}" required class="form-control">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="local_sight_sceen_amount[]">Sight Sceen Charges</label>
+												<input type="text" name="local_sight_sceen_amount[]" value="{{$info->local_sight_sceen_amount}}" required class="form-control">
+											</div>
+										</div>
 									</div>
-									<div align="right">						
-										<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					
+									<div align="right">
+										<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">
 									</div>
 
 							@elseif($info->service_name == 'Local Transport')
 							<input type="text" hidden value="{{$info->id}}">
-								<div class="row">			
-									<div class="col-md-4">				
-										<div class="form-group">					
-											<label for="service_name[]"><strong>{{$i++}}.</strong> Service Name</label>					
-											<input name="service_name[]" class="form-control service" value="{{$info->service_name}}" readonly required>			
-										</div>			
-									</div>		
+								<div class="row">
+									<div class="col-md-4">
+										<div class="form-group">
+											<label for="service_name[]"><strong>{{$i++}}.</strong> Service Name</label>
+											<input name="service_name[]" class="form-control service" value="{{$info->service_name}}" readonly required>
+										</div>
+									</div>
 								</div>
-								<div class="row">	
-									<div class="col-md-6">		
-										<div class="form-group">			
-											<label for="local_transport_remarks">Local Transport Remarks</label>			
-											<input type="text" name="local_transport_remarks[]" value="{{$info->local_transport_remarks}}" required class="form-control">		
-										</div>		
-									</div>		
-									<div class="col-md-6">				
-										<div class="form-group">					
-											<label for="local_transport_amount[]">Transport Charges</label>					
-											<input type="text" name="local_transport_amount[]" value="{{$info->local_transport_amount}}" required class="form-control">				
-										</div>				
-									</div>				
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="local_transport_remarks">Local Transport Remarks</label>
+											<input type="text" name="local_transport_remarks[]" value="{{$info->local_transport_remarks}}" required class="form-control">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="local_transport_amount[]">Transport Charges</label>
+											<input type="text" name="local_transport_amount[]" value="{{$info->local_transport_amount}}" required class="form-control">
+										</div>
+									</div>
 								</div>
-								<div align="right">						
-									<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					
+								<div align="right">
+									<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">
 								</div>
 
 							@elseif($info->service_name == 'Car Rental')
 							<input type="text" hidden value="{{$info->id}}">
-								<div class="row">			
-									<div class="col-md-4">				
-										<div class="form-group">					
-											<label for="service_name[]"><strong>{{$i++}}.</strong> Service Name</label>					
-											<input name="service_name[]" class="form-control service" value="{{$info->service_name}}" readonly required>			
-										</div>			
-									</div>		
+								<div class="row">
+									<div class="col-md-4">
+										<div class="form-group">
+											<label for="service_name[]"><strong>{{$i++}}.</strong> Service Name</label>
+											<input name="service_name[]" class="form-control service" value="{{$info->service_name}}" readonly required>
+										</div>
+									</div>
 								</div>
-								<div class="row">	
-									<div class="col-md-6">		
-										<div class="form-group">			
-											<label for="car_rental_remarks">Car Rental Remarks</label>			
-											<input type="text" name="car_rental_remarks[]" value="{{$info->car_rental_remarks}}" required class="form-control">		
-										</div>		
-									</div>		
-									<div class="col-md-6">				
-										<div class="form-group">					
-											<label for="car_rental_amount[]">Car Rental Charges</label>					
-											<input type="text" name="car_rental_amount[]" value="{{$info->car_rental_amount}}" required class="form-control">				
-										</div>				
-									</div>				
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="car_rental_remarks">Car Rental Remarks</label>
+											<input type="text" name="car_rental_remarks[]" value="{{$info->car_rental_remarks}}" required class="form-control">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="car_rental_amount[]">Car Rental Charges</label>
+											<input type="text" name="car_rental_amount[]" value="{{$info->car_rental_amount}}" required class="form-control">
+										</div>
+									</div>
 								</div>
-								<div align="right">						
-									<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					
+								<div align="right">
+									<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">
 								</div>
 
 							@elseif($info->service_name == 'Other Facilities')
 							<input type="text" hidden value="{{$info->id}}">
-								<div class="row">			
-									<div class="col-md-4">				
-										<div class="form-group">					
-											<label for="service_name[]"><strong>{{$i++}}.</strong> Service Name</label>					
-											<input name="service_name[]" class="form-control service" value="{{$info->service_name}}" readonly required>			
-										</div>			
-									</div>		
+								<div class="row">
+									<div class="col-md-4">
+										<div class="form-group">
+											<label for="service_name[]"><strong>{{$i++}}.</strong> Service Name</label>
+											<input name="service_name[]" class="form-control service" value="{{$info->service_name}}" readonly required>
+										</div>
+									</div>
 								</div>
-								<div class="row">	
-									<div class="col-md-6">		
-										<div class="form-group">			
-											<label for="other_facilities_remarks">Other Facilities Remarks</label>			
-											<input type="text" name="other_facilities_remarks[]" value="{{$info->other_facilities_remarks}}" required class="form-control">		
-										</div>		
-									</div>		
-									<div class="col-md-6">				
-										<div class="form-group">					
-											<label for="other_facilities_amount[]">Other Facilities Charges</label>					
-											<input type="text" name="other_facilities_amount[]" value="{{$info->other_facilities_amount}}" required class="form-control">				
-										</div>				
-									</div>				
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="other_facilities_remarks">Other Facilities Remarks</label>
+											<input type="text" name="other_facilities_remarks[]" value="{{$info->other_facilities_remarks}}" required class="form-control">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="other_facilities_amount[]">Other Facilities Charges</label>
+											<input type="text" name="other_facilities_amount[]" value="{{$info->other_facilities_amount}}" required class="form-control">
+										</div>
+									</div>
 								</div>
-								<div align="right">						
-									<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					
+								<div align="right">
+									<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">
 								</div>
 							@endif
-					</div>				
+					</div>
 				</div>
 			@endforeach
 		</div>
@@ -605,7 +605,37 @@ Edit Invoice
 			});
 		}
 
-
+        function findFamily(test){
+		if (test.value != 'SELF') {
+			var familyId = test.value;
+			var Url = "http://127.0.0.1:8000/find/family/"+ familyId;
+			var xhr = new XMLHttpRequest();
+			xhr.open('GET', Url, true);
+			xhr.send();
+			xhr.onreadystatechange = processRequest;
+			function processRequest(e) {
+					var response1 = JSON.parse(xhr.responseText);
+					var div = $(test).closest(".box-body");
+					div.find('.member_dob').val(response1['member_DOB']);
+					div.find('.member_name').val(response1['member_name']);
+					div.find('.passport_no').val(response1['member_passport_no']);
+			}
+		}
+		else{
+			var client_id = document.getElementById('client').value;
+				@foreach($clients as $client)
+				var fetched_client_id = {!! json_encode($client->id) !!}
+			    	if(fetched_client_id == client_id){
+							var div = $(test).closest(".box-body");
+							div.find('.member_dob').val({!! json_encode($client->DOB) !!});
+							var first_name = {!! json_encode($client->first_name)!!};
+							var last_name = {!! json_encode($client->last_name)!!}
+							div.find('.member_name').val(first_name+" "+last_name);
+							div.find('.passport_no').val({!! json_encode($client->passport_no) !!});
+						}
+			  @endforeach
+		}
+	}
 	$(document).ready(function(){
     $("#add").click(function(){
     	var append = '<div class="box box-primary">			<div class="box-body">					<div class="row">						<div class="col-md-4">							<div class="form-group">								<label for="service_name[]">Select Service</label>								<select name="service_name[]" class="form-control service" onChange="SelectService(this);" required>										<option value="">--select--</option>										@if($products->count()>0)										@foreach($products as $product)											<option value="{{$product->service}}">{{$product->service}}</option>										@endforeach										@endif								</select>							</div>						</div>					</div>	<div class="Insert"></div>		<div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					</div>	</div>				</div>';
@@ -664,8 +694,21 @@ Edit Invoice
 				$(test).closest(".box").html(data);
 			}
 			if (value == 'Visa Services') {
-				var data = '<div class="box-body"> <div class="row">			<div class="col-md-4">				<div class="form-group">					<label for="service_name[]">Select Service</label>					<select name="service_name[]" class="form-control service" required onChange="SelectService(this);">							<option value="">--select--</option>							@if($products->count()>0)							@foreach($products as $product)								<option value="{{$product->service}}" {{($product->service == "Visa Services")?"selected":''}}>{{$product->service}}</option>							@endforeach							@endif					</select>				</div>			</div>		</div><div class="row">	<div class="col-md-3">		<div class="form-group">			<label for="name_of_visa_applicant">Name Of Visa Applicant</label>			<input type="text" name="name_of_visa_applicant[]"  required class="form-control">		</div>		</div>		<div class="col-md-3">		<div class="form-group">			<label for="passport_origin">Passport Origin</label>			<input type="text" name="passport_origin[]" class="form-control">		</div>		</div>	<div class="col-md-3">		<div class="form-group">			<label for="passport_no">Passport No.</label>			<input type="text" name="passport_no[]" class="form-control">		</div>		</div> <div class="col-md-3">		<div class="form-group">			<label for="passport_member_dob">Passport Member DOB</label>			<input type="text" name="passport_member_dob[]" class="form-control">		</div>		</div>	</div>		<div class="row">				<div class="col-md-4">				<div class="form-group">					<label for="visa_country">Visa Country</label>					<input type="text" name="visa_country[]" required class="form-control">				</div>				</div>				<div class="col-md-4">				<div class="form-group">					<label for="visa_type">Visa Type</label>					<input type="text" name="visa_type[]" class="form-control">				</div>				</div>				<div class="col-md-4">						<div class="form-group">							<label for="visa_charges[]">Visa Fee</label>							<input type="text" name="visa_charges[]" class="form-control" onKeyUp="VisaAmount()">						</div>						</div>				</div><div class="row">						<div class="col-md-4">			<div class="form-group">	<label for="service_charge[]">Service Charge</label>		<input id="service_charge" type="text" name="service_charge[]" required class="form-control" onKeyUp="VisaAmount()">			</div>		</div>		<div class="col-md-4">			<div class="form-group">	<label for="visa_amount">Amount</label>		<input id="amount" type="number" name="visa_amount[]" required class="form-control" readonly>			</div>		</div></div><div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					</div>	</div>				</div></div>';
+				var options = "<option value=''>---SELECT---</option><option value='SELF'>SELF</option>";
+				var client_id = document.getElementById('client').value;
+				@foreach($clients as $client)
+				var fetched_client_id = {!! json_encode($client->id) !!}
+			    	if(fetched_client_id == client_id){
+							@foreach($client->family as $family)
+							var temp = {!! json_encode($family->member_name) !!}
+							options = options + "<option value='{{$family->id}}'>{{$family->member_name}}</option>";
+							@endforeach
+						}
+			  @endforeach
+				var data = '<div class="box-body"> <div class="row">			<div class="col-md-4">				<div class="form-group">					<label for="service_name[]">Select Service</label>					<select name="service_name[]" class="form-control service" required onChange="SelectService(this);">							<option value="">--select--</option>							@if($products->count()>0)							@foreach($products as $product)								<option value="{{$product->service}}" {{($product->service == "Visa Services")?"selected":''}}>{{$product->service}}</option>							@endforeach							@endif					</select>				</div>			</div><div class="col-md-4"><div class="form-group"><label for="visa_applicant">Visa Applicant</label><select name="visa_applicant" id="visa-applicant" class="form-control" onChange="findFamily(this);">'+options+'</select></div></div>		</div><div class="row">	<div class="col-md-3">		<div class="form-group">			<label for="name_of_visa_applicant">Name Of Visa Applicant</label>			<input type="text" name="name_of_visa_applicant[]"  required class="form-control member_name">		</div>		</div>		<div class="col-md-3">		<div class="form-group">			<label for="passport_origin">Passport Origin</label>			<input type="text" name="passport_origin[]" class="form-control">		</div>		</div>	<div class="col-md-3">		<div class="form-group">			<label for="passport_no">Passport No.</label>			<input type="text" name="passport_no[]" class="form-control passport_no">		</div>		</div> <div class="col-md-3">		<div class="form-group">			<label for="passport_member_dob">Passport Member DOB</label>			<input type="text" name="passport_member_dob[]" class="form-control member_dob">		</div>		</div>	</div>		<div class="row">				<div class="col-md-4">				<div class="form-group">					<label for="visa_country">Visa Country</label>					<input type="text" name="visa_country[]" required class="form-control">				</div>				</div>				<div class="col-md-4">				<div class="form-group">					<label for="visa_type">Visa Type</label>					<input type="text" name="visa_type[]" class="form-control">				</div>				</div>				<div class="col-md-4">						<div class="form-group">							<label for="visa_charges[]">Visa Fee</label>							<input type="text" name="visa_charges[]" class="form-control" onKeyUp="VisaAmount()">						</div>						</div>				</div><div class="row">						<div class="col-md-4">			<div class="form-group">	<label for="service_charge[]">Service Charge</label>		<input id="service_charge" type="text" name="service_charge[]" required class="form-control" onKeyUp="VisaAmount()">			</div>		</div>		<div class="col-md-4">			<div class="form-group">	<label for="visa_amount">Amount</label>		<input id="amount" type="number" name="visa_amount[]" required class="form-control" readonly>			</div>		</div></div><div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					</div>	</div>				</div></div>';
+
 				$(test).closest(".box").html(data);
+
 			}
 			if (value == 'Hotel') {
 				var data = '<div class="box-body"> <div class="row">			<div class="col-md-4">				<div class="form-group">					<label for="service_name[]">Select Service</label>					<select name="service_name[]" class="form-control service" required onChange="SelectService(this);">							<option value="">--select--</option>							@if($products->count()>0)							@foreach($products as $product)								<option value="{{$product->service}}" {{($product->service == "Hotel")?"selected":''}}>{{$product->service}}</option>							@endforeach							@endif					</select>				</div>			</div>		</div> <div class="row">		<div class="col-md-6">		<div class="form-group">			<label for="hotel_city">City</label>			<input type="text" name="hotel_city[]" required class="form-control">		</div>		</div>		<div class="col-md-6">		<div class="form-group">			<label for="hotel_country">Country</label>			<input type="text" name="hotel_country[]" class="form-control">		</div>		</div>		</div>		<div class="row">		<div class="col-md-4">		<div class="form-group">			<label for="hotel_name">Name</label>			<input type="text" name="hotel_name[]" required class="form-control">		</div>		</div>		<div class="col-md-4">		<div class="form-group">			<label for="check_in_date">Check In Date</label>			<input type="date" name="check_in_date[]" required class="form-control">		</div>		</div>		<div class="col-md-4">		<div class="form-group">			<label for="check_out_date">Check Out Date</label>			<input type="date" name="check_out_date[]" required class="form-control">		</div>		</div>		</div>		<div class="row">		<div class="col-md-3">		<div class="form-group">			<label for="no_of_children[]">No. Of Children</label>			<input type="text" name="no_of_children[]" class="form-control" >		</div>		</div>		<div class="col-md-3">		<div class="form-group">			<label for="no_of_rooms">No. Of Rooms</label>			<input type="text" name="no_of_rooms[]" class="form-control">		</div>		</div>		<div class="col-md-3">		<div class="form-group">			<label for="hotel_amount[]">Amount</label>			<input type="text" name="hotel_amount[]" class="form-control">		</div>		</div>		</div>			</div>		</div></div><div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					</div>	</div>				</div></div>';
@@ -761,10 +804,10 @@ Edit Invoice
     });
 
 
-    
+
 </script>
-	   
-	   
-		
+
+
+
 @stop
 
