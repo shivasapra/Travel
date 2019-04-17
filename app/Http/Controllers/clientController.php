@@ -112,6 +112,7 @@ class clientController extends Controller
                 $client_family->member_name = $member_name;
                 $client_family->member_DOB = $request->member_DOB[$index];
                 $client_family->member_passport_no = $request->member_passport_no[$index];
+                $client_family->member_passport_place = $request->member_passport_place[$index];
                 if($request->hasFile('member_passport_front'))
                 {
                 $member_passport_front = $request->member_passport_front[$index];
