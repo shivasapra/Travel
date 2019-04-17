@@ -19,8 +19,8 @@ class CreateClientFamiliesTable extends Migration
             $table->string('member_name')->nullable();
             $table->string('member_DOB')->nullable();
             $table->string('member_passport_no')->nullable();
-            $table->string('passport_front')->nullable();
-            $table->string('passport_back')->nullable();
+            $table->string('member_passport_front')->nullable();
+            $table->string('member_passport_back')->nullable();
             $table->timestamps();
         });
     }
