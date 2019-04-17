@@ -168,6 +168,47 @@ client
 					@endif
 				</tbody>
 			</table>
+			<br><br><hr><div class="text-center"><strong>Family Members:</strong></div><hr>
+			<table class="table table-hover mb-0">
+				<tbody>
+					@foreach($client->family as $family)
+					<div class="row">
+						<tr>
+							<td><strong>Member Name:</strong></td>
+							<td>{{$family->member_name}}</td>
+						</tr>
+					</div>
+					<div class="row">
+							<tr>
+								<td><strong>Member DOB:</strong></td>
+								<td>{{$family->member_DOB}}</td>
+							</tr>
+					</div>
+					<div class="row">
+							<tr>
+								<td><strong>Member Passport No:</strong></td>
+								<td>{{$family->member_passport_no}}</td>
+							</tr>
+					</div>
+					<div class="row">
+							<tr>
+								<td><strong>Passport Front:</strong></td>
+								<td>
+									<img src="{{asset($family->member_passport_front)}}" alt="passport front" height="300px" width="300px" style="border-radius:20px">
+								</td>
+							</tr>
+						</div>
+						<div class="row">
+							<tr>
+								<td><strong>Passport Back:</strong></td>
+								<td>
+									<img src="{{asset($family->member_passport_back)}}" alt="passport back" height="300px" width="300px" style="border-radius:20px"><br><hr>
+								</td>
+							</tr>
+						</div>
+					@endforeach
+				</tbody>
+			</table>
 		</div>
 	</div>
 
