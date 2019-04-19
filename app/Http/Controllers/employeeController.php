@@ -337,4 +337,19 @@ class employeeController extends Controller
         return view('employee.assignment')->with('employees',$employees);
     }
 
+    public function activate($id){
+        $user = employee::find($id)->user;
+        $user->active = 1;
+        $user->save();
+        Session::flash('success','Employee Activated');
+        return redirect()->back();
+    }
+
+    public function deactivate($id){
+        $user = employee::find($id)->user;
+        $user->active = 0;
+        $user->save();
+        Session::flash('success','Employee Deactivated');
+        return redirect()->back();
+    }
 }

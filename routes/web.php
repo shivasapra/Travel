@@ -75,7 +75,14 @@ Route::get('/assignment/Done/{id}',[
 			'uses'=> 'AssignmentController@assignmentDone',
 			'as'=>'assignmentDone'
 		]);
-
+Route::get('/activate/employee/{id}',[
+	'uses'=> 'employeeController@activate',
+	'as'=>'activateEmployee'
+]);
+Route::get('/deactivate/employee/{id}',[
+	'uses'=> 'employeeController@deactivate',
+	'as'=>'deactivateEmployee'
+]);
 // Route::get('/search/client',['as'=>'searchClient'],function(){
 // 	dd(true);
 // 	$clients = App\client::where('first_name', 'like', '%'.request('client_name').'%')->get();
