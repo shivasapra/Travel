@@ -28,7 +28,13 @@ class InvoiceController extends Controller
     }
 
     public function index()
-    {
+    {   
+        foreach (invoice::all() as $invoice) {
+            if ($invoice->pending_amount == 0) {
+                $invoice->status = 1;
+                $invoice->save();
+            }
+        }
         return view('invoice.index')->with('invoices',invoice::all())
                                     ->with('tax',settings::all());
     }
@@ -113,9 +119,13 @@ class InvoiceController extends Controller
         }
         
         $invoice->paid = 0;
-        $invoice->pending_amount=0;
         if($request->credit != '0'){
             $invoice->credit = 1;
+            $invoice->credit_amount = $request->credit_amount;
+            $invoice->paid = $invoice->paid + $request->credit_amount;
+        }
+        else{
+            $invoice->credit = 0;
             $invoice->credit_amount = $request->credit_amount;
             $invoice->paid = $invoice->paid + $request->credit_amount;
         }
@@ -124,8 +134,18 @@ class InvoiceController extends Controller
             $invoice->debit_amount = $request->debit_amount;
             $invoice->paid = $invoice->paid + $request->debit_amount;
         }
+        else{
+            $invoice->debit = 0;
+            $invoice->debit_amount = $request->debit_amount;
+            $invoice->paid = $invoice->paid + $request->debit_amount;
+        }
         if($request->cash != '0'){
             $invoice->cash = 1;
+            $invoice->cash_amount = $request->cash_amount;
+            $invoice->paid = $invoice->paid + $request->cash_amount;
+        }
+        else{
+            $invoice->cash = 0;
             $invoice->cash_amount = $request->cash_amount;
             $invoice->paid = $invoice->paid + $request->cash_amount;
         }
@@ -134,9 +154,14 @@ class InvoiceController extends Controller
             $invoice->bank_amount = $request->bank_amount;
             $invoice->paid = $invoice->paid + $request->bank_amount;
         }
-        
+        else{
+            $invoice->bank = 0;
+            $invoice->bank_amount = $request->bank_amount;
+            $invoice->paid = $invoice->paid + $request->bank_amount;
+        }
         $invoice->save();
-
+        $invoice->pending_amount = $invoice->discounted_total + $invoice->VAT_amount - $invoice->paid;
+        $invoice->save();
         $flight_counter=0;
         $visa_counter=0;
         $insurance_counter=0;
@@ -341,29 +366,49 @@ class InvoiceController extends Controller
         $invoice->total = $request->total;
         $invoice->discounted_total =$request->total - $request->discount;
         $invoice->paid = 0;
-        $invoice->pending_amount=0;
-        if($request->credit_amount != '0'){
+        if($request->credit != '0'){
             $invoice->credit = 1;
             $invoice->credit_amount = $request->credit_amount;
             $invoice->paid = $invoice->paid + $request->credit_amount;
         }
-        if($request->debit_amount != '0'){
+        else{
+            $invoice->credit = 0;
+            $invoice->credit_amount = $request->credit_amount;
+            $invoice->paid = $invoice->paid + $request->credit_amount;
+        }
+        if($request->debit != '0'){
             $invoice->debit = 1;
             $invoice->debit_amount = $request->debit_amount;
             $invoice->paid = $invoice->paid + $request->debit_amount;
         }
-        if($request->cash_amount != '0'){
+        else{
+            $invoice->debit = 0;
+            $invoice->debit_amount = $request->debit_amount;
+            $invoice->paid = $invoice->paid + $request->debit_amount;
+        }
+        if($request->cash != '0'){
             $invoice->cash = 1;
             $invoice->cash_amount = $request->cash_amount;
             $invoice->paid = $invoice->paid + $request->cash_amount;
         }
-        if($request->bank_amount != '0'){
+        else{
+            $invoice->cash = 0;
+            $invoice->cash_amount = $request->cash_amount;
+            $invoice->paid = $invoice->paid + $request->cash_amount;
+        }
+        if($request->bank != '0'){
             $invoice->bank = 1;
             $invoice->bank_amount = $request->bank_amount;
             $invoice->paid = $invoice->paid + $request->bank_amount;
         }
+        else{
+            $invoice->bank = 0;
+            $invoice->bank_amount = $request->bank_amount;
+            $invoice->paid = $invoice->paid + $request->bank_amount;
+        }
         $invoice->save();
-
+        $invoice->pending_amount = $invoice->discounted_total + $invoice->VAT_amount - $invoice->paid;
+        $invoice->save();
         foreach ($invoice->invoiceInfo as $info) {
             $info->delete();
         }
@@ -606,26 +651,49 @@ class InvoiceController extends Controller
 
     public function payy(Request $request,$id){
         $invoice = invoice::find($id);
-        if($request->credit_amount != '0'){
+        $invoice->paid = 0;
+        if($request->credit != '0'){
             $invoice->credit = 1;
             $invoice->credit_amount = $request->credit_amount;
             $invoice->paid = $invoice->paid + $request->credit_amount;
         }
-        if($request->debit_amount != '0'){
+        else{
+            $invoice->credit = 0;
+            $invoice->credit_amount = $request->credit_amount;
+            $invoice->paid = $invoice->paid + $request->credit_amount;
+        }
+        if($request->debit != '0'){
             $invoice->debit = 1;
             $invoice->debit_amount = $request->debit_amount;
             $invoice->paid = $invoice->paid + $request->debit_amount;
         }
-        if($request->cash_amount != '0'){
+        else{
+            $invoice->debit = 0;
+            $invoice->debit_amount = $request->debit_amount;
+            $invoice->paid = $invoice->paid + $request->debit_amount;
+        }
+        if($request->cash != '0'){
             $invoice->cash = 1;
             $invoice->cash_amount = $request->cash_amount;
             $invoice->paid = $invoice->paid + $request->cash_amount;
         }
-        if($request->bank_amount != '0'){
+        else{
+            $invoice->cash = 0;
+            $invoice->cash_amount = $request->cash_amount;
+            $invoice->paid = $invoice->paid + $request->cash_amount;
+        }
+        if($request->bank != '0'){
             $invoice->bank = 1;
             $invoice->bank_amount = $request->bank_amount;
             $invoice->paid = $invoice->paid + $request->bank_amount;
         }
+        else{
+            $invoice->bank = 0;
+            $invoice->bank_amount = $request->bank_amount;
+            $invoice->paid = $invoice->paid + $request->bank_amount;
+        }
+        $invoice->save();
+        $invoice->pending_amount = $invoice->discounted_total + $invoice->VAT_amount - $invoice->paid;
         $invoice->save();
         return redirect()->route('invoice')->with('invoices',invoice::all())
                                             ->with('tax',settings::all());
