@@ -181,6 +181,16 @@ class employeeController extends Controller
         return redirect()->route('employees');
     }
 
+    public function sendLetterTOEmployee(Request $request,$id){
+        
+        $contactEmail = employee::find($id)->email;
+        $data = array('content'=>$request->content);
+        Mail::send('emails.letter', $data, function($message) use ($contactEmail)
+        {  
+            $message->to($contactEmail);
+        });
+        return redirect()->back();
+    }
     
 
     /**

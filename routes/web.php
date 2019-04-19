@@ -115,6 +115,10 @@ Route::post('/send/letter',[
 			'uses'=> 'HomeController@sendLetter',
 			'as'=>'sendLetter'
 		]);
+Route::post('/send/letter/{id}',[
+	'uses'=> 'employeeController@sendLetterToEmployee',
+	'as'=>'sendLetterTOEmployee'
+]);
 Route::get('/task/delete/{id}',[
 			'uses'=> 'TasksController@destroy',
 			'as'=>'task.destroy'
