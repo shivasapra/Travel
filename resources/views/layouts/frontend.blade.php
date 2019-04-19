@@ -291,7 +291,7 @@
         @if(Auth::user()->admin)
         <li>
           <a href="{{route('status')}}">
-            <i class="fa fa-clock-o"></i> <span>Employee Status</span>
+            <i class="fa fa-clock-o"></i> <span>Employee Attendance Status</span>
           </a>
         </li>
         <li class="treeview">
