@@ -21,8 +21,14 @@ class clientController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('clients.index')->with('clients',client::all());
+    {   
+        if (Auth::user()->admin) {
+            $clients = client::all();
+        }
+        else{
+            $clients = client::where('user_id',Auth::user()->id)->get();
+        }
+        return view('clients.index')->with('clients',$clients);
     }
 
     /**
