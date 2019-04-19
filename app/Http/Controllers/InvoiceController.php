@@ -29,31 +29,6 @@ class InvoiceController extends Controller
 
     public function index()
     {
-        $tax = settings::all();
-        if($tax[0]->enable == 'yes'){
-            foreach (invoice::all() as $invoice) {
-            $taxed = ($tax[0]->tax/100)*$invoice->discounted_total;
-            $total = $invoice->discounted_total + $taxed;
-            $invoice->pending_amount = $total - $invoice->paid;
-            $invoice->save();
-            }
-        }
-        else{
-            foreach (invoice::all() as $invoice){
-                $invoice->pending = $discounted_total - $invoice->paid;
-                $invoice->save();
-            }
-        }
-        foreach (invoice::all() as $invoice) {
-            if ($invoice->pending_amount > 0) {
-                $invoice->status = 0;
-            }
-            else{
-                $invoice->status =1;
-            }
-            $invoice->save();
-        }
-
         return view('invoice.index')->with('invoices',invoice::all())
                                     ->with('tax',settings::all());
     }
@@ -129,7 +104,18 @@ class InvoiceController extends Controller
         $invoice->currency = $request->currency;
         $invoice->total = $request->total;
         $invoice->discounted_total =$request->total - $request->discount;
-
+        $invoice->mail_sent = $date;
+        $invoice->save();
+        $tax = settings::all();
+        if($tax[0]->enable == 'yes'){
+            $invoice->VAT_percentage = $tax[0]->tax;
+            $invoice->VAT_amount = ($tax[0]->tax)/100*($invoice->discounted_total);
+        }
+        else{
+            $invoice->VAT_percentage = 0;
+            $invoice->VAT_amount = 0;
+        }
+        
         $invoice->paid = 0;
         $invoice->pending_amount=0;
         if($request->credit != '0'){
@@ -152,7 +138,7 @@ class InvoiceController extends Controller
             $invoice->bank_amount = $request->bank_amount;
             $invoice->paid = $invoice->paid + $request->bank_amount;
         }
-        $invoice->mail_sent = $date;
+        
         $invoice->save();
 
         $flight_counter=0;

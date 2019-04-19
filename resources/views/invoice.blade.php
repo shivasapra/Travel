@@ -289,25 +289,19 @@ Invoice
                 <th>Discounted Total:</th>
                 <td>{{$invoice->currency}} {{$invoice->discounted_total}}</td>
               </tr> --}}
-              @if($tax[0]->enable == 'yes')
               <tr>
-                <th>VAT ({{$tax[0]->tax}}%)</th>
-                <?php $taxed = ($tax[0]->tax/100*$invoice->discounted_total) ?>
-                <td>{{$invoice->currency}} {{$taxed}}</td>
+                <th>VAT ({{$invoice->VAT_percentage}}%)</th>
+                <td>{{$invoice->currency}} {{$invoice->VAT_amount}}</td>
               </tr>
-              @endif
               {{-- <tr>
                 <th>Shipping:</th>
                 <td>{{$invoice->currency}} 0.00</td>
               </tr> --}}
               <tr>
                 <th>Total:</th>
-                @if($tax[0]->enable == 'yes')
-                <?php $total = $invoice->discounted_total + $taxed ?>
+                <?php $total = $invoice->discounted_total + $tinvoice->VAT_amount ?>
                 <td style="color:white;font-weight:500;background-color:#0066FF;">{{$invoice->currency}} {{$total}}</td>
-                @else
-                  <td style="color:white;font-weight:500;background-color:#0066FF;">{{$invoice->currency}} {{$invoice->discounted_total}}</td>
-                @endif
+                
               </tr>
               <tr>
                 <th class="text-success">Paid:</th>
