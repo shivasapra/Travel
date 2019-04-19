@@ -29,7 +29,7 @@ VAT
 										<input type="radio" id="enable" name="enable" value="yes" {{($tax[0]->enable == 'yes')?'checked':''}}>Enable
 										<input type="radio" id="disable" name="enable" value="no" {{($tax[0]->enable == 'no')?'checked':''}}>Diasble
 										<div id="buttonDisable">
-											<input type="text" name="tax" value="{{$tax[0]->tax}}" class="form-group">
+											<input type="text" name="tax" value="{{$tax[0]->tax}}" class="form-group">(%)
 										</div>
 									</td>
 								</tr>
@@ -55,7 +55,7 @@ VAT
 
 	$(document).ready(function(){
     $("#enable").click(function(){
-			var data = '<input type="text" name="tax" value="{{$tax[0]->tax}}" class="form-group">'
+			var data = '<input type="text" name="tax" value="{{$tax[0]->tax}}" class="form-group">(%)'
     	$("#buttonDisable").html(data);
     });
 	});
