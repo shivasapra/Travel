@@ -68,7 +68,7 @@ Route::get('/accept/task/{id}',[
 	'as'=>'task.accept'
 ]);
 Route::get('/assignments/{id}',[
-			'uses'=> 'HomeController@assignments',
+			'uses'=> 'AssignmentController@assignments',
 			'as'=>'assignments'
 		]);
 Route::get('/assignment/Done/{id}',[
