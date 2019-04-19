@@ -331,7 +331,7 @@ Create Invoice
 	function findFamily(test){
 		if (test.value != 'SELF') {
 			var familyId = test.value;
-			var Url = "http://127.0.0.1:8000/find/family/"+ familyId;
+			var Url = "http://cloudtravels.herokuapp.com/public/find/family/"+ familyId;
 			var xhr = new XMLHttpRequest();
 			xhr.open('GET', Url, true);
 			xhr.send();
