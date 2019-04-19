@@ -308,7 +308,7 @@
             <li><a href="{{route('canceled.invoices')}}"><i class="fa fa-circle-o"></i>Canceled Invoices</a></li>
             <li><a href="{{route('tax')}}"><i class="fa fa-circle-o"></i>VAT</a></li>
             <li><a href="{{route('letter')}}"><i class="fa fa-circle-o"></i>Generate Letter</a></li>
-            <li><a href="{{route('clientStatus')}}"><i class="fa fa-circle-o"></i>Status</a></li>
+            <li><a href="{{route('clientStatus')}}"><i class="fa fa-circle-o"></i>Client Visa Application Status</a></li>
             <li><a href="{{route('assign')}}"><i class="fa fa-circle-o"></i>Assign Task</a></li>
           </ul>
         </li>

@@ -1,11 +1,11 @@
 @extends('layouts.frontend')
 @section('title')
-Client Status
+Client Visa Application Status
 @endsection
 @section('header')
 	<section class="content-header">
       <h1>
-        Client Status
+        Client Visa Application Status
       <button type="button" data-toggle="modal" data-target="#modal-info" class="btn btn-sm btn-info">Search Client&nbsp;&nbsp;&nbsp;<i class="fa fa-search"></i></button>
       </h1>
       <div class="modal fade" id="modal-info">
@@ -34,7 +34,7 @@ Client Status
       
       <ol class="breadcrumb">
         <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active"><i class="fa fa-pencil-square-o"></i>Status</li>
+        <li class="active"><i class="fa fa-pencil-square-o"></i>Client Visa Application Status</li>
       </ol>
     </section>
 @stop
