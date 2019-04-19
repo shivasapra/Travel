@@ -299,7 +299,7 @@ Invoice
               </tr> --}}
               <tr>
                 <th>Total:</th>
-                <?php $total = $invoice->discounted_total + $tinvoice->VAT_amount ?>
+                <?php $total = $invoice->discounted_total + $invoice->VAT_amount ?>
                 <td style="color:white;font-weight:500;background-color:#0066FF;">{{$invoice->currency}} {{$total}}</td>
                 
               </tr>

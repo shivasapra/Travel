@@ -111,10 +111,6 @@ class InvoiceController extends Controller
             $invoice->VAT_percentage = $tax[0]->tax;
             $invoice->VAT_amount = ($tax[0]->tax)/100*($invoice->discounted_total);
         }
-        else{
-            $invoice->VAT_percentage = 0;
-            $invoice->VAT_amount = 0;
-        }
         
         $invoice->paid = 0;
         $invoice->pending_amount=0;
