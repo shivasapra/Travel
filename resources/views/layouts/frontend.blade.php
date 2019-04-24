@@ -317,7 +317,7 @@
 
         <li>
           <a href="{{route('session')}}">
-            <i class="fa fa-clock-o"></i> <span>Manage Session
+            <i class="fa fa-clock-o"></i> <span>Mark Attendance
             @if(Auth::user()->employee[0]->wage->count()>0)
               @if(Auth::user()->employee[0]->wage->last()->date == $date)
                 @if(Auth::user()->employee[0]->wage->last()->logout == null and Auth::user()->employee[0]->wage->last()->login != null)

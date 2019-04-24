@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use Hash;
 use App\wage;
-use App\wagelog;
+use App\wageLog;
 use App\employee;
 use Carbon\Carbon;
 use Session;
