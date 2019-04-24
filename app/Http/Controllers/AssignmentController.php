@@ -34,7 +34,7 @@ class AssignmentController extends Controller
     }
     public function assignments($id){
         $assignments = assignment::where('employee_id',$id)->get();
-        return view('employee.tasks')->with('assignments',$assignments);
+        return view('employee.Tasks')->with('assignments',$assignments);
     }
 
     /**
