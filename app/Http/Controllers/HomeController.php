@@ -175,7 +175,7 @@ class HomeController extends Controller
         return view('tax')->with('tax',settings::all());
     }
     public function taxUpdate(Request $request){
-        $tax = settings::find(1);
+        $tax = settings::all()->last();
         $tax->tax = $request->tax;
         $tax->enable = $request->enable;
         $tax->save();
