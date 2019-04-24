@@ -235,15 +235,22 @@ class clientController extends Controller
     }
     public function statusSave(Request $request){
         $client = client::where('unique_id',$request->client_id)->get();
-        $client[0]->status = $request->status;
-        $client[0]->save();
-        $contactEmail = $client[0]->email;
-        $data = array('status'=>$request->status);
-        Mail::send('emails.status', $data, function($message) use ($contactEmail)
-        {  
-            $message->to($contactEmail);
-        });
-        return redirect()->back();
+        if ($client->count()>0) {
+            $client[0]->status = $request->status;
+            $client[0]->save();
+            $contactEmail = $client[0]->email;
+            $data = array('status'=>$request->status);
+            Mail::send('emails.status', $data, function($message) use ($contactEmail)
+            {  
+                $message->to($contactEmail);
+            });
+        Session::flash('success','Status Sent');
+        }
+        else{
+            Session::flash('warning','Please Enter Valid Client Id');
+        }
+        $clients =client::where('passport',2)->get();
+        return view('status')->with('clients',$clients);
     }
 
     public function search(Request $request){
