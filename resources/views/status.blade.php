@@ -6,7 +6,7 @@ Client Visa Application Status
 	<section class="content-header">
       <h1>
         Client Visa Application Status
-      <button type="button" data-toggle="modal" data-target="#modal-info" class="btn btn-sm btn-info">Search Client&nbsp;&nbsp;&nbsp;<i class="fa fa-search"></i></button>
+      <button type="button" data-toggle="modal" data-target="#modal-info" class="btn btn-sm btn-info" id="searchClient">Search Client&nbsp;&nbsp;&nbsp;<i class="fa fa-search"></i></button>
       </h1>
       <div class="modal fade" id="modal-info">
   		<div class="modal-dialog">
@@ -87,7 +87,7 @@ Client Visa Application Status
     		<div class="row">
     			<div class="col-md-4">
     				<label for="client_id">Client Id:</label>
-    				<input type="text" id="clientId" name="client_id" required class="form-control">
+    				<input type="text" id="clientId" name="client_id" required class="form-control" readonly onclick="document.getElementById('searchClient').click()">
     			</div>
     			<div class="col-md-4">
     				<label for="country">Select Country:</label>
