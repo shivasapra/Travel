@@ -245,7 +245,21 @@
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
-        @if(Auth::user()->admin)
+        <li class="treeview">
+            <a href="">
+              <i class="fa fa-user-circle"></i><span>Client Management</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="{{route('clients')}}"><i class="fa fa-circle-o"></i><span>Clients</span></a></li>
+                @if(Auth::user()->admin)
+               <li><a href="{{route('clientStatus')}}"><i class="fa fa-circle-o"></i>Client Visa Application Status</a></li>
+               @endif
+            </ul>
+          </li>
+      @if(Auth::user()->admin)
         <li class="treeview">
             <a href="">
               <i class="fa fa-pencil-square-o"></i><span>Employee Management</span>
@@ -258,20 +272,6 @@
                 <li><a href="{{route('status')}}"><i class="fa fa-circle-o"></i> <span>Employee Attendance Status</span></a></li>
                 <li><a href="{{route('slip.generate')}}"><i class="fa fa-circle-o"></i>Generate Employee Salary Slip</a></li>
                 <li><a href="{{route('wage')}}"><i class="fa fa-circle-o"></i><span>Staff Wage Management</span></a></li>
-            </ul>
-          </li>
-        
-        @endif
-        <li class="treeview">
-            <a href="">
-              <i class="fa fa-user-circle"></i><span>Client Management</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-            </a>
-            <ul class="treeview-menu">
-                <li><a href="{{route('clients')}}"><i class="fa fa-circle-o"></i><span>Clients</span></a></li>
-               <li><a href="{{route('clientStatus')}}"><i class="fa fa-circle-o"></i>Client Visa Application Status</a></li>
             </ul>
           </li>
         <li class="treeview">
@@ -300,23 +300,12 @@
                 <li><a href="{{route('tax')}}"><i class="fa fa-circle-o"></i>VAT</a></li>
             </ul>
           </li>
-        @if(Auth::user()->admin)
         <li><a href="{{route('assign')}}"><i class="fa fa-clock-o"></i><span>Assignments</span></a></li>
-        <li><a href="{{route('letter')}}"><i class="fa fa-circle-o"></i><span>Generate Letter</span></a></li>
+        <li><a href="{{route('letter')}}"><i class="fa fa-envelope-open-o"></i><span>Generate Letter</span></a></li>
         <li><a href="{{route('products')}}"><i class="fa fa-plus-square"></i><span>Services Registration</span></a></li>
         <li><a href="{{route('airlines')}}"><i class="fa fa-plane"></i><span>Airlines Name Registration</span></a></li>
-        
-        @endif
-        
-        @if(Auth::user()->admin)
-        
-        @endif
-        
-        
-        @if(Auth::user()->admin)
-        
-        @else
-
+      @endif
+      @if(!Auth::user()->admin)
         <li>
           <a href="{{route('session')}}">
             <i class="fa fa-clock-o"></i> <span>Mark Attendance
@@ -332,7 +321,7 @@
             </span>
           </a>
         </li>
-        @endif
+      @endif
       </ul>
     </section>
     <!-- /.sidebar -->
