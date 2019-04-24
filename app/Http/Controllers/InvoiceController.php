@@ -344,10 +344,16 @@ class InvoiceController extends Controller
     {
         $invoice = invoice::find($id);
         $client = client::find($invoice->client_id);
-        return view('invoice.edit')->with('invoice',$invoice)
-                                    ->with('products',products::all())
-                                    ->with('airlines',airlines::all())
-                                    ->with('client',$client);
+        if ($invoice->status == 0) {
+            return view('invoice.edit')->with('invoice',$invoice)
+                                        ->with('products',products::all())
+                                        ->with('airlines',airlines::all())
+                                        ->with('client',$client);
+        }
+        else{
+            Session::flash('warning',"This Invoice is already Paid. You Can't Edit Now!!");
+            return redirect()->back();
+        }
 
     }
 
@@ -365,47 +371,47 @@ class InvoiceController extends Controller
         $invoice->currency = $request->currency;
         $invoice->total = $request->total;
         $invoice->discounted_total =$request->total - $request->discount;
-        $invoice->paid = 0;
-        if($request->credit != '0'){
-            $invoice->credit = 1;
-            $invoice->credit_amount = $request->credit_amount;
-            $invoice->paid = $invoice->paid + $request->credit_amount;
-        }
-        else{
-            $invoice->credit = 0;
-            $invoice->credit_amount = $request->credit_amount;
-            $invoice->paid = $invoice->paid + $request->credit_amount;
-        }
-        if($request->debit != '0'){
-            $invoice->debit = 1;
-            $invoice->debit_amount = $request->debit_amount;
-            $invoice->paid = $invoice->paid + $request->debit_amount;
-        }
-        else{
-            $invoice->debit = 0;
-            $invoice->debit_amount = $request->debit_amount;
-            $invoice->paid = $invoice->paid + $request->debit_amount;
-        }
-        if($request->cash != '0'){
-            $invoice->cash = 1;
-            $invoice->cash_amount = $request->cash_amount;
-            $invoice->paid = $invoice->paid + $request->cash_amount;
-        }
-        else{
-            $invoice->cash = 0;
-            $invoice->cash_amount = $request->cash_amount;
-            $invoice->paid = $invoice->paid + $request->cash_amount;
-        }
-        if($request->bank != '0'){
-            $invoice->bank = 1;
-            $invoice->bank_amount = $request->bank_amount;
-            $invoice->paid = $invoice->paid + $request->bank_amount;
-        }
-        else{
-            $invoice->bank = 0;
-            $invoice->bank_amount = $request->bank_amount;
-            $invoice->paid = $invoice->paid + $request->bank_amount;
-        }
+        // $invoice->paid = 0;
+        // if($request->credit != '0'){
+        //     $invoice->credit = 1;
+        //     $invoice->credit_amount = $request->credit_amount;
+        //     $invoice->paid = $invoice->paid + $request->credit_amount;
+        // }
+        // else{
+        //     $invoice->credit = 0;
+        //     $invoice->credit_amount = $request->credit_amount;
+        //     $invoice->paid = $invoice->paid + $request->credit_amount;
+        // }
+        // if($request->debit != '0'){
+        //     $invoice->debit = 1;
+        //     $invoice->debit_amount = $request->debit_amount;
+        //     $invoice->paid = $invoice->paid + $request->debit_amount;
+        // }
+        // else{
+        //     $invoice->debit = 0;
+        //     $invoice->debit_amount = $request->debit_amount;
+        //     $invoice->paid = $invoice->paid + $request->debit_amount;
+        // }
+        // if($request->cash != '0'){
+        //     $invoice->cash = 1;
+        //     $invoice->cash_amount = $request->cash_amount;
+        //     $invoice->paid = $invoice->paid + $request->cash_amount;
+        // }
+        // else{
+        //     $invoice->cash = 0;
+        //     $invoice->cash_amount = $request->cash_amount;
+        //     $invoice->paid = $invoice->paid + $request->cash_amount;
+        // }
+        // if($request->bank != '0'){
+        //     $invoice->bank = 1;
+        //     $invoice->bank_amount = $request->bank_amount;
+        //     $invoice->paid = $invoice->paid + $request->bank_amount;
+        // }
+        // else{
+        //     $invoice->bank = 0;
+        //     $invoice->bank_amount = $request->bank_amount;
+        //     $invoice->paid = $invoice->paid + $request->bank_amount;
+        // }
         $invoice->save();
         $invoice->pending_amount = $invoice->discounted_total + $invoice->VAT_amount - $invoice->paid;
         $invoice->save();
@@ -562,9 +568,16 @@ class InvoiceController extends Controller
     public function destroy($id)
     {
         $invoice = invoice::find($id);
-        $invoice->delete();
-        Session::flash('success','Invoice Canceled Successfully');
-        return redirect()->back()->with('invoices',invoice::all());
+        
+        if ($invoice->status == 0) {
+            $invoice->delete();
+            Session::flash('success','Invoice Canceled Successfully');
+            return redirect()->back()->with('invoices',invoice::all());
+        }
+        else{
+            Session::flash('warning',"This Invoice is already Paid. You Can't Cancel Now!!");
+            return redirect()->back();
+        }
     }
     public function generatePdf($id) {
         $data = [
@@ -643,7 +656,13 @@ class InvoiceController extends Controller
 
     public function pay($id){
         $invoice = invoice::find($id);
-        return view('invoice.pay')->with('invoice',$invoice);
+        if ($invoice->status == 0) {
+            return view('invoice.pay')->with('invoice',$invoice);
+        }
+        else{
+            Session::flash('warning',"This Invoice is already Paid. You Can't Pay Now!!");
+            return redirect()->back();
+        }
 
     }
 
