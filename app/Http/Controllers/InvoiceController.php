@@ -574,7 +574,7 @@ class InvoiceController extends Controller
             'airlines'=> airlines::all(),
             ];
         $pdf = PDF::loadView('invoicePrint',$data);
-        return $pdf->stream('invoice.pdf');
+        return $pdf->setPaper('a4')->stream('invoice.pdf');
         
     }
 
