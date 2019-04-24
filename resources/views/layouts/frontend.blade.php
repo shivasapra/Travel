@@ -306,6 +306,8 @@
         <li><a href="{{route('airlines')}}"><i class="fa fa-plane"></i><span>Airlines Name Registration</span></a></li>
       @endif
       @if(!Auth::user()->admin)
+        <li><a href="{{route('expenses.get')}}"><i class="fa fa-money"></i>Expenses</a></li>
+        <li><a href="{{route('assign')}}"><i class="fa fa-clock-o"></i><span>Assignments</span></a></li>
         <li>
           <a href="{{route('session')}}">
             <i class="fa fa-clock-o"></i> <span>Mark Attendance

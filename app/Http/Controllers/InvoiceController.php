@@ -30,7 +30,7 @@ class InvoiceController extends Controller
     public function index()
     {   
         foreach (invoice::all() as $invoice) {
-            if ($invoice->pending_amount == 0) {
+            if ($invoice->pending_amount <= 0) {
                 $invoice->status = 1;
                 $invoice->save();
             }
