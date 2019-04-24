@@ -5,8 +5,8 @@
 	<title></title>
 </head>
 <body>
-	
-      {{$content}}
+  <h1>Haaji</h1>
+      {!! $content !!}
   </div>
 </div>
 </body>
