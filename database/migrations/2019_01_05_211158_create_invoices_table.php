@@ -36,8 +36,8 @@ class CreateInvoicesTable extends Migration
             $table->integer('pending_amount')->nullable();
             $table->boolean('status')->default(0);
             $table->Date('mail_sent');
-            $table->integer('VAT_percentage')->default(0);
-            $table->integer('VAT_amount')->default(0);
+            $table->float('VAT_percentage')->default(0);
+            $table->float('VAT_amount')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });
