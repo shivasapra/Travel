@@ -250,7 +250,7 @@ Dashboard
                     <li><a href="#">View calendar</a></li>--}}                  
                   {{-- </ul> --}}
                 </div>
-                <button type="button" class="btn btn-sm btn-default" data-toggle="modal" data-target="#modal-info"><span style="color: white">Add new event</span></button>
+                <button type="button" class="btn btn-lg btn-default" data-toggle="modal" data-target="#modal-info" ><span style="color: white"><strong>+ Add New Event</strong></span></button>
                 {{-- <button class="btn btn-sm btn-default" id="create"><span style="color: white">Add new event</span></button> --}}
                 <button type="button" class="btn btn-default btn-sm" data-widget="collapse"><span style="color: white"><i class="fa fa-minus"></i></span>
                 </button>

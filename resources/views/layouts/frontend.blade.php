@@ -246,73 +246,75 @@
           </a>
         </li>
         @if(Auth::user()->admin)
-        <li>
-          <a href="{{route('employees')}}">
-            <i class="fa fa-pencil-square-o"></i><span>Employee</span>
-          </a>
-        </li>
+        <li class="treeview">
+            <a href="">
+              <i class="fa fa-pencil-square-o"></i><span>Employee Management</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="{{route('employees')}}"><i class="fa fa-circle-o"></i><span>Employees</span></a></li>
+                <li><a href="{{route('status')}}"><i class="fa fa-circle-o"></i> <span>Employee Attendance Status</span></a></li>
+                <li><a href="{{route('slip.generate')}}"><i class="fa fa-circle-o"></i>Generate Employee Salary Slip</a></li>
+                <li><a href="{{route('wage')}}"><i class="fa fa-circle-o"></i><span>Staff Wage Management</span></a></li>
+            </ul>
+          </li>
+        
         @endif
-        <li>
-          <a href="{{route('clients')}}">
-            <i class="fa fa-user-circle"></i><span>Client</span>
-          </a>
-        </li>
+        <li class="treeview">
+            <a href="">
+              <i class="fa fa-user-circle"></i><span>Client Management</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="{{route('clients')}}"><i class="fa fa-circle-o"></i><span>Clients</span></a></li>
+               <li><a href="{{route('clientStatus')}}"><i class="fa fa-circle-o"></i>Client Visa Application Status</a></li>
+            </ul>
+          </li>
+        <li class="treeview">
+            <a href="">
+              <i class="fa fa-money"></i><span>Daily Expense Entry</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="{{route('expenses.get')}}"><i class="fa fa-circle-o"></i>Expenses</a></li>
+              <li><a href="{{route('auto.get')}}"><i class="fa fa-circle-o"></i>Auto Deduction</a></li>
+            </ul>
+          </li>
+  
+          <li class="treeview">
+            <a href="">
+              <i class="fa fa-wrench"></i><span>Invoices</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="{{route('invoice')}}"><i class="fa fa-circle-o"></i>Invoice Generation</a></li>
+                <li><a href="{{route('canceled.invoices')}}"><i class="fa fa-circle-o"></i>Canceled Invoices</a></li>
+                <li><a href="{{route('tax')}}"><i class="fa fa-circle-o"></i>VAT</a></li>
+            </ul>
+          </li>
         @if(Auth::user()->admin)
-        <li>
-          <a href="{{route('products')}}">
-            <i class="fa fa-plus-square"></i><span>Services Registration</span>
-          </a>
-        </li>
-        <li>
-          <a href="{{route('airlines')}}">
-            <i class="fa fa-plane"></i><span>Airlines Name Registration</span>
-          </a>
-        </li>
+        <li><a href="{{route('assign')}}"><i class="fa fa-clock-o"></i><span>Assignments</span></a></li>
+        <li><a href="{{route('letter')}}"><i class="fa fa-circle-o"></i><span>Generate Letter</span></a></li>
+        <li><a href="{{route('products')}}"><i class="fa fa-plus-square"></i><span>Services Registration</span></a></li>
+        <li><a href="{{route('airlines')}}"><i class="fa fa-plane"></i><span>Airlines Name Registration</span></a></li>
+        
         @endif
         
         @if(Auth::user()->admin)
-        <li>
-          <a href="{{route('wage')}}">
-            <i class="fa fa-wrench"></i><span>Staff Wage Management</span>
-          </a>
-        </li>
+        
         @endif
-        <li class="treeview">
-          <a href="">
-            <i class="fa fa-money"></i><span>Daily Expense Entry</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="{{route('expenses.get')}}"><i class="fa fa-circle-o"></i>Expenses</a></li>
-          </ul>
-        </li>
-        <li><a href="{{route('assign')}}"><i class="fa fa-circle-o"></i>Assignments</a></li>
+        
+        
         @if(Auth::user()->admin)
-        <li>
-          <a href="{{route('status')}}">
-            <i class="fa fa-clock-o"></i> <span>Employee Attendance Status</span>
-          </a>
-        </li>
-        <li class="treeview">
-          <a href="">
-            <i class="fa fa-gears"></i><span>Settings</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="{{route('auto.get')}}"><i class="fa fa-circle-o"></i>Auto Deduction</a></li>
-            <li><a href="{{route('slip.generate')}}"><i class="fa fa-circle-o"></i>Generate Salary Slip</a></li>
-            <li><a href="{{route('invoice')}}"><i class="fa fa-circle-o"></i>Invoice Generation</a></li>
-            <li><a href="{{route('canceled.invoices')}}"><i class="fa fa-circle-o"></i>Canceled Invoices</a></li>
-            <li><a href="{{route('tax')}}"><i class="fa fa-circle-o"></i>VAT</a></li>
-            <li><a href="{{route('letter')}}"><i class="fa fa-circle-o"></i>Generate Letter</a></li>
-            <li><a href="{{route('clientStatus')}}"><i class="fa fa-circle-o"></i>Client Visa Application Status</a></li>
-            <li><a href="{{route('assign')}}"><i class="fa fa-circle-o"></i>Assign Task</a></li>
-          </ul>
-        </li>
+        
         @else
 
         <li>
