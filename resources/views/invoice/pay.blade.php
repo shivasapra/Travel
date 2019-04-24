@@ -9,6 +9,7 @@ Pay
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="{{route('invoice')}}"><i class="fa fa-paperclip"></i> Invoice</a></li>
         <li class="active"><i class="fa fa-paperclip"></i>Pay</li>
       </ol>
     </section>
@@ -84,25 +85,25 @@ Pay
             <td class="col-md-8" align="right">
                 <strong>Credit card:</strong>
             </td>
-            <td class="col-md-4" id="creditInput"><input name="credit_amount" type="text" value="{{$invoice->credit_amount}}" class="form-control"></td>
+            <td class="col-md-4" id="creditInput"><input name="credit_amount" type="text"  class="form-control"></td>
             </tr>
             <tr>
             <td class="col-md-8" align="right">
                 <strong>Debit card:</strong>
             </td>
-            <td class="col-md-4" id="debitInput"><input name="debit_amount" type="text" value="{{$invoice->debit_amount}}" class="form-control"></td>
+            <td class="col-md-4" id="debitInput"><input name="debit_amount" type="text"  class="form-control"></td>
             </tr>
             <tr>
             <td class="col-md-8" align="right">
                 <strong>Cash:</strong>
             </td>
-            <td class="col-md-4" id="cashInput"><input name="cash_amount" type="text" value="{{$invoice->cash_amount}}" class="form-control"></td>
+            <td class="col-md-4" id="cashInput"><input name="cash_amount" type="text"  class="form-control"></td>
             </tr>
             <tr>
             <td class="col-md-8" align="right">
                 <strong>Bank Transfer:</strong>
             </td>
-            <td class="col-md-4" id="bankInput"><input name="bank_amount" type="text" value="{{$invoice->bank_amount}}" class="form-control"></td>
+            <td class="col-md-4" id="bankInput"><input name="bank_amount" type="text"  class="form-control"></td>
             </tr>
         </table>
         

@@ -668,45 +668,24 @@ class InvoiceController extends Controller
 
     public function payy(Request $request,$id){
         $invoice = invoice::find($id);
-        $invoice->paid = 0;
-        if($request->credit != '0'){
+        if($request->credit_amount != null){
             $invoice->credit = 1;
-            $invoice->credit_amount = $request->credit_amount;
+            $invoice->credit_amount = $invoice->credit_amount + $request->credit_amount;
             $invoice->paid = $invoice->paid + $request->credit_amount;
         }
-        else{
-            $invoice->credit = 0;
-            $invoice->credit_amount = $request->credit_amount;
-            $invoice->paid = $invoice->paid + $request->credit_amount;
-        }
-        if($request->debit != '0'){
+        if($request->debit_amount != null){
             $invoice->debit = 1;
-            $invoice->debit_amount = $request->debit_amount;
+            $invoice->debit_amount = $invoice->debit_amount + $request->debit_amount;
             $invoice->paid = $invoice->paid + $request->debit_amount;
         }
-        else{
-            $invoice->debit = 0;
-            $invoice->debit_amount = $request->debit_amount;
-            $invoice->paid = $invoice->paid + $request->debit_amount;
-        }
-        if($request->cash != '0'){
+        if($request->cash_amount != null){
             $invoice->cash = 1;
-            $invoice->cash_amount = $request->cash_amount;
+            $invoice->cash_amount = $invoice->cash_amount + $request->cash_amount;
             $invoice->paid = $invoice->paid + $request->cash_amount;
         }
-        else{
-            $invoice->cash = 0;
-            $invoice->cash_amount = $request->cash_amount;
-            $invoice->paid = $invoice->paid + $request->cash_amount;
-        }
-        if($request->bank != '0'){
+        if($request->bank_amount != null){
             $invoice->bank = 1;
-            $invoice->bank_amount = $request->bank_amount;
-            $invoice->paid = $invoice->paid + $request->bank_amount;
-        }
-        else{
-            $invoice->bank = 0;
-            $invoice->bank_amount = $request->bank_amount;
+            $invoice->bank_amount = $invoice->bank_amount + $request->bank_amount;
             $invoice->paid = $invoice->paid + $request->bank_amount;
         }
         $invoice->save();
