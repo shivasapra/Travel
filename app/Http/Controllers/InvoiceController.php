@@ -573,7 +573,7 @@ class InvoiceController extends Controller
             'products'=> products::all(),
             'airlines'=> airlines::all(),
             ];
-        $pdf = PDF::loadView('invoice',$data);
+        $pdf = PDF::loadView('invoicePrint',$data);
         return $pdf->stream('invoice.pdf');
         
     }
