@@ -575,9 +575,9 @@ class InvoiceController extends Controller
             ];
         $pdf = PDF::loadView('invoice',$data);
         // dd();
-        $pdf->save('generated/pdf/invoice.pdf');
-        $pdf->download('invoice.pdf');
-        return "PDF GENERTATED";
+        return $pdf->save('generated/pdf/invoice.pdf')->stream('invoice.pdf');
+        //  $pdf->download('invoice.pdf');
+        
     }
 
     public function AirlineSearch(Request $request){
