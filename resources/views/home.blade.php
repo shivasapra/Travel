@@ -87,11 +87,13 @@ Dashboard
                 <h3 class="box-title">Direct Chat</h3>
   
                 <div class="box-tools pull-right">
-                  {{-- <span data-toggle="tooltip" title="3 New Messages" class="badge bg-light-blue">{{$unread}}</span> --}}
+                  
+                  <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Unread Messages" data-widget="chat-pane-toggle">
+                      <span data-toggle="tooltip" title="{{$unread_messages->count()}} New Messages" class="badge bg-red">{{$unread_messages->count()}}</span></button>
                   <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                   </button>
-                  <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Contacts" data-widget="chat-pane-toggle">
-                    <i class="fa fa-comments"></i></button>
+                  {{-- <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Contacts" data-widget="chat-pane-toggle"> --}}
+                    {{-- <i class="fa fa-comments"></i></button> --}}
                   <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                 </div>
               </div>
@@ -100,12 +102,12 @@ Dashboard
                 <!-- Conversations are loaded here -->
                 <div class="direct-chat-messages">
                   <!-- Message. Default to the left -->
-                  @if($chat != null)
+                  @if($messages != null)
                   @foreach($messages as $message)
                     @if($message->user_id == Auth::user()->id)
-                      <div class="direct-chat-msg">
+                      <div class="direct-chat-msg ">
                         <div class="direct-chat-info clearfix">
-                          <span class="direct-chat-name pull-left">{{Auth::user()->name}}</span>
+                          <span class="direct-chat-name pull-left">{{'You'}}</span>
                         <span class="direct-chat-timestamp pull-right">{{$message->date}}{{' '}}{{$message->time}}</span>
                         </div>
                         <!-- /.direct-chat-info -->
@@ -152,20 +154,30 @@ Dashboard
                 <!-- Contacts are loaded here -->
                 <div class="direct-chat-contacts">
                   <ul class="contacts-list">
+                    @if($unread_messages->count()>0)
+                    @foreach($unread_messages as $unread)
                     <li>
-                      <a href="#">
-                        <img class="contacts-list-img" src="../dist/img/user1-128x128.jpg" alt="User Image">
+                      <a href="{{route('home.message',['id'=>$unread->user_id])}}">
+                        <img class="contacts-list-img"
+                        @if(App\User::find($unread->user_id)->avatar)
+                            src="{{asset(App\User::find($unread->user_id)->avatar)}}"
+                          @else
+                            src="{{asset('app/images/user-placeholder.jpg')}}"
+                        @endif 
+                        alt="User Image">
   
                         <div class="contacts-list-info">
                               <span class="contacts-list-name">
-                                Count Dracula
-                                <small class="contacts-list-date pull-right">2/28/2015</small>
+                                {{App\User::find($unread->user_id)->name}}
+                                <small class="contacts-list-date pull-right">{{$unread->date}}{{' '}}{{$unread->time}}</small>
                               </span>
-                          <span class="contacts-list-msg">How have you been? I was...</span>
+                          <span class="contacts-list-msg">{{$unread->message}}</span>
                         </div>
                         <!-- /.contacts-list-info -->
                       </a>
                     </li>
+                    @endforeach
+                    @endif
                     <!-- End Contact Item -->
                   </ul>
                   <!-- /.contatcts-list -->
@@ -174,10 +186,11 @@ Dashboard
               </div>
               <!-- /.box-body -->
               <div class="box-footer">
-                  @if($chat != null)
-                  <form action="" method="post">
+                  @if($messages != null)
+                  <form action="{{route('admin.message.send')}}" method="post">
                     @csrf
                     <div class="input-group">
+                      <input name='user_id' value="{{$id}}" hidden>
                       <input type="text" name="message" placeholder="Type Message ..." class="form-control">
                           <span class="input-group-btn">
                             <button type="submit" class="btn btn-danger btn-flat">Send</button>

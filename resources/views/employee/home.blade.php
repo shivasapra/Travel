@@ -39,7 +39,7 @@ Dashboard
                     @if($message->user_id == Auth::user()->id)
                       <div class="direct-chat-msg">
                         <div class="direct-chat-info clearfix">
-                          <span class="direct-chat-name pull-left">{{Auth::user()->name}}</span>
+                          <span class="direct-chat-name pull-left">{{'You'}}</span>
                         <span class="direct-chat-timestamp pull-right">{{$message->date}}{{' '}}{{$message->time}}</span>
                         </div>
                         <!-- /.direct-chat-info -->

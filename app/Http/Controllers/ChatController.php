@@ -37,12 +37,35 @@ class ChatController extends Controller
      */
     public function store(Request $request)
     {   
+        $last = Chat::where('user_id',Auth::user()->id)->orderBy('created_at','desc')->get()->first();
+        if ($last != null) {
+            $last->status = 1;
+            $last->save();
+        }
         $chat = new Chat;
         $chat->user_id = Auth::user()->id;
         $chat->admin = Auth::user()->admin;
         $chat->time = Carbon::now()->timezone('Europe/London')->toTimeString();
         $chat->date = Carbon::now()->timezone('Europe/London')->toDateString();
         $chat->to_id = 1;
+        $chat->message = $request->message;
+        $chat->save();
+        return redirect()->back();
+    }
+
+    public function AdminMessageStore(Request $request)
+    {   
+        $last = Chat::where('user_id',Auth::user()->id)->orderBy('created_at','desc')->get()->first();
+        if ($last != null) {
+            $last->status = 1;
+            $last->save();
+        }
+        $chat = new Chat;
+        $chat->user_id = Auth::user()->id;
+        $chat->admin = Auth::user()->admin;
+        $chat->time = Carbon::now()->timezone('Europe/London')->toTimeString();
+        $chat->date = Carbon::now()->timezone('Europe/London')->toDateString();
+        $chat->to_id = $request->user_id;
         $chat->message = $request->message;
         $chat->save();
         return redirect()->back();

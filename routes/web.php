@@ -21,6 +21,14 @@ Route::post('/chat/store',[
 	'uses' => 'ChatController@store',
 	'as' => 'chat.store'
 ]);
+Route::post('/chat/store/admin',[
+	'uses' => 'ChatController@AdminMessageStore',
+	'as' => 'admin.message.send'
+]);
+Route::get('homeWithMessage/{id}',[
+	'uses'=>'HomeController@HomeWithMessage',
+	'as'=>'home.message'
+]);
 Route::get('canceled/invoices',['uses'=>'InvoiceController@canceled','as'=>'canceled.invoices']);
 Route::get('retrieve/invoice/{id}',['uses'=>'InvoiceController@retrieve','as'=>'invoice.retrieve']);
 Route::get('kill/invoice/{id}',['uses'=>'InvoiceController@kill','as'=>'invoice.kill']);
