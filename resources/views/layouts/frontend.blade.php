@@ -316,7 +316,7 @@
           </li>
         <li><a href="{{route('assign')}}"><i class="fa fa-clock-o"></i><span>Assignments</span></a></li>
         <li><a href="{{route('letter')}}"><i class="fa fa-envelope-open-o"></i><span>Generate Letter</span></a></li>
-        <li><a href="{{route('direct.chat')}}"><i class="fa fa-commenting-o"></i><span>Direct Chat</span></a></li>
+        {{-- <li><a href="{{route('direct.chat')}}"><i class="fa fa-commenting-o"></i><span>Direct Chat</span></a></li> --}}
         <li><a href="{{route('products')}}"><i class="fa fa-plus-square"></i><span>Services Registration</span></a></li>
         <li><a href="{{route('airlines')}}"><i class="fa fa-plane"></i><span>Airlines Name Registration</span></a></li>
       @endif
