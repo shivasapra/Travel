@@ -300,6 +300,20 @@
                 <li><a href="{{route('tax')}}"><i class="fa fa-circle-o"></i>VAT</a></li>
             </ul>
           </li>
+          <li class="treeview">
+            <a href="">
+              <i class="fa fa-bar-chart-o"></i><span>Reports</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="{{route('visa.report')}}"><i class="fa fa-circle-o"></i>Visa Report</a></li>
+                <li><a href="{{route('paidInvoice.report')}}"><i class="fa fa-circle-o"></i>Paid Invoices Report</a></li>
+                <li><a href="{{route('unpaidInvoice.report')}}"><i class="fa fa-circle-o"></i>UnPaid Invoices Report</a></li>
+                <li><a href="{{route('expenses.report')}}"><i class="fa fa-circle-o"></i>Expenses Report</a></li>
+            </ul>
+          </li>
         <li><a href="{{route('assign')}}"><i class="fa fa-clock-o"></i><span>Assignments</span></a></li>
         <li><a href="{{route('letter')}}"><i class="fa fa-envelope-open-o"></i><span>Generate Letter</span></a></li>
         <li><a href="{{route('products')}}"><i class="fa fa-plus-square"></i><span>Services Registration</span></a></li>
