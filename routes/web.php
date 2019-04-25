@@ -159,6 +159,10 @@ Route::get('/expenses/report',[
 			'uses'=> 'ReportController@expenses',
 			'as'=>'expenses.report'
 		]);
+Route::get('/visa/report',[
+	'uses'=> 'ReportController@visa',
+	'as'=>'visa.report'
+]);
 Route::get('/invoice/print',[
 			'uses'=> 'InvoiceController@invoicePrint',
 			'as'=>'invoice.print'

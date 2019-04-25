@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\invoice;
 use App\settings;
 use App\expenses;
+use App\invoiceInfo;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
@@ -23,6 +24,11 @@ class ReportController extends Controller
     public function expenses(){
         return view('reports.expenses')
         ->with('expenses',expenses::all());
+    }
+
+    public function visa(){
+        $invoices = invoiceInfo::where('service_name','Visa Services')->get();
+        return view('reports.visa')->with('invoices',$invoices);
     }
 
 }
