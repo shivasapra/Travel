@@ -50,7 +50,7 @@ Visa Report
                           <td>{{$invoice->passport_no}}</td>
                           <td>{{$invoice->visa_country}}</td>
                           <td>{{$invoice->visa_type}}</td>
-                          <td>{{$invoice->visa_amount}}</td>
+                          <td><strong>{{$invoice->invoice->currency}}{{$invoice->visa_amount}}</strong></td>
                           </tr>
                         @endforeach
                       @endif

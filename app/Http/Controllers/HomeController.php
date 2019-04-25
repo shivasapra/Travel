@@ -13,6 +13,7 @@ use App\wageLog;
 use Carbon\Carbon;
 use Session;
 use App\invoice;
+use App\invoiceInfo;
 use App\settings;
 use App\Task;
 use Mail;
@@ -125,6 +126,7 @@ class HomeController extends Controller
                             ->with('expense',$total_amount)
                             ->with('date',$date)
                             ->with('invoices',invoice::orderBy('created_at','desc')->take(7)->get())
+                            ->with('invoice_infos',invoiceInfo::where('service_name','Visa Services')->orderBy('created_at','desc')->take(7)->get())
                             ->with('total_wage',$total_wage)
                             ->with('expenses',expenses::all())
                             ->with('recent_expenses',expenses::where('auto',0)->orderBy('created_at','desc')->take(7)->get())

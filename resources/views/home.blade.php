@@ -229,6 +229,62 @@ Dashboard
         </div>
       </div>
     </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="box box-danger">
+          <div class="box-body">
+            
+              
+            
+            <section class="content-header">
+              <h1 class="text-center">
+                <a href="{{route('visa.report')}}"><span style="color:#0066FF;">Visa Report</span>
+                </a>
+              </h1>
+
+              <hr>
+
+            </section>
+            <div class="table-responsive">
+              <table id="recent-orders" class="table table-hover mb-0 ps-container ps-theme-default">
+                <thead>
+                  <tr>
+                    <th>Sno.</th>
+                    <th>Client Name</th>
+                    <th>Date</th>
+                    <th>Visa Applicant Name</th>
+                    <th>Passport Origin</th>
+                    <th>Passport No.</th>
+                    <th>Visa Country</th>
+                    <th>Visa Type</th>
+                    <th>Amount</th>
+                  </tr>
+                  </thead>
+                <tbody>
+                  @if($invoices->count()>0)
+                  <?php $i = 1; ?>
+                    @foreach($invoice_infos as $invoice)
+                    <tr>
+                      <td>{{$i++}}</td>
+                      <td>{{$invoice->invoice->receiver_name}}</td>
+                      <td>{{$invoice->created_at->toDateString()}}</td>
+                      <td>{{$invoice->name_of_visa_applicant}}</td>
+                      <td>{{$invoice->passport_origin}}</td>
+                      <td>{{$invoice->passport_no}}</td>
+                      <td>{{$invoice->visa_country}}</td>
+                      <td>{{$invoice->visa_type}}</td>
+                      <td><strong>{{$invoice->invoice->currency}}{{$invoice->visa_amount}}</strong></td>
+                      </tr>
+                    @endforeach
+                  @endif
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="row">
        <div class="col-md-7">
           
