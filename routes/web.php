@@ -17,6 +17,10 @@ Route::get('/find/family/{id}', function ($id) {
     $family = App\ClientFamily::find($id);
     return $family;
 });
+Route::post('/chat/store',[
+	'uses' => 'ChatController@store',
+	'as' => 'chat.store'
+]);
 Route::get('canceled/invoices',['uses'=>'InvoiceController@canceled','as'=>'canceled.invoices']);
 Route::get('retrieve/invoice/{id}',['uses'=>'InvoiceController@retrieve','as'=>'invoice.retrieve']);
 Route::get('kill/invoice/{id}',['uses'=>'InvoiceController@kill','as'=>'invoice.kill']);

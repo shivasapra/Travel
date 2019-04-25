@@ -19,14 +19,14 @@ Dashboard
             <!-- DIRECT CHAT PRIMARY -->
             <div class="box box-primary direct-chat direct-chat-primary">
               <div class="box-header with-border">
-                <h3 class="box-title">Direct Chat</h3>
+                <h3 class="box-title">Direct Chat </h3>
   
                 <div class="box-tools pull-right">
-                  <span data-toggle="tooltip" title="3 New Messages" class="badge bg-light-blue">3</span>
+                  {{-- <span data-toggle="tooltip" title="3 New Messages" class="badge bg-light-blue">{{$unread}}</span> --}}
                   <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                   </button>
-                  <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Contacts" data-widget="chat-pane-toggle">
-                    <i class="fa fa-comments"></i></button>
+                  {{-- <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Contacts" data-widget="chat-pane-toggle">
+                    <i class="fa fa-comments"></i></button> --}}
                   <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                 </div>
               </div>
@@ -36,7 +36,7 @@ Dashboard
                 <div class="direct-chat-messages">
                   <!-- Message. Default to the left -->
                   @foreach($messages as $message)
-                    @if($message->id == Auth::user()->id)
+                    @if($message->user_id == Auth::user()->id)
                       <div class="direct-chat-msg">
                         <div class="direct-chat-info clearfix">
                           <span class="direct-chat-name pull-left">{{Auth::user()->name}}</span>
@@ -61,13 +61,13 @@ Dashboard
                       <!-- Message to the right -->
                       <div class="direct-chat-msg right">
                         <div class="direct-chat-info clearfix">
-                          <span class="direct-chat-name pull-right">{{App\User::find($message->id)->name}}</span>
+                          <span class="direct-chat-name pull-right">{{App\User::find($message->user_id)->name}}</span>
                           <span class="direct-chat-timestamp pull-left">{{$message->date}}{{' '}}{{$message->time}}</span>
                         </div>
                         <!-- /.direct-chat-info -->
                         <img class="direct-chat-img" 
-                        @if(App\User::find($message->id)->avatar)
-                            src="{{asset(App\User::find($message->id)->avatar)}}"
+                        @if(App\User::find($message->user_id)->avatar)
+                            src="{{asset(App\User::find($message->user_id)->avatar)}}"
                           @else
                             src="{{asset('app/images/user-placeholder.jpg')}}"
                         @endif 
@@ -83,7 +83,7 @@ Dashboard
                 </div>
                 <!--/.direct-chat-messages-->
                 <!-- Contacts are loaded here -->
-                <div class="direct-chat-contacts">
+                {{-- <div class="direct-chat-contacts">
                   <ul class="contacts-list">
                     <li>
                       <a href="#">
@@ -102,12 +102,13 @@ Dashboard
                     <!-- End Contact Item -->
                   </ul>
                   <!-- /.contatcts-list -->
-                </div>
+                </div> --}}
                 <!-- /.direct-chat-pane -->
               </div>
               <!-- /.box-body -->
               <div class="box-footer">
-                <form action="#" method="post">
+                <form action="{{route('chat.store')}}" method="post">
+                  @csrf
                   <div class="input-group">
                     <input type="text" name="message" placeholder="Type Message ..." class="form-control">
                         <span class="input-group-btn">

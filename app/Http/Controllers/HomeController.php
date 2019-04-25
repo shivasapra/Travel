@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\employee;
 use App\client;
@@ -42,7 +42,7 @@ class HomeController extends Controller
         // $array = array('shiva','sparsh','navdeepak');
         // $random = array_rand($array , 1);
         // dd($array[$random]);
-
+        if (Auth::user()->admin) {
         $dt = Carbon::now();
         $date_today = $dt->timezone('Europe/London');
         // dd($date_today);
@@ -124,7 +124,7 @@ class HomeController extends Controller
         
         // $test = client::find(1);
         // dd($test->created_at->toDateString());
-        if (Auth::user()->admin) {
+        
         
         return view('home')->with('employees',employee::all())
                            
@@ -135,15 +135,16 @@ class HomeController extends Controller
                             ->with('invoice_infos',invoiceInfo::where('service_name','Visa Services')->orderBy('created_at','desc')->take(7)->get())
                             ->with('total_wage',$total_wage)
                             ->with('expenses',expenses::all())
-                            ->with('recent_expenses',expenses::where('auto',0)->orderBy('created_at','desc')->take(7)->get())
+                            ->with('recent_expenses',expenses::where('auto',0)->orderBy('created_at','desc')->take(4)->get())
                             ->with('tasks',$tasks)
                             ->with('tax',settings::all())
                             ->with('paid_invoices',$paid_invoices)
                             ->with('unpaid_invoices',$unpaid_invoices)
-                            ->with('wages',$wages);
+                            ->with('wages',$wages)
+                            ->with('chat',null);
         }
         else{
-            $messages = Chat::where('to_id',Auth::user()->id or 'user_id',Auth::user()->id)->orderBy('created_at','asc')->get();
+            $messages = Chat::where('to_id',Auth::user()->id)->orWhere('user_id',Auth::user()->id)->orderBy('created_at','asc')->get();
             return view('employee.home')->with('assignments',assignment::where('date',Carbon::now()->timezone('Europe/London')->toDateString())
                                         ->where('employee_id',null)->get())
                                         ->with('messages',$messages);

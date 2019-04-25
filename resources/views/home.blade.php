@@ -80,7 +80,120 @@ Dashboard
     </div>
 
     <div class="row">
-      <div class="col-md-6">
+        <div class="col-md-3">
+            <!-- DIRECT CHAT PRIMARY -->
+            <div class="box box-danger direct-chat direct-chat-danger">
+              <div class="box-header with-border">
+                <h3 class="box-title">Direct Chat</h3>
+  
+                <div class="box-tools pull-right">
+                  {{-- <span data-toggle="tooltip" title="3 New Messages" class="badge bg-light-blue">{{$unread}}</span> --}}
+                  <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Contacts" data-widget="chat-pane-toggle">
+                    <i class="fa fa-comments"></i></button>
+                  <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                </div>
+              </div>
+              <!-- /.box-header -->
+              <div class="box-body">
+                <!-- Conversations are loaded here -->
+                <div class="direct-chat-messages">
+                  <!-- Message. Default to the left -->
+                  @if($chat != null)
+                  @foreach($messages as $message)
+                    @if($message->user_id == Auth::user()->id)
+                      <div class="direct-chat-msg">
+                        <div class="direct-chat-info clearfix">
+                          <span class="direct-chat-name pull-left">{{Auth::user()->name}}</span>
+                        <span class="direct-chat-timestamp pull-right">{{$message->date}}{{' '}}{{$message->time}}</span>
+                        </div>
+                        <!-- /.direct-chat-info -->
+                        <img class="direct-chat-img"
+                          @if(Auth::user()->avatar)
+                            src="{{asset(Auth::user()->avatar)}}"
+                          @else
+                            src="{{asset('app/images/user-placeholder.jpg')}}"
+                        @endif 
+                        alt="Message User Image">
+                        <!-- /.direct-chat-img -->
+                        <div class="direct-chat-text">
+                          {{$message->message}}
+                        </div>
+                        <!-- /.direct-chat-text -->
+                      </div>
+                      <!-- /.direct-chat-msg -->
+                    @elseif($message->to_id == Auth::user()->id)
+                      <!-- Message to the right -->
+                      <div class="direct-chat-msg right">
+                        <div class="direct-chat-info clearfix">
+                          <span class="direct-chat-name pull-right">{{App\User::find($message->user_id)->name}}</span>
+                          <span class="direct-chat-timestamp pull-left">{{$message->date}}{{' '}}{{$message->time}}</span>
+                        </div>
+                        <!-- /.direct-chat-info -->
+                        <img class="direct-chat-img" 
+                        @if(App\User::find($message->user_id)->avatar)
+                            src="{{asset(App\User::find($message->user_id)->avatar)}}"
+                          @else
+                            src="{{asset('app/images/user-placeholder.jpg')}}"
+                        @endif 
+                        alt="Message User Image"><!-- /.direct-chat-img -->
+                        <div class="direct-chat-text">
+                            {{$message->message}}
+                        </div>
+                        <!-- /.direct-chat-text -->
+                      </div>
+                    @endif
+                  @endforeach
+                  @endif
+                  <!-- /.direct-chat-msg -->
+                </div>
+                <!--/.direct-chat-messages-->
+                <!-- Contacts are loaded here -->
+                <div class="direct-chat-contacts">
+                  <ul class="contacts-list">
+                    <li>
+                      <a href="#">
+                        <img class="contacts-list-img" src="../dist/img/user1-128x128.jpg" alt="User Image">
+  
+                        <div class="contacts-list-info">
+                              <span class="contacts-list-name">
+                                Count Dracula
+                                <small class="contacts-list-date pull-right">2/28/2015</small>
+                              </span>
+                          <span class="contacts-list-msg">How have you been? I was...</span>
+                        </div>
+                        <!-- /.contacts-list-info -->
+                      </a>
+                    </li>
+                    <!-- End Contact Item -->
+                  </ul>
+                  <!-- /.contatcts-list -->
+                </div>
+                <!-- /.direct-chat-pane -->
+              </div>
+              <!-- /.box-body -->
+              <div class="box-footer">
+                  @if($chat != null)
+                  <form action="" method="post">
+                    @csrf
+                    <div class="input-group">
+                      <input type="text" name="message" placeholder="Type Message ..." class="form-control">
+                          <span class="input-group-btn">
+                            <button type="submit" class="btn btn-danger btn-flat">Send</button>
+                          </span>
+                    </div>
+                  </form>
+                  @else
+                  <strong><span class="text-info">{{'Select Contact To Start Chat!!'}}</span></strong>
+                  @endif
+                </div>
+                <!-- /.box-footer-->
+              </div>
+              <!--/.direct-chat -->
+            </div>
+            <!-- /.col -->
+      <div class="col-md-3">
         <div class="box box-primary">
             <div class="box-header with-border">
               <h3 class="box-title"><strong>Expenses({{$expenses->count()}})</strong></h3>
@@ -96,7 +209,7 @@ Dashboard
             <div class="box-body">
               <ul class="products-list product-list-in-box">
                 @if($recent_expenses->count()>0)
-                @foreach($expenses as $expense)
+                @foreach($recent_expenses as $expense)
                 <li class="item">
                   {{-- <div class="product-img">
                     <img src="dist/img/default-50x50.gif" alt="Product Image">

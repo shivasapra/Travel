@@ -1,5 +1,4 @@
 <?php
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -34,14 +33,6 @@ class CreateChatsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('chats');
-    }
-    public function run()
-    {
-        $chat = App\Chat::create([
-            'admin' => Auth::user()->admin,
-            'time' => Carbon::now()->timezone('Europe/London')->toTimeString(),
-            'date' => Carbon::now()->timezone('Europe/London')->toDateString()
-        ]);
     }
 
 }
