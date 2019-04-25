@@ -50,7 +50,7 @@
   @yield('css')
   @yield('head')
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue sidebar-collapse sidebar-mini">
 <div class="wrapper">
 
   <header class="main-header">
@@ -240,6 +240,7 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
+        @if(Auth::user()->admin)
         <li>
           <a href="{{route('home')}}">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
@@ -259,7 +260,6 @@
                @endif
             </ul>
           </li>
-      @if(Auth::user()->admin)
         <li class="treeview">
             <a href="">
               <i class="fa fa-pencil-square-o"></i><span>Employee Management</span>
@@ -320,7 +320,8 @@
         <li><a href="{{route('airlines')}}"><i class="fa fa-plane"></i><span>Airlines Name Registration</span></a></li>
       @endif
       @if(!Auth::user()->admin)
-        <li><a href="{{route('expenses.get')}}"><i class="fa fa-money"></i>Expenses</a></li>
+       <li><a href="{{route('clients')}}"><i class="fa fa-user-circle"></i><span>Clients</span></a></li>
+        <li><a href="{{route('expenses.get')}}"><i class="fa fa-money"></i><span>Expenses</span></a></li>
         <li><a href="{{route('assign')}}"><i class="fa fa-clock-o"></i><span>Assignments</span></a></li>
         <li>
           <a href="{{route('session')}}">
