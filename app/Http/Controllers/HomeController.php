@@ -17,6 +17,7 @@ use App\invoiceInfo;
 use App\settings;
 use App\Task;
 use Mail;
+use App\Chat;
 use Auth;
 use App\assignment;
 class HomeController extends Controller
@@ -38,6 +39,10 @@ class HomeController extends Controller
      */
     public function index()
     {   
+        // $array = array('shiva','sparsh','navdeepak');
+        // $random = array_rand($array , 1);
+        // dd($array[$random]);
+
         $dt = Carbon::now();
         $date_today = $dt->timezone('Europe/London');
         // dd($date_today);
@@ -119,6 +124,7 @@ class HomeController extends Controller
         
         // $test = client::find(1);
         // dd($test->created_at->toDateString());
+        if (Auth::user()->admin) {
         
         return view('home')->with('employees',employee::all())
                            
@@ -134,9 +140,14 @@ class HomeController extends Controller
                             ->with('tax',settings::all())
                             ->with('paid_invoices',$paid_invoices)
                             ->with('unpaid_invoices',$unpaid_invoices)
-                            ->with('wages',$wages)
-                            ->with('assignments',assignment::where('date',Carbon::now()->timezone('Europe/London')->toDateString())
-                                                            ->where('employee_id',null)->get());
+                            ->with('wages',$wages);
+        }
+        else{
+            $messages = Chat::where('to_id',Auth::user()->id or 'user_id',Auth::user()->id)->orderBy('created_at','asc')->get();
+            return view('employee.home')->with('assignments',assignment::where('date',Carbon::now()->timezone('Europe/London')->toDateString())
+                                        ->where('employee_id',null)->get())
+                                        ->with('messages',$messages);
+        }
     }
     public function products(){
         return view('products')->with('products',products::all());

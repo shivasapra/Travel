@@ -16,9 +16,11 @@ class CreateChatsTable extends Migration
         Schema::create('chats', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
+            $table->integer('to_id');
+            $table->boolean('admin');
             $table->text('message');
-            $table->time('time')->default(Carbon::now()->timezone('Europe/London')->toTimeString());
-            $table->date('date')->default(Carbon::now()->timezone('Europe/London')->toDateString());
+            $table->time('time');
+            $table->date('date');
             $table->boolean('status')->default(0);
             $table->timestamps();
         });
@@ -33,4 +35,13 @@ class CreateChatsTable extends Migration
     {
         Schema::dropIfExists('chats');
     }
+    public function run()
+    {
+        $chat = App\Chat::create([
+            'admin' => Auth::user()->admin,
+            'time' => Carbon::now()->timezone('Europe/London')->toTimeString(),
+            'date' => Carbon::now()->timezone('Europe/London')->toDateString()
+        ]);
+    }
+
 }
