@@ -17,6 +17,10 @@ Route::get('/find/family/{id}', function ($id) {
     $family = App\ClientFamily::find($id);
     return $family;
 });
+Route::get('/direct/chat',[
+	'uses' => 'ChatController@index',
+	'as' => 'direct.chat'
+]);
 Route::post('/chat/store',[
 	'uses' => 'ChatController@store',
 	'as' => 'chat.store'

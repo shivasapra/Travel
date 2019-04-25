@@ -15,8 +15,10 @@ class ChatController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
+    {   
+        $latest = Chat::where('user_id',Auth::user()->id)->orWhere('to_id',Auth::user()->id)->get();
+        $unread_messages = Chat::where('to_id',Auth::user()->id)->where('status',0)->get();
+        return view('chat.index')->with('latest',$latest)->with('unread_messages',$unread_messages);
     }
 
     /**

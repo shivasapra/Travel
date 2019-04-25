@@ -193,7 +193,7 @@ Client Registration
 	    function fun() {
 			 var x = document.forms["myForm"]["postal_code"].value;
 
-			 var Url = "https://www.doogal.co.uk/GetPostcode.ashx?postcode=KT5%208AN";
+			 var Url = "https://api.postcodes.io/postcodes?q=" + x;
 			 var xhr = new XMLHttpRequest();
 			 xhr.open('GET', Url, true);
 			 xhr.send();
@@ -202,9 +202,11 @@ Client Registration
 			 if (xhr.readyState == 4 && xhr.status == 200) {
 			 // alert(xhr.responseText);
 			 var response1 = JSON.parse(xhr.responseText);
-			 document.getElementById("city").value = response1.result.admin_ward;
-			 document.getElementById("country").value = response1.result.country;
-			 document.getElementById("county").value = response1.result.admin_county;
+			 console.log(response1);
+			 
+			 document.getElementById("city").value = response1.result[0].admin_ward;
+			 document.getElementById("country").value = response1.result[0].country;
+			 document.getElementById("county").value = response1.result[0].admin_county;
 			 }
 			 }
 			 }
