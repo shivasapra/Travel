@@ -146,8 +146,10 @@ class HomeController extends Controller
         }
         else{
             $last = Chat::where('to_id',Auth::user()->id)->orderBy('created_at','desc')->get()->first();
-            $last->status = 1;
-            $last->save();
+            if($last != null){
+                $last->status = 1;
+                $last->save();
+            }
             $messages = Chat::where('to_id',Auth::user()->id)->orWhere('user_id',Auth::user()->id)->orderBy('created_at','asc')->get();
             return view('employee.home')->with('assignments',assignment::where('date',Carbon::now()->timezone('Europe/London')->toDateString())
                                         ->where('employee_id',null)->get())
