@@ -5,13 +5,14 @@ Slip
 @section('header')
     <section class="content-header">
       <h1>
-		Salary Slip
+		Salary Slip Generated
 		
 	  </h1>
 	  
       <ol class="breadcrumb">
-        <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active"><i class="fa fa-paperclip"></i> Salary Slip</li>
+		<li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Home</a></li>
+		<li><a href="{{route('slip.generate')}}"><i class="fa fa-dashboard"></i> Salary Slip</a></li>
+        <li class="active"><i class="fa fa-paperclip"></i> Salary Slip Generated</li>
       </ol>
     </section>
 @stop
@@ -31,33 +32,10 @@ Slip
 	<div class="row">
 		<form action="{{route('slip')}}" method="post">
 			@csrf
-		<div class="col-md-6 ">
-		<div class="box box-primary">
-		<div class="box-body">
-					<div class="form-group">
-						<label for="unique">Employee Unique Id:</label>
-						<input type="text" name='unique' required class="form-control">
-					</div>
-					<div class="form-group">
-						<label for="from">From:</label>
-						<input type="date" name='from' required class="form-control">
-					</div>
-					<div class="form-group">
-						<label for="to">To:</label>
-						<input type="date" name='to' required class="form-control">
-					</div>
-
-		</div>
-		</div>
-		<div class="form-group">
-			<div class="text-center">
-				<button class="btn btn-success" type="submit">Generate</button>
-			</div>
-		</div>
-	</div>
+		
 		</form>
 		
-		<div class="col-md-6 ">
+		<div class="col-md-12 ">
 		<div id="tblCustomers">	
 		<div class="box box-info">
 		<div class="box-body" id="print">

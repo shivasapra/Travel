@@ -189,24 +189,26 @@ class wageController extends Controller
 
     public function slip(Request $request){
         $employee = employee::where('unique_id',$request->unique)->take(1)->get();
-        // dd($employee);
+        
         if ($employee->count()>0) {
             $emp = employee::find($employee[0]->id);
         }
         else{
             return redirect()->route('slip.generate');
         }
-        // dd($request->to);
-        $wages = wage::where('unique_id',$request->unique)->whereDate('date','>=',$request->from)->whereDate('date','<=',$request->to)->get();
-        // dd($wages);
+        $wages = wage::where('unique_id',$request->unique)->get();
         $total_wage = 0;
         $total_hours = 0;
         foreach($wages as $wage){
-            $total_wage = $total_wage + $wage->wage;
-            $total_hours = $total_hours + $wage->hours;
+            if(substr($wage->date,5,-3) == $request->month){
+                $total_wage = $total_wage + $wage->wage;
+                $total_hours = $total_hours + $wage->hours;
+            } 
         }
+        $employees = employee::where('id',0)->get();
         return view('wage.slip')->with('employee',$emp)
                                 ->with('total_wage',$total_wage)
-                                ->with('total_hours',$total_hours);
+                                ->with('total_hours',$total_hours)
+                                ->with('employees',$employees);
     }
 }

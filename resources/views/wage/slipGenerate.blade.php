@@ -97,14 +97,22 @@ Generate Salary Slip
 					</div>
 					<div class="col-md-4">
 					<div class="form-group">
-						<label for="from">From:</label>
-						<input type="date" name='from' required class="form-control">
-					</div>
-					</div>
-					<div class="col-md-4">
-					<div class="form-group">
-						<label for="to">To:</label>
-						<input type="date" name='to' required class="form-control">
+						<label for="month">Month:</label>
+						<select name="month" class="form-control">
+							<option value="01">January</option>
+							<option value="02">February</option>
+							<option value="03">March</option>
+							<option value="04">April</option>
+							<option value="05">May</option>
+							<option value="06">June</option>
+							<option value="07">July</option>
+							<option value="08">August</option>
+							<option value="09">September</option>
+							<option value="10">October</option>
+							<option value="11">November</option>
+							<option value="12">December</option>
+
+						</select>
 					</div>
 					</div>
 				</div>

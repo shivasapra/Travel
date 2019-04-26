@@ -367,4 +367,9 @@ class employeeController extends Controller
         $employees = employee::where('first_name', 'like', '%'.request('employee_name').'%')->get();
         return view('wage.slipGenerate')->with('employees',$employees);
     }
+
+    public function searchEmployeeG(Request $request){
+        $employees = employee::where('first_name', 'like', '%'.request('employee_name').'%')->get();
+        return redirect()->back()->with('employees',$employees);
+    }
 }
