@@ -362,4 +362,9 @@ class employeeController extends Controller
         Session::flash('success','Employee Deactivated');
         return redirect()->back();
     }
+
+    public function searchEmployee(Request $request){
+        $employees = employee::where('first_name', 'like', '%'.request('employee_name').'%')->get();
+        return view('wage.slipGenerate')->with('employees',$employees);
+    }
 }

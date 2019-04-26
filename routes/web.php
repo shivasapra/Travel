@@ -67,6 +67,10 @@ Route::post('/search/client',[
 		'uses' => 'clientController@search',
 		'as' => 'searchClient'
 	]);
+	Route::post('/find/Employee',[
+		'uses' => 'employeeController@searchEmployee',
+		'as' => 'searchEmployees'
+	]);
 Route::post('/search/employee',[
 		'uses' => 'employeeController@search',
 		'as' => 'searchEmployee'

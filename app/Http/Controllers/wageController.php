@@ -183,7 +183,8 @@ class wageController extends Controller
         //
     }
     public function generateSlip(){
-        return view('wage.slipGenerate');
+        $employees = employee::where('id',0)->get();
+        return view('wage.slipGenerate')->with('employees',$employees);
     }
 
     public function slip(Request $request){
