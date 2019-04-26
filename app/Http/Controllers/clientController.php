@@ -187,6 +187,16 @@ class clientController extends Controller
         return view('clients.edit')->with('client',$client)->with('date',$date);
     }
 
+    public function editFamily($id)
+    {
+        $family = ClientFamily::find($id);
+        $dt = Carbon::now();
+        $dt->timezone('Asia/Kolkata');
+        $date_today = $dt->timezone('Europe/London');
+        $date = $date_today->toDateString();
+        return view('clients.editFamily')->with('family',$family)->with('date',$date);
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -265,6 +275,30 @@ class clientController extends Controller
         return redirect()->route('clients');
     }
 
+    public function updateFamily(Request $request, $id)
+    {
+        $client_family = ClientFamily::find($id);
+        $client_family->member_name = $request->member_name;
+        $client_family->member_DOB = $request->member_DOB;
+        $client_family->member_passport_no = $request->member_passport_no;
+        $client_family->member_passport_place = $request->member_passport_place;
+        if($request->hasFile('member_passport_front'))
+        {
+        $member_passport_front = $request->member_passport_front;
+        $member_passport_front_new_name = time().$member_passport_front->getClientOriginalName();
+        $member_passport_front->move('uploads/passport',$member_passport_front_new_name);
+        $client_family->member_passport_front = 'uploads/passport/'.$member_passport_front_new_name;
+        }
+        if($request->hasFile('member_passport_back'))
+        {
+        $member_passport_back = $request->member_passport_back;
+        $member_passport_back_new_name = time().$member_passport_back->getClientOriginalName();
+        $member_passport_back->move('uploads/passport',$member_passport_back_new_name);
+        $client_family->member_passport_back = 'uploads/passport/'.$member_passport_back_new_name;
+        }
+        $client_family->save();
+        return redirect()->route('clients');
+    }
     /**
      * Remove the specified resource from storage.
      *

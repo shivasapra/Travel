@@ -274,10 +274,18 @@ Route::post('/client/update/{id}',[
 		'uses' => 'clientController@update',
 		'as' => 'update.client'
 	]);
+Route::post('/client/family/update/{id}',[
+	'uses' => 'clientController@updateFamily',
+	'as' => 'update.family'
+]);
 Route::get('/client/edit/{id}',[
 		'uses' => 'clientController@edit',
 		'as' => 'edit.client'
 	]);
+Route::get('/client/family/edit/{id}',[
+	'uses' => 'clientController@editFamily',
+	'as' => 'edit.family'
+]);
 Route::get('/client/view/{id}',[
 		'uses' => 'clientController@show',
 		'as' => 'view.client'
