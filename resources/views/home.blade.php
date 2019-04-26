@@ -253,6 +253,7 @@ Dashboard
                   <tr>
                     <th>Sno.</th>
                     <th>Client Name</th>
+                    <th>Phone No.</th>
                     <th>Date</th>
                     <th>Visa Applicant Name</th>
                     <th>Passport Origin</th>
@@ -269,6 +270,7 @@ Dashboard
                     <tr>
                       <td>{{$i++}}</td>
                       <td>{{$invoice->invoice->receiver_name}}</td>
+                      <td>{{$invoice->invoice->client->phone}}</td>
                       <td>{{$invoice->created_at->toDateString()}}</td>
                       <td>{{$invoice->name_of_visa_applicant}}</td>
                       <td>{{$invoice->passport_origin}}</td>
