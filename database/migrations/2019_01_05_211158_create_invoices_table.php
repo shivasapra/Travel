@@ -34,6 +34,7 @@ class CreateInvoicesTable extends Migration
             $table->string('bank_amount')->nullable();
             $table->integer('paid')->nullable();
             $table->integer('pending_amount')->nullable();
+            $table->integer('advance')->default(0);
             $table->boolean('status')->default(0);
             $table->Date('mail_sent');
             $table->float('VAT_percentage')->default(0);

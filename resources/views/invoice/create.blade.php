@@ -435,8 +435,8 @@ Create Invoice
 							'<div class="col-md-3">		<div class="form-group">			<label for="destination">Arrival</label>'+
 							'<div class="AirportArrivaldropdown">	<div id="AirportArrivalmyDropdown" class="AirportArrivaldropdown-content">'+
 							'<input type="text" class="form-control airport-arrival-name" placeholder="Search.." name="destination[]" id="AirportArrivalmyInput" onkeyup="AirportArrivalDataExtract(this)"  required >'+
-							'<div class="airportArrival_html"></div>	</div>	</div>		</div>		</div><div class="col-md-3">		<div class="form-group">	<label for="date_of_trave">Date</label>'+
-							'<input type="date" name="date_of_travel" required class="form-control">	</div>	</div>		</div><hr>'+
+							'<div class="airportArrival_html"></div>	</div>	</div>		</div>		</div><div class="col-md-3">		<div class="form-group">	<label for="date_of_travel">Date</label>'+
+							'<input type="date" name="date_of_travel[]" required class="form-control">	</div>	</div>		</div><hr>'+
 							'<div class="row">	'+
 							'<div class="col-md-4">		<div class="form-group">	<label for="adult[]">Adult</label>'+
 							'<input type="text" name="adult[]" class="form-control" onKeyUp="FlightAmount()">	</div>	</div><div class="col-md-4">		<div class="form-group">	<label for="adult_price[]">Adult Price</label>'+

@@ -311,6 +311,10 @@ Invoice
                 <th class="text-danger">Pending:</th>
                 <td>{{$invoice->currency}} {{$invoice->pending_amount}}</td>
               </tr>
+              <tr>
+                <th class="text-info">Advance:</th>
+                <td>{{$invoice->currency}} {{$invoice->advance}}</td>
+              </tr>
 
             </table>
           </div>
