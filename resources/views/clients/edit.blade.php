@@ -29,7 +29,7 @@ Edit Client
 
 
 	
-			<form action="{{route('update.client',['id'=>$client->id])}}" method="post">
+			<form action="{{route('update.client',['id'=>$client->id])}}" enctype="multipart/form-data" method="post">
 				@csrf
 		<div class="box box-success">
 		<div class="box-body">
@@ -94,18 +94,26 @@ Edit Client
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-6">
+					<div class="col-md-4">
 					<div class="form-group">
 						<label for="email">Email</label>
 						<input type="text" name='email' required class="form-control" value="{{$client->email}}">
 					</div>
 					</div>
-					<div class="col-md-6">
+					<div class="col-md-4">
 					<div class="form-group">
 						<label for="DOB">DOB</label>
 						<input type="date" name='DOB' required class="form-control" value="{{$client->DOB}}">
 					</div>
 					</div>
+					@if($client->credit_limit != null)
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="credit_limit">Credit Limit</label>
+							<input type="text" name='credit_limit' required class="form-control" value="{{$client->credit_limit}}">
+						</div>
+						</div>
+					@endif
 				</div>
 				@if($client->passport == 1)
 				<div class="text-center"><h3>Passport Details</h3></div><hr>
@@ -141,25 +149,84 @@ Edit Client
 					<div class="col-md-4">
 						<div class="form-group">
 							<label for="passport_front">Passport Front</label>
-							<input type="file" name="passport_front" required class="form-control" value="{{$client->passport_front}}">
+							<input type="file" name="passport_front"  class="form-control" value="{{$client->passport_front}}">
 						</div>
 					</div>
 					<div class="col-md-4">
 						<div class="form-group">
 							<label for="passport_back">Passport Back</label>
-							<input type="file" name="passport_back" required class="form-control" value="{{$client->passport_back}}">
+							<input type="file" name="passport_back"  class="form-control" value="{{$client->passport_back}}">
 						</div>
 					</div>
 					<div class="col-md-4">
 						<div class="form-group">
 							<label for="letter">Letter:</label>
-							<input type="file" name="letter" required class="form-control" value="{{$client->letter}}">
+							<input type="file" name="letter"  class="form-control" value="{{$client->letter}}"> <br>	<br><hr>
 						</div>
 					</div>
 				</div>
 				@endif
-				
-				
+				@if($client->family->count() > 0)
+				<?php $i=1?>
+				{{-- <div class="text-center"><h3>Family Members</h3></div><hr>
+				@foreach($client->family as $fam)
+				<div class="hatao">
+					<div class="row">	
+						<div class="col-md-3">		
+							<div class="form-group">			
+								<label for="member_name[]"><strong>{{$i++}}</strong>. Member Name</label>			
+								<input type="text" name="member_name[]" value="{{$fam->member_name}}" required class="form-control">		
+							</div>	
+						</div>	
+						<div class="col-md-3">		
+							<div class="form-group">			
+								<label for="member_DOB[]">Member DOB</label>			
+								<input type="date" name="member_DOB[]" value="{{$fam->member_DOB}}" required class="form-control">		
+							</div>	
+						</div>	
+						<div class="col-md-3">		
+							<div class="form-group">			
+								<label for="member_passport_no[]">Member Passport NO.</label>			
+								<input type="text" name="member_passport_no[]" value="{{$fam->member_passport_no}}" required class="form-control">		
+							</div>	
+						</div>
+						<div class="col-md-3">
+								<div class="form-group">
+									<label for="member_passport_place">Place of Issue</label>
+									<input type="text" name="member_passport_place[]" value="{{$fam->member_passport_place}}" required class="form-control">
+								</div>
+							</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="member_passport_place">Place of Issue</label>
+								<input type="text" name="member_passport_place[]" value="{{$fam->member_passport_place}}" required class="form-control">
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="member_passport_front">Passport Front:</label>
+								<input type="file" name="member_passport_front[]"  class="form-control" value="{{$fam->member_passport_front}}">
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+							<label for="member_passport_back">Passport Back:</label>
+							<input type="file" name="member_passport_back[]"  class="form-control" value="{{$fam->member_passport_back}}">
+							</div>
+						</div>
+					</div>
+					<div align="right">						
+						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">	<br><br>
+					</div>
+				</div>
+				@endforeach --}}
+				@endif
+				<div id="family-member"></div>
+				<div align="right" style="margin-top: 5px">
+					<button class="btn btn-sm btn-primary" type="button" id="add">Add Family Member</button>
+				</div>
 		</div>
 		</div>
 				<div class="form-group">
@@ -171,4 +238,19 @@ Edit Client
 	
 
 
+@stop
+@section('js')
+<script>
+	$(document).ready(function(){
+    $("#add").click(function(){
+    		var append = '<div class="text-center"><h3>New Family Member</h3></div><hr><div class="hatao"><div class="row">	<div class="col-md-4">		<div class="form-group">			<label for="member_name[]">Member Name</label>			<input type="text" name="member_name[]" required class="form-control">		</div>	</div>	<div class="col-md-4">		<div class="form-group">			<label for="member_DOB[]">Member DOB</label>			<input type="date" name="member_DOB[]" value="{{$date}}" required class="form-control">		</div>	</div>	<div class="col-md-4">		<div class="form-group">			<label for="member_passport_no[]">Member Passport NO.</label>			<input type="text" name="member_passport_no[]" required class="form-control">		</div>	</div></div><div class="row"><div class="col-md-4"><div class="form-group"><label for="member_passport_place">Place of Issue</label><input type="text" name="member_passport_place[]" required class="form-control"></div></div><div class="col-md-4"><div class="form-group"><label for="member_passport_front">Passport Front:</label><input type="file" name="member_passport_front[]" class="form-control"></div></div><div class="col-md-4"><div class="form-group"><label for="member_passport_back">Passport Back:</label><input type="file" name="member_passport_back[]" class="form-control"></div></div></div><div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">	</div></div>';
+        $("#family-member").append(append);
+        });
+    });
+function SomeDeleteRowFunction(btndel) {
+    if (typeof(btndel) == "object") {
+        $(btndel).closest('.hatao').remove();
+    } else {
+        return false;
+    }}</script>
 @stop

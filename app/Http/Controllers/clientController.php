@@ -180,7 +180,11 @@ class clientController extends Controller
     public function edit($id)
     {
         $client = client::find($id);
-        return view('clients.edit')->with('client',$client);
+        $dt = Carbon::now();
+        $dt->timezone('Asia/Kolkata');
+        $date_today = $dt->timezone('Europe/London');
+        $date = $date_today->toDateString();
+        return view('clients.edit')->with('client',$client)->with('date',$date);
     }
 
     /**
@@ -203,14 +207,60 @@ class clientController extends Controller
         $client->DOB = $request->DOB;
         $client->email = $request->email;
         $client->phone = $request->phone;
+        $client->credit_limit = $request->credit_limit;
         if ($request->passport_no != null ) {
             $client->passport_no = $request->passport_no;
             $client->passport_expiry_date = $request->passport_expiry_date;
             $client->passport_issue_date = $request->passport_issue_date;
             $client->passport_place = $request->passport_place;
-
+            if($request->hasFile('passport_front'))
+                {
+                $passport_front = $request->passport_front;
+                $passport_front_new_name = time().$passport_front->getClientOriginalName();
+                $passport_front->move('uploads/passport',$passport_front_new_name);
+                $client->passport_front = 'uploads/passport/'.$passport_front_new_name;
+                }
+            if($request->hasFile('passport_back'))
+                {
+                $passport_back = $request->passport_back;
+                $passport_back_new_name = time().$passport_back->getClientOriginalName();
+                $passport_back->move('uploads/passport',$passport_back_new_name);
+                $client->passport_back = 'uploads/passport/'.$passport_back_new_name;
+                }
+            if($request->hasFile('letter'))
+                {
+                $letter = $request->letter;
+                $letter_new_name = time().$letter->getClientOriginalName();
+                $letter->move('uploads/passport',$letter_new_name);
+                $client->letter = 'uploads/passport/'.$letter_new_name;
+                }
         }
         $client->save();
+        if($request->member_name){
+            foreach($request->member_name as $index=>$member_name){
+                $client_family = new ClientFamily;
+                $client_family->client_id = $client->id;
+                $client_family->member_name = $member_name;
+                $client_family->member_DOB = $request->member_DOB[$index];
+                $client_family->member_passport_no = $request->member_passport_no[$index];
+                $client_family->member_passport_place = $request->member_passport_place[$index];
+                if($request->hasFile('member_passport_front'))
+                {
+                $member_passport_front = $request->member_passport_front[$index];
+                $member_passport_front_new_name = time().$member_passport_front->getClientOriginalName();
+                $member_passport_front->move('uploads/passport',$member_passport_front_new_name);
+                $client_family->member_passport_front = 'uploads/passport/'.$member_passport_front_new_name;
+                }
+            if($request->hasFile('member_passport_back'))
+                {
+                $member_passport_back = $request->member_passport_back[$index];
+                $member_passport_back_new_name = time().$member_passport_back->getClientOriginalName();
+                $member_passport_back->move('uploads/passport',$member_passport_back_new_name);
+                $client_family->member_passport_back = 'uploads/passport/'.$member_passport_back_new_name;
+                }
+                $client_family->save();
+            }
+        }
         Session::flash('success','Client Updated Successfully');
         return redirect()->route('clients');
     }
@@ -225,6 +275,9 @@ class clientController extends Controller
     {
         $client = client::find($id);
         $client->delete();
+        foreach ($client->family as $family) {
+            $family->delete();
+        }
         Session::flash('success','Client Deleted Successfully');
         return redirect()->route('clients');
     }

@@ -194,7 +194,11 @@ client
 							<tr>
 								<td><strong>Passport Front:</strong></td>
 								<td>
+									@if($family->member_passport_front != null)
 									<img src="{{asset($family->member_passport_front)}}" alt="passport front" height="300px" width="300px" style="border-radius:20px">
+									@else
+									<strong>{{'N/A'}}</strong>
+									@endif
 								</td>
 							</tr>
 						</div>
@@ -202,7 +206,11 @@ client
 							<tr>
 								<td><strong>Passport Back:</strong></td>
 								<td>
+									@if($family->member_passport_back != null)
 									<img src="{{asset($family->member_passport_back)}}" alt="passport back" height="300px" width="300px" style="border-radius:20px"><br><hr>
+									@else
+									<strong>{{'N/A'}}</strong>
+									@endif
 								</td>
 							</tr>
 						</div>
