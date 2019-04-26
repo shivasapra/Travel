@@ -58,7 +58,9 @@ Session
     @endif
   </div>
   <div class="text-center">
-    
+      @if($latest_wageLog != null and $latest_wageLog->logout_time == null) 
+      <div class="lockscreen-name"><h4><strong>Total Hours This Session:</strong></h4><h3><span class="text-red"><strong>{{$total_hours_this_session}}</strong></span></h3></div>
+      @endif
   </div>
   <div class="lockscreen-footer text-center">
     

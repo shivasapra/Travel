@@ -35,11 +35,18 @@ class wageController extends Controller
             $latest_wageLog = wageLog::where('wage_id',$today_wage[0]->id)
                                         ->orderBy('created_at','desc')
                                         ->first();
+            if($latest_wageLog != null and $latest_wageLog->logout_time == null){ 
+            $total_hours_this_session =  substr(Carbon::now()->totimeString(),0,2) - substr($latest_wageLog->login_time,0,2);
+            }
+            else{
+                $total_hours_this_session = null;
+            }
          }
          else{
             $latest_wageLog = null;
+            $total_hours_this_session = null;
          }
-        return view('wage.session')->with('latest_wageLog',$latest_wageLog);
+        return view('wage.session')->with('latest_wageLog',$latest_wageLog)->with('total_hours_this_session',$total_hours_this_session);
     }
     public function Logout(Request $request){
         if (Hash::check($request->password,Auth::user()->password)) {
@@ -201,8 +208,8 @@ class wageController extends Controller
         $total_hours = 0;
         foreach($wages as $wage){
             if(substr($wage->date,5,-3) == $request->month){
-                $total_wage = $total_wage + $wage->wage;
-                $total_hours = $total_hours + $wage->hours;
+                $total_wage = $total_wage + $wage->today_wage;
+                $total_hours = $total_hours + $wage->total_hours;
             } 
         }
         $employees = employee::where('id',0)->get();
