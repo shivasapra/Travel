@@ -39,13 +39,9 @@ class HomeController extends Controller
      */
     public function index()
     {   
-        // $array = array('shiva','sparsh','navdeepak');
-        // $random = array_rand($array , 1);
-        // dd($array[$random]);
         if (Auth::user()->admin) {
         $dt = Carbon::now();
         $date_today = $dt->timezone('Europe/London');
-        // dd($date_today);
         $date = $date_today->toDateString();
 
         $assignments = assignment::where('date',Carbon::now()->timezone('Europe/London')->addDays(-1)->toDateString())
@@ -66,12 +62,6 @@ class HomeController extends Controller
         }
 
         $wages = wage::where('date',$date)->get();
-        // $array = [];
-        // foreach($wages as $wage){
-        //     $array = $wage->employee_id;
-        // }
-
-        // $absent_emp = employee::whereIn('id','!=',$array)->get();
         $total_wage = 0;
         foreach ($wages as $wage) {
             $total_wage = $total_wage + $wage->today_wage;
@@ -88,6 +78,9 @@ class HomeController extends Controller
            $client->mail_sent = 1;
            $client->save();
            }
+        if ($client_passport_emails != null) {
+            Mail::to($client_passport_emails)->send(new \App\Mail\passportMail);
+        }
 
         $employee_passport_emails = array();
         $mail_employees = employee::where('mail_sent',0)->where('passport_expiry_date',Carbon::now()->addMonths(6)->toDateString())->get();
@@ -96,17 +89,24 @@ class HomeController extends Controller
            $employee->mail_sent = 1;
            $employee->save();
            }
+           if ($employee_passport_emails != null) {
+            Mail::to($employee_passport_emails)->send(new \App\Mail\passportMail);
+        }
 
 
         $invoice_emails = array();
         $mail_invoices = invoice::where('status',0)->where('mail_sent',Carbon::now()->addDays(-7)->toDateString())
-                                                    ->orwhere('mail_sent',Carbon::now()->addDays(-1)->toDateString())
                                                     ->orwhere('mail_sent',Carbon::now()->addDays(-15)->toDateString())->get();
         foreach ($mail_invoices as $invoice) {
            array_push($invoice_emails,$invoice->client->email);
-           $invoice->mail_sent = $date;
-           $invoice->save();
+           if ($invoice->mail_sent == Carbon::now()->addDays(-15)->toDateString()) {
+               $invoice->mail_sent = $date;
+               $invoice->save();
            }
+           }
+           if ($invoice_emails != null) {
+            Mail::to($invoice_emails)->send(new \App\Mail\invoiceMail);
+        }
 
         $client_inactive_emails = array();
         $clients = client::all();
@@ -115,16 +115,13 @@ class HomeController extends Controller
                 array_push($client_inactive_emails,$client->user->email);
             }
         }
+        if ($client_inactive_emails != null) {
+            Mail::to($client_inactive_emails)->send(new \App\Mail\clientInactiveMail);
+        }
 
-         // Mail::to($client_passport_emails)->send(new \App\Mail\passportMail);
-         // Mail::to($employee_passport_emails)->send(new \App\Mail\passportMail);
-        //  Mail::to($invoice_emails)->send(new \App\Mail\invoiceMail);
-         // Mail::to($client_inactive_emails)->send(new \App\Mail\clientInactiveMail);
         $paid_invoices = invoice::where('status',1)->get();
         $unpaid_invoices = invoice::where('status',0)->get();
-        
-        // $test = client::find(1);
-        // dd($test->created_at->toDateString());
+
         
         $unread_messages = Chat::where('to_id',Auth::user()->id)->where('status',0)->get();
         return view('home')->with('employees',employee::all())
@@ -159,12 +156,8 @@ class HomeController extends Controller
     }
 
     public function HomeWithMessage($id){
-        // $array = array('shiva','sparsh','navdeepak');
-        // $random = array_rand($array , 1);
-        // dd($array[$random]);
             $dt = Carbon::now();
             $date_today = $dt->timezone('Europe/London');
-            // dd($date_today);
             $date = $date_today->toDateString();
     
             $assignments = assignment::where('date',Carbon::now()->timezone('Europe/London')->addDays(-1)->toDateString())
@@ -185,12 +178,6 @@ class HomeController extends Controller
             }
     
             $wages = wage::where('date',$date)->get();
-            // $array = [];
-            // foreach($wages as $wage){
-            //     $array = $wage->employee_id;
-            // }
-    
-            // $absent_emp = employee::whereIn('id','!=',$array)->get();
             $total_wage = 0;
             foreach ($wages as $wage) {
                 $total_wage = $total_wage + $wage->today_wage;
@@ -230,26 +217,16 @@ class HomeController extends Controller
             foreach ($clients as $client) {
                 if ($client->invoice == null and $client->created_at->toDateString() == Carbon::now()->addDays(-1)->toDateString()) {
                     array_push($client_inactive_emails,$client->user->email);
-                    // dd($client_inactive_emails);
                 }
             }
-    
-             // Mail::to($client_passport_emails)->send(new \App\Mail\passportMail);
-             // Mail::to($employee_passport_emails)->send(new \App\Mail\passportMail);
-             // Mail::to($invoice_emails)->send(new \App\Mail\invoiceMail);
-             // Mail::to($client_inactive_emails)->send(new \App\Mail\clientInactiveMail);
             $paid_invoices = invoice::where('status',1)->get();
             $unpaid_invoices = invoice::where('status',0)->get();
-            
-            // $test = client::find(1);
-            // dd($test->created_at->toDateString());
             
             $messages = Chat::where('user_id',$id)->orWhere('user_id',Auth::user()->id)->orderBy('created_at','asc')->get();
             $last = Chat::where('user_id',$id)->orderBy('created_at','desc')->get()->first();
             $last->status = 1;
             $last->save();
             $unread_messages = Chat::where('to_id',Auth::user()->id)->where('status',0)->get();
-            // dd($last);
             return view('home')->with('employees',employee::all())
                                
                                 ->with('clients',client::all())

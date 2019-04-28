@@ -49,12 +49,14 @@ Invoices
 	                    		@endif
 	                    		{{-- <td><button class="btn btn-xs btn-success" id="pdf">PDF</button></td> --}}
 	                    		<td>
-	                    			<a href="{{route('invoice.edit',['id'=>$invoice->id])}}" class="btn btn-info btn-xs"><span class="fa fa-edit"></span></a>
 														<a href="{{route('invoice.view',['id'=>$invoice->id])}}" class="btn btn-info btn-xs"><span class="fa fa-eye"></span></a>
+														@if($invoice->status == 0)
+	                    			<a href="{{route('invoice.edit',['id'=>$invoice->id])}}" class="btn btn-info btn-xs"><span class="fa fa-edit"></span></a>
 														<a href="{{route('invoice.delete',['id'=>$invoice->id])}}" class="btn btn-danger btn-xs">Cancel</a>
 														<a href="{{route('invoice.pay',['id'=>$invoice->id])}}" class="btn btn-primary btn-xs">Pay</a>
+														<a href="{{route('invoice.reminder',['id'=>$invoice->id])}}" class="btn btn-warning btn-xs">Send Reminder</a>
+														@endif
 	                    		</td>
-	                    		{{-- <td><a href="{{route('invoice.delete',['id'=>$invoice->id])}}" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span></a></td> --}}
 	                    	</tr>
 	                    	@endforeach
                     	@endif

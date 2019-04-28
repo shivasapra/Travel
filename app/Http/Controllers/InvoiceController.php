@@ -14,6 +14,7 @@ use GuzzleHttp;
 use App\settings;
 use Carbon\Carbon;
 use PDF;
+use Mail;
 class InvoiceController extends Controller
 {
     /**
@@ -715,6 +716,22 @@ class InvoiceController extends Controller
         return redirect()->route('invoice')->with('invoices',invoice::all())
                                             ->with('tax',settings::all());
 
+    }
+
+    public function reminder($id){
+        $invoice = invoice::find($id);
+        if ($invoice->status == 0) {
+            Mail::to($invoice->client->email)->send(new \App\Mail\invoiceMail);
+            $invoice->mail_sent = Carbon::now()->timezone('Europe/London')->toDateString();
+            $invoice->save();
+            Session::flash('success','Sent!!');
+            return redirect()->back();
+        }
+        else{
+            Session::flash('warning',"This Invoice is already Paid. You Can't Send Reminder Now!!");
+            return redirect()->back();
+        }
+        
     }
 
 }

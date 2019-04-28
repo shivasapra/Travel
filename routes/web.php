@@ -16,6 +16,19 @@ Route::get('/find/family/{id}', function ($id) {
     $family = App\ClientFamily::find($id);
     return $family;
 });
+Route::get('/start/reminder/{id}', function ($id) {
+	$client = App\client::find($id);
+	$client->reminder = 1;
+	$client->save();
+    return redirect()->back();
+});
+Route::get('/stop/reminder/{id}', function ($id) {
+	$client = App\client::find($id);
+	$client->reminder = 0;
+	$client->save();
+    return redirect()->back();
+});
+
 Route::get('/direct/chat',[
 	'uses' => 'ChatController@index',
 	'as' => 'direct.chat'
@@ -406,6 +419,10 @@ Route::post('/update/invoice/{id}',[
 	'uses'=>'InvoiceController@update',
 	'as'=>'invoice.update'
 	])->middleware('admin');
+	Route::get('/invoice/reminder/{id}',[
+		'uses'=>'InvoiceController@reminder',
+		'as'=>'invoice.reminder'
+		])->middleware('admin');
 
 Route::post('/add/todo',[
 			'uses'=> 'HomeController@addTodo',
