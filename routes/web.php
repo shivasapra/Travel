@@ -41,19 +41,19 @@ Route::get('accept/{token}', 'InviteController@accept')->name('accept');
 Route::get('confirm/{token}', 'InviteController@confirm')->name('confirm');
 Route::get('deleteClientPassportData/{token}', 'InviteController@deleteClientPassportData')->name('deleteClientPassportData');
 Route::get('/client/documents/movement',[
-	'uses' => 'clientDocController@index',
+	'uses' => 'ClientDocController@index',
 	'as' => 'clientDocIndex'
 ]);
 Route::get('/client/documents/movement/store/{id}',[
-	'uses' => 'clientDocController@store',
+	'uses' => 'ClientDocController@store',
 	'as' => 'clientDoc.store'
 ]);
 Route::get('/client/documents/movement/destroy/{id}',[
-	'uses' => 'clientDocController@destroy',
+	'uses' => 'ClientDocController@destroy',
 	'as' => 'clientDoc.destroy'
 ]);
 Route::post('/emergency/message',[
-	'uses' => 'clientDocController@emergency',
+	'uses' => 'ClientDocController@emergency',
 	'as' => 'emergency'
 ]);
 
