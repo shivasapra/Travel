@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Auth;
 use App\ClientFamily;
 use App\invoiceInfo;
+use App\ClientDoc;
 class clientController extends Controller
 {   
     public function __construct()
@@ -348,6 +349,7 @@ class clientController extends Controller
 
     public function searchForDoc(Request $request){
         $invoices = invoiceInfo::where('service_name','Visa Services')->where('receiver_name', 'like', '%'.request('client_name').'%')->get();
-        return view('clientDoc.index')->with('invoices',$invoices);
+        $docs = ClientDoc::where('date',Carbon::now()->timezone('Europe/London')->toDateString())->get();
+        return view('clientDoc.index')->with('invoices',$invoices)->with('docs',$docs);
     }
 }

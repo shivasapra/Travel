@@ -45,6 +45,14 @@ Route::get('/client/documents/movement',[
 	'uses' => 'clientDocController@index',
 	'as' => 'clientDocIndex'
 ]);
+Route::get('/client/documents/movement/store/{id}',[
+	'uses' => 'clientDocController@store',
+	'as' => 'clientDoc.store'
+]);
+Route::get('/client/documents/movement/destroy/{id}',[
+	'uses' => 'clientDocController@destroy',
+	'as' => 'clientDoc.destroy'
+]);
 // Route::group(['middleware' => ['authorize', 'auth']], function () {
 //     Route::get('/', [
 //         'name' => 'home',

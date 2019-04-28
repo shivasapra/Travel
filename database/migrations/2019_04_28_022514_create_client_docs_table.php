@@ -16,7 +16,6 @@ class CreateClientDocsTable extends Migration
         Schema::create('client_docs', function (Blueprint $table) {
             $table->increments('id');
             $table->date('date');
-            $table->string('unique_id');
             $table->string('client_name');
             $table->string('mobile');
             $table->string('visa_applicant_name');

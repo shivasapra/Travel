@@ -42,7 +42,6 @@ Client Document Movement
 	@if($invoices->count()>0)
   	<div class="box box-info">
     	<div class="box-body">
-    		@foreach($invoices as $invoice)
     		<table class="table table-hover mb-0">
                     <thead>
                       <tr>
@@ -75,34 +74,32 @@ Client Document Movement
                           <td>{{$invoice->visa_country}}</td>
                           <td>{{$invoice->visa_type}}</td>
                           <td>
-                              <a href="#" class="btn btn-xs btn-success">Add</a>
+                            <a href="{{route('clientDoc.store',['id'=>$invoice->id])}}" class="btn btn-xs btn-success">Add</a>
                           </td>
                           </tr>
                         @endforeach
                       @endif
                     </tbody>
             </table>
-    		@endforeach
     	</div>
 	</div>
     @endif	
 	<div class="box box-info">
     	<div class="box-body">
-    		@if($docs->count()>0)
-    		@foreach($docs as $doc)
     		<table class="table table-hover mb-0">
                     <thead>
                       <tr>
                         <th>Sno.</th>
+                        <th>Date</th>
                         <th>Client Name</th>
                         <th>Phone No.</th>
-                        <th>Date</th>
                         <th>Visa Applicant Name</th>
                         <th>DOB</th>
                         <th>Passport Origin</th>
                         <th>Passport No.</th>
                         <th>Visa Country</th>
                         <th>Visa Type</th>
+                        <th>Action</th>
                       </tr>
                     	</thead>
                     <tbody>
@@ -111,22 +108,23 @@ Client Document Movement
                         @foreach($docs as $doc)
                         <tr>
                           <td>{{$i++}}</td>
-                          <td>{{$doc->doc->receiver_name}}</td>
-                          <td>{{$doc->doc->client->phone}}</td>
-                          <td>{{$doc->created_at->toDateString()}}</td>
-                          <td>{{$doc->name_of_visa_applicant}}</td>
-                          <td>{{$doc->passport_member_DOB}}</td>
+                          <td>{{$doc->date}}</td>
+                          <td>{{$doc->client_name}}</td>
+                          <td>{{$doc->mobile}}</td>
+                          <td>{{$doc->visa_applicant_name}}</td>
+                          <td>{{$doc->DOB}}</td>
                           <td>{{$doc->passport_origin}}</td>
                           <td>{{$doc->passport_no}}</td>
                           <td>{{$doc->visa_country}}</td>
                           <td>{{$doc->visa_type}}</td>
+                          <td>
+                            <a href="{{route('clientDoc.destroy',['id'=>$doc->id])}}" class="btn btn-xs btn-danger">Remove</a>
+                          </td>
                           </tr>
                         @endforeach
                       @endif
                     </tbody>
             </table>
-    		@endforeach
-    @endif	
     		
     	</div>
 	</div>
