@@ -34,6 +34,6 @@ class ReportController extends Controller
 
     public function docMovement(){
         $docs = ClientDoc::all();
-        return view('reports.docsmovement')->with('docs',$docs);
+        return view('reports.docsMovement')->with('docs',$docs);
     }
 }
