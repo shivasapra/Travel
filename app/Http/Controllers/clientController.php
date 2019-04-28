@@ -9,6 +9,7 @@ use Mail;
 use Carbon\Carbon;
 use Auth;
 use App\ClientFamily;
+use App\invoiceInfo;
 class clientController extends Controller
 {   
     public function __construct()
@@ -343,5 +344,10 @@ class clientController extends Controller
     public function search(Request $request){
         $clients = client::where('first_name', 'like', '%'.request('client_name').'%')->get();
         return view('status')->with('clients',$clients);
+    }
+
+    public function searchForDoc(Request $request){
+        $invoices = invoiceInfo::where('service_name','Visa Services')->where('receiver_name', 'like', '%'.request('client_name').'%')->get();
+        return view('clientDoc.index')->with('invoices',$invoices);
     }
 }

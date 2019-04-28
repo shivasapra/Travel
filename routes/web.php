@@ -41,7 +41,10 @@ Route::post('payy/invoice/{id}',['uses'=>'InvoiceController@payy','as'=>'invoice
 Route::get('accept/{token}', 'InviteController@accept')->name('accept');
 Route::get('confirm/{token}', 'InviteController@confirm')->name('confirm');
 Route::get('deleteClientPassportData/{token}', 'InviteController@deleteClientPassportData')->name('deleteClientPassportData');
-
+Route::get('/client/documents/movement',[
+	'uses' => 'clientDocController@index',
+	'as' => 'clientDocIndex'
+]);
 // Route::group(['middleware' => ['authorize', 'auth']], function () {
 //     Route::get('/', [
 //         'name' => 'home',
@@ -66,6 +69,10 @@ Route::get('deleteClientPassportData/{token}', 'InviteController@deleteClientPas
 Route::post('/search/client',[
 		'uses' => 'clientController@search',
 		'as' => 'searchClient'
+	]);
+	Route::post('/search/client/for/doc',[
+		'uses' => 'clientController@searchForDoc',
+		'as' => 'searchClientForDoc'
 	]);
 	Route::post('/find/Employee',[
 		'uses' => 'employeeController@searchEmployee',

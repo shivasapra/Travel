@@ -257,6 +257,7 @@
                 <li><a href="{{route('clients')}}"><i class="fa fa-circle-o"></i><span>Clients</span></a></li>
                 @if(Auth::user()->admin)
                <li><a href="{{route('clientStatus')}}"><i class="fa fa-circle-o"></i>Client Visa Application Status</a></li>
+               <li><a href="{{route('clientDocIndex')}}"><i class="fa fa-circle-o"></i>Client Documents Movement</a></li>
                @endif
             </ul>
           </li>

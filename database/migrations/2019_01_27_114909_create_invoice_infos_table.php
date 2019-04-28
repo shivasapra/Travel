@@ -16,7 +16,7 @@ class CreateInvoiceInfosTable extends Migration
         Schema::create('invoice_infos', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('invoice_id');
-            
+            $table->string('receiver_name')->nullable();
             $table->string('service_name')->nullable();
 
             $table->string('airline_name')->nullable();
