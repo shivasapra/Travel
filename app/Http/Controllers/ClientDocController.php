@@ -36,15 +36,20 @@ class ClientDocController extends Controller
 
     public function emergency(Request $request){
         $emails = array();
-        $clientDocs = ClientDoc::where('date',Carbon::now()->timezone('Europe/London')->toDateString())->get();
-            foreach ($clientDocs as $client) {
-                    array_push($emails,$client->client->user->email);
-            }
+        // $clientDocs = ClientDoc::where('date',Carbon::now()->timezone('Europe/London')->toDateString())->get();
+        //     foreach ($clientDocs as $client) {
+        //             array_push($emails,$client->client->user->email);
+        //     }
+        foreach($request->email as $email){
+            array_push($emails,$email);
+        }
         $data = array('content'=>$request->message);
         Mail::send('emails.emergency', $data, function($message) use ($emails)
         { 
             $message->to($emails)->subject( 'Emergency Message Related To Visa Documents' );
         });
+        Session::flash('success','Message Sent!');
+        return redirect()->back();
     }
 
     /**

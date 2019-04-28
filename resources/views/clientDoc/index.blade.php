@@ -142,6 +142,12 @@ Client Document Movement
                 @csrf
                 <div class="row">
                     <div class="col-md-4">
+                        @foreach($docs as $doc)
+                        <label for="email[]">{{$doc->client_name}}</label>
+                        <input type="checkbox" name="email[]" value="{{$doc->client->email}}">
+                        @endforeach
+                    </div>
+                    <div class="col-md-4">
                         <textarea type="text" name="message" class="form-control" placeholder="Enter Message"></textarea>
                     </div>
                     <div class="col-md-2">
