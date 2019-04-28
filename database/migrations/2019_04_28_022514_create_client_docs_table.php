@@ -15,6 +15,7 @@ class CreateClientDocsTable extends Migration
     {
         Schema::create('client_docs', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('client_id');
             $table->date('date');
             $table->string('client_name');
             $table->string('mobile');

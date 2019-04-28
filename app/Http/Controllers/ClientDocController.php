@@ -8,6 +8,7 @@ use App\ClientDoc;
 use App\invoiceInfo;
 use Carbon\Carbon;
 use Session;
+use Mail;
 class ClientDocController extends Controller
 {
     /**
@@ -33,6 +34,19 @@ class ClientDocController extends Controller
         //
     }
 
+    public function emergency(Request $request){
+        $emails = array();
+        $clientDocs = ClientDoc::where('date',Carbon::now()->timezone('Europe/London')->toDateString())->get();
+            foreach ($clientDocs as $client) {
+                    array_push($emails,$client->client->user->email);
+            }
+        $data = array('content'=>$request->message);
+        Mail::send('emails.emergency', $data, function($message) use ($emails)
+        { 
+            $message->to($emails)->subject( 'Emergency Message Related To Visa Documents' );
+        });
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -43,6 +57,7 @@ class ClientDocController extends Controller
     {   
        $invoiceInfo = invoiceInfo::find($id);
        $doc = new ClientDoc;
+       $doc->client_id = $invoiceInfo->invoice->client->id;
        $doc->date = Carbon::now()->timezone('Europe/London')->toDateString();
        $doc->client_name = $invoiceInfo->receiver_name;
        $doc->mobile = $invoiceInfo->invoice->client->phone;

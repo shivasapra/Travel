@@ -62,6 +62,7 @@ Client Document Movement
                     	@if($invoices->count()>0)
                       <?php $i = 1; ?>
                         @foreach($invoices as $invoice)
+                        @if(App\ClientDoc::where('visa_applicant_name',$invoice->name_of_visa_applicant)->count() == 0)
                         <tr>
                           <td>{{$i++}}</td>
                           <td>{{$invoice->invoice->receiver_name}}</td>
@@ -77,6 +78,7 @@ Client Document Movement
                             <a href="{{route('clientDoc.store',['id'=>$invoice->id])}}" class="btn btn-xs btn-success">Add</a>
                           </td>
                           </tr>
+                          @endif
                         @endforeach
                       @endif
                     </tbody>
@@ -127,7 +129,29 @@ Client Document Movement
             </table>
     		
     	</div>
-	</div>
+    </div>
+    
+    <div class="box box-danger">
+        <div class="box-body">
+            <div class="text-center">
+                <h2>
+                    Emergency Message
+                </h2>
+            </div>
+            <form action="{{route('emergency')}}" method="post">
+                @csrf
+                <div class="row">
+                    <div class="col-md-4">
+                        <textarea type="text" name="message" class="form-control" placeholder="Enter Message"></textarea>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-sm btn-danger">Send</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
 	
 @stop
 @section('js')

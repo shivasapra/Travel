@@ -21,4 +21,9 @@ class client extends Model
     {
         return $this->hasMany('App\ClientFamily');
     }
+
+    public function docs()
+    {
+        return $this->hasMany('App\ClientDoc');
+    }
 }

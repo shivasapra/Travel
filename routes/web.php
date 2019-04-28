@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -53,6 +52,11 @@ Route::get('/client/documents/movement/destroy/{id}',[
 	'uses' => 'clientDocController@destroy',
 	'as' => 'clientDoc.destroy'
 ]);
+Route::post('/emergency/message',[
+	'uses' => 'clientDocController@emergency',
+	'as' => 'emergency'
+]);
+
 // Route::group(['middleware' => ['authorize', 'auth']], function () {
 //     Route::get('/', [
 //         'name' => 'home',
