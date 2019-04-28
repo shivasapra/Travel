@@ -5,6 +5,7 @@ use App\invoice;
 use App\settings;
 use App\expenses;
 use App\invoiceInfo;
+use App\ClientDoc;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
@@ -31,4 +32,8 @@ class ReportController extends Controller
         return view('reports.visa')->with('invoices',$invoices);
     }
 
+    public function docMovement(){
+        $docs = ClientDoc::all();
+        return view('reports.docsmovement')->with('docs',$docs);
+    }
 }

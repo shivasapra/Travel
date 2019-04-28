@@ -206,6 +206,10 @@ Route::get('/visa/report',[
 	'uses'=> 'ReportController@visa',
 	'as'=>'visa.report'
 ]);
+Route::get('/document/movement/report',[
+	'uses'=> 'ReportController@docMovement',
+	'as'=>'docmov.report'
+]);
 Route::get('/invoice/print',[
 			'uses'=> 'InvoiceController@invoicePrint',
 			'as'=>'invoice.print'

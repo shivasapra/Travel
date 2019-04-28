@@ -313,6 +313,7 @@
                 <li><a href="{{route('paidInvoice.report')}}"><i class="fa fa-circle-o"></i>Paid Invoices Report</a></li>
                 <li><a href="{{route('unpaidInvoice.report')}}"><i class="fa fa-circle-o"></i>UnPaid Invoices Report</a></li>
                 <li><a href="{{route('expenses.report')}}"><i class="fa fa-circle-o"></i>Expenses Report</a></li>
+                <li><a href="{{route('docmov.report')}}"><i class="fa fa-circle-o"></i>Document Movement Report</a></li>
             </ul>
           </li>
         <li><a href="{{route('assign')}}"><i class="fa fa-clock-o"></i><span>Assignments</span></a></li>
