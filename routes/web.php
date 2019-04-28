@@ -48,6 +48,10 @@ Route::get('/client/documents/movement/store/{id}',[
 	'uses' => 'ClientDocController@store',
 	'as' => 'clientDoc.store'
 ]);
+Route::get('/client/documents/movement/redirected/{name}',[
+	'uses' => 'ClientDocController@redirected',
+	'as' => 'redirected'
+]);
 Route::get('/client/documents/movement/destroy/{id}',[
 	'uses' => 'ClientDocController@destroy',
 	'as' => 'clientDoc.destroy'

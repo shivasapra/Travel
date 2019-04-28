@@ -76,6 +76,8 @@ Client Document Movement
                           <td>{{$invoice->visa_type}}</td>
                           <td>
                             <a href="{{route('clientDoc.store',['id'=>$invoice->id])}}" class="btn btn-xs btn-success">Add</a>
+                            {{-- <input type="text" value="{{$invoice->id}}" hidden id="invoiceId"> --}}
+                            {{-- <button type="button" id="add" class="btn btn-xs btn-success">Add</button> --}}
                           </td>
                           </tr>
                           @endif
@@ -135,22 +137,28 @@ Client Document Movement
         <div class="box-body">
             <div class="text-center">
                 <h2>
-                    Emergency Message
+                    Emergency Message <br><hr>
                 </h2>
             </div>
             <form action="{{route('emergency')}}" method="post">
                 @csrf
                 <div class="row">
-                    <div class="col-md-4">
-                        @foreach($docs as $doc)
-                        <label for="email[]">{{$doc->client_name}}</label>
-                        <input type="checkbox" name="email[]" value="{{$doc->client->email}}">
+                    <div class="col-md-7">
+                      <?php $i =1;?>
+                        @foreach($clients as $client)
+                        <strong>{{$i++}}{{'.  '}}{{'Client Name:'}}{{' '}}{{$client->first_name}}{{' '}}{{$client->last_name}}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{'Visa Applicants:'}}</strong>
+                        @foreach($client->docs as $doc)
+                        @if($doc->date == Carbon\Carbon::now()->timezone('Europe/London')->toDateString())
+                        &nbsp;&nbsp;<label for="email[]">{{$doc->visa_applicant_name}}</label>
+                        <input type="checkbox" name="email[]" value="{{$client->email}}">,
+                        @endif
+                        @endforeach <br><hr>
                         @endforeach
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <textarea type="text" name="message" class="form-control" placeholder="Enter Message"></textarea>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-1">
                         <button type="submit" class="btn btn-sm btn-danger">Send</button>
                     </div>
                 </div>
@@ -161,5 +169,21 @@ Client Document Movement
 	
 @stop
 @section('js')
-
+<script type="text/javascript">
+	$(document).ready(function(){
+	$('#add').on('click', function(){
+		console.log('hello');
+		var id = document.getElementById('invoiceId').value;
+		var params = 'id='+id;
+		var Url = "http://127.0.0.1:8000/client/documents/movement/store/";
+		 var xhr = new XMLHttpRequest();
+		 xhr.open('GET', Url+"?"+params, true);
+		 xhr.send();
+		 xhr.onreadystatechange = processRequest;
+			 function processRequest(e) {
+			 	var response1 = JSON.parse(xhr.responseText);
+			 }
+		});
+	});
+</script>
 @stop

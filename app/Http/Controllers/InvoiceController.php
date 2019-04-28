@@ -444,6 +444,7 @@ class InvoiceController extends Controller
             if ($request->service_name[$k]=='Flight') {
                 $invoice_info = new invoiceInfo;
                         $invoice_info->invoice_id = $invoice->id;
+                        $invoice_info->receiver_name = $invoice->receiver_name;
                         $invoice_info->service_name = 'Flight';
 
                         $invoice_info->airline_name = $request->airline_name[$flight_counter];
@@ -465,6 +466,7 @@ class InvoiceController extends Controller
             if ($request->service_name[$k]=='Visa Services') {
                 $invoice_info = new invoiceInfo;
                         $invoice_info->invoice_id = $invoice->id;
+                        $invoice_info->receiver_name = $invoice->receiver_name;
                         $invoice_info->service_name = 'Visa Services';
 
 
@@ -485,6 +487,7 @@ class InvoiceController extends Controller
             if ($request->service_name[$k]=='Insurance') {
                 $invoice_info = new invoiceInfo;
                         $invoice_info->invoice_id = $invoice->id;
+                        $invoice_info->receiver_name = $invoice->receiver_name;
                         $invoice_info->service_name = 'Insurance';
 
 
@@ -499,6 +502,7 @@ class InvoiceController extends Controller
             if ($request->service_name[$k]=='Hotel') {
                 $invoice_info = new invoiceInfo;
                         $invoice_info->invoice_id = $invoice->id;
+                        $invoice_info->receiver_name = $invoice->receiver_name;
                         $invoice_info->service_name = 'Hotel';
 
 
@@ -518,6 +522,7 @@ class InvoiceController extends Controller
             if ($request->service_name[$k]=='Local Sight Sceen') {
                 $invoice_info = new invoiceInfo;
                         $invoice_info->invoice_id = $invoice->id;
+                        $invoice_info->receiver_name = $invoice->receiver_name;
                         $invoice_info->service_name = 'Local Sight Sceen';
 
 
@@ -531,6 +536,7 @@ class InvoiceController extends Controller
             if ($request->service_name[$k]=='Local Transport') {
                 $invoice_info = new invoiceInfo;
                         $invoice_info->invoice_id = $invoice->id;
+                        $invoice_info->receiver_name = $invoice->receiver_name;
                         $invoice_info->service_name = 'Local Transport';
 
 
@@ -544,6 +550,7 @@ class InvoiceController extends Controller
             if ($request->service_name[$k]=='Car Rental') {
                 $invoice_info = new invoiceInfo;
                         $invoice_info->invoice_id = $invoice->id;
+                        $invoice_info->receiver_name = $invoice->receiver_name;
                         $invoice_info->service_name = 'Car Rental';
 
 
@@ -557,6 +564,7 @@ class InvoiceController extends Controller
             if ($request->service_name[$k]=='Other Facilities') {
                 $invoice_info = new invoiceInfo;
                         $invoice_info->invoice_id = $invoice->id;
+                        $invoice_info->receiver_name = $invoice->receiver_name;
                         $invoice_info->service_name = 'Other Facilities';
 
 

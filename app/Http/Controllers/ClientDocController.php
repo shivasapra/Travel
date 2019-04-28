@@ -20,8 +20,38 @@ class ClientDocController extends Controller
     {
         $invoices = invoiceInfo::where('service_name','test')->get();
         $docs = ClientDoc::where('date',Carbon::now()->timezone('Europe/London')->toDateString())->get();
+        $clients = array();
+        foreach(client::all() as $client){
+            foreach($client->docs as $doc) {
+                if ($doc->date == Carbon::now()->timezone('Europe/London')->toDateString()) {
+                    array_push($clients,$client);
+                    break;
+                }
+            }
+        }
+        // dd($clients);
         return view('clientDoc.index')->with('invoices',$invoices)
-                                        ->with('docs',$docs);
+                                        ->with('docs',$docs)
+                                        ->with('clients',$clients);
+    }
+
+    public function redirected($name){
+        // dd($name);
+        $invoices = invoiceInfo::where('service_name','Visa Services')->where('receiver_name', 'like', '%'.$name.'%')->get();
+        // dd($invoices);
+        $docs = ClientDoc::where('date',Carbon::now()->timezone('Europe/London')->toDateString())->get();
+        $clients = array();
+        foreach(client::all() as $client){
+            foreach($client->docs as $doc) {
+                if ($doc->date == Carbon::now()->timezone('Europe/London')->toDateString()) {
+                    array_push($clients,$client);
+                    break;
+                }
+            }
+        }
+        return view('clientDoc.index')->with('invoices',$invoices)
+                                        ->with('docs',$docs)
+                                        ->with('clients',$clients);
     }
 
     /**
@@ -74,7 +104,7 @@ class ClientDocController extends Controller
        $doc->visa_type = $invoiceInfo->visa_type;
        $doc->save();
        Session::flash('success','One Record Added');
-       return redirect()->route('clientDocIndex');
+        return redirect()->route('redirected',['name'=>$invoiceInfo->receiver_name]);
     }
 
     /**

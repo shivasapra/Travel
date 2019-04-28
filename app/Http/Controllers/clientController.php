@@ -350,6 +350,15 @@ class clientController extends Controller
     public function searchForDoc(Request $request){
         $invoices = invoiceInfo::where('service_name','Visa Services')->where('receiver_name', 'like', '%'.request('client_name').'%')->get();
         $docs = ClientDoc::where('date',Carbon::now()->timezone('Europe/London')->toDateString())->get();
-        return view('clientDoc.index')->with('invoices',$invoices)->with('docs',$docs);
+        $clients = array();
+        foreach(client::all() as $client){
+            foreach($client->docs as $doc) {
+                if ($doc->date == Carbon::now()->timezone('Europe/London')->toDateString()) {
+                    array_push($clients,$client);
+                    break;
+                }
+            }
+        }
+        return view('clientDoc.index')->with('invoices',$invoices)->with('docs',$docs)->with('clients',$clients);
     }
 }
