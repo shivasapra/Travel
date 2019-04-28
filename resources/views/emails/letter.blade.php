@@ -5,7 +5,6 @@
 	<title></title>
 </head>
 <body>
-  <h1>Haaji</h1>
       {!! $content !!}
   </div>
 </div>
