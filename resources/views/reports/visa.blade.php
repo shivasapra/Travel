@@ -31,11 +31,11 @@ Visa Report
                         <th>Phone No.</th>
                         <th>Date</th>
                         <th>Visa Applicant Name</th>
+                        <th>DOB</th>
                         <th>Passport Origin</th>
                         <th>Passport No.</th>
                         <th>Visa Country</th>
                         <th>Visa Type</th>
-                        <th>Amount</th>
                       </tr>
                       </thead>
                     <tbody>
@@ -48,11 +48,11 @@ Visa Report
                           <td>{{$invoice->invoice->client->phone}}</td>
                           <td>{{$invoice->created_at->toDateString()}}</td>
                           <td>{{$invoice->name_of_visa_applicant}}</td>
+                          <td>{{$invoice->passport_member_DOB}}</td>
                           <td>{{$invoice->passport_origin}}</td>
                           <td>{{$invoice->passport_no}}</td>
                           <td>{{$invoice->visa_country}}</td>
                           <td>{{$invoice->visa_type}}</td>
-                          <td><strong>{{$invoice->invoice->currency}}{{$invoice->visa_amount}}</strong></td>
                           </tr>
                         @endforeach
                       @endif
