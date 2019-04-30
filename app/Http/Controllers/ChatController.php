@@ -16,9 +16,19 @@ class ChatController extends Controller
      */
     public function index()
     {   
-        $latest = Chat::where('user_id',Auth::user()->id)->orWhere('to_id',Auth::user()->id)->get();
+        // $latest = Chat::where('user_id',Auth::user()->id)->orWhere('to_id',Auth::user()->id)->get();
         $unread_messages = Chat::where('to_id',Auth::user()->id)->where('status',0)->get();
-        return view('chat.index')->with('latest',$latest)->with('unread_messages',$unread_messages);
+        return view('chat.index')->with('unread_messages',$unread_messages)->with('messages',null);
+    }
+
+    public function IndexWithMessage($id)
+    {   
+        $messages = Chat::where('user_id',$id)->orWhere('user_id',Auth::user()->id)->orderBy('created_at','asc')->get();
+        $last = Chat::where('user_id',$id)->orderBy('created_at','desc')->get()->first();
+        $last->status = 1;
+        $last->save();
+        $unread_messages = Chat::where('to_id',Auth::user()->id)->where('status',0)->get();
+        return view('chat.index')->with('unread_messages',$unread_messages)->with('messages',$messages);
     }
 
     /**
