@@ -82,7 +82,7 @@ class ChatController extends Controller
         $chat->admin = Auth::user()->admin;
         $chat->time = Carbon::now()->timezone('Europe/London')->toTimeString();
         $chat->date = Carbon::now()->timezone('Europe/London')->toDateString();
-        $chat->to_id = 1;
+        $chat->to_id = 2;
         $chat->message = $request->message;
         $chat->save();
         return redirect()->back();
