@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Chat;
 use Auth;
 use Carbon\Carbon;
+use App\ChatLog;
 
 class ChatController extends Controller
 {
@@ -23,12 +24,12 @@ class ChatController extends Controller
 
     public function IndexWithMessage($id)
     {   
-        $messages = Chat::where('user_id',$id)->orWhere('user_id',Auth::user()->id)->orderBy('created_at','asc')->get();
+        $messages = Chat::where('user_id',$id)->orWhere('to_id',$id)->orderBy('created_at','asc')->get();
         $last = Chat::where('user_id',$id)->orderBy('created_at','desc')->get()->first();
         $last->status = 1;
         $last->save();
         $unread_messages = Chat::where('to_id',Auth::user()->id)->where('status',0)->get();
-        return view('chat.index')->with('unread_messages',$unread_messages)->with('messages',$messages);
+        return view('chat.index')->with('unread_messages',$unread_messages)->with('messages',$messages)->with('id',$id);
     }
 
     /**
@@ -48,7 +49,17 @@ class ChatController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
+    {   $i = 0;
+        foreach (ChatLog::all() as $ChatLog) {
+            if($ChatLog->user_id == Auth::user()->id){
+                $i++;
+            }
+        }
+        if($i == 0){
+            $newChatLog = new ChatLog;
+            $newChatLog->user_id = Auth::user()->id;
+            $newChatLog->save();
+        }
         $last = Chat::where('user_id',Auth::user()->id)->orderBy('created_at','desc')->get()->first();
         if ($last != null) {
             $last->status = 1;
@@ -71,6 +82,17 @@ class ChatController extends Controller
         if ($last != null) {
             $last->status = 1;
             $last->save();
+        }
+        $i = 0;
+        foreach (ChatLog::all() as $ChatLog) {
+            if($ChatLog->user_id == $request->user_id){
+                $i++;
+            }
+        }
+        if($i == 0){
+            $newChatLog = new ChatLog;
+            $newChatLog->user_id = $request->user_id;
+            $newChatLog->save();
         }
         $chat = new Chat;
         $chat->user_id = Auth::user()->id;

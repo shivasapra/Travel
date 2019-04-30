@@ -15,7 +15,7 @@ Direct Chat
 @stop
 @section('content')
 <div class="row">
-    <div class="col-md-6">
+<div class="col-md-6">
     <!-- DIRECT CHAT PRIMARY -->
   <div class="box box-danger direct-chat direct-chat-danger">
     <div class="box-header with-border">
@@ -23,7 +23,7 @@ Direct Chat
 
       <div class="box-tools pull-right">
         
-        <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Unread Messages" data-widget="chat-pane-toggle">
+        <button type="button" class="btn btn-box-tool" data-toggle="tooltip"  data-widget="chat-pane-toggle">
             <span data-toggle="tooltip" title="{{$unread_messages->count()}} New Messages" class="badge bg-red">{{$unread_messages->count()}}</span></button>
         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
         </button>
@@ -140,6 +140,102 @@ Direct Chat
     </div>
     <!--/.direct-chat -->
         <!--/.direct-chat -->   
+</div>
+
+
+<div class="col-md-4">
+    <!-- DIRECT CHAT PRIMARY -->
+  <div class="box box-info direct-chat direct-chat-info">
+    <div class="box-header with-border">
+      <h3 class="box-title">Previous Conversations!!</h3>
+
+      <div class="box-tools pull-right">
+        
+        {{-- <button type="button" class="btn btn-box-tool" data-toggle="tooltip"  data-widget="chat-pane-toggle">
+            <span data-toggle="tooltip" title="{{$unread_messages->count()}} New Messages" class="badge bg-red">{{$unread_messages->count()}}</span></button> --}}
+        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+        </button>
+        {{-- <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Contacts" data-widget="chat-pane-toggle"> --}}
+          {{-- <i class="fa fa-comments"></i></button> --}}
+        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+      </div>
     </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+      <!-- Conversations are loaded here -->
+      <div class="direct-chat-messages">
+        <!-- Message. Default to the left -->
+        <ul class="contacts-list">
+            @foreach(App\ChatLog::all() as $ChatLog)
+            <li>
+              <a href="{{route('index.message',['id'=>$ChatLog->user_id])}}">
+                <img class="contacts-list-img"
+                @if(App\User::find($ChatLog->user_id)->avatar)
+                    src="{{asset(App\User::find($ChatLog->user_id)->avatar)}}"
+                  @else
+                    src="{{asset('app/images/user-placeholder.jpg')}}"
+                @endif 
+                alt="User Image">
+  
+                <div class="contacts-list-info">
+                      <span class="contacts-list-name">
+                        <strong><span style="color:black;">{{App\User::find($ChatLog->user_id)->name}}</span></strong>
+                        <?php $conversation = App\Chat::where('user_id',$ChatLog->user_id)->orWhere('to_id',$ChatLog->user_id)->orderBy('created_at','desc')->get()->first();?>
+                        <small class="contacts-list-date pull-right" style="color:black;">{{$conversation->date}}{{' '}}{{$conversation->time}}</small>
+                      </span>
+                  <span class="contacts-list-msg" >{{$conversation->message}}</span>
+                </div>
+                <!-- /.contacts-list-info -->
+              </a>
+            </li>
+            @endforeach
+            <!-- End Contact Item -->
+          </ul>
+        <!-- /.direct-chat-msg -->
+      </div>
+      <!--/.direct-chat-messages-->
+      <!-- Contacts are loaded here -->
+      <div class="direct-chat-contacts">
+        <ul class="contacts-list">
+          @if($unread_messages->count()>0)
+          @foreach($unread_messages as $unread)
+          <li>
+            <a href="{{route('index.message',['id'=>$unread->user_id])}}">
+              <img class="contacts-list-img"
+              @if(App\User::find($unread->user_id)->avatar)
+                  src="{{asset(App\User::find($unread->user_id)->avatar)}}"
+                @else
+                  src="{{asset('app/images/user-placeholder.jpg')}}"
+              @endif 
+              alt="User Image">
+
+              <div class="contacts-list-info">
+                    <span class="contacts-list-name">
+                      {{App\User::find($unread->user_id)->name}}
+                      <small class="contacts-list-date pull-right">{{$unread->date}}{{' '}}{{$unread->time}}</small>
+                    </span>
+                <span class="contacts-list-msg">{{$unread->message}}</span>
+              </div>
+              <!-- /.contacts-list-info -->
+            </a>
+          </li>
+          @endforeach
+          @endif
+          <!-- End Contact Item -->
+        </ul>
+        <!-- /.contatcts-list -->
+      </div>
+      <!-- /.direct-chat-pane -->
+    </div>
+    <!-- /.box-body -->
+    <div class="box-footer">
+        
+        <strong><span class="text-info">{{App\ChatLog::all()->count()}}{{' Previous Conversations!!'}}</span></strong>
+      </div>
+      <!-- /.box-footer-->
+    </div>
+    <!--/.direct-chat -->
+        <!--/.direct-chat -->   
+</div>
 </div>
 @stop

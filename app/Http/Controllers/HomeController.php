@@ -222,7 +222,7 @@ class HomeController extends Controller
             $paid_invoices = invoice::where('status',1)->get();
             $unpaid_invoices = invoice::where('status',0)->get();
             
-            $messages = Chat::where('user_id',$id)->orWhere('user_id',Auth::user()->id)->orderBy('created_at','asc')->get();
+            $messages = Chat::where('user_id',$id)->orWhere('to',$id)->orderBy('created_at','asc')->get();
             $last = Chat::where('user_id',$id)->orderBy('created_at','desc')->get()->first();
             $last->status = 1;
             $last->save();
