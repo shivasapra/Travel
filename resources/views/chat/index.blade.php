@@ -2,6 +2,10 @@
 @section('title')
 Direct Chat
 @endsection
+@section('css')
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">
+@stop
 @section('header')
 	<section class="content-header">
       <h1>
@@ -147,7 +151,7 @@ Direct Chat
     <!-- DIRECT CHAT PRIMARY -->
   <div class="box box-info direct-chat direct-chat-info">
     <div class="box-header with-border">
-      <h3 class="box-title">Previous Conversations!!</h3>
+      <h3 class="box-title">{{App\ChatLog::all()->count()}} Previous Conversations!!</h3>
 
       <div class="box-tools pull-right">
         
@@ -194,43 +198,12 @@ Direct Chat
         <!-- /.direct-chat-msg -->
       </div>
       <!--/.direct-chat-messages-->
-      <!-- Contacts are loaded here -->
-      <div class="direct-chat-contacts">
-        <ul class="contacts-list">
-          @if($unread_messages->count()>0)
-          @foreach($unread_messages as $unread)
-          <li>
-            <a href="{{route('index.message',['id'=>$unread->user_id])}}">
-              <img class="contacts-list-img"
-              @if(App\User::find($unread->user_id)->avatar)
-                  src="{{asset(App\User::find($unread->user_id)->avatar)}}"
-                @else
-                  src="{{asset('app/images/user-placeholder.jpg')}}"
-              @endif 
-              alt="User Image">
-
-              <div class="contacts-list-info">
-                    <span class="contacts-list-name">
-                      {{App\User::find($unread->user_id)->name}}
-                      <small class="contacts-list-date pull-right">{{$unread->date}}{{' '}}{{$unread->time}}</small>
-                    </span>
-                <span class="contacts-list-msg">{{$unread->message}}</span>
-              </div>
-              <!-- /.contacts-list-info -->
-            </a>
-          </li>
-          @endforeach
-          @endif
-          <!-- End Contact Item -->
-        </ul>
-        <!-- /.contatcts-list -->
-      </div>
-      <!-- /.direct-chat-pane -->
+      
     </div>
     <!-- /.box-body -->
     <div class="box-footer">
         
-        <strong><span class="text-info">{{App\ChatLog::all()->count()}}{{' Previous Conversations!!'}}</span></strong>
+        <strong><span class="text-info">{{'Start New Chat!!'}}</span></strong>
       </div>
       <!-- /.box-footer-->
     </div>
@@ -238,4 +211,66 @@ Direct Chat
         <!--/.direct-chat -->   
 </div>
 </div>
+<div class="row">
+<div class="box box-info">
+        <div class="box-body">
+            
+        
+        <table id="example" class="table table-striped display" style="width:100%">
+                <thead>
+                        <tr>
+                          <th>Sno.</th>
+                          <th>Name</th>
+                          <th>Unique Id</th>
+                          <th>country</th>
+                          <th>Department</th>
+                          <th>Hiring Date</th>
+                          <th>Rate Contract</th>
+                          <th>Action</th>
+                        </tr>
+                          </thead>
+                      <tbody>
+                          @if($employees->count()>0)
+                          <?php $i = 1; ?>
+                              @foreach($employees as $employee)
+                              <tr>
+                                  <td>{{$i++}}</td>
+                                  <td>{{$employee->first_name}}</td>
+                                  <td>{{$employee->unique_id}}</td>
+                                  <td>{{$employee->country}}</td>
+                                  <td>{{$employee->hired_for_dep}}</td>
+                                  <td>{{$employee->hiring_date}}</td>
+                                  <td>{{$employee->currency.$employee->rate}}</td>
+                                  <td>
+                                      <a href="{{route('index.message',['id'=>$employee->user->id])}}" class="btn btn-primary btn-xs">Start Conversation</a>
+                                  </td>
+                              </tr>
+                              @endforeach
+                          @endif
+                      </tbody>
+        </table>
+    
+    </div>
+    </div>
+</div>
 @stop
+@section('js')
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+
+
+  <script>
+  	$(document).ready(function() {
+    $('#example').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+        ]
+    } );
+} );
+</script>
+@endsection

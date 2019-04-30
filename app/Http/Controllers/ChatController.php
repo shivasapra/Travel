@@ -7,6 +7,7 @@ use App\Chat;
 use Auth;
 use Carbon\Carbon;
 use App\ChatLog;
+use App\employee;
 
 class ChatController extends Controller
 {
@@ -19,7 +20,7 @@ class ChatController extends Controller
     {   
         // $latest = Chat::where('user_id',Auth::user()->id)->orWhere('to_id',Auth::user()->id)->get();
         $unread_messages = Chat::where('to_id',Auth::user()->id)->where('status',0)->get();
-        return view('chat.index')->with('unread_messages',$unread_messages)->with('messages',null);
+        return view('chat.index')->with('unread_messages',$unread_messages)->with('messages',null)->with('employees',employee::all());
     }
 
     public function IndexWithMessage($id)
@@ -29,7 +30,7 @@ class ChatController extends Controller
         $last->status = 1;
         $last->save();
         $unread_messages = Chat::where('to_id',Auth::user()->id)->where('status',0)->get();
-        return view('chat.index')->with('unread_messages',$unread_messages)->with('messages',$messages)->with('id',$id);
+        return view('chat.index')->with('unread_messages',$unread_messages)->with('messages',$messages)->with('id',$id)->with('employees',employee::all());
     }
 
     /**
