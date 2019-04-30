@@ -21,14 +21,20 @@ Direct Chat
 <div class="row">
 <div class="col-md-6">
     <!-- DIRECT CHAT PRIMARY -->
-  <div class="box box-danger direct-chat direct-chat-danger">
+  <div class="box box-info direct-chat direct-chat-info">
     <div class="box-header with-border">
-      <h3 class="box-title">Direct Chat</h3>
+      <h3 class="box-title">
+          @if($name != null)
+          {{$name}}
+          @else
+          Direct Chat
+          @endif
+      </h3>
 
       <div class="box-tools pull-right">
         
         <button type="button" class="btn btn-box-tool" data-toggle="tooltip"  data-widget="chat-pane-toggle">
-            <span data-toggle="tooltip" title="{{$unread_messages->count()}} New Messages" class="badge bg-red">{{$unread_messages->count()}}</span></button>
+            <span data-toggle="tooltip" title="{{$unread_messages->count()}} New Messages" class="badge bg-light-blue">{{$unread_messages->count()}}</span></button>
         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
         </button>
         {{-- <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Contacts" data-widget="chat-pane-toggle"> --}}
@@ -132,7 +138,7 @@ Direct Chat
             <input name='user_id' value="{{$id}}" hidden>
             <input type="text" name="message" placeholder="Type Message ..." class="form-control">
                 <span class="input-group-btn">
-                  <button type="submit" class="btn btn-danger btn-flat">Send</button>
+                  <button type="submit" class="btn btn-info btn-flat">Send</button>
                 </span>
           </div>
         </form>
@@ -203,7 +209,7 @@ Direct Chat
     <!-- /.box-body -->
     <div class="box-footer">
         
-        <strong><span class="text-info">{{'Start New Chat!!'}}</span></strong>
+        <strong><span class="text-info">{{App\ChatLog::all()->count()}} Previous Conversations!!</span></strong>
       </div>
       <!-- /.box-footer-->
     </div>

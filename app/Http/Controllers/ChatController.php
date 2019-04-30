@@ -8,6 +8,7 @@ use Auth;
 use Carbon\Carbon;
 use App\ChatLog;
 use App\employee;
+use App\User;
 
 class ChatController extends Controller
 {
@@ -20,17 +21,27 @@ class ChatController extends Controller
     {   
         // $latest = Chat::where('user_id',Auth::user()->id)->orWhere('to_id',Auth::user()->id)->get();
         $unread_messages = Chat::where('to_id',Auth::user()->id)->where('status',0)->get();
-        return view('chat.index')->with('unread_messages',$unread_messages)->with('messages',null)->with('employees',employee::all());
+        return view('chat.index')->with('unread_messages',$unread_messages)
+                                ->with('messages',null)
+                                ->with('employees',employee::all())
+                                ->with('name',null);
     }
 
     public function IndexWithMessage($id)
     {   
         $messages = Chat::where('user_id',$id)->orWhere('to_id',$id)->orderBy('created_at','asc')->get();
         $last = Chat::where('user_id',$id)->orderBy('created_at','desc')->get()->first();
-        $last->status = 1;
-        $last->save();
+        if ($last != null) {
+            # code...
+            $last->status = 1;
+            $last->save();
+        }
+        $name = User::find($id)->name;
         $unread_messages = Chat::where('to_id',Auth::user()->id)->where('status',0)->get();
-        return view('chat.index')->with('unread_messages',$unread_messages)->with('messages',$messages)->with('id',$id)->with('employees',employee::all());
+        return view('chat.index')->with('unread_messages',$unread_messages)
+                                ->with('messages',$messages)
+                                ->with('id',$id)->with('employees',employee::all())
+                                ->with('name',$name);
     }
 
     /**
