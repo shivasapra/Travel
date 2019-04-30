@@ -246,6 +246,7 @@
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
+        <li><a href="{{route('users')}}"><i class="fa fa-user"></i><span>Users</span></a></li>
         <li class="treeview">
             <a href="">
               <i class="fa fa-user-circle"></i><span>Client Management</span>

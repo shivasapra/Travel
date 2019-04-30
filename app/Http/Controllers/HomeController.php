@@ -19,6 +19,7 @@ use App\Task;
 use Mail;
 use App\Chat;
 use Auth;
+use App\User;
 use App\assignment;
 class HomeController extends Controller
 {
@@ -395,5 +396,9 @@ class HomeController extends Controller
         });
         Session::flash('success','Mail Sent!');
         return redirect()->back();
+    }
+
+    public function users(){
+        return view('users')->with('users',User::all());
     }
 }

@@ -28,7 +28,10 @@ Route::get('/stop/reminder/{id}', function ($id) {
 	$client->save();
     return redirect()->back();
 });
-
+Route::get('/users',[
+	'uses' => 'HomeController@users',
+	'as' => 'users'
+]);
 Route::get('/direct/chat',[
 	'uses' => 'ChatController@index',
 	'as' => 'direct.chat'
