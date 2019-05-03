@@ -204,27 +204,27 @@ Route::resource('tasks', 'TasksController');
 Route::get('/client/status',[
 			'uses'=> 'clientController@status',
 			'as'=>'clientStatus'
-		]);
+		])->middleware('permission: Client Visa Application Status');
 Route::post('/status/save',[
 			'uses'=> 'clientController@statusSave',
 			'as'=>'statusSave'
-		]);
+		])->middleware('permission: Client Visa Application Status');
 
 
 Route::get('/letter',[
 			'uses'=> 'HomeController@letter',
 			'as'=>'letter'
-		]);
+		])->middleware('permission: Generate Letter');
 Route::post('/send/letter',[
 			'uses'=> 'HomeController@sendLetter',
 			'as'=>'sendLetter'
-		]);
+		])->middleware('permission: Generate Letter');
 
 
 Route::post('/send/letter/{id}',[
 	'uses'=> 'employeeController@sendLetterToEmployee',
 	'as'=>'sendLetterTOEmployee'
-]);
+	])->middleware('permission: Letter To Employee');
 
 
 Route::get('/task/delete/{id}',[
@@ -236,11 +236,11 @@ Route::get('/task/delete/{id}',[
 Route::get('/tax',[
 			'uses'=> 'HomeController@tax',
 			'as'=>'tax'
-		]);
+		])->middleware('permission: VAT Updation');
 Route::post('/tax/update/',[
 			'uses'=> 'HomeController@taxUpdate',
 			'as'=>'tax.update'
-		]);
+		])->middleware('permission: VAT Updation');
 
 
 Route::get('/searchAirline','InvoiceController@AirlineSearch');
@@ -254,23 +254,23 @@ Route::get('/searchAirportArrival','InvoiceController@AirportArrivalSearch');
 Route::get('/paidInvoice/report',[
 			'uses'=> 'ReportController@paidInvoice',
 			'as'=>'paidInvoice.report'
-		]);
+		])->middleware('permission: View/Export Reports');
 Route::get('/unpaidInvoice/report',[
 			'uses'=> 'ReportController@unpaidInvoice',
 			'as'=>'unpaidInvoice.report'
-		]);
+		])->middleware('permission: View/Export Reports');
 Route::get('/expenses/report',[
 			'uses'=> 'ReportController@expenses',
 			'as'=>'expenses.report'
-		]);
+		])->middleware('permission: View/Export Reports');
 Route::get('/visa/report',[
 	'uses'=> 'ReportController@visa',
 	'as'=>'visa.report'
-]);
+		])->middleware('permission: View/Export Reports');
 Route::get('/document/movement/report',[
 	'uses'=> 'ReportController@docMovement',
 	'as'=>'docmov.report'
-]);
+		])->middleware('permission: View/Export Reports');
 
 
 
@@ -290,200 +290,200 @@ Route::post('/Logout',[
 Route::get('/wage',[
 		'uses' => 'wageController@index',
 		'as' => 'wage'
-	])->middleware('admin');
+	])->middleware('permission: Staff Wage management');
 Route::get('/employee/wage/log/{id}',[
 		'uses' => 'wageController@show',
 		'as' => 'wage.log'
-	])->middleware('admin');
+	])->middleware('permission: Staff Wage management');
 
 
 Route::get('/generate/slip',[
 		'uses' => 'wageController@generateSlip',
 		'as' => 'slip.generate'
-	])->middleware('admin');
+	])->middleware('permission: Employee Salary Slip');
 Route::post('/slip',[
 		'uses' => 'wageController@slip',
 		'as' => 'slip'
-	])->middleware('admin');
+	])->middleware('permission: Employee Salary Slip');
 
 
 
 Route::get('/employees',[
 		'uses' => 'employeeController@index',
 		'as' => 'employees'
-	]);
+	])->middleware('permission: View Employees');
 Route::get('/employee/registration',[
 		'uses' => 'employeeController@create',
 		'as' => 'create.employee'
-	]);
+	])->middleware('permission: Create Employee');
 Route::post('/employee/store',[
 		'uses' => 'employeeController@store',
 		'as' => 'store.employee'
-	]);
+		])->middleware('permission: Create Employee');
 Route::post('/employee/update/{id}',[
 		'uses' => 'employeeController@update',
 		'as' => 'update.employee'
-	]);
+		])->middleware('permission: Create Employee');
 Route::get('/employee/edit/{id}',[
 		'uses' => 'employeeController@edit',
 		'as' => 'edit.employee'
-	]);
+	])->middleware('permission: Edit Employee');
 Route::get('/employee/view/{id}',[
 		'uses' => 'employeeController@show',
 		'as' => 'view.employee'
-	]);
-Route::get('/employee/delete/{id}',[
-		'uses' => 'employeeController@destroy',
-		'as' => 'delete.employee'
-	]);
+	])->middleware('permission: View Employees');
+// Route::get('/employee/delete/{id}',[
+// 		'uses' => 'employeeController@destroy',
+// 		'as' => 'delete.employee'
+// 	]);
 Route::get('/employeeletter/{id}',[
 		'uses' => 'employeeController@letter',
 		'as' => 'letter.employee'
-	]);
+		])->middleware('permission: Letter To Employee');
 Route::get('/status',[
 		'uses' => 'employeeController@status',
 		'as' => 'status'
-	]);
+	])->middleware('permission: Employee Attendance Status');
 Route::post('/employee/status',[
 		'uses' => 'employeeController@status2',
 		'as' => 'status2'
-	]);
+	])->middleware('permission: Employee Attendance Status');
 
 
 
 Route::get('/clients',[
 		'uses' => 'clientController@index',
 		'as' => 'clients'
-	]);
+	])->middleware('permission:View Clients');
 Route::get('/client/registration',[
 		'uses' => 'clientController@create',
 		'as' => 'create.client'
-	]);
+	])->middleware('permission:Create Client');
 Route::post('/client/store',[
 		'uses' => 'clientController@store',
 		'as' => 'store.client'
-	]);
+	])->middleware('permission:Create Client');
 Route::post('/client/update/{id}',[
 		'uses' => 'clientController@update',
 		'as' => 'update.client'
-	]);
+	])->middleware('permission:Edit Client');
 Route::post('/client/family/update/{id}',[
 	'uses' => 'clientController@updateFamily',
 	'as' => 'update.family'
-]);
+])->middleware('permission:Edit Client');
 Route::get('/client/edit/{id}',[
 		'uses' => 'clientController@edit',
 		'as' => 'edit.client'
-	]);
+	])->middleware('permission:Edit Client');
 Route::get('/client/family/edit/{id}',[
 	'uses' => 'clientController@editFamily',
 	'as' => 'edit.family'
-]);
+])->middleware('permission:Edit Client');
 Route::get('/client/view/{id}',[
 		'uses' => 'clientController@show',
 		'as' => 'view.client'
-	]);
-Route::get('/client/delete/{id}',[
-		'uses' => 'clientController@destroy',
-		'as' => 'delete.client'
-	]);
+	])->middleware('permission:View Clients');
+// Route::get('/client/delete/{id}',[
+// 		'uses' => 'clientController@destroy',
+// 		'as' => 'delete.client'
+// 	]);
 
 
 
 Route::get('/products',[
 	'uses'=>'HomeController@products',
 	'as'=>'products'
-	])->middleware('admin');
+	])->middleware('permission:Services Registration');
 Route::post('/add/product',[
 	'uses'=>'HomeController@addProduct',
 	'as'=>'product.add'
-	])->middleware('admin');
+	])->middleware('permission:Services Registration');
 Route::get('/delete/product/{id}',[
 	'uses'=>'HomeController@destroyProduct',
 	'as'=>'product.delete'
-	])->middleware('admin');
+	])->middleware('permission:Services Registration');
 
 
 Route::get('/airlines',[
 	'uses'=>'HomeController@airlines',
 	'as'=>'airlines'
-	])->middleware('admin');
+	])->middleware('permission:Airlines Name Registration');
 Route::post('/add/airline',[
 	'uses'=>'HomeController@addAirline',
 	'as'=>'airline.add'
-	])->middleware('admin');
+	])->middleware('permission:Airlines Name Registration');
 Route::get('/delete/airline/{id}',[
 	'uses'=>'HomeController@destroyAirline',
 	'as'=>'airline.delete'
-	])->middleware('admin');
+	])->middleware('permission:Airlines Name Registration');
 
 
 Route::get('/expense',[
 	'uses'=>'expensesController@index',
 	'as'=>'expenses.get'
-	]);
+	])->middleware('permission:Expense Entry');
 Route::post('/expenses',[
 	'uses'=>'expensesController@index',
 	'as'=>'expenses'
-	]);
+	])->middleware('permission:Expense Entry');
 Route::get('/Auto/deduction',[
 	'uses'=>'expensesController@auto',
 	'as'=>'auto.get'
-	]);
+	])->middleware('permission:Auto Deduction Expense Entry');
 Route::post('/auto/deduction',[
 	'uses'=>'expensesController@auto',
 	'as'=>'auto',
-	]);
+	])->middleware('permission:Auto Deduction Expense Entry');
 Route::get('/expense/delete/{id}',[
 	'uses'=>'expensesController@destroy',
 	'as'=>'expense.delete'
-	]);
+	])->middleware('permission:Delete Expense');
 
 
 
 
-Route::get('/generate/invoice/pdf/{id}',[
-	'uses'=> 'InvoiceController@generatePdf',
-	'as'=>'pdf.invoice'
-	]);
-Route::get('/invoice/print',[
-			'uses'=> 'InvoiceController@invoicePrint',
-			'as'=>'invoice.print'
-		]);
+
 Route::get('/invoice',[
 	'uses'=>'InvoiceController@index',
 	'as'=>'invoice'
-	]);
+	])->middleware('permission:View Invoices');
 Route::get('/invoice/view/{id}',[
 	'uses'=>'InvoiceController@show',
 	'as'=>'invoice.view'
-	]);
+	])->middleware('permission:View Invoices');
 Route::get('/invoice/print/{id}',[
 			'uses'=> 'InvoiceController@invoicePrint',
 			'as'=>'invoice.print'
-		]);
+		])->middleware('permission:View Invoices');
 Route::get('/create/invoice',[
 	'uses'=>'InvoiceController@create',
 	'as'=>'invoice.create'
-	]);
+	])->middleware('permission:Generate Invoice');
 Route::post('/store/invoice',[
 	'uses'=>'InvoiceController@store',
 	'as'=>'invoice.store'
-	]);
+	])->middleware('permission:Generate Invoice');
 Route::get('/delete/invoice/{id}',[
 	'uses'=>'InvoiceController@destroy',
 	'as'=>'invoice.delete'
-	])->middleware('admin');
+	])->middleware('permission:Cancel Invoice');
 Route::get('/edit/invoice/{id}',[
 	'uses'=>'InvoiceController@edit',
 	'as'=>'invoice.edit'
-	])->middleware('admin');
+	])->middleware('permission:Edit Invoice');
 Route::post('/update/invoice/{id}',[
 	'uses'=>'InvoiceController@update',
 	'as'=>'invoice.update'
-	])->middleware('admin');
+	])->middleware('permission:Edit Invoice');
 Route::get('/invoice/reminder/{id}',[
 	'uses'=>'InvoiceController@reminder',
 	'as'=>'invoice.reminder'
-	])->middleware('admin');
-
+	])->middleware('permission:Send Reminder For Unpaid Invoice');
+Route::get('/generate/invoice/pdf/{id}',[
+	'uses'=> 'InvoiceController@generatePdf',
+	'as'=>'pdf.invoice'
+	])->middleware('permission:View Invoices');
+Route::get('/invoice/print',[
+			'uses'=> 'InvoiceController@invoicePrint',
+			'as'=>'invoice.print'
+		])->middleware('permission:View Invoices');
