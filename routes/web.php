@@ -1,4 +1,6 @@
 <?php
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,65 +23,65 @@ Route::get('/start/reminder/{id}', function ($id) {
 	$client->reminder = 1;
 	$client->save();
     return redirect()->back();
-});
+})->middleware('permission:Client Notification Reminder Toggle');
 Route::get('/stop/reminder/{id}', function ($id) {
 	$client = App\client::find($id);
 	$client->reminder = 0;
 	$client->save();
     return redirect()->back();
-});
+})->middleware('permission:Client Notification Reminder Toggle');
 Route::get('/users',[
 	'uses' => 'HomeController@users',
 	'as' => 'users'
-]);
+])->middleware('permission:View Users');
 Route::get('/direct/chat',[
 	'uses' => 'ChatController@index',
 	'as' => 'direct.chat'
-]);
+])->middleware('permission:Direct Chat');
 Route::post('/chat/store',[
 	'uses' => 'ChatController@store',
 	'as' => 'chat.store'
-]);
+])->middleware('permission:Direct Chat');
 Route::post('/chat/store/admin',[
 	'uses' => 'ChatController@AdminMessageStore',
 	'as' => 'admin.message.send'
-]);
+])->middleware('permission:Direct Chat');
 Route::get('homeWithMessage/{id}',[
 	'uses'=>'HomeController@HomeWithMessage',
 	'as'=>'home.message'
-]);
+	])->middleware('permission:Direct Chat');
 Route::get('indexWithMessage/{id}',[
 	'uses'=>'ChatController@IndexWithMessage',
 	'as'=>'index.message'
-]);
-Route::get('canceled/invoices',['uses'=>'InvoiceController@canceled','as'=>'canceled.invoices']);
-Route::get('retrieve/invoice/{id}',['uses'=>'InvoiceController@retrieve','as'=>'invoice.retrieve']);
-Route::get('kill/invoice/{id}',['uses'=>'InvoiceController@kill','as'=>'invoice.kill']);
-Route::get('pay/invoice/{id}',['uses'=>'InvoiceController@pay','as'=>'invoice.pay']);
-Route::post('payy/invoice/{id}',['uses'=>'InvoiceController@payy','as'=>'invoice.payy']);
+	])->middleware('permission:Direct Chat');
+Route::get('canceled/invoices',['uses'=>'InvoiceController@canceled','as'=>'canceled.invoices'])->middleware('permission:View Canceled Invoice');
+Route::get('retrieve/invoice/{id}',['uses'=>'InvoiceController@retrieve','as'=>'invoice.retrieve'])->middleware('permission:Restore Invoice');
+Route::get('kill/invoice/{id}',['uses'=>'InvoiceController@kill','as'=>'invoice.kill'])->middleware('permission:Cancel Invoice');
+Route::get('pay/invoice/{id}',['uses'=>'InvoiceController@pay','as'=>'invoice.pay'])->middleware('permission:Pay Invoice');
+Route::post('payy/invoice/{id}',['uses'=>'InvoiceController@payy','as'=>'invoice.payy'])->middleware('permission:Pay Invoice');
 Route::get('accept/{token}', 'InviteController@accept')->name('accept');
 Route::get('confirm/{token}', 'InviteController@confirm')->name('confirm');
 Route::get('deleteClientPassportData/{token}', 'InviteController@deleteClientPassportData')->name('deleteClientPassportData');
 Route::get('/client/documents/movement',[
 	'uses' => 'ClientDocController@index',
 	'as' => 'clientDocIndex'
-]);
+])->middleware('permission:Client Documents Movement');
 Route::get('/client/documents/movement/store/{id}',[
 	'uses' => 'ClientDocController@store',
 	'as' => 'clientDoc.store'
-]);
+])->middleware('permission:Client Documents Movement');
 Route::get('/client/documents/movement/redirected/{name}',[
 	'uses' => 'ClientDocController@redirected',
 	'as' => 'redirected'
-]);
+])->middleware('permission:Client Documents Movement');
 Route::get('/client/documents/movement/destroy/{id}',[
 	'uses' => 'ClientDocController@destroy',
 	'as' => 'clientDoc.destroy'
-]);
+])->middleware('permission:Client Documents Movement');
 Route::post('/emergency/message',[
 	'uses' => 'ClientDocController@emergency',
 	'as' => 'emergency'
-]);
+])->middleware('permission:Client Documents Movement');
 
 // Route::group(['middleware' => ['authorize', 'auth']], function () {
 //     Route::get('/', [
@@ -145,11 +147,11 @@ Route::get('/assignment/Done/{id}',[
 Route::get('/activate/employee/{id}',[
 	'uses'=> 'employeeController@activate',
 	'as'=>'activateEmployee'
-]);
+])->middleware('permission:Activate/Deactivate Employee');
 Route::get('/deactivate/employee/{id}',[
 	'uses'=> 'employeeController@deactivate',
 	'as'=>'deactivateEmployee'
-]);
+])->middleware('permission:Activate/Deactivate Employee');
 // Route::get('/search/client',['as'=>'searchClient'],function(){
 // 	dd(true);
 // 	$clients = App\client::where('first_name', 'like', '%'.request('client_name').'%')->get();
