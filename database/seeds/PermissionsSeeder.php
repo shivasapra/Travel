@@ -54,6 +54,41 @@ class PermissionsSeeder extends Seeder
         Permission::create(['name' => 'Services Registration']);
 
         Permission::create(['name' => 'Airlines Name Registration']);
+
+
+
+        $role_admin = Role::create(['name'=>'Admin']);
+        $role_admin->givePermissionTo('View Users');
+        $role_admin->givePermissionTo('View Clients');
+        $role_admin->givePermissionTo('Edit Client');
+        $role_admin->givePermissionTo('Client Notification Reminder Toggle');
+        $role_admin->givePermissionTo('Client Visa Application Status');
+        $role_admin->givePermissionTo('Client Documents Movement');
+        $role_admin->givePermissionTo('View Employees');
+        $role_admin->givePermissionTo('Edit Employee');
+        $role_admin->givePermissionTo('Letter To Employee');
+        $role_admin->givePermissionTo('Assign Tasks To Employee');
+        $role_admin->givePermissionTo('Activate/Deactivate Employee');
+        $role_admin->givePermissionTo('Employee Attendance Status');
+        $role_admin->givePermissionTo('Employee Salary Slip');
+        $role_admin->givePermissionTo('Staff Wage management');
+        $role_admin->givePermissionTo('Expense Entry');
+        $role_admin->givePermissionTo('Auto Deduction Expense Entry');
+        $role_admin->givePermissionTo('View Invoices');
+        $role_admin->givePermissionTo('Generate Invoice');
+        $role_admin->givePermissionTo('Edit Invoice');
+        $role_admin->givePermissionTo('Pay Invoice');
+        $role_admin->givePermissionTo('Cancel Invoice');
+        $role_admin->givePermissionTo('View Canceled Invoice');
+        $role_admin->givePermissionTo('Restore Invoice');
+        $role_admin->givePermissionTo('Send Reminder For Unpaid Invoice');
+        $role_admin->givePermissionTo('VAT Updation');
+        $role_admin->givePermissionTo('View/Export Reports');
+        $role_admin->givePermissionTo('Assigments');
+        $role_admin->givePermissionTo('Generate Letter');
+        $role_admin->givePermissionTo('Direct Chat');
+        $role_admin->givePermissionTo('Services Registration');
+        $role_admin->givePermissionTo('Airlines Name Registration');
         
     }
 }
