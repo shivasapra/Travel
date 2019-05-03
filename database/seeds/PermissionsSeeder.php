@@ -89,6 +89,9 @@ class PermissionsSeeder extends Seeder
         $role_admin->givePermissionTo('Direct Chat');
         $role_admin->givePermissionTo('Services Registration');
         $role_admin->givePermissionTo('Airlines Name Registration');
+
+        User::find(1)->assignRole('Admin');
+        User::find(2)->assignRole('Admin');
         
     }
 }
