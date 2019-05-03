@@ -247,6 +247,7 @@
           </a>
         </li>
         <li><a href="{{route('users')}}"><i class="fa fa-user"></i><span>Users</span></a></li>
+        <li><a href="{{route('role.management')}}"><i class="fa fa-dot-circle-o"></i><span>Role Management</span></a></li>
         <li class="treeview">
             <a href="">
               <i class="fa fa-user-circle"></i><span>Client Management</span>

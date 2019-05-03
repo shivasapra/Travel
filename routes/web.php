@@ -28,7 +28,14 @@ Route::post('/update/profile',[
 	'uses'=> 'UserController@update',
 	'as'=>'update.profile'
 ]);
-
+Route::get('/Role-management', [
+	'uses' => 'RolesController@index',
+	'as' => 'role.management',
+]);
+Route::post('/create/role', [
+	'uses' => 'RolesController@CreateRole',
+	'as' => 'create.role',
+]);
 Route::get('/find/family/{id}', function ($id) {
     $family = App\ClientFamily::find($id);
     return $family;
