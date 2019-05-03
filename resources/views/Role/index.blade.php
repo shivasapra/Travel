@@ -35,12 +35,13 @@ Role Management
                     <tbody>
                         @if($roles->count()>0)
                         <?php $i = 1; ?>
-                        @foreach($roles as $role)
+                        @foreach($roles as $rol)
                         <tr>
                             <th>{{$i++}}.</th>
-                            <td>{{$role->name}}</td>
+                            <td>{{$rol->name}}</td>
                             <td>
-                                <a href="#" class="btn btn-xs btn-success">Permissions</a>
+                                {{-- <button type="button" class="btn btn-xs btn-success" onClick="findRole({{$role->id}})" >Permissions</button> --}}
+                                <a href="{{route('find.role',['id'=>$rol->id])}}" class="btn btn-xs btn-success">Permissions</a>
                             </td>
                         </tr>
                         @endforeach
@@ -53,28 +54,54 @@ Role Management
     <div class="col-md-6">
         <div class="box box-primary">
             <div class="box-body">
-                <table class="table table-hover mb-0">
+                <div id="permissions">
+                @if($permissions->count()>0 and $role != null)
+                <form action="{{route('assign.permissions',['id'=>$role->id])}}" method="post">
+                        @csrf
+                @endif
+                    <table class="table table-hover mb-0">
+                        <div class="text-center">
+                            <h2>All Permissions @if($permissions->count()>0 and $role != null) Under ({{$role->name}}) @endif</h2><hr>
+                        </div>
+                        <thead>
+                            <tr>
+                            <th>Sno.</th>
+                            <th>Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if($permissions->count()>0 and $role == null)
+                            <?php $i = 1; ?>
+                            @foreach($permissions as $permission)
+                            <tr>
+                                <th>{{$i++}}.</th>
+                                <td>{{$permission->name}}</td>
+                            </tr>
+                            @endforeach
+                            
+                            @elseif($permissions->count()>0 and $role != null)
+                            <?php $i = 1; ?>
+                            @foreach($permissions as $permission)
+                            
+                            <tr>
+                                <th>{{$i++}}.</th>
+                                <td>{{$permission->name}}</td>
+                                <td>
+                                    <input type="checkbox"  value="{{$permission->name}}" name="permissions[]" @if($role->hasPermissionTo($permission->name)) checked @endif>
+                                </td>
+                            </tr>
+                            @endforeach
+                            @endif
+                        </tbody>
+                    </table>
+                    @if($permissions->count()>0 and $role != null)
                     <div class="text-center">
-                        <h2>Permissions</h2><hr>
+                        <button type="submit" class="btn btn-xs btn-success">Update</button>
                     </div>
-                    <thead>
-                        <tr>
-                        <th>Sno.</th>
-                        <th>Name</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @if($permissions->count()>0)
-                        <?php $i = 1; ?>
-                        @foreach($permissions as $permission)
-                        <tr>
-                            <th>{{$i++}}.</th>
-                            <td>{{$permission->name}}</td>
-                        </tr>
-                        @endforeach
-                        @endif
-                    </tbody>
-                </table>
+                    @endif
+                    </form>
+                            
+                </div>
             </div>
         </div>
     </div>
@@ -102,3 +129,46 @@ Role Management
     </div>
 </div>
 @stop
+{{-- @section('js')
+<script>
+function findRole(id) {
+    var roleId = id;
+    var Url = "http://127.0.0.1:8000/find/role/" +roleId;
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', Url, true);
+    xhr.send();
+    xhr.onreadystatechange = processRequest;
+    function processRequest(e) {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+    var response1 = JSON.parse(xhr.responseText);
+    alert(response1[1]);
+    var data =  '<table class="table table-hover mb-0">'+
+                        '<div class="text-center">'+
+                            '<h2>Permissions Under ('+ response1[0].name+ ')</h2><hr>'+
+                        '</div>'+
+                        '<thead>'+
+                            '<tr>'+
+                            '<th>Sno.</th>'+
+                            '<th>Name</th>'+
+                            '</tr>'+
+                        '</thead>'+
+                        '<tbody>'+
+                        if ( response[1].length > 0 ) {
+                            for (var i = 0 ; i < response[1].length )
+                            +'<tr>'+ 
+                            '<th>'+ i++ +'</th>'+
+                            '<td>'+ response[1][i] +'</td>'+
+                            '<tr>'+ 
+                            }
+                        }
+                        +'</tbody>'+
+                    '</table>';
+        $('#permissions').html(data);
+    // document.getElementById("city").value = response1.result.admin_ward;
+    // document.getElementById("country").value = response1.result.country;
+    // document.getElementById("county").value = response1.result.admin_county;
+    }
+    }
+    }
+</script>
+@stop --}}

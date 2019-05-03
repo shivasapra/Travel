@@ -36,6 +36,19 @@ Route::post('/create/role', [
 	'uses' => 'RolesController@CreateRole',
 	'as' => 'create.role',
 ]);
+Route::get('/find/role/{id}', [
+	'uses' => 'RolesController@findRole',
+	'as' => 'find.role',
+]);
+Route::post('/assign/permissions/{id}', [
+	'uses' => 'RolesController@assignPermissions',
+	'as' => 'assign.permissions',
+]);
+// Route::get('/find/role/{id}', function ($id) {
+// 	$role = Role::find($id);
+// 	$pers = $role->getPermissionNames();
+//     return [$role,$pers];
+// });
 Route::get('/find/family/{id}', function ($id) {
     $family = App\ClientFamily::find($id);
     return $family;

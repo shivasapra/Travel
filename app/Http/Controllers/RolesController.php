@@ -18,6 +18,7 @@ class RolesController extends Controller
     public function index()
     {
         return view('Role.index')->with('roles',Role::all())
+                                ->with('role',null)
                                 ->with('permissions',Permission::all());
     }
 
@@ -26,6 +27,29 @@ class RolesController extends Controller
         $role = Role::create(['name' => $request->name]);
         Session::flash('success','New Role created');
         return redirect()->back();
+    }
+
+    public function findRole($id){
+        $role = Role::find($id);
+        $permissions = $role->Permissions;
+        return view('Role.index')->with('roles',Role::all())
+                                ->with('permissions',Permission::all())
+                                ->with('role',$role);
+    }
+
+    public function assignPermissions(Request $request,$id){
+        $role = Role::find($id);
+        $permissions = $role->Permissions;
+        foreach ($permissions as $per) {
+            $role->revokePermissionTo($per);
+        }
+        // dd($request->permissions);
+        foreach($request->permissions as $permission){
+            $role->givePermissionTo($permission);
+        }
+        return view('Role.index')->with('roles',Role::all())
+                                ->with('permissions',Permission::all())
+                                ->with('role',$role);
     }
     /**
      * Show the form for creating a new resource.
