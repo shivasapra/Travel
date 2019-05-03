@@ -14,10 +14,27 @@ use Spatie\Permission\Models\Permission;
 // Route::post('invite', 'employeeController@process')->name('process');
 // {token} is a required parameter that will be exposed to us in the controller method
 Auth::routes();
+
+Route::get('/', [
+	'name' => 'home',
+	'as' => 'home',
+	'uses' => 'HomeController@index',
+]);
+Route::get('/edit/profile',[
+	'uses'=> 'UserController@index',
+	'as'=>'edit.profile'
+]);
+Route::post('/update/profile',[
+	'uses'=> 'UserController@update',
+	'as'=>'update.profile'
+]);
+
 Route::get('/find/family/{id}', function ($id) {
     $family = App\ClientFamily::find($id);
     return $family;
 });
+
+
 Route::get('/start/reminder/{id}', function ($id) {
 	$client = App\client::find($id);
 	$client->reminder = 1;
@@ -30,10 +47,14 @@ Route::get('/stop/reminder/{id}', function ($id) {
 	$client->save();
     return redirect()->back();
 })->middleware('permission:Client Notification Reminder Toggle');
+
+
 Route::get('/users',[
 	'uses' => 'HomeController@users',
 	'as' => 'users'
 ])->middleware('permission:View Users');
+
+
 Route::get('/direct/chat',[
 	'uses' => 'ChatController@index',
 	'as' => 'direct.chat'
@@ -54,6 +75,8 @@ Route::get('indexWithMessage/{id}',[
 	'uses'=>'ChatController@IndexWithMessage',
 	'as'=>'index.message'
 	])->middleware('permission:Direct Chat');
+
+
 Route::get('canceled/invoices',['uses'=>'InvoiceController@canceled','as'=>'canceled.invoices'])->middleware('permission:View Canceled Invoice');
 Route::get('retrieve/invoice/{id}',['uses'=>'InvoiceController@retrieve','as'=>'invoice.retrieve'])->middleware('permission:Restore Invoice');
 Route::get('kill/invoice/{id}',['uses'=>'InvoiceController@kill','as'=>'invoice.kill'])->middleware('permission:Cancel Invoice');
@@ -62,6 +85,8 @@ Route::post('payy/invoice/{id}',['uses'=>'InvoiceController@payy','as'=>'invoice
 Route::get('accept/{token}', 'InviteController@accept')->name('accept');
 Route::get('confirm/{token}', 'InviteController@confirm')->name('confirm');
 Route::get('deleteClientPassportData/{token}', 'InviteController@deleteClientPassportData')->name('deleteClientPassportData');
+
+
 Route::get('/client/documents/movement',[
 	'uses' => 'ClientDocController@index',
 	'as' => 'clientDocIndex'
@@ -104,6 +129,8 @@ Route::post('/emergency/message',[
 //         'uses' => 'Auth\AuthorizeController@resend',
 //     ]);
 // });
+
+
 Route::post('/search/client',[
 		'uses' => 'clientController@search',
 		'as' => 'searchClient'
@@ -124,6 +151,8 @@ Route::post('/search/employee',[
 		'uses' => 'employeeController@search',
 		'as' => 'searchEmployee'
 	]);
+
+
 Route::get('/assign/task',[
 			'uses'=> 'AssignmentController@index',
 			'as'=>'assign'
@@ -136,6 +165,8 @@ Route::get('/accept/task/{id}',[
 	'uses'=> 'AssignmentController@accept',
 	'as'=>'task.accept'
 ]);
+
+
 Route::get('/assignments/{id}',[
 			'uses'=> 'AssignmentController@assignments',
 			'as'=>'assignments'
@@ -144,6 +175,8 @@ Route::get('/assignment/Done/{id}',[
 			'uses'=> 'AssignmentController@assignmentDone',
 			'as'=>'assignmentDone'
 		]);
+
+
 Route::get('/activate/employee/{id}',[
 	'uses'=> 'employeeController@activate',
 	'as'=>'activateEmployee'
@@ -157,17 +190,17 @@ Route::get('/deactivate/employee/{id}',[
 // 	$clients = App\client::where('first_name', 'like', '%'.request('client_name').'%')->get();
 // 	return view('status')->with('clients',$clients);
 // });
-Route::get('/', [
-        'name' => 'home',
-        'as' => 'home',
-        'uses' => 'HomeController@index',
-    ]);
+
+
+
 Route::post('sendEmail', [
         'uses' => 'HomeController@sendEmail',
         'as' => 'send.email',
     ]);
 
 Route::resource('tasks', 'TasksController');
+
+
 Route::get('/client/status',[
 			'uses'=> 'clientController@status',
 			'as'=>'clientStatus'
@@ -176,6 +209,8 @@ Route::post('/status/save',[
 			'uses'=> 'clientController@statusSave',
 			'as'=>'statusSave'
 		]);
+
+
 Route::get('/letter',[
 			'uses'=> 'HomeController@letter',
 			'as'=>'letter'
@@ -184,18 +219,20 @@ Route::post('/send/letter',[
 			'uses'=> 'HomeController@sendLetter',
 			'as'=>'sendLetter'
 		]);
+
+
 Route::post('/send/letter/{id}',[
 	'uses'=> 'employeeController@sendLetterToEmployee',
 	'as'=>'sendLetterTOEmployee'
 ]);
+
+
 Route::get('/task/delete/{id}',[
 			'uses'=> 'TasksController@destroy',
 			'as'=>'task.destroy'
 		]);
-Route::get('/edit/profile',[
-			'uses'=> 'UserController@index',
-			'as'=>'edit.profile'
-		]);
+
+
 Route::get('/tax',[
 			'uses'=> 'HomeController@tax',
 			'as'=>'tax'
@@ -204,18 +241,16 @@ Route::post('/tax/update/',[
 			'uses'=> 'HomeController@taxUpdate',
 			'as'=>'tax.update'
 		]);
-Route::post('/update/profile',[
-			'uses'=> 'UserController@update',
-			'as'=>'update.profile'
-		]);
+
 
 Route::get('/searchAirline','InvoiceController@AirlineSearch');
 Route::get('/searchAirport','InvoiceController@AirportSearch');
 Route::get('/searchAirportArrival','InvoiceController@AirportArrivalSearch');
-Route::get('/generate/invoice/pdf/{id}',[
-	'uses'=> 'InvoiceController@generatePdf',
-	'as'=>'pdf.invoice'
-	]);
+
+
+
+
+
 Route::get('/paidInvoice/report',[
 			'uses'=> 'ReportController@paidInvoice',
 			'as'=>'paidInvoice.report'
@@ -236,10 +271,10 @@ Route::get('/document/movement/report',[
 	'uses'=> 'ReportController@docMovement',
 	'as'=>'docmov.report'
 ]);
-Route::get('/invoice/print',[
-			'uses'=> 'InvoiceController@invoicePrint',
-			'as'=>'invoice.print'
-		]);
+
+
+
+
 Route::get('/session',[
 		'uses' => 'wageController@session',
 		'as' => 'session'
@@ -252,8 +287,6 @@ Route::post('/Logout',[
 		'uses' => 'wageController@Logout',
 		'as' => 'Logout'
 	]);
-
-
 Route::get('/wage',[
 		'uses' => 'wageController@index',
 		'as' => 'wage'
@@ -263,6 +296,7 @@ Route::get('/employee/wage/log/{id}',[
 		'as' => 'wage.log'
 	])->middleware('admin');
 
+
 Route::get('/generate/slip',[
 		'uses' => 'wageController@generateSlip',
 		'as' => 'slip.generate'
@@ -271,6 +305,7 @@ Route::post('/slip',[
 		'uses' => 'wageController@slip',
 		'as' => 'slip'
 	])->middleware('admin');
+
 
 
 Route::get('/employees',[
@@ -315,6 +350,7 @@ Route::post('/employee/status',[
 	]);
 
 
+
 Route::get('/clients',[
 		'uses' => 'clientController@index',
 		'as' => 'clients'
@@ -352,6 +388,8 @@ Route::get('/client/delete/{id}',[
 		'as' => 'delete.client'
 	]);
 
+
+
 Route::get('/products',[
 	'uses'=>'HomeController@products',
 	'as'=>'products'
@@ -364,6 +402,8 @@ Route::get('/delete/product/{id}',[
 	'uses'=>'HomeController@destroyProduct',
 	'as'=>'product.delete'
 	])->middleware('admin');
+
+
 Route::get('/airlines',[
 	'uses'=>'HomeController@airlines',
 	'as'=>'airlines'
@@ -376,6 +416,8 @@ Route::get('/delete/airline/{id}',[
 	'uses'=>'HomeController@destroyAirline',
 	'as'=>'airline.delete'
 	])->middleware('admin');
+
+
 Route::get('/expense',[
 	'uses'=>'expensesController@index',
 	'as'=>'expenses.get'
@@ -396,6 +438,18 @@ Route::get('/expense/delete/{id}',[
 	'uses'=>'expensesController@destroy',
 	'as'=>'expense.delete'
 	]);
+
+
+
+
+Route::get('/generate/invoice/pdf/{id}',[
+	'uses'=> 'InvoiceController@generatePdf',
+	'as'=>'pdf.invoice'
+	]);
+Route::get('/invoice/print',[
+			'uses'=> 'InvoiceController@invoicePrint',
+			'as'=>'invoice.print'
+		]);
 Route::get('/invoice',[
 	'uses'=>'InvoiceController@index',
 	'as'=>'invoice'
@@ -428,32 +482,8 @@ Route::post('/update/invoice/{id}',[
 	'uses'=>'InvoiceController@update',
 	'as'=>'invoice.update'
 	])->middleware('admin');
-	Route::get('/invoice/reminder/{id}',[
-		'uses'=>'InvoiceController@reminder',
-		'as'=>'invoice.reminder'
-		])->middleware('admin');
+Route::get('/invoice/reminder/{id}',[
+	'uses'=>'InvoiceController@reminder',
+	'as'=>'invoice.reminder'
+	])->middleware('admin');
 
-Route::post('/add/todo',[
-			'uses'=> 'HomeController@addTodo',
-			'as'=>'add.todo'
-		]);
-Route::post('/update/todo/{id}',[
-			'uses'=> 'HomeController@updateTodo',
-			'as'=>'update.todo'
-		]);
-Route::get('/todos/{target_date}',[
-			'uses'=> 'HomeController@todos',
-			'as'=>'todos'
-		]);
-Route::post('/todos/',[
-			'uses'=> 'HomeController@todosCustom',
-			'as'=>'todos.custom'
-		]);
-Route::get('/pastWeekTodos',[
-			'uses'=> 'HomeController@pastWeekTodos',
-			'as'=>'pastWeekTodos'
-		]);
-Route::get('/pastMonthTodos',[
-			'uses'=> 'HomeController@pastMonthTodos',
-			'as'=>'pastMonthTodos'
-		]);
