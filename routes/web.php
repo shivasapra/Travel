@@ -282,23 +282,23 @@ Route::get('/searchAirportArrival','InvoiceController@AirportArrivalSearch');
 Route::get('/paidInvoice/report',[
 			'uses'=> 'ReportController@paidInvoice',
 			'as'=>'paidInvoice.report'
-		])->middleware('permission: View/Export Reports');
+		])->middleware('permission:View/Export Reports');
 Route::get('/unpaidInvoice/report',[
 			'uses'=> 'ReportController@unpaidInvoice',
 			'as'=>'unpaidInvoice.report'
-		])->middleware('permission: View/Export Reports');
+		])->middleware('permission:View/Export Reports');
 Route::get('/expenses/report',[
 			'uses'=> 'ReportController@expenses',
 			'as'=>'expenses.report'
-		])->middleware('permission: View/Export Reports');
+		])->middleware('permission:View/Export Reports');
 Route::get('/visa/report',[
 	'uses'=> 'ReportController@visa',
 	'as'=>'visa.report'
-		])->middleware('permission: View/Export Reports');
+		])->middleware('permission:View/Export Reports');
 Route::get('/document/movement/report',[
 	'uses'=> 'ReportController@docMovement',
 	'as'=>'docmov.report'
-		])->middleware('permission: View/Export Reports');
+		])->middleware('permission:View/Export Reports');
 
 
 

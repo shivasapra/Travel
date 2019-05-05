@@ -13,12 +13,16 @@ Role Management
       </ol>
     </section>
 @stop
+@section('css')
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">
+@stop
 @section('content')
 <div class="row">
     <div class="col-md-6">
         <div class="box box-primary">
             <div class="box-body">
-                <table class="table table-hover mb-0">
+                <table class="table table-hover mb-0" >
                     <div class="pull-right">
                         <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#Role">Create Role</button>
                     </div>
@@ -41,7 +45,9 @@ Role Management
                             <td>{{$rol->name}}</td>
                             <td>
                                 {{-- <button type="button" class="btn btn-xs btn-success" onClick="findRole({{$role->id}})" >Permissions</button> --}}
+                                @if($rol->name != 'Admin')
                                 <a href="{{route('find.role',['id'=>$rol->id])}}" class="btn btn-xs btn-success">Permissions</a>
+                                @endif
                             </td>
                         </tr>
                         @endforeach
@@ -59,7 +65,7 @@ Role Management
                 <form action="{{route('assign.permissions',['id'=>$role->id])}}" method="post">
                         @csrf
                 @endif
-                    <table class="table table-hover mb-0">
+                    <table class="table table-hover mb-0" >
                         <div class="text-center">
                             <h2>All Permissions @if($permissions->count()>0 and $role != null) Under ({{$role->name}}) @endif</h2><hr>
                         </div>
@@ -129,46 +135,29 @@ Role Management
     </div>
 </div>
 @stop
-{{-- @section('js')
-<script>
-function findRole(id) {
-    var roleId = id;
-    var Url = "http://127.0.0.1:8000/find/role/" +roleId;
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', Url, true);
-    xhr.send();
-    xhr.onreadystatechange = processRequest;
-    function processRequest(e) {
-    if (xhr.readyState == 4 && xhr.status == 200) {
-    var response1 = JSON.parse(xhr.responseText);
-    alert(response1[1]);
-    var data =  '<table class="table table-hover mb-0">'+
-                        '<div class="text-center">'+
-                            '<h2>Permissions Under ('+ response1[0].name+ ')</h2><hr>'+
-                        '</div>'+
-                        '<thead>'+
-                            '<tr>'+
-                            '<th>Sno.</th>'+
-                            '<th>Name</th>'+
-                            '</tr>'+
-                        '</thead>'+
-                        '<tbody>'+
-                        if ( response[1].length > 0 ) {
-                            for (var i = 0 ; i < response[1].length )
-                            +'<tr>'+ 
-                            '<th>'+ i++ +'</th>'+
-                            '<td>'+ response[1][i] +'</td>'+
-                            '<tr>'+ 
-                            }
-                        }
-                        +'</tbody>'+
-                    '</table>';
-        $('#permissions').html(data);
-    // document.getElementById("city").value = response1.result.admin_ward;
-    // document.getElementById("country").value = response1.result.country;
-    // document.getElementById("county").value = response1.result.admin_county;
-    }
-    }
-    }
+@section('js')
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+
+
+  <script>
+  	$(document).ready(function() {
+    $('#example').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+        ]
+    } );
+
+    $('#example2').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+        ]
+    } );
+} );
 </script>
-@stop --}}
+@endsection
