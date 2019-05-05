@@ -34,7 +34,7 @@ Users
                 <th>Avatar</th>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Identity</th>
+                <th>##</th>
                 </tr>
                 </thead>
             <tbody>
@@ -56,11 +56,7 @@ Users
                         <td>{{$user->name}}</td>
                         <td>{{$user->email}}</td>
                         <td>
-                            @if($user->admin)
-                                <strong><span>{{'Admin'}}</span></strong>
-                            @else
-                                <strong><span>{{'Employee'}}</span></strong>
-                            @endif
+                            <a href="{{route('user.roles',['id'=>$user->id])}}" class="btn btn-xs btn-success">Roles/Permisssions</a>
                         </td>
                     </tr>
                     @endforeach

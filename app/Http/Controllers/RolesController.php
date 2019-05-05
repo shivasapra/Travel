@@ -51,6 +51,30 @@ class RolesController extends Controller
                                 ->with('permissions',Permission::all())
                                 ->with('role',$role);
     }
+
+    public function assignUserRoles(Request $request,$id)
+    {   
+        $user = User::find($id);
+        foreach($request->roles as $index => $item_name){
+            $user->assignRole($request->roles[$index]);
+        }
+        Session::flash('success','Roles Assigned To User');
+        return view('userRoles')->with('user',User::find($id))
+                                ->with('roles',Role::all())
+                                ->with('permissions',Permission::all());
+    }
+
+    public function assignUserPermissions(Request $request,$id)
+    {   
+        $user = User::find($id);
+        foreach($request->permissions as $index => $item_name){
+            $user->givePermissionTo($request->permissions[$index]);
+        }
+        Session::flash('success',' Permissions Assigned To User');
+        return view('userRoles')->with('roles',Role::all())
+                                ->with('permissions',Permission::all())
+                                ->with('user',User::find($id));
+    }
     /**
      * Show the form for creating a new resource.
      *

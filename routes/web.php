@@ -44,6 +44,10 @@ Route::post('/assign/permissions/{id}', [
 	'uses' => 'RolesController@assignPermissions',
 	'as' => 'assign.permissions',
 ]);
+Route::post('/user/roles/{id}', [
+	'uses' => 'RolesController@assignUserRoles',
+	'as' => 'user.roles',
+]);
 // Route::get('/find/role/{id}', function ($id) {
 // 	$role = Role::find($id);
 // 	$pers = $role->getPermissionNames();
