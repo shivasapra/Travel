@@ -31,23 +31,23 @@ Route::post('/update/profile',[
 Route::get('/Role-management', [
 	'uses' => 'RolesController@index',
 	'as' => 'role.management',
-]);
+])->middleware('permission:Role Management');
 Route::post('/create/role', [
 	'uses' => 'RolesController@CreateRole',
 	'as' => 'create.role',
-]);
+])->middleware('permission:Role Management');
 Route::get('/find/role/{id}', [
 	'uses' => 'RolesController@findRole',
 	'as' => 'find.role',
-]);
+])->middleware('permission:Role Management');
 Route::post('/assign/permissions/{id}', [
 	'uses' => 'RolesController@assignPermissions',
 	'as' => 'assign.permissions',
-]);
-Route::post('/user/roles/{id}', [
-	'uses' => 'RolesController@assignUserRoles',
+])->middleware('permission:Role Management');
+Route::get('/user/roles/{id}', [
+	'uses' => 'RolesController@userRole',
 	'as' => 'user.roles',
-]);
+])->middleware('permission:Role Management');
 // Route::get('/find/role/{id}', function ($id) {
 // 	$role = Role::find($id);
 // 	$pers = $role->getPermissionNames();

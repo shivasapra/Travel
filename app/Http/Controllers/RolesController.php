@@ -52,6 +52,11 @@ class RolesController extends Controller
                                 ->with('role',$role);
     }
 
+    public function userRole($id){
+        return view('userRoles')->with('user',User::find($id))
+                                ->with('roles',Role::all())
+                                ->with('permissions',Permission::all());
+    }
     public function assignUserRoles(Request $request,$id)
     {   
         $user = User::find($id);
