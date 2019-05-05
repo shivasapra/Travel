@@ -46,6 +46,8 @@ class PermissionsSeeder extends Seeder
 
         Permission::create(['name' => 'VAT Updation']);
 
+        Permission::create(['name' => 'Role Management']);
+
         Permission::create(['name' => 'View/Export Reports']);
 
         Permission::create(['name' => 'Generate Letter']);
@@ -88,6 +90,7 @@ class PermissionsSeeder extends Seeder
         $role_admin->givePermissionTo('VAT Updation');
         $role_admin->givePermissionTo('View/Export Reports');
         $role_admin->givePermissionTo('Generate Letter');
+        $role_admin->givePermissionTo('Role Management');
         $role_admin->givePermissionTo('Direct Chat');
         $role_admin->givePermissionTo('Services Registration');
         $role_admin->givePermissionTo('Airlines Name Registration');
