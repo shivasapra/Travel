@@ -9,17 +9,18 @@ Users
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Users</li>
+        <li><a href="{{route('users')}}">Users</a></li>
+        <li class="active">User Roles</li>
       </ol>
     </section>
 @stop
 @section('content')
 <div class="row">
     <div class="col-md-6">
+        <form action="" method="post">
+            @csrf
         <div class="box box-primary">
             <div class="box-body">
-            <form action="" method="post">
-                @csrf
                 <table class="table table-hover mb-0">
                     <div class="text-center">
                         <h2>Roles</h2>
@@ -45,18 +46,19 @@ Users
                         @endif
                     </tbody>
                 </table>
-                <div class="text-center">
-                    <button type="submit" class="btn btn-xs btn-success">Update</button>
-                </div>
             </div>
         </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-xs btn-success">Update</button>
+        </div>
+    </form>
     </div>
-    <div class="col-md-6">
+</div>
+    {{-- <div class="col-md-6">
+        <form action="" method="post">
+            @csrf
         <div class="box box-primary">
-            <div class="box-body">
-                <div id="permissions">
-                <form action="" method="post">
-                        @csrf
+                <div class="box-body">
                     <table class="table table-hover mb-0">
                         <div class="text-center">
                             <h2>Permissions</h2><hr>
@@ -68,7 +70,6 @@ Users
                             </tr>
                         </thead>
                         <tbody>
-                            <?php $i = 1; ?>
                             @foreach($permissions as $permission)
                             <tr>
                                 <th>{{$i++}}.</th>
@@ -80,13 +81,12 @@ Users
                             @endforeach
                         </tbody>
                     </table>
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-xs btn-success">Update</button>
-                    </div>
-                    </form> 
                 </div>
             </div>
-        </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-xs btn-success">Update</button>
+            </div>
+        </form> 
     </div>
-</div>
+</div> --}}
 @stop

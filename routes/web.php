@@ -48,6 +48,10 @@ Route::get('/user/roles/{id}', [
 	'uses' => 'RolesController@userRole',
 	'as' => 'user.roles',
 ])->middleware('permission:Role Management');
+Route::post('/assign/roles/to/user/{id}', [
+	'uses' => 'RolesController@assignUserRoles',
+	'as' => 'assignuser.roles',
+])->middleware('permission:Role Management');
 // Route::get('/find/role/{id}', function ($id) {
 // 	$role = Role::find($id);
 // 	$pers = $role->getPermissionNames();

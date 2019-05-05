@@ -60,13 +60,12 @@ class RolesController extends Controller
     public function assignUserRoles(Request $request,$id)
     {   
         $user = User::find($id);
-        foreach($request->roles as $index => $item_name){
-            $user->assignRole($request->roles[$index]);
+        foreach($user->roles as $role){
+            $user->removeRole($role);
         }
-        Session::flash('success','Roles Assigned To User');
-        return view('userRoles')->with('user',User::find($id))
-                                ->with('roles',Role::all())
-                                ->with('permissions',Permission::all());
+        $user->assignRole($request->roles);
+        Session::flash('success','Role Assigned To User');
+        return redirect()->back();
     }
 
     public function assignUserPermissions(Request $request,$id)

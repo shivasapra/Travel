@@ -21,6 +21,8 @@ use App\Chat;
 use Auth;
 use App\User;
 use App\assignment;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 class HomeController extends Controller
 {
     /**
@@ -323,6 +325,7 @@ class HomeController extends Controller
     }
 
     public function users(){
-        return view('users')->with('users',User::all());
+        return view('users')->with('users',User::all())
+                            ->with('roles',Role::all());
     }
 }

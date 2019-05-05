@@ -34,7 +34,8 @@ Users
                 <th>Avatar</th>
                 <th>Name</th>
                 <th>Email</th>
-                <th>##</th>
+                <th>Role</th>
+                <th>Action</th>
                 </tr>
                 </thead>
             <tbody>
@@ -55,9 +56,21 @@ Users
                         </td>
                         <td>{{$user->name}}</td>
                         <td>{{$user->email}}</td>
-                        <td>
-                            <a href="{{route('user.roles',['id'=>$user->id])}}" class="btn btn-xs btn-success">Roles/Permisssions</a>
-                        </td>
+                        <form action="{{route('assignuser.roles',['id'=>$user->id])}}" method="post">
+                        @csrf
+                            <td>
+                                <select name="roles" id="" class="form-control">
+                                    <option value="">{{'--Select Role--'}}</option>
+                                    @foreach($roles as $role)
+                                        <option value="{{$role->name}}" @if($user->hasRole($role->name)) selected @endif>{{$role->name}}</option>
+                                    @endforeach
+                                </select>
+                                {{-- <a href="{{route('user.roles',['id'=>$user->id])}}" class="btn btn-xs btn-success">Roles/Permisssions</a> --}}
+                            </td>
+                            <td>
+                                <button type="submit" class="btn btn-xs btn-success">Save</button>
+                            </td>
+                        </form>
                     </tr>
                     @endforeach
                 @endif
