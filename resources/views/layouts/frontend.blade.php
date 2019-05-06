@@ -319,7 +319,7 @@
             </ul>
           </li>
         @endif
-  
+        @if(Auth::user()->can('View Invoices') or Auth::user()->can('View Canceled Invoice') or Auth::user()->can('VAT Updation')) 
           <li class="treeview">
             <a href="">
               <i class="fa fa-wrench"></i><span>Invoices</span>
@@ -328,11 +328,20 @@
               </span>
             </a>
             <ul class="treeview-menu">
+              @can('View Invoices')
                 <li><a href="{{route('invoice')}}"><i class="fa fa-circle-o"></i>Invoice Generation</a></li>
+              @endcan
+              @can('View Canceled Invoice')
                 <li><a href="{{route('canceled.invoices')}}"><i class="fa fa-circle-o"></i>Canceled Invoices</a></li>
+              @endif
+              @can('VAT Updation')
                 <li><a href="{{route('tax')}}"><i class="fa fa-circle-o"></i>VAT</a></li>
+              @endcan
             </ul>
           </li>
+        @endif
+
+          @can('View/Export Reports')
           <li class="treeview">
             <a href="">
               <i class="fa fa-bar-chart-o"></i><span>Reports</span>
@@ -348,16 +357,22 @@
                 <li><a href="{{route('docmov.report')}}"><i class="fa fa-circle-o"></i>Document Movement Report</a></li>
             </ul>
           </li>
+          @endcan
         <li><a href="{{route('assign')}}"><i class="fa fa-clock-o"></i><span>Assignments</span></a></li>
-        <li><a href="{{route('letter')}}"><i class="fa fa-envelope-open-o"></i><span>Generate Letter</span></a></li>
-        <li><a href="{{route('direct.chat')}}"><i class="fa fa-commenting-o"></i><span>Direct Chat</span></a></li>
-        <li><a href="{{route('products')}}"><i class="fa fa-plus-square"></i><span>Services Registration</span></a></li>
-        <li><a href="{{route('airlines')}}"><i class="fa fa-plane"></i><span>Airlines Name Registration</span></a></li>
+        @can('Generate Letter')
+          <li><a href="{{route('letter')}}"><i class="fa fa-envelope-open-o"></i><span>Generate Letter</span></a></li>
+        @endcan
+        @can('Direct Chat')
+          <li><a href="{{route('direct.chat')}}"><i class="fa fa-commenting-o"></i><span>Direct Chat</span></a></li>
+        @endcan
+        @can('Services Registration')
+          <li><a href="{{route('products')}}"><i class="fa fa-plus-square"></i><span>Services Registration</span></a></li>
+        @endcan
+        @can('Airlines Name Registration')
+          <li><a href="{{route('airlines')}}"><i class="fa fa-plane"></i><span>Airlines Name Registration</span></a></li>
+        @endcan
       @endif
       @if(!Auth::user()->admin)
-       <li><a href="{{route('clients')}}"><i class="fa fa-user-circle"></i><span>Clients</span></a></li>
-        <li><a href="{{route('expenses.get')}}"><i class="fa fa-money"></i><span>Expenses</span></a></li>
-        <li><a href="{{route('assign')}}"><i class="fa fa-clock-o"></i><span>Assignments</span></a></li>
         <li>
           <a href="{{route('session')}}">
             <i class="fa fa-clock-o"></i> <span>Mark Attendance
