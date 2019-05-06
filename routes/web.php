@@ -232,27 +232,27 @@ Route::resource('tasks', 'TasksController');
 Route::get('/client/status',[
 			'uses'=> 'clientController@status',
 			'as'=>'clientStatus'
-		])->middleware('permission: Client Visa Application Status');
+		])->middleware('permission:Client Visa Application Status');
 Route::post('/status/save',[
 			'uses'=> 'clientController@statusSave',
 			'as'=>'statusSave'
-		])->middleware('permission: Client Visa Application Status');
+		])->middleware('permission:Client Visa Application Status');
 
 
 Route::get('/letter',[
 			'uses'=> 'HomeController@letter',
 			'as'=>'letter'
-		])->middleware('permission: Generate Letter');
+		])->middleware('permission:Generate Letter');
 Route::post('/send/letter',[
 			'uses'=> 'HomeController@sendLetter',
 			'as'=>'sendLetter'
-		])->middleware('permission: Generate Letter');
+		])->middleware('permission:Generate Letter');
 
 
 Route::post('/send/letter/{id}',[
 	'uses'=> 'employeeController@sendLetterToEmployee',
 	'as'=>'sendLetterTOEmployee'
-	])->middleware('permission: Letter To Employee');
+	])->middleware('permission:Letter To Employee');
 
 
 Route::get('/task/delete/{id}',[
@@ -264,11 +264,11 @@ Route::get('/task/delete/{id}',[
 Route::get('/tax',[
 			'uses'=> 'HomeController@tax',
 			'as'=>'tax'
-		])->middleware('permission: VAT Updation');
+		])->middleware('permission:VAT Updation');
 Route::post('/tax/update/',[
 			'uses'=> 'HomeController@taxUpdate',
 			'as'=>'tax.update'
-		])->middleware('permission: VAT Updation');
+		])->middleware('permission:VAT Updation');
 
 
 Route::get('/searchAirline','InvoiceController@AirlineSearch');
@@ -318,48 +318,48 @@ Route::post('/Logout',[
 Route::get('/wage',[
 		'uses' => 'wageController@index',
 		'as' => 'wage'
-	])->middleware('permission: Staff Wage management');
+	])->middleware('permission:Staff Wage management');
 Route::get('/employee/wage/log/{id}',[
 		'uses' => 'wageController@show',
 		'as' => 'wage.log'
-	])->middleware('permission: Staff Wage management');
+	])->middleware('permission:Staff Wage management');
 
 
 Route::get('/generate/slip',[
 		'uses' => 'wageController@generateSlip',
 		'as' => 'slip.generate'
-	])->middleware('permission: Employee Salary Slip');
+	])->middleware('permission:Employee Salary Slip');
 Route::post('/slip',[
 		'uses' => 'wageController@slip',
 		'as' => 'slip'
-	])->middleware('permission: Employee Salary Slip');
+	])->middleware('permission:Employee Salary Slip');
 
 
 
 Route::get('/employees',[
 		'uses' => 'employeeController@index',
 		'as' => 'employees'
-	])->middleware('permission: View Employees');
+	])->middleware('permission:View Employees');
 Route::get('/employee/registration',[
 		'uses' => 'employeeController@create',
 		'as' => 'create.employee'
-	])->middleware('permission: Create Employee');
+	])->middleware('permission:Create Employee');
 Route::post('/employee/store',[
 		'uses' => 'employeeController@store',
 		'as' => 'store.employee'
-		])->middleware('permission: Create Employee');
+		])->middleware('permission:Create Employee');
 Route::post('/employee/update/{id}',[
 		'uses' => 'employeeController@update',
 		'as' => 'update.employee'
-		])->middleware('permission: Create Employee');
+		])->middleware('permission:Create Employee');
 Route::get('/employee/edit/{id}',[
 		'uses' => 'employeeController@edit',
 		'as' => 'edit.employee'
-	])->middleware('permission: Edit Employee');
+	])->middleware('permission:Edit Employee');
 Route::get('/employee/view/{id}',[
 		'uses' => 'employeeController@show',
 		'as' => 'view.employee'
-	])->middleware('permission: View Employees');
+	])->middleware('permission:View Employees');
 // Route::get('/employee/delete/{id}',[
 // 		'uses' => 'employeeController@destroy',
 // 		'as' => 'delete.employee'
@@ -367,15 +367,15 @@ Route::get('/employee/view/{id}',[
 Route::get('/employeeletter/{id}',[
 		'uses' => 'employeeController@letter',
 		'as' => 'letter.employee'
-		])->middleware('permission: Letter To Employee');
+		])->middleware('permission:Letter To Employee');
 Route::get('/status',[
 		'uses' => 'employeeController@status',
 		'as' => 'status'
-	])->middleware('permission: Employee Attendance Status');
+	])->middleware('permission:Employee Attendance Status');
 Route::post('/employee/status',[
 		'uses' => 'employeeController@status2',
 		'as' => 'status2'
-	])->middleware('permission: Employee Attendance Status');
+	])->middleware('permission:Employee Attendance Status');
 
 
 
