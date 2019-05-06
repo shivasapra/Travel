@@ -249,9 +249,11 @@
         @can('View Users')
           <li><a href="{{route('users')}}"><i class="fa fa-user"></i><span>Users</span></a></li>
         @endcan
+
         @can('Role Management')
           <li><a href="{{route('role.management')}}"><i class="fa fa-dot-circle-o"></i><span>Role Management</span></a></li>
         @endcan
+
         @if(Auth::user()->can('View Clients') or Auth::user()->can('Client Visa Application Status') or Auth::user()->can('Client Documents Movement'))
         <li class="treeview">
             <a href="">
@@ -274,6 +276,7 @@
           </li>
         @endif
 
+        @if(Auth::user()->can('View Employees') or Auth::user()->can('Employee Attendance Status') or Auth::user()->can('Employee Salary Slip') or Auth::user()->can('Staff Wage management'))
         <li class="treeview">
             <a href="">
               <i class="fa fa-pencil-square-o"></i><span>Employee Management</span>
@@ -282,12 +285,23 @@
               </span>
             </a>
             <ul class="treeview-menu">
+              @can('View Employees')
                 <li><a href="{{route('employees')}}"><i class="fa fa-circle-o"></i><span>Employees</span></a></li>
+              @endcan
+              @can('Employee Attendance Status')
                 <li><a href="{{route('status')}}"><i class="fa fa-circle-o"></i> <span>Employee Attendance Status</span></a></li>
+              @endcan
+              @can('Employee Salary Slip')
                 <li><a href="{{route('slip.generate')}}"><i class="fa fa-circle-o"></i>Generate Employee Salary Slip</a></li>
+              @endcan
+              @can('Staff Wage management')
                 <li><a href="{{route('wage')}}"><i class="fa fa-circle-o"></i><span>Staff Wage Management</span></a></li>
+              @endcan
             </ul>
           </li>
+          @endif
+
+        @if(Auth::user()->can('Expense Entry') or Auth::user()->can('Auto Deduction Expense Entry')) 
         <li class="treeview">
             <a href="">
               <i class="fa fa-money"></i><span>Daily Expense Entry</span>
@@ -296,10 +310,15 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="{{route('expenses.get')}}"><i class="fa fa-circle-o"></i>Expenses</a></li>
-              <li><a href="{{route('auto.get')}}"><i class="fa fa-circle-o"></i>Auto Deduction</a></li>
+              @can('Expense Entry')
+                <li><a href="{{route('expenses.get')}}"><i class="fa fa-circle-o"></i>Expenses</a></li>
+              @endcan
+              @can('Auto Deduction Expense Entry')
+                <li><a href="{{route('auto.get')}}"><i class="fa fa-circle-o"></i>Auto Deduction</a></li>
+              @endcan
             </ul>
           </li>
+        @endif
   
           <li class="treeview">
             <a href="">
