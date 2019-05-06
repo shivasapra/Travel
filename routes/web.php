@@ -225,6 +225,7 @@ Route::get('/deactivate/employee/{id}',[
 
 
 
+
 Route::post('sendEmail', [
         'uses' => 'HomeController@sendEmail',
         'as' => 'send.email',
