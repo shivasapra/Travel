@@ -140,8 +140,13 @@ class RolesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroyRole($id)
     {
-        //
+        $role = Role::find($id);
+        $role->delete();
+        Session::flash('warning','Role deleted!!');
+        return view('Role.index')->with('roles',Role::all())
+                                ->with('role',null)
+                                ->with('permissions',Permission::all());
     }
 }

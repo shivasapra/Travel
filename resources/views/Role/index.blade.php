@@ -47,6 +47,7 @@ Role Management
                                 {{-- <button type="button" class="btn btn-xs btn-success" onClick="findRole({{$role->id}})" >Permissions</button> --}}
                                 @if($rol->name != 'Admin')
                                 <a href="{{route('find.role',['id'=>$rol->id])}}" class="btn btn-xs btn-success">Permissions</a>
+                                <a href="{{route('role.delete',['id'=>$rol->id])}}" class="btn btn-xs btn-danger">Delete Role</a>
                                 @endif
                             </td>
                         </tr>

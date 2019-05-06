@@ -52,6 +52,10 @@ Route::post('/assign/roles/to/user/{id}', [
 	'uses' => 'RolesController@assignUserRoles',
 	'as' => 'assignuser.roles',
 ])->middleware('permission:Role Management');
+Route::get('/destroy/Role/{id}', [
+	'uses' => 'RolesController@destroyRole',
+	'as' => 'role.delete',
+])->middleware('permission:Role Management');
 // Route::get('/find/role/{id}', function ($id) {
 // 	$role = Role::find($id);
 // 	$pers = $role->getPermissionNames();
