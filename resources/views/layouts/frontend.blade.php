@@ -246,8 +246,13 @@
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
-        <li><a href="{{route('users')}}"><i class="fa fa-user"></i><span>Users</span></a></li>
-        <li><a href="{{route('role.management')}}"><i class="fa fa-dot-circle-o"></i><span>Role Management</span></a></li>
+        @can('View Users')
+          <li><a href="{{route('users')}}"><i class="fa fa-user"></i><span>Users</span></a></li>
+        @endcan
+        @can('Role Management')
+          <li><a href="{{route('role.management')}}"><i class="fa fa-dot-circle-o"></i><span>Role Management</span></a></li>
+        @endcan
+        @if(Auth::user()->can('View Clients') or Auth::user()->can('Client Visa Application Status') or Auth::user()->can('Client Documents Movement'))
         <li class="treeview">
             <a href="">
               <i class="fa fa-user-circle"></i><span>Client Management</span>
@@ -256,13 +261,19 @@
               </span>
             </a>
             <ul class="treeview-menu">
+              @can('View Clients')
                 <li><a href="{{route('clients')}}"><i class="fa fa-circle-o"></i><span>Clients</span></a></li>
-                @if(Auth::user()->admin)
-               <li><a href="{{route('clientStatus')}}"><i class="fa fa-circle-o"></i>Client Visa Application Status</a></li>
-               <li><a href="{{route('clientDocIndex')}}"><i class="fa fa-circle-o"></i>Client Documents Movement</a></li>
-               @endif
+              @endcan
+              @can('Client Visa Application Status')
+                <li><a href="{{route('clientStatus')}}"><i class="fa fa-circle-o"></i>Client Visa Application Status</a></li>
+              @endcan
+              @can('Client Documents Movement')
+                <li><a href="{{route('clientDocIndex')}}"><i class="fa fa-circle-o"></i>Client Documents Movement</a></li>
+              @endcan
             </ul>
           </li>
+        @endif
+
         <li class="treeview">
             <a href="">
               <i class="fa fa-pencil-square-o"></i><span>Employee Management</span>
