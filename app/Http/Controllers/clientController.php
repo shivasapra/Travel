@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\client;
 use Session;
+use Validator;
 use Mail;
 use Carbon\Carbon;
 use Auth;
@@ -54,7 +55,12 @@ class clientController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+        Validator::make($request->all(), [
+            'first_name' => 'integer',
+            ])->validate();
+        
+
         $client = new client;
         $unique_id = 'CLD'. mt_rand(100000, 999999);
         while (client::where('unique_id',$unique_id)->get()->count()>0) {

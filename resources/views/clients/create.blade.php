@@ -18,17 +18,16 @@ Client Registration
     </section>
 @stop
 @section('content')
-	
-	@if(count($errors)>0)
-		<ul class="list-group">
-			@foreach($errors->all() as $error)
-				<li class="list_group-item text-danger">
-					{{ $error }}
-				</li>
-			@endforeach
-		</ul>
-	@endif
 
+	@if ($errors->any())
+	<div class="alert alert-danger">
+			<ul>
+					@foreach ($errors->all() as $error)
+							<li>{{ $error }}</li>
+					@endforeach
+			</ul>
+	</div>
+	@endif
 
 
 			<form action="{{route('store.client')}}" method="post" enctype="multipart/form-data" name="myForm">
@@ -39,7 +38,7 @@ Client Registration
 					<div class="col-md-6">
 					<div class="form-group">
 						<label for="first_name">First Name</label>
-						<input type="text" name='first_name' required class="form-control">
+						<input type="text" name='first_name' value="{{old('first_name')}}" required class="form-control">
 					</div>
 					</div>
 					<div class="col-md-6">
