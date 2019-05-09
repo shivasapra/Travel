@@ -44,7 +44,7 @@ Client Registration
 					<div class="col-md-6">
 					<div class="form-group">
 						<label for="last_name">Last Name</label>
-						<input type="text" name='last_name' required class="form-control">
+						<input type="text" name='last_name' value="{{old('last_name')}}" required class="form-control">
 					</div>
 					</div>
 				</div>
@@ -52,13 +52,13 @@ Client Registration
 					<div class="col-md-6">
 					<div class="form-group">
 						<label for="address">Street</label>
-						<input type="text" name='address' required class="form-control">
+						<input type="text" name='address' value="{{old('address')}}" required class="form-control">
 					</div>
 					</div>
 					<div class="col-md-6">
 					<div class="form-group">
 						<label for="city">City</label>
-						<input id="city" type="text" name='city' required class="form-control">
+						<input id="city" type="text" name='city' value="{{old('city')}}" required class="form-control">
 					</div>
 					</div>
 					
@@ -69,13 +69,13 @@ Client Registration
 					<div class="col-md-4">
 					<div class="form-group">
 						<label for="county">County</label>
-						<input id="county" type="text" name='county' required class="form-control">
+						<input id="county" type="text" name='county' value="{{old('county')}}" required class="form-control">
 					</div>
 					</div>
 					<div class="col-md-6">
 					<div class="form-group">
 						<label for="postal_code">Postal Code</label>
-						<input id="postal_code" type="text" name='postal_code' required class="form-control" onkeyup="fun()">
+						<input id="postal_code" type="text" name='postal_code' value="{{old('postal_code')}}" required class="form-control" onkeyup="fun()">
 					</div>
 					</div>
 				</div>
@@ -83,13 +83,13 @@ Client Registration
 					<div class="col-md-6">
 					<div class="form-group">
 						<label for="country">Country</label>
-						<input id="country" type="text" name='country' required class="form-control">
+						<input id="country" type="text" name='country' value="{{old('country')}}" required class="form-control">
 					</div>
 					</div>
 					<div class="col-md-6">
 					<div class="form-group">
 						<label for="phone">Phone</label>
-						<input type="text" name='phone' required class="form-control">
+						<input type="text" name='phone' value="{{old('phone')}}" required class="form-control">
 					</div>
 					</div>
 				</div>
@@ -97,13 +97,13 @@ Client Registration
 					<div class="col-md-6">
 					<div class="form-group">
 						<label for="email">Email</label>
-						<input type="email" name='email' required class="form-control">
+						<input type="email" name='email' value="{{old('email')}}" required class="form-control">
 					</div>
 					</div>
 					<div class="col-md-6">
 					<div class="form-group">
 						<label for="DOB">DOB</label>
-						<input type="date" name='DOB' value="{{$date}}" required class="form-control">
+						<input type="date" name='DOB' value="{{old('DOB')}}" value="{{$date}}" required class="form-control">
 					</div>
 					</div>
 				</div>
