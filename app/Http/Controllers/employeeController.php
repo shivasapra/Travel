@@ -164,11 +164,11 @@ class employeeController extends Controller
         while (Invite::where('token', $token)->first());
 
         //create a new invite record
-        $invite = Invite::create([
-            'email' => $employee->email,
-            'token' => $token
-        ]);
-
+        $invite = new Invite;
+        $invite->email = $employee->email;
+        $invite->token = $token;
+        $invite->save();
+        
         // send the email
         $contactEmail = $employee->email;
         $data = array('token'=>$token);
