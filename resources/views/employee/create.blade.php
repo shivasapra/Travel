@@ -264,7 +264,13 @@ Employee Registration
 					<div class="col-md-4">
 					<div class="form-group">
 						<label for="hired_for_dep">Hired For: Department</label>
-						<input type="text" name='hired_for_dep' value="{{old('hired_for_dep')}}" class="form-control">
+						<select name='hired_for_dep' class="form-control"required>
+							<option value="" class="form-control">---Select---</option>
+								@foreach(Spatie\Permission\Models\Role::all() as $role)
+										<option value="{{$role->name}}" class="form-control">{{$role->name}}</option>	
+								@endforeach
+						</select>
+						{{-- <input type="text" name='hired_for_dep' value="{{old('hired_for_dep')}}" class="form-control"> --}}
 					</div>
 					</div>
 					<div class="col-md-4">
