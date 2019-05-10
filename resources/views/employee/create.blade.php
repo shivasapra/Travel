@@ -16,15 +16,15 @@ Employee Registration
 @stop
 @section('content')
 	
-	@if(count($errors)>0)
-		<ul class="list-group">
-			@foreach($errors->all() as $error)
-				<li class="list_group-item text-danger">
-					{{ $error }}
-				</li>
-			@endforeach
+@if ($errors->any())
+<div class="alert alert-danger">
+		<ul>
+				@foreach ($errors->all() as $error)
+						<li>{{ $error }}</li>
+				@endforeach
 		</ul>
-	@endif
+</div>
+@endif
 
 
 

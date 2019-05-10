@@ -12,6 +12,7 @@ use App\Mail\InviteCreated;
 use Mail;
 use App\wage;
 use App\assignment;
+use Validator;
 
 class employeeController extends Controller
 {   
@@ -53,7 +54,15 @@ class employeeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+        Validator::make($request->all(), [
+            'passport_no' => 'unique:employees',
+            'email' => 'unique:users',
+            'mobile_phone' => 'unique:employees',
+            'rate' => 'integer'
+            ])->validate();
+
+        
         $employee = new employee;
         $employee->first_name = $request->first_name;
         $employee->last_name = $request->last_name;
