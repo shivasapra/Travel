@@ -97,6 +97,17 @@ class PermissionsSeeder extends Seeder
 
         User::find(1)->assignRole('Admin');
         User::find(2)->assignRole('Admin');
+
+
+        $role_marketing = Role::create(['name'=>'Marketing Employee']);
+        $role_marketing_manager = Role::create(['name'=>'Marketing Manager']);
+        $role_sales = Role::create(['name'=>'Sales Employee']);
+        $role_prive = Role::create(['name'=>'Prive SE']);
+        $role_sales_manager = Role::create(['name'=>'Sales Manager']);
+        $role_mrd = Role::create(['name'=>'MRD']);
+        $role_tms = Role::create(['name'=>'TMS']);
+        $role_tms = Role::create(['name'=>'TME']);
+        $role_tms = Role::create(['name'=>'BMM']);
         
     }
 }
