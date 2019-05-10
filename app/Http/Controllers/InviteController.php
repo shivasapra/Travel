@@ -25,7 +25,7 @@ class InviteController extends Controller
         $user->email = $employee[0]->email;
         $user->password = bcrypt('pass@123');
         $user->save();
-        $user->assignRole($employee->hired_for_dep);
+        $user->assignRole($employee[0]->hired_for_dep);
         $employee[0]->user_id = $user->id;
         $employee[0]->save();
 
