@@ -98,6 +98,13 @@ class PermissionsSeeder extends Seeder
         User::find(1)->assignRole('Admin');
         User::find(2)->assignRole('Admin');
 
+        $role_accountant = Role::create(['name'=>'Accountant']);
+        $role_collection_manager = Role::create(['name'=>'Collection Manager']);
+
+        $role_hr_manager = Role::create(['name'=>'HR Manager']);
+        $role_hr_executive = Role::create(['name'=>'HR Executive']);
+
+        $role_bmm = Role::create(['name'=>'BMM']);
 
         $role_marketing = Role::create(['name'=>'Marketing Employee']);
         $role_marketing_manager = Role::create(['name'=>'Marketing Manager']);
@@ -107,7 +114,6 @@ class PermissionsSeeder extends Seeder
         $role_mrd = Role::create(['name'=>'MRD']);
         $role_tms = Role::create(['name'=>'TMS']);
         $role_tms = Role::create(['name'=>'TME']);
-        $role_tms = Role::create(['name'=>'BMM']);
         
     }
 }
