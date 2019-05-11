@@ -735,19 +735,3 @@ class InvoiceController extends Controller
     }
 
 }
-
-
-
-
-// $invoice = invoice::where(invoice_no);
-        // $client = new GuzzleHttp\Client();
-        // $res = $client->get('https://api.postcodes.io/postcodes?q=OX495NU');
-        // dd($res);
-        // dd($res->getStatusCode());
-        // $json = json_decode(file_get_contents('https://api.postcodes.io/postcodes?q=OX495NU'), true);
-        // $result = json_decode(file_get_contents('https://api.postcodes.io/postcodes?q=OX495NU'), true);
-        // dd($result);
-        // dd($json['result'][0]['postcode']);
-        // $request = Request::create('http://api.postcodes.io/postcodes/B289EU', 'GET');
-        // dd($request);
-
