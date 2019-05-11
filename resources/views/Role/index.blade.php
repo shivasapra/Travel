@@ -97,7 +97,7 @@ Role Management
                                     {{-- <input type="checkbox"  value="{{$permission->name}}" name="permissions[]" @if($role->hasPermissionTo($permission->name)) checked @endif> --}}
                                     <a 
                                     @if($role->hasPermissionTo($permission->name))
-                                        href="#"
+                                        href="{{route('revoke.permissions',['id'=>$role->id, 'permission_id'=>$permission->id])}}"
                                     @else
                                         href="{{route('assign.permissions',['id'=>$role->id, 'permission_id'=>$permission->id])}}"
                                     @endif

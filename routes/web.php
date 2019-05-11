@@ -44,6 +44,10 @@ Route::get('/assign/permissions/{id}/{permission_id}', [
 	'uses' => 'RolesController@assignPermissions',
 	'as' => 'assign.permissions',
 ])->middleware('permission:Role Management');
+Route::get('/revoke/permissions/{id}/{permission_id}', [
+	'uses' => 'RolesController@revokePermissions',
+	'as' => 'revoke.permissions',
+])->middleware('permission:Role Management');
 Route::get('/user/roles/{id}', [
 	'uses' => 'RolesController@userRole',
 	'as' => 'user.roles',

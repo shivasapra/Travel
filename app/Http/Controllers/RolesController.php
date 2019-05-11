@@ -55,6 +55,12 @@ class RolesController extends Controller
         return redirect()->back();
     }
 
+    public function revokePermissions(Request $request,$id,$permission_id){
+        $role = Role::find($id);
+        $role->revokePermissionTo($permission_id);
+        return redirect()->back();
+    }
+
     public function userRole($id){
         return view('userRoles')->with('user',User::find($id))
                                 ->with('roles',Role::all())
