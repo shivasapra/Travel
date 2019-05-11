@@ -19,7 +19,7 @@ Departments
             <!-- small box -->
             <div class="small-box bg-yellow">
                 <div class="inner">
-                <h3>{{App\User::role('Account Manager')->count() + App\User::role('Account executive')->count()}}</h3>
+                <h3>{{App\User::role('Account Manager')->count() + App\User::role('Account Executive')->count()}}</h3>
 
                 <p>{{'Accounts'}}</p>
                 </div>
@@ -36,7 +36,7 @@ Departments
             <!-- small box -->
             <div class="small-box bg-green">
                 <div class="inner">
-                <h3>{{App\User::role('Marketing/Sales Manager')->count() + App\User::role('Marketing/Sales executive')->count()}}</h3>
+                <h3>{{App\User::role('Marketing/Sales Manager')->count() + App\User::role('Marketing/Sales Executive')->count()}}</h3>
 
                 <p>{{'Marketing/Sales'}}</p>
                 </div>
@@ -53,7 +53,7 @@ Departments
             <!-- small box -->
             <div class="small-box bg-red">
                 <div class="inner">
-                <h3>{{App\User::role('HRD Manager')->count() + App\User::role('HRD executive')->count()}}</h3>
+                <h3>{{App\User::role('HRD Manager')->count() + App\User::role('HRD Executive')->count()}}</h3>
 
                 <p>{{'HRD'}}</p>
                 </div>
@@ -70,7 +70,7 @@ Departments
             <!-- small box -->
             <div class="small-box bg-blue">
                 <div class="inner">
-                <h3>{{App\User::role('Operations Manager')->count() + App\User::role('Operations executive')->count()}}</h3>
+                <h3>{{App\User::role('Operations Manager')->count() + App\User::role('Operations Executive')->count()}}</h3>
 
                 <p>{{'Operations'}}</p>
                 </div>

@@ -329,7 +329,5 @@ class HomeController extends Controller
                             ->with('roles',Role::all());
     }
 
-    public function departments(){
-        return view('departments.index')->with('roles',Role::all());
-    }
+    
 }
