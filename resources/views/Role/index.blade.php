@@ -63,8 +63,8 @@ Role Management
             <div class="box-body">
                 <div id="permissions">
                 @if($permissions->count()>0 and $role != null)
-                <form action="{{route('assign.permissions',['id'=>$role->id])}}" method="post">
-                        @csrf
+                {{-- <form action="{{route('assign.permissions',['id'=>$role->id])}}" method="post">
+                        @csrf --}}
                 @endif
                     <table class="table table-hover mb-0" >
                         <div class="text-center">
@@ -94,19 +94,32 @@ Role Management
                                 <th>{{$i++}}.</th>
                                 <td>{{$permission->name}}</td>
                                 <td>
-                                    <input type="checkbox"  value="{{$permission->name}}" name="permissions[]" @if($role->hasPermissionTo($permission->name)) checked @endif>
+                                    {{-- <input type="checkbox"  value="{{$permission->name}}" name="permissions[]" @if($role->hasPermissionTo($permission->name)) checked @endif> --}}
+                                    <a 
+                                    @if($role->hasPermissionTo($permission->name))
+                                        href="#"
+                                    @else
+                                        href="{{route('assign.permissions',['id'=>$role->id, 'permission_id'=>$permission->id])}}"
+                                    @endif
+
+                                    @if($role->hasPermissionTo($permission->name)) 
+                                        class="btn btn-sm btn-success" 
+                                    @else 
+                                        class="btn btn-sm btn-danger" 
+                                    @endif 
+                                    style="border-radius:50%"></a>
                                 </td>
                             </tr>
                             @endforeach
                             @endif
                         </tbody>
                     </table>
-                    @if($permissions->count()>0 and $role != null)
+                    {{-- @if($permissions->count()>0 and $role != null)
                     <div class="text-center">
                         <button type="submit" class="btn btn-xs btn-success">Update</button>
                     </div>
                     @endif
-                    </form>
+                    </form> --}}
                             
                 </div>
             </div>

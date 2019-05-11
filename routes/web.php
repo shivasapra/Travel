@@ -40,7 +40,7 @@ Route::get('/find/role/{id}', [
 	'uses' => 'RolesController@findRole',
 	'as' => 'find.role',
 ])->middleware('permission:Role Management');
-Route::post('/assign/permissions/{id}', [
+Route::get('/assign/permissions/{id}/{permission_id}', [
 	'uses' => 'RolesController@assignPermissions',
 	'as' => 'assign.permissions',
 ])->middleware('permission:Role Management');

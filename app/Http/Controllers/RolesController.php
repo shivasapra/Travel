@@ -37,19 +37,22 @@ class RolesController extends Controller
                                 ->with('role',$role);
     }
 
-    public function assignPermissions(Request $request,$id){
+    public function assignPermissions(Request $request,$id,$permission_id){
         $role = Role::find($id);
-        $permissions = $role->Permissions;
-        foreach ($permissions as $per) {
-            $role->revokePermissionTo($per);
-        }
+        // $permissions = $role->Permissions;
+        // foreach ($permissions as $per) {
+        //     $role->revokePermissionTo($per);
+        // }
         // dd($request->permissions);
-        foreach($request->permissions as $permission){
-            $role->givePermissionTo($permission);
-        }
-        return view('Role.index')->with('roles',Role::all())
-                                ->with('permissions',Permission::all())
-                                ->with('role',$role);
+        // foreach($request->permissions as $permission){
+        //     $role->givePermissionTo($permission);
+        // }
+        // return view('Role.index')->with('roles',Role::all())
+        //                         ->with('permissions',Permission::all())
+        //                         ->with('role',$role);
+
+        $role->givePermissionTo($permission_id);
+        return redirect()->back();
     }
 
     public function userRole($id){
@@ -57,28 +60,7 @@ class RolesController extends Controller
                                 ->with('roles',Role::all())
                                 ->with('permissions',Permission::all());
     }
-    public function assignUserRoles(Request $request,$id)
-    {   
-        $user = User::find($id);
-        foreach($user->roles as $role){
-            $user->removeRole($role);
-        }
-        $user->assignRole($request->roles);
-        Session::flash('success','Role Assigned To User');
-        return redirect()->back();
-    }
-
-    public function assignUserPermissions(Request $request,$id)
-    {   
-        $user = User::find($id);
-        foreach($request->permissions as $index => $item_name){
-            $user->givePermissionTo($request->permissions[$index]);
-        }
-        Session::flash('success',' Permissions Assigned To User');
-        return view('userRoles')->with('roles',Role::all())
-                                ->with('permissions',Permission::all())
-                                ->with('user',User::find($id));
-    }
+    
     /**
      * Show the form for creating a new resource.
      *
