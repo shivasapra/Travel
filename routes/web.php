@@ -524,3 +524,9 @@ Route::get('/invoice/print',[
 			'uses'=> 'InvoiceController@invoicePrint',
 			'as'=>'invoice.print'
 		])->middleware('permission:View Invoices');
+
+
+Route::get('/departments',[
+	'uses'=> 'HomeController@departments',
+	'as'=>'departments'
+	]);

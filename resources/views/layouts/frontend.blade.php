@@ -254,6 +254,8 @@
           <li><a href="{{route('role.management')}}"><i class="fa fa-dot-circle-o"></i><span>Role Management</span></a></li>
         @endcan
 
+        <li><a href="{{route('departments')}}"><i class="fa fa-briefcase"></i><span>Departments</span></a></li>
+
         @if(Auth::user()->can('View Clients') or Auth::user()->can('Client Visa Application Status') or Auth::user()->can('Client Documents Movement'))
         <li class="treeview">
             <a href="">
