@@ -101,8 +101,8 @@ class PermissionsSeeder extends Seeder
         $role_account_manager = Role::create(['name'=>'Account Manager']);
         $role_account_executive = Role::create(['name'=>'Account Executive']);
 
-        $role_marketing_manager = Role::create(['name'=>'Marketing/Sales Manager']);
-        $role_marketing_executive = Role::create(['name'=>'Marketing/sales Executive']);
+        $role_marketing_manager = Role::create(['name'=>'Marketing-Sales Manager']);
+        $role_marketing_executive = Role::create(['name'=>'Marketing-sales Executive']);
 
         $role_hrd_manager = Role::create(['name'=>'HRD Manager']);
         $role_hrd_executive = Role::create(['name'=>'HRD Executive']);

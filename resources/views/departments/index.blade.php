@@ -36,9 +36,9 @@ Departments
             <!-- small box -->
             <div class="small-box bg-green">
                 <div class="inner">
-                <h3>{{App\User::role('Marketing/Sales Manager')->count() + App\User::role('Marketing/Sales Executive')->count()}}</h3>
+                <h3>{{App\User::role('Marketing-Sales Manager')->count() + App\User::role('Marketing-Sales Executive')->count()}}</h3>
 
-                <p>{{'Marketing/Sales'}}</p>
+                <p>{{'Marketing-Sales'}}</p>
                 </div>
                 <div class="icon">
                 <i class="fa fa-user-circle"></i>

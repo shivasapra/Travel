@@ -24,12 +24,12 @@ Marketing/Sales Department
                 <div class="inner">
                 <h3>{{App\User::role('Marketing/Sales Manager')->count()}}</h3>
 
-                <p>{{'Marketing/Sales Manager'}}</p>
+                <p>{{'Marketing-Sales Manager'}}</p>
                 </div>
                 <div class="icon">
                 <i class="fa fa-user-circle"></i>
                 </div>
-                <a href="{{route('display.specific',['slug'=>'Marketing/Sales Manager'])}}" class="small-box-footer">
+                <a href="{{route('display.specific',['slug'=>'Marketing-Sales Manager'])}}" class="small-box-footer">
                 More info <i class="fa fa-arrow-circle-right"></i>
                 </a>
             </div>
@@ -41,12 +41,12 @@ Marketing/Sales Department
                 <div class="inner">
                 <h3>{{App\User::role('Marketing/Sales Executive')->count()}}</h3>
 
-                <p>{{'Marketing/Sales Executive'}}</p>
+                <p>{{'Marketing-Sales Executive'}}</p>
                 </div>
                 <div class="icon">
                 <i class="fa fa-user-circle"></i>
                 </div>
-                <a href="{{route('display.specific',['slug'=>'Marketing/Sales Executive'])}}" class="small-box-footer">
+                <a href="{{route('display.specific',['slug'=>'Marketing-Sales Executive'])}}" class="small-box-footer">
                 More info <i class="fa fa-arrow-circle-right"></i>
                 </a>
             </div>
