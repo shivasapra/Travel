@@ -19,14 +19,65 @@ Departments
             <!-- small box -->
             <div class="small-box bg-yellow">
                 <div class="inner">
-                <h3>{{'44'}}</h3>
+                <h3>{{App\User::role('Account Manager')->count() + App\User::role('Account executive')->count()}}</h3>
 
                 <p>{{'Accounts'}}</p>
                 </div>
                 <div class="icon">
-                <i class="ion ion-person-add"></i>
+                <i class="fa fa-male"></i>
                 </div>
-                <a href="#" class="small-box-footer">
+                <a href="{{route('accounts')}}" class="small-box-footer">
+                More info <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <!-- small box -->
+            <div class="small-box bg-green">
+                <div class="inner">
+                <h3>{{App\User::role('Marketing/Sales Manager')->count() + App\User::role('Marketing/Sales executive')->count()}}</h3>
+
+                <p>{{'Marketing/Sales'}}</p>
+                </div>
+                <div class="icon">
+                <i class="fa fa-user-circle"></i>
+                </div>
+                <a href="{{route('marketing')}}" class="small-box-footer">
+                More info <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <!-- small box -->
+            <div class="small-box bg-red">
+                <div class="inner">
+                <h3>{{App\User::role('HRD Manager')->count() + App\User::role('HRD executive')->count()}}</h3>
+
+                <p>{{'HRD'}}</p>
+                </div>
+                <div class="icon">
+                <i class="fa fa-user-o"></i>
+                </div>
+                <a href="{{route('hrd')}}" class="small-box-footer">
+                More info <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <!-- small box -->
+            <div class="small-box bg-blue">
+                <div class="inner">
+                <h3>{{App\User::role('Operations Manager')->count() + App\User::role('Operations executive')->count()}}</h3>
+
+                <p>{{'Operations'}}</p>
+                </div>
+                <div class="icon">
+                <i class="fa fa-users"></i>
+                </div>
+                <a href="{{route('operations')}}" class="small-box-footer">
                 More info <i class="fa fa-arrow-circle-right"></i>
                 </a>
             </div>

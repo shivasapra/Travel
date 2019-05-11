@@ -527,6 +527,22 @@ Route::get('/invoice/print',[
 
 
 Route::get('/departments',[
-	'uses'=> 'HomeController@departments',
+	'uses'=> 'DepartmentController@index',
 	'as'=>'departments'
+	]);
+Route::get('/departments/accounts',[
+	'uses'=> 'DepartmentController@accounts',
+	'as'=>'accounts'
+	]);
+Route::get('/departments/marketing-sales',[
+	'uses'=> 'DepartmentController@marketing',
+	'as'=>'marketing'
+	]);
+Route::get('/departments/operations',[
+	'uses'=> 'DepartmentController@operations',
+	'as'=>'operations'
+	]);
+Route::get('/departments/HRD',[
+	'uses'=> 'DepartmentController@hrd',
+	'as'=>'hrd'
 	]);
