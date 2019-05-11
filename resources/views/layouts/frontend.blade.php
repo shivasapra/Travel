@@ -240,7 +240,6 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
-        @if(Auth::user()->admin)
         <li>
           <a href="{{route('home')}}">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
@@ -373,7 +372,6 @@
         @can('Airlines Name Registration')
           <li><a href="{{route('airlines')}}"><i class="fa fa-plane"></i><span>Airlines Name Registration</span></a></li>
         @endcan
-      @endif
       @if(!Auth::user()->admin)
         <li>
           <a href="{{route('session')}}">

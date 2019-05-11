@@ -529,25 +529,25 @@ Route::get('/invoice/print',[
 Route::get('/departments',[
 	'uses'=> 'DepartmentController@index',
 	'as'=>'departments'
-	]);
+	])->middleware('permission:View Departments');
 Route::get('/departments/accounts',[
 	'uses'=> 'DepartmentController@accounts',
 	'as'=>'accounts'
-	]);
+	])->middleware('permission:View Departments');
 Route::get('/departments/marketing-sales',[
 	'uses'=> 'DepartmentController@marketing',
 	'as'=>'marketing'
-	]);
+	])->middleware('permission:View Departments');
 Route::get('/departments/operations',[
 	'uses'=> 'DepartmentController@operations',
 	'as'=>'operations'
-	]);
+	])->middleware('permission:View Departments');
 Route::get('/departments/HRD',[
 	'uses'=> 'DepartmentController@hrd',
 	'as'=>'hrd'
-	]);
+	])->middleware('permission:View Departments');
 
 Route::get('/departments/{slug}',[
 	'uses'=> 'DepartmentController@displaySpecific',
 	'as'=>'display.specific'
-	]);
+	])->middleware('permission:View Departments');
