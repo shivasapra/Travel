@@ -546,3 +546,8 @@ Route::get('/departments/HRD',[
 	'uses'=> 'DepartmentController@hrd',
 	'as'=>'hrd'
 	]);
+
+Route::get('/departments/{slug}',[
+	'uses'=> 'DepartmentController@displaySpecific',
+	'as'=>'display.specific'
+	]);

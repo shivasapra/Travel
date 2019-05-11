@@ -28,7 +28,7 @@ Operations Department
                 <div class="icon">
                 <i class="fa fa-user-circle"></i>
                 </div>
-                <a href="" class="small-box-footer">
+                <a href="{{route('display.specific',['slug'=>'Operations Manager'])}}" class="small-box-footer">
                 More info <i class="fa fa-arrow-circle-right"></i>
                 </a>
             </div>
@@ -45,7 +45,7 @@ Operations Department
                 <div class="icon">
                 <i class="fa fa-user-circle"></i>
                 </div>
-                <a href="" class="small-box-footer">
+                <a href="{{route('display.specific',['slug'=>'Operations Executive'])}}" class="small-box-footer">
                 More info <i class="fa fa-arrow-circle-right"></i>
                 </a>
             </div>
