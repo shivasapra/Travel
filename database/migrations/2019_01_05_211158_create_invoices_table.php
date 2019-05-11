@@ -39,6 +39,7 @@ class CreateInvoicesTable extends Migration
             $table->Date('mail_sent');
             $table->float('VAT_percentage')->default(0);
             $table->float('VAT_amount')->default(0);
+            $table->boolean('refund')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

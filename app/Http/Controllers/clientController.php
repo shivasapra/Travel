@@ -71,9 +71,9 @@ class clientController extends Controller
         
 
         $client = new client;
-        $unique_id = 'CLD'. mt_rand(100000, 999999);
+        $unique_id = 'CLDC'. mt_rand(100000, 999999);
         while (client::where('unique_id',$unique_id)->get()->count()>0) {
-           $unique_id = 'CLD'. mt_rand(100000, 999999); 
+           $unique_id = 'CLDC'. mt_rand(100000, 999999); 
         }
         $client->unique_id = $unique_id;
         $client->user_id = Auth::user()->id;

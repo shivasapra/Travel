@@ -64,19 +64,19 @@ class InvoiceController extends Controller
         $dt->timezone('Asia/Kolkata');
         $date_today = $dt->timezone('Europe/London');
         $date = $date_today->toDateString();
-        $invoice = invoice::where('invoice_no','CLD0001')->get();
+        $invoice = invoice::where('invoice_no','CLDI0001')->get();
         if ($invoice->count()>0) {
             $latest = invoice::orderBy('created_at','desc')->take(1)->get();
             $invoice_prev_no = $latest[0]->invoice_no;
-            $invoice_no = 'CLD000'.(substr($invoice_prev_no,3,6)+1);
+            $invoice_no = 'CLDI000'.(substr($invoice_prev_no,3,6)+1);
             // dd($invoice_no);
         }
         else{
-            $invoice_no = 'CLD0001';
+            $invoice_no = 'CLDI0001';
         }
-        // $invoice_no = 'CLD'. mt_rand(10000, 99999);
+        // $invoice_no = 'CLDI'. mt_rand(10000, 99999);
         // while (invoice::where('invoice_no',$invoice_no)->get()->count()>0) {
-        //    $invoice_no = 'CLD'. mt_rand(10000, 99999);
+        //    $invoice_no = 'CLDI'. mt_rand(10000, 99999);
         // }
         if(client::all()->count()==0){
             session::flash('warning','you must have atleast one client to create an invoice');

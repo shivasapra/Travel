@@ -152,9 +152,9 @@ class employeeController extends Controller
             $employee->work_permit = 'uploads/passport/'.$work_permit_new_name;
             // $client->save();
             }
-        $unique_id = 'CLD'. mt_rand(100000, 999999);
+        $unique_id = 'CLDE'. mt_rand(100000, 999999);
         while (employee::where('unique_id',$unique_id)->get()->count()>0) {
-           $unique_id = 'CLD'. mt_rand(100000, 999999); 
+           $unique_id = 'CLDE'. mt_rand(100000, 999999); 
         }
         $employee->unique_id = $unique_id;
         $employee->save();
