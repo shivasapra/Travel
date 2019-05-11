@@ -98,22 +98,18 @@ class PermissionsSeeder extends Seeder
         User::find(1)->assignRole('Admin');
         User::find(2)->assignRole('Admin');
 
-        $role_accountant = Role::create(['name'=>'Accountant']);
-        $role_collection_manager = Role::create(['name'=>'Collection Manager']);
+        $role_account_manager = Role::create(['name'=>'Account Manager']);
+        $role_account_executive = Role::create(['name'=>'Account Executive']);
 
-        $role_hr_manager = Role::create(['name'=>'HR Manager']);
-        $role_hr_executive = Role::create(['name'=>'HR Executive']);
+        $role_marketing_manager = Role::create(['name'=>'Marketing/Sales Manager']);
+        $role_marketing_executive = Role::create(['name'=>'Marketing/sales Executive']);
 
-        $role_bmm = Role::create(['name'=>'BMM']);
+        $role_hrd_manager = Role::create(['name'=>'HRD Manager']);
+        $role_hrd_executive = Role::create(['name'=>'HRD Executive']);
 
-        $role_marketing = Role::create(['name'=>'Marketing Employee']);
-        $role_marketing_manager = Role::create(['name'=>'Marketing Manager']);
-        $role_sales = Role::create(['name'=>'Sales Employee']);
-        $role_prive = Role::create(['name'=>'Prive SE']);
-        $role_sales_manager = Role::create(['name'=>'Sales Manager']);
-        $role_mrd = Role::create(['name'=>'MRD']);
-        $role_tms = Role::create(['name'=>'TMS']);
-        $role_tms = Role::create(['name'=>'TME']);
+        $role_operations_manager = Role::create(['name'=>'Operations Manager']);
+        $role_operations_Executive = Role::create(['name'=>'Operations Executive']);
         
+        $role_pso = Role::create(['name'=>'PSO']);
     }
 }
