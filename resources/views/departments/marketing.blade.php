@@ -22,7 +22,7 @@ Marketing/Sales Department
             <!-- small box -->
             <div class="small-box bg-green">
                 <div class="inner">
-                <h3>{{App\User::role('Marketing/Sales Manager')->count()}}</h3>
+                <h3>{{App\User::role('Marketing-Sales Manager')->count()}}</h3>
 
                 <p>{{'Marketing-Sales Manager'}}</p>
                 </div>
@@ -39,7 +39,7 @@ Marketing/Sales Department
             <!-- small box -->
             <div class="small-box bg-blue">
                 <div class="inner">
-                <h3>{{App\User::role('Marketing/Sales Executive')->count()}}</h3>
+                <h3>{{App\User::role('Marketing-Sales Executive')->count()}}</h3>
 
                 <p>{{'Marketing-Sales Executive'}}</p>
                 </div>
