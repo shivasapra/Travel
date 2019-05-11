@@ -233,26 +233,26 @@ Invoice
           <p class="lead">Payment Methods:</p>
           <div class="table-responsive">
             <table class="table">
-              @if($invoice->credit)
+              @if($invoice->credit_amount != 0)
               <tr>
                 <th style="width:50%"><button class="btn btn-xs bg-maroon btn-flat">Credit Card</button></th>
                 <td>{{$invoice->invoiceInfo[0]->currency. $invoice->credit_amount}}</td>
               </tr>
               @endif
 
-              @if($invoice->debit)
+              @if($invoice->debit_amount != 0)
               <tr>
                 <th style="width:50%"><button class="btn btn-xs bg-purple btn-flat">Debit Card</button></th>
                 <td>{{$invoice->invoiceInfo[0]->currency. $invoice->debit_amount}}</td>
               </tr>
               @endif
-              @if($invoice->cash)
+              @if($invoice->cash_amount != 0)
                 <tr>
                 <th style="width:50%"><button class="btn btn-xs bg-navy btn-flat">Cash</button></th>
                 <td>{{$invoice->invoiceInfo[0]->currency. $invoice->cash_amount}}</td>
               </tr>
               @endif
-              @if($invoice->bank)
+              @if($invoice->bank_amount != 0)
                 <tr>
                 <th style="width:50%"><button class="btn btn-xs bg-olive btn-flat">Bank Transfer</button></th>
                 <td>{{$invoice->invoiceInfo[0]->currency. $invoice->bank_amount}}</td>
@@ -307,14 +307,18 @@ Invoice
                 <th class="text-success">Paid:</th>
                 <td>{{$invoice->currency}} {{$invoice->paid}}</td>
               </tr>
+              @if($invoice->pending_amount != 0 )
               <tr>
                 <th class="text-danger">Pending:</th>
                 <td>{{$invoice->currency}} {{$invoice->pending_amount}}</td>
               </tr>
+              @endif
+              @if($invoice->advance != 0 )
               <tr>
                 <th class="text-info">Advance:</th>
                 <td>{{$invoice->currency}} {{$invoice->advance}}</td>
               </tr>
+              @endif
 
             </table>
           </div>
