@@ -1,3 +1,63 @@
+.float-right{
+    float:right;
+}
+.invoice .card{
+    border-radius: 0;
+    font-size:13px;
+}
+.invoice .card-header {
+    border-left: 4px solid #dc3545;
+    border-radius: 0;
+    font-size: 16px;
+    padding-left: 10px;
+    color: #000;
+    font-weight: 600;
+}
+.invoice .table th{
+    font-weight:600;
+}
+.invoice .table td, .invoice .table th{
+    vertical-align: middle;
+}
+.invoice .form-control{
+    border-radius: 2px;
+    padding:.375rem .55rem;
+    font-size:14px;
+    box-shadow:inset 0 0 5px rgba(0,0,0,0.1);
+}
+.gbp-back span{
+    position: relative;
+    background-color:#e4e4e4;
+    padding:0.6rem 1rem;
+    display:inline-block;
+    font-size:16px;
+}
+.gbp-back span::before{
+    content: "";
+    position: absolute;
+    left: -30px;
+    border: 15px solid transparent;
+    border-right-color: #e4e4e4;
+    top: 0;
+}
+.select-custom{
+    position:relative;
+}
+.select-custom::before{
+    content:"";
+    position:absolute;
+    top:0;
+    right:0;
+    border: 22px solid #e68317;
+    /*background-color:#e68317;*/
+}
+.custom-control-label{
+    font-size:14px;
+}
+
+
+
+
 .btn-default {
     color: #415164;
     background-color: #F1F5F7;
