@@ -32,7 +32,6 @@ Expenses
                         <th>Description</th>
                         <th>Company Name</th>
                         <th>Invoice No</th>
-                        <th>Delete</th>
                       </tr>
                       </thead>
                     <tbody>
@@ -57,9 +56,6 @@ Expenses
                             @else
                               <strong>{{"N/A"}}</strong>
                             @endif
-                          </td>
-                          <td>
-                            <a href="{{route('expense.delete',['id'=>$expense->id])}}" class="btn btn-danger btn-xs">Delete</a>
                           </td>
                           </tr>
                         @endforeach

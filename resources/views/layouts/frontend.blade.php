@@ -8,6 +8,7 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>@yield('title')</title>
@@ -245,78 +246,138 @@
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
-        @if(Auth::user()->admin)
-        <li>
-          <a href="{{route('employees')}}">
-            <i class="fa fa-pencil-square-o"></i><span>Employee</span>
-          </a>
-        </li>
-        @endif
-        <li>
-          <a href="{{route('clients')}}">
-            <i class="fa fa-user-circle"></i><span>Client</span>
-          </a>
-        </li>
-        @if(Auth::user()->admin)
-        <li>
-          <a href="{{route('products')}}">
-            <i class="fa fa-plus-square"></i><span>Services Registration</span>
-          </a>
-        </li>
-        <li>
-          <a href="{{route('airlines')}}">
-            <i class="fa fa-plane"></i><span>Airlines Name Registration</span>
-          </a>
-        </li>
-        @endif
-        
-        @if(Auth::user()->admin)
-        <li>
-          <a href="{{route('wage')}}">
-            <i class="fa fa-wrench"></i><span>Staff Wage Management</span>
-          </a>
-        </li>
-        @endif
-        <li class="treeview">
-          <a href="">
-            <i class="fa fa-money"></i><span>Daily Expense Entry</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="{{route('expenses.get')}}"><i class="fa fa-circle-o"></i>Expenses</a></li>
-          </ul>
-        </li>
-        <li><a href="{{route('assign')}}"><i class="fa fa-circle-o"></i>Assignments</a></li>
-        @if(Auth::user()->admin)
-        <li>
-          <a href="{{route('status')}}">
-            <i class="fa fa-clock-o"></i> <span>Employee Status</span>
-          </a>
-        </li>
-        <li class="treeview">
-          <a href="">
-            <i class="fa fa-gears"></i><span>Settings</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="{{route('auto.get')}}"><i class="fa fa-circle-o"></i>Auto Deduction</a></li>
-            <li><a href="{{route('slip.generate')}}"><i class="fa fa-circle-o"></i>Generate Salary Slip</a></li>
-            <li><a href="{{route('invoice')}}"><i class="fa fa-circle-o"></i>Invoice Generation</a></li>
-            <li><a href="{{route('tax')}}"><i class="fa fa-circle-o"></i>VAT</a></li>
-            <li><a href="{{route('letter')}}"><i class="fa fa-circle-o"></i>Generate Letter</a></li>
-            <li><a href="{{route('clientStatus')}}"><i class="fa fa-circle-o"></i>Status</a></li>
-            <li><a href="{{route('assign')}}"><i class="fa fa-circle-o"></i>Assign Task</a></li>
-          </ul>
-        </li>
-        @else
+        @can('View Users')
+          <li><a href="{{route('users')}}"><i class="fa fa-user"></i><span>Users</span></a></li>
+        @endcan
 
+        @can('Role Management')
+          <li><a href="{{route('role.management')}}"><i class="fa fa-dot-circle-o"></i><span>Role Management</span></a></li>
+        @endcan
+        @can('View Departments')
+          <li><a href="{{route('departments')}}"><i class="fa fa-briefcase"></i><span>Departments</span></a></li>
+        @endcan
+        
+        @if(Auth::user()->can('View Clients') or Auth::user()->can('Client Visa Application Status') or Auth::user()->can('Client Documents Movement'))
+        <li class="treeview">
+            <a href="">
+              <i class="fa fa-user-circle"></i><span>Client Management</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              @can('View Clients')
+                <li><a href="{{route('clients')}}"><i class="fa fa-circle-o"></i><span>Clients</span></a></li>
+              @endcan
+              @can('Client Visa Application Status')
+                <li><a href="{{route('clientStatus')}}"><i class="fa fa-circle-o"></i>Client Visa Application Status</a></li>
+              @endcan
+              @can('Client Documents Movement')
+                <li><a href="{{route('clientDocIndex')}}"><i class="fa fa-circle-o"></i>Client Documents Movement</a></li>
+              @endcan
+            </ul>
+          </li>
+        @endif
+
+        @if(Auth::user()->can('View Employees') or Auth::user()->can('Employee Attendance Status') or Auth::user()->can('Employee Salary Slip') or Auth::user()->can('Staff Wage management'))
+        <li class="treeview">
+            <a href="">
+              <i class="fa fa-pencil-square-o"></i><span>Employee Management</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              @can('View Employees')
+                <li><a href="{{route('employees')}}"><i class="fa fa-circle-o"></i><span>Employees</span></a></li>
+              @endcan
+              @can('Employee Attendance Status')
+                <li><a href="{{route('status')}}"><i class="fa fa-circle-o"></i> <span>Employee Attendance Status</span></a></li>
+              @endcan
+              @can('Employee Salary Slip')
+                <li><a href="{{route('slip.generate')}}"><i class="fa fa-circle-o"></i>Generate Employee Salary Slip</a></li>
+              @endcan
+              @can('Staff Wage management')
+                <li><a href="{{route('wage')}}"><i class="fa fa-circle-o"></i><span>Staff Wage Management</span></a></li>
+              @endcan
+            </ul>
+          </li>
+          @endif
+
+        @if(Auth::user()->can('Expense Entry') or Auth::user()->can('Auto Deduction Expense Entry')) 
+        <li class="treeview">
+            <a href="">
+              <i class="fa fa-money"></i><span>Daily Expense Entry</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              @can('Expense Entry')
+                <li><a href="{{route('expenses.get')}}"><i class="fa fa-circle-o"></i>Expenses</a></li>
+              @endcan
+              @can('Auto Deduction Expense Entry')
+                <li><a href="{{route('auto.get')}}"><i class="fa fa-circle-o"></i>Auto Deduction</a></li>
+              @endcan
+            </ul>
+          </li>
+        @endif
+        @if(Auth::user()->can('View Invoices') or Auth::user()->can('View Canceled Invoice') or Auth::user()->can('VAT Updation')) 
+          <li class="treeview">
+            <a href="">
+              <i class="fa fa-wrench"></i><span>Invoices</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              @can('View Invoices')
+                <li><a href="{{route('invoice')}}"><i class="fa fa-circle-o"></i>Invoice Generation</a></li>
+              @endcan
+              @can('View Canceled Invoice')
+                <li><a href="{{route('canceled.invoices')}}"><i class="fa fa-circle-o"></i>Canceled Invoices</a></li>
+              @endif
+              @can('VAT Updation')
+                <li><a href="{{route('tax')}}"><i class="fa fa-circle-o"></i>VAT</a></li>
+              @endcan
+            </ul>
+          </li>
+        @endif
+
+          @can('View/Export Reports')
+          <li class="treeview">
+            <a href="">
+              <i class="fa fa-bar-chart-o"></i><span>Reports</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="{{route('visa.report')}}"><i class="fa fa-circle-o"></i>Visa Report</a></li>
+                <li><a href="{{route('paidInvoice.report')}}"><i class="fa fa-circle-o"></i>Paid Invoices Report</a></li>
+                <li><a href="{{route('unpaidInvoice.report')}}"><i class="fa fa-circle-o"></i>UnPaid Invoices Report</a></li>
+                <li><a href="{{route('expenses.report')}}"><i class="fa fa-circle-o"></i>Expenses Report</a></li>
+                <li><a href="{{route('docmov.report')}}"><i class="fa fa-circle-o"></i>Document Movement Report</a></li>
+            </ul>
+          </li>
+          @endcan
+        <li><a href="{{route('assign')}}"><i class="fa fa-clock-o"></i><span>Assignments</span></a></li>
+        @can('Generate Letter')
+          <li><a href="{{route('letter')}}"><i class="fa fa-envelope-open-o"></i><span>Generate Letter</span></a></li>
+        @endcan
+        @can('Direct Chat')
+          <li><a href="{{route('direct.chat')}}"><i class="fa fa-commenting-o"></i><span>Direct Chat</span></a></li>
+        @endcan
+        @can('Services Registration')
+          <li><a href="{{route('products')}}"><i class="fa fa-plus-square"></i><span>Services Registration</span></a></li>
+        @endcan
+        @can('Airlines Name Registration')
+          <li><a href="{{route('airlines')}}"><i class="fa fa-plane"></i><span>Airlines Name Registration</span></a></li>
+        @endcan
+      @if(!Auth::user()->admin)
         <li>
           <a href="{{route('session')}}">
-            <i class="fa fa-clock-o"></i> <span>Manage Session
+            <i class="fa fa-clock-o"></i> <span>Mark Attendance
             @if(Auth::user()->employee[0]->wage->count()>0)
               @if(Auth::user()->employee[0]->wage->last()->date == $date)
                 @if(Auth::user()->employee[0]->wage->last()->logout == null and Auth::user()->employee[0]->wage->last()->login != null)
@@ -329,7 +390,7 @@
             </span>
           </a>
         </li>
-        @endif
+      @endif
       </ul>
     </section>
     <!-- /.sidebar -->

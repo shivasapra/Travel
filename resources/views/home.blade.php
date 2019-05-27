@@ -80,7 +80,132 @@ Dashboard
     </div>
 
     <div class="row">
-      <div class="col-md-6">
+        <div class="col-md-3">
+          <!-- DIRECT CHAT PRIMARY -->
+  <div class="box box-danger direct-chat direct-chat-danger">
+    <div class="box-header with-border">
+      <h3 class="box-title">Direct Chat</h3>
+
+      <div class="box-tools pull-right">
+        
+        <button type="button" class="btn btn-box-tool" data-toggle="tooltip"  data-widget="chat-pane-toggle">
+            <span data-toggle="tooltip" title="{{$unread_messages->count()}} New Messages" class="badge bg-red">{{$unread_messages->count()}}</span></button>
+        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+        </button>
+        {{-- <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Contacts" data-widget="chat-pane-toggle"> --}}
+          {{-- <i class="fa fa-comments"></i></button> --}}
+        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+      </div>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+      <!-- Conversations are loaded here -->
+      <div class="direct-chat-messages">
+        <!-- Message. Default to the left -->
+        @if($messages != null)
+        @foreach($messages as $message)
+          @if($message->user_id == Auth::user()->id)
+            <div class="direct-chat-msg ">
+              <div class="direct-chat-info clearfix">
+                <span class="direct-chat-name pull-left">{{'You'}}</span>
+              <span class="direct-chat-timestamp pull-right">{{$message->date}}{{' '}}{{$message->time}}</span>
+              </div>
+              <!-- /.direct-chat-info -->
+              <img class="direct-chat-img"
+                @if(Auth::user()->avatar)
+                  src="{{asset(Auth::user()->avatar)}}"
+                @else
+                  src="{{asset('app/images/user-placeholder.jpg')}}"
+              @endif 
+              alt="Message User Image">
+              <!-- /.direct-chat-img -->
+              <div class="direct-chat-text">
+                {{$message->message}}
+              </div>
+              <!-- /.direct-chat-text -->
+            </div>
+            <!-- /.direct-chat-msg -->
+          @elseif($message->to_id == Auth::user()->id)
+            <!-- Message to the right -->
+            <div class="direct-chat-msg right">
+              <div class="direct-chat-info clearfix">
+                <span class="direct-chat-name pull-right">{{App\User::find($message->user_id)->name}}</span>
+                <span class="direct-chat-timestamp pull-left">{{$message->date}}{{' '}}{{$message->time}}</span>
+              </div>
+              <!-- /.direct-chat-info -->
+              <img class="direct-chat-img" 
+              @if(App\User::find($message->user_id)->avatar)
+                  src="{{asset(App\User::find($message->user_id)->avatar)}}"
+                @else
+                  src="{{asset('app/images/user-placeholder.jpg')}}"
+              @endif 
+              alt="Message User Image"><!-- /.direct-chat-img -->
+              <div class="direct-chat-text">
+                  {{$message->message}}
+              </div>
+              <!-- /.direct-chat-text -->
+            </div>
+          @endif
+        @endforeach
+        @endif
+        <!-- /.direct-chat-msg -->
+      </div>
+      <!--/.direct-chat-messages-->
+      <!-- Contacts are loaded here -->
+      <div class="direct-chat-contacts">
+        <ul class="contacts-list">
+          @if($unread_messages->count()>0)
+          @foreach($unread_messages as $unread)
+          <li>
+            <a href="{{route('home.message',['id'=>$unread->user_id])}}">
+              <img class="contacts-list-img"
+              @if(App\User::find($unread->user_id)->avatar)
+                  src="{{asset(App\User::find($unread->user_id)->avatar)}}"
+                @else
+                  src="{{asset('app/images/user-placeholder.jpg')}}"
+              @endif 
+              alt="User Image">
+
+              <div class="contacts-list-info">
+                    <span class="contacts-list-name">
+                      {{App\User::find($unread->user_id)->name}}
+                      <small class="contacts-list-date pull-right">{{$unread->date}}{{' '}}{{$unread->time}}</small>
+                    </span>
+                <span class="contacts-list-msg">{{$unread->message}}</span>
+              </div>
+              <!-- /.contacts-list-info -->
+            </a>
+          </li>
+          @endforeach
+          @endif
+          <!-- End Contact Item -->
+        </ul>
+        <!-- /.contatcts-list -->
+      </div>
+      <!-- /.direct-chat-pane -->
+    </div>
+    <!-- /.box-body -->
+    <div class="box-footer">
+        @if($messages != null)
+        <form action="{{route('admin.message.send')}}" method="post">
+          @csrf
+          <div class="input-group">
+            <input name='user_id' value="{{$id}}" hidden>
+            <input type="text" name="message" placeholder="Type Message ..." class="form-control">
+                <span class="input-group-btn">
+                  <button type="submit" class="btn btn-danger btn-flat">Send</button>
+                </span>
+          </div>
+        </form>
+        @else
+        <strong><span class="text-info">{{$unread_messages->count()}}{{' Unread Conversations'}}</span></strong>
+        @endif
+      </div>
+      <!-- /.box-footer-->
+    </div>
+    <!--/.direct-chat -->
+        </div>
+      <div class="col-md-3">
         <div class="box box-primary">
             <div class="box-header with-border">
               <h3 class="box-title"><strong>Expenses({{$expenses->count()}})</strong></h3>
@@ -96,7 +221,7 @@ Dashboard
             <div class="box-body">
               <ul class="products-list product-list-in-box">
                 @if($recent_expenses->count()>0)
-                @foreach($expenses as $expense)
+                @foreach($recent_expenses as $expense)
                 <li class="item">
                   {{-- <div class="product-img">
                     <img src="dist/img/default-50x50.gif" alt="Product Image">
@@ -153,15 +278,8 @@ Dashboard
                       <td>{{$invoice->invoice_date}}</td>
                       <td>{{$invoice->receiver_name}}</td>
                       
-                        @if($tax[0]->enable == 'yes')
-                          <?php $taxed = ($tax[0]->tax/100*$invoice->discounted_total) ?>
-                       @endif
-                      @if($tax[0]->enable == 'yes')
-                          <?php $total = $invoice->discounted_total + $taxed ?>
-                          <td>{{$invoice->invoiceInfo[0]->currency}} {{$total}}</td>
-                        @else
-                            <td>{{$invoice->invoiceInfo[0]->currency}} {{$invoice->discounted_total}}</td>
-                        @endif
+                      <?php $total = $invoice->discounted_total + $invoice->VAT_amount ?>
+                      <td>{{$invoice->currency}}{{$total}}</td>
                       
                       @if($invoice->status == 1)
                       <td><small class="label label-success">Paid</small></td>
@@ -236,6 +354,64 @@ Dashboard
         </div>
       </div>
     </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="box box-danger">
+          <div class="box-body">
+            
+              
+            
+            <section class="content-header">
+              <h1 class="text-center">
+                <a href="{{route('visa.report')}}"><span style="color:#0066FF;">Visa Report</span>
+                </a>
+              </h1>
+
+              <hr>
+
+            </section>
+            <div class="table-responsive">
+              <table id="recent-orders" class="table table-hover mb-0 ps-container ps-theme-default">
+                <thead>
+                  <tr>
+                    <th>Sno.</th>
+                    <th>Client Name</th>
+                    <th>Phone No.</th>
+                    <th>Date</th>
+                    <th>Visa Applicant Name</th>
+                    <th>DOB</th>
+                    <th>Passport Origin</th>
+                    <th>Passport No.</th>
+                    <th>Visa Country</th>
+                    <th>Visa Type</th>
+                  </tr>
+                  </thead>
+                <tbody>
+                  @if($invoices->count()>0)
+                  <?php $i = 1; ?>
+                    @foreach($invoice_infos as $invoice)
+                    <tr>
+                      <td>{{$i++}}</td>
+                      <td>{{$invoice->invoice->receiver_name}}</td>
+                      <td>{{$invoice->invoice->client->phone}}</td>
+                      <td>{{$invoice->created_at->toDateString()}}</td>
+                      <td>{{$invoice->name_of_visa_applicant}}</td>
+                      <td>{{$invoice->passport_member_DOB}}</td>
+                      <td>{{$invoice->passport_origin}}</td>
+                      <td>{{$invoice->passport_no}}</td>
+                      <td>{{$invoice->visa_country}}</td>
+                      <td>{{$invoice->visa_type}}</td>
+                      </tr>
+                    @endforeach
+                  @endif
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="row">
        <div class="col-md-7">
           
@@ -257,7 +433,7 @@ Dashboard
                     <li><a href="#">View calendar</a></li>--}}                  
                   {{-- </ul> --}}
                 </div>
-                <button type="button" class="btn btn-sm btn-default" data-toggle="modal" data-target="#modal-info"><span style="color: white">Add new event</span></button>
+                <button type="button" class="btn btn-lg btn-default" data-toggle="modal" data-target="#modal-info" ><span style="color: white"><strong>Add New Event</strong></span></button>
                 {{-- <button class="btn btn-sm btn-default" id="create"><span style="color: white">Add new event</span></button> --}}
                 <button type="button" class="btn btn-default btn-sm" data-widget="collapse"><span style="color: white"><i class="fa fa-minus"></i></span>
                 </button>
@@ -426,58 +602,6 @@ Dashboard
         </div>
       </div>
     </div>
-    
-      @else
-      <button type="button" data-toggle="modal" id="clickme" data-target="#autoload" hidden class="btn btn-sm btn-info"></button>
-      <div class="modal fade" id="autoload">
-          <div class="modal-dialog">
-             <div class="modal-content">
-          <div class="modal-header" style="color:white;font-weight:500;background-color:#0066FF;">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Assignments</h4>
-          </div>
-          
-          <div class="modal-body">
-              <table class="table table-hover mb-0">
-                  <thead>
-                    <tr>
-                      <th>Sno.</th>
-                      <th>Date</th>
-                      <th>Task</th>
-                      <th>Task Description</th>
-                      <th>Action:</th>
-                    </tr>
-                    </thead>
-                  <tbody>
-                    @if($assignments->count()>0)
-                    <?php $i = 1; ?>
-                      @foreach($assignments as $assignment)
-                      <tr>
-                        <td>{{$i++}}</td>
-                        <td>{{$assignment->date}}</td>
-                        <td>{{$assignment->task}}</td>
-                        <td>{{$assignment->task_description}}</td>
-                        <td>
-                          @if($assignment->employee_id == null)
-                        <a href="{{route('task.accept',['id'=>$assignment->id])}}" class="btn btn-xs btn-info">Accept</a>
-                          @else
-                          {{'Accepted'}}
-                          @endif
-                      </td>
-                      </tr>
-                      @endforeach
-                    @endif
-                  </tbody>
-                </table>
-          </div>
-          <div class="modal-footer" style="color:white;font-weight:500;background-color:#0066FF;">
-            <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-          </div>
-            </div>
-          </div>
-      </div>
-     
       @endif
   
 

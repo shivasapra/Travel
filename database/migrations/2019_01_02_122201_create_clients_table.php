@@ -19,6 +19,7 @@ class CreateClientsTable extends Migration
             $table->string('status')->nullable();
             $table->integer('user_id');
             $table->boolean('permanent')->default(0);
+            $table->boolean('reminder')->default(1);
             $table->string('credit_limit')->nullable();
             $table->string('currency')->nullable();
             $table->string('first_name');

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use Hash;
 use App\wage;
-use App\wagelog;
+use App\wageLog;
 use App\employee;
 use Carbon\Carbon;
 use Session;
@@ -35,11 +35,18 @@ class wageController extends Controller
             $latest_wageLog = wageLog::where('wage_id',$today_wage[0]->id)
                                         ->orderBy('created_at','desc')
                                         ->first();
+            if($latest_wageLog != null and $latest_wageLog->logout_time == null){ 
+            $total_hours_this_session =  substr(Carbon::now()->totimeString(),0,2) - substr($latest_wageLog->login_time,0,2);
+            }
+            else{
+                $total_hours_this_session = null;
+            }
          }
          else{
             $latest_wageLog = null;
+            $total_hours_this_session = null;
          }
-        return view('wage.session')->with('latest_wageLog',$latest_wageLog);
+        return view('wage.session')->with('latest_wageLog',$latest_wageLog)->with('total_hours_this_session',$total_hours_this_session);
     }
     public function Logout(Request $request){
         if (Hash::check($request->password,Auth::user()->password)) {
@@ -183,29 +190,32 @@ class wageController extends Controller
         //
     }
     public function generateSlip(){
-        return view('wage.slipGenerate');
+        $employees = employee::where('id',0)->get();
+        return view('wage.slipGenerate')->with('employees',$employees);
     }
 
     public function slip(Request $request){
         $employee = employee::where('unique_id',$request->unique)->take(1)->get();
-        // dd($employee);
+        
         if ($employee->count()>0) {
             $emp = employee::find($employee[0]->id);
         }
         else{
             return redirect()->route('slip.generate');
         }
-        // dd($request->to);
-        $wages = wage::where('unique_id',$request->unique)->whereDate('date','>=',$request->from)->whereDate('date','<=',$request->to)->get();
-        // dd($wages);
+        $wages = wage::where('unique_id',$request->unique)->get();
         $total_wage = 0;
         $total_hours = 0;
         foreach($wages as $wage){
-            $total_wage = $total_wage + $wage->wage;
-            $total_hours = $total_hours + $wage->hours;
+            if(substr($wage->date,5,-3) == $request->month){
+                $total_wage = $total_wage + $wage->today_wage;
+                $total_hours = $total_hours + $wage->total_hours;
+            } 
         }
+        $employees = employee::where('id',0)->get();
         return view('wage.slip')->with('employee',$emp)
                                 ->with('total_wage',$total_wage)
-                                ->with('total_hours',$total_hours);
+                                ->with('total_hours',$total_hours)
+                                ->with('employees',$employees);
     }
 }

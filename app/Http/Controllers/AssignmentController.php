@@ -32,6 +32,10 @@ class AssignmentController extends Controller
         Session::flash('success','Assignment Done');
         return redirect()->back();
     }
+    public function assignments($id){
+        $assignments = assignment::where('employee_id',$id)->get();
+        return view('employee.Tasks')->with('assignments',$assignments);
+    }
 
     /**
      * Show the form for creating a new resource.

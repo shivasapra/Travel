@@ -40,17 +40,8 @@ Invoices
 	                    		<td>{{$invoice->invoice_no}}</td>
 	                    		<td>{{$invoice->invoice_date}}</td>
 	                    		<td>{{$invoice->receiver_name}}</td>
-								@if($tax[0]->enable == 'yes')
-					                <?php $taxed = ($tax[0]->tax/100*$invoice->discounted_total) ?>
-					             @endif
-								@if($tax[0]->enable == 'yes')
-					                <?php $total = $invoice->discounted_total + $taxed ?>
-					                <td>{{$invoice->invoiceInfo[0]->currency}} {{$total}}</td>
-				                @else
-				                  	<td>{{$invoice->invoiceInfo[0]->currency}} {{$invoice->discounted_total}}</td>
-				                @endif
-
-
+					                <?php $total = $invoice->discounted_total + $invoice->VAT_amount ?>
+					                <td>{{$invoice->currency}}{{$total}}</td>
 	                    		@if($invoice->status == 1)
 	                    		<td><div class="text-success">{{'Paid'}}</div></td>
 	                    		@else
@@ -58,10 +49,14 @@ Invoices
 	                    		@endif
 	                    		{{-- <td><button class="btn btn-xs btn-success" id="pdf">PDF</button></td> --}}
 	                    		<td>
-	                    			{{-- <a href="{{route('invoice.edit',['id'=>$invoice->id])}}" class="btn btn-info btn-xs"><span class="fa fa-edit"></span></a> --}}
-	                    			<a href="{{route('invoice.view',['id'=>$invoice->id])}}" class="btn btn-info btn-xs"><span class="fa fa-eye"></span></a>
+														<a href="{{route('invoice.view',['id'=>$invoice->id])}}" class="btn btn-info btn-xs"><span class="fa fa-eye"></span></a>
+														@if($invoice->status == 0)
+	                    			<a href="{{route('invoice.edit',['id'=>$invoice->id])}}" class="btn btn-info btn-xs"><span class="fa fa-edit"></span></a>
+														<a href="{{route('invoice.delete',['id'=>$invoice->id])}}" class="btn btn-danger btn-xs">Cancel</a>
+														<a href="{{route('invoice.pay',['id'=>$invoice->id])}}" class="btn btn-primary btn-xs">Pay</a>
+														<a href="{{route('invoice.reminder',['id'=>$invoice->id])}}" class="btn btn-warning btn-xs">Send Reminder</a>
+														@endif
 	                    		</td>
-	                    		{{-- <td><a href="{{route('invoice.delete',['id'=>$invoice->id])}}" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span></a></td> --}}
 	                    	</tr>
 	                    	@endforeach
                     	@endif

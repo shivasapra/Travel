@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class wageLog extends Model
 {
-    protected $fillable = ['id','wage_id','date','login_time','logout_time','hours'];
+    protected $table = 'wage_logs';
 
 
     public function wage()

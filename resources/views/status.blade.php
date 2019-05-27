@@ -1,12 +1,12 @@
 @extends('layouts.frontend')
 @section('title')
-Client Status
+Client Visa Application Status
 @endsection
 @section('header')
 	<section class="content-header">
       <h1>
-        Client Status
-      <button type="button" data-toggle="modal" data-target="#modal-info" class="btn btn-sm btn-info">Search Client&nbsp;&nbsp;&nbsp;<i class="fa fa-search"></i></button>
+        Client Visa Application Status
+      <button type="button" data-toggle="modal" data-target="#modal-info" class="btn btn-sm btn-info" id="searchClient">Search Client&nbsp;&nbsp;&nbsp;<i class="fa fa-search"></i></button>
       </h1>
       <div class="modal fade" id="modal-info">
   		<div class="modal-dialog">
@@ -34,7 +34,7 @@ Client Status
       
       <ol class="breadcrumb">
         <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active"><i class="fa fa-pencil-square-o"></i>Status</li>
+        <li class="active"><i class="fa fa-pencil-square-o"></i>Client Visa Application Status</li>
       </ol>
     </section>
 @stop
@@ -87,7 +87,7 @@ Client Status
     		<div class="row">
     			<div class="col-md-4">
     				<label for="client_id">Client Id:</label>
-    				<input type="text" id="clientId" name="client_id" required class="form-control">
+    				<input type="text" id="clientId" name="client_id" required class="form-control" readonly onclick="document.getElementById('searchClient').click()">
     			</div>
     			<div class="col-md-4">
     				<label for="country">Select Country:</label>
