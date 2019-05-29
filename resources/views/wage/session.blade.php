@@ -41,7 +41,7 @@ Session
         <input type="password" name="password" class="form-control" placeholder="password">
 
         <div class="input-group-btn">
-          <button type="submit" class="btn"><i class="fa fa-arrow-right text-muted"></i></button>
+          <button type="submit" class="btn">@if($latest_wageLog != null and $latest_wageLog->logout_time == null)End @else Start @endif<i class="fa fa-arrow-right text-muted"></i></button>
         </div>
       </div>
     </form>
@@ -52,13 +52,15 @@ Session
   <div class="help-block text-center">
     Enter your password
     @if($latest_wageLog != null and $latest_wageLog->logout_time == null) 
-    to end your Session.
+    to <strong>End</strong> your Session.
     @else 
-    to start your Session.
+    to <strong>Start</strong> your Session.
     @endif
   </div>
   <div class="text-center">
-    
+      @if($latest_wageLog != null and $latest_wageLog->logout_time == null) 
+      <div class="lockscreen-name"><h4><strong>Total Hours This Session:</strong></h4><h3><span class="text-red"><strong>{{$total_hours_this_session}}</strong></span></h3></div>
+      @endif
   </div>
   <div class="lockscreen-footer text-center">
     

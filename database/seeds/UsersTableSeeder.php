@@ -14,7 +14,7 @@ class UsersTableSeeder extends Seeder
         $user = App\User::create([
         	'name' => 'Shiva Sapra',
         	'email' => 'shivasapra24@gmail.com',
-        	'password' => bcrypt('password'),
+            'password' => bcrypt('password'),
             'admin' => 1
         ]);
 
@@ -29,14 +29,5 @@ class UsersTableSeeder extends Seeder
             'tax' => 0,
             'enable' => 'yes',
         ]);
-
-
-        $user = App\products::create([
-            'service' => 'Flight',
-        ]);
-        $user = App\products::create([
-            'service' => 'Visa Services',
-        ]);
-
     }
 }

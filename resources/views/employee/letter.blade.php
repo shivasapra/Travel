@@ -15,7 +15,8 @@ Employee's Letter
     </section>
 @stop
 @section('content')
-
+<form action="{{route('sendLetterTOEmployee',['id'=>$employee->id])}}" method="post">
+  @csrf
 	<div class="box box-info" style="width: 900px;margin-left: 100px">
 		<div class="box-body" style="margin-left: 20px">
 			<div class="text-center">
@@ -98,7 +99,10 @@ Employee's Letter
 			</textarea>
 		</div>
 	</div>
-
+	<div class="text-center">
+    <button type="submit" class="btn btn-success btn-xs">Send</button>
+	</div>
+</form>
 @stop
 @section('css')
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css" rel="stylesheet">

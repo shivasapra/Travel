@@ -12,6 +12,7 @@ use App\Mail\InviteCreated;
 use Mail;
 use App\wage;
 use App\assignment;
+use Validator;
 
 class employeeController extends Controller
 {   
@@ -53,7 +54,15 @@ class employeeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+        Validator::make($request->all(), [
+            'passport_no' => 'unique:employees',
+            'email' => 'unique:users',
+            'mobile_phone' => 'unique:employees',
+            'rate' => 'integer'
+            ])->validate();
+
+        
         $employee = new employee;
         $employee->first_name = $request->first_name;
         $employee->last_name = $request->last_name;
@@ -143,9 +152,9 @@ class employeeController extends Controller
             $employee->work_permit = 'uploads/passport/'.$work_permit_new_name;
             // $client->save();
             }
-        $unique_id = 'CLD'. mt_rand(100000, 999999);
+        $unique_id = 'CLDE'. mt_rand(100000, 999999);
         while (employee::where('unique_id',$unique_id)->get()->count()>0) {
-           $unique_id = 'CLD'. mt_rand(100000, 999999); 
+           $unique_id = 'CLDE'. mt_rand(100000, 999999); 
         }
         $employee->unique_id = $unique_id;
         $employee->save();
@@ -164,11 +173,11 @@ class employeeController extends Controller
         while (Invite::where('token', $token)->first());
 
         //create a new invite record
-        $invite = Invite::create([
-            'email' => $employee->email,
-            'token' => $token
-        ]);
-
+        $invite = new Invite;
+        $invite->email = $employee->email;
+        $invite->token = $token;
+        $invite->save();
+        
         // send the email
         $contactEmail = $employee->email;
         $data = array('token'=>$token);
@@ -181,6 +190,16 @@ class employeeController extends Controller
         return redirect()->route('employees');
     }
 
+    public function sendLetterTOEmployee(Request $request,$id){
+        
+        $contactEmail = employee::find($id)->email;
+        $data = array('content'=>$request->content);
+        Mail::send('emails.letter', $data, function($message) use ($contactEmail)
+        {  
+            $message->to($contactEmail);
+        });
+        return redirect()->back();
+    }
     
 
     /**
@@ -337,4 +356,29 @@ class employeeController extends Controller
         return view('employee.assignment')->with('employees',$employees);
     }
 
+    public function activate($id){
+        $user = employee::find($id)->user;
+        $user->active = 1;
+        $user->save();
+        Session::flash('success','Employee Activated');
+        return redirect()->back();
+    }
+
+    public function deactivate($id){
+        $user = employee::find($id)->user;
+        $user->active = 0;
+        $user->save();
+        Session::flash('success','Employee Deactivated');
+        return redirect()->back();
+    }
+
+    public function searchEmployee(Request $request){
+        $employees = employee::where('first_name', 'like', '%'.request('employee_name').'%')->get();
+        return view('wage.slipGenerate')->with('employees',$employees);
+    }
+
+    public function searchEmployeeG(Request $request){
+        $employees = employee::where('first_name', 'like', '%'.request('employee_name').'%')->get();
+        return redirect()->back()->with('employees',$employees);
+    }
 }

@@ -21,6 +21,7 @@ class CreateInvoicesTable extends Migration
             $table->Date('invoice_date');
             $table->string('invoice_no');
             $table->string('total');
+            $table->string('currency')->nullable();
             $table->integer('discount')->nullable();
             $table->integer('discounted_total')->nullable();
             $table->boolean('credit')->default(0);
@@ -33,8 +34,13 @@ class CreateInvoicesTable extends Migration
             $table->string('bank_amount')->nullable();
             $table->integer('paid')->nullable();
             $table->integer('pending_amount')->nullable();
+            $table->integer('advance')->default(0);
             $table->boolean('status')->default(0);
             $table->Date('mail_sent');
+            $table->float('VAT_percentage')->default(0);
+            $table->float('VAT_amount')->default(0);
+            $table->boolean('refund')->default(0);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

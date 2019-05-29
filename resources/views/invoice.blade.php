@@ -29,7 +29,7 @@ Invoice
       </div>
       <!-- info row -->
       <div class="row invoice-info">
-        
+
         <!-- /.col -->
         <div class="col-sm-8 invoice-col">
           To,<br>
@@ -57,43 +57,172 @@ Invoice
 
       <!-- Table row -->
       <div class="row">
-        <div class="col-xs-12 table-responsive">
-          <table class="table table-striped">
-            <thead>
-            <tr>
-                <th width="15%" style="color:white;font-weight:500;background-color:#0066FF;">Service Name</th>
-                <th width="15%" style="color:white;font-weight:500;background-color:#0066FF;"> Sub Name</th>
-                <th width="7%" style="color:white;font-weight:500;background-color:#0066FF;">Quantity</th>
-                {{-- <th width="8%">Currency</th> --}}
-                <th width="13%" style="color:white;font-weight:500;background-color:#0066FF;">Price</th>
-                <th width="12%" style="color:white;font-weight:500;background-color:#0066FF;">Actual Amt.</th>
-                {{-- <th width="12%">Status</th> --}}
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($invoice->invoiceInfo as $info)
-            <tr id="row">
-            <td>{{$info->service_name}}</td>
-            @if($info->service_name != null)
-            <td>{{$info->airline_name}}</td>
-            @elseif($info->service_name != null)
-            <td>{{$info->visa_type}}</td>
-            @endif
-            <td>{{$info->quantity}}</td>
-            {{-- <td>{{$invoice->currency}}</td> --}}
-            <td>{{$info->price}}</td>
-            <td>{{$info->currency.$info->amount}}</td>
-            @endforeach
-            {{-- <td>@if($invoice->status ==1)
-                {{'Paid'}}
-                @else
-                {{"UnPaid"}}
-                @endif
-            </td> --}}
-          </tr>
-            </tbody>
-          </table>
-        </div>
+        @foreach($invoice->invoiceInfo as $info)
+        @if($info->service_name == 'Flight')
+            <div class="col-xs-12 table-responsive">
+              <table class="table table-bordered">
+              <thead>
+                <div style="color:white;font-weight:500;background-color:#0066FF;">Service Name: {{'Flight'}}</div>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>{{'Airline Name:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->airline_name}}</td>
+                  <td><strong>{{'Source:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->source}}</td>
+                  <td><strong>{{'Destination:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->destination}}</td>
+                  <td><strong>{{'Date:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->date_of_travel}}</td>
+                </tr>
+                <tr>
+                    <td><strong>{{'Adult:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->adult}}</td>
+                    <td><strong>{{'Adult Price:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->adult_price}}</td>
+                    <td><strong>{{'Child:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->child}}</td>
+                    <td><strong>{{'Child Price:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->child_price}}</td>
+                </tr>
+                <tr>
+                    <td><strong>{{'Infant:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->infant}}</td>
+                    <td><strong>{{'Infant Price:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->infant_price}}</td>
+                    <td><strong>{{'Remarks:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->flight_remarks}}</td>
+                {{-- </tr>
+                <tr>
+                    <td><strong>{{'Quantity:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->flight_quantity}}</td>
+                    <td><strong>{{'Price:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->flight_price}}</td> --}}
+                    <td style="color:white;font-weight:500;background-color:gray;"><strong>{{'Amount:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->flight_amount}}</td>
+                </tr>
+              </tbody>
+              </table>
+            </div>
+          @endif
+
+          @if($info->service_name == 'Visa Services')
+            <div class="col-xs-12 table-responsive">
+              <table class="table table-bordered">
+              <thead>
+                <div style="color:white;font-weight:500;background-color:#0066FF;">Service Name: {{'Visa Services'}}</div>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>{{'Name Of Visa Applicant:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->name_of_visa_applicant}}</td>
+                  <td><strong>{{'Passport Origin:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->passport_origin}}</td>
+                  <td><strong>{{'Passport No:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->passport_no}}</td>
+                  <td><strong>{{'DOB:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->passport_member_DOB}}</td>
+                </tr>
+                <tr>
+                    <td><strong>{{'Visa Country:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->visa_country}}</td>
+                    <td><strong>{{'Visa Type:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->visa_type}}</td>
+                    <td><strong>{{'Visa Fee:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->visa_charges}}</td>
+                    <td><strong>{{'Service Charge:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->service_charge}}</td>
+                    <td style="color:white;font-weight:500;background-color:gray;"><strong>{{'Amount:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->visa_amount}}</td>
+                </tr>
+              </tbody>
+              </table>
+            </div>
+          @endif
+
+          @if($info->service_name == 'Hotel')
+            <div class="col-xs-12 table-responsive">
+              <table class="table table-bordered">
+              <thead>
+                <div style="color:white;font-weight:500;background-color:#0066FF;">Service Name: {{'Hotel'}}</div>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>{{'Hotel City:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->hotel_city}}</td>
+                  <td><strong>{{'Hotel Country:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->hotel_country}}</td>
+                  <td><strong>{{'Name:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->hotel_name}}</td>
+                  <td><strong>{{'Check-In-Date:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->check_in_date}}</td>
+                </tr>
+                <tr>
+                    <td><strong>{{'Check-Out_Date:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->check_out_date}}</td>
+                    <td><strong>{{'No. Of Children:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->no_of_children}}</td>
+                    <td><strong>{{'No. Of Rooms:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->no_of_rooms}}</td>
+                    <td style="color:white;font-weight:500;background-color:gray;"><strong>{{'Amount:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->hotel_amount}}</td>
+                </tr>
+              </tbody>
+              </table>
+            </div>
+          @endif
+
+          @if($info->service_name == 'Insurance')
+            <div class="col-xs-12 table-responsive">
+              <table class="table table-bordered">
+              <thead>
+                <div style="color:white;font-weight:500;background-color:#0066FF;">Service Name: {{'Insurance'}}</div>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>{{'Name Of Insurance Applicant:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->name_of_insurance_applicant}}</td>
+                  <td><strong>{{'Insurance Remarks:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->insurance_remarks}}</td>
+                  <td style="color:white;font-weight:500;background-color:gray;"><strong>{{'Amount:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->insurance_amount}}</td>
+                </tr>
+              </tbody>
+              </table>
+            </div>
+          @endif
+
+          @if($info->service_name == 'Local Sight Sceen')
+            <div class="col-xs-12 table-responsive">
+              <table class="table table-bordered">
+              <thead>
+                <div style="color:white;font-weight:500;background-color:#0066FF;">Service Name: {{'Local Sight Sceen'}}</div>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>{{'Local Sight Sceen Remarks:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->local_sight_sceen_remarks}}</td>
+                  <td style="color:white;font-weight:500;background-color:gray;"><strong>{{'Amount:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->local_sight_sceen_amount}}</td>
+                </tr>
+              </tbody>
+              </table>
+            </div>
+          @endif
+
+          @if($info->service_name == 'Local Transport')
+            <div class="col-xs-12 table-responsive">
+              <table class="table table-bordered">
+              <thead>
+                <div style="color:white;font-weight:500;background-color:#0066FF;">Service Name: {{'Local Transport'}}</div>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>{{'Local Transport Remarks:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->local_transport_remarks}}</td>
+                  <td style="color:white;font-weight:500;background-color:gray;"><strong>{{'Amount:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->local_transport_amount}}</td>
+                </tr>
+              </tbody>
+              </table>
+            </div>
+          @endif
+
+          @if($info->service_name == 'Car Rental')
+            <div class="col-xs-12 table-responsive">
+              <table class="table table-bordered">
+              <thead>
+                <div style="color:white;font-weight:500;background-color:#0066FF;">Service Name: {{'Car Rental'}}</div>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>{{'Car Rental Remarks:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->car_rental_remarks}}</td>
+                  <td style="color:white;font-weight:500;background-color:gray;"><strong>{{'Amount:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->car_rental_amount}}</td>
+                </tr>
+              </tbody>
+              </table>
+            </div>
+          @endif
+
+          @if($info->service_name == 'Other Facilities')
+            <div class="col-xs-12 table-responsive">
+              <table class="table table-bordered">
+              <thead>
+                <div style="color:white;font-weight:500;background-color:#0066FF;">Service Name: {{'Other Facilities'}}</div>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>{{'Other Facilities Remarks:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->other_facilities_remarks}}</td>
+                  <td style="color:white;font-weight:500;background-color:gray;"><strong>{{'Amount:'}}</strong>&nbsp;&nbsp;&nbsp; {{$info->other_facilities_amount}}</td>
+                </tr>
+              </tbody>
+              </table>
+            </div>
+          @endif
+          @endforeach
+
         <!-- /.col -->
       </div><br>
       <!-- /.row -->
@@ -104,26 +233,26 @@ Invoice
           <p class="lead">Payment Methods:</p>
           <div class="table-responsive">
             <table class="table">
-              @if($invoice->credit)
+              @if($invoice->credit_amount != 0)
               <tr>
                 <th style="width:50%"><button class="btn btn-xs bg-maroon btn-flat">Credit Card</button></th>
                 <td>{{$invoice->invoiceInfo[0]->currency. $invoice->credit_amount}}</td>
               </tr>
               @endif
 
-              @if($invoice->debit)
+              @if($invoice->debit_amount != 0)
               <tr>
                 <th style="width:50%"><button class="btn btn-xs bg-purple btn-flat">Debit Card</button></th>
                 <td>{{$invoice->invoiceInfo[0]->currency. $invoice->debit_amount}}</td>
               </tr>
               @endif
-              @if($invoice->cash)
+              @if($invoice->cash_amount != 0)
                 <tr>
                 <th style="width:50%"><button class="btn btn-xs bg-navy btn-flat">Cash</button></th>
                 <td>{{$invoice->invoiceInfo[0]->currency. $invoice->cash_amount}}</td>
               </tr>
               @endif
-              @if($invoice->bank)
+              @if($invoice->bank_amount != 0)
                 <tr>
                 <th style="width:50%"><button class="btn btn-xs bg-olive btn-flat">Bank Transfer</button></th>
                 <td>{{$invoice->invoiceInfo[0]->currency. $invoice->bank_amount}}</td>
@@ -147,48 +276,50 @@ Invoice
 
           <div class="table-responsive">
             <table class="table">
-              
+
               <tr>
                 <th style="width:50%">Subtotal:</th>
-                <td>{{$invoice->invoiceInfo[0]->currency}} {{$invoice->total}}</td>
+                <td>{{$invoice->currency}} {{$invoice->total}}</td>
               </tr>
               <tr>
                 <th>Discount:</th>
-                <td>{{$invoice->invoiceInfo[0]->currency}} {{$invoice->discount}}</td>
+                <td>{{$invoice->currency}} {{$invoice->discount}}</td>
               </tr>
               {{-- <tr>
                 <th>Discounted Total:</th>
-                <td>{{$invoice->invoiceInfo[0]->currency}} {{$invoice->discounted_total}}</td>
+                <td>{{$invoice->currency}} {{$invoice->discounted_total}}</td>
               </tr> --}}
-              @if($tax[0]->enable == 'yes')
               <tr>
-                <th>VAT ({{$tax[0]->tax}}%)</th>
-                <?php $taxed = ($tax[0]->tax/100*$invoice->discounted_total) ?>
-                <td>{{$invoice->invoiceInfo[0]->currency}} {{$taxed}}</td>
+                <th>VAT ({{$invoice->VAT_percentage}}%)</th>
+                <td>{{$invoice->currency}} {{$invoice->VAT_amount}}</td>
               </tr>
-              @endif
               {{-- <tr>
                 <th>Shipping:</th>
-                <td>{{$invoice->invoiceInfo[0]->currency}} 0.00</td>
+                <td>{{$invoice->currency}} 0.00</td>
               </tr> --}}
               <tr>
                 <th>Total:</th>
-                @if($tax[0]->enable == 'yes')
-                <?php $total = $invoice->discounted_total + $taxed ?>
-                <td style="color:white;font-weight:500;background-color:#0066FF;">{{$invoice->invoiceInfo[0]->currency}} {{$total}}</td>
-                @else
-                  <td style="color:white;font-weight:500;background-color:#0066FF;">{{$invoice->invoiceInfo[0]->currency}} {{$invoice->discounted_total}}</td>
-                @endif
+                <?php $total = $invoice->discounted_total + $invoice->VAT_amount ?>
+                <td style="color:white;font-weight:500;background-color:#0066FF;">{{$invoice->currency}} {{$total}}</td>
+                
               </tr>
               <tr>
                 <th class="text-success">Paid:</th>
-                <td>{{$invoice->invoiceInfo[0]->currency}} {{$invoice->paid}}</td>
+                <td>{{$invoice->currency}} {{$invoice->paid}}</td>
               </tr>
+              @if($invoice->pending_amount != 0 )
               <tr>
                 <th class="text-danger">Pending:</th>
-                <td>{{$invoice->invoiceInfo[0]->currency}} {{$invoice->pending_amount}}</td>
+                <td>{{$invoice->currency}} {{$invoice->pending_amount}}</td>
               </tr>
-              
+              @endif
+              @if($invoice->advance != 0 )
+              <tr>
+                <th class="text-info">Advance:</th>
+                <td>{{$invoice->currency}} {{$invoice->advance}}</td>
+              </tr>
+              @endif
+
             </table>
           </div>
         </div>
@@ -199,7 +330,8 @@ Invoice
       <!-- this row will not appear when printing -->
       <div class="row no-print">
         <div class="col-xs-12">
-          <a href="{{ route('pdf.invoice',['id'=>$invoice->id]) }}" target="_blank" class="btn btn-primary pull-right"><i class="fa fa-print"></i> Print</a>
+          <!--<a href="{{ route('pdf.invoice',['id'=>$invoice->id]) }}" target="_blank" class="btn btn-primary pull-right"><i class="fa fa-print"></i> Print</a>-->
+          <button onclick="print()" class="btn btn-primary pull-right"><i class="fa fa-print"></i> Print</button>
           {{-- <button type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment
           </button>
           <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
@@ -224,7 +356,7 @@ Invoice
         PASSENGER NOTICE :
         Carriage and other services provided by the carrier are subject to conditions of contract, which are hereby incorporated by reference. These conditions may be obtained from the issuing carrier. The itinerary/receipt constitutes the passenger ticket for the purposes of Article 3 of the Warsaw convention, except where the carrier delivers to the passenger another document complying with the requirements of Article 3. If the passenger's journey involves an ultimate destination or stop in a country other than the country of departure the Warsaw Convention may be applicable, and the convention governs, and in most cases limits, the liability of carriers for death or personal injury and in respect of loss of or damage to baggage. See also notices headed Advice to International Passengers on limitation of liability and notice of baggage liability limitations. Full conditions can be found at
         <a href="WWW.IATA.ORG">WWW.IATA.ORG</a>
-        or by clicking 
+        or by clicking
         HERE
       </p>
       <p class="text-muted" style="margin-top: 10px; font-size: 10px">
@@ -234,13 +366,20 @@ Invoice
         States. Applications may be submitted at anytime prior to travel, but no less than 72 hours prior to departure.
         Travel Authorization is obtained through an online registration system known as the Electronic System for Travel Authorization (ESTA). If your registration
         is successful, it will be valid for multiple applications for two years or until the date on which your passport expires, which ever comes first.
-        Submit your ESTA Application at 
+        Submit your ESTA Application at
         <a href="WWW.IATA.ORG">WWW.IATA.ORG</a>
       </p>
       <p class="text-muted" style="margin-top: 10px; font-size: 10px">
         Note : There is no liability if airline(s) above cease to trade, unless Scheduled Airline Failure Insurance (SAFI) has been paid.
         Yours Sincerely
       </p>
-    
+
     </section>
+@stop
+@section('js')
+<script>
+function print() {
+  window.print();
+}
+</script>
 @stop

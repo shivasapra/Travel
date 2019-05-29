@@ -53,8 +53,8 @@ Auto Deduction
 					</div>
 					<div class="col-md-2">
 					<div class="form-group">
-						<label for="deduction_date">Deduction Date:</label>
-						<input type="text" name='deduction_date' required  class="form-control">
+						<label for="deduction_date">Deduction Day Of Month:</label>
+						<input type="number" max="31" min="1" name='deduction_date'  required  class="form-control">
 					</div>
 					</div>
 					<div class="col-md-2">

@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class settings extends Model
 {
-    protected $fillable =['tax','enable'];
+    protected $table = 'settings';
 }

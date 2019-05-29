@@ -168,6 +168,67 @@ client
 					@endif
 				</tbody>
 			</table>
+			@if($client->family->count()>0)
+			<br><br><hr><div class="text-center"><strong>Family Members:</strong></div><hr>
+			<table class="table table-hover mb-0">
+				<tbody>
+					<?php $i = 1?>
+					@foreach($client->family as $family)
+					<div class="row">
+						<tr>
+							<td><strong>{{$i++}}. Member Name:</strong></td>
+							<td>{{$family->member_name}}</td>
+						</tr>
+					</div>
+					<div class="row">
+							<tr>
+								<td><strong>&nbsp;&nbsp;&nbsp;&nbsp;Member DOB:</strong></td>
+								<td>{{$family->member_DOB}}</td>
+							</tr>
+					</div>
+					<div class="row">
+							<tr>
+								<td><strong>&nbsp;&nbsp;&nbsp;&nbsp;Member Passport No:</strong></td>
+								<td>{{$family->member_passport_no}}</td>
+							</tr>
+					</div>
+					<div class="row">
+							<tr>
+								<td><strong>&nbsp;&nbsp;&nbsp;&nbsp;Place Of Issue:</strong></td>
+								<td>{{$family->member_passport_place}}</td>
+							</tr>
+					</div>
+					<div class="row">
+							<tr>
+								<td><strong>&nbsp;&nbsp;&nbsp;&nbsp;Passport Front:</strong></td>
+								<td>
+									@if($family->member_passport_front != null)
+									<img src="{{asset($family->member_passport_front)}}" alt="passport front" height="300px" width="300px" style="border-radius:20px">
+									@else
+									<strong>{{'N/A'}}</strong>
+									@endif
+								</td>
+							</tr>
+						</div>
+						<div class="row">
+							<tr>
+								<td><strong>&nbsp;&nbsp;&nbsp;&nbsp;Passport Back:</strong></td>
+								<td>
+									@if($family->member_passport_back != null)
+									<img src="{{asset($family->member_passport_back)}}" alt="passport back" height="300px" width="300px" style="border-radius:20px">
+									@else
+									<strong>{{'N/A'}}</strong>
+									@endif
+									<div align='right'>
+										<a href="{{route('edit.family',['id'=>$family->id])}}" class="btn btn-xs btn-danger">Edit</a><br><hr>
+									</div>
+								</td>
+							</tr>
+						</div>
+					@endforeach
+				</tbody>
+			</table>
+			@endif
 		</div>
 	</div>
 
