@@ -220,7 +220,12 @@ Create Invoice
 			</div>
 
 			<div class="card mt-3">
-				<div class="card-header text-danger font-weight-bold">Segment Related Cancellation/date Change Text</div>
+				<div class="card-header text-danger font-weight-bold">
+					<div class="row">
+						<div class="col-sm-6">Segment Related Cancellation/date Change Text</div>
+						<div class="col-sm-6 text-right"><button type="button" onclick="AddSegment()" class="btn btn-primary">Add Segment</button></div>
+					</div>
+				</div>
 				<div class="card-body">
 					<h4 class="text-uppercase font-weight-bold"><b>Note</b></h4>
 					<ul class="pl-4">
@@ -231,7 +236,7 @@ Create Invoice
 				</div>
 				<div class="card-body p-0">
 					<div class="table-responsive">
-						<table class="table table-bordered m-0">
+						<table id="AddSegment" class="table table-bordered m-0">
 							<thead class="bg-light">
 							<tr>
 								<th>Seg Id <a href="#" class="text-dark"><i class="fa fa-angle-down"></i></a></th>
@@ -242,36 +247,6 @@ Create Invoice
 							<tbody>
 							<tr>
 								<td>1</td>
-								<td><input type="text" value="LHR" class="form-control"></td>
-								<td>
-									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="customCheck" name="example1">
-										<label class="custom-control-label" for="customCheck">Tick to hide from customer</label>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>2</td>
-								<td><input type="text" value="LHR" class="form-control"></td>
-								<td>
-									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="customCheck" name="example1">
-										<label class="custom-control-label" for="customCheck">Tick to hide from customer</label>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td><input type="text" value="LHR" class="form-control"></td>
-								<td>
-									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="customCheck" name="example1">
-										<label class="custom-control-label" for="customCheck">Tick to hide from customer</label>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>4</td>
 								<td><input type="text" value="LHR" class="form-control"></td>
 								<td>
 									<div class="custom-control custom-checkbox">
@@ -704,8 +679,33 @@ Create Invoice
     }
 
 </script>
-@stop
 
+<script>
+    function AddSegment() {
+        var table = document.getElementById("AddSegment");
+        var row = table.insertRow(2);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
+
+        cell1.innerHTML = '2';
+        cell2.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
+        cell3.innerHTML = '<div class="custom-control custom-checkbox">\n' +
+            '<input type="checkbox" class="custom-control-input" id="customCheck" name="example1"> ' +
+            '<label class="custom-control-label" for="customCheck">Tick to hide from customer</label>' +
+            '</div>';
+        cell4.innerHTML = '<a href="javascript:void(0)" class="fa fa-remove text-danger" onclick="DeleteSegment()"></a>';
+
+    }
+
+    function DeleteSegment() {
+        document.getElementById("AddSegment").deleteRow(2);
+    }
+
+</script>
+@stop
+ap
 		
 
 {{-- <div class="row">

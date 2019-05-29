@@ -3431,6 +3431,7 @@ form.dropzone input[type="file"] {
 table.table {
     margin-top: 15px;
     margin-bottom: 35px;
+    font-size:13px;
 }
 
 .chart {
