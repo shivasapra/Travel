@@ -4,6 +4,7 @@
 .invoice .card{
     border-radius: 0;
     font-size:13px;
+    margin-top:20px;
 }
 .invoice .card-header {
     border-left: 4px solid #dc3545;
@@ -54,10 +55,6 @@
 .custom-control-label{
     font-size:14px;
 }
-
-
-
-
 .btn-default {
     color: #415164;
     background-color: #F1F5F7;
@@ -3432,7 +3429,8 @@ form.dropzone input[type="file"] {
 }
 
 table.table {
-    margin-top: 25px;
+    margin-top: 15px;
+    margin-bottom: 35px;
 }
 
 .chart {

@@ -75,10 +75,15 @@ Create Invoice
 
 		<div class="invoice" style="margin:0 0 30px 0;">
 			<div class="card">
-				<div class="card-header text-danger font-weight-bold">General PNR Info</div>
+				<div class="card-header text-danger font-weight-bold">
+					<div class="row">
+						<div class="col-sm-6">General PNR Info</div>
+						<div class="col-sm-6 text-right"><button type="button" onclick="pnrAdd()" class="btn btn-primary">Add PNR</button></div>
+					</div>
+				</div>
 				<div class="card-body p-0">
 					<div class="table-responsive">
-						<table class="table table-bordered m-0">
+						<table id="add_PNR" class="table table-bordered m-0">
 							<thead>
 							<tr>
 								<th>Creation Date <a href="#" class="text-dark"><i class="fa fa-angle-down"></i></a></th>
@@ -111,7 +116,7 @@ Create Invoice
 				</div>
 				<div class="card-body p-0">
 					<div class="table-responsive">
-						<table id="myTable" class="table table-bordered m-0" style="margin-top:10px;">
+						<table id="myTable" class="table table-bordered m-0">
 							<thead>
 							<tr>
 								<th>Pax Id <a href="#" class="text-dark"><i class="fa fa-angle-down"></i></a></th>
@@ -169,11 +174,16 @@ Create Invoice
 				<h6 class="text-danger font-weight-bold gbp-back"><span>Total GBP 806.05</span></h6>
 			</div>
 
-			<div class="card mt-3">
-				<div class="card-header text-danger font-weight-bold">Itinerary Details</div>
+			<div class="card mt-4">
+				<div class="card-header text-danger font-weight-bold">
+					<div class="row">
+						<div class="col-sm-6">Itinerary Details</div>
+						<div class="col-sm-6 text-right"><button type="button" onclick="AddItinerary()" class="btn btn-primary">Add Itinerary</button></div>
+					</div>
+				</div>
 				<div class="card-body p-0">
 					<div class="table-responsive">
-						<table class="table table-bordered m-0">
+						<table id="AddItinerary" class="table table-bordered m-0">
 							<thead>
 							<tr>
 								<th>Seg Id <a href="#" class="text-dark"><i class="fa fa-angle-down"></i></a></th>
@@ -203,19 +213,6 @@ Create Invoice
 								<td><input type="text" value="16:55" class="form-control" disabled></td>
 								<td><input type="text" value="HK" class="form-control" disabled></td>
 							</tr>
-							<tr>
-								<td>1</td>
-								<td><input type="text" value="LHR" class="form-control" disabled></td>
-								<td><input type="text" value="XYZ" class="form-control" disabled></td>
-								<td><input type="text" value="AC" class="form-control" disabled></td>
-								<td><input type="text" value="549" class="form-control" disabled></td>
-								<td><input type="text" value="S" class="form-control" disabled></td>
-								<td><input type="text" value="15052019" class="form-control" disabled></td>
-								<td><input type="text" value="14:10" class="form-control" disabled></td>
-								<td><input type="text" value="15052019" class="form-control" disabled></td>
-								<td><input type="text" value="16:55" class="form-control" disabled></td>
-								<td><input type="text" value="HK" class="form-control" disabled></td>
-							</tr>
 							</tbody>
 						</table>
 					</div>
@@ -225,7 +222,7 @@ Create Invoice
 			<div class="card mt-3">
 				<div class="card-header text-danger font-weight-bold">Segment Related Cancellation/date Change Text</div>
 				<div class="card-body">
-					<h6 class="text-uppercase font-weight-bold">Note</h6>
+					<h4 class="text-uppercase font-weight-bold"><b>Note</b></h4>
 					<ul class="pl-4">
 						<li>Date changes before Departure (subject to original advance purchase conditions and same class of booking) :- not Permitted.</li>
 						<li>Date changes before Inbound Departure (subject to same class of booking) :- not Permitted.</li>
@@ -290,10 +287,15 @@ Create Invoice
 			</div>
 
 			<div class="card mt-3">
-				<div class="card-header text-danger font-weight-bold">Charge Details</div>
+				<div class="card-header text-danger font-weight-bold">
+					<div class="row">
+						<div class="col-sm-6">Charge Details</div>
+						<div class="col-sm-6 text-right"><button type="button" onclick="AddCharges()" class="btn btn-primary">Add Charges</button></div>
+					</div>
+				</div>
 				<div class="card-body p-0">
 					<div class="table-responsive">
-						<table class="table table-bordered m-0">
+						<table id="AddCharges" class="table table-bordered m-0">
 							<thead>
 							<tr>
 								<th>Charge Type <a href="#" class="text-dark"><i class="fa fa-angle-down"></i></a></th>
@@ -600,6 +602,108 @@ Create Invoice
         }
 
 	</script>
+
+
+<script>
+    function pnrAdd() {
+        var table = document.getElementById("add_PNR");
+        var row = table.insertRow(2);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
+        var cell5 = row.insertCell(4);
+        var cell6 = row.insertCell(5);
+
+
+        cell1.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
+        cell2.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
+        cell3.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
+        cell4.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
+        cell5.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
+        cell6.innerHTML = '<a href="javascript:void(0)" class="fa fa-remove text-danger" onclick="DeletePNR()"></a>';
+
+    }
+
+    function DeletePNR() {
+        document.getElementById("add_PNR").deleteRow(2);
+    }
+
+</script>
+
+<script>
+    function AddItinerary() {
+        var table = document.getElementById("AddItinerary");
+        var row = table.insertRow(2);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
+        var cell5 = row.insertCell(4);
+        var cell6 = row.insertCell(5);
+        var cell7 = row.insertCell(6);
+        var cell8 = row.insertCell(7);
+        var cell9 = row.insertCell(8);
+        var cell10 = row.insertCell(9);
+        var cell11 = row.insertCell(10);
+        var cell12 = row.insertCell(11);
+
+
+
+        cell1.innerHTML = '2';
+        cell2.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
+        cell3.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
+        cell4.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
+        cell5.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
+        cell6.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
+        cell7.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
+        cell8.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
+        cell9.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
+        cell10.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
+        cell11.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
+        cell12.innerHTML = '<a href="javascript:void(0)" class="fa fa-remove text-danger" onclick="DeleteItinerary()"></a>';
+
+    }
+
+    function DeleteItinerary() {
+        document.getElementById("AddItinerary").deleteRow(2);
+    }
+
+</script>
+
+<script>
+    function AddCharges() {
+        var table = document.getElementById("AddCharges");
+        var row = table.insertRow(2);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
+        var cell5 = row.insertCell(4);
+        var cell6 = row.insertCell(5);
+        var cell7 = row.insertCell(6);
+        var cell8 = row.insertCell(7);
+        var cell9 = row.insertCell(8);
+
+
+
+        cell1.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
+        cell2.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
+        cell3.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
+        cell4.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
+        cell5.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
+        cell6.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
+        cell7.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
+        cell8.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
+        cell9.innerHTML = '<a href="javascript:void(0)" class="fa fa-remove text-danger" onclick="DeleteCharges()"></a>';
+
+    }
+
+    function DeleteCharges() {
+        document.getElementById("AddCharges").deleteRow(2);
+    }
+
+</script>
 @stop
 
 		
