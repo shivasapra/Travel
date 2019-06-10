@@ -33,14 +33,10 @@ class CreateFlightsTable extends Migration
             $table->string('segment_two_flight')->nullable();
             $table->string('segment_one_class')->nullable();
             $table->string('segment_two_class')->nullable();
-            $table->string('segment_one_departure_date')->nullable();
-            $table->string('segment_two_departure_date')->nullable();
-            $table->string('segment_one_departure_time')->nullable();
-            $table->string('segment_two_departure_time')->nullable();
-            $table->string('segment_one_arrival_date')->nullable();
-            $table->string('segment_two_arrival_date')->nullable();
-            $table->string('segment_one_arrival_time')->nullable();
-            $table->string('segment_two_arrival_time')->nullable();
+            $table->string('segment_one_departure')->nullable();
+            $table->string('segment_two_departure')->nullable();
+            $table->string('segment_one_arrival')->nullable();
+            $table->string('segment_two_arrival')->nullable();
 
             $table->string('flight_remarks')->nullable();
             $table->timestamps();

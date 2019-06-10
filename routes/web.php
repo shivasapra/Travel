@@ -284,6 +284,9 @@ Route::get('/searchAirline','InvoiceController@AirlineSearch');
 Route::get('/searchAirport','InvoiceController@AirportSearch');
 Route::get('/searchAirportArrival','InvoiceController@AirportArrivalSearch');
 
+Route::get('/searchAirlineTwo','InvoiceController@AirlineSearchTwo');
+Route::get('/searchAirportTwo','InvoiceController@AirportSearchTwo');
+Route::get('/searchAirportArrivalTwo','InvoiceController@AirportArrivalSearchTwo');
 
 
 

@@ -37,16 +37,22 @@ Invoice
       <div class="col-md-12 text-center">
         <h2 class="mb-4 text-uppercase font-weight-bold">Invoice</h2>
       </div>
-      @foreach($invoice->invoiceInfo as $info)
-      @if($info->service_name == 'Flight')
+
+      @foreach($invoice->flights as $flight)
       <div class="col-sm-12">
         <h3>Service: Flight</h3>
       </div>
-      <div class="col-md-4">
-        <h5><span class="text-blue">Booking Ref:</span> IEB 9003953</h5>
+      <div class="col-md-3">
+        <h5><span class="text-blue">Universal PNR:</span> {{ $flight->universal_pnr }}</h5>
       </div>
-      <div class="col-md-4">
-        <h5><span class="text-blue">Airline Ref:</span> AC M7NTAR</h5>
+      <div class="col-md-3">
+        <h5><span class="text-blue">PNR:</span> {{ $flight->pnr }}</h5>
+      </div>
+      <div class="col-md-3">
+        <h5><span class="text-blue">Agency PCC:</span> {{ $flight->agency_pcc }}</h5>
+      </div>
+      <div class="col-md-3">
+        <h5><span class="text-blue">Airline Ref:</span> {{ $flight->airline_ref }}</h5>
       </div>
     </div>
     <div class="row">
@@ -57,18 +63,20 @@ Invoice
             <tr class="text-blue">
               <th>S#</th>
               <th>Pax Type</th>
-              <th>First Name & Title</th>
+              <th>First Name</th>
               <th>Last Name</th>
+              <th>DOB</th>
             </tr>
-            <tr>
-              <td>1</td>
-              <td>ADT</td>
-              <td>AMARPREETKAUR*</td>
-              <td>MRS</td>
-            </tr>
-            <tr>
-              <td colspan="4" class="text-blue">Note - * denotes the lead passenger</td>
-            </tr>
+            <?php $i = 1;?>
+            @foreach($flight->passengers as $passenger)
+                <tr>
+                    <td>{{ $i++ }}</td>
+                    <td>{{ $passenger->pax_type }}</td>
+                    <td>{{ $passenger->first_name}}</td>
+                    <td>{{ $passenger->last_name }}</td>
+                    <td>{{ $passenger->DOB }}</td>
+                </tr>
+            @endforeach
           </table>
         </div>
       </div>
@@ -83,70 +91,37 @@ Invoice
               <th>Arrival</th>
               <th>Airline</th>
               <th>Class</th>
+              <th>Carrier</th>
             </tr>
             <tr>
-              <td>London Heathrow Arpt (LHR), Mon, 10 Jun 2019 12:05</td>
-              <td>Lester B Pearson Intl (YYZ), Mon, 10 Jun 2019 14:50</td>
-              <td>Air Canada (AC857)</td>
-              <td>Economy</td>
+              <td>{{ $flight->segment_one_from.', '.$flight->segment_one_departure }}</td>
+              <td>{{ $flight->segment_one_to.', '.$flight->segment_one_arrival }}</td>
+              <td>{{ $flight->segment_one_flight }}</td>
+              <td>{{ $flight->segment_one_class }}</td>
+              <td>{{ $flight->segment_one_carrier }}</td>
             </tr>
             <tr>
-             <td>Lester B Pearson Intl (YYZ), Sun, 23 Jun 2019 18:35</td>
-             <td>London Heathrow Arpt (LHR), Mon, 24 Jun 2019 06:35</td>
-             <td>Air Canada (AC856)</td>
-              <td>Economy</td>
+             <td>{{ $flight->segment_two_from.', '.$flight->segment_two_departure }}</td>
+             <td>{{ $flight->segment_two_to.', '.$flight->segment_two_arrival }}</td>
+             <td>{{ $flight->segment_two_flight }}</td>
+             <td>{{ $flight->segment_two_class }}</td>
+             <td>{{ $flight->segment_two_carrier}}</td>
             </tr>
           </table>
         </div>
       </div>
     </div>
-    <div class="row mt-4">
-      <div class="col-md-12">
-        <h4 class="text-blue font-weight-bold">Flight Charge Details</h4>
-        <div class="table-responsive">
-          <table class="table table-bordered">
-            <tr class="text-blue">
-              <th>Charge Type</th>
-              <th>Seg. Id</th>
-              <th>Pax Type</th>
-              <th>Amount</th>
-              <th>Total Amount</th>
-            </tr>
-            <tr>
-              <td>FAR</td>
-              <td>1</td>
-              <td>ADT</td>
-              <td>123.00</td>
-              <td>123.00</td>
-            </tr>
-            <tr>
-              <td>TAX</td>
-              <td>1</td>
-              <td>ADT</td>
-              <td>356.42</td>
-              <td>356.42</td>
-            </tr>
-            <tr>
-              <td>ATOL</td>
-              <td>1</td>
-              <td>N/A</td>
-              <td>2.50</td>
-              <td>2.50</td>
-            </tr>
-          </table>
-        </div>
-      </div>
-    </div>
+
     <div class="row">
       <div class="col-md-6 col-xs-6">
         <h2 class="text-blue" style="font-size:20px;">Total Flight Charges:</h2>
       </div>
       <div class="col-md-6 text-right col-xs-6">
-        <h4>GBP 481.92</h4>
+        <h4>GBP {{ $invoice->currency.$flight->total_amount }}</h4>
       </div>
-      @endif
+      @endforeach
 
-
+      @foreach($invoice->invoiceInfo as $info)
       @if($info->service_name == 'Visa Services')
       <div class="col-sm-12"><hr>
         <h3>Service: {{ $info->service_name }}</h3>

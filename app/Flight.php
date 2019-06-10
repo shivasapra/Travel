@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Flight extends Model
 {
+    protected $table = 'flights';
     public function invoice()
     {
         return $this->belongsTo('App\invoice');

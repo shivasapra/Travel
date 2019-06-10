@@ -223,7 +223,7 @@ class InvoiceController extends Controller
         $flight->pnr = $request->pnr[$flight_counter];
         $flight->agency_pcc = $request->agency_pcc[$flight_counter];
         $flight->airline_ref = $request->airline_ref[$flight_counter];
-        $flight->total_amount = $request->total_amount[$flight_counter];
+        $flight->total_amount = $request->flight_amount[$flight_counter];
         $flight->segment_one_from = $request->segment_one_from[$flight_counter];
         $flight->segment_two_from = $request->segment_two_from[$flight_counter];
         $flight->segment_one_to = $request->segment_one_to[$flight_counter];
@@ -234,16 +234,29 @@ class InvoiceController extends Controller
         $flight->segment_two_flight = $request->segment_two_flight[$flight_counter];
         $flight->segment_one_class = $request->segment_one_class[$flight_counter];
         $flight->segment_two_class = $request->segment_two_class[$flight_counter];
-        $flight->segment_one_departure_date = $request->segment_one_departure_date[$flight_counter];
-        $flight->segment_two_departure_date = $request->segment_two_departure_date[$flight_counter];
-        $flight->segment_one_departure_time = $request->segment_one_departure_time[$flight_counter];
-        $flight->segment_two_departure_time = $request->segment_two_departure_time[$flight_counter];
-        $flight->segment_one_arrival_date = $request->segment_one_arrival_date[$flight_counter];
-        $flight->segment_two_arrival_date = $request->segment_two_arrival_date[$flight_counter];
-        $flight->segment_one_arrival_time = $request->segment_one_arrival_time[$flight_counter];
-        $flight->segment_two_arrival_time = $request->segment_two_arrival_time[$flight_counter];
+        $flight->segment_one_departure = $request->segment_one_departure[$flight_counter];
+        $flight->segment_two_departure = $request->segment_two_departure[$flight_counter];
+        $flight->segment_one_arrival = $request->segment_one_arrival[$flight_counter];
+        $flight->segment_two_arrival = $request->segment_two_arrival[$flight_counter];
         $flight->flight_remarks = $request->flight_remarks[$flight_counter];
         $flight->save();
+
+        foreach($request->pax_type as $index=>$pax_type){
+            if($request->verify[$index] == $flight->pnr )
+            {
+                $passenger = new Passenger;
+                $passenger->flight_id = $flight->id;
+                $passenger->pax_type = $request->pax_type[$index];
+                $passenger->first_name = $request->first_name[$index];
+                $passenger->last_name = $request->last_name[$index];
+                $passenger->DOB = $request->DOB[$index];
+                $passenger->segment_one_fare_cost = $request->segment_one_fare_cost[$index];
+                $passenger->segment_two_fare_cost = $request->segment_two_fare_cost[$index];
+                $passenger->segment_one_fare_sell = $request->segment_one_fare_sell[$index];
+                $passenger->segment_two_fare_sell = $request->segment_two_fare_sell[$index];
+                $passenger->save();
+            }
+        }
         $flight_counter++;
 }
 
@@ -771,5 +784,44 @@ class InvoiceController extends Controller
         }
 
     }
+    public function AirlineSearchTwo(Request $request){
+        if($request->ajax()){
+            $output="";
+            $airline= airlines::where('name','LIKE','%'.$request->search."%")->get();
+            if($airline){
+                    foreach ($airline as $key => $product) {
+                        $output.='<a><option onClick="AirlineAssignTwo(this)" value="'.$product->name.'">'.$product->name.'</option></a>';
+                    }
+                return Response($output);
+            }
+        }
+    }
+
+    public function AirportSearchTwo(Request $request){
+        if($request->ajax()){
+            $output="";
+            $airline= airports::where('name','LIKE','%'.$request->search."%")->get();
+            if($airline){
+                    foreach ($airline as $key => $product) {
+                        $output.='<a><option onClick="AirportAssignTwo(this)" value="'.$product->name.'">'.$product->name.'</option></a>';
+                    }
+                return Response($output);
+            }
+        }
+    }
+
+    public function AirportArrivalSearchTwo(Request $request){
+        if($request->ajax()){
+            $output="";
+            $airline= airports::where('name','LIKE','%'.$request->search."%")->get();
+            if($airline){
+                    foreach ($airline as $key => $product) {
+                        $output.='<a><option onClick="AirportArrivalAssignTwo(this)" value="'.$product->name.'">'.$product->name.'</option></a>';
+                    }
+                return Response($output);
+            }
+        }
+    }
+
 
 }
