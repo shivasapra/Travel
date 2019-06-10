@@ -1,4 +1,4 @@
-<?php 
+<?php
   use Carbon\Carbon;
   $dt = Carbon::now();
   $date_today = $dt->timezone('Europe/London');
@@ -121,7 +121,7 @@
                       {{-- <i class="fa fa-users text-green"></i> --}}
                     </a>
                   </li>
-                  
+
                 </ul>
               </li>
               <li class="footer"><a href="#">View all</a></li>
@@ -140,31 +140,31 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img 
+              <img
                     @if(Auth::user()->avatar)
                       src="{{asset(Auth::user()->avatar)}}"
                     @else
-                      src="{{asset('app/images/user-placeholder.jpg')}}"
-                    @endif 
+                      src="{{asset('images/user-placeholder.jpg')}}"
+                    @endif
                class="user-image" alt="User Image">
               <span class="hidden-xs">{{auth::user()->name}}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img 
+                <img
                     @if(Auth::user()->avatar)
                       src="{{asset(Auth::user()->avatar)}}"
                     @else
                       src="{{asset('app/images/user-placeholder.jpg')}}"
-                    @endif 
+                    @endif
                  class="img-circle" alt="User Image"><br>
                   <div class="text-center">
                     <strong>{{auth::user()->name}}</strong>
                   </div>
                   <div class="text-center">
                     {{auth::user()->email}}
-                  
+
                   <div class="text-center">
                     @if(!Auth::user()->admin)
                    {{Auth::user()->employee[0]->unique_id}}
@@ -195,7 +195,7 @@
                                    document.getElementById('logout-form').submit();">
                       <i class="ft-power"> {{ __('Logout') }}</i>
                   </a>
-              
+
                   <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                       @csrf
                   </form>
@@ -204,7 +204,7 @@
             </ul>
           </li>
           <!-- Control Sidebar Toggle Button -->
-          
+
         </ul>
       </div>
     </nav>
@@ -256,7 +256,7 @@
         @can('View Departments')
           <li><a href="{{route('departments')}}"><i class="fa fa-briefcase"></i><span>Departments</span></a></li>
         @endcan
-        
+
         @if(Auth::user()->can('View Clients') or Auth::user()->can('Client Visa Application Status') or Auth::user()->can('Client Documents Movement'))
         <li class="treeview">
             <a href="">
@@ -304,7 +304,7 @@
           </li>
           @endif
 
-        @if(Auth::user()->can('Expense Entry') or Auth::user()->can('Auto Deduction Expense Entry')) 
+        @if(Auth::user()->can('Expense Entry') or Auth::user()->can('Auto Deduction Expense Entry'))
         <li class="treeview">
             <a href="">
               <i class="fa fa-money"></i><span>Daily Expense Entry</span>
@@ -322,7 +322,7 @@
             </ul>
           </li>
         @endif
-        @if(Auth::user()->can('View Invoices') or Auth::user()->can('View Canceled Invoice') or Auth::user()->can('VAT Updation')) 
+        @if(Auth::user()->can('View Invoices') or Auth::user()->can('View Canceled Invoice') or Auth::user()->can('VAT Updation'))
           <li class="treeview">
             <a href="">
               <i class="fa fa-wrench"></i><span>Invoices</span>
@@ -623,7 +623,7 @@
 <script src="{{asset("bower_components/jquery/dist/jquery.min.js")}}"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="{{asset("bower_components/jquery-ui/jquery-ui.min.js")}}"></script>
-    
+
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
   $.widget.bridge('uibutton', $.ui.button);
@@ -673,7 +673,7 @@
         @endif
     </script>
 
-    
+
 @yield('js')
 </body>
 </html>

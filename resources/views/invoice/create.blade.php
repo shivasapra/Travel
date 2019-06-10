@@ -2,6 +2,94 @@
 @section('title')
 Create Invoice
 @endsection
+@section('css')
+	<style>
+
+		/* The search field when it gets focus/clicked on */
+		#myInput:focus {outline: 3px solid #ddd;}
+
+
+		/* Dropdown Content (Hidden by Default) */
+		.dropdown-content {
+		display: block;
+		position:absolute;
+		background-color: #f6f6f6;
+		min-width: 240px;
+		border: 1px solid #ddd;
+		z-index: 1;
+		}
+
+		/* Links inside the dropdown */
+		.dropdown-content a {
+		color: black;
+		padding: 12px 16px;
+		text-decoration: none;
+		display: block;
+		}
+
+		/* Change color of dropdown links on hover */
+		.dropdown-content a:hover {background-color: #f1f1f1}
+
+	</style>
+
+	<style>
+
+		/* The search field when it gets focus/clicked on */
+		#AirportmyInput:focus {outline: 3px solid #ddd;}
+
+
+		/* Dropdown Content (Hidden by Default) */
+		.Airportdropdown-content {
+		display: block;
+		position:absolute;
+		background-color: #f6f6f6;
+		min-width: 240px;
+		border: 1px solid #ddd;
+		z-index: 1;
+		}
+
+		/* Links inside the dropdown */
+		.Airportdropdown-content a {
+		color: black;
+		padding: 12px 16px;
+		text-decoration: none;
+		display: block;
+		}
+
+		/* Change color of dropdown links on hover */
+		.Airportdropdown-content a:hover {background-color: #f1f1f1}
+
+	</style>
+
+	<style>
+
+		/* The search field when it gets focus/clicked on */
+		#AirportArrivalmyInput:focus {outline: 3px solid #ddd;}
+
+
+		/* Dropdown Content (Hidden by Default) */
+		.AirportArrivaldropdown-content {
+		display: block;
+		position:absolute;
+		background-color: #f6f6f6;
+		min-width: 240px;
+		border: 1px solid #ddd;
+		z-index: 1;
+		}
+
+		/* Links inside the dropdown */
+		.AirportArrivaldropdown-content a {
+		color: black;
+		padding: 12px 16px;
+		text-decoration: none;
+		display: block;
+		}
+
+		/* Change color of dropdown links on hover */
+		.AirportArrivaldropdown-content a:hover {background-color: #f1f1f1}
+
+	</style>
+@stop
 @section('header')
 	<section class="content-header">
       <h1>
@@ -15,7 +103,7 @@ Create Invoice
     </section>
 @stop
 @section('content')
-	
+
 	@if(count($errors)>0)
 		<ul class="list-group">
 			@foreach($errors->all() as $error)
@@ -38,6 +126,14 @@ Create Invoice
 			<hr>
 			<div class="row">
 				<div class="col-md-8">
+							{{-- <div class="AirportArrivaldropdown">
+							<div id="AirportArrivalmyDropdown" class="AirportArrivaldropdown-content">
+								<input type="text" placeholder="Search.." name="destination" id="AirportArrivalmyInput" onkeyup="AirportArrivalDataExtract(this)"  required class="form-control">
+								<div id="airportArrival_html"></div>
+							</div>
+							</div> --}}
+
+
 					<h3>To,</h3>
 					<h3>RECEIVER (BILL TO)</h3>
 				</div>
@@ -58,7 +154,7 @@ Create Invoice
 					</select>
 					{{-- <input type="text" name='receiver_name' required class="form-control" placeholder="Enter Receiver Name"> --}}
 					<div id="address">
-						<textarea name="billing_address" required class="form-control" placeholder="Enter Billing Adress"></textarea>
+						<textarea name="billing_address"  required class="form-control" placeholder="Enter Billing Adress"></textarea>
 					</div>
 				</div>
 				</div>
@@ -71,274 +167,43 @@ Create Invoice
 			</div>
 		</div>
 		</div>
-
-
-		<div class="invoice" style="margin:0 0 30px 0;">
-			<div class="card">
-				<div class="card-header text-danger font-weight-bold">
+		<div id="target">
+			<div class="box box-primary">
+			<div class="box-body">
 					<div class="row">
-						<div class="col-sm-6">General PNR Info</div>
-						<div class="col-sm-6 text-right"><button type="button" onclick="pnrAdd()" class="btn btn-primary">Add PNR</button></div>
-					</div>
-				</div>
-				<div class="card-body p-0">
-					<div class="table-responsive">
-						<table id="add_PNR" class="table table-bordered m-0">
-							<thead>
-							<tr>
-								<th>Creation Date <a href="#" class="text-dark"><i class="fa fa-angle-down"></i></a></th>
-								<th>Universal PNR <a href="#" class="text-dark"><i class="fa fa-angle-down"></i></a></th>
-								<th>PNR <a href="#" class="text-dark"><i class="fa fa-angle-down"></i></a></th>
-								<th>Agency PCC <a href="#" class="text-dark"><i class="fa fa-angle-down"></i></a></th>
-								<th>Airline Ref <a href="#" class="text-dark"><i class="fa fa-angle-down"></i></a></th>
-							</tr>
-							</thead>
-							<tbody>
-							<tr>
-								<td>Friday, 10 May 2019</td>
-								<td>T4LQU5</td>
-								<td>8H6GQE</td>
-								<td>TVPORTDYNASKLTONWABAGENC</td>
-								<td>KCZFHZ</td>
-							</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-
-			<div class="card mt-3">
-				<div class="card-header text-danger font-weight-bold">
-					<div class="row">
-					<div class="col-sm-6">Passenger Details</div>
-					<div class="col-sm-6 text-right"><button type="button" onclick="myCreateFunction()" class="btn btn-primary">Add Passenger</button></div>
-					</div>
-				</div>
-				<div class="card-body p-0">
-					<div class="table-responsive">
-						<table id="myTable" class="table table-bordered m-0">
-							<thead>
-							<tr>
-								<th>Pax Id <a href="#" class="text-dark"><i class="fa fa-angle-down"></i></a></th>
-								<th>Pax Type* <a href="#" class="text-dark"><i class="fa fa-angle-down"></i></a></th>
-								<th>First Name <a href="#" class="text-dark"><i class="fa fa-angle-down"></i></a></th>
-								<th>Last Name <a href="#" class="text-dark"><i class="fa fa-angle-down"></i></a></th>
-								<th>Date of Birth* <a href="#" class="text-dark"><i class="fa fa-angle-down"></i></a></th>
-								<th>&nbsp;</th>
-								<th>Fare Cost <a href="#" class="text-dark"><i class="fa fa-angle-down"></i></a></th>
-								<th>Fare Sell <a href="#" class="text-dark"><i class="fa fa-angle-down"></i></a></th>
-								<th>Tax Cost <a href="#" class="text-dark"><i class="fa fa-angle-down"></i></a></th>
-								<th>Tax Sell <a href="#" class="text-dark"><i class="fa fa-angle-down"></i></a></th>
-								<th>Total Sell <a href="#" class="text-dark"><i class="fa fa-angle-down"></i></a></th>
-								<th>&nbsp;</th>
-							</tr>
-							</thead>
-							<tbody>
-							<tr>
-								<td>1</td>
-								<td>
-									<select class="form-control select-custom custom-select">
-										<option value="Adult">Adult</option>
-										<option value="Youth">Youth</option>
-										<option value="Child">Child</option>
-										<option value="Infant">Infant</option>
-									</select>
-								</td>
-								<td><input type="text" value="Harnam" class="form-control"></td>
-								<td><input type="text" value="Singh" class="form-control"></td>
-								<td><input type="text" placeholder="dd/mm/yyyy" value="" class="form-control"></td>
-								<td>Segment-1</td>
-								<td><input type="text" value="0" class="form-control" style="width:60px;"></td>
-								<td><input type="text" value="0" class="form-control" style="width:60px;"></td>
-								<td><input type="text" value="0" class="form-control" style="width:60px;"></td>
-								<td><input type="text" value="0" class="form-control" style="width:60px;"></td>
-								<td><input type="text" value="0" class="form-control" style="width:60px;"></td>
-								<td>&nbsp;</td>
-							</tr>
-							<tr>
-								<td colspan="5"></td>
-								<td>Segment-2</td>
-								<td><input type="text" value="0" class="form-control" style="width:60px;"></td>
-								<td><input type="text" value="0" class="form-control" style="width:60px;"></td>
-								<td><input type="text" value="0" class="form-control" style="width:60px;"></td>
-								<td><input type="text" value="0" class="form-control" style="width:60px;"></td>
-								<td><input type="text" value="0" class="form-control" style="width:60px;"></td>
-								<td>&nbsp;</td>
-							</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-			<div class="text-right mt-2">
-				<h6 class="text-danger font-weight-bold gbp-back"><span>Total GBP 806.05</span></h6>
-			</div>
-
-			<div class="card mt-4">
-				<div class="card-header text-danger font-weight-bold">
-					<div class="row">
-						<div class="col-sm-6">Itinerary Details</div>
-						<div class="col-sm-6 text-right"><button type="button" onclick="AddItinerary()" class="btn btn-primary">Add Itinerary</button></div>
-					</div>
-				</div>
-				<div class="card-body p-0">
-					<div class="table-responsive">
-						<table id="AddItinerary" class="table table-bordered m-0">
-							<thead>
-							<tr>
-								<th>Seg Id <a href="#" class="text-dark"><i class="fa fa-angle-down"></i></a></th>
-								<th>From <a href="#" class="text-dark"><i class="fa fa-angle-down"></i></a></th>
-								<th>To <a href="#" class="text-dark"><i class="fa fa-angle-down"></i></a></th>
-								<th>Carrier <a href="#" class="text-dark"><i class="fa fa-angle-down"></i></a></th>
-								<th>Flight <a href="#" class="text-dark"><i class="fa fa-angle-down"></i></a></th>
-								<th>Class <a href="#" class="text-dark"><i class="fa fa-angle-down"></i></a></th>
-								<th>Departure <a href="#" class="text-dark"><i class="fa fa-angle-down"></i></a></th>
-								<th>Time <a href="#" class="text-dark"><i class="fa fa-angle-down"></i></a></th>
-								<th>Arrival <a href="#" class="text-dark"><i class="fa fa-angle-down"></i></a></th>
-								<th>Time <a href="#" class="text-dark"><i class="fa fa-angle-down"></i></a></th>
-								<th>Status <a href="#" class="text-dark"><i class="fa fa-angle-down"></i></a></th>
-							</tr>
-							</thead>
-							<tbody>
-							<tr>
-								<td>1</td>
-								<td><input type="text" value="LHR" class="form-control" disabled></td>
-								<td><input type="text" value="XYZ" class="form-control" disabled></td>
-								<td><input type="text" value="AC" class="form-control" disabled></td>
-								<td><input type="text" value="549" class="form-control" disabled></td>
-								<td><input type="text" value="S" class="form-control" disabled></td>
-								<td><input type="text" value="15052019" class="form-control" disabled></td>
-								<td><input type="text" value="14:10" class="form-control" disabled></td>
-								<td><input type="text" value="15052019" class="form-control" disabled></td>
-								<td><input type="text" value="16:55" class="form-control" disabled></td>
-								<td><input type="text" value="HK" class="form-control" disabled></td>
-							</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-
-			<div class="card mt-3">
-				<div class="card-header text-danger font-weight-bold">
-					<div class="row">
-						<div class="col-sm-6">Segment Related Cancellation/date Change Text</div>
-						<div class="col-sm-6 text-right"><button type="button" onclick="AddSegment()" class="btn btn-primary">Add Segment</button></div>
-					</div>
-				</div>
-				<div class="card-body">
-					<h4 class="text-uppercase font-weight-bold"><b>Note</b></h4>
-					<ul class="pl-4">
-						<li>Date changes before Departure (subject to original advance purchase conditions and same class of booking) :- not Permitted.</li>
-						<li>Date changes before Inbound Departure (subject to same class of booking) :- not Permitted.</li>
-						<li>Cancellation Fees (minimum 24 hours before departure) :- No Refunds.</li>
-					</ul>
-				</div>
-				<div class="card-body p-0">
-					<div class="table-responsive">
-						<table id="AddSegment" class="table table-bordered m-0">
-							<thead class="bg-light">
-							<tr>
-								<th>Seg Id <a href="#" class="text-dark"><i class="fa fa-angle-down"></i></a></th>
-								<th>Cancellation/Date Change Remarks <a href="#" class="text-dark"><i class="fa fa-angle-down"></i></a></th>
-								<th>&nbsp;</th>
-							</tr>
-							</thead>
-							<tbody>
-							<tr>
-								<td>1</td>
-								<td><input type="text" value="LHR" class="form-control"></td>
-								<td>
-									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="customCheck" name="example1">
-										<label class="custom-control-label" for="customCheck">Tick to hide from customer</label>
-									</div>
-								</td>
-							</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-
-			<div class="card mt-3">
-				<div class="card-header text-danger font-weight-bold">
-					<div class="row">
-						<div class="col-sm-6">Charge Details</div>
-						<div class="col-sm-6 text-right"><button type="button" onclick="AddCharges()" class="btn btn-primary">Add Charges</button></div>
-					</div>
-				</div>
-				<div class="card-body p-0">
-					<div class="table-responsive">
-						<table id="AddCharges" class="table table-bordered m-0">
-							<thead>
-							<tr>
-								<th>Charge Type <a href="#" class="text-dark"><i class="fa fa-angle-down"></i></a></th>
-								<th>Segment Id <a href="#" class="text-dark"><i class="fa fa-angle-down"></i></a></th>
-								<th>Pax Id <a href="#" class="text-dark"><i class="fa fa-angle-down"></i></a></th>
-								<th>Pax Type <a href="#" class="text-dark"><i class="fa fa-angle-down"></i></a></th>
-								<th>Cost Amount <a href="#" class="text-dark"><i class="fa fa-angle-down"></i></a></th>
-								<th>Sell Amount <a href="#" class="text-dark"><i class="fa fa-angle-down"></i></a></th>
-								<th>Supplier <a href="#" class="text-dark"><i class="fa fa-angle-down"></i></a></th>
-								<th>Remarks <a href="#" class="text-dark"><i class="fa fa-angle-down"></i></a></th>
-							</tr>
-							</thead>
-							<tbody>
-							<tr>
-								<td>ATOL</td>
-								<td>1</td>
-								<td>All</td>
-								<td>All</td>
-								<td>2.50</td>
-								<td>2.50</td>
-								<td>ATOL</td>
-								<td>N/A</td>
-							</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<div class="text-right mt-2">
-					<h6 class="text-danger font-weight-bold gbp-back"><span>Total GBP 2.05</span></h6>
-					<h6 class="text-danger font-weight-bold gbp-back"><span>Grand Total GBP 808.52</span></h6>
-				</div>
-				<div class="row">
-				<div class="col-sm-12">
-					<h4 class="text-danger font-weight-bold">Agent Remarks</h4>
-					<textarea class="form-control" name="" style="height:80px;"></textarea>
-					<a href="#" class="btn btn-success" style="margin-top:10px;">Submit</a>
-				</div>
-				</div>
-			</div>
-		</div>
-
-
-		<div class="box box-primary">
-		<div class="box-body">
-				<div class="row">
-					<div class="col-md-4">
-						<div class="form-group">
-							<label for="service_name[]">Select Service</label>
-							<select name="service_name[]" id="service" class="form-control"required>
-									<option value="">--select--</option>
-									@if($products->count()>0)
-									@foreach($products as $product)
-										<option value="{{$product->service}}">{{$product->service}}</option>
-									@endforeach
-									@endif
-							</select>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="service_name[]">Select Service</label>
+								<select name="service_name[]" class="form-control service"required onChange="SelectService(this);">
+										<option value="">--select--</option>
+										@if($products->count()>0)
+										@foreach($products as $product)
+											<option value="{{$product->service}}">{{$product->service}}</option>
+										@endforeach
+										@endif
+								</select>
+							</div>
 						</div>
 					</div>
+					<div class="Insert"></div>
 				</div>
-				<div id="Insert"></div>
+				</div>
 			</div>
+			<div class="text-center"  style="margin-top: 5px">
+				<button class="btn btn-success btn-sm"  type="button" id="add">Add Service</button><br><br>
 			</div>
-			{{-- <div class="text-center"  style="margin-top: 5px">
-			<button class="btn btn-success btn-sm"  type="button" id="add">Add Service</button><br><br>
-			</div> --}}
 		<div class="box box-primary" id="targetTotal">
 		<div class="box-body">
 			<table class="table table-bordered">
+				<tr>
+					<td class="col-md-8" align="right"><strong>Currency:</strong></td>
+					<td class="col-md-4">
+					<select name="currency" class="form-control" id="currency">
+						<option value="$">$</option>
+						<option value="&#163;" selected>&#163;</option>
+					</select>
+					</td>
+				</tr>
 				<tr>
 					<td class="col-md-8" align="right"><strong>SubTotal:</strong></td>
 					<td class="col-md-4"><input name="total"  type="text" id="total" required class="form-control" readonly></td>
@@ -366,38 +231,41 @@ Create Invoice
 					</tr>
 					<tr>
 					<td class="col-md-8" align="right">
-						<input type="checkbox" id="credit" name="credit"> <strong>Credit card:</strong>
+						<strong>Credit card:</strong>
 					</td>
-					<td class="col-md-4" id="creditInput"></td>
+					<td class="col-md-4" id="creditInput"><input name="credit_amount" type="text" value="0" class="form-control"></td>
 					</tr>
 					<tr>
 					<td class="col-md-8" align="right">
-						<input type="checkbox" id="debit" name="debit"> <strong>Debit card:</strong>
+						<strong>Debit card:</strong>
 					</td>
-					<td class="col-md-4" id="debitInput"></td>
+					<td class="col-md-4" id="debitInput"><input name="debit_amount" type="text" value="0" class="form-control"></td>
 					</tr>
 					<tr>
 					<td class="col-md-8" align="right">
-						<input type="checkbox" id="cash" name="cash"> <strong>Cash:</strong>
+						<strong>Cash:</strong>
 					</td>
-					<td class="col-md-4" id="cashInput"></td>
+					<td class="col-md-4" id="cashInput"><input name="cash_amount" type="text" value="0" class="form-control"></td>
 					</tr>
 					<tr>
 					<td class="col-md-8" align="right">
-						<input type="checkbox" id="bank" name="bank"> <strong>Bank Transfer:</strong>
+						<strong>Bank Transfer:</strong>
 					</td>
-					<td class="col-md-4" id="bankInput"></td>
+					<td class="col-md-4" id="bankInput"><input name="bank_amount" type="text" value="0" class="form-control"></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-			
+
 			<div class="form-group">
 			<div class="text-center">
 				<button class="btn btn-primary" type="submit">Create</button>
+				<div id="daalo"></div>
 			</div>
 			</div>
 	</form>
+
+
 @stop
 @section('js')
 <script>
@@ -405,87 +273,462 @@ Create Invoice
 </script>
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<script type="text/javascript">
-	$(document).ready(function(){
-    $("#service").change(function(){
-			var value = this.value;
-			if (value == 'Flight') {
-				var data = '<div class="row">		<div class="col-md-4">		<div class="form-group">			<label for="airline_name">Airline Name</label>			<input type="text" name="airline_name" required class="form-control">		</div>		</div>		<div class="col-md-4">		<div class="form-group">			<label for="source">Source</label>			<input type="text" name="source" class="form-control">		</div>		</div>		<div class="col-md-4">		<div class="form-group">			<label for="destination">Destination</label>			<input type="text" name="destination" required class="form-control">		</div>		</div>		</div><div class="row">		<div class="col-md-3">		<div class="form-group">			<label for="date">Date</label>			<input type="date" name="date" required class="form-control">		</div>		</div>		<div class="col-md-2">		<div class="form-group">			<label for="adult">Adult</label>			<input type="text" name="adult" class="form-control">		</div>		</div>		<div class="col-md-2">		<div class="form-group">			<label for="child">Child</label>			<input type="text" name="child" required class="form-control">		</div>		</div>		<div class="col-md-2">				<div class="form-group">					<label for="infant">Infant</label>					<input type="text" name="infant" required class="form-control">				</div>				</div>	<div class="col-md-3">		<div class="form-group">			<label for="infant_dob">Infant DOB</label>			<input type="date" name="infant_dob" required class="form-control">		</div>		</div>	</div><div class="row">		<div class="col-md-3">		<div class="form-group">	<label for="quantity">Quantity</label>		<input type="text" id="quantity" name="quantity[]" required class="form-control">		</div>		</div>		<div class="col-md-3">			<div class="form-group">	<label for="currency">Currency</label>		<select name="currency[]" class="form-control" id="currency">				<option value="$">$</option>				<option value="&#163;" selected>&#163;</option>			</select>			</div>		</div>		<div class="col-md-3">			<div class="form-group">	<label for="price">Price</label>		<input id="price" type="text" name="price[]" required class="form-control">			</div>		</div>		<div class="col-md-3">			<div class="form-group">	<label for="amount">Amount</label>		<input id="amount" type="text" name="amount[]" required class="form-control" readonly>			</div>		</div></div>';		
-						$("#Insert").html(data);
+		$.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
+		</script>
+	<script type="text/javascript">
+		function ChildAppend(test){
+			// console.log(test.value);
+			// if($(test).prop("checked") == true){
+			// 	var data='';
+			// $(test).closest(".box-body").append(data);
+			// }
+			// else{
+			// 	$(test).closest(".box-body").append(data);
+			// }
+			var box = $(test).closest(".box-body");
+			box.find('#child-nikaalo').toggle();
+
+		}
+
+		function InfantAppend(test){
+			var box = $(test).closest(".box-body");
+			box.find('#infant-nikaalo').toggle();
+		}
+
+
+
+	  function filterFunction() {
+		var input, filter, ul, li, a, i;
+		input = document.getElementById("myInput");
+		filter = input.value.toUpperCase();
+		div = document.getElementById("myDropdown");
+		a = div.getElementsByTagName("a");
+		for (i = 0; i < a.length; i++) {
+		  txtValue = a[i].textContent || a[i].innerText;
+		  if (txtValue.toUpperCase().indexOf(filter) > -1) {
+			a[i].style.display = "";
+		  } else {
+			a[i].style.display = "none";
+		  }
+		}
+	  }
+
+	function AirlineAssign(temp){
+		var div = $(temp).closest(".dropdown-content");
+		div.find('.airline-name').val(temp.value);
+		$(temp).closest(".airline_html").html('');
+	  }
+	function AirportAssign(temp){
+		var div = $(temp).closest(".Airportdropdown-content");
+		div.find('.airport-name').val(temp.value);
+		$(temp).closest(".airport_html").html('');
+	}
+	function AirportArrivalAssign(temp){
+		var div = $(temp).closest(".AirportArrivaldropdown-content");
+		div.find('.airport-arrival-name').val(temp.value);
+		$(temp).closest(".airportArrival_html").html('');
+	}
+	function findFamily(test){
+		if (test.value != 'SELF') {
+			var familyId = test.value;
+			var Url = "http://buildatwill.com/cloud/public/find/family/"+ familyId;
+			var xhr = new XMLHttpRequest();
+			xhr.open('GET', Url, true);
+			xhr.send();
+			xhr.onreadystatechange = processRequest;
+			function processRequest(e) {
+					var response1 = JSON.parse(xhr.responseText);
+					var div = $(test).closest(".box-body");
+					div.find('.member_dob').val(response1['member_DOB']);
+					div.find('.member_name').val(response1['member_name']);
+					div.find('.passport_no').val(response1['member_passport_no']);
+					div.find('.passport_origin').val(response1['member_passport_place']);
 			}
-			if (value == 'Visa Services') {
-				var data = '<div class="row">		<div class="col-md-6">		<div class="form-group">			<label for="name_of_visa_applicant">Name Of Visa Applicant</label>			<input type="text" name="name_of_visa_applicant" required class="form-control">		</div>		</div>		<div class="col-md-6">		<div class="form-group">			<label for="passport_origin">Passport Origin</label>			<input type="text" name="passport_origin" class="form-control">		</div>		</div>		</div>		<div class="row">				<div class="col-md-4">				<div class="form-group">					<label for="visa_country">Visa Country</label>					<input type="text" name="visa_country" required class="form-control">				</div>				</div>				<div class="col-md-4">				<div class="form-group">					<label for="visa_type">Visa Type</label>					<input type="text" name="visa_type" class="form-control">				</div>				</div>				<div class="col-md-4">						<div class="form-group">							<label for="visa_charges">Visa Charges</label>							<input charges="text" name="visa_type" class="form-control">						</div>						</div>				</div><div class="row">		<div class="col-md-3">		<div class="form-group">	<label for="quantity">Quantity</label>		<input type="text" id="quantity" name="quantity[]" required class="form-control">		</div>		</div>		<div class="col-md-3">			<div class="form-group">	<label for="currency">Currency</label>		<select name="currency[]" class="form-control" id="currency">				<option value="$">$</option>				<option value="&#163;" selected>&#163;</option>			</select>			</div>		</div>		<div class="col-md-3">			<div class="form-group">	<label for="price">Price</label>		<input id="price" type="text" name="price[]" required class="form-control">			</div>		</div>		<div class="col-md-3">			<div class="form-group">	<label for="amount">Amount</label>		<input id="amount" type="text" name="amount[]" required class="form-control" readonly>			</div>		</div></div>';
-				$("#Insert").html(data);
-			}
-			})
-		});
+		}
+		else{
+			var client_id = document.getElementById('client').value;
+				@foreach($clients as $client)
+				var fetched_client_id = {!! json_encode($client->id) !!}
+			    	if(fetched_client_id == client_id){
+							var div = $(test).closest(".box-body");
+							div.find('.member_dob').val({!! json_encode($client->DOB) !!});
+							var first_name = {!! json_encode($client->first_name)!!};
+							var last_name = {!! json_encode($client->last_name)!!}
+							div.find('.member_name').val(first_name+" "+last_name);
+							div.find('.passport_no').val({!! json_encode($client->passport_no) !!});
+							div.find('.passport_origin').val({!! json_encode($client->passport_place) !!});
+						}
+			  @endforeach
+		}
+	}
+	function AirlineDataExtract(test){
+			$value=test.value;
+			$.ajax({
+				type : 'get',
+				url : '{{URL::to('searchAirline')}}',
+				data:{'search':$value},
+				success:function(data){
+					$(test).next(".airline_html").html(data);
+				}
+			});
+		}
+
+		function AirportDataExtract(test){
+			$value=test.value;
+			$.ajax({
+				type : 'get',
+				url : '{{URL::to('searchAirport')}}',
+				data:{'search':$value},
+				success:function(data){
+					$(test).next(".airport_html").html(data);
+				}
+			});
+		}
+
+		function AirportArrivalDataExtract(test){
+			$value=test.value;
+			$.ajax({
+				type : 'get',
+				url : '{{URL::to('searchAirportArrival')}}',
+				data:{'search':$value},
+				success:function(data){
+					$(test).next(".airportArrival_html").html(data);
+				}
+			});
+		}
+
+
+
 	$(document).ready(function(){
     $("#add").click(function(){
-    	var options1 = "";
-    		@if($products->count()>0)
-				@foreach($products as $product)
-				options1 = options1 + "<option value='{{$product->service}}'>{{$product->service}}</option>";
-				@endforeach
-			@endif
-		var options2 = "";
-		@if($airlines->count()>0)
-			@foreach($airlines as $airline)
-			options2 = options2 + "<option value='{{$airline->name}}'>{{$airline->name}}</option>";
-			@endforeach
-		@endif
-		var currency = document.getElementById('currency').value;
-    	var append = '<tr id="row"><td><select required name="item_name[]" class="form-control" id=""><option value="">--select--</option>'+options1+'</select></td><td><select required name="item_subname[]" class="form-control" id=""><option value="">--select--</option>'+options2+'</select></td><td><input type="text" name="quantity[]" id="quantity" required class="form-control"></td><td><select name="currency[]" class="form-control" id=""><option value='+currency+'>'+currency+'</option></select></td><td><input type="text" name="price[]" id="price" required class="form-control"></td><td><input id="amount" type="text" name="amount[]" required class="form-control" readonly></td></tr>';
-        $("#target").append(append);   
+    	var append = '<div class="box box-primary">			<div class="box-body">					<div class="row">						<div class="col-md-4">							<div class="form-group">								<label for="service_name[]">Select Service</label>								<select name="service_name[]" class="form-control service" onChange="SelectService(this);" required>										<option value="">--select--</option>										@if($products->count()>0)										@foreach($products as $product)											<option value="{{$product->service}}">{{$product->service}}</option>										@endforeach										@endif								</select>							</div>						</div>					</div>	<div class="Insert"></div>		<div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					</div>	</div>				</div>';
+        $("#target").append(append);
         });
     });
+	function SomeDeleteRowFunction(btndel) {
+    if (typeof(btndel) == "object") {
+        $(btndel).closest('.box').remove();
+    } else {
+        return false;
+    }}
+    function flight(){
+        var data = '<div class="box-body"><div class="row">'+
+				 			'<div class="col-md-4">				<div class="form-group">'+
+				 			'<label for="service_name[]">Select Service</label>'+
+				 			'<select name="service_name[]" class="form-control service" required onChange="SelectService(this);">'+
+				 			'<option value="">--select--</option>							@if($products->count()>0)'+
+				 			'@foreach($products as $product)	'+
+				 			'<option value="{{$product->service}}" {{($product->service == "Flight")?"selected":''}}>{{$product->service}}</option>'+
+				 			'@endforeach							@endif					</select>				</div>'+
+				 			'</div>		</div>'+
+
+    '<div class="table-responsive">'+
+      '<table class="table table-bordered">'+
+        '<thead>'+
+'          <tr>'+
+            '<th>Universal PNR </th>'+
+            '<th>PNR </th>'+
+            '<th>Agency PCC </th>'+
+            '<th>Airline Ref </th>'+
+          '</tr>'+
+        '</thead>'+
+        '<tbody>'+
+          '<tr>'+
+            '<td><input type="text" name="universal_pnr[]" class="form-control"></td>'+
+            '<td><input type="text" name="pnr[]" class="form-control"></td>'+
+            '<td><input type="text" name="agency_pcc[]" class="form-control"></td>'+
+            '<td><input type="text" name="airline_ref[]" class="form-control"></td>'+
+          '</tr>'+
+        '</tbody>'+
+      '</table>'+
+    '</div>'+
+
+    '<div class="table-responsive">'+
+      '<table class="table table-bordered">'+
+        '<thead>'+
+          '<tr>'+
+            '<th>#</th>'+
+            '<th>From</th>'+
+            '<th>To</th>'+
+            '<th>Flight</th>'+
+            '<th>Carrier</th>'+
+            '<th>Class</th>'+
+            '<th>Departure Date</th>'+
+            '<th>Departure Time</th>'+
+            '<th>Arrival Date</th>'+
+            '<th>Arrival Time</th>'+
+          '</tr>'+
+        '</thead>'+
+        '<tbody>'+
+          '<tr>'+
+            '<td>Segment-1</td>'+
+            '<td><input type="text" name="segment_one_from[]"  class="form-control" ></td>'+
+            '<td><input type="text"  name="segment_one_to[]" class="form-control" ></td>'+
+            '<td><input type="text" name="segment_one_flight[]"  class="form-control" ></td>'+
+            '<td><input type="text" name="segment_one_carrier[]" class="form-control" ></td>'+
+            '<td><input type="text" name="segment_one_class[]" class="form-control" ></td>'+
+            '<td><input type="text" name="segment_one_departure_date[]" class="form-control" ></td>'+
+            '<td><input type="text" name="segment_one_departure_time[]" class="form-control" ></td>'+
+            '<td><input type="text" name="segment_one_arrival_date[]" class="form-control" ></td>'+
+            '<td><input type="text" name="segment_one_arrival_time[]" class="form-control" ></td>'+
+          '</tr>'+
+          '<tr>'+
+            '<td>Segment-2</td>'+
+            '<td><input type="text" name="segment_two_from[]" class="form-control" ></td>'+
+            '<td><input type="text" name="segment_two_to[]" class="form-control" ></td>'+
+            '<td><input type="text" name="segment_two_flight[]" class="form-control" ></td>'+
+            '<td><input type="text" name="segment_two_carrier[]" class="form-control" ></td>'+
+            '<td><input type="text" name="segment_two_class[]" class="form-control" ></td>'+
+            '<td><input type="text" name="segment_two_departure_date[]" class="form-control" ></td>'+
+            '<td><input type="text" name="segment_two_departure_time[]" class="form-control" ></td>'+
+            '<td><input type="text" name="segment_two_arrival_date[]" class="form-control" ></td>'+
+            '<td><input type="text" name="segment_two_arrival_time[]" class="form-control" ></td>'+
+          '</tr>'+
+        '</tbody>'+
+      '</table>'+
+    '</div>'+
+
+
+'<div class="table-responsive">'+
+    '<table class="table table-bordered" id="passenger">'+
+        '<thead>'+
+          '<tr>'+
+            '<th>Pax Type*</th>'+
+            '<th>First Name</th>'+
+            '<th>Last Name</th>'+
+            '<th>Date of Birth*</th>'+
+            '<th>&nbsp;</th>'+
+            '<th>Fare Cost</th>'+
+            '<th>Fare Sell</th>'+
+          '</tr>'+
+        '</thead>'+
+        '<tbody>'+
+          '<tr>'+
+            '<td>'+
+              '<select name="pax_type[]" class="form-control select-custom custom-select">'+
+                '<option value="">--Select--</option>'+
+              '<option value="Adult">Adult</option>'+
+              '<option value="Youth">Youth</option>'+
+              '<option value="Child">Child</option>'+
+              '<option value="Infant">Infant</option>'+
+            '</select>'+
+          '</td>'+
+            '<td><input type="text" name="first_name[]" class="form-control"></td>'+
+            '<td><input type="text" name="last_name[]" class="form-control"></td>'+
+            '<td><input type="date" name="DOB[]" placeholder="dd/mm/yyyy"  class="form-control"></td>'+
+            '<td>Segment-1</td>'+
+            '<td><input type="text" name="segmnet_one_fare_cost[]" value="0" class="form-control" style="width:60px;" onKeyUp="FlightAmount()" ></td>'+
+            '<td><input type="text" name="segmnet_one_fare_sell[]" value="0" class="form-control" style="width:60px;"onKeyUp="FlightAmount()" ></td>'+
+          '</tr>'+
+          '<tr>'+
+            '<td colspan="4">&nbsp;</td>'+
+            '<td>Segment-2</td>'+
+            '<td><input type="text" name="segmnet_two_fare_cost[]" value="0" class="form-control" style="width:60px;" onKeyUp="FlightAmount()"></td>'+
+            '<td><input type="text" name="segmnet_two_fare_sell[]" value="0" class="form-control" style="width:60px;" onKeyUp="FlightAmount()"></td>'+
+          '</tr>'+
+          '<div ></div>'+
+        '</tbody>'+
+      '</table>'+
+      '</div>'+
+      '<div align="left">'+
+      '<button type="button" class="btn btn-sm btn-info" onClick="addPassenger();">Add Passenger </button>'+
+      '<div align="right">'+
+      '<div class="row">'+
+      '<div class="col-md-10">'+
+        '<h3><strong>Total Amount:</strong></h3>'+
+        '</div>'+
+        '<div class="col-md-2">'+
+        '<br><input type="text" name="flight_amount[]" value="0" class="form-control" >'+
+       '</div>'+
+       '</div>'+
+      '</div>'+
+    '</div>';
+        return data;
+    }
+    function addPassenger(){
+        var data = '<tr>'+
+            '<td>'+
+              '<select name="pax_type[]" class="form-control select-custom custom-select">'+
+                '<option value="">--Select--</option>'+
+              '<option value="Adult">Adult</option>'+
+              '<option value="Youth">Youth</option>'+
+              '<option value="Child">Child</option>'+
+              '<option value="Infant">Infant</option>'+
+            '</select>'+
+          '</td>'+
+            '<td><input type="text" name="first_name[]" class="form-control"></td>'+
+            '<td><input type="text" name="last_name[]" class="form-control"></td>'+
+            '<td><input type="date" name="DOB[]" placeholder="dd/mm/yyyy"  class="form-control"></td>'+
+            '<td>Segment-1</td>'+
+            '<td><input type="text" name="segmnet_one_fare_cost[]" value="0" class="form-control" style="width:60px;" onKeyUp="FlightAmount()"></td>'+
+            '<td><input type="text" name="segmnet_one_fare_sell[]" value="0" class="form-control" style="width:60px;" onKeyUp="FlightAmount()"></td>'+
+          '</tr>'+
+          '<tr>'+
+            '<td colspan="4">&nbsp;</td>'+
+            '<td>Segment-2</td>'+
+            '<td><input type="text" name="segmnet_two_fare_cost[]" value="0" class="form-control" style="width:60px;" onKeyUp="FlightAmount()"></td>'+
+            '<td><input type="text" name="segmnet_two_fare_sell[]" value="0" class="form-control" style="width:60px;" onKeyUp="FlightAmount()"></td>'+
+          '</tr>';
+          $("#passenger").append(data);
+    }
+    function SelectService(test){
+			var value = test.value;
+			if (value == 'Flight') {
+            var temp = flight();
+				// var data = '<div class="box-body"> <div class="row">'+
+				// 			'<div class="col-md-4">				<div class="form-group">'+
+				// 			'<label for="service_name[]">Select Service</label>'+
+				// 			'<select name="service_name[]" class="form-control service" required onChange="SelectService(this);">'+
+				// 			'<option value="">--select--</option>							@if($products->count()>0)'+
+				// 			'@foreach($products as $product)	'+
+				// 			'<option value="{{$product->service}}" {{($product->service == "Flight")?"selected":''}}>{{$product->service}}</option>'+
+				// 			'@endforeach							@endif					</select>				</div>'+
+				// 			'</div>		</div><div class="row">		<div class="col-md-3">		<div class="form-group">'+
+				// 			'<label for="airline_name">Airline Name</label>'+
+				// 			'<div class="dropdown">			<div id="myDropdown" class="dropdown-content">'+
+				// 			'<input type="text" class="form-control airline-name" placeholder="Search.." name="airline_name[]" id="myInput" onkeyup="AirlineDataExtract(this)"  required >'+
+				// 			'<div class="airline_html"></div>'+
+				// 			'</div>	</div>		</div>		</div>'+
+				// 			'<div class="col-md-3">	<div class="form-group">	<label for="source">Departure</label>'+
+				// 			'<div class="Airportdropdown">	<div id="AirportmyDropdown" class="Airportdropdown-content">'+
+				// 			'<input type="text" class="form-control airport-name" placeholder="Search.." name="source[]" id="AirportmyInput" onkeyup="AirportDataExtract(this)"  required >'+
+				// 			'<div class="airport_html"></div>	</div>		</div>		</div>		</div>'+
+				// 			'<div class="col-md-3">		<div class="form-group">			<label for="destination">Arrival</label>'+
+				// 			'<div class="AirportArrivaldropdown">	<div id="AirportArrivalmyDropdown" class="AirportArrivaldropdown-content">'+
+				// 			'<input type="text" class="form-control airport-arrival-name" placeholder="Search.." name="destination[]" id="AirportArrivalmyInput" onkeyup="AirportArrivalDataExtract(this)"  required >'+
+				// 			'<div class="airportArrival_html"></div>	</div>	</div>		</div>		</div><div class="col-md-3">		<div class="form-group">	<label for="date_of_travel">Date</label>'+
+				// 			'<input type="date" name="date_of_travel[]" required class="form-control">	</div>	</div>		</div><hr>'+
+				// 			'<div class="row">	'+
+				// 			'<div class="col-md-4">		<div class="form-group">	<label for="adult[]">Adult</label>'+
+				// 			'<input type="text" name="adult[]" class="form-control" onKeyUp="FlightAmount()">	</div>	</div><div class="col-md-4">		<div class="form-group">	<label for="adult_price[]">Adult Price</label>'+
+				// 			'<input type="text" name="adult_price[]" class="form-control" onKeyUp="FlightAmount()">	</div>	</div><div class="col-md-1"><div class="form-group">'+
+				// 			'<label for="child_check[]">Child</label><br><input type="checkbox" name="child_check[]" checked onClick="ChildAppend(this)" ></div></div><div class="col-md-1"><div class="form-group">'+
+				// 			'<label for="infant_check[]">Infant</label><br><input type="checkbox" name="infant_check[]" onClick="InfantAppend(this)" checked >'+
+				// 			'</div></div></div><div class="row"><div id="child-nikaalo"><div class="col-md-3">'+
+				// 			'<div class="form-group">	<label for="child[]">Child</label>'+
+				// 			'<input type="text" name="child[]"  class="form-control" onKeyUp="FlightAmount()">	</div>	</div> <div class="col-md-3">		<div class="form-group">	<label for="child_price[]">Child Price</label>'+
+				// 			'<input type="text" name="child_price[]" class="form-control" onKeyUp="FlightAmount()">	</div>	</div></div><div id="infant-nikaalo">'+
+				// 			'<div class="col-md-3">	<div class="form-group">	<label for="infant[]">Infant</label>'+
+				// 			'<input type="text" name="infant[]"  class="form-control" onKeyUp="FlightAmount()">	</div>	</div> <div class="col-md-3">	<div class="form-group">	<label for="infant_price[]">Infant Price</label>'+
+				// 			'<input type="text" name="infant_price[]"  class="form-control" onKeyUp="FlightAmount()">	</div>	</div></div></div><div class="row">'+
+				// 			'<div class="col-md-4">	<div class="form-group">	<label for="flight_remarks[]">Remarks</label>'+
+				// 			'<input type="text" name="flight_remarks[]" required class="form-control">	</div>	</div>		<div class="col-md-4">	<div class="form-group">	<label for="flight_amount[]">Amount</label>'+
+				// 			'<input id="amount" type="number" name="flight_amount[]" required class="form-control" readonly>	'+
+				// 			'</div>		</div></div><div align="right">'+
+				// 			'<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">'+
+				// 			'</div>	</div>	</div></div>';
+				$(test).closest(".box").html(temp);
+			}
+			if (value == 'Visa Services') {
+				var options = "<option value=''>---SELECT---</option><option value='SELF'>SELF</option>";
+				var client_id = document.getElementById('client').value;
+				@foreach($clients as $client)
+				var fetched_client_id = {!! json_encode($client->id) !!}
+			    	if(fetched_client_id == client_id){
+							@foreach($client->family as $family)
+							var temp = {!! json_encode($family->member_name) !!}
+							options = options + "<option value='{{$family->id}}'>{{$family->member_name}}</option>";
+							@endforeach
+						}
+			  @endforeach
+				var data = '<div class="box-body"> <div class="row">			<div class="col-md-4">				<div class="form-group">					<label for="service_name[]">Select Service</label>					<select name="service_name[]" class="form-control service" required onChange="SelectService(this);">							<option value="">--select--</option>							@if($products->count()>0)							@foreach($products as $product)								<option value="{{$product->service}}" {{($product->service == "Visa Services")?"selected":''}}>{{$product->service}}</option>							@endforeach							@endif					</select>				</div>			</div><div class="col-md-4"><div class="form-group"><label for="visa_applicant">Visa Applicant</label><select name="visa_applicant" id="visa-applicant" class="form-control" onChange="findFamily(this);">'+options+'</select></div></div>		</div><div class="row">	<div class="col-md-3">		<div class="form-group">			<label for="name_of_visa_applicant">Name Of Visa Applicant</label>			<input type="text" name="name_of_visa_applicant[]"  required class="form-control member_name">		</div>		</div>		<div class="col-md-3">		<div class="form-group">			<label for="passport_origin">Passport Origin</label>			<input type="text" name="passport_origin[]" class="form-control passport_origin" required>		</div>		</div>	<div class="col-md-3">		<div class="form-group">			<label for="passport_no">Passport No.</label>			<input type="text" name="passport_no[]" class="form-control passport_no">		</div>		</div> <div class="col-md-3">		<div class="form-group">			<label for="passport_member_dob">Passport Member DOB</label>			<input type="text" name="passport_member_dob[]" class="form-control member_dob">		</div>		</div>	</div>		<div class="row">				<div class="col-md-4">				<div class="form-group">					<label for="visa_country">Visa Country</label>					<input type="text" name="visa_country[]" required class="form-control">				</div>				</div>				<div class="col-md-4">				<div class="form-group">					<label for="visa_type">Visa Type</label>					<input type="text" name="visa_type[]" class="form-control">				</div>				</div>				<div class="col-md-4">						<div class="form-group">							<label for="visa_charges[]">Visa Fee</label>							<input type="text" name="visa_charges[]" class="form-control" onKeyUp="VisaAmount()">						</div>						</div>				</div><div class="row">						<div class="col-md-4">			<div class="form-group">	<label for="service_charge[]">Service Charge</label>		<input id="service_charge" type="text" name="service_charge[]" required class="form-control" onKeyUp="VisaAmount()">			</div>		</div>		<div class="col-md-4">			<div class="form-group">	<label for="visa_amount">Amount</label>		<input id="amount" type="number" name="visa_amount[]" required class="form-control" readonly>			</div>		</div></div><div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					</div>	</div>				</div></div>';
+
+				$(test).closest(".box").html(data);
+
+			}
+			if (value == 'Hotel') {
+				var data = '<div class="box-body"> <div class="row">			<div class="col-md-4">				<div class="form-group">					<label for="service_name[]">Select Service</label>					<select name="service_name[]" class="form-control service" required onChange="SelectService(this);">							<option value="">--select--</option>							@if($products->count()>0)							@foreach($products as $product)								<option value="{{$product->service}}" {{($product->service == "Hotel")?"selected":''}}>{{$product->service}}</option>							@endforeach							@endif					</select>				</div>			</div>		</div> <div class="row">		<div class="col-md-6">		<div class="form-group">			<label for="hotel_city">City</label>			<input type="text" name="hotel_city[]" required class="form-control">		</div>		</div>		<div class="col-md-6">		<div class="form-group">			<label for="hotel_country">Country</label>			<input type="text" name="hotel_country[]" class="form-control">		</div>		</div>		</div>		<div class="row">		<div class="col-md-4">		<div class="form-group">			<label for="hotel_name">Name</label>			<input type="text" name="hotel_name[]" required class="form-control">		</div>		</div>		<div class="col-md-4">		<div class="form-group">			<label for="check_in_date">Check In Date</label>			<input type="date" name="check_in_date[]" required class="form-control">		</div>		</div>		<div class="col-md-4">		<div class="form-group">			<label for="check_out_date">Check Out Date</label>			<input type="date" name="check_out_date[]" required class="form-control">		</div>		</div>		</div>		<div class="row">		<div class="col-md-3">		<div class="form-group">			<label for="no_of_children[]">No. Of Children</label>			<input type="text" name="no_of_children[]" class="form-control" >		</div>		</div>		<div class="col-md-3">		<div class="form-group">			<label for="no_of_rooms">No. Of Rooms</label>			<input type="text" name="no_of_rooms[]" class="form-control">		</div>		</div>		<div class="col-md-3">		<div class="form-group">			<label for="hotel_amount[]">Amount</label>			<input type="text" name="hotel_amount[]" class="form-control">		</div>		</div>		</div>			</div>		</div></div><div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					</div>	</div>				</div></div>';
+				$(test).closest(".box").html(data);
+			}
+			if (value == 'Insurance') {
+				var data = '<div class="box-body"> <div class="row">			<div class="col-md-4">				<div class="form-group">					<label for="service_name[]">Select Service</label>					<select name="service_name[]" class="form-control service" required onChange="SelectService(this);">							<option value="">--select--</option>							@if($products->count()>0)							@foreach($products as $product)								<option value="{{$product->service}}" {{($product->service == "Insurance")?"selected":''}}>{{$product->service}}</option>							@endforeach							@endif					</select>				</div>			</div>		</div><div class="row">	<div class="col-md-4">		<div class="form-group">			<label for="name_of_insurance_applicant">Name Of Insurance Applicant</label>			<input type="text" name="name_of_insurance_applicant[]" required class="form-control">		</div>		</div>		<div class="col-md-4">		<div class="form-group">			<label for="insurance_remarks">Insurance Remarks</label>			<input type="text" name="insurance_remarks[]" class="form-control">		</div>		</div>						<div class="col-md-4">				<div class="form-group">					<label for="insurance_amount[]">Insurance Amount</label>					<input type="text" name="insurance_amount[]" required class="form-control">				</div>				</div>				</div><div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					</div>	</div>				</div></div>';
+				$(test).closest(".box").html(data);
+			}
+			if (value == 'Local Sight Sceen') {
+				var data = '<div class="box-body"> <div class="row">			<div class="col-md-4">				<div class="form-group">					<label for="service_name[]">Select Service</label>					<select name="service_name[]" class="form-control service" required onChange="SelectService(this);">							<option value="">--select--</option>							@if($products->count()>0)							@foreach($products as $product)								<option value="{{$product->service}}" {{($product->service == "Local Sight Sceen")?"selected":''}}>{{$product->service}}</option>							@endforeach							@endif					</select>				</div>			</div>		</div><div class="row">	<div class="col-md-6">		<div class="form-group">			<label for="local_sight_sceen_remarks">Local Sight Sceen Remarks</label>			<input type="text" name="local_sight_sceen_remarks[]" required class="form-control">		</div>		</div>		<div class="col-md-6">				<div class="form-group">					<label for="local_sight_sceen_amount[]">Sight Sceen Charges</label>					<input type="text" name="local_sight_sceen_amount[]" required class="form-control">				</div>				</div>				</div><div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					</div>	</div>				</div></div>';
+				$(test).closest(".box").html(data);
+			}
+			if (value == 'Local Transport') {
+				var data = '<div class="box-body"> <div class="row">			<div class="col-md-4">				<div class="form-group">					<label for="service_name[]">Select Service</label>					<select name="service_name[]" class="form-control service" required onChange="SelectService(this);">							<option value="">--select--</option>							@if($products->count()>0)							@foreach($products as $product)								<option value="{{$product->service}}" {{($product->service == "Local Transport")?"selected":''}}>{{$product->service}}</option>							@endforeach							@endif					</select>				</div>			</div>		</div><div class="row">	<div class="col-md-6">		<div class="form-group">			<label for="local_transport_remarks">Local Transport Remarks</label>			<input type="text" name="local_transport_remarks[]" required class="form-control">		</div>		</div>		<div class="col-md-6">				<div class="form-group">					<label for="local_transport_amount[]">Transport Charges</label>					<input type="text" name="local_transport_amount[]" required class="form-control">				</div>				</div>				</div><div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					</div>	</div>				</div></div>';
+				$(test).closest(".box").html(data);
+			}
+			if (value == 'Car Rental') {
+				var data = '<div class="box-body"> <div class="row">			<div class="col-md-4">				<div class="form-group">					<label for="service_name[]">Select Service</label>					<select name="service_name[]" class="form-control service" required onChange="SelectService(this);">							<option value="">--select--</option>							@if($products->count()>0)							@foreach($products as $product)								<option value="{{$product->service}}" {{($product->service == "Car Rental")?"selected":''}}>{{$product->service}}</option>							@endforeach							@endif					</select>				</div>			</div>		</div><div class="row">	<div class="col-md-6">		<div class="form-group">			<label for="car_rental_remarks">Car Rental Remarks</label>			<input type="text" name="car_rental_remarks[]" required class="form-control">		</div>		</div>		<div class="col-md-6">				<div class="form-group">					<label for="car_rental_amount[]">Car Rental Charges</label>					<input type="text" name="car_rental_amount[]" required class="form-control">				</div>				</div>				</div><div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					</div>	</div>				</div></div>';
+				$(test).closest(".box").html(data);
+			}
+			if (value == 'Other Facilities') {
+				var data = '<div class="box-body"> <div class="row">			<div class="col-md-4">				<div class="form-group">					<label for="service_name[]">Select Service</label>					<select name="service_name[]" class="form-control service" required onChange="SelectService(this);">							<option value="">--select--</option>							@if($products->count()>0)							@foreach($products as $product)								<option value="{{$product->service}}" {{($product->service == "Other Facilities")?"selected":''}}>{{$product->service}}</option>							@endforeach							@endif					</select>				</div>			</div>		</div><div class="row">	<div class="col-md-6">		<div class="form-group">			<label for="other_facilities_remarks">Other Facilities Remarks</label>			<input type="text" name="other_facilities_remarks[]" required class="form-control">		</div>		</div>		<div class="col-md-6">				<div class="form-group">					<label for="other_facilities_amount[]">Other Facilities Charges</label>					<input type="text" name="other_facilities_amount[]" required class="form-control">				</div>				</div>				</div><div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					</div>	</div>				</div></div>';
+				$(test).closest(".box").html(data);
+			}
+			if (value == '') {
+				var data = '';
+				$(test).closest(".box").html(data);
+			}
+		}
+
+	function FlightAmount(){
+		for (var i = 0; i < document.getElementsByName("flight_amount[]").length; i++) {
+			// var adult_price = document.getElementsByName("adult_price[]")[i].value * document.getElementsByName("adult[]")[i].value;
+			// var child_price = document.getElementsByName("child_price[]")[i].value * document.getElementsByName("child[]")[i].value;
+			// var infant_price = document.getElementsByName("infant_price[]")[i].value * document.getElementsByName("infant[]")[i].value;
+			// var actual_amount = document.getElementsByName("flight_price[]")[i].value * document.getElementsByName("flight_quantity[]")[i].value;
+			document.getElementsByName("flight_amount[]")[i].value = Number(document.getElementsByName("segment_one_fare_sell[]")[i].value) + Number(document.getElementsByName("segment_two_fare_sell[]")[i].value);
+
+    	}
+	}
+
+	function VisaAmount(){
+		for (var i = 0; i < document.getElementsByName("service_charge[]").length; i++) {
+    		var actual_amount = document.getElementsByName("service_charge[]")[i].value - (-document.getElementsByName("visa_charges[]")[i].value);
+     		document.getElementsByName("visa_amount[]")[i].value =actual_amount;
+
+    	}
+	}
+
+
 
     $(document).ready(function(){
     $("#targetTotal").hover(function(){
-    	
-    	for (var i = 0; i < document.getElementsByName("price[]").length; i++) {
-    		var actual_amount = document.getElementsByName("price[]")[i].value * document.getElementsByName("quantity[]")[i].value;
-    		document.getElementsByName("amount[]")[i].value =document.getElementsByName("currency[]")[i].value+actual_amount;
-    		
+		var total_amount = 0;
+    	var total_flight_amount = 0;
+		var total_visa_amount = 0;
+		var total_hotel_amount = 0;
+		var total_insurance_amount = 0;
+		var total_local_sight_sceen_amount = 0;
+		var total_other_facilities_amount = 0;
+		var total_car_rental_amount = 0;
+		var total_local_transport_amount = 0;
+    	for (var i = 0; i < document.getElementsByName("flight_amount[]").length; i++) {
+    		var total_flight_amount = total_flight_amount - (-document.getElementsByName("flight_amount[]")[i].value);
     	}
-    	
+		for (var i = 0; i < document.getElementsByName("visa_amount[]").length; i++) {
+    		var total_visa_amount = total_visa_amount - (-document.getElementsByName("visa_amount[]")[i].value);
+    	}
+		for (var i = 0; i < document.getElementsByName("hotel_amount[]").length; i++) {
+    		var total_hotel_amount = total_hotel_amount - (-document.getElementsByName("hotel_amount[]")[i].value);
+    	}
+		for (var i = 0; i < document.getElementsByName("insurance_amount[]").length; i++) {
+    		var total_insurance_amount = total_insurance_amount - (-document.getElementsByName("insurance_amount[]")[i].value);
+    	}
+		for (var i = 0; i < document.getElementsByName("local_sight_sceen_amount[]").length; i++) {
+    		var total_local_sight_sceen_amount = total_local_sight_sceen_amount - (-document.getElementsByName("local_sight_sceen_amount[]")[i].value);
+    	}
+		for (var i = 0; i < document.getElementsByName("other_facilities_amount[]").length; i++) {
+    		var total_other_facilities_amount = total_other_facilities_amount - (-document.getElementsByName("other_facilities_amount[]")[i].value);
+    	}
+		for (var i = 0; i < document.getElementsByName("car_rental_amount[]").length; i++) {
+    		var total_car_rental_amount = total_car_rental_amount - (-document.getElementsByName("car_rental_amount[]")[i].value);
+    	}
+		for (var i = 0; i < document.getElementsByName("local_transport_amount[]").length; i++) {
+    		var total_local_transport_amount = total_local_transport_amount - (-document.getElementsByName("local_transport_amount[]")[i].value);
+    	}
+		total_amount = Number(total_flight_amount) + Number(total_visa_amount) + Number(total_hotel_amount) + Number(total_insurance_amount) + Number(total_local_sight_sceen_amount) + Number(total_other_facilities_amount) + Number(total_car_rental_amount) + Number(total_local_transport_amount) ;
+		document.getElementsByName("total")[0].value = total_amount;
+		var discounted = Number(total_amount) - document.getElementsByName("discount")[0].value;
+		document.getElementsByName("discounted_total")[0].value = document.getElementById('currency').value + discounted;
     });
     });
 
-    $(document).ready(function(){
-    $("#targetTotal").hover(function(){
-    	var total_amount = 0;
-    	for (var i = 0; i < document.getElementsByName("amount[]").length; i++) {
-    		var total_amount = total_amount + (document.getElementsByName("price[]")[i].value * document.getElementsByName("quantity[]")[i].value);
-    	}
-		document.getElementsByName("total")[0].value =document.getElementsByName("currency[]")[0].value+total_amount;
-		var discounted = total_amount - document.getElementsByName("discount")[0].value
-		document.getElementsByName("discounted_total")[0].value =document.getElementsByName("currency[]")[0].value+ discounted;
-    });
-    });
-
-    $(document).ready(function(){
-    $("#credit").click(function(){
-    	var input = '<input name="credit_amount" type="text" class="form-control">';
-    	$("#creditInput").html(input);
-    });
-	});
-	$(document).ready(function(){
-    $("#debit").click(function(){
-    	var input = '<input name="debit_amount" type="text" class="form-control">';
-    	$("#debitInput").html(input);
-    });
-	});
-	$(document).ready(function(){
-    $("#cash").click(function(){
-    	var input = '<input name="cash_amount" type="text" class="form-control">';
-    	$("#cashInput").html(input);
-    });
-	});
-	$(document).ready(function(){
-    $("#bank").click(function(){
-    	var input = '<input name="bank_amount" type="text" class="form-control">';
-    	$("#bankInput").html(input);
-    });
-	});
 
     $(document).ready(function(){
     $("#client").change(function(){
@@ -501,247 +744,12 @@ Create Invoice
 	    	}
     	@endforeach
     	var append = '<textarea name="billing_address" required class="form-control" placeholder="Enter Billing Adress">'+address+'&#13;&#10;'+city+'&#13;&#10;'+postal_code+'&#13;&#10;'+county+'&#13;&#10;'+country+'</textarea>';
-    	$("#address").html(append);   
+    	$("#address").html(append);
     	});
     });
-		
    	</script>
 
 
-	<script>
-        function myCreateFunction() {
-            var table = document.getElementById("myTable");
-            var row = table.insertRow(3);
-            var cell1 = row.insertCell(0);
-            var cell2 = row.insertCell(1);
-            var cell3 = row.insertCell(2);
-            var cell4 = row.insertCell(3);
-            var cell5 = row.insertCell(4);
-            var cell6 = row.insertCell(5);
-            var cell7 = row.insertCell(6);
-            var cell8 = row.insertCell(7);
-            var cell9 = row.insertCell(8);
-            var cell10 = row.insertCell(9);
-            var cell11 = row.insertCell(10);
-            var cell12 = row.insertCell(11);
 
-            var row_second = table.insertRow(4);
-            var cell01 = row_second.insertCell(0);
-            var cell02 = row_second.insertCell(1);
-            var cell03 = row_second.insertCell(2);
-            var cell04 = row_second.insertCell(3);
-            var cell05 = row_second.insertCell(4);
-            var cell06 = row_second.insertCell(5);
-            var cell07 = row_second.insertCell(6);
-            var cell08 = row_second.insertCell(7);
-            var cell09 = row_second.insertCell(8);
-            var cell010 = row_second.insertCell(9);
-            var cell011 = row_second.insertCell(10);
-            var cell012 = row_second.insertCell(11);
-
-            cell1.innerHTML = '2';
-            cell2.innerHTML = '<select class="form-control select-custom custom-select">\n' +
-                '              <option value="Adult">Adult</option>\n' +
-                '              <option value="Youth">Youth</option>\n' +
-                '              <option value="Child">Child</option>\n' +
-                '              <option value="Infant">Infant</option>\n' +
-                '            </select>';
-            cell3.innerHTML = '<input type="text" value="Harnam" class="form-control">';
-            cell4.innerHTML = '<input type="text" value="Singh" class="form-control">';
-            cell5.innerHTML = '<input type="text" placeholder="dd/mm/yyyy" value="" class="form-control">';
-            cell6.innerHTML = 'Segment-1';
-            cell7.innerHTML = '<input type="text" value="0" class="form-control" style="width:60px;">';
-            cell8.innerHTML = '<input type="text" value="0" class="form-control" style="width:60px;">';
-            cell9.innerHTML = '<input type="text" value="0" class="form-control" style="width:60px;">';
-            cell10.innerHTML = '<input type="text" value="0" class="form-control" style="width:60px;">';
-            cell11.innerHTML = '<input type="text" value="0" class="form-control" style="width:60px;">';
-            cell12.innerHTML = '<a href="javascript:void(0)" class="fa fa-remove text-danger" onclick="myDeleteFunction()"></a>';
-
-            cell01.innerHTML = '&nbsp';
-            cell02.innerHTML = '&nbsp';
-            cell03.innerHTML = '&nbsp';
-            cell04.innerHTML = '&nbsp';
-            cell05.innerHTML = '&nbsp';
-            cell06.innerHTML = 'Segment-2';
-            cell07.innerHTML = '<input type="text" value="0" class="form-control" style="width:60px;">';
-            cell08.innerHTML = '<input type="text" value="0" class="form-control" style="width:60px;">';
-            cell09.innerHTML = '<input type="text" value="0" class="form-control" style="width:60px;">';
-            cell010.innerHTML = '<input type="text" value="0" class="form-control" style="width:60px;">';
-            cell011.innerHTML = '<input type="text" value="0" class="form-control" style="width:60px;">';
-            cell012.innerHTML = '&nbsp';
-        }
-
-        function myDeleteFunction() {
-            document.getElementById("myTable").deleteRow(4);
-            document.getElementById("myTable").deleteRow(3);
-        }
-
-	</script>
-
-
-<script>
-    function pnrAdd() {
-        var table = document.getElementById("add_PNR");
-        var row = table.insertRow(2);
-        var cell1 = row.insertCell(0);
-        var cell2 = row.insertCell(1);
-        var cell3 = row.insertCell(2);
-        var cell4 = row.insertCell(3);
-        var cell5 = row.insertCell(4);
-        var cell6 = row.insertCell(5);
-
-
-        cell1.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
-        cell2.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
-        cell3.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
-        cell4.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
-        cell5.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
-        cell6.innerHTML = '<a href="javascript:void(0)" class="fa fa-remove text-danger" onclick="DeletePNR()"></a>';
-
-    }
-
-    function DeletePNR() {
-        document.getElementById("add_PNR").deleteRow(2);
-    }
-
-</script>
-
-<script>
-    function AddItinerary() {
-        var table = document.getElementById("AddItinerary");
-        var row = table.insertRow(2);
-        var cell1 = row.insertCell(0);
-        var cell2 = row.insertCell(1);
-        var cell3 = row.insertCell(2);
-        var cell4 = row.insertCell(3);
-        var cell5 = row.insertCell(4);
-        var cell6 = row.insertCell(5);
-        var cell7 = row.insertCell(6);
-        var cell8 = row.insertCell(7);
-        var cell9 = row.insertCell(8);
-        var cell10 = row.insertCell(9);
-        var cell11 = row.insertCell(10);
-        var cell12 = row.insertCell(11);
-
-
-
-        cell1.innerHTML = '2';
-        cell2.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
-        cell3.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
-        cell4.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
-        cell5.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
-        cell6.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
-        cell7.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
-        cell8.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
-        cell9.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
-        cell10.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
-        cell11.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
-        cell12.innerHTML = '<a href="javascript:void(0)" class="fa fa-remove text-danger" onclick="DeleteItinerary()"></a>';
-
-    }
-
-    function DeleteItinerary() {
-        document.getElementById("AddItinerary").deleteRow(2);
-    }
-
-</script>
-
-<script>
-    function AddCharges() {
-        var table = document.getElementById("AddCharges");
-        var row = table.insertRow(2);
-        var cell1 = row.insertCell(0);
-        var cell2 = row.insertCell(1);
-        var cell3 = row.insertCell(2);
-        var cell4 = row.insertCell(3);
-        var cell5 = row.insertCell(4);
-        var cell6 = row.insertCell(5);
-        var cell7 = row.insertCell(6);
-        var cell8 = row.insertCell(7);
-        var cell9 = row.insertCell(8);
-
-
-
-        cell1.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
-        cell2.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
-        cell3.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
-        cell4.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
-        cell5.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
-        cell6.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
-        cell7.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
-        cell8.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
-        cell9.innerHTML = '<a href="javascript:void(0)" class="fa fa-remove text-danger" onclick="DeleteCharges()"></a>';
-
-    }
-
-    function DeleteCharges() {
-        document.getElementById("AddCharges").deleteRow(2);
-    }
-
-</script>
-
-<script>
-    function AddSegment() {
-        var table = document.getElementById("AddSegment");
-        var row = table.insertRow(2);
-        var cell1 = row.insertCell(0);
-        var cell2 = row.insertCell(1);
-        var cell3 = row.insertCell(2);
-        var cell4 = row.insertCell(3);
-
-        cell1.innerHTML = '2';
-        cell2.innerHTML = '<input type="text" value="" class="form-control" placeholder="Enter">';
-        cell3.innerHTML = '<div class="custom-control custom-checkbox">\n' +
-            '<input type="checkbox" class="custom-control-input" id="customCheck" name="example1"> ' +
-            '<label class="custom-control-label" for="customCheck">Tick to hide from customer</label>' +
-            '</div>';
-        cell4.innerHTML = '<a href="javascript:void(0)" class="fa fa-remove text-danger" onclick="DeleteSegment()"></a>';
-
-    }
-
-    function DeleteSegment() {
-        document.getElementById("AddSegment").deleteRow(2);
-    }
-
-</script>
 @stop
-ap
-		
 
-{{-- <div class="row">
-		<div class="col-md-4">
-		<div class="form-group">
-			<label for="first_name">First Name</label>
-			<input type="text" name='first_name' required class="form-control">
-		</div>
-		</div>
-		<div class="col-md-4">
-		<div class="form-group">
-			<label for="middle_name">Middle Name</label>
-			<input type="text" name='middle_name' class="form-control">
-		</div>
-		</div>
-		<div class="col-md-4">
-		<div class="form-group">
-			<label for="last_name">Last Name</label>
-			<input type="text" name='last_name' required class="form-control">
-		</div>
-		</div>
-		</div>
-		<div class="row">
-		<div class="col-md-6">
-		<div class="form-group">
-			<label for="father_name">Father's Name</label>
-			<input type="text" name='father_name' class="form-control" >
-		</div>
-		</div>
-		<div class="col-md-6">
-		<div class="form-group">
-			<label for="mother_name">Mother's Name</label>
-			<input type="text" name='mother_name' class="form-control">
-		</div>
-		</div>
-		</div>
-		
-		
-</div> --}}

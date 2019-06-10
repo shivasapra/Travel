@@ -1,59 +1,98 @@
-.float-right{
-    float:right;
+.generate-invoice{
+    background-color:#fff;
+    padding:3rem 0rem;
 }
 .invoice .card{
-    border-radius: 0;
-    font-size:13px;
-    margin-top:20px;
+	border-radius: 0;
+	font-size:13px;
 }
-.invoice .card-header {
-    border-left: 4px solid #dc3545;
-    border-radius: 0;
-    font-size: 16px;
-    padding-left: 10px;
-    color: #000;
-    font-weight: 600;
-}
-.invoice .table th{
-    font-weight:600;
+.invoice .card-header{
+	border-left:4px solid #dc3545;
+	border-radius:0;
+	font-size:15px;
 }
 .invoice .table td, .invoice .table th{
-    vertical-align: middle;
+	padding:.75rem .40rem;
+	vertical-align: middle;
 }
 .invoice .form-control{
-    border-radius: 2px;
-    padding:.375rem .55rem;
-    font-size:14px;
-    box-shadow:inset 0 0 5px rgba(0,0,0,0.1);
+	border-radius: 2px;
+	padding:.375rem .55rem;
+	font-size:14px;
+	box-shadow:inset 0 0 5px rgba(0,0,0,0.1);
 }
 .gbp-back span{
-    position: relative;
-    background-color:#e4e4e4;
-    padding:0.6rem 1rem;
-    display:inline-block;
-    font-size:16px;
+	position: relative;
+	background-color:#e4e4e4;
+	padding:0.6rem 1rem;
+	display:inline-block;
 }
 .gbp-back span::before{
-    content: "";
+	content: "";
     position: absolute;
-    left: -30px;
-    border: 15px solid transparent;
+    left: -38px;
+    border: 19px solid transparent;
     border-right-color: #e4e4e4;
     top: 0;
 }
 .select-custom{
-    position:relative;
+	position:relative;
 }
 .select-custom::before{
-    content:"";
-    position:absolute;
-    top:0;
-    right:0;
-    border: 22px solid #e68317;
-    /*background-color:#e68317;*/
+	content:"";
+	position:absolute;
+	top:0;
+	right:0;
+	border: 22px solid #e68317;
+	/*background-color:#e68317;*/
 }
 .custom-control-label{
-    font-size:14px;
+	font-size:14px;
+}
+.bg-blue{
+	background-color:#26ace2;
+}
+.text-blue{
+	color:#18475a;
+}
+.generate-invoice{
+	border:1px solid #ddd;
+	font-size:15px;
+}
+.generate-invoice .panel-body{
+	padding:10px;
+}
+.generate-invoice h1{
+	font-size:36px;
+	font-weight:700;
+}
+.generate-invoice h2{
+	font-weight:600;
+	border:1px solid #fff;
+	border-radius:100px;
+	padding:10px 0;
+}
+.generate-invoice h3{
+	font-size:28px;
+	font-weight:600;
+	color:#fff;
+	background-color:#26ace2;
+	padding:12px 20px;
+	border-radius:100px;
+	margin-bottom:20px;
+	display:inline-block;
+}
+.generate-invoice h4{
+	color:#fff !important;
+	background-color:#26ace2;
+	padding:12px 20px;
+	border-radius:100px;
+	display:block;
+    font-size:17px;
+    margin-top:3rem;
+}
+.generate-invoice h5{
+    font-size: 15px;
 }
 .btn-default {
     color: #415164;
@@ -1018,7 +1057,7 @@ small {
     font-size: 70%;
 }
 
-@-webkit-keyframes loader {
+/*@-webkit-keyframes loader {
     0% {
         background: #f0f0f0;
     }
@@ -1041,8 +1080,8 @@ small {
         background: #f0f0f0;
     }
 }
-
-.table-bordered>thead>tr>th,
+*/
+.bordered>thead>tr>th,
 .table-bordered>tbody>tr>th,
 .table-bordered>tfoot>tr>th,
 .table-bordered>thead>tr>td,
@@ -3429,9 +3468,7 @@ form.dropzone input[type="file"] {
 }
 
 table.table {
-    margin-top: 15px;
-    margin-bottom: 35px;
-    font-size:13px;
+    margin-top: 25px;
 }
 
 .chart {
@@ -8166,7 +8203,7 @@ input#tags {
 .table-loading .dataTables_length,
 .table-loading .dt-buttons,
 .table-loading .dataTables_filter {
-    opacity: 0 !important;
+    opacity: 100 !important;
 }
 
 .table-loading table thead tr {
@@ -8182,10 +8219,10 @@ input#tags {
     border: 0;
 }
 
-.table-loading {
+/*.table-loading {
     background: url(../images/table-loading.png);
     background-repeat: repeat-x;
-}
+}*/
 
 .task-info-created small {
     font-size: 85%;

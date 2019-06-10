@@ -8,6 +8,8 @@ use App\airports;
 use App\products;
 use App\invoice;
 use App\invoiceInfo;
+use App\Flight;
+use App\Passenger;
 use Session;
 use App\client;
 use GuzzleHttp;
@@ -29,7 +31,7 @@ class InvoiceController extends Controller
     }
 
     public function index()
-    {   
+    {
         foreach (invoice::all() as $invoice) {
             if($invoice->pending_amount < 0){
                 $invoice->advance = 0 - $invoice->pending_amount;
@@ -68,8 +70,7 @@ class InvoiceController extends Controller
         if ($invoice->count()>0) {
             $latest = invoice::orderBy('created_at','desc')->take(1)->get();
             $invoice_prev_no = $latest[0]->invoice_no;
-            $invoice_no = 'CLDI000'.(substr($invoice_prev_no,3,6)+1);
-            // dd($invoice_no);
+            $invoice_no = 'CLDI000'.(substr($invoice_prev_no,4,7)+1);
         }
         else{
             $invoice_no = 'CLDI0001';
@@ -123,7 +124,7 @@ class InvoiceController extends Controller
             $invoice->VAT_percentage = $tax[0]->tax;
             $invoice->VAT_amount = ($tax[0]->tax)/100*($invoice->discounted_total);
         }
-        
+
         $invoice->paid = 0;
         if($request->credit != '0'){
             $invoice->credit = 1;
@@ -178,43 +179,73 @@ class InvoiceController extends Controller
         $other_facilities_counter=0;
         for ($k = 0; $k < count($request->service_name); $k++) {
             if ($request->service_name[$k]=='Flight') {
-                $invoice_info = new invoiceInfo;
-                        $invoice_info->invoice_id = $invoice->id;
-                        $invoice_info->receiver_name = $invoice->receiver_name;
-                        $invoice_info->service_name = 'Flight';
+        //
+            //     $invoice_info = new invoiceInfo;
+            //             $invoice_info->invoice_id = $invoice->id;
+            //             $invoice_info->receiver_name = $invoice->receiver_name;
+            //             $invoice_info->service_name = 'Flight';
 
-                        $invoice_info->airline_name = $request->airline_name[$flight_counter];
-                        $invoice_info->source = $request->source[$flight_counter];
-                        $invoice_info->destination = $request->destination[$flight_counter];
-                        $invoice_info->date_of_travel = $request->date_of_travel[$flight_counter];
-                        $invoice_info->adult = $request->adult[$flight_counter];
-                        $invoice_info->adult_price = $request->adult_price[$flight_counter];
-                        if($request->child[$flight_counter]){
-                            $invoice_info->child = $request->child[$flight_counter];
-                            $invoice_info->child_price = $request->child_price[$flight_counter];
-                        }
-                        else{
-                            $invoice_info->child = 0;
-                            $invoice_info->child_price = 0;
-                        }
+            //             $invoice_info->airline_name = $request->airline_name[$flight_counter];
+            //             $invoice_info->source = $request->source[$flight_counter];
+            //             $invoice_info->destination = $request->destination[$flight_counter];
+            //             $invoice_info->date_of_travel = $request->date_of_travel[$flight_counter];
+            //             $invoice_info->adult = $request->adult[$flight_counter];
+            //             $invoice_info->adult_price = $request->adult_price[$flight_counter];
+            //             if($request->child[$flight_counter]){
+            //                 $invoice_info->child = $request->child[$flight_counter];
+            //                 $invoice_info->child_price = $request->child_price[$flight_counter];
+            //             }
+            //             else{
+            //                 $invoice_info->child = 0;
+            //                 $invoice_info->child_price = 0;
+            //             }
 
-                        if($request->infant[$flight_counter]){
-                            $invoice_info->infant = $request->infant[$flight_counter];
-                            $invoice_info->infant_price = $request->infant_price[$flight_counter];
-                        }
-                        else{
-                            $invoice_info->infant = 0;
-                            $invoice_info->infant_price = 0;
-                        }
+            //             if($request->infant[$flight_counter]){
+            //                 $invoice_info->infant = $request->infant[$flight_counter];
+            //                 $invoice_info->infant_price = $request->infant_price[$flight_counter];
+            //             }
+            //             else{
+            //                 $invoice_info->infant = 0;
+            //                 $invoice_info->infant_price = 0;
+            //             }
 
-                        // $invoice_info->infant_dob = $request->infant_dob[$flight_counter];
-                        $invoice_info->flight_amount = $request->flight_amount[$flight_counter];
-                        $invoice_info->flight_remarks = $request->flight_remarks[$flight_counter];
-                        // $invoice_info->flight_quantity = $request->flight_quantity[$flight_counter];
-                        // $invoice_info->flight_price = $request->flight_price[$flight_counter];
-                        $invoice_info->save();
-                        $flight_counter++;
-            }
+            //             // $invoice_info->infant_dob = $request->infant_dob[$flight_counter];
+            //             $invoice_info->flight_amount = $request->flight_amount[$flight_counter];
+            //             $invoice_info->flight_remarks = $request->flight_remarks[$flight_counter];
+            //             // $invoice_info->flight_quantity = $request->flight_quantity[$flight_counter];
+            //             // $invoice_info->flight_price = $request->flight_price[$flight_counter];
+            //             $invoice_info->save();
+            //             $flight_counter++;
+            //
+        $flight = new Flight;
+        $flight->invoice_id = $invoice->id;
+        $flight->universal_pnr = $request->universal_pnr[$flight_counter];
+        $flight->pnr = $request->pnr[$flight_counter];
+        $flight->agency_pcc = $request->agency_pcc[$flight_counter];
+        $flight->airline_ref = $request->airline_ref[$flight_counter];
+        $flight->total_amount = $request->total_amount[$flight_counter];
+        $flight->segment_one_from = $request->segment_one_from[$flight_counter];
+        $flight->segment_two_from = $request->segment_two_from[$flight_counter];
+        $flight->segment_one_to = $request->segment_one_to[$flight_counter];
+        $flight->segment_two_to = $request->segment_two_to[$flight_counter];
+        $flight->segment_one_carrier = $request->segment_one_carrier[$flight_counter];
+        $flight->segment_two_carrier = $request->segment_two_carrier[$flight_counter];
+        $flight->segment_one_flight = $request->segment_one_flight[$flight_counter];
+        $flight->segment_two_flight = $request->segment_two_flight[$flight_counter];
+        $flight->segment_one_class = $request->segment_one_class[$flight_counter];
+        $flight->segment_two_class = $request->segment_two_class[$flight_counter];
+        $flight->segment_one_departure_date = $request->segment_one_departure_date[$flight_counter];
+        $flight->segment_two_departure_date = $request->segment_two_departure_date[$flight_counter];
+        $flight->segment_one_departure_time = $request->segment_one_departure_time[$flight_counter];
+        $flight->segment_two_departure_time = $request->segment_two_departure_time[$flight_counter];
+        $flight->segment_one_arrival_date = $request->segment_one_arrival_date[$flight_counter];
+        $flight->segment_two_arrival_date = $request->segment_two_arrival_date[$flight_counter];
+        $flight->segment_one_arrival_time = $request->segment_one_arrival_time[$flight_counter];
+        $flight->segment_two_arrival_time = $request->segment_two_arrival_time[$flight_counter];
+        $flight->flight_remarks = $request->flight_remarks[$flight_counter];
+        $flight->save();
+        $flight_counter++;
+}
 
             if ($request->service_name[$k]=='Visa Services') {
                 $invoice_info = new invoiceInfo;
@@ -348,6 +379,13 @@ class InvoiceController extends Controller
                                     ->with('tax',settings::all());
     }
 
+    public function test($id)
+    {
+        return view('test')->with('invoice',invoice::find($id))
+                                ->with('products',products::all())
+                                    ->with('airlines',airlines::all())
+                                    ->with('tax',settings::all());
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -590,7 +628,7 @@ class InvoiceController extends Controller
     public function destroy($id)
     {
         $invoice = invoice::find($id);
-        
+
         if ($invoice->status == 0) {
             $invoice->delete();
             Session::flash('success','Invoice Canceled Successfully');
@@ -610,7 +648,7 @@ class InvoiceController extends Controller
             ];
         $pdf = PDF::loadView('invoicePrint',$data);
         return $pdf->setPaper('a4')->stream('invoice.pdf');
-        
+
     }
 
     public function AirlineSearch(Request $request){
@@ -731,7 +769,7 @@ class InvoiceController extends Controller
             Session::flash('warning',"This Invoice is already Paid. You Can't Send Reminder Now!!");
             return redirect()->back();
         }
-        
+
     }
 
 }

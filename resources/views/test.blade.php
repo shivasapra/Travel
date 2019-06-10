@@ -1,41 +1,20 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <meta name="csrf-token" content="{{ csrf_token() }}">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>{{$invoice->receiver_name}}'s Invoice</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href= "{{asset('bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css' />
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="{{asset('bower_components/font-awesome/css/font-awesome.min.css')}}">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="{{asset('bower_components/Ionicons/css/ionicons.min.css')}}">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="{{asset('dist/css/AdminLTE.min.css')}}">
-  <!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="{{asset('dist/css/skins/_all-skins.min.css')}}">
-  <!-- Morris chart -->
-  <link rel="stylesheet" href="{{asset('bower_components/morris.js/morris.css')}}">
-  <!-- jvectormap -->
-  <link rel="stylesheet" href="{{asset('bower_components/jvectormap/jquery-jvectormap.css')}}">
-  <!-- Date Picker -->
-  <link rel="stylesheet" href="{{asset('bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css')}}">
-  <!-- Daterange picker -->
-  <link rel="stylesheet" href="{{asset('bower_components/bootstrap-daterangepicker/daterangepicker.css')}}">
-  <!-- bootstrap wysihtml5 - text editor -->
-  <link rel="stylesheet" href="{{asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
-  <link href="{{ asset('/css/toastr.min.css') }}" rel="stylesheet">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
- 
-</head>
-<body>
-  
+@extends('layouts.frontend')
+@section('title')
+Invoice
+@endsection
+@section('header')
+  <section class="content-header">
+      <h1>
+        Invoice
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="{{route('invoice')}}"><i class="fa fa-paperclip"></i> Invoice</a></li>
+        <li class="active">Generate Invoice</li>
+      </ol>
+    </section>
+@stop
+@section('content')
 
     <section class="invoice">
       <!-- title row -->
@@ -254,26 +233,26 @@
           <p class="lead">Payment Methods:</p>
           <div class="table-responsive">
             <table class="table">
-              @if($invoice->credit)
+              @if($invoice->credit_amount != 0)
               <tr>
                 <th style="width:50%"><button class="btn btn-xs bg-maroon btn-flat">Credit Card</button></th>
                 <td>{{$invoice->invoiceInfo[0]->currency. $invoice->credit_amount}}</td>
               </tr>
               @endif
 
-              @if($invoice->debit)
+              @if($invoice->debit_amount != 0)
               <tr>
                 <th style="width:50%"><button class="btn btn-xs bg-purple btn-flat">Debit Card</button></th>
                 <td>{{$invoice->invoiceInfo[0]->currency. $invoice->debit_amount}}</td>
               </tr>
               @endif
-              @if($invoice->cash)
+              @if($invoice->cash_amount != 0)
                 <tr>
                 <th style="width:50%"><button class="btn btn-xs bg-navy btn-flat">Cash</button></th>
                 <td>{{$invoice->invoiceInfo[0]->currency. $invoice->cash_amount}}</td>
               </tr>
               @endif
-              @if($invoice->bank)
+              @if($invoice->bank_amount != 0)
                 <tr>
                 <th style="width:50%"><button class="btn btn-xs bg-olive btn-flat">Bank Transfer</button></th>
                 <td>{{$invoice->invoiceInfo[0]->currency. $invoice->bank_amount}}</td>
@@ -304,7 +283,7 @@
               </tr>
               <tr>
                 <th>Discount:</th>
-                <td>{{$invoice->currency}} {{$invoice->discount}}</td>
+                <td>{{$invoice->currency}} {{ $invoice->discount }}</td>
               </tr>
               {{-- <tr>
                 <th>Discounted Total:</th>
@@ -321,17 +300,25 @@
               <tr>
                 <th>Total:</th>
                 <?php $total = $invoice->discounted_total + $invoice->VAT_amount ?>
-                <td style="color:white;font-weight:500;background-color:#0066FF;">{{$invoice->currency}} {{$total}}</td>
-                
+                <td style="color:white;font-weight:500;background-color:#0066FF;">{{$invoice->currency}} {{ $total }}</td>
+
               </tr>
               <tr>
                 <th class="text-success">Paid:</th>
                 <td>{{$invoice->currency}} {{$invoice->paid}}</td>
               </tr>
+              @if($invoice->pending_amount != 0 )
               <tr>
                 <th class="text-danger">Pending:</th>
                 <td>{{$invoice->currency}} {{$invoice->pending_amount}}</td>
               </tr>
+              @endif
+              @if($invoice->advance != 0 )
+              <tr>
+                <th class="text-info">Advance:</th>
+                <td>{{$invoice->currency}} {{$invoice->advance}}</td>
+              </tr>
+              @endif
 
             </table>
           </div>
@@ -343,7 +330,8 @@
       <!-- this row will not appear when printing -->
       <div class="row no-print">
         <div class="col-xs-12">
-          <a href="{{ route('pdf.invoice',['id'=>$invoice->id]) }}" target="_blank" class="btn btn-primary pull-right"><i class="fa fa-print"></i> Print</a>
+          <!--<a href="{{ route('pdf.invoice',['id'=>$invoice->id]) }}" target="_blank" class="btn btn-primary pull-right"><i class="fa fa-print"></i> Print</a>-->
+          <button onclick="print()" class="btn btn-primary pull-right"><i class="fa fa-print"></i> Print</button>
           {{-- <button type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment
           </button>
           <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
@@ -387,4 +375,11 @@
       </p>
 
     </section>
-  </body>
+@stop
+@section('js')
+<script>
+function print() {
+  window.print();
+}
+</script>
+@stop

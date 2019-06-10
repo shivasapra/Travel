@@ -19,21 +19,22 @@ class CreateInvoiceInfosTable extends Migration
             $table->string('receiver_name')->nullable();
             $table->string('service_name')->nullable();
 
-            $table->string('airline_name')->nullable();
-            $table->string('source')->nullable();
-            $table->string('destination')->nullable();
-            $table->string('date_of_travel')->nullable();
-            $table->string('adult')->nullable();
-            $table->string('adult_price')->nullable();
-            $table->string('child')->nullable();
-            $table->string('child_price')->nullable();
-            $table->string('infant')->nullable();
-            $table->string('infant_price')->nullable();
-            $table->string('infant_dob')->nullable();
-            $table->string('flight_amount')->nullable();
-            $table->string('flight_remarks')->nullable();
-            $table->integer('flight_quantity')->nullable();
-            $table->integer('flight_price')->nullable();
+            // $table->string('airline_name')->nullable();
+
+            // $table->string('source')->nullable();
+            // $table->string('destination')->nullable();
+            // $table->string('date_of_travel')->nullable();
+            // $table->string('adult')->nullable();
+            // $table->string('adult_price')->nullable();
+            // $table->string('child')->nullable();
+            // $table->string('child_price')->nullable();
+            // $table->string('infant')->nullable();
+            // $table->string('infant_price')->nullable();
+            // $table->string('infant_dob')->nullable();
+            // $table->string('flight_amount')->nullable();
+            // $table->string('flight_remarks')->nullable();
+            // $table->integer('flight_quantity')->nullable();
+            // $table->integer('flight_price')->nullable();
 
             $table->string('name_of_visa_applicant')->nullable();
             $table->string('passport_origin')->nullable();
@@ -69,7 +70,7 @@ class CreateInvoiceInfosTable extends Migration
 
             $table->string('local_transport_amount')->nullable();
             $table->string('local_transport_remarks')->nullable();
-            
+
             $table->timestamps();
         });
     }

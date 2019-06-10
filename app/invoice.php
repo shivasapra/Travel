@@ -17,6 +17,10 @@ class invoice extends Model
     {
         return $this->hasMany('App\invoiceInfo');
     }
+    public function flights()
+    {
+        return $this->hasMany('App\Flight');
+    }
     public function client()
     {
         return $this->belongsTo('App\client');

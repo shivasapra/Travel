@@ -487,7 +487,11 @@ Route::get('/invoice',[
 Route::get('/invoice/view/{id}',[
 	'uses'=>'InvoiceController@show',
 	'as'=>'invoice.view'
-	])->middleware('permission:View Invoices');
+    ])->middleware('permission:View Invoices');
+    Route::get('/test/{id}',[
+        'uses'=>'InvoiceController@test',
+        'as'=>'test'
+        ])->middleware('permission:View Invoices');
 Route::get('/invoice/print/{id}',[
 			'uses'=> 'InvoiceController@invoicePrint',
 			'as'=>'invoice.print'
