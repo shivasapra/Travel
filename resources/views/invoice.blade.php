@@ -352,7 +352,7 @@ Invoice
         <h4 class="font-weight-bold">Payment Information</h2>
       </div>
       <div class="col-md-12">
-            <table class="table table-bordered">
+            {{-- <table class="table table-bordered">
 
             <tr class="text-blue">
               <th>Mode</th>
@@ -382,7 +382,7 @@ Invoice
                 <td>{{$invoice->invoiceInfo[0]->currency. $invoice->bank_amount}}</td>
               </tr>
               @endif
-          </table>
+          </table> --}}
         </div>
       </div>
       <div class="col-md-12"><br>
