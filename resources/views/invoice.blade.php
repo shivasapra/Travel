@@ -19,148 +19,160 @@ Invoice
 @stop
 @section('content')
 
-<div class="container generate-invoice">
-    <div class="row align-items-center pt-2 pb-2 border-bottom" style="border-bottom:1px solid #ddd;padding-bottom:20px;">
-        <div class="col-md-3">
-        <img src="{{asset('images/logo.png')}}" alt="logo" class="img-fluid img-responsive"/>
-       </div>
-       <div class="col-md-9 text-right">
-         <p class="mb-0">62 King street, southall, middlesex, UB2 4DB, United Kingdom<br>
-         Email: info@cloudtravels.co.uk, admin@cloudtravels.co.uk<br>
-         Phone: 02035000000</p>
-         <h5 class="mb-3">Invoive No: <b>{{$invoice->invoice_no}}</b></h5>
-         <h5><span class="text-blue">Date:</span> {{$invoice->invoice_date}}</h5>
-       </div>
-      </div>
-      <div class="panel-body">
-    <div class="row mt-4 mb-3">
-      <div class="col-md-12 text-center">
-        <h2 class="mb-4 text-uppercase font-weight-bold">Invoice</h2>
-      </div>
-
+<div class="outer-div">
+    <div class="container outer-div-inner">
+        <div class="row">
+          <div class="col-md-12">
+            <img src="{{asset('images/logo.png')}}" alt="logo" class="img-fluid img-responsive"/>
+          </div>
+        </div><br><hr><br>
+        <div class="row">
+          <div class="col-md-6">
+            <h1>Invoice</h1>
+          </div>
+          <div class="col-md-6">
+            <div class="col-md-12">
+            <div class="row border">
+              <div class="col-6 p-3 bg-light-blue text-white"><p class="m-0">Invoice No: {{$invoice->invoice_no}}</p></div>
+              <div class="col-6 p-3"><p class="m-0">Invoice Date:{{$invoice->invoice_date}}</p></div>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="row mt-5">
+          <div class="col-md-6">
+            <h2>Bill To</h2>
+            <p><b>NAME:</b> Customer Name<br>
+              <b>ADDRESS:</b> Customer Permanaent Address<br>
+              <b>CONTACT NO:</b> +91 98888-786-001<br>
+            <b>EMAIL ID:</b> customeremailid@gmail.com</p>
+          </div>
+          <div class="col-md-6">
+            <h2>Bill From</h2>
+            <p><b>NAME:</b> Cloud Travel<br>
+              <b>ADDRESS:</b> 62 King street, southall, middlesex, UB2 4DB, United Kingdom<br>
+              <b>CONTACT NO:</b> 02035000000<br>
+            <b>EMAIL ID:</b> info@cloudtravels.co.uk, admin@cloudtravels.co.uk</p>
+          </div>
+        </div><hr><br>
+        <div class="row">
+          <div class="col-md-12">
+            <h2 class="p-3 bg-light-blue d-inline-block text-white">Service: Flight</h2>
+          </div>
       @foreach($invoice->flights as $flight)
-      <div class="col-sm-12">
-        <h3>Service: Flight</h3>
-      </div>
-      <div class="col-md-3">
-        <h5><span class="text-blue">Universal PNR:</span> {{ $flight->universal_pnr }}</h5>
-      </div>
-      <div class="col-md-3">
-        <h5><span class="text-blue">PNR:</span> {{ $flight->pnr }}</h5>
-      </div>
-      <div class="col-md-3">
-        <h5><span class="text-blue">Agency PCC:</span> {{ $flight->agency_pcc }}</h5>
-      </div>
-      <div class="col-md-3">
-        <h5><span class="text-blue">Airline Ref:</span> {{ $flight->airline_ref }}</h5>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <h4 class="text-blue font-weight-bold">Passenger Details</h4>
-        <div class="table-responsive">
+          <div class="col-md-12">
+            <h4 class="mt-3"><b>Passanger Details</b></h4>
+            <p>Booking Ref: IEB 9003953 &nbsp;&nbsp; | &nbsp;&nbsp; Airline Ref: {{ $flight->airline_ref }}</p>
+          </div>
+          <div class="col-md-12">
+            <div class="table-responsive">
           <table class="table table-bordered">
-            <tr class="text-blue">
+            <thead>
+            <tr>
               <th>S#</th>
               <th>Pax Type</th>
-              <th>First Name</th>
+              <th>First Name & Title</th>
               <th>Last Name</th>
               <th>DOB</th>
             </tr>
-            <?php $i = 1;?>
-            @foreach($flight->passengers as $passenger)
-                <tr>
+          </thead>
+          <tbody>
+                <?php $i = 1;?>
+                @foreach($flight->passengers as $passenger)
+            <tr>
                     <td>{{ $i++ }}</td>
                     <td>{{ $passenger->pax_type }}</td>
                     <td>{{ $passenger->first_name}}</td>
                     <td>{{ $passenger->last_name }}</td>
                     <td>{{ $passenger->DOB }}</td>
-                </tr>
+            </tr>
             @endforeach
+          </tbody>
           </table>
         </div>
-      </div>
-    </div>
-    <div class="row mt-4">
-      <div class="col-md-12">
-        <h4 class="text-blue font-weight-bold">Flight Details</h4>
-        <div class="table-responsive">
-          <table class="table table-bordered">
-            <tr class="text-blue">
+        <p>Note - * denotes the lead passenger</p>
+          </div>
+          <div class="col-md-12 mt-4">
+            <h4 class="mt-3"><b>Flight Details</b></h4>
+          </div>
+          <div class="col-md-12">
+            <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+            <tr>
               <th>Departure</th>
               <th>Arrival</th>
               <th>Airline</th>
               <th>Class</th>
               <th>Carrier</th>
             </tr>
+          </thead>
+          <tbody>
             <tr>
-              <td>{{ $flight->segment_one_from.', '.$flight->segment_one_departure }}</td>
-              <td>{{ $flight->segment_one_to.', '.$flight->segment_one_arrival }}</td>
-              <td>{{ $flight->segment_one_flight }}</td>
-              <td>{{ $flight->segment_one_class }}</td>
-              <td>{{ $flight->segment_one_carrier }}</td>
+                    <td>{{ $flight->segment_one_from.', '.$flight->segment_one_departure }}</td>
+                    <td>{{ $flight->segment_one_to.', '.$flight->segment_one_arrival }}</td>
+                    <td>{{ $flight->segment_one_flight }}</td>
+                    <td>{{ $flight->segment_one_class }}</td>
+                    <td>{{ $flight->segment_one_carrier }}</td>
             </tr>
             <tr>
-             <td>{{ $flight->segment_two_from.', '.$flight->segment_two_departure }}</td>
-             <td>{{ $flight->segment_two_to.', '.$flight->segment_two_arrival }}</td>
-             <td>{{ $flight->segment_two_flight }}</td>
-             <td>{{ $flight->segment_two_class }}</td>
-             <td>{{ $flight->segment_two_carrier}}</td>
+                    <td>{{ $flight->segment_two_from.', '.$flight->segment_two_departure }}</td>
+                    <td>{{ $flight->segment_two_to.', '.$flight->segment_two_arrival }}</td>
+                    <td>{{ $flight->segment_two_flight }}</td>
+                    <td>{{ $flight->segment_two_class }}</td>
+                    <td>{{ $flight->segment_two_carrier}}</td>
             </tr>
+          </tbody>
           </table>
         </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-6 col-xs-6">
-        <h2 class="text-blue" style="font-size:20px;">Total Flight Charges:</h2>
-      </div>
-      <div class="col-md-6 text-right col-xs-6">
-        <h4>GBP {{ $invoice->currency.$flight->total_amount }}</h4>
-      </div>
-      @endforeach
-
-      @foreach($invoice->invoiceInfo as $info)
-      @if($info->service_name == 'Visa Services')
-      <div class="col-sm-12"><hr>
-        <h3>Service: {{ $info->service_name }}</h3>
-      </div>
-      <div class="col-md-12">
-        <div class="table-responsive">
-          <table class="table table-bordered">
-            <tr class="text-blue">
-              <th>Applicant Name</th>
-              <th>Passport Origin</th>
-              <th>Passport No.</th>
-              <th>DOB</th>
-              <th>Visa Country</th>
-              <th>Visa Type</th>
-              <th>Visa Fees</th>
-              <th>Service Charge</th>
-            </tr>
+          </div>
+          <div class="col-md-12 text-right">
+            <h4 class="mt-3"><b>Total Flight Charges: <span class="text-light-blue">GBP {{ $invoice->currency.$flight->total_amount }}</span></b></h4>
+          </div>
+          @endforeach
+        </div>
+        @foreach($invoice->invoiceInfo as $info)
+        @if($info->service_name == 'Visa Services')
+        <div class="row">
+          <div class="col-md-12 mt-4">
+            <h2 class="p-3 bg-light-blue d-inline-block text-white">Service: {{ $info->service_name }}</h2>
+          </div>
+          <div class="col-md-12">
+            <div class="table-responsive">
+            <table class="table table-bordered">
+            <thead>
             <tr>
-              <td>{{$info->name_of_visa_applicant}}</td>
-              <td>{{$info->passport_origin}}</td>
-              <td>{{$info->passport_no}}</td>
-              <td>{{$info->passport_member_DOB}}</td>
-              <td>{{$info->visa_country}}</td>
-              <td>{{$info->visa_type}}</td>
-              <td>{{$info->visa_charges}}</td>
-              <td>{{$info->service_charge}}</td>
+                    <th>Applicant Name</th>
+                    <th>Passport Origin</th>
+                    <th>Passport No.</th>
+                    <th>DOB</th>
+                    <th>Visa Country</th>
+                    <th>Visa Type</th>
+                    <th>Visa Fees</th>
+                    <th>Service Charge</th>
             </tr>
+          </thead>
+          <tbody>
+            <tr>
+                    <td>{{$info->name_of_visa_applicant}}</td>
+                    <td>{{$info->passport_origin}}</td>
+                    <td>{{$info->passport_no}}</td>
+                    <td>{{$info->passport_member_DOB}}</td>
+                    <td>{{$info->visa_country}}</td>
+                    <td>{{$info->visa_type}}</td>
+                    <td>{{$info->visa_charges}}</td>
+                    <td>{{$info->service_charge}}</td>
+            </tr>
+          </tbody>
           </table>
         </div>
-      </div>
-      <div class="col-md-6 col-xs-6">
-        <h2 class="text-blue" style="font-size:20px;">Total Visa Charges:</h2>
-      </div>
-      <div class="col-md-6 text-right col-xs-6">
-        <h4>GBP {{ $invoice->currency.$info->visa_amount }}</h4>
-      </div>
-      @endif
-
-      @if($info->service_name == 'Hotel')
+          </div>
+          <div class="col-md-12 text-right">
+            <h4 class="mt-3"><b>Total Visa Charges: <span class="text-light-blue">GBP {{ $invoice->currency.$info->visa_amount }}</span></b></h4>
+          </div>
+        </div>
+        @endif
+        @if($info->service_name == 'Hotel')
       <div class="col-sm-12"><hr>
         <h3>Service: {{ $info->service_name }}</h3>
       </div>
@@ -317,96 +329,59 @@ Invoice
         <h4>GBP {{ $invoice->currency.$info->other_facilities_amount }}</h4>
       </div>
       @endif
-      @endforeach
-
-
-      <div class="col-md-6 text-right align-self-center">
-        <hr><img
-        @if($invoice->status == 1)
-            src="{{asset('images/paid.png')}}" alt="paid"
-        @else
-            src="{{asset('images/unpaid.jpg')}}" alt="unpaid"
-        @endif
-        style="width:200px;"/>
-      </div>
-      <div class="col-md-6 text-right">
-        <hr><h2 style="font-size:17px;line-height:27px;">SubTotal: <b>{{$invoice->currency}} {{$invoice->total}}</b> <br>
-            Discount: <b>{{$invoice->currency}} {{ $invoice->discount }}</b><br>
-        VAT @ {{$invoice->VAT_percentage}}%: <b>{{$invoice->currency}} {{$invoice->VAT_amount}}</b><br>
-        <?php $total = $invoice->discounted_total + $invoice->VAT_amount ?>
-      Invoice Total: <b>{{$invoice->currency}} {{ $total }}</b>
-    </h2><hr style="margin-top:0px;margin-bottom:0px;">
-    <h2 style="font-size:17px;line-height:27px;">Paid: <b>{{$invoice->currency}} {{$invoice->paid}}</b> <br>
-        @if($invoice->pending_amount != 0 )
-        Amount Due: <b>{{ $invoice->currency}} {{ $invoice->pending_amount}}</b>
-        @endif
-        @if($invoice->advance != 0 )
-        Advance: <b>{{$invoice->currency}} {{$invoice->advance}}</b>
-        @endif
-    </h2>
-      </div>
-      <div class="col-md-3">
-
-      </div>
-      <div class="col-md-12">
-        <h4 class="font-weight-bold">Payment Information</h2>
-      </div>
-      <div class="col-md-12">
-            {{-- <table class="table table-bordered">
-
-            <tr class="text-blue">
-              <th>Mode</th>
-              <th>Amount</th>
-            </tr>
-                @if($invoice->credit_amount != 0)
-                <tr>
-                    <td>Credit Card</td>
-                  <td>{{$invoice->invoiceInfo[0]->currency. $invoice->credit_amount}}</td>
-                </tr>
-                @endif
-                @if($invoice->debit_amount != 0)
-              <tr>
-                <td>Debit Card</td>
-                <td>{{$invoice->invoiceInfo[0]->currency. $invoice->debit_amount}}</td>
-              </tr>
-              @endif
-              @if($invoice->cash_amount != 0)
-                <tr>
-                <td>Cash</td>
-                <td>{{$invoice->invoiceInfo[0]->currency. $invoice->cash_amount}}</td>
-              </tr>
-              @endif
-              @if($invoice->bank_amount != 0)
-                <tr>
-                <td>Bank Transfer</td>
-                <td>{{$invoice->invoiceInfo[0]->currency. $invoice->bank_amount}}</td>
-              </tr>
-              @endif
-          </table> --}}
+      @endforeach<hr><br>
+        <div class="row">
+          <div class="col-md-6">
+             <h4><b>Payment Information</b></h4>
+             <p class="mb-1"><b style="width:120px;display:inline-block;">DATE:</b> 25-05-2019</p>
+             <p class="mb-1"><b style="width:120px;display:inline-block;">MODE:</b> Debit Card</p>
+             <p class="mb-1"><b style="width:120px;display:inline-block;">AMOUNT:</b> $23100</p>
+          </div>
+          <div class="col-md-6 text-right">
+            <div class="w-100">
+            <div class="" style="display:inline-block;margin-right:30px;">
+            <p class="mb-1"><b>Total net Amount:</b></p>
+            <p class="mb-1"><b>VAT @ {{$invoice->VAT_percentage}}:</b></p>
+            <p class="mb-1"><b>Invoice Total:</b></p>
+            <p class="mb-1"><b>Advance:</b></p>
+          </div>
+          <div class="" style="display:inline-block;">
+            <p class="mb-1">{{$invoice->currency}} {{$invoice->total}}</p>
+            <p class="mb-1">{{$invoice->currency}} {{$invoice->VAT_amount}}</p>
+            <p class="mb-1">{{$invoice->currency}} {{ $invoice->total }}</p>
+            <p class="mb-1">{{  $invoice->currency}} {{$invoice->advance}}</p>
+          </div>
+        </div><hr>
+        <div class="w-100">
+            <div class="" style="display:inline-block;margin-right:30px;">
+            <p class="mb-1"><b>Amount Due:</b></p>
+          </div>
+          <div class="" style="display:inline-block;">
+            @if($invoice->pending_amount != 0 )
+            <p class="mb-1">{{ $invoice->currency}} {{ $invoice->pending_amount}}</p>
+            @endif
         </div>
-      </div>
-      <div class="col-md-12"><br>
-        <p style="margin-bottom:5px;"><b>Remarks:</b></p>
-        <p style="color:red;"><b>Only those invoices can be cancelled which are within 60 days from the current system date.</b></p>
-      </div>
-      <div class="col-md-12 mt-4">
-        <p><b>NOTES:</b></p>
-        <ol>
-         <li>This sale is covered by ATOL number 3853.</li>
-         <li>There is no liability if airline(s) above cease to trade, unless Scheduled Airline Failure Insurance (SAFI)
-          has been paid.</li>
-        <li>Passengers travelling to/ or via USA/CANADA : will require an ESTA at least 72 hours prior to travel, even
-          for transit purposes.Children under 18 travelling to South Africa and Botswana : All minors travelling will be
-          required to carry certified copies Birth Certificate, and in the event that only one parent is travelling,
-          certified written consent from the other parent to allow the child to travel.</li>
-        </ol>
-      </div>
-      <div class="col-md-12 text-right">
-        <button type="button" class="btn btn-success">Print Invoice</button>
-      </div>
+        </div>
+          </div>
+        </div><hr>
+        <div class="row">
+          <div class="col-md-12">
+            <h4><b>Remarks:</b></h4>
+            <p class="text-danger">Only those invoices can be cancelled which are within 60 days from the current system date.</p>
+          </div>
+          <div class="col-md-12">
+            <h4><b>Notes:</b></h4>
+            <ul>
+              <li>This sale is covered by ATOL number 3853.</li>
+              <li>There is no liability if airline(s) above cease to trade, unless Scheduled Airline Failure Insurance (SAFI) has been paid.</li>
+              <li>Passengers travelling to/ or via USA/CANADA : will require an ESTA at least 72 hours prior to travel, even for transit purposes.Children under 18 travelling to South Africa and Botswana : All minors travelling will be required to carry certified copies Birth Certificate, and in the event that only one parent is travelling, certified written consent from the other parent to allow the child to travel.</li>
+            </ul>
+            <a href="#" class="btn btn-success">Print Invoice</a>
+          </div>
+        </div>
     </div>
   </div>
-  </div>
+
 
 @stop
 @section('js')
