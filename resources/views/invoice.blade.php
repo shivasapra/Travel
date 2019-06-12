@@ -31,7 +31,6 @@ Invoice
     text-transform: uppercase;
     font-weight: 600;
     font-family: 'Roboto Condensed', sans-serif;
-    margin-bottom:2rem;
   }
   /*.outer-div-inner h1::after{*/
     /*content: "";*/
@@ -51,6 +50,13 @@ Invoice
     display: inline-block !important;
     padding: 1rem;
     margin-top:20px;
+  }
+  .outer-div-inner h3 {
+    font-size: 24px;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-family: 'Roboto Condensed', sans-serif;
+    color: #26ace2;
   }
   .outer-div-inner h4{
     font-size:2rem;
@@ -111,29 +117,24 @@ Invoice
           </div>
         </div><br><hr><br>
         <div class="row">
-          <div class="col-md-6"><p class="m-0">Invoice No:<b> {{$invoice->invoice_no}} </b></p></div>
-          <div class="col-md-6 text-right"><p class="m-0">Invoice Date:<b> {{$invoice->invoice_date}} </b></p></div>
+          <div class="col-md-4"><p class="m-0">Invoice No:<b> {{$invoice->invoice_no}} </b></p></div>
+          <div class="col-md-4 text-center"><h1>Invoice</h1></div>
+          <div class="col-md-4 text-right"><p class="m-0">Invoice Date:<b> {{$invoice->invoice_date}} </b></p></div>
         </div>
         <div class="row mt-5">
           <div class="col-md-8">
-            <h2>Bill To</h2>
+            <h3>To</h3>
             <p><b>NAME:</b> Customer Name<br>
               <b>ADDRESS:</b> Customer Permanaent Address<br>
-              <b>CONTACT NO:</b> +91 98888-786-001<br>
             <b>EMAIL ID:</b> customeremailid@gmail.com</p>
           </div>
           <div class="col-md-4">
-            <h2>Bill From</h2>
-            <p><b>ADDRESS:</b> 62 King street, southall, middlesex,<br> UB2 4DB, United Kingdom<br>
+            <h3>From</h3>
+            <p><b>ADDRESS:</b> 62 King street,<br> southall, <br>middlesex,<br> UB2 4DB,<br> United Kingdom<br>
               <b>CONTACT NO:</b> 02035000000<br>
             <b>EMAIL ID:</b> info@cloudtravels.co.uk</p>
           </div>
-        </div><hr><br>
-      <div class="row">
-        <div class="col-md-12 text-center">
-          <h1>Invoice</h1>
-        </div>
-      </div>
+        </div><hr>
         <div class="row">
           <div class="col-md-12">
             <h2 class="p-3 bg-light-blue d-inline-block text-white">Service: Flight</h2>

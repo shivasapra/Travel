@@ -51,12 +51,12 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="css" value="112" />
-          <entry key="php" value="1663" />
+          <entry key="php" value="1736" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Blade" value="1640" />
+          <entry key="Blade" value="1713" />
           <entry key="CSS" value="112" />
           <entry key="HTML" value="11" />
           <entry key="PHP" value="12" />
@@ -69,8 +69,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/invoice.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="211">
-              <caret line="15" column="5689" selection-start-line="15" selection-start-column="5680" selection-end-line="15" selection-end-column="5689" />
+            <state relative-caret-position="531">
+              <caret line="59" column="18" selection-start-line="59" selection-start-column="18" selection-end-line="59" selection-end-column="18" />
               <folding>
                 <element signature="e#11940#11946#0#HTML" expanded="true" />
                 <element signature="e#11946#11952#0#HTML" expanded="true" />
@@ -129,6 +129,7 @@
       <find>.invoice .card</find>
       <find>.table td, .table th</find>
       <find>.table th</find>
+      <find>background-color</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -354,7 +355,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20343000" />
+    <option name="totallyTimeSpent" value="21403000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -446,13 +447,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://D:/new-invoice-design/new-invoice-design/new-invoice.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="9" lean-forward="true" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="211">
@@ -460,10 +454,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://D:/new-invoice-design/new-invoice-design/new-invoice.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="9" lean-forward="true" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/invoice.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="15" column="5689" selection-start-line="15" selection-start-column="5680" selection-end-line="15" selection-end-column="5689" />
+        <state relative-caret-position="531">
+          <caret line="59" column="18" selection-start-line="59" selection-start-column="18" selection-end-line="59" selection-end-column="18" />
           <folding>
             <element signature="e#11940#11946#0#HTML" expanded="true" />
             <element signature="e#11946#11952#0#HTML" expanded="true" />
