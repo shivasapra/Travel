@@ -73,6 +73,12 @@ Invoice
     color: #fff;
     font-weight: 600;
   }
+  @media print {
+    .noprint {
+      display: none;
+    }
+
+  }
   @media only screen and (max-width:767px){
     .outer-div{
       font-size:13px;
@@ -455,7 +461,7 @@ Invoice
               <li>There is no liability if airline(s) above cease to trade, unless Scheduled Airline Failure Insurance (SAFI) has been paid.</li>
               <li>Passengers travelling to/ or via USA/CANADA : will require an ESTA at least 72 hours prior to travel, even for transit purposes.Children under 18 travelling to South Africa and Botswana : All minors travelling will be required to carry certified copies Birth Certificate, and in the event that only one parent is travelling, certified written consent from the other parent to allow the child to travel.</li>
             </ul>
-            <a href="#" class="btn btn-success">Print Invoice</a>
+            <a href="#" class="btn btn-success noprint">Print Invoice</a>
           </div>
         </div>
     </div>
