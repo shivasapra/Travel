@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="40877b6b-74e7-4585-a48d-75ff3be5e906" name="Default Changelist" comment="" />
+    <list default="true" id="40877b6b-74e7-4585-a48d-75ff3be5e906" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/resources/views/invoice.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/invoice.blade.php" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,12 +50,12 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="css" value="112" />
-          <entry key="php" value="1752" />
+          <entry key="php" value="1864" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Blade" value="1729" />
+          <entry key="Blade" value="1841" />
           <entry key="CSS" value="112" />
           <entry key="HTML" value="11" />
           <entry key="PHP" value="12" />
@@ -66,9 +68,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/invoice.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="310">
-              <caret line="40" column="19" lean-forward="true" selection-start-line="40" selection-start-column="19" selection-end-line="40" selection-end-column="19" />
+            <state relative-caret-position="340">
+              <caret line="20" column="3" lean-forward="true" selection-start-line="20" selection-start-column="3" selection-end-line="20" selection-end-column="3" />
               <folding>
+                <element signature="e#11852#11929#0#HTML" expanded="true" />
                 <element signature="e#11940#11946#0#HTML" expanded="true" />
                 <element signature="e#11946#11952#0#HTML" expanded="true" />
                 <element signature="e#11955#11961#0#HTML" expanded="true" />
@@ -103,8 +106,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://D:/new-invoice-design/new-invoice-design/new-invoice.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="9" lean-forward="true" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
+            <state relative-caret-position="374">
+              <caret line="43" column="43" selection-start-line="43" selection-start-column="43" selection-end-line="43" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -352,10 +355,11 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21795000" />
+    <option name="totallyTimeSpent" value="22747000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26119402" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -443,13 +447,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://D:/new-invoice-design/new-invoice-design/new-invoice.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="9" lean-forward="true" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="211">
@@ -457,11 +454,19 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://D:/new-invoice-design/new-invoice-design/new-invoice.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="43" column="43" selection-start-line="43" selection-start-column="43" selection-end-line="43" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/invoice.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="310">
-          <caret line="40" column="19" lean-forward="true" selection-start-line="40" selection-start-column="19" selection-end-line="40" selection-end-column="19" />
+        <state relative-caret-position="340">
+          <caret line="20" column="3" lean-forward="true" selection-start-line="20" selection-start-column="3" selection-end-line="20" selection-end-column="3" />
           <folding>
+            <element signature="e#11852#11929#0#HTML" expanded="true" />
             <element signature="e#11940#11946#0#HTML" expanded="true" />
             <element signature="e#11946#11952#0#HTML" expanded="true" />
             <element signature="e#11955#11961#0#HTML" expanded="true" />
