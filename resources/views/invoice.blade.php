@@ -115,7 +115,7 @@ Invoice
           <div class="col-md-12">
             <img src="{{asset('images/logo.png')}}" alt="logo" class="img-fluid img-responsive"/>
           </div>
-        </div><br><hr><br>
+        </div><br><hr>
         <div class="row">
           <div class="col-md-4"><p class="m-0">Invoice No:<b> {{$invoice->invoice_no}} </b></p></div>
           <div class="col-md-4 text-center"><h1>Invoice</h1></div>
@@ -125,14 +125,12 @@ Invoice
           <div class="col-md-8">
             <h3>To</h3>
             <p><b>NAME:</b> Customer Name<br>
-              <b>ADDRESS:</b> Customer Permanaent Address<br>
-            <b>EMAIL ID:</b> customeremailid@gmail.com</p>
+              <b>ADDRESS:</b> Customer Permanaent Address
           </div>
           <div class="col-md-4">
-            <h3>From</h3>
             <p><b>ADDRESS:</b> 62 King street,<br> southall, <br>middlesex,<br> UB2 4DB,<br> United Kingdom<br>
-              <b>CONTACT NO:</b> 02035000000<br>
-            <b>EMAIL ID:</b> info@cloudtravels.co.uk</p>
+              <b>TEL:</b> 02035000000<br>
+            <b>E-MAIL</b> info@cloudtravels.co.uk</p>
           </div>
         </div><hr>
         <div class="row">
