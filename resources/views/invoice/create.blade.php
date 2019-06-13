@@ -522,7 +522,7 @@ Create Invoice
 '          <tr>'+
             '<th>Universal PNR </th>'+
             '<th>PNR </th>'+
-            '<th>Agency PCC </th>'+
+            '<th>E-Ticket No</th>'+
             '<th>Airline Ref </th>'+
           '</tr>'+
         '</thead>'+
@@ -585,9 +585,9 @@ Create Invoice
           '</tr>'+
           '<tr>'+
             '<th>Departure:</th>'+
-            '<td><input type="datetime-local" name="segment_one_departure[]" class="form-control" ></td>'+
+            '<td><input type="datetime-local" placeholder="dd/mm/yyyy" name="segment_one_departure[]" class="form-control" ></td>'+
             '<th align="right">Arrival:</th>'+
-            '<td><input type="datetime-local" name="segment_one_arrival[]" class="form-control" ></td>'+
+            '<td><input type="datetime-local" placeholder="dd/mm/yyyy" name="segment_one_arrival[]" class="form-control" ></td>'+
           '</tr>'+
           '<tr>'+
           '<td class="colspan-6"></td>'+
@@ -624,9 +624,9 @@ Create Invoice
           '</tr>'+
           '<tr>'+
             '<th>Departure:</th>'+
-            '<td><input type="datetime-local" name="segment_two_departure[]" class="form-control" ></td>'+
+            '<td><input type="datetime-local" placeholder="dd/mm/yyyy" name="segment_two_departure[]" class="form-control" ></td>'+
             '<th align="right">Arrival:</th>'+
-            '<td><input type="datetime-local" name="segment_two_arrival[]" class="form-control" ></td>'+
+            '<td><input type="datetime-local" placeholder="dd/mm/yyyy" name="segment_two_arrival[]" class="form-control" ></td>'+
           '</tr>'+
         '</tbody>'+
       '</table>'+
@@ -796,7 +796,7 @@ Create Invoice
 				$(test).closest(".box").html(data);
 			}
 			if (value == 'Insurance') {
-				var data = '<div class="box-body"> <div class="row">			<div class="col-md-4">				<div class="form-group">					<label for="service_name[]">Select Service</label>					<select name="service_name[]" class="form-control service" required onChange="SelectService(this);">							<option value="">--select--</option>							@if($products->count()>0)							@foreach($products as $product)								<option value="{{$product->service}}" {{($product->service == "Insurance")?"selected":''}}>{{$product->service}}</option>							@endforeach							@endif					</select>				</div>			</div>		</div><div class="row">	<div class="col-md-4">		<div class="form-group">			<label for="name_of_insurance_applicant">Name Of Insurance Applicant</label>			<input type="text" name="name_of_insurance_applicant[]" required class="form-control">		</div>		</div>		<div class="col-md-4">		<div class="form-group">			<label for="insurance_remarks">Insurance Remarks</label>			<input type="text" name="insurance_remarks[]" class="form-control">		</div>		</div>						<div class="col-md-4">				<div class="form-group">					<label for="insurance_amount[]">Insurance Amount</label>					<input type="text" name="insurance_amount[]" required class="form-control">				</div>				</div>				</div><div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					</div>	</div>				</div></div>';
+				var data = '<div class="box-body"> <div class="row">			<div class="col-md-4">				<div class="form-group">					<label for="service_name[]">Select Service</label>					<select name="service_name[]" class="form-control service" required onChange="SelectService(this);">							<option value="">--select--</option>							@if($products->count()>0)							@foreach($products as $product)								<option value="{{$product->service}}" {{($product->service == "Insurance")?"selected":''}}>{{$product->service}}</option>							@endforeach							@endif					</select>				</div>			</div>	<div class="col-md-4">		<div class="form-group">			<label for="name_of_insurance_applicant">Name Of Insurance Company</label>			<input type="text" name="name_of_insurance_company[]" required class="form-control">		</div>		</div>	</div><div class="row">	<div class="col-md-4">		<div class="form-group">			<label for="name_of_insurance_applicant">Name Of Insurance Applicant</label>			<input type="text" name="name_of_insurance_applicant[]" required class="form-control">		</div>		</div>		<div class="col-md-4">		<div class="form-group">			<label for="insurance_remarks">Insurance Remarks</label>			<input type="text" name="insurance_remarks[]" class="form-control">		</div>		</div>						<div class="col-md-4">				<div class="form-group">					<label for="insurance_amount[]">Insurance Amount</label>					<input type="text" name="insurance_amount[]" required class="form-control">				</div>				</div>				</div><div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					</div>	</div>				</div></div>';
 				$(test).closest(".box").html(data);
 			}
 			if (value == 'Local Sight Sceen') {

@@ -289,6 +289,7 @@ class InvoiceController extends Controller
 
 
                             $invoice_info->name_of_insurance_applicant = $request->name_of_insurance_applicant[$insurance_counter];
+                            $invoice_info->name_of_insurance_company = $request->name_of_insurance_company[$insurance_counter];
                             $invoice_info->insurance_amount = $request->insurance_amount[$insurance_counter];
                             $invoice_info->insurance_remarks = $request->insurance_remarks[$insurance_counter];
 

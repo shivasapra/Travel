@@ -56,6 +56,7 @@ class CreateInvoiceInfosTable extends Migration
             $table->string('hotel_amount')->nullable();
 
             $table->string('name_of_insurance_applicant')->nullable();
+            $table->string('name_of_insurance_company')->nullable();
             $table->string('insurance_amount')->nullable();
             $table->string('insurance_remarks')->nullable();
 

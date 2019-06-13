@@ -1,7 +1,4 @@
-@media print {
-    .noprint {
-      display: none;
-    }
+
 .generate-invoice{
     background-color:#fff;
     padding:3rem 0rem;

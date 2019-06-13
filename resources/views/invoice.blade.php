@@ -141,7 +141,8 @@ Invoice
   }
 
 
-  }
+
+
   @media only screen and (max-width:767px){
     .outer-div{
       font-size:13px;
@@ -164,6 +165,11 @@ Invoice
       font-size:1rem;
     }
   }
+  @media print {
+    .noprint {
+      display: none;
+    }
+}
 </style>
   <section class="content-header">
       <h1>
@@ -193,8 +199,8 @@ Invoice
         <div class="row mt-5">
           <div class="col-md-8">
             <h3>To</h3>
-            <p><b>NAME:</b> {{ $invoice->client->first_name }} {{ $invoice->client->last_name }}<br>
-              <b>ADDRESS:</b> {{ $invoice->client->address }}<br>{{ $invoice->client->city }}<br>{{ $invoice->client->county }}<br>{{ $invoice->client->postal_code }}</div>
+            <p>{{ $invoice->client->first_name }} {{ $invoice->client->last_name }}<br>
+               {{ $invoice->client->address }}<br>{{ $invoice->client->city }}<br>{{ $invoice->client->county }}<br>{{ $invoice->client->postal_code }}</div>
           <div class="col-md-4">
             <h3>Issued By</h3>
             <p>62 King street,<br> Southall, <br>Middlesex,<br> UB2 4DB<br>
@@ -214,7 +220,7 @@ Invoice
       @foreach($invoice->flights as $flight)
           <div class="col-md-12">
             <h4 class="mt-3"><b>Passanger Details</b></h4>
-            <p>Booking Ref: IEB 9003953 &nbsp;&nbsp; | &nbsp;&nbsp; Airline Ref: {{ $flight->airline_ref }}</p>
+
           </div>
           <div class="col-md-12">
             <div class="table-responsive">
@@ -244,6 +250,7 @@ Invoice
           </div>
           <div class="col-md-12 mt-4">
             <h4 class="mt-3"><b>Flight Details</b></h4>
+            <p>Booking Ref: IEB 9003953 &nbsp;&nbsp; | &nbsp;&nbsp; Airline Ref: {{ $flight->airline_ref }}</p>
           </div>
           <div class="col-md-12">
             <div class="table-responsive">
@@ -379,11 +386,13 @@ Invoice
             <thead>
             <tr>
               <th>Name Of Insurance Applicant</th>
+              <th>Company Name</th>
               <th>Insurance Remarks</th>
             </tr>
         </thead>
             <tr>
               <td>{{ $info->name_of_insurance_applicant }}</td>
+              <td>{{ $info->name_of_insurance_company }}</td>
               <td>{{ $info->insurance_remarks }}</td>
             </tr>
           </table>
@@ -555,9 +564,9 @@ Invoice
           <div class="col-md-8 text-right">
             <div class="w-100">
             <div class="" style="display:inline-block;margin-right:30px;">
-            <p class="mb-1"><b>Total net Amount:</b></p>
+            <p class="mb-1"><b>Total Package:</b></p>
             @if($invoice->VAT_percentage != 0)<p class="mb-1"><b>VAT @ {{ $invoice->VAT_percentage }}:@endif</b></p>
-            <p class="mb-1"><b>Invoice Total:</b></p>
+            <p class="mb-1"><b>Total:</b></p>
             <p class="mb-1"><b>Advance:</b></p>
           </div>
           <div class="" style="display:inline-block;">
@@ -569,7 +578,7 @@ Invoice
         </div><hr>
         <div class="w-100">
             <div class="" style="display:inline-block;margin-right:30px;">
-            <p class="mb-1"><b>Amount Due:</b></p>
+            <p class="mb-1"><b>Due Payment:</b></p>
           </div>
           <div class="" style="display:inline-block;">
             @if($invoice->pending_amount != 0 )
@@ -591,7 +600,7 @@ Invoice
               <li>There is no liability if airline(s) above cease to trade, unless Scheduled Airline Failure Insurance (SAFI) has been paid.</li>
               <li>Passengers travelling to/ or via USA/CANADA : will require an ESTA at least 72 hours prior to travel, even for transit purposes.Children under 18 travelling to South Africa and Botswana : All minors travelling will be required to carry certified copies Birth Certificate, and in the event that only one parent is travelling, certified written consent from the other parent to allow the child to travel.</li>
             </ul>
-            {{-- <a href="#" class="btn btn-success noprint">Print Invoice</a> --}}
+            {{-- <a href="#" class="btn btn-success noprint" onclick="print();">Print Invoice</a> --}}
           </div>
         </div>
     </div>
