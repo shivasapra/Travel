@@ -547,7 +547,7 @@ Create Invoice
             '<th width="250px">From</th>'+
             '<th width="250px">To</th>'+
             '<th>Carrier</th>'+
-            '<th>Class</th>'+
+            '<th>Travel Class</th>'+
             // '<th>Departure</th>'+
             // '<th>Arrival</th>'+
           '</tr>'+
@@ -571,7 +571,16 @@ Create Invoice
             '<div class="airportArrival_html"></div></div></div>'+
             '</td>'+
             '<td><input type="text" name="segment_one_carrier[]" class="form-control" ></td>'+
-            '<td><input type="text" name="segment_one_class[]" class="form-control" ></td>'+
+            // '<td><input type="text" name="segment_one_class[]" class="form-control" ></td>'+
+            // '<td><input type="text" name="segment_one_class[]" class="form-control" ></td>'+
+            '<td><select name="segment_one_class[]" class="form-control service"required >'+
+										'<option value="">--select--</option>'+
+											'<option value="Economy class">Economy class</option>'+
+											'<option value="Premium Economy class">Premium Economy class</option>'+
+											'<option value="Business Class">Business Class</option>'+
+											'<option value="First Class">First Class</option>'+
+
+			'</select></td>'+
             // '<td><input type="datetime-local" name="segment_one_departure[]" class="form-control" ></td>'+
             // '<td><input type="datetime-local" name="segment_one_arrival[]" class="form-control" ></td>'+
           '</tr>'+
@@ -602,7 +611,15 @@ Create Invoice
             '<div class="airportArrival_html_two"></div></div></div>'+
             '</td>'+
             '<td><input type="text" name="segment_two_carrier[]" class="form-control" ></td>'+
-            '<td><input type="text" name="segment_two_class[]" class="form-control" ></td>'+
+            // '<td><input type="text" name="segment_two_class[]" class="form-control" ></td>'+
+            '<td><select name="segment_two_class[]" class="form-control service"required >'+
+										'<option value="">--select--</option>'+
+											'<option value="Economy class">Economy class</option>'+
+											'<option value="Premium Economy class">Premium Economy class</option>'+
+											'<option value="Business Class">Business Class</option>'+
+											'<option value="First Class">First Class</option>'+
+
+			'</select></td>'+
             // '<td><input type="datetime-local" name="segment_two_departure[]" class="form-control" ></td>'+
             // '<td><input type="datetime-local" name="segment_two_arrival[]" class="form-control" ></td>'+
           '</tr>'+
