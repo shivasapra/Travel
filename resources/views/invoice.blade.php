@@ -205,6 +205,7 @@ Invoice
             <b>E-MAIL</b> info@cloudtravels.co.uk</p>
           </div>
         </div>
+        @if($invoice->flights->count() > 0)
         <div class="row hide_div1">
           <div class="col-md-12">
             <h2 class="p-3 bg-light-blue d-inline-block text-white">Flight</h2>
@@ -283,6 +284,7 @@ Invoice
           </div>
           @endforeach
         </div>
+        @endif
         @foreach($invoice->invoiceInfo as $info)
         @if($info->service_name == 'Visa Services')
         <div class="row hide_div2">
@@ -516,7 +518,6 @@ Invoice
         <div class="row">
           <div class="col-md-6">
              <h4><b>Payment Information</b></h4>
-<<<<<<< HEAD
               <div class="table-responsive">
                 <table class="table table-bordered">
                   <thead>
