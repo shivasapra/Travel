@@ -188,7 +188,7 @@ Invoice
         <div class="row">
           <div class="col-md-4"><p class="m-0">Invoice No:<b> {{$invoice->invoice_no}} </b></p></div>
           <div class="col-md-4 text-center"><h1>Invoice</h1></div>
-          <div class="col-md-4 text-right"><p class="m-0">Invoice Date:<b> {{ Carbon\Carbon::parse($invoice->invoice_date)->format('d/m/Y') }}</b></p></div>
+          <div class="col-md-4 text-right"><p class="m-0">Invoice Date:<b> {{ Carbon\Carbon::parse($invoice->invoice_date)->format('j F Y') }}</b></p></div>
         </div>
         <div class="row mt-5">
           <div class="col-md-8">
