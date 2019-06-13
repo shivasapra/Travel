@@ -13,6 +13,9 @@ Invoice
     font-size:16px;
   }
   :root{--blue:#007bff;--indigo:#6610f2;--purple:#6f42c1;--pink:#e83e8c;--red:#dc3545;--orange:#fd7e14;--yellow:#ffc107;--green:#28a745;--teal:#20c997;--cyan:#17a2b8;--white:#fff;--gray:#6c757d;--gray-dark:#343a40;--primary:#007bff;--secondary:#6c757d;--success:#28a745;--info:#17a2b8;--warning:#ffc107;--danger:#dc3545;--light:#f8f9fa;--dark:#343a40;--breakpoint-xs:0;--breakpoint-sm:576px;--breakpoint-md:768px;--breakpoint-lg:992px;--breakpoint-xl:1200px;--font-family-sans-serif:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";--font-family-monospace:SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}*,::after,::before{box-sizing:border-box}html{font-family:sans-serif;line-height:1.15;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-weight:400;line-height:1.5;color:#212529;text-align:left;background-color:#fff}[tabindex="-1"]:focus{outline:0!important}hr{box-sizing:content-box;height:0;overflow:visible}h1,h2,h3,h4,h5,h6{margin-top:0;margin-bottom:.5rem}p{margin-top:0;margin-bottom:1rem}address{margin-bottom:1rem;font-style:normal;line-height:inherit}ul{margin-top:0;margin-bottom:1rem}ul ul{margin-bottom:0}b{font-weight:bolder}a{color:#007bff;text-decoration:none;background-color:transparent}a:hover{color:#0056b3;text-decoration:underline}a:not([href]):not([tabindex]){color:inherit;text-decoration:none}a:not([href]):not([tabindex]):focus,a:not([href]):not([tabindex]):hover{color:inherit;text-decoration:none}a:not([href]):not([tabindex]):focus{outline:0}code{font-family:SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;}img{vertical-align:middle;border-style:none}table{border-collapse:collapse}th{text-align:inherit}[type=button],[type=reset],[type=submit]{-webkit-appearance:button}[type=button]:not(:disabled),[type=reset]:not(:disabled),[type=submit]:not(:disabled){cursor:pointer}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner{padding:0;border-style:none}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{outline-offset:-2px;-webkit-appearance:none}[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{font:inherit;-webkit-appearance:button}[hidden]{display:none!important}.h1,.h2,.h3,.h4,.h5,.h6,h1,h2,h3,h4,h5,h6{margin-bottom:.5rem;font-weight:500;line-height:1.2}hr{margin-top:1rem;margin-bottom:1rem;border:0;border-top:1px solid rgba(0,0,0,.1)}.img-fluid{max-width:100%;height:auto}code{color:#e83e8c;word-break:break-word}a>code{color:inherit}.container{width:100%;padding-right:15px;padding-left:15px;margin-right:auto;margin-left:auto}@media (min-width:576px){.container{max-width:540px}}@media (min-width:768px){.container{max-width:720px}}@media (min-width:992px){.container{max-width:960px}}@media (min-width:1200px){.container{max-width:1140px}}.container-fluid{width:100%;padding-right:15px;padding-left:15px;margin-right:auto;margin-left:auto}.row{display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;margin-right:-15px;margin-left:-15px}.col,.col-1,.col-10,.col-11,.col-12,.col-2,.col-3,.col-4,.col-5,.col-6,.col-7,.col-8,.col-9,.col-md,.col-md-1,.col-md-10,.col-md-11,.col-md-12,.col-md-2,.col-md-3,.col-md-4,.col-md-5,.col-md-6,.col-md-7,.col-md-8,.col-md-9{position:relative;width:100%;padding-right:15px;padding-left:15px}.col{-ms-flex-preferred-size:0;flex-basis:0;-ms-flex-positive:1;flex-grow:1;max-width:100%}.col-1{-ms-flex:0 0 8.333333%;flex:0 0 8.333333%;max-width:8.333333%}.col-2{-ms-flex:0 0 16.666667%;flex:0 0 16.666667%;max-width:16.666667%}.col-3{-ms-flex:0 0 25%;flex:0 0 25%;max-width:25%}.col-4{-ms-flex:0 0 33.333333%;flex:0 0 33.333333%;max-width:33.333333%}.col-5{-ms-flex:0 0 41.666667%;flex:0 0 41.666667%;max-width:41.666667%}.col-6{-ms-flex:0 0 50%;flex:0 0 50%;max-width:50%}.col-7{-ms-flex:0 0 58.333333%;flex:0 0 58.333333%;max-width:58.333333%}.col-8{-ms-flex:0 0 66.666667%;flex:0 0 66.666667%;max-width:66.666667%}.col-9{-ms-flex:0 0 75%;flex:0 0 75%;max-width:75%}.col-10{-ms-flex:0 0 83.333333%;flex:0 0 83.333333%;max-width:83.333333%}.col-11{-ms-flex:0 0 91.666667%;flex:0 0 91.666667%;max-width:91.666667%}.col-12{-ms-flex:0 0 100%;flex:0 0 100%;max-width:100%}@media (min-width:768px){.col-md{-ms-flex-preferred-size:0;flex-basis:0;-ms-flex-positive:1;flex-grow:1;max-width:100%}.col-md-1{-ms-flex:0 0 8.333333%;flex:0 0 8.333333%;max-width:8.333333%}.col-md-2{-ms-flex:0 0 16.666667%;flex:0 0 16.666667%;max-width:16.666667%}.col-md-3{-ms-flex:0 0 25%;flex:0 0 25%;max-width:25%}.col-md-4{-ms-flex:0 0 33.333333%;flex:0 0 33.333333%;max-width:33.333333%}.col-md-5{-ms-flex:0 0 41.666667%;flex:0 0 41.666667%;max-width:41.666667%}.col-md-6{-ms-flex:0 0 50%;flex:0 0 50%;max-width:50%}.col-md-7{-ms-flex:0 0 58.333333%;flex:0 0 58.333333%;max-width:58.333333%}.col-md-8{-ms-flex:0 0 66.666667%;flex:0 0 66.666667%;max-width:66.666667%}.col-md-9{-ms-flex:0 0 75%;flex:0 0 75%;max-width:75%}.col-md-10{-ms-flex:0 0 83.333333%;flex:0 0 83.333333%;max-width:83.333333%}.col-md-11{-ms-flex:0 0 91.666667%;flex:0 0 91.666667%;max-width:91.666667%}.col-md-12{-ms-flex:0 0 100%;flex:0 0 100%;max-width:100%}}.table{width:100%;margin-bottom:1rem;color:#212529}.table td,.table th{padding:.75rem;vertical-align:top;border-top:1px solid #dee2e6}.table thead th{vertical-align:bottom;border-bottom:2px solid #dee2e6}.table tbody+tbody{border-top:2px solid #dee2e6}.table-bordered{border:1px solid #dee2e6}.table-bordered td,.table-bordered th{border:1px solid #dee2e6}.table-bordered thead td,.table-bordered thead th{border-bottom-width:2px}.table-success,.table-success>td,.table-success>th{background-color:#c3e6cb}.table-success tbody+tbody,.table-success td,.table-success th,.table-success thead th{border-color:#8fd19e}.table-info,.table-info>td,.table-info>th{background-color:#bee5eb}.table-info tbody+tbody,.table-info td,.table-info th,.table-info thead th{border-color:#86cfda}.table-danger,.table-danger>td,.table-danger>th{background-color:#f5c6cb}.table-danger tbody+tbody,.table-danger td,.table-danger th,.table-danger thead th{border-color:#ed969e}.table-light,.table-light>td,.table-light>th{background-color:#fdfdfe}.table-light tbody+tbody,.table-light td,.table-light th,.table-light thead th{border-color:#fbfcfc}.table .thead-light th{color:#495057;background-color:#e9ecef;border-color:#dee2e6}@media (max-width:767.98px){.table-responsive-md{display:block;width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}.table-responsive-md>.table-bordered{border:0}}.table-responsive{display:block;width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}.table-responsive>.table-bordered{border:0}.btn{display:inline-block;font-weight:400;color:#212529;text-align:center;vertical-align:middle;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;background-color:transparent;border:1px solid transparent;padding:.375rem .75rem;line-height:1.5;border-radius:.25rem;transition:color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out}@media (prefers-reduced-motion:reduce){.btn{transition:none}}.btn:hover{color:#212529;text-decoration:none}.btn:focus{outline:0;box-shadow:0 0 0 .2rem rgba(0,123,255,.25)}.btn:disabled{opacity:.65}.btn-success{color:#fff;background-color:#28a745;border-color:#28a745}.btn-success:hover{color:#fff;background-color:#218838;border-color:#1e7e34}.btn-success:focus{box-shadow:0 0 0 .2rem rgba(72,180,97,.5)}.btn-success:disabled{color:#fff;background-color:#28a745;border-color:#28a745}.btn-info{color:#fff;background-color:#17a2b8;border-color:#17a2b8}.btn-info:hover{color:#fff;background-color:#138496;border-color:#117a8b}.btn-info:focus{box-shadow:0 0 0 .2rem rgba(58,176,195,.5)}.btn-info:disabled{color:#fff;background-color:#17a2b8;border-color:#17a2b8}.btn-danger{color:#fff;background-color:#dc3545;border-color:#dc3545}.btn-danger:hover{color:#fff;background-color:#c82333;border-color:#bd2130}.btn-danger:focus{box-shadow:0 0 0 .2rem rgba(225,83,97,.5)}.btn-danger:disabled{color:#fff;background-color:#dc3545;border-color:#dc3545}.btn-light{color:#212529;background-color:#f8f9fa;border-color:#f8f9fa}.btn-light:hover{color:#212529;background-color:#e2e6ea;border-color:#dae0e5}.btn-light:focus{box-shadow:0 0 0 .2rem rgba(216,217,219,.5)}.btn-light:disabled{color:#212529;background-color:#f8f9fa;border-color:#f8f9fa}.btn-block{display:block;width:100%}.btn-block+.btn-block{margin-top:.5rem}thead{display:table-header-group}img,tr{page-break-inside:avoid}h2,h3,p{orphans:3;widows:3}h2,h3{page-break-after:avoid}@page{size:a3}body{min-width:992px!important}.container{min-width:992px!important}.table{border-collapse:collapse!important}.table td,.table th{}.table-bordered td,.table-bordered th{border:1px solid #dee2e6!important}
+  .float-right{
+    float:right;
+  }
   .outer-div-inner{
     margin:2% auto;
     padding:20px 25px;
@@ -48,7 +51,7 @@ Invoice
     color: #fff !important;
     display: inline-block !important;
     padding: 1rem;
-    margin-top:20px;
+    margin-top:10px;
   }
   .outer-div-inner h3 {
     font-size: 24px;
@@ -71,6 +74,70 @@ Invoice
   .outer-div-inner table thead tr th{
     color: #fff;
     font-weight: 600;
+  }
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+    float: right;
+    margin-top: 18px;
+  }
+
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 9px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+
+  input:checked + .slider {
+    background-color: #69a713;
+  }
+
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+
+  .slider.round:before {
+    border-radius: 50%;
+  }
+  .opacity_05{
+    opacity: 0.3;
   }
   @media print {
     .noprint {
@@ -138,9 +205,13 @@ Invoice
             <b>E-MAIL</b> info@cloudtravels.co.uk</p>
           </div>
         </div>
-        <div class="row">
+        <div class="row hide_div1">
           <div class="col-md-12">
-            <h2 class="p-3 bg-light-blue d-inline-block text-white">Service: Flight</h2>
+            <h2 class="p-3 bg-light-blue d-inline-block text-white">Flight</h2>
+            <label class="switch switch1">
+              <input type="checkbox" checked>
+              <span class="slider round"></span>
+            </label>
           </div>
       @foreach($invoice->flights as $flight)
           <div class="col-md-12">
@@ -209,16 +280,20 @@ Invoice
           </table>
         </div>
           </div>
-          <div class="col-md-12 text-right">
-            <h4 class="mt-3"><b>Total: <span class="text-light-blue">{{ $invoice->currency.$flight->total_amount }}</span></b></h4>
+          <div class="col-md-12">
+            <h4 class="mt-3"><b>Total:</b> <b class="float-right"><span class="text-light-blue">{{ $invoice->currency.$flight->total_amount }}</span></b></h4>
           </div>
           @endforeach
         </div>
         @foreach($invoice->invoiceInfo as $info)
         @if($info->service_name == 'Visa Services')
-        <div class="row">
+        <div class="row hide_div2">
           <div class="col-md-12 mt-4">
             <h2 class="p-3 bg-light-blue d-inline-block text-white">{{ $info->service_name }}</h2>
+            <label class="switch switch2">
+              <input type="checkbox" checked>
+              <span class="slider round"></span>
+            </label>
           </div>
           <div class="col-md-12">
             <div class="table-responsive">
@@ -246,15 +321,19 @@ Invoice
           </table>
         </div>
           </div>
-          <div class="col-md-12 text-right">
-            <h4 class="mt-3"><b>Total: <span class="text-light-blue">{{ $invoice->currency.$info->visa_amount }}</span></b></h4>
+          <div class="col-md-12">
+            <h4 class="mt-3"><b>Total:</b> <b class="float-right"><span class="text-light-blue">{{ $invoice->currency.$info->visa_amount }}</span></b></h4>
           </div>
         </div>
         @endif
         @if($info->service_name == 'Hotel')
-        <div class="row">
+        <div class="row hide_div3">
       <div class="col-sm-12 mt-4">
         <h2 class="p-3 bg-light-blue d-inline-block text-white">{{ $info->service_name }}</h2>
+        <label class="switch switch3">
+          <input type="checkbox" checked>
+          <span class="slider round"></span>
+        </label>
       </div>
       <div class="col-md-12">
         <div class="table-responsive">
@@ -282,16 +361,20 @@ Invoice
           </table>
         </div>
       </div>
-      <div class="col-md-12 text-right">
-            <h4 class="mt-3"><b>Total: <span class="text-light-blue">{{ $invoice->currency.$info->hotel_amount }}</span></b></h4>
-          </div>
+      <div class="col-md-12">
+        <h4 class="mt-3"><b>Total:</b> <b class="float-right"><span class="text-light-blue">{{ $invoice->currency.$info->hotel_amount }}</span></b></h4>
+      </div>
     </div>
       @endif
 
       @if($info->service_name == 'Insurance')
-      <div class="row">
+      <div class="row hide_div4">
         <div class="col-md-12 mt-4">
             <h2 class="p-3 bg-light-blue d-inline-block text-white">{{ $info->service_name }}</h2>
+          <label class="switch switch4">
+            <input type="checkbox" checked>
+            <span class="slider round"></span>
+          </label>
         </div>
       <div class="col-md-12">
         <div class="table-responsive">
@@ -309,17 +392,21 @@ Invoice
           </table>
         </div>
       </div>
-      <div class="col-md-12 text-right">
-            <h4 class="mt-3"><b>Total: <span class="text-light-blue">{{ $invoice->currency.$info->insurance_amount }}</span></b></h4>
-          </div>
+      <div class="col-md-12">
+        <h4 class="mt-3"><b>Total:</b> <b class="float-right"><span class="text-light-blue">{{ $invoice->currency.$info->insurance_amount }}</span></b></h4>
+      </div>
     </div>
       @endif
 
       @if($info->service_name == 'Local Sight Sceen')
-      <div class="row">
+      <div class="row hide_div5">
             <div class="col-md-12 mt-4">
-                    <h2 class="p-3 bg-light-blue d-inline-block text-white">{{ $info->service_name }}</h2>
-                  </div>
+              <h2 class="p-3 bg-light-blue d-inline-block text-white">{{ $info->service_name }}</h2>
+              <label class="switch switch5">
+                <input type="checkbox" checked>
+                <span class="slider round"></span>
+              </label>
+            </div>
       <div class="col-md-12">
         <div class="table-responsive">
           <table class="table table-bordered">
@@ -334,16 +421,20 @@ Invoice
           </table>
         </div>
       </div>
-      <div class="col-md-12 text-right">
-            <h4 class="mt-3"><b>Total: <span class="text-light-blue">{{ $invoice->currency.$info->local_sight_sceen_amount }}</span></b></h4>
-          </div>
+      <div class="col-md-12">
+        <h4 class="mt-3"><b>Total:</b> <b class="float-right"><span class="text-light-blue">{{ $invoice->currency.$info->local_sight_sceen_amount }}</span></b></h4>
+      </div>
     </div>
       @endif
 
       @if($info->service_name == 'Local Transport')
-      <div class="row">
+      <div class="row hide_div6">
             <div class="col-md-12 mt-4">
-                    <h2 class="p-3 bg-light-blue d-inline-block text-white">{{ $info->service_name }}</h2>
+              <h2 class="p-3 bg-light-blue d-inline-block text-white">{{ $info->service_name }}</h2>
+              <label class="switch switch6">
+                <input type="checkbox" checked>
+                <span class="slider round"></span>
+              </label>
                   </div>
       <div class="col-md-12">
         <div class="table-responsive">
@@ -359,16 +450,20 @@ Invoice
           </table>
         </div>
       </div>
-      <div class="col-md-12 text-right">
-            <h4 class="mt-3"><b>Total: <span class="text-light-blue">{{ $invoice->currency.$info->local_transport_amount }}</span></b></h4>
-          </div>
+      <div class="col-md-12">
+        <h4 class="mt-3"><b>Total:</b> <b class="float-right"><span class="text-light-blue">{{ $invoice->currency.$info->local_transport_amount }}</span></b></h4>
+      </div>
     </div>
       @endif
 
       @if($info->service_name == 'Car Rental')
-      <div class="row">
+      <div class="row hide_div7">
       <div class="col-md-12 mt-4">
             <h2 class="p-3 bg-light-blue d-inline-block text-white">{{ $info->service_name }}</h2>
+        <label class="switch switch7">
+          <input type="checkbox" checked>
+          <span class="slider round"></span>
+        </label>
           </div>
       <div class="col-md-12">
         <div class="table-responsive">
@@ -385,16 +480,20 @@ Invoice
         </div>
       </div>
 
-      <div class="col-md-12 text-right">
-            <h4 class="mt-3"><b>Total: <span class="text-light-blue">{{ $invoice->currency.$info->car_rental_amount}}</span></b></h4>
-          </div>
+      <div class="col-md-12">
+        <h4 class="mt-3"><b>Total:</b> <b class="float-right"><span class="text-light-blue">{{ $invoice->currency.$info->car_rental_amount}}</span></b></h4>
+      </div>
         </div>
       @endif
 
       @if($info->service_name == 'Other Facilities')
-      <div class="row">
+      <div class="row hide_div8">
       <div class="col-md-12 mt-4">
             <h2 class="p-3 bg-light-blue d-inline-block text-white">{{ $info->service_name }}</h2>
+        <label class="switch switch8">
+          <input type="checkbox" checked>
+          <span class="slider round"></span>
+        </label>
           </div>
       <div class="col-md-12">
         <div class="table-responsive">
@@ -410,18 +509,31 @@ Invoice
           </table>
         </div>
       </div>
-      <div class="col-md-12 text-right">
-            <h4 class="mt-3"><b>Total: <span class="text-light-blue">{{ $invoice->currency.$info->visa_amount }}</span></b></h4>
-          </div>
+      <div class="col-md-12">
+        <h4 class="mt-3"><b>Total:</b> <b class="float-right"><span class="text-light-blue">{{ $invoice->currency.$info->visa_amount }}</span></b></h4>
+      </div>
     </div>
       @endif
       @endforeach<br>
         <div class="row">
           <div class="col-md-6">
              <h4><b>Payment Information</b></h4>
-             <p class="mb-1"><b style="width:120px;display:inline-block;">DATE:</b> 25-05-2019</p>
-             <p class="mb-1"><b style="width:120px;display:inline-block;">MODE:</b> Debit Card</p>
-             <p class="mb-1"><b style="width:120px;display:inline-block;">AMOUNT:</b> $23100</p>
+              <div class="table-responsive">
+                <table class="table table-bordered">
+                  <thead>
+                  <tr>
+                    <th>Mode</th>
+                    <th>Amount</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>Debit Card</td>
+                    <td>$203458</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
           </div>
           <div class="col-md-6 text-right">
             <div class="w-100">
@@ -476,4 +588,93 @@ function print() {
   window.print();
 }
 </script>
+<script>
+      $('.switch1 input:checkbox').change(function(){
+          if($(this).is(":checked")) {
+              $('.hide_div1').removeClass("noprint");
+              $('.hide_div1').removeClass("opacity_05");
+
+          } else {
+              $('.hide_div1').addClass("noprint");
+              $('.hide_div1').addClass("opacity_05");
+          }
+      });
+
+      $('.switch2 input:checkbox').change(function(){
+          if($(this).is(":checked")) {
+              $('.hide_div2').removeClass("noprint");
+              $('.hide_div2').removeClass("opacity_05");
+
+          } else {
+              $('.hide_div2').addClass("noprint");
+              $('.hide_div2').addClass("opacity_05");
+          }
+      });
+
+      $('.switch3 input:checkbox').change(function(){
+          if($(this).is(":checked")) {
+              $('.hide_div3').removeClass("noprint");
+              $('.hide_div3').removeClass("opacity_05");
+
+          } else {
+              $('.hide_div3').addClass("noprint");
+              $('.hide_div3').addClass("opacity_05");
+          }
+      });
+
+      $('.switch4 input:checkbox').change(function(){
+          if($(this).is(":checked")) {
+              $('.hide_div4').removeClass("noprint");
+              $('.hide_div4').removeClass("opacity_05");
+
+          } else {
+              $('.hide_div4').addClass("noprint");
+              $('.hide_div4').addClass("opacity_05");
+          }
+      });
+
+      $('.switch5 input:checkbox').change(function(){
+          if($(this).is(":checked")) {
+              $('.hide_div5').removeClass("noprint");
+              $('.hide_div5').removeClass("opacity_05");
+
+          } else {
+              $('.hide_div5').addClass("noprint");
+              $('.hide_div5').addClass("opacity_05");
+          }
+      });
+
+      $('.switch6 input:checkbox').change(function(){
+          if($(this).is(":checked")) {
+              $('.hide_div6').removeClass("noprint");
+              $('.hide_div6').removeClass("opacity_05");
+
+          } else {
+              $('.hide_div6').addClass("noprint");
+              $('.hide_div6').addClass("opacity_05");
+          }
+      });
+
+      $('.switch7 input:checkbox').change(function(){
+          if($(this).is(":checked")) {
+              $('.hide_div7').removeClass("noprint");
+              $('.hide_div7').removeClass("opacity_05");
+
+          } else {
+              $('.hide_div7').addClass("noprint");
+              $('.hide_div7').addClass("opacity_05");
+          }
+      });
+
+      $('.switch8 input:checkbox').change(function(){
+          if($(this).is(":checked")) {
+              $('.hide_div8').removeClass("noprint");
+              $('.hide_div8').removeClass("opacity_05");
+
+          } else {
+              $('.hide_div8').addClass("noprint");
+              $('.hide_div8').addClass("opacity_05");
+          }
+      });
+ </script>
 @stop

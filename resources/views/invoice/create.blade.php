@@ -350,7 +350,6 @@ Create Invoice
 			</div>
 	</form>
 
-
 @stop
 @section('js')
 <script>
