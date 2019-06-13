@@ -516,7 +516,7 @@ Invoice
         </div>
       </div>
       <div class="col-md-12">
-        <h4 class="mt-3"><b>Total:</b> <b class="float-right"><span class="text-light-blue">{{ $invoice->currency.$info->visa_amount }}</span></b></h4>
+        <h4 class="mt-3"><b>Total:</b> <b class="float-right"><span class="text-light-blue">{{ $invoice->currency.$info->other_facilities_amount }}</span></b></h4>
       </div>
     </div>
       @endif
