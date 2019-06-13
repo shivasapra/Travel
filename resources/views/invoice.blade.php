@@ -139,10 +139,7 @@ Invoice
   .opacity_05{
     opacity: 0.3;
   }
-  @media print {
-    .noprint {
-      display: none;
-    }
+
 
   }
   @media only screen and (max-width:767px){
@@ -516,7 +513,7 @@ Invoice
       @endif
       @endforeach<br>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-4">
              <h4><b>Payment Information</b></h4>
               <div class="table-responsive">
                 <table class="table table-bordered">
@@ -527,15 +524,35 @@ Invoice
                   </tr>
                   </thead>
                   <tbody>
+                    @if($invoice->Debit != '0')
                   <tr>
                     <td>Debit Card</td>
-                    <td>$203458</td>
+                    <td>{{ $invoice->currency.$invoice->debit_amount }}</td>
                   </tr>
+                  @endif
+                    @if($invoice->credit != '0')
+                  <tr>
+                    <td>Credit Card</td>
+                    <td>{{ $invoice->currency.$invoice->credit_amount }}</td>
+                  </tr>
+                  @endif
+                    @if($invoice->Cash != '0')
+                  <tr>
+                    <td>Cash</td>
+                    <td>{{ $invoice->currency.$invoice->cash_amount }}</td>
+                  </tr>
+                  @endif
+                    @if($invoice->bank != '0')
+                  <tr>
+                    <td>Bank</td>
+                    <td>{{ $invoice->currency.$invoice->bank_amount }}</td>
+                  </tr>
+                  @endif
                   </tbody>
                 </table>
               </div>
           </div>
-          <div class="col-md-6 text-right">
+          <div class="col-md-8 text-right">
             <div class="w-100">
             <div class="" style="display:inline-block;margin-right:30px;">
             <p class="mb-1"><b>Total net Amount:</b></p>
@@ -574,7 +591,7 @@ Invoice
               <li>There is no liability if airline(s) above cease to trade, unless Scheduled Airline Failure Insurance (SAFI) has been paid.</li>
               <li>Passengers travelling to/ or via USA/CANADA : will require an ESTA at least 72 hours prior to travel, even for transit purposes.Children under 18 travelling to South Africa and Botswana : All minors travelling will be required to carry certified copies Birth Certificate, and in the event that only one parent is travelling, certified written consent from the other parent to allow the child to travel.</li>
             </ul>
-            <a href="#" class="btn btn-success noprint">Print Invoice</a>
+            {{-- <a href="#" class="btn btn-success noprint">Print Invoice</a> --}}
           </div>
         </div>
     </div>

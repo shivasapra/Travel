@@ -419,8 +419,8 @@
   </div>
       <!-- /.row (main row) -->
   <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    Designed and Developed by <a href="https://www.himsoftsolution.com">Him Soft Solution Chandigarh
+  <footer class="main-footer noprint">
+    Designed and Developed by <a href="https://www.himsoftsolution.com" class="noprint">Him Soft Solution Chandigarh
   </footer>
 
   <!-- Control Sidebar -->
