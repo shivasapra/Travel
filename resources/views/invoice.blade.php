@@ -124,7 +124,7 @@ Invoice
         <div class="row">
           <div class="col-md-4"><p class="m-0">Invoice No:<b> {{$invoice->invoice_no}} </b></p></div>
           <div class="col-md-4 text-center"><h1>Invoice</h1></div>
-          <div class="col-md-4 text-right"><p class="m-0">Invoice Date:<b> {{$invoice->invoice_date}} </b></p></div>
+          <div class="col-md-4 text-right"><p class="m-0">Invoice Date:<b> {{ Carbon\Carbon::parse($invoice->invoice_date)->format('d/m/Y') }}</b></p></div>
         </div>
         <div class="row mt-5">
           <div class="col-md-8">
@@ -156,7 +156,6 @@ Invoice
               <th>Pax Type</th>
               <th>First Name & Title</th>
               <th>Last Name</th>
-              <th>DOB</th>
             </tr>
           </thead>
           <tbody>
@@ -167,7 +166,6 @@ Invoice
                     <td>{{ $passenger->pax_type }}</td>
                     <td>{{ $passenger->first_name}}</td>
                     <td>{{ $passenger->last_name }}</td>
-                    <td>{{ $passenger->DOB }}</td>
             </tr>
             @endforeach
           </tbody>
@@ -192,15 +190,15 @@ Invoice
           </thead>
           <tbody>
             <tr>
-                    <td>{{ $flight->segment_one_from.', '.$flight->segment_one_departure }}</td>
-                    <td>{{ $flight->segment_one_to.', '.$flight->segment_one_arrival }}</td>
+                    <td>{{ $flight->segment_one_from.', '. Carbon\Carbon::parse($flight->segment_one_departure)->format('l\\, F jS\\, Y\\, h:i A') }}</td>
+                    <td>{{ $flight->segment_one_to.', '.  Carbon\Carbon::parse($flight->segment_one_arrival)->format('l\\, F jS\\, Y\\, h:i A') }}</td>
                     <td>{{ $flight->segment_one_flight }}</td>
                     <td>{{ $flight->segment_one_class }}</td>
                     <td>{{ $flight->segment_one_carrier }}</td>
             </tr>
             <tr>
-                    <td>{{ $flight->segment_two_from.', '.$flight->segment_two_departure }}</td>
-                    <td>{{ $flight->segment_two_to.', '.$flight->segment_two_arrival }}</td>
+                    <td>{{ $flight->segment_two_from.', '. Carbon\Carbon::parse($flight->segment_two_departure)->format('l\\, F jS\\, Y\\, h:i A') }}</td>
+                    <td>{{ $flight->segment_two_to.', '. Carbon\Carbon::parse($flight->segment_two_arrival)->format('l\\, F jS\\, Y\\, h:i A') }}</td>
                     <td>{{ $flight->segment_two_flight }}</td>
                     <td>{{ $flight->segment_two_class }}</td>
                     <td>{{ $flight->segment_two_carrier}}</td>
@@ -274,8 +272,8 @@ Invoice
               <td>{{ $info->hotel_city }}</td>
               <td>{{ $info->hotel_country }}</td>
               <td>{{ $info->hotel_name }}</td>
-              <td>{{ $info->check_in_date }}</td>
-              <td>{{ $info->check_out_date }}</td>
+              <td>{{ Carbon\Carbon::parse($info->check_in_date)->format('d/m/Y') }}</td>
+              <td>{{ Carbon\Carbon::parse($info->check_out_date)->format('d/m/Y') }}</td>
               <td>{{ $info->no_of_children }}</td>
               <td>{{ $info->no_of_rooms }}</td>
             </tr>
@@ -419,7 +417,7 @@ Invoice
         <div class="row">
           <div class="col-md-6">
              <h4><b>Payment Information</b></h4>
-             <p class="mb-1"><b style="width:120px;display:inline-block;">DATE:</b> 25-05-2019</p>
+             {{-- <p class="mb-1"><b style="width:120px;display:inline-block;">DATE:</b> 25-05-2019</p> --}}
              <p class="mb-1"><b style="width:120px;display:inline-block;">MODE:</b> Debit Card</p>
              <p class="mb-1"><b style="width:120px;display:inline-block;">AMOUNT:</b> $23100</p>
           </div>
@@ -427,13 +425,13 @@ Invoice
             <div class="w-100">
             <div class="" style="display:inline-block;margin-right:30px;">
             <p class="mb-1"><b>Total net Amount:</b></p>
-            <p class="mb-1"><b>VAT @ {{$invoice->VAT_percentage}}:</b></p>
+            @if($invoice->VAT_percentage != 0)<p class="mb-1"><b>VAT @ {{ $invoice->VAT_percentage }}:@endif</b></p>
             <p class="mb-1"><b>Invoice Total:</b></p>
             <p class="mb-1"><b>Advance:</b></p>
           </div>
           <div class="" style="display:inline-block;">
             <p class="mb-1">{{$invoice->currency}} {{$invoice->total}}</p>
-            <p class="mb-1">{{$invoice->currency}} {{$invoice->VAT_amount}}</p>
+            @if($invoice->VAT_percentage != 0)<p class="mb-1">{{$invoice->currency}} {{$invoice->VAT_amount}}@endif</p>
             <p class="mb-1">{{$invoice->currency}} {{ $invoice->total }}</p>
             <p class="mb-1">{{  $invoice->currency}} {{$invoice->advance}}</p>
           </div>
