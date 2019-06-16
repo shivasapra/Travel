@@ -778,7 +778,7 @@ Create Invoice
 				var options = "<option value=''>---SELECT---</option><option value='SELF'>SELF</option>";
 				var client_id = document.getElementById('client').value;
 				@foreach($clients as $client)
-				var fetched_client_id = {!! json_encode($client->id) !!}
+ 				var fetched_client_id = {!! json_encode($client->id) !!}
 			    	if(fetched_client_id == client_id){
 							@foreach($client->family as $family)
 							var temp = {!! json_encode($family->member_name) !!}
