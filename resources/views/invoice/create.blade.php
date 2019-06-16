@@ -662,14 +662,14 @@ Create Invoice
             '<td><input type="text" name="last_name[]" class="form-control"></td>'+
             '<td><input type="date" name="DOB[]" placeholder="dd/mm/yyyy"  class="form-control"></td>'+
             '<td>Segment-1</td>'+
-            '<td><input type="text" name="segment_one_fare_cost[]" step="0.01" placeholder="0.00" class="form-control" style="width:60px;" onKeyUp="FlightAmount()" required></td>'+
-            '<td><input type="text" name="segment_one_fare_sell[]" step="0.01" placeholder="0.00" class="form-control" style="width:60px;"onKeyUp="FlightAmount()" required></td>'+
+            '<td><input type="text" name="segment_one_fare_cost[]" step="0.01" placeholder="0.00" class="form-control" style="width:60px;"  required></td>'+
+            '<td><input type="text" name="segment_one_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare" style="width:60px;" required></td>'+
           '</tr>'+
           '<tr>'+
             '<td colspan="4">&nbsp;</td>'+
             '<td>Segment-2</td>'+
-            '<td><input type="text" name="segment_two_fare_cost[]" step="0.01" placeholder="0.00" class="form-control" style="width:60px;" onKeyUp="FlightAmount()" required></td>'+
-            '<td><input type="text" name="segment_two_fare_sell[]" step="0.01" placeholder="0.00" class="form-control" style="width:60px;" onKeyUp="FlightAmount()" required></td>'+
+            '<td><input type="text" name="segment_two_fare_cost[]" step="0.01" placeholder="0.00" class="form-control" style="width:60px;"  required></td>'+
+            '<td><input type="text" name="segment_two_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare" style="width:60px;"  required></td>'+
           '</tr>'+
           '<div ></div>'+
         '</tbody>'+
@@ -683,7 +683,7 @@ Create Invoice
         '<h3><strong>Total Amount:</strong></h3>'+
         '</div>'+
         '<div class="col-md-2">'+
-        '<br><input type="text" name="flight_amount[]" value="0" class="form-control" >'+
+        '<br><input type="text" name="flight_amount[]" value="0" onClick="FlightAmount(this);" class="form-control flight_amount" >'+
        '</div>'+
        '</div>'+
       '</div>'+
@@ -714,14 +714,14 @@ Create Invoice
             '<td><input type="text" name="last_name[]" class="form-control"></td>'+
             '<td><input type="date" name="DOB[]" placeholder="dd/mm/yyyy"  class="form-control"></td>'+
             '<td>Segment-1</td>'+
-            '<td><input type="text" name="segment_one_fare_cost[]" value="0" class="form-control" style="width:60px;" onKeyUp="FlightAmount()"></td>'+
-            '<td><input type="text" name="segment_one_fare_sell[]" value="0" class="form-control" style="width:60px;" onKeyUp="FlightAmount()"></td>'+
+            '<td><input type="text" name="segment_one_fare_cost[]" step="0.01" placeholder="0.00" class="form-control" style="width:60px;" ></td>'+
+            '<td><input type="text" name="segment_one_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare" style="width:60px;" ></td>'+
           '</tr>'+
           '<tr>'+
             '<td colspan="4">&nbsp;</td>'+
             '<td>Segment-2</td>'+
-            '<td><input type="text" name="segment_two_fare_cost[]" value="0" class="form-control" style="width:60px;" onKeyUp="FlightAmount()"></td>'+
-            '<td><input type="text" name="segment_two_fare_sell[]" value="0" class="form-control" style="width:60px;" onKeyUp="FlightAmount()"></td>'+
+            '<td><input type="text" name="segment_two_fare_cost[]" step="0.01" placeholder="0.00" class="form-control" style="width:60px;" ></td>'+
+            '<td><input type="text" name="segment_two_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare" style="width:60px;" ></td>'+
           '</tr>';
           $(test).parents('.box').find('.add_row_invoice').append(data);
         //   $(".add_row_invoice").append(data);
@@ -821,15 +821,15 @@ Create Invoice
 			}
 		}
 
-	function FlightAmount(){
-		for (var i = 0; i < document.getElementsByName("flight_amount[]").length; i++) {
-			// var adult_price = document.getElementsByName("adult_price[]")[i].value * document.getElementsByName("adult[]")[i].value;
-			// var child_price = document.getElementsByName("child_price[]")[i].value * document.getElementsByName("child[]")[i].value;
-			// var infant_price = document.getElementsByName("infant_price[]")[i].value * document.getElementsByName("infant[]")[i].value;
-			// var actual_amount = document.getElementsByName("flight_price[]")[i].value * document.getElementsByName("flight_quantity[]")[i].value;
-			document.getElementsByName("flight_amount[]")[i].value = Number(document.getElementsByName("segment_one_fare_sell[]")[i].value) + Number(document.getElementsByName("segment_two_fare_sell[]")[i].value);
+	function FlightAmount(test){
+            var amount = 0;
+            var temp = $(test).parents('.box').find('.fare');
+            for (var i = 0; i < temp.length; i++) {
+                amount = Number(amount) + Number($(temp[i]).val());
+            }
+			test.value = amount;
 
-    	}
+
 	}
 
 	function VisaAmount(){
