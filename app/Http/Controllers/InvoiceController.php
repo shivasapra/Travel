@@ -109,8 +109,8 @@ class InvoiceController extends Controller
         $invoice = new invoice;
         $client = client::find($request->receiver_name);
         $invoice->client_id = $client->id;
-        $invoice->receiver_name = $client->first_name.' '.$client->last_name;
-        $invoice->billing_address = $request->billing_address;
+        $invoice->receiver_name = strtoupper($client->first_name.' '.$client->last_name);
+        $invoice->billing_address = strtoupper($request->billing_address);
         $invoice->invoice_date = $request->invoice_date;
         $invoice->invoice_no = $request->invoice_no;
         $invoice->discount = $request->discount;
@@ -246,9 +246,9 @@ class InvoiceController extends Controller
             {
                 $passenger = new Passenger;
                 $passenger->flight_id = $flight->id;
-                $passenger->pax_type = $request->pax_type[$index];
-                $passenger->first_name = $request->first_name[$index];
-                $passenger->last_name = $request->last_name[$index];
+                $passenger->pax_type = strtoupper($request->pax_type[$index]);
+                $passenger->first_name = strtoupper($request->first_name[$index]);
+                $passenger->last_name = strtoupper($request->last_name[$index]);
                 $passenger->DOB = $request->DOB[$index];
                 $passenger->segment_one_fare_cost = $request->segment_one_fare_cost[$index];
                 $passenger->segment_two_fare_cost = $request->segment_two_fare_cost[$index];
@@ -267,12 +267,12 @@ class InvoiceController extends Controller
                         $invoice_info->service_name = 'Visa Services';
 
 
-                            $invoice_info->name_of_visa_applicant = $request->name_of_visa_applicant[$visa_counter];
-                            $invoice_info->passport_origin = $request->passport_origin[$visa_counter];
+                            $invoice_info->name_of_visa_applicant = strtoupper($request->name_of_visa_applicant[$visa_counter]);
+                            $invoice_info->passport_origin = strtoupper($request->passport_origin[$visa_counter]);
                             $invoice_info->passport_member_dob = $request->passport_member_dob[$visa_counter];
                             $invoice_info->passport_no = $request->passport_no[$visa_counter];
-                            $invoice_info->visa_country = $request->visa_country[$visa_counter];
-                            $invoice_info->visa_type = $request->visa_type[$visa_counter];
+                            $invoice_info->visa_country = strtoupper($request->visa_country[$visa_counter]);
+                            $invoice_info->visa_type = strtoupper($request->visa_type[$visa_counter]);
                             $invoice_info->visa_charges = $request->visa_charges[$visa_counter];
                             $invoice_info->service_charge = $request->service_charge[$visa_counter];
                             $invoice_info->visa_amount = $request->visa_amount[$visa_counter];
@@ -288,8 +288,8 @@ class InvoiceController extends Controller
                         $invoice_info->service_name = 'Insurance';
 
 
-                            $invoice_info->name_of_insurance_applicant = $request->name_of_insurance_applicant[$insurance_counter];
-                            $invoice_info->name_of_insurance_company = $request->name_of_insurance_company[$insurance_counter];
+                            $invoice_info->name_of_insurance_applicant = strtoupper($request->name_of_insurance_applicant[$insurance_counter]);
+                            $invoice_info->name_of_insurance_company = strtoupper($request->name_of_insurance_company[$insurance_counter]);
                             $invoice_info->insurance_amount = $request->insurance_amount[$insurance_counter];
                             $invoice_info->insurance_remarks = $request->insurance_remarks[$insurance_counter];
 
@@ -304,9 +304,9 @@ class InvoiceController extends Controller
                         $invoice_info->service_name = 'Hotel';
 
 
-                            $invoice_info->hotel_city = $request->hotel_city[$hotel_counter];
-                            $invoice_info->hotel_country = $request->hotel_country[$hotel_counter];
-                            $invoice_info->hotel_name = $request->hotel_name[$hotel_counter];
+                            $invoice_info->hotel_city = strtoupper($request->hotel_city[$hotel_counter]);
+                            $invoice_info->hotel_country = strtoupper($request->hotel_country[$hotel_counter]);
+                            $invoice_info->hotel_name = strtoupper($request->hotel_name[$hotel_counter]);
                             $invoice_info->check_in_date = $request->check_in_date[$hotel_counter];
                             $invoice_info->check_out_date = $request->check_out_date[$hotel_counter];
                             $invoice_info->no_of_children = $request->no_of_children[$hotel_counter];
@@ -320,7 +320,7 @@ class InvoiceController extends Controller
             if ($request->service_name[$k]=='Local Sight Sceen') {
                 $invoice_info = new invoiceInfo;
                         $invoice_info->invoice_id = $invoice->id;
-                        $invoice_info->receiver_name = $invoice->receiver_name;
+                        $invoice_info->receiver_name = strtoupper($invoice->receiver_name);
                         $invoice_info->service_name = 'Local Sight Sceen';
 
 
