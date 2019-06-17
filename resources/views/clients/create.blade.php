@@ -61,9 +61,9 @@ Client Registration
 						<input id="city" type="text" name='city' value="{{old('city')}}" required class="form-control">
 					</div>
 					</div>
-					
-					
-					
+
+
+
 				</div>
 				<div class="row">
 					<div class="col-md-4">
@@ -100,12 +100,22 @@ Client Registration
 						<input type="email" name='email' value="{{old('email')}}" required class="form-control">
 					</div>
 					</div>
-					<div class="col-md-6">
+					<div class="col-md-3">
 					<div class="form-group">
 						<label for="DOB">DOB</label>
 						<input type="date" name='DOB' value="{{old('DOB')}}" value="{{$date}}" required class="form-control">
 					</div>
-					</div>
+                    </div>
+                    <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="client_type">Client Type:</label>
+                        <select name="client_type" class="form-control">
+                            <option value="">--Select--</option>
+                            <option value="Corporate">Corporate</option>
+                            <option value="Individual">Individual</option>
+                        </select>
+                    </div>
+                    </div>
 				</div>
 				<div id="family-member"></div>
 					<div class="text-center" style="margin-top: 5px">
@@ -133,9 +143,9 @@ Client Registration
 						<div id="permanent"></div>
 					</div>
 				</div>
-				
-				
-				
+
+
+
 		</div>
 		</div>
 				<div class="form-group">
@@ -167,26 +177,26 @@ Client Registration
 		$(document).ready(function(){
 	    $("#yespassport").click(function(){
 	    	var data = '<hr><div class="text-center"><h3>Passport Details</h3></div><hr><div class="row"><div class="col-md-6"><div class="form-group"><label for="passport_no">Passport Number</label><input type="text" name="passport_no" required class="form-control"></div></div><div class="col-md-6"><div class="form-group"><label for="passport_expiry_date">Passport Expire date</label><input type="date" name="passport_expiry_date" required class="form-control"></div></div></div><div class="row"><div class="col-md-6"><div class="form-group"><label for="passport_place">Place of Issue</label><input type="text" name="passport_place" required class="form-control"></div></div><div class="col-md-6"><div class="form-group"><label for="passport_issue_date">Date Of Issue</label><input type="date" name="passport_issue_date" required class="form-control"></div></div></div><div class="row"><div class="col-md-4"><div class="form-group"><label for="passport_front">Passport Front:</label><input type="file" name="passport_front" class="form-control"></div></div><div class="col-md-4"><div class="form-group"><label for="passport_back">Passport Back:</label><input type="file" name="passport_back" class="form-control"></div></div><div class="col-md-4"><div class="form-group"><label for="passport_front">Letter:</label><input type="file" name="letter" class="form-control"></div></div></div><hr>';
-	        $("#passport").html(data);   
+	        $("#passport").html(data);
 	        });
 	    });
 	    $(document).ready(function(){
 	    $("#nopassport").click(function(){
 	    	var data = '';
-	        $("#passport").html(data);   
+	        $("#passport").html(data);
 	        });
 	    });
 
 	    $(document).ready(function(){
 	    $("#yespermanent").click(function(){
 	    	var data = '<div class="row"><div class="col-md-6"><div class="form-group"><label for="currency">Currency</label><select name="currency" class="form-control" id="currency"><option value="$">$</option><option value="&#163;" selected>&#163;</option></select></div></div><div class="col-md-6"><div class="form-group"><label for="credit_limit">Credit Limit</label><input type="text" name="credit_limit" required class="form-control"></div></div></div>';
-	        $("#permanent").html(data);   
+	        $("#permanent").html(data);
 	        });
 	    });
 	    $(document).ready(function(){
 	    $("#nopermanent").click(function(){
 	    	var data = '';
-	        $("#permanent").html(data);   
+	        $("#permanent").html(data);
 	        });
 	    });
 	    function fun() {
@@ -202,7 +212,7 @@ Client Registration
 			 // alert(xhr.responseText);
 			 var response1 = JSON.parse(xhr.responseText);
 			 console.log(response1);
-			 
+
 			 document.getElementById("city").value = response1.result[0].admin_ward;
 			 document.getElementById("country").value = response1.result[0].country;
 			 document.getElementById("county").value = response1.result[0].admin_county;
@@ -216,9 +226,9 @@ Client Registration
     	 var postal_code = document.getElementById('postal_code').value;
 
     	document.getElementById('country').value = '{{json_decode(file_get_contents('https://api.postcodes.io/postcodes?q='.postal_code), true)['result'][0]['admin_ward']}}';
-    	 
+
     	});
 	});
 	</script> --}}
-	
+
 @stop

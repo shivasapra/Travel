@@ -86,12 +86,21 @@ Edit Client
 						<input type="text" name='country' required class="form-control" value="{{$client->country}}">
 					</div>
 					</div>
-					<div class="col-md-6">
+					<div class="col-md-3">
 					<div class="form-group">
 						<label for="phone">Phone</label>
 						<input type="text" name='phone' required class="form-control" value="{{$client->phone}}">
 					</div>
-					</div>
+                    </div>
+                    <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="client_type">Client Type:</label>
+                        <select name="client_type" class="form-control">
+                            <option value="Corporate" {{($client->client_type == 'Corporate')?"selected":" "}}>Corporate</option>
+                            <option value="Individual" {{($client->client_type == 'Individual')?"selected":" "}}>Individual</option>
+                        </select>
+                    </div>
+                    </div>
 				</div>
 				<div class="row">
 					<div class="col-md-4">

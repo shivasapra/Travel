@@ -38,7 +38,13 @@ client
 							<td><strong>last Name:</strong></td>
 							<td>{{$client->last_name}}</td>
 						</tr>
-					</div>
+                    </div>
+                    <div class="row">
+                        <tr>
+                            <td><strong>Client Type:</strong></td>
+                            <td>{{$client->client_type}}</td>
+                        </tr>
+                    </div>
 					<div class="row">
 						<tr>
 							<td><strong>Street:</strong></td>

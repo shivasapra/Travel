@@ -89,6 +89,7 @@ class clientController extends Controller
         $client->email = $request->email;
         $client->phone = $request->phone;
         $client->permanent = $request->permanent;
+        $client->client_type = $request->client_type;
         if ($request->permanent == 1 ){
             $client->currency = $request->currency;
             $client->credit_limit = $request->credit_limit;
@@ -255,6 +256,7 @@ class clientController extends Controller
         $client->email = $request->email;
         $client->phone = $request->phone;
         $client->credit_limit = $request->credit_limit;
+        $client->client_type = $request->client_type;
         if ($request->passport_no != null ) {
             $client->passport_no = $request->passport_no;
             $client->passport_expiry_date = $request->passport_expiry_date;
