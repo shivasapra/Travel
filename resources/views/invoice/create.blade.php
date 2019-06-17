@@ -662,13 +662,13 @@ Create Invoice
             '<td><input type="text" name="last_name[]" class="form-control"></td>'+
             '<td><input type="date" name="DOB[]" placeholder="dd/mm/yyyy"  class="form-control"></td>'+
             '<td>Segment-1</td>'+
-            '<td><input type="text" name="segment_one_fare_cost[]" step="0.01" placeholder="0.00" class="form-control" style="width:60px;"  required></td>'+
+            '<td><input type="text" name="segment_one_fare_cost[]" step="0.01" placeholder="0.00" class="form-control" style="width:60px;"  required onKeyUp="fareSell(this);"></td>'+
             '<td><input type="text" name="segment_one_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare" style="width:60px;" required></td>'+
           '</tr>'+
           '<tr>'+
             '<td colspan="4">&nbsp;</td>'+
             '<td>Segment-2</td>'+
-            '<td><input type="text" name="segment_two_fare_cost[]" step="0.01" placeholder="0.00" class="form-control" style="width:60px;"  required></td>'+
+            '<td><input type="text" name="segment_two_fare_cost[]" step="0.01" placeholder="0.00" class="form-control" style="width:60px;"  required onKeyUp="fareSell(this);"></td>'+
             '<td><input type="text" name="segment_two_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare" style="width:60px;"  required></td>'+
           '</tr>'+
           '<div ></div>'+
@@ -714,18 +714,39 @@ Create Invoice
             '<td><input type="text" name="last_name[]" class="form-control"></td>'+
             '<td><input type="date" name="DOB[]" placeholder="dd/mm/yyyy"  class="form-control"></td>'+
             '<td>Segment-1</td>'+
-            '<td><input type="text" name="segment_one_fare_cost[]" step="0.01" placeholder="0.00" class="form-control" style="width:60px;" ></td>'+
+            '<td><input type="text" name="segment_one_fare_cost[]" step="0.01" placeholder="0.00" class="form-control" style="width:60px;" onKeyUp="fareSell(this);"></td>'+
             '<td><input type="text" name="segment_one_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare" style="width:60px;" ></td>'+
           '</tr>'+
           '<tr>'+
             '<td colspan="4">&nbsp;</td>'+
             '<td>Segment-2</td>'+
-            '<td><input type="text" name="segment_two_fare_cost[]" step="0.01" placeholder="0.00" class="form-control" style="width:60px;" ></td>'+
+            '<td><input type="text" name="segment_two_fare_cost[]" step="0.01" placeholder="0.00" class="form-control" style="width:60px;" onKeyUp="fareSell(this);"></td>'+
             '<td><input type="text" name="segment_two_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare" style="width:60px;" ></td>'+
           '</tr>';
           $(test).parents('.box').find('.add_row_invoice').append(data);
         //   $(".add_row_invoice").append(data);
     }
+    function fareSell(temp){
+        var client_id = document.getElementById('client').value;
+console.log(client_id);
+
+
+        @foreach($clients as $client)
+    		var test = {{ $client->id }};
+	    	if (client_id == test) {
+	    		@if($client->client_type == 'Corporate')
+                    var percentage = {{ $settings->corporate_percentage }};
+                @else
+                    var percentage = {{ $settings->individual_percentage }};
+                @endif
+	    	}
+        @endforeach
+        var fare_cost = temp.value;
+        var fare_sell = Number(fare_cost) + Number((percentage / 100) * fare_cost );
+        console.log(fare_sell);
+        $(temp).next('.fare').value = 35;
+    }
+
     function SelectService(test){
 			var value = test.value;
 			if (value == 'Flight') {

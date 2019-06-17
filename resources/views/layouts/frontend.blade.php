@@ -275,6 +275,9 @@
               @can('Client Documents Movement')
                 <li><a href="{{route('clientDocIndex')}}"><i class="fa fa-circle-o"></i>Client Documents Movement</a></li>
               @endcan
+              @can('View Clients')
+                <li><a href="{{route('client.settings')}}"><i class="fa fa-circle-o"></i>Client Settings</a></li>
+              @endcan
             </ul>
           </li>
         @endif

@@ -17,6 +17,7 @@ use App\settings;
 use Carbon\Carbon;
 use PDF;
 use Mail;
+use App\ClientSettings;
 class InvoiceController extends Controller
 {
     /**
@@ -90,7 +91,8 @@ class InvoiceController extends Controller
                                     ->with('invoice_no',$invoice_no)
                                     ->with('clients',client::all())
                                     ->with('json',$json)
-                                    ->with('date',$date);
+                                    ->with('date',$date)
+                                    ->with('settings',ClientSettings::first());
     }
 
     /**
