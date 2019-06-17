@@ -189,8 +189,7 @@ class clientController extends Controller
         $data = array('token'=>$token,'name'=>$client->first_name.' '.$client->last_name);
         Mail::send('emails.inviteClient', $data, function($message) use ($contactEmail)
         {
-            
-            $message->to($contactEmail);
+            $message->to($contactEmail)->subject('Activate Your Account!!');
         });
         Session::flash('success','Client Created Successfully');
         return redirect()->route('clients');

@@ -2,4 +2,4 @@
 
 <p>To activate your account click below.</p>
 
-<a href="{{ route('accept', $token) }}">Click here</a> to activate!
+<a href="{{ route('acceptClient', $token) }}">Click here</a> to activate!

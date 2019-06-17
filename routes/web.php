@@ -119,6 +119,7 @@ Route::get('kill/invoice/{id}',['uses'=>'InvoiceController@kill','as'=>'invoice.
 Route::get('pay/invoice/{id}',['uses'=>'InvoiceController@pay','as'=>'invoice.pay'])->middleware('permission:Pay Invoice');
 Route::post('payy/invoice/{id}',['uses'=>'InvoiceController@payy','as'=>'invoice.payy'])->middleware('permission:Pay Invoice');
 Route::get('accept/{token}', 'InviteController@accept')->name('accept');
+Route::get('accept/Client/{token}', 'InviteController@acceptClient')->name('acceptClient');
 Route::get('confirm/{token}', 'InviteController@confirm')->name('confirm');
 Route::get('deleteClientPassportData/{token}', 'InviteController@deleteClientPassportData')->name('deleteClientPassportData');
 
