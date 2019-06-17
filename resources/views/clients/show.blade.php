@@ -18,7 +18,7 @@ client
 
 	<div class="box box-info">
 		<div class="box-body">
-			
+
 			<table class="table table-hover mb-0">
 				<tbody>
 					<div class="row">
@@ -45,14 +45,14 @@ client
 							<td>{{$client->address}}</td>
 						</tr>
 					</div>
-					
+
 					<div class="row">
 						<tr>
 							<td><strong>City:</strong></td>
 							<td>{{$client->city}}</td>
 						</tr>
 					</div>
-					
+
 					<div class="row">
 						<tr>
 							<td><strong>County:</strong></td>
@@ -229,7 +229,16 @@ client
 				</tbody>
 			</table>
 			@endif
-		</div>
-	</div>
+        </div>
+    </div>
+        <div class="text-center">
+            @if($client->user_id == null)
+                <a href="{{route('resend.client.account.confirmation',['id'=>$client->id])}}" class="btn btn-info btn-xs">Resend Account Confirmation</a>
+            @endif
+            @if($client->token != null)
+                <a href="{{route('resend.client.passport.confirmation',['id'=>$client->id])}}" class="btn btn-info btn-xs">Resend Passport Confirmation</a>
+            @endif
+        </div>
+
 
 @endsection

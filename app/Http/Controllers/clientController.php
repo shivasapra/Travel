@@ -396,4 +396,53 @@ class clientController extends Controller
         }
         return view('clientDoc.index')->with('invoices',$invoices)->with('docs',$docs)->with('clients',$clients);
     }
+
+    public function resendAccountConfirmation($id){
+        $client = client::find($id);
+        $old_invite = Invite::where('email',$client->email)->first();
+        // dd($old_invite);
+        $old_invite->delete();
+        do {
+            //generate a random string using Laravel's str_random helper
+            $token = str_random();
+        } //check if the token already exists and if it does, try again
+        while (Invite::where('token', $token)->first());
+
+        //create a new invite record
+        $invite = new Invite;
+        $invite->email = $client->email;
+        $invite->token = $token;
+        $invite->save();
+
+        // send the email
+        $contactEmail = $client->email;
+        $data = array('token'=>$token,'name'=>$client->first_name.' '.$client->last_name);
+        Mail::send('emails.inviteClient', $data, function($message) use ($contactEmail)
+        {
+            $message->to($contactEmail)->subject('Activate Your Account!!');
+        });
+        Session::flash('success','Confirmation Resent!!');
+        return redirect()->back();
+    }
+
+    public function resendPassportConfirmation($id){
+        $client = client::find($id);
+        do {
+            //generate a random string using Laravel's str_random helper
+            $token = str_random();
+        } //check if the token already exists and if it does, try again
+        while (client::where('token', $token)->first());
+        $client->token = $token;
+        $client->save();
+        // send the email
+        $contactEmail = $client->email;
+        $data = array('token'=>$token);
+        Mail::send('emails.clientConfirmation', $data, function($message) use ($contactEmail)
+        {
+            $message->to($contactEmail)->subject( 'Permission For Keeping Your Details' );
+        });
+
+        Session::flash('success','Confirmation Resent!!');
+        return redirect()->back();
+    }
 }

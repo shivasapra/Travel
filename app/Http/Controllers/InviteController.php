@@ -73,6 +73,7 @@ class InviteController extends Controller
         }
 
         $client->confirmation = 1;
+        $client->token =  null;
         $client->save();
 
         // here you would probably log the user in and show them the dashboard, but we'll just prove it worked
@@ -96,6 +97,7 @@ class InviteController extends Controller
         $client->passport_front = null;
         $client->passport_back = null;
         $client->letter = null;
+        $client->token = null;
         $client->save();
 
         // here you would probably log the user in and show them the dashboard, but we'll just prove it worked

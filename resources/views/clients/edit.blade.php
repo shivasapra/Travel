@@ -15,7 +15,7 @@ Edit Client
     </section>
 @stop
 @section('content')
-	
+
 	@if(count($errors)>0)
 		<ul class="list-group">
 			@foreach($errors->all() as $error)
@@ -28,7 +28,7 @@ Edit Client
 
 
 
-	
+
 			<form action="{{route('update.client',['id'=>$client->id])}}" enctype="multipart/form-data" method="post">
 				@csrf
 		<div class="box box-success">
@@ -60,8 +60,8 @@ Edit Client
 						<input type="text" name='city' required class="form-control" value="{{$client->city}}">
 					</div>
 					</div>
-					
-					
+
+
 				</div>
 				<div class="row">
 					<div class="col-md-6">
@@ -76,10 +76,10 @@ Edit Client
 						<input type="text" name='postal_code' required class="form-control" value="{{$client->postal_code}}">
 					</div>
 					</div>
-					
+
 				</div>
 				<div class="row">
-					
+
 					<div class="col-md-6">
 					<div class="form-group">
 						<label for="country">Country</label>
@@ -171,24 +171,24 @@ Edit Client
 				{{-- <div class="text-center"><h3>Family Members</h3></div><hr>
 				@foreach($client->family as $fam)
 				<div class="hatao">
-					<div class="row">	
-						<div class="col-md-3">		
-							<div class="form-group">			
-								<label for="member_name[]"><strong>{{$i++}}</strong>. Member Name</label>			
-								<input type="text" name="member_name[]" value="{{$fam->member_name}}" required class="form-control">		
-							</div>	
-						</div>	
-						<div class="col-md-3">		
-							<div class="form-group">			
-								<label for="member_DOB[]">Member DOB</label>			
-								<input type="date" name="member_DOB[]" value="{{$fam->member_DOB}}" required class="form-control">		
-							</div>	
-						</div>	
-						<div class="col-md-3">		
-							<div class="form-group">			
-								<label for="member_passport_no[]">Member Passport NO.</label>			
-								<input type="text" name="member_passport_no[]" value="{{$fam->member_passport_no}}" required class="form-control">		
-							</div>	
+					<div class="row">
+						<div class="col-md-3">
+							<div class="form-group">
+								<label for="member_name[]"><strong>{{$i++}}</strong>. Member Name</label>
+								<input type="text" name="member_name[]" value="{{$fam->member_name}}" required class="form-control">
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="form-group">
+								<label for="member_DOB[]">Member DOB</label>
+								<input type="date" name="member_DOB[]" value="{{$fam->member_DOB}}" required class="form-control">
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="form-group">
+								<label for="member_passport_no[]">Member Passport NO.</label>
+								<input type="text" name="member_passport_no[]" value="{{$fam->member_passport_no}}" required class="form-control">
+							</div>
 						</div>
 						<div class="col-md-3">
 								<div class="form-group">
@@ -217,7 +217,7 @@ Edit Client
 							</div>
 						</div>
 					</div>
-					<div align="right">						
+					<div align="right">
 						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">	<br><br>
 					</div>
 				</div>
@@ -235,7 +235,7 @@ Edit Client
 					</div>
 				</div>
 			</form>
-	
+
 
 
 @stop

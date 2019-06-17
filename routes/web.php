@@ -423,7 +423,15 @@ Route::get('/client/family/edit/{id}',[
 Route::get('/client/view/{id}',[
 		'uses' => 'clientController@show',
 		'as' => 'view.client'
-	])->middleware('permission:View Clients');
+    ])->middleware('permission:View Clients');
+Route::get('/resend/client/account/confirmation/{id}',[
+    'uses' => 'clientController@resendAccountConfirmation',
+    'as' => 'resend.client.account.confirmation'
+])->middleware('permission:View Clients');
+Route::get('/resend/client/passport/confirmation/{id}',[
+    'uses' => 'clientController@resendPassportConfirmation',
+    'as' => 'resend.client.passport.confirmation'
+])->middleware('permission:View Clients');
 // Route::get('/client/delete/{id}',[
 // 		'uses' => 'clientController@destroy',
 // 		'as' => 'delete.client'
