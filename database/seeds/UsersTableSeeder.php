@@ -29,5 +29,10 @@ class UsersTableSeeder extends Seeder
             'tax' => 0,
             'enable' => 'yes',
         ]);
+
+        $settings = App\ClientSettings::create([
+            'corporate_percentage' => 0,
+            'individual_percentage' => 0,
+        ]);
     }
 }

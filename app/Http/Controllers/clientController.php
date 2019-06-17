@@ -13,6 +13,7 @@ use App\ClientFamily;
 use App\invoiceInfo;
 use App\ClientDoc;
 use App\Invite;
+use App\ClientSettings;
 class clientController extends Controller
 {
     public function __construct()
@@ -445,6 +446,17 @@ class clientController extends Controller
         });
 
         Session::flash('success','Confirmation Resent!!');
+        return redirect()->back();
+    }
+
+    public function clientSettings(){
+        return view('clients.settings')->with('settings',ClientSettings::first());
+    }
+    public function clientSettingsUpdate(Request $request){
+        $settings = ClientSettings::first();
+        $settings->corporate_percentage = $request->corporate_percentage;
+        $settings->individual_percentage = $request->individual_percentage;
+        $settings->save();
         return redirect()->back();
     }
 }

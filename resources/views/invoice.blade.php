@@ -523,15 +523,15 @@ Invoice
       @endforeach<br>
         <div class="row">
           <div class="col-md-4">
-             <h4><b>Payment Information</b></h4>
+             {{-- <h4><b>Payment Information</b></h4> --}}
               <div class="table-responsive">
                 <table class="table">
-                  <thead>
+                  {{-- <thead>
                   <tr>
                     <th>Mode</th>
                     <th>Amount</th>
                   </tr>
-                  </thead>
+                  </thead> --}}
                   <tbody>
                     @if($invoice->Debit != '0')
                   <tr>
