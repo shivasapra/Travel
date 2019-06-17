@@ -186,9 +186,10 @@ class clientController extends Controller
 
         // send the email
         $contactEmail = $client->email;
-        $data = array('token'=>$token);
+        $data = array('token'=>$token,'name'=>$client->first_name.' '.$client->last_name);
         Mail::send('emails.inviteClient', $data, function($message) use ($contactEmail)
         {
+            
             $message->to($contactEmail);
         });
         Session::flash('success','Client Created Successfully');
