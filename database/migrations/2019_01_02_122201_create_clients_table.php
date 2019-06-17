@@ -17,7 +17,8 @@ class CreateClientsTable extends Migration
             $table->increments('id');
             $table->string('unique_id');
             $table->string('status')->nullable();
-            $table->integer('user_id');
+            $table->integer('user_id')->nullable();
+            $table->integer('creator_id')->nullable();
             $table->boolean('permanent')->default(0);
             $table->boolean('reminder')->default(1);
             $table->string('credit_limit')->nullable();

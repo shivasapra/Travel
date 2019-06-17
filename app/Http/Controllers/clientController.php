@@ -12,8 +12,9 @@ use Auth;
 use App\ClientFamily;
 use App\invoiceInfo;
 use App\ClientDoc;
+use App\Invite;
 class clientController extends Controller
-{   
+{
     public function __construct()
     {
         $this->middleware('auth');
@@ -24,12 +25,12 @@ class clientController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
+    {
         if (Auth::user()->admin) {
             $clients = client::all();
         }
         else{
-            $clients = client::where('user_id',Auth::user()->id)->get();
+            $clients = client::where('creator_id',Auth::user()->id)->get();
         }
         return view('clients.index')->with('clients',$clients);
     }
@@ -40,7 +41,7 @@ class clientController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {   
+    {
         $dt = Carbon::now();
         $dt->timezone('Asia/Kolkata');
         $date_today = $dt->timezone('Europe/London');
@@ -55,7 +56,7 @@ class clientController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
+    {
         Validator::make($request->all(), [
             'first_name' => 'required',
             'last_name' => 'required',
@@ -68,15 +69,15 @@ class clientController extends Controller
             'email' => 'unique:users',
             'phone' => 'required',
             ])->validate();
-        
+
 
         $client = new client;
         $unique_id = 'CLDC'. mt_rand(100000, 999999);
         while (client::where('unique_id',$unique_id)->get()->count()>0) {
-           $unique_id = 'CLDC'. mt_rand(100000, 999999); 
+           $unique_id = 'CLDC'. mt_rand(100000, 999999);
         }
         $client->unique_id = $unique_id;
-        $client->user_id = Auth::user()->id;
+        $client->creator_id = Auth::user()->id;
         $client->first_name = $request->first_name;
         $client->last_name = $request->last_name;
         $client->address = $request->address;
@@ -166,11 +167,30 @@ class clientController extends Controller
                 $contactEmail = $client->email;
                 $data = array('token'=>$token);
                 Mail::send('emails.clientConfirmation', $data, function($message) use ($contactEmail)
-                { 
+                {
                     $message->to($contactEmail)->subject( 'Permission For Keeping Your Details' );
                 });
         }
-        
+
+        do {
+            //generate a random string using Laravel's str_random helper
+            $token = str_random();
+        } //check if the token already exists and if it does, try again
+        while (Invite::where('token', $token)->first());
+
+        //create a new invite record
+        $invite = new Invite;
+        $invite->email = $client->email;
+        $invite->token = $token;
+        $invite->save();
+
+        // send the email
+        $contactEmail = $client->email;
+        $data = array('token'=>$token);
+        Mail::send('emails.inviteClient', $data, function($message) use ($contactEmail)
+        {
+            $message->to($contactEmail);
+        });
         Session::flash('success','Client Created Successfully');
         return redirect()->route('clients');
     }
@@ -345,7 +365,7 @@ class clientController extends Controller
             $contactEmail = $client[0]->email;
             $data = array('status'=>$request->status);
             Mail::send('emails.status', $data, function($message) use ($contactEmail)
-            {  
+            {
                 $message->to($contactEmail);
             });
         Session::flash('success','Status Sent');
