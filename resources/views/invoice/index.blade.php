@@ -14,11 +14,11 @@ Invoices
     </section>
 @stop
 @section('content')
-	
+
 		<div class="box box-info">
 			<div class="box-body">
-				
-			
+
+
 			<table id="myTable" class="table table-striped">
                     <thead id="ignorePDF">
                       <tr>
@@ -34,7 +34,7 @@ Invoices
                     	</thead>
                     <tbody>
                     	@if($invoices->count()>0)
-                    	
+
 	                    	@foreach($invoices as $invoice)
 	                    	<tr>
 	                    		<td>{{$invoice->invoice_no}}</td>
@@ -50,8 +50,8 @@ Invoices
 	                    		{{-- <td><button class="btn btn-xs btn-success" id="pdf">PDF</button></td> --}}
 	                    		<td>
 														<a href="{{route('invoice.view',['id'=>$invoice->id])}}" class="btn btn-info btn-xs"><span class="fa fa-eye"></span></a>
+                                                        <a href="{{route('invoice.edit',['id'=>$invoice->id])}}" class="btn btn-info btn-xs"><span class="fa fa-edit"></span></a>
 														@if($invoice->status == 0)
-	                    			<a href="{{route('invoice.edit',['id'=>$invoice->id])}}" class="btn btn-info btn-xs"><span class="fa fa-edit"></span></a>
 														<a href="{{route('invoice.delete',['id'=>$invoice->id])}}" class="btn btn-danger btn-xs">Cancel</a>
 														<a href="{{route('invoice.pay',['id'=>$invoice->id])}}" class="btn btn-primary btn-xs">Pay</a>
 														<a href="{{route('invoice.reminder',['id'=>$invoice->id])}}" class="btn btn-warning btn-xs">Send Reminder</a>
@@ -62,7 +62,7 @@ Invoices
                     	@endif
                     </tbody>
             </table>
-        
+
 		</div>
 		</div>
 		<div class="text-center">
