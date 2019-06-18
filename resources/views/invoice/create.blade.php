@@ -715,14 +715,14 @@ Create Invoice
             '<td><input type="text" name="last_name[]" class="form-control"></td>'+
             '<td><input type="date" name="DOB[]" placeholder="dd/mm/yyyy"  class="form-control"></td>'+
             '<td>Segment-1</td>'+
-            '<td><input type="text" name="segment_one_fare_cost[]" step="0.01" placeholder="0.00" class="form-control mask-money" style="width:60px;" onKeyUp="fareSell(this);"></td>'+
-            '<td><input type="text" name="segment_one_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare mask-money" style="width:60px;" ></td>'+
+            '<td><input type="text" name="segment_one_fare_cost[]" step="0.01" placeholder="0.00" class="form-control mask-money"  onKeyUp="fareSell(this);"></td>'+
+            '<td><input type="text" name="segment_one_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare mask-money"  ></td>'+
         '</tr>'+
           '<tr class="fare-parent">'+
             '<td colspan="4">&nbsp;</td>'+
             '<td>Segment-2</td>'+
-            '<td><input type="text" name="segment_two_fare_cost[]" step="0.01" placeholder="0.00" class="form-control mask-money" style="width:60px;" onKeyUp="fareSell(this);"></td>'+
-            '<td><input type="text" name="segment_two_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare mask-money" style="width:60px;" ></td>'+
+            '<td><input type="text" name="segment_two_fare_cost[]" step="0.01" placeholder="0.00" class="form-control mask-money"  onKeyUp="fareSell(this);"></td>'+
+            '<td><input type="text" name="segment_two_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare mask-money"  ></td>'+
           '</tr>';
           $(test).parents('.box').find('.add_row_invoice').append(data);
         //   $(".add_row_invoice").append(data);
@@ -744,6 +744,7 @@ Create Invoice
 	    	}
         @endforeach
         var fare_cost = temp.value;
+        fare_cost = fare_cost.replace(/\,/g,'');
         var fare_sell = Number(fare_cost) + Number((percentage / 100) * fare_cost );
         $(temp).parents('.fare-parent').find('.fare').val(fare_sell);
     }

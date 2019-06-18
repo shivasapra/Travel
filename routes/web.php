@@ -156,6 +156,10 @@ Route::post('/requests/status/save/{id}',[
 	'uses'=> 'ClientController@requestStatusSave',
 	'as'=>'request.status.save'
 ]);
+Route::get('/aslam', function () {
+    event(new App\Events\NewClientRequest('shiva','Hotel'));
+    return "Event has been sent!";
+});
 // Route::group(['middleware' => ['authorize', 'auth']], function () {
 //     Route::get('/', [
 //         'name' => 'home',
