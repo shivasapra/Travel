@@ -14,6 +14,8 @@ use App\invoiceInfo;
 use App\ClientDoc;
 use App\Invite;
 use App\ClientSettings;
+use App\ClientRequests;
+use App\products;
 class clientController extends Controller
 {
     public function __construct()
@@ -457,6 +459,21 @@ class clientController extends Controller
         $settings->corporate_percentage = $request->corporate_percentage;
         $settings->individual_percentage = $request->individual_percentage;
         $settings->save();
+        return redirect()->back();
+    }
+
+    public function requests(){
+        $requests = Auth::user()->client->requests;
+        return view('clients.requests')->with('requests',$requests)->with('products',products::all());
+    }
+
+    public function requestsGenerate(Request $request){
+        $client_request = new ClientRequests;
+        $client_request->description = $request->description;
+        $client_request->client_id = Auth::user()->client->id;
+        $client_request->request_type = $request->request_type;
+        $client_request->save();
+        Session::flash('success','Request Generated!!');
         return redirect()->back();
     }
 }

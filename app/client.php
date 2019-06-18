@@ -26,4 +26,9 @@ class client extends Model
     {
         return $this->hasMany('App\ClientDoc');
     }
+
+    public function requests()
+    {
+        return $this->hasMany('App\ClientRequests');
+    }
 }

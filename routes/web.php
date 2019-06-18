@@ -144,7 +144,14 @@ Route::post('/emergency/message',[
 	'uses' => 'ClientDocController@emergency',
 	'as' => 'emergency'
 ])->middleware('permission:Client Documents Movement');
-
+Route::get('/requests',[
+	'uses'=> 'ClientController@requests',
+	'as'=>'requests'
+]);
+Route::post('/requests/generate',[
+	'uses'=> 'ClientController@requestsGenerate',
+	'as'=>'requests.generate'
+]);
 // Route::group(['middleware' => ['authorize', 'auth']], function () {
 //     Route::get('/', [
 //         'name' => 'home',
