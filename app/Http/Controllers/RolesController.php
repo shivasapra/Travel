@@ -66,7 +66,7 @@ class RolesController extends Controller
                                 ->with('roles',Role::all())
                                 ->with('permissions',Permission::all());
     }
-    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -122,6 +122,16 @@ class RolesController extends Controller
         //
     }
 
+    public function assignUserRoles(Request $request, $id){
+        $user = User::find($id);
+        // dd($user->roles);
+        foreach($user->roles as $role){
+            $user->removeRole($role);
+        }
+        $user->assignRole($request->roles);
+        Session::flash('success','Role Assigned');
+        return redirect()->back();
+    }
     /**
      * Remove the specified resource from storage.
      *

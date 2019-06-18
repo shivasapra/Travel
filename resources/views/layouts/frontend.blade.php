@@ -82,7 +82,7 @@
             </ul>
           </li>
           <!-- Notifications: style can be found in dropdown.less -->
-          @if(!Auth::user()->admin)
+          @if(!Auth::user()->admin and !Auth::user()->client)
           <li class="dropdown messages-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-envelope-o"></i>
@@ -166,7 +166,7 @@
                     {{auth::user()->email}}
 
                   <div class="text-center">
-                    @if(!Auth::user()->admin)
+                    @if(!Auth::user()->admin and !Auth::user()->client)
                    {{Auth::user()->employee[0]->unique_id}}
                    @endif
                    </div>
@@ -377,7 +377,7 @@
         @can('Airlines Name Registration')
           <li><a href="{{route('airlines')}}"><i class="fa fa-plane"></i><span>Airlines Name Registration</span></a></li>
         @endcan
-      @if(!Auth::user()->admin)
+      @if(!Auth::user()->admin and !Auth::user()->client)
         <li>
           <a href="{{route('session')}}">
             <i class="fa fa-clock-o"></i> <span>Mark Attendance

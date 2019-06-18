@@ -41,7 +41,7 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {   
+    {
         if (Auth::user()->admin) {
         $dt = Carbon::now();
         $date_today = $dt->timezone('Europe/London');
@@ -61,7 +61,7 @@ class HomeController extends Controller
         $expenses = expenses::where('auto',0)->get();
         $total_amount = 0;
         foreach ($expenses as $expense) {
-            $total_amount = $total_amount + $expense->amount; 
+            $total_amount = $total_amount + $expense->amount;
         }
 
         $wages = wage::where('date',$date)->get();
@@ -71,7 +71,7 @@ class HomeController extends Controller
         }
 
             $yesterday_date = Carbon::now()->addDays(-1)->toDateString();
-        
+
         $tasks = Task::all();
 
         $client_passport_emails = array();
@@ -125,10 +125,10 @@ class HomeController extends Controller
         $paid_invoices = invoice::where('status',1)->get();
         $unpaid_invoices = invoice::where('status',0)->get();
 
-        
+
         $unread_messages = Chat::where('to_id',Auth::user()->id)->where('status',0)->get();
         return view('home')->with('employees',employee::all())
-                           
+
                             ->with('clients',client::all())
                             ->with('expense',$total_amount)
                             ->with('date',$date)
@@ -145,7 +145,8 @@ class HomeController extends Controller
                             ->with('unread_messages',$unread_messages)
                             ->with('messages',null);
         }
-        else{
+        elseif(Auth::user()->employee->count()>0){
+            // dd();
             $last = Chat::where('to_id',Auth::user()->id)->orderBy('created_at','desc')->get()->first();
             if($last != null){
                 $last->status = 1;
@@ -156,13 +157,17 @@ class HomeController extends Controller
                                         ->where('employee_id',null)->get())
                                         ->with('messages',$messages);
         }
+        else{
+            // dd();
+            return view('clients.home')->with('assignments',assignment::where('date',Carbon::now()->timezone('Europe/London')->toDateString()));
+        }
     }
 
     public function HomeWithMessage($id){
             $dt = Carbon::now();
             $date_today = $dt->timezone('Europe/London');
             $date = $date_today->toDateString();
-    
+
             $assignments = assignment::where('date',Carbon::now()->timezone('Europe/London')->addDays(-1)->toDateString())
                                         ->where('status',0)->get();
             foreach ($assignments as $assignment) {
@@ -177,19 +182,19 @@ class HomeController extends Controller
             $expenses = expenses::where('auto',0)->get();
             $total_amount = 0;
             foreach ($expenses as $expense) {
-                $total_amount = $total_amount + $expense->amount; 
+                $total_amount = $total_amount + $expense->amount;
             }
-    
+
             $wages = wage::where('date',$date)->get();
             $total_wage = 0;
             foreach ($wages as $wage) {
                 $total_wage = $total_wage + $wage->today_wage;
             }
-    
+
                 $yesterday_date = Carbon::now()->addDays(-1)->toDateString();
-            
+
             $tasks = Task::all();
-    
+
             $client_passport_emails = array();
             $mail_clients = client::where('mail_sent',0)->where('passport_expiry_date',Carbon::now()->addMonths(6)->toDateString())->get();
             foreach ($mail_clients as $client) {
@@ -197,7 +202,7 @@ class HomeController extends Controller
                $client->mail_sent = 1;
                $client->save();
                }
-    
+
             $employee_passport_emails = array();
             $mail_employees = employee::where('mail_sent',0)->where('passport_expiry_date',Carbon::now()->addMonths(6)->toDateString())->get();
             foreach ($mail_employees as $employee) {
@@ -205,8 +210,8 @@ class HomeController extends Controller
                $employee->mail_sent = 1;
                $employee->save();
                }
-    
-    
+
+
             $invoice_emails = array();
             $mail_invoices = invoice::where('status',0)->where('mail_sent',Carbon::now()->addDays(-7)->toDateString())->get();
             foreach ($mail_invoices as $invoice) {
@@ -214,7 +219,7 @@ class HomeController extends Controller
                $invoice->mail_sent = $date;
                $invoice->save();
                }
-    
+
             $client_inactive_emails = array();
             $clients = client::all();
             foreach ($clients as $client) {
@@ -224,14 +229,14 @@ class HomeController extends Controller
             }
             $paid_invoices = invoice::where('status',1)->get();
             $unpaid_invoices = invoice::where('status',0)->get();
-            
+
             $messages = Chat::where('user_id',$id)->orWhere('to_id',$id)->orderBy('created_at','asc')->get();
             $last = Chat::where('user_id',$id)->orderBy('created_at','desc')->get()->first();
             $last->status = 1;
             $last->save();
             $unread_messages = Chat::where('to_id',Auth::user()->id)->where('status',0)->get();
             return view('home')->with('employees',employee::all())
-                               
+
                                 ->with('clients',client::all())
                                 ->with('expense',$total_amount)
                                 ->with('date',$date)
@@ -248,7 +253,7 @@ class HomeController extends Controller
                                 ->with('unread_messages',$unread_messages)
                                 ->with('messages',$messages)
                                 ->with('id',$id);
-            
+
     }
     public function products(){
         return view('products')->with('products',products::all());
@@ -296,17 +301,17 @@ class HomeController extends Controller
         return view('tax')->with('tax',settings::all());
     }
 
-   
+
     public function letter(){
         return view('letter')->with('date',Carbon::now()->toDateString());
     }
 
     public function sendLetter(Request $request){
-        
+
         $contactEmail = $request->email_to;
         $data = array('content'=>$request->content);
         Mail::send('emails.letter', $data, function($message) use ($contactEmail)
-        {  
+        {
             $message->to($contactEmail);
         });
         return redirect()->back();
@@ -317,7 +322,7 @@ class HomeController extends Controller
         $subject = $request->subject;
         $data = array('content'=>$request->message);
         Mail::send('emails.send', $data, function($message) use ($contactEmail,$subject)
-        { 
+        {
             $message->to($contactEmail)->subject($subject);
         });
         Session::flash('success','Mail Sent!');
@@ -329,5 +334,5 @@ class HomeController extends Controller
                             ->with('roles',Role::all());
     }
 
-    
+
 }

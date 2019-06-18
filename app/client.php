@@ -8,7 +8,7 @@ class client extends Model
 {
     protected $table = 'clients';
 
-    public function invoice()
+    public function invoices()
     {
         return $this->hasMany('App\invoice');
     }

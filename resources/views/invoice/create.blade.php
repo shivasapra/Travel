@@ -743,7 +743,7 @@ Create Invoice
         @endforeach
         var fare_cost = temp.value;
         var fare_sell = Number(fare_cost) + Number((percentage / 100) * fare_cost );
-        var shiva = $(temp).parents('.fare-parent').find('.fare').val(fare_sell);
+        $(temp).parents('.fare-parent').find('.fare').val(fare_sell);
     }
 
     function SelectService(test){
