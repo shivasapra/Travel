@@ -552,7 +552,7 @@ Create Invoice
           '</tr>'+
         '</thead>'+
         '<tbody>'+
-          '<tr>'+
+          '<tr >'+
             '<th>Segment-1</th>'+
             '<td>'+
             '<div class="dropdown">	<div id="myDropdown" class="dropdown-content">'+
@@ -637,7 +637,7 @@ Create Invoice
     '<div class="col-md-12 text-right" style="margin-bottom:20px;"><button type="button" class="btn btn-sm btn-info" onClick="addPassenger(this);">Add Passenger </button></div>'+
     '<table class="add_row_invoice table table-bordered" id="passenger">'+
         '<thead>'+
-          '<tr>'+
+          '<tr >'+
             '<th>Pax Type*</th>'+
             '<th>First Name</th>'+
             '<th>Last Name</th>'+
@@ -648,7 +648,7 @@ Create Invoice
           '</tr>'+
         '</thead>'+
         '<tbody>'+
-          '<tr>'+
+          '<tr class="fare-parent">'+
             '<td>'+
               '<input type="text" name="verify[]" hidden class="verify"><select name="pax_type[]" class="form-control select-custom custom-select">'+
                 '<option value="">--Select--</option>'+
@@ -665,7 +665,7 @@ Create Invoice
             '<td><input type="text" name="segment_one_fare_cost[]" step="0.01" placeholder="0.00" class="form-control" style="width:60px;"  required onKeyUp="fareSell(this);"></td>'+
             '<td><input type="text" name="segment_one_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare" style="width:60px;" required></td>'+
           '</tr>'+
-          '<tr>'+
+          '<tr class="fare-parent">'+
             '<td colspan="4">&nbsp;</td>'+
             '<td>Segment-2</td>'+
             '<td><input type="text" name="segment_two_fare_cost[]" step="0.01" placeholder="0.00" class="form-control" style="width:60px;"  required onKeyUp="fareSell(this);"></td>'+
@@ -699,7 +699,7 @@ Create Invoice
     }
     function addPassenger(test){
         var value =  $(test).parents('.box').find('.pnr').val();
-        var data = '<tr>'+
+        var data = '<tr class="fare-parent">'+
             '<td>'+
             '<input type="text" name="verify[]" hidden value="'+value+'">'+
               '<select name="pax_type[]" class="form-control select-custom custom-select">'+
@@ -716,8 +716,8 @@ Create Invoice
             '<td>Segment-1</td>'+
             '<td><input type="text" name="segment_one_fare_cost[]" step="0.01" placeholder="0.00" class="form-control" style="width:60px;" onKeyUp="fareSell(this);"></td>'+
             '<td><input type="text" name="segment_one_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare" style="width:60px;" ></td>'+
-          '</tr>'+
-          '<tr>'+
+        '</tr>'+
+          '<tr class="fare-parent">'+
             '<td colspan="4">&nbsp;</td>'+
             '<td>Segment-2</td>'+
             '<td><input type="text" name="segment_two_fare_cost[]" step="0.01" placeholder="0.00" class="form-control" style="width:60px;" onKeyUp="fareSell(this);"></td>'+
@@ -728,7 +728,7 @@ Create Invoice
     }
     function fareSell(temp){
         var client_id = document.getElementById('client').value;
-console.log(client_id);
+// console.log(client_id);
 
 
         @foreach($clients as $client)
@@ -743,8 +743,7 @@ console.log(client_id);
         @endforeach
         var fare_cost = temp.value;
         var fare_sell = Number(fare_cost) + Number((percentage / 100) * fare_cost );
-        console.log(fare_sell);
-        $(temp).next('.fare').value = 35;
+        var shiva = $(temp).parents('.fare-parent').find('.fare').val(fare_sell);
     }
 
     function SelectService(test){
