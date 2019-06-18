@@ -1,0 +1,40 @@
+<?php
+
+namespace App\Events;
+
+use Illuminate\Broadcasting\Channel;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Broadcasting\PrivateChannel;
+use Illuminate\Broadcasting\PresenceChannel;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+
+class NewClientRequest
+{
+    use Dispatchable, InteractsWithSockets, SerializesModels;
+
+    public $client;
+
+    public $request_type;
+    /**
+     * Create a new event instance.
+     *
+     * @return void
+     */
+    public function __construct($client,$request_type)
+    {
+        $this->client = $client;
+        $this->request_type  = $request_type;
+    }
+
+    /**
+     * Get the channels the event should broadcast on.
+     *
+     * @return \Illuminate\Broadcasting\Channel|array
+     */
+    public function broadcastOn()
+    {
+        return new PrivateChannel('new-client-request');
+    }
+}

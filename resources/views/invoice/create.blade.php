@@ -639,9 +639,9 @@ Create Invoice
     '<table class="add_row_invoice table table-bordered" id="passenger">'+
         '<thead>'+
           '<tr >'+
-            '<th>Pax Type*</th>'+
-            '<th>First Name</th>'+
-            '<th>Last Name</th>'+
+            '<th width="120px;">Pax Type*</th>'+
+            '<th width="180px;">First Name</th>'+
+            '<th width="180px;">Last Name</th>'+
             '<th>Date of Birth*</th>'+
             '<th>&nbsp;</th>'+
             '<th>Fare Cost</th>'+
@@ -663,14 +663,14 @@ Create Invoice
             '<td><input type="text" name="last_name[]" class="form-control"></td>'+
             '<td><input type="date" name="DOB[]" placeholder="dd/mm/yyyy"  class="form-control"></td>'+
             '<td>Segment-1</td>'+
-            '<td><input type="text" name="segment_one_fare_cost[]" step="0.01" placeholder="0.00" class="form-control" style="width:60px;"  required onKeyUp="fareSell(this);"></td>'+
-            '<td><input type="text" name="segment_one_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare" style="width:60px;" required></td>'+
+            '<td><input type="text" name="segment_one_fare_cost[]" step="0.01" placeholder="0.00" class="form-control mask-money"   required onKeyUp="fareSell(this);"></td>'+
+            '<td><input type="text" name="segment_one_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare mask-money"  required></td>'+
           '</tr>'+
           '<tr class="fare-parent">'+
             '<td colspan="4">&nbsp;</td>'+
             '<td>Segment-2</td>'+
-            '<td><input type="text" name="segment_two_fare_cost[]" step="0.01" placeholder="0.00" class="form-control" id="mask-money" style="width:60px;"  required onKeyUp="fareSell(this);"></td>'+
-            '<td><input type="text" name="segment_two_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare" style="width:60px;"  required></td>'+
+            '<td><input type="text" name="segment_two_fare_cost[]" step="0.01" placeholder="0.00" class="form-control mask-money"   required onKeyUp="fareSell(this);"></td>'+
+            '<td><input type="text" name="segment_two_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare mask-money"   required></td>'+
           '</tr>'+
           '<div ></div>'+
         '</tbody>'+
@@ -715,20 +715,20 @@ Create Invoice
             '<td><input type="text" name="last_name[]" class="form-control"></td>'+
             '<td><input type="date" name="DOB[]" placeholder="dd/mm/yyyy"  class="form-control"></td>'+
             '<td>Segment-1</td>'+
-            '<td><input type="text" name="segment_one_fare_cost[]" step="0.01" placeholder="0.00" class="form-control" style="width:60px;" onKeyUp="fareSell(this);"></td>'+
-            '<td><input type="text" name="segment_one_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare" style="width:60px;" ></td>'+
+            '<td><input type="text" name="segment_one_fare_cost[]" step="0.01" placeholder="0.00" class="form-control mask-money" style="width:60px;" onKeyUp="fareSell(this);"></td>'+
+            '<td><input type="text" name="segment_one_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare mask-money" style="width:60px;" ></td>'+
         '</tr>'+
           '<tr class="fare-parent">'+
             '<td colspan="4">&nbsp;</td>'+
             '<td>Segment-2</td>'+
-            '<td><input type="text" name="segment_two_fare_cost[]" step="0.01" placeholder="0.00" class="form-control" style="width:60px;" onKeyUp="fareSell(this);"></td>'+
-            '<td><input type="text" name="segment_two_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare" style="width:60px;" ></td>'+
+            '<td><input type="text" name="segment_two_fare_cost[]" step="0.01" placeholder="0.00" class="form-control mask-money" style="width:60px;" onKeyUp="fareSell(this);"></td>'+
+            '<td><input type="text" name="segment_two_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare mask-money" style="width:60px;" ></td>'+
           '</tr>';
           $(test).parents('.box').find('.add_row_invoice').append(data);
         //   $(".add_row_invoice").append(data);
     }
     function fareSell(temp){
-        $('#mask-money').maskMoney();
+        $('.mask-money').maskMoney();
         var client_id = document.getElementById('client').value;
 // console.log(client_id);
 

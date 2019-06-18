@@ -15,6 +15,7 @@
         "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0",
+        "pusher/pusher-php-server": "^3.4",
         "rachidlaasri/laravel-installer": "^4.0",
         "spatie/laravel-permission": "^2.37",
         "sudiptpa/guid": "^1.0",
