@@ -23,55 +23,82 @@ Requests
                     <th>Request Type</th>
                     <th>Description</th>
                     <th>Status</th>
+                    @if(Auth::user()->admin)
+                    <th>Action</th>
+                    @endif
                     </tr>
                     </thead>
                 <tbody>
                     <?php $i =1;?>
+                    @if(Auth::user()->client)
+                        <?php $requests = Auth::user()->client->requests ?>
+                    @elseif(Auth::user()->admin)
+                        <?php $requests = App\ClientRequests::all() ?>
+                    @endif
                 @foreach($requests as $request)
                 <tr>
                     <td>{{ $i++ }}</td>
                     <td>{{ $request->request_type }}</td>
                     <td>{{ $request->description }}</td>
-                    <td>
-                        @if($request->status == 0)
-                            <span class="text-danger">{{ 'Pending' }}</span>
-                        @elseif($request->status == 1)
-                            <span class="text-warning">{{ 'Processing' }}</span>
-                        @elseif($request->status == 2)
-                            <span class="text-success">{{ 'Done' }}</span>
-                        @endif
-                    </td>
+                    @if(Auth::user()->client)
+                        <td>
+                            @if($request->status == 0)
+                                <span class="text-danger">{{ 'Pending' }}</span>
+                            @elseif($request->status == 1)
+                                <span class="text-warning">{{ 'Processing' }}</span>
+                            @elseif($request->status == 2)
+                                <span class="text-success">{{ 'Done' }}</span>
+                            @endif
+                        </td>
+                    @else
+                    <form action="{{ route('request.status.save',['id'=>$request->id]) }}" method="post">
+                        @csrf
+                        <td>
+                            <select name="status" class="form-control">
+                                <option value="">--SELECT--</option>
+                                <option value="0" {{($request->status == 0)?"selected":" "}}>Pending</option>
+                                <option value="1" {{($request->status == 1)?"selected":" "}}>Processing</option>
+                                <option value="2" {{($request->status == 2)?"selected":" "}}>Done</option>
+                            </select>
+                        </td>
+                        <td>
+                            <button type="submit" class="btn btn-xs btn-success">Save</button>
+                        </td>
+                    </form>
+                    @endif
                 </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
 </div>
-<form action="{{ route('requests.generate') }}" method="post">
-    @csrf
-    <div class="box box-success">
-        <div class="box-body">
-            <div class="row">
-                <div class="col-md-6">
-                    <label for="request_type">Request Type:</label>
-                    <select name="request_type" class="form-control">
-                        <option value="">--SELECT--</option>
-                        @foreach($products as $product)
-				            <option value="{{$product->service}}">{{$product->service}}</option>
-		                @endforeach
-                    </select>
-                </div>
-                <div class="col-md-6">
-                    <label for="description">Description</label>
-                    <textarea name="description" class="form-control"></textarea>
+@if(Auth::user()->client)
+    <form action="{{ route('requests.generate') }}" method="post">
+        @csrf
+        <div class="box box-success">
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="request_type">Request Type:</label>
+                        <select name="request_type" class="form-control">
+                            <option value="">--SELECT--</option>
+                            @foreach($products as $product)
+                                <option value="{{$product->service}}">{{$product->service}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="description">Description</label>
+                        <textarea name="description" class="form-control"></textarea>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="text-center">
-        <button class="btn btn-small btn-info" type="submit">Generate Request</button>
-    </div>
-</form>
+        <div class="text-center">
+            <button class="btn btn-small btn-info" type="submit">Generate Request</button>
+        </div>
+    </form>
+@endif
 @stop
 @section('js')
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>

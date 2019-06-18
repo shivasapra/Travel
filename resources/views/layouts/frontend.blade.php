@@ -278,10 +278,15 @@
               @can('View Clients')
                 <li><a href="{{route('client.settings')}}"><i class="fa fa-circle-o"></i>Client Settings</a></li>
               @endcan
+              @can('View Clients')
+                <li><a href="{{route('requests')}}"><i class="fa fa-circle-o"></i>Client Requests</a></li>
+              @endcan
             </ul>
           </li>
         @endif
-
+        @if(Auth::user()->client)
+            <li><a href="{{ route('requests') }}"><i class="fa fa-plus-square"></i><span>Generate Request</span></a></li>
+        @endif
         @if(Auth::user()->can('View Employees') or Auth::user()->can('Employee Attendance Status') or Auth::user()->can('Employee Salary Slip') or Auth::user()->can('Staff Wage management'))
         <li class="treeview">
             <a href="">
@@ -379,9 +384,7 @@
         @can('Airlines Name Registration')
           <li><a href="{{route('airlines')}}"><i class="fa fa-plane"></i><span>Airlines Name Registration</span></a></li>
         @endcan
-        @if(Auth::user()->client)
-          <li><a href="{{ route('requests') }}"><i class="fa fa-plus-square"></i><span>Generate Request</span></a></li>
-        @endif
+
       @if(!Auth::user()->admin and !Auth::user()->client)
         <li>
           <a href="{{route('session')}}">

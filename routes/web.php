@@ -152,6 +152,10 @@ Route::post('/requests/generate',[
 	'uses'=> 'ClientController@requestsGenerate',
 	'as'=>'requests.generate'
 ]);
+Route::post('/requests/status/save/{id}',[
+	'uses'=> 'ClientController@requestStatusSave',
+	'as'=>'request.status.save'
+]);
 // Route::group(['middleware' => ['authorize', 'auth']], function () {
 //     Route::get('/', [
 //         'name' => 'home',

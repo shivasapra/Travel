@@ -463,8 +463,7 @@ class clientController extends Controller
     }
 
     public function requests(){
-        $requests = Auth::user()->client->requests;
-        return view('clients.requests')->with('requests',$requests)->with('products',products::all());
+        return view('clients.requests')->with('products',products::all());
     }
 
     public function requestsGenerate(Request $request){
@@ -474,6 +473,13 @@ class clientController extends Controller
         $client_request->request_type = $request->request_type;
         $client_request->save();
         Session::flash('success','Request Generated!!');
+        return redirect()->back();
+    }
+
+    public function requestStatusSave(Request $request,$id){
+        $client_request = ClientRequests::find($id);
+        $client_request->status = $request->status;
+        $client_request->save();
         return redirect()->back();
     }
 }
