@@ -355,7 +355,8 @@ Create Invoice
 <script>
 
 </script>
-	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
 	<script type="text/javascript">
 		$.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
 		</script>
@@ -668,7 +669,7 @@ Create Invoice
           '<tr class="fare-parent">'+
             '<td colspan="4">&nbsp;</td>'+
             '<td>Segment-2</td>'+
-            '<td><input type="text" name="segment_two_fare_cost[]" step="0.01" placeholder="0.00" class="form-control" style="width:60px;"  required onKeyUp="fareSell(this);"></td>'+
+            '<td><input type="text" name="segment_two_fare_cost[]" step="0.01" placeholder="0.00" class="form-control" id="mask-money" style="width:60px;"  required onKeyUp="fareSell(this);"></td>'+
             '<td><input type="text" name="segment_two_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare" style="width:60px;"  required></td>'+
           '</tr>'+
           '<div ></div>'+
@@ -727,6 +728,7 @@ Create Invoice
         //   $(".add_row_invoice").append(data);
     }
     function fareSell(temp){
+        $('#mask-money').maskMoney();
         var client_id = document.getElementById('client').value;
 // console.log(client_id);
 

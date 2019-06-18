@@ -364,7 +364,9 @@
             </ul>
           </li>
           @endcan
-        <li><a href="{{route('assign')}}"><i class="fa fa-clock-o"></i><span>Assignments</span></a></li>
+        @if(!Auth::user()->client)
+            <li><a href="{{route('assign')}}"><i class="fa fa-clock-o"></i><span>Assignments</span></a></li>
+        @endif
         @can('Generate Letter')
           <li><a href="{{route('letter')}}"><i class="fa fa-envelope-open-o"></i><span>Generate Letter</span></a></li>
         @endcan

@@ -20,11 +20,11 @@ class CreatePassengersTable extends Migration
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('DOB')->nullable();
-            $table->string('segment_one_fare_cost')->nullable();
-            $table->string('segment_two_fare_cost')->nullable();
-            $table->string('segment_one_fare_sell')->nullable();
-            $table->string('segment_two_fare_sell')->nullable();
-            
+            $table->float('segment_one_fare_cost')->nullable();
+            $table->float('segment_two_fare_cost')->nullable();
+            $table->float('segment_one_fare_sell')->nullable();
+            $table->float('segment_two_fare_sell')->nullable();
+
             $table->timestamps();
         });
     }

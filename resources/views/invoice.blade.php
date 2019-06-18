@@ -177,8 +177,10 @@ Invoice
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="{{route('invoice')}}"><i class="fa fa-paperclip"></i> Invoice</a></li>
-        <li class="active">Generate Invoice</li>
+        @if(!Auth::user()->client)
+        <li><a href="{{route('invoice')}}"><i class="fa fa-paperclip"></i> Invoices</a></li>
+        @endif 
+        <li class="active">Invoice</li>
       </ol>
     </section>
 @stop
