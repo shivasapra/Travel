@@ -334,5 +334,16 @@ class HomeController extends Controller
                             ->with('roles',Role::all());
     }
 
-
+    public function CountrySearch(Request $request){
+        if($request->ajax()){
+            $output="";
+            $country= App\Country::where('name','LIKE','%'.$request->search."%")->get();
+            if($country){
+                    foreach ($country as $key => $product) {
+                        $output.='<a><option onClick="CountryAssign(this)" value="'.$product->name.'">'.$product->name.'</option></a>';
+                    }
+                return Response($output);
+            }
+        }
+    }
 }

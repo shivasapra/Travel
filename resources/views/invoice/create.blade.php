@@ -174,7 +174,35 @@ Create Invoice
 		/* Change color of dropdown links on hover */
 		.AirportArrivaldropdown-content-two a:hover {background-color: #f1f1f1}
 
-	</style>
+    </style>
+    <style>
+
+            /* The search field when it gets focus/clicked on */
+            #CountrymyInput:focus {outline: 3px solid #ddd;}
+
+
+            /* Dropdown Content (Hidden by Default) */
+            .Country-content {
+            display: block;
+            position:absolute;
+            background-color: #f6f6f6;
+            min-width: 220px;
+            border: 1px solid #ddd;
+            z-index: 1;
+            }
+
+            /* Links inside the dropdown */
+            .Country-content-two a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            }
+
+            /* Change color of dropdown links on hover */
+            .Country-content-two a:hover {background-color: #f1f1f1}
+
+        </style>
 @stop
 @section('header')
 	<section class="content-header">
@@ -821,7 +849,13 @@ Create Invoice
             else{
                 var date ="{{ $date }}";
             }
-				var data = '<div class="box-body"> <div class="row">			<div class="col-md-4">				<div class="form-group">					<label for="service_name[]">Select Service</label>					<select name="service_name[]" class="form-control service" required onChange="SelectService(this);">							<option value="">--select--</option>							@if($products->count()>0)							@foreach($products as $product)								<option value="{{$product->service}}" {{($product->service == "Hotel")?"selected":''}}>{{$product->service}}</option>							@endforeach							@endif					</select>				</div>			</div>		</div> <div class="row">		<div class="col-md-6">		<div class="form-group">			<label for="hotel_city">City</label>			<input type="text" name="hotel_city[]" required class="form-control">		</div>		</div>		<div class="col-md-6">		<div class="form-group">			<label for="hotel_country">Country</label>			<input type="text" name="hotel_country[]" class="form-control">		</div>		</div>		</div>		<div class="row">		<div class="col-md-4">		<div class="form-group">			<label for="hotel_name">Hotel Name</label>			<input type="text" name="hotel_name[]" required class="form-control">		</div>		</div>		<div class="col-md-4">		<div class="form-group">			<label for="check_in_date">Check In Date</label>			<input type="date" name="check_in_date[]" value="'+date.slice(0,10)+'"  required class="form-control">		</div>		</div>		<div class="col-md-4">		<div class="form-group">			<label for="check_out_date">Check Out Date</label>			<input type="date" name="check_out_date[]" value="{{ $date }}" required class="form-control">		</div>		</div>		</div>		<div class="row">		<div class="col-md-3">		<div class="form-group">			<label for="no_of_children[]">No. Of Adults</label>			<input type="text" name="no_of_children[]" class="form-control" >		</div>		</div>		<div class="col-md-3">		<div class="form-group">			<label for="no_of_rooms">No. Of Rooms</label>			<input type="text" name="no_of_rooms[]" class="form-control">		</div>		</div>		<div class="col-md-3">		<div class="form-group">			<label for="hotel_amount[]">Amount</label>			<input type="text" name="hotel_amount[]" class="form-control">		</div>		</div>		</div>			</div>		</div></div><div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					</div>	</div>				</div></div>';
+				var data = '<div class="box-body"> <div class="row">			<div class="col-md-4">				<div class="form-group">					<label for="service_name[]">Select Service</label>					<select name="service_name[]" class="form-control service" required onChange="SelectService(this);">							<option value="">--select--</option>							@if($products->count()>0)							@foreach($products as $product)								<option value="{{$product->service}}" {{($product->service == "Hotel")?"selected":''}}>{{$product->service}}</option>							@endforeach							@endif					</select>				</div>			</div>		</div> <div class="row">		<div class="col-md-6">		<div class="form-group">			<label for="hotel_city">City</label>			<input type="text" name="hotel_city[]" required class="form-control">		</div>		</div>'+
+                '<div class="col-md-6">		<div class="form-group">			<label for="hotel_country">Country</label>'+
+                // '<input type="text" name="hotel_country[]" class="form-control">'+
+                '<div class="Countrydropdown">	<div id="CountrymyDropdown" class="Countrydropdown-content">'+
+                '<input type="text" name="hotel_country[]" class="form-control country-name" placeholder="Search..." id="CountrymyInput" onkeyup="CountryExtract(this)">'+
+                '<div class="country_html"></div></div></div>'+
+                '</div>		</div>		</div>		<div class="row">		<div class="col-md-4">		<div class="form-group">			<label for="hotel_name">Hotel Name</label>			<input type="text" name="hotel_name[]" required class="form-control">		</div>		</div>		<div class="col-md-4">		<div class="form-group">			<label for="check_in_date">Check In Date</label>			<input type="date" name="check_in_date[]" value="'+date.slice(0,10)+'"  required class="form-control">		</div>		</div>		<div class="col-md-4">		<div class="form-group">			<label for="check_out_date">Check Out Date</label>			<input type="date" name="check_out_date[]" value="{{ $date }}" required class="form-control">		</div>		</div>		</div>		<div class="row">		<div class="col-md-3">		<div class="form-group">			<label for="no_of_children[]">No. Of Adults</label>			<input type="text" name="no_of_children[]" class="form-control" >		</div>		</div>		<div class="col-md-3">		<div class="form-group">			<label for="no_of_rooms">No. Of Rooms</label>			<input type="text" name="no_of_rooms[]" class="form-control">		</div>		</div>		<div class="col-md-3">		<div class="form-group">			<label for="hotel_amount[]">Amount</label>			<input type="text" name="hotel_amount[]" class="form-control">		</div>		</div>		</div>			</div>		</div></div><div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					</div>	</div>				</div></div>';
 				$(test).closest(".box").html(data);
 			}
 			if (value == 'Insurance') {
@@ -990,6 +1024,25 @@ Create Invoice
             }
         });
     }
+
+
+    function CountryExtract(test){
+        $value=test.value;
+        $.ajax({
+            type : 'get',
+            url : '{{URL::to('searchCountry')}}',
+            data:{'search':$value},
+            success:function(data){
+                $(test).next(".country").html(data);
+            }
+        });
+    }
+
+    function CountryAssign(temp){
+		var div = $(temp).closest(".country-content");
+		div.find('.country-name').val(temp.value);
+		$(temp).closest(".country_html").html('');
+	}
    	</script>
 
 

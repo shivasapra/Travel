@@ -156,10 +156,10 @@ Route::post('/requests/status/save/{id}',[
 	'uses'=> 'ClientController@requestStatusSave',
 	'as'=>'request.status.save'
 ]);
-Route::get('/aslam', function () {
-    event(new App\Events\NewClientRequest('shiva','Hotel'));
-    return "Event has been sent!";
-});
+// Route::get('/aslam', function () {
+//     event(new App\Events\NewClientRequest('shiva','Hotel'));
+//     return "Event has been sent!";
+// });
 // Route::group(['middleware' => ['authorize', 'auth']], function () {
 //     Route::get('/', [
 //         'name' => 'home',
@@ -303,6 +303,8 @@ Route::get('/searchAirportArrival','InvoiceController@AirportArrivalSearch');
 Route::get('/searchAirlineTwo','InvoiceController@AirlineSearchTwo');
 Route::get('/searchAirportTwo','InvoiceController@AirportSearchTwo');
 Route::get('/searchAirportArrivalTwo','InvoiceController@AirportArrivalSearchTwo');
+
+Route::get('/searchCountry','HomeController@CountrySearch');
 
 
 
