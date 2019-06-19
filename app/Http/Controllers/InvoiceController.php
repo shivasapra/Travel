@@ -412,16 +412,11 @@ class InvoiceController extends Controller
     {
         $invoice = invoice::find($id);
         $client = client::find($invoice->client_id);
-        if ($invoice->status == 0) {
-            return view('invoice.edit')->with('invoice',$invoice)
+        return view('invoice.edit')->with('invoice',$invoice)
                                         ->with('products',products::all())
                                         ->with('airlines',airlines::all())
                                         ->with('client',$client);
-        }
-        else{
-            Session::flash('warning',"This Invoice is already Paid. You Can't Edit Now!!");
-            return redirect()->back();
-        }
+       
 
     }
 
