@@ -3361,13 +3361,12 @@ class CountrySeeder extends Seeder
             'updated_at'=>NULL
             ] );
 
-            App\Countries::create( [
-            'id'=>234,
-            'name'=>'"Saint Helena',
-            'created_at'=>NULL,
-            'updated_at'=>NULL,
-
-            ] );
+            App\Countires::create([
+                'id'=>234,
+                'name'=>'Saint Helena',
+                'created_at' => NULL,
+                'updated_at' => NULL
+            ]);
 
             App\Countries::create( [
             'id'=>235,

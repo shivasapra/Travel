@@ -13,9 +13,9 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(CountrySeeder::class);
         $this->call(UsersTableSeeder::class);
-        // $this->call(AirlinesTableSeeder::class);
-        // $this->call(AirportsTableSeeder::class);
-        // $this->call(ProductsTableSeeder::class);
-        // $this->call(PermissionsSeeder::class);
+        $this->call(AirlinesTableSeeder::class);
+        $this->call(AirportsTableSeeder::class);
+        $this->call(ProductsTableSeeder::class);
+        $this->call(PermissionsSeeder::class);
     }
 }
