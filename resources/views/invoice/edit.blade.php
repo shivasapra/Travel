@@ -377,7 +377,7 @@ Edit Invoice
         @foreach($flight->passengers as $passenger)
         <tr class="fare-parent">
         <td>
-        <input type="text" name="verify[]" hidden class="verify"><select name="pax_type[]" class="form-control select-custom custom-select">
+        <input type="text" name="verify[]" value="{{ $flight->pnr }}" hidden class="verify"><select name="pax_type[]" class="form-control select-custom custom-select">
         <option value="">--Select--</option>
         <option value="Adult" {{($passenger->pax_type == 'ADULT')?"selected":" "}}>Adult</option>
         <option value="Youth" {{($passenger->pax_type == 'YOUTH')?"selected":" "}}>Youth</option>
