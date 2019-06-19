@@ -415,8 +415,9 @@ class InvoiceController extends Controller
         return view('invoice.edit')->with('invoice',$invoice)
                                         ->with('products',products::all())
                                         ->with('airlines',airlines::all())
-                                        ->with('client',$client);
-       
+                                        ->with('client',$client)
+                                        ->with('settings',ClientSettings::first());
+
 
     }
 

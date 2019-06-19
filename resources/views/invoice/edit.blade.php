@@ -14,6 +14,180 @@ Edit Invoice
       </ol>
     </section>
 @stop
+@section('css')
+<style>
+
+    /* The search field when it gets focus/clicked on */
+    #myInput:focus {outline: 3px solid #ddd;}
+
+
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content {
+    display: block;
+    position:absolute;
+    background-color: #f6f6f6;
+    min-width: 220px;
+    border: 1px solid #ddd;
+    z-index: 1;
+    }
+
+    /* Links inside the dropdown */
+    .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    }
+
+    /* Change color of dropdown links on hover */
+    .dropdown-content a:hover {background-color: #f1f1f1}
+
+</style>
+
+<style>
+
+    /* The search field when it gets focus/clicked on */
+    #myInputTwo:focus {outline: 3px solid #ddd;}
+
+
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content-two {
+    display: block;
+    position:absolute;
+    background-color: #f6f6f6;
+    min-width: 220px;
+    border: 1px solid #ddd;
+    z-index: 1;
+    }
+
+    /* Links inside the dropdown */
+    .dropdown-content-two a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    }
+
+    /* Change color of dropdown links on hover */
+    .dropdown-content-two a:hover {background-color: #f1f1f1}
+
+</style>
+
+	<style>
+
+		/* The search field when it gets focus/clicked on */
+		#AirportmyInput:focus {outline: 3px solid #ddd;}
+
+
+		/* Dropdown Content (Hidden by Default) */
+		.Airportdropdown-content {
+		display: block;
+		position:absolute;
+		background-color: #f6f6f6;
+		min-width: 220px;
+		border: 1px solid #ddd;
+		z-index: 1;
+		}
+
+		/* Links inside the dropdown */
+		.Airportdropdown-content a {
+		color: black;
+		padding: 12px 16px;
+		text-decoration: none;
+		display: block;
+		}
+
+		/* Change color of dropdown links on hover */
+		.Airportdropdown-content a:hover {background-color: #f1f1f1}
+
+    </style>
+
+<style>
+
+    /* The search field when it gets focus/clicked on */
+    #AirportmyInputTwo:focus {outline: 3px solid #ddd;}
+
+
+    /* Dropdown Content (Hidden by Default) */
+    .Airportdropdown-content-two {
+    display: block;
+    position:absolute;
+    background-color: #f6f6f6;
+    min-width: 220px;
+    border: 1px solid #ddd;
+    z-index: 1;
+    }
+
+    /* Links inside the dropdown */
+    .Airportdropdown-content-two a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    }
+
+    /* Change color of dropdown links on hover */
+    .Airportdropdown-content-two a:hover {background-color: #f1f1f1}
+
+</style>
+
+	<style>
+
+		/* The search field when it gets focus/clicked on */
+		#AirportArrivalmyInput:focus {outline: 3px solid #ddd;}
+
+
+		/* Dropdown Content (Hidden by Default) */
+		.AirportArrivaldropdown-content {
+		display: block;
+		position:absolute;
+		background-color: #f6f6f6;
+		min-width: 220px;
+		border: 1px solid #ddd;
+		z-index: 1;
+		}
+
+		/* Links inside the dropdown */
+		.AirportArrivaldropdown-content a {
+		color: black;
+		padding: 12px 16px;
+		text-decoration: none;
+		display: block;
+		}
+
+		/* Change color of dropdown links on hover */
+		.AirportArrivaldropdown-content a:hover {background-color: #f1f1f1}
+
+    </style>
+    <style>
+
+		/* The search field when it gets focus/clicked on */
+		#AirportArrivalmyInputTwo:focus {outline: 3px solid #ddd;}
+
+
+		/* Dropdown Content (Hidden by Default) */
+		.AirportArrivaldropdown-content-two {
+		display: block;
+		position:absolute;
+		background-color: #f6f6f6;
+		min-width: 220px;
+		border: 1px solid #ddd;
+		z-index: 1;
+		}
+
+		/* Links inside the dropdown */
+		.AirportArrivaldropdown-content-two a {
+		color: black;
+		padding: 12px 16px;
+		text-decoration: none;
+		display: block;
+		}
+
+		/* Change color of dropdown links on hover */
+		.AirportArrivaldropdown-content-two a:hover {background-color: #f1f1f1}
+
+	</style>
+@stop
 @section('content')
 
 	@if(count($errors)>0)
@@ -531,7 +705,8 @@ Edit Invoice
 @section('js')
 <script>
 </script>
-	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
 	<script type="text/javascript">
 		$.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
 		</script>
@@ -640,50 +815,285 @@ Edit Invoice
     } else {
         return false;
     }}
+    function flight(){
+        var data = '<div class="box-body"><div class="row">'+
+				 			'<div class="col-md-4">				<div class="form-group">'+
+				 			'<label for="service_name[]">Select Service</label>'+
+				 			'<select name="service_name[]" class="form-control service" required onChange="SelectService(this);">'+
+				 			'<option value="">--select--</option>							@if($products->count()>0)'+
+				 			'@foreach($products as $product)	'+
+				 			'<option value="{{$product->service}}" {{($product->service == "Flight")?"selected":''}}>{{$product->service}}</option>'+
+				 			'@endforeach							@endif					</select>				</div>'+
+				 			'</div>		</div>'+
+
+    '<div class="table-responsive">'+
+      '<table class="table table-bordered">'+
+        '<thead>'+
+'          <tr>'+
+            '<th>Universal PNR </th>'+
+            '<th>PNR </th>'+
+            '<th>E-Ticket No</th>'+
+            '<th>Airline Ref </th>'+
+          '</tr>'+
+        '</thead>'+
+        '<tbody>'+
+          '<tr>'+
+            '<td><input type="text" name="universal_pnr[]" class="form-control"></td>'+
+            '<td><input type="text" name="pnr[]" class="form-control pnr" onKeyUp="pnr(this);"></td>'+
+            '<td><input type="text" name="agency_pcc[]" class="form-control"></td>'+
+            '<td><input type="text" name="airline_ref[]" class="form-control"></td>'+
+          '</tr>'+
+        '</tbody>'+
+      '</table>'+
+    '</div>'+
+
+    '<div class="table-responsive">'+
+      '<table class="table table-bordered">'+
+        '<thead>'+
+          '<tr>'+
+            '<th>#</th>'+
+            '<th width="250px">Flight</th>'+
+            '<th width="250px">From</th>'+
+            '<th width="250px">To</th>'+
+            '<th>Carrier</th>'+
+            '<th>Travel Class</th>'+
+            // '<th>Departure</th>'+
+            // '<th>Arrival</th>'+
+          '</tr>'+
+        '</thead>'+
+        '<tbody>'+
+          '<tr >'+
+            '<th>Segment-1</th>'+
+            '<td>'+
+            '<div class="dropdown">	<div id="myDropdown" class="dropdown-content">'+
+            '<input type="text" name="segment_one_flight[]" class="form-control airline-name" placeholder="Search..." id="myInput" onkeyup="AirlineDataExtract(this)">'+
+            '<div class="airline_html"></div></div></div>'+
+            '</td>'+
+            '<td>'+
+            '<div class="Airportdropdown">	<div id="AirportmyDropdown" class="Airportdropdown-content">'+
+            '<input type="text" name="segment_one_from[]" class="form-control airport-name" placeholder="Search..." id="AirportmyInput" onkeyup="AirportDataExtract(this)">'+
+            '<div class="airport_html"></div></div></div>'+
+            '</td>'+
+            '<td>'+
+            '<div class="AirportArrivaldropdown">	<div id="AirportArrivalmyDropdown" class="AirportArrivaldropdown-content">'+
+            '<input type="text" name="segment_one_to[]" class="form-control airport-arrival-name" placeholder="Search..." id="AirportArrivalmyInput" onkeyup="AirportArrivalDataExtract(this)">'+
+            '<div class="airportArrival_html"></div></div></div>'+
+            '</td>'+
+            '<td><input type="text" name="segment_one_carrier[]" class="form-control" ></td>'+
+            // '<td><input type="text" name="segment_one_class[]" class="form-control" ></td>'+
+            // '<td><input type="text" name="segment_one_class[]" class="form-control" ></td>'+
+            '<td><select name="segment_one_class[]" class="form-control service"required >'+
+										'<option value="">--select--</option>'+
+											'<option value="Economy class">Economy class</option>'+
+											'<option value="Premium Economy class">Premium Economy class</option>'+
+											'<option value="Business Class">Business Class</option>'+
+											'<option value="First Class">First Class</option>'+
+
+			'</select></td>'+
+            // '<td><input type="datetime-local" name="segment_one_departure[]" class="form-control" ></td>'+
+            // '<td><input type="datetime-local" name="segment_one_arrival[]" class="form-control" ></td>'+
+          '</tr>'+
+          '<tr>'+
+            '<th>Departure:</th>'+
+            '<td><input type="datetime-local" placeholder="dd/mm/yyyy" name="segment_one_departure[]" class="form-control" ></td>'+
+            '<th align="right">Arrival:</th>'+
+            '<td><input type="datetime-local" placeholder="dd/mm/yyyy" name="segment_one_arrival[]" class="form-control" ></td>'+
+          '</tr>'+
+          '<tr>'+
+          '<td class="colspan-6"></td>'+
+          '</tr>'+
+          '<tr>'+
+            '<th>Segment-2</th>'+
+            '<td>'+
+                '<div class="dropdownTwo">			<div id="myDropdownTwo" class="dropdown-content-two">'+
+                '<input type="text" name="segment_two_flight[]" class="form-control airline-name-two" placeholder="Search.."  id="myInputTwo" onkeyup="AirlineDataExtractTwo(this)"  required >'+
+                '<div class="airline_html_two"></div></div>	</div>'+
+            '</td>'+
+            '<td>'+
+            '<div class="AirportdropdownTwo">	<div id="AirportmyDropdownTwo" class="Airportdropdown-content-two">'+
+            '<input type="text" name="segment_two_from[]" class="form-control airport-name-two" placeholder="Search..." id="AirportmyInputTwo" onkeyup="AirportDataExtractTwo(this)">'+
+            '<div class="airport_html_two"></div></div></div>'+
+            '</td>'+
+            '<td>'+
+            '<div class="AirportArrivaldropdownTwo">	<div id="AirportArrivalmyDropdownTwo" class="AirportArrivaldropdown-content-two">'+
+            '<input type="text" name="segment_two_to[]" class="form-control airport-arrival-name-two" placeholder="Search..." id="AirportArrivalmyInputTwo" onkeyup="AirportArrivalDataExtractTwo(this)">'+
+            '<div class="airportArrival_html_two"></div></div></div>'+
+            '</td>'+
+            '<td><input type="text" name="segment_two_carrier[]" class="form-control" ></td>'+
+            // '<td><input type="text" name="segment_two_class[]" class="form-control" ></td>'+
+            '<td><select name="segment_two_class[]" class="form-control service"required >'+
+										'<option value="">--select--</option>'+
+											'<option value="Economy class">Economy class</option>'+
+											'<option value="Premium Economy class">Premium Economy class</option>'+
+											'<option value="Business Class">Business Class</option>'+
+											'<option value="First Class">First Class</option>'+
+
+			'</select></td>'+
+            // '<td><input type="datetime-local" name="segment_two_departure[]" class="form-control" ></td>'+
+            // '<td><input type="datetime-local" name="segment_two_arrival[]" class="form-control" ></td>'+
+          '</tr>'+
+          '<tr>'+
+            '<th>Departure:</th>'+
+            '<td><input type="datetime-local" placeholder="dd/mm/yyyy" name="segment_two_departure[]" class="form-control" ></td>'+
+            '<th align="right">Arrival:</th>'+
+            '<td><input type="datetime-local" placeholder="dd/mm/yyyy" name="segment_two_arrival[]" class="form-control" ></td>'+
+          '</tr>'+
+        '</tbody>'+
+      '</table>'+
+    '</div>'+
+
+
+'<div class="table-responsive" id="passengers">'+
+    '<div class="col-md-12 text-right" style="margin-bottom:20px;"><button type="button" class="btn btn-sm btn-info" onClick="addPassenger(this);">Add Passenger </button></div>'+
+    '<table class="add_row_invoice table table-bordered" id="passenger">'+
+        '<thead>'+
+          '<tr >'+
+            '<th width="120px;">Pax Type*</th>'+
+            '<th width="180px;">First Name</th>'+
+            '<th width="180px;">Last Name</th>'+
+            '<th>Date of Birth*</th>'+
+            '<th>&nbsp;</th>'+
+            '<th>Fare Cost</th>'+
+            '<th>Fare Sell</th>'+
+          '</tr>'+
+        '</thead>'+
+        '<tbody>'+
+          '<tr class="fare-parent">'+
+            '<td>'+
+              '<input type="text" name="verify[]" hidden class="verify"><select name="pax_type[]" class="form-control select-custom custom-select">'+
+                '<option value="">--Select--</option>'+
+              '<option value="Adult">Adult</option>'+
+              '<option value="Youth">Youth</option>'+
+              '<option value="Child">Child</option>'+
+              '<option value="Infant">Infant</option>'+
+            '</select>'+
+          '</td>'+
+            '<td><input type="text" name="first_name[]" class="form-control"></td>'+
+            '<td><input type="text" name="last_name[]" class="form-control"></td>'+
+            '<td><input type="date" name="DOB[]" placeholder="dd/mm/yyyy"  class="form-control"></td>'+
+            '<td>Segment-1</td>'+
+            '<td><input type="text" name="segment_one_fare_cost[]" step="0.01" placeholder="0.00" class="form-control mask-money"   required onKeyUp="fareSell(this);"></td>'+
+            '<td><input type="text" name="segment_one_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare mask-money"  required></td>'+
+          '</tr>'+
+          '<tr class="fare-parent">'+
+            '<td colspan="4">&nbsp;</td>'+
+            '<td>Segment-2</td>'+
+            '<td><input type="text" name="segment_two_fare_cost[]" step="0.01" placeholder="0.00" class="form-control mask-money"   required onKeyUp="fareSell(this);"></td>'+
+            '<td><input type="text" name="segment_two_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare mask-money"   required></td>'+
+          '</tr>'+
+          '<div ></div>'+
+        '</tbody>'+
+      '</table>'+
+      '</div>'+
+    //   '<div align="left">'+
+
+      '<div align="right">'+
+      '<div class="row">'+
+      '<div class="col-md-10">'+
+        '<h3><strong>Total Amount:</strong></h3>'+
+        '</div>'+
+        '<div class="col-md-2">'+
+        '<br><input type="text" name="flight_amount[]" value="0" onClick="FlightAmount(this);" class="form-control flight_amount" >'+
+       '</div>'+
+       '</div>'+
+      '</div>'+
+      '<div align="right">'+
+      '<br><input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">'+
+	'</div>'+
+    '</div>';
+        return data;
+    }
+    function pnr(test){
+        var value = test.value;
+        $(test).parents('.box').find('.verify').val(value);
+    }
+    function addPassenger(test){
+        var value =  $(test).parents('.box').find('.pnr').val();
+        var data = '<tr class="fare-parent">'+
+            '<td>'+
+            '<input type="text" name="verify[]" hidden value="'+value+'">'+
+              '<select name="pax_type[]" class="form-control select-custom custom-select">'+
+                '<option value="">--Select--</option>'+
+              '<option value="Adult">Adult</option>'+
+              '<option value="Youth">Youth</option>'+
+              '<option value="Child">Child</option>'+
+              '<option value="Infant">Infant</option>'+
+            '</select>'+
+          '</td>'+
+            '<td><input type="text" name="first_name[]" class="form-control"></td>'+
+            '<td><input type="text" name="last_name[]" class="form-control"></td>'+
+            '<td><input type="date" name="DOB[]" placeholder="dd/mm/yyyy"  class="form-control"></td>'+
+            '<td>Segment-1</td>'+
+            '<td><input type="text" name="segment_one_fare_cost[]" step="0.01" placeholder="0.00" class="form-control mask-money"  onKeyUp="fareSell(this);"></td>'+
+            '<td><input type="text" name="segment_one_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare mask-money"  ></td>'+
+        '</tr>'+
+          '<tr class="fare-parent">'+
+            '<td colspan="4">&nbsp;</td>'+
+            '<td>Segment-2</td>'+
+            '<td><input type="text" name="segment_two_fare_cost[]" step="0.01" placeholder="0.00" class="form-control mask-money"  onKeyUp="fareSell(this);"></td>'+
+            '<td><input type="text" name="segment_two_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare mask-money"  ></td>'+
+          '</tr>';
+          $(test).parents('.box').find('.add_row_invoice').append(data);
+        //   $(".add_row_invoice").append(data);
+    }
+    function fareSell(temp){
+        $('.mask-money').maskMoney();
+        @if($client->client_type == 'Corporate')
+            var percentage = {{ $settings->corporate_percentage }};
+        @else
+            var percentage = {{ $settings->individual_percentage }};
+        @endif
+        var fare_cost = temp.value;
+        fare_cost = fare_cost.replace(/\,/g,'');
+        var fare_sell = Number(fare_cost) + Number((percentage / 100) * fare_cost );
+        $(temp).parents('.fare-parent').find('.fare').val(fare_sell);
+    }
+
     function SelectService(test){
 			var value = test.value;
 			if (value == 'Flight') {
-				var data = '<div class="box-body"> <div class="row">'+
-							'<div class="col-md-4">				<div class="form-group">'+
-							'<label for="service_name[]">Select Service</label>'+
-							'<select name="service_name[]" class="form-control service" required onChange="SelectService(this);">'+
-							'<option value="">--select--</option>							@if($products->count()>0)'+
-							'@foreach($products as $product)	'+
-							'<option value="{{$product->service}}" {{($product->service == "Flight")?"selected":''}}>{{$product->service}}</option>'+
-							'@endforeach							@endif					</select>				</div>'+
-							'</div>		</div><div class="row">		<div class="col-md-4">		<div class="form-group">'+
-							'<label for="airline_name">Airline Name</label>'+
-							'<div class="dropdown">			<div id="myDropdown" class="dropdown-content">'+
-							'<input type="text" class="form-control airline-name" placeholder="Search.." name="airline_name[]" id="myInput" onkeyup="AirlineDataExtract(this)"  required >'+
-							'<div class="airline_html"></div>'+
-							'</div>	</div>		</div>		</div>'+
-							'<div class="col-md-4">	<div class="form-group">	<label for="source">Departure</label>'+
-							'<div class="Airportdropdown">	<div id="AirportmyDropdown" class="Airportdropdown-content">'+
-							'<input type="text" class="form-control airport-name" placeholder="Search.." name="source[]" id="AirportmyInput" onkeyup="AirportDataExtract(this)"  required >'+
-							'<div class="airport_html"></div>	</div>		</div>		</div>		</div>'+
-							'<div class="col-md-4">		<div class="form-group">			<label for="destination">Arrival</label>'+
-							'<div class="AirportArrivaldropdown">	<div id="AirportArrivalmyDropdown" class="AirportArrivaldropdown-content">'+
-							'<input type="text" class="form-control airport-arrival-name" placeholder="Search.." name="destination[]" id="AirportArrivalmyInput" onkeyup="AirportArrivalDataExtract(this)"  required >'+
-							'<div class="airportArrival_html"></div>	</div>	</div>		</div>		</div>		</div><hr>'+
-							'<div class="row">		<div class="col-md-3">		<div class="form-group">	<label for="date_of_travel">Date</label>'+
-							'<input type="date" name="date_of_travel" required class="form-control">	</div>	</div>'+
-							'<div class="col-md-2">		<div class="form-group">	<label for="adult[]">Adult</label>'+
-							'<input type="text" name="adult[]" class="form-control" onKeyUp="FlightAmount()">	</div>	</div><div class="col-md-2">		<div class="form-group">	<label for="adult_price[]">Adult Price</label>'+
-							'<input type="text" name="adult_price[]" class="form-control" onKeyUp="FlightAmount()">	</div>	</div>	<div class="col-md-2">'+
-							'<div class="form-group">	<label for="child[]">Child</label>'+
-							'<input type="text" name="child[]" required class="form-control" onKeyUp="FlightAmount()">	</div>	</div> <div class="col-md-2">		<div class="form-group">	<label for="child_price[]">Child Price</label>'+
-							'<input type="text" name="child_price[]" class="form-control" onKeyUp="FlightAmount()">	</div>	</div>'+
-							'</div>'+
-							'<div class="row"><div class="col-md-2">	<div class="form-group">	<label for="infant[]">Infant</label>'+
-							'<input type="text" name="infant[]" required class="form-control" onKeyUp="FlightAmount()">	</div>	</div> <div class="col-md-2">	<div class="form-group">	<label for="infant_price[]">Infant Price</label>'+
-							'<input type="text" name="infant_price[]" required class="form-control" onKeyUp="FlightAmount()">	</div>	</div>'+
-							'<div class="col-md-4">	<div class="form-group">	<label for="flight_remarks[]">Remarks</label>'+
-							'<input type="text" name="flight_remarks[]" required class="form-control">	</div>	</div>		<div class="col-md-3">	<div class="form-group">	<label for="flight_amount[]">Amount</label>'+
-							'<input id="amount" type="number" name="flight_amount[]" required class="form-control" readonly>	'+
-							'</div>		</div></div><div align="right">'+
-							'<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">'+
-							'</div>	</div>	</div></div>';
-				$(test).closest(".box").html(data);
+                var temp = flight();
+				// var data = '<div class="box-body"> <div class="row">'+
+				// 			'<div class="col-md-4">				<div class="form-group">'+
+				// 			'<label for="service_name[]">Select Service</label>'+
+				// 			'<select name="service_name[]" class="form-control service" required onChange="SelectService(this);">'+
+				// 			'<option value="">--select--</option>							@if($products->count()>0)'+
+				// 			'@foreach($products as $product)	'+
+				// 			'<option value="{{$product->service}}" {{($product->service == "Flight")?"selected":''}}>{{$product->service}}</option>'+
+				// 			'@endforeach							@endif					</select>				</div>'+
+				// 			'</div>		</div><div class="row">		<div class="col-md-4">		<div class="form-group">'+
+				// 			'<label for="airline_name">Airline Name</label>'+
+				// 			'<div class="dropdown">			<div id="myDropdown" class="dropdown-content">'+
+				// 			'<input type="text" class="form-control airline-name" placeholder="Search.." name="airline_name[]" id="myInput" onkeyup="AirlineDataExtract(this)"  required >'+
+				// 			'<div class="airline_html"></div>'+
+				// 			'</div>	</div>		</div>		</div>'+
+				// 			'<div class="col-md-4">	<div class="form-group">	<label for="source">Departure</label>'+
+				// 			'<div class="Airportdropdown">	<div id="AirportmyDropdown" class="Airportdropdown-content">'+
+				// 			'<input type="text" class="form-control airport-name" placeholder="Search.." name="source[]" id="AirportmyInput" onkeyup="AirportDataExtract(this)"  required >'+
+				// 			'<div class="airport_html"></div>	</div>		</div>		</div>		</div>'+
+				// 			'<div class="col-md-4">		<div class="form-group">			<label for="destination">Arrival</label>'+
+				// 			'<div class="AirportArrivaldropdown">	<div id="AirportArrivalmyDropdown" class="AirportArrivaldropdown-content">'+
+				// 			'<input type="text" class="form-control airport-arrival-name" placeholder="Search.." name="destination[]" id="AirportArrivalmyInput" onkeyup="AirportArrivalDataExtract(this)"  required >'+
+				// 			'<div class="airportArrival_html"></div>	</div>	</div>		</div>		</div>		</div><hr>'+
+				// 			'<div class="row">		<div class="col-md-3">		<div class="form-group">	<label for="date_of_travel">Date</label>'+
+				// 			'<input type="date" name="date_of_travel" required class="form-control">	</div>	</div>'+
+				// 			'<div class="col-md-2">		<div class="form-group">	<label for="adult[]">Adult</label>'+
+				// 			'<input type="text" name="adult[]" class="form-control" onKeyUp="FlightAmount()">	</div>	</div><div class="col-md-2">		<div class="form-group">	<label for="adult_price[]">Adult Price</label>'+
+				// 			'<input type="text" name="adult_price[]" class="form-control" onKeyUp="FlightAmount()">	</div>	</div>	<div class="col-md-2">'+
+				// 			'<div class="form-group">	<label for="child[]">Child</label>'+
+				// 			'<input type="text" name="child[]" required class="form-control" onKeyUp="FlightAmount()">	</div>	</div> <div class="col-md-2">		<div class="form-group">	<label for="child_price[]">Child Price</label>'+
+				// 			'<input type="text" name="child_price[]" class="form-control" onKeyUp="FlightAmount()">	</div>	</div>'+
+				// 			'</div>'+
+				// 			'<div class="row"><div class="col-md-2">	<div class="form-group">	<label for="infant[]">Infant</label>'+
+				// 			'<input type="text" name="infant[]" required class="form-control" onKeyUp="FlightAmount()">	</div>	</div> <div class="col-md-2">	<div class="form-group">	<label for="infant_price[]">Infant Price</label>'+
+				// 			'<input type="text" name="infant_price[]" required class="form-control" onKeyUp="FlightAmount()">	</div>	</div>'+
+				// 			'<div class="col-md-4">	<div class="form-group">	<label for="flight_remarks[]">Remarks</label>'+
+				// 			'<input type="text" name="flight_remarks[]" required class="form-control">	</div>	</div>		<div class="col-md-3">	<div class="form-group">	<label for="flight_amount[]">Amount</label>'+
+				// 			'<input id="amount" type="number" name="flight_amount[]" required class="form-control" readonly>	'+
+				// 			'</div>		</div></div><div align="right">'+
+				// 			'<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">'+
+				// 			'</div>	</div>	</div></div>';
+				$(test).closest(".box").html(temp);
 			}
 			if (value == 'Visa Services') {
 				var options = "<option value=''>---SELECT---</option><option value='SELF'>SELF</option>";
@@ -726,15 +1136,17 @@ Edit Invoice
 				$(test).closest(".box").html(data);
 			}
 		}
-	function FlightAmount(){
-		for (var i = 0; i < document.getElementsByName("adult_price[]").length; i++) {
-			var adult_price = document.getElementsByName("adult_price[]")[i].value * document.getElementsByName("adult[]")[i].value;
-			var child_price = document.getElementsByName("child_price[]")[i].value * document.getElementsByName("child[]")[i].value;
-			var infant_price = document.getElementsByName("infant_price[]")[i].value * document.getElementsByName("infant[]")[i].value;
-			// var actual_amount = document.getElementsByName("flight_price[]")[i].value * document.getElementsByName("flight_quantity[]")[i].value;
-			document.getElementsByName("flight_amount[]")[i].value = Number(adult_price) + Number(child_price) + Number(infant_price);
-    	}
+        function FlightAmount(test){
+            var amount = 0;
+            var temp = $(test).parents('.box').find('.fare');
+            for (var i = 0; i < temp.length; i++) {
+                amount = Number(amount) + Number($(temp[i]).val());
+            }
+			test.value = amount;
+
+
 	}
+
 	function VisaAmount(){
 		for (var i = 0; i < document.getElementsByName("service_charge[]").length; i++) {
     		var actual_amount = document.getElementsByName("service_charge[]")[i].value - (-document.getElementsByName("visa_charges[]")[i].value);
@@ -782,6 +1194,59 @@ Edit Invoice
 		document.getElementsByName("discounted_total")[0].value = document.getElementById('currency').value + discounted;
     });
     });
+
+    function AirlineAssignTwo(temp){
+		var div = $(temp).closest(".dropdown-content-two");
+		div.find('.airline-name-two').val(temp.value);
+		$(temp).closest(".airline_html_two").html('');
+	  }
+	function AirportAssignTwo(temp){
+		var div = $(temp).closest(".Airportdropdown-content-two");
+		div.find('.airport-name-two').val(temp.value);
+		$(temp).closest(".airport_html_two").html('');
+	}
+	function AirportArrivalAssignTwo(temp){
+		var div = $(temp).closest(".AirportArrivaldropdown-content-two");
+		div.find('.airport-arrival-name-two').val(temp.value);
+		$(temp).closest(".airportArrival_html_two").html('');
+	}
+
+
+    function AirlineDataExtractTwo(test){
+        $value=test.value;
+        $.ajax({
+            type : 'get',
+            url : '{{URL::to('searchAirlineTwo')}}',
+            data:{'search':$value},
+            success:function(data){
+                $(test).next(".airline_html_two").html(data);
+            }
+        });
+    }
+
+    function AirportDataExtractTwo(test){
+        $value=test.value;
+        $.ajax({
+            type : 'get',
+            url : '{{URL::to('searchAirportTwo')}}',
+            data:{'search':$value},
+            success:function(data){
+                $(test).next(".airport_html_two").html(data);
+            }
+        });
+    }
+
+    function AirportArrivalDataExtractTwo(test){
+        $value=test.value;
+        $.ajax({
+            type : 'get',
+            url : '{{URL::to('searchAirportArrivalTwo')}}',
+            data:{'search':$value},
+            success:function(data){
+                $(test).next(".airportArrival_html_two").html(data);
+            }
+        });
+    }
 </script>
 
 
