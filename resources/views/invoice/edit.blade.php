@@ -237,103 +237,193 @@ Edit Invoice
 		</div>
 		</div>
 		<div id="target">
-		<?php $i = 1;?>
+        <?php $i = 1;?>
+        @foreach($invoice->flights as $flight)
+                <div class="box box-primary">
+                <div class="box-body">
+                        <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="service_name[]">Service Name</label>
+                                        <input name="service_name[]" class="form-control service" value="Flight" readonly required>
+                                    </div>
+                                </div>
+                            </div>
+
+
+        <div class="table-responsive">
+        <table class="table table-bordered">
+        <thead>
+                <tr>
+        <th>Universal PNR </th>
+        <th>PNR </th>
+        <th>E-Ticket No</th>
+        <th>Airline Ref </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td><input type="text" name="universal_pnr[]" value="{{ $flight->universal_pnr }}" class="form-control"></td>
+        <td><input type="text" name="pnr[]" value="{{ $flight->pnr }}" class="form-control pnr" onKeyUp="pnr(this);"></td>
+        <td><input type="text" name="agency_pcc[]" value="{{ $flight->agency_pcc }}" class="form-control"></td>
+        <td><input type="text" name="airline_ref[]" value="{{ $flight->airline_ref }}" class="form-control"></td>
+        </tr>
+        </tbody>
+        </table>
+        </div>
+
+        <div class="table-responsive">
+        <table class="table table-bordered">
+        <thead>
+        <tr>
+        <th>#</th>
+        <th width="250px">Flight</th>
+        <th width="250px">From</th>
+        <th width="250px">To</th>
+        <th>Carrier</th>
+        <th>Travel Class</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr >
+        <th>Segment-1</th>
+        <td>
+        <div class="dropdown">	<div id="myDropdown" class="dropdown-content">
+        <input type="text" name="segment_one_flight[]" value="{{ $flight->segment_one_flight }}" class="form-control airline-name" placeholder="Search..." id="myInput" onkeyup="AirlineDataExtract(this)">
+        <div class="airline_html"></div></div></div>
+        </td>
+        <td>
+        <div class="Airportdropdown">	<div id="AirportmyDropdown" class="Airportdropdown-content">
+        <input type="text" name="segment_one_from[]" value="{{ $flight->segment_one_from }}"  class="form-control airport-name" placeholder="Search..." id="AirportmyInput" onkeyup="AirportDataExtract(this)">
+        <div class="airport_html"></div></div></div>
+        </td>
+        <td>
+        <div class="AirportArrivaldropdown">	<div id="AirportArrivalmyDropdown" class="AirportArrivaldropdown-content">
+        <input type="text" name="segment_one_to[]" value="{{ $flight->segment_one_to }}" class="form-control airport-arrival-name" placeholder="Search..." id="AirportArrivalmyInput" onkeyup="AirportArrivalDataExtract(this)">
+        <div class="airportArrival_html"></div></div></div>
+        </td>
+        <td><input type="text" name="segment_one_carrier[]" value="{{ $flight->segment_one_carrier }}" class="form-control" ></td>
+        <td><select name="segment_one_class[]" class="form-control service"required >
+            <option value="">--select--</option>
+            <option value="Economy class" {{($flight->segment_one_class == 'Economy class')?"selected":" "}}>Economy class</option>
+            <option value="Premium Economy class" {{($flight->segment_one_class == 'Premium Economy class')?"selected":" "}}>Premium Economy class</option>
+            <option value="Business Class" {{($flight->segment_one_class == 'Business Class')?"selected":" "}}>Business Class</option>
+            <option value="First Class" {{($flight->segment_one_class == 'First Class')?"selected":" "}}>First Class</option>
+
+        </select></td>
+        </tr>
+        <tr>
+        <th>Departure:</th>
+        <td><input type="datetime-local" placeholder="dd/mm/yyyy" name="segment_one_departure[]" value="{{ $flight->segment_one_departure }}" class="form-control" ></td>
+        <th align="right">Arrival:</th>
+        <td><input type="datetime-local" placeholder="dd/mm/yyyy" name="segment_one_arrival[]" value="{{ $flight->segment_one_arrival }}" class="form-control" ></td>
+        </tr>
+        <tr>
+        <td class="colspan-6"></td>
+        </tr>
+        <tr>
+        <th>Segment-2</th>
+        <td>
+        <div class="dropdownTwo">			<div id="myDropdownTwo" class="dropdown-content-two">
+        <input type="text" name="segment_two_flight[]" value="{{ $flight->segment_two_flight }}" class="form-control airline-name-two" placeholder="Search.."  id="myInputTwo" onkeyup="AirlineDataExtractTwo(this)"  required >
+        <div class="airline_html_two"></div></div>	</div>
+        </td>
+        <td>
+        <div class="AirportdropdownTwo">	<div id="AirportmyDropdownTwo" class="Airportdropdown-content-two">
+        <input type="text" name="segment_two_from[]" value="{{ $flight->segment_two_from }}" class="form-control airport-name-two" placeholder="Search..." id="AirportmyInputTwo" onkeyup="AirportDataExtractTwo(this)">
+        <div class="airport_html_two"></div></div></div>
+        </td>
+        <td>
+        <div class="AirportArrivaldropdownTwo">	<div id="AirportArrivalmyDropdownTwo" class="AirportArrivaldropdown-content-two">
+        <input type="text" name="segment_two_to[]" value="{{ $flight->segment_two_to }}" class="form-control airport-arrival-name-two" placeholder="Search..." id="AirportArrivalmyInputTwo" onkeyup="AirportArrivalDataExtractTwo(this)">
+        <div class="airportArrival_html_two"></div></div></div>
+        </td>
+        <td><input type="text" name="segment_two_carrier[]" value="{{ $flight->segment_two_carrier }}" class="form-control" ></td>
+        <td><select name="segment_two_class[]" class="form-control service"required >
+            <option value="">--select--</option>
+            <option value="Economy class" {{($flight->segment_two_class == 'Economy class')?"selected":" "}}>Economy class</option>
+            <option value="Premium Economy class" {{($flight->segment_two_class == 'Premium Economy class')?"selected":" "}}>Premium Economy class</oion>
+            <option value="Business Class" {{($flight->segment_two_class == 'Business Class')?"selected":" "}}>Business Class</option>
+            <option value="First Class" {{($flight->segment_two_class == 'First Class')?"selected":" "}}>First Class</option>
+        </select></td>
+        </tr>
+        <tr>
+        <th>Departure:</th>
+        <td><input type="datetime-local" placeholder="dd/mm/yyyy" name="segment_two_departure[]" value="{{ $flight->segment_two_departure }}" class="form-control" ></td>
+        <th align="right">Arrival:</th>
+        <td><input type="datetime-local" placeholder="dd/mm/yyyy" name="segment_two_arrival[]" value="{{ $flight->segment_two_arrival }}" class="form-control" ></td>
+        </tr>
+        </tbody>
+        </table>
+        </div>
+
+
+        <div class="table-responsive" id="passengers">
+        <div class="col-md-12 text-right" style="margin-bottom:20px;"><button type="button" class="btn btn-sm btn-info" onClick="addPassenger(this);">Add Passenger </button></div>
+        <table class="add_row_invoice table table-bordered" id="passenger">
+        <thead>
+        <tr >
+        <th width="120px;">Pax Type*</th>
+        <th width="180px;">First Name</th>
+        <th width="180px;">Last Name</th>
+        <th>Date of Birth*</th>
+        <th>&nbsp;</th>
+        <th>Fare Cost</th>
+        <th>Fare Sell</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach($flight->passengers as $passenger)
+        <tr class="fare-parent">
+        <td>
+        <input type="text" name="verify[]" hidden class="verify"><select name="pax_type[]" class="form-control select-custom custom-select">
+        <option value="">--Select--</option>
+        <option value="Adult" {{($passenger->pax_type == 'ADULT')?"selected":" "}}>Adult</option>
+        <option value="Youth" {{($passenger->pax_type == 'YOUTH')?"selected":" "}}>Youth</option>
+        <option value="Child" {{($passenger->pax_type == 'CHILD')?"selected":" "}}>Child</option>
+        <option value="Infant" {{($passenger->pax_type == 'INFANT')?"selected":" "}}>Infant</option>
+        </select>
+        </td>
+        <td><input type="text" name="first_name[]" value="{{ $passenger->first_name }}" class="form-control"></td>
+        <td><input type="text" name="last_name[]" value="{{ $passenger->last_name }}" class="form-control"></td>
+        <td><input type="date" name="DOB[]" value="{{ $passenger->DOB }}" placeholder="dd/mm/yyyy"  class="form-control"></td>
+        <td>Segment-1</td>
+        <td><input type="text" name="segment_one_fare_cost[]" value="{{ $passenger->segment_one_fare_cost }}" step="0.01" placeholder="0.00" class="form-control mask-money"   required onKeyUp="fareSell(this);"></td>
+        <td><input type="text" name="segment_one_fare_sell[]" step="0.01" value="{{ $passenger->segment_one_fare_sell }}" placeholder="0.00" class="form-control fare mask-money"  required></td>
+        </tr>
+        <tr class="fare-parent">
+        <td colspan="4">&nbsp;</td>
+        <td>Segment-2</td>
+        <td><input type="text" name="segment_two_fare_cost[]" value="{{ $passenger->segment_two_fare_cost }}" step="0.01" placeholder="0.00" class="form-control mask-money"   required onKeyUp="fareSell(this);"></td>
+        <td><input type="text" name="segment_two_fare_sell[]" step="0.01" value="{{ $passenger->segment_two_fare_sell }}" placeholder="0.00" class="form-control fare mask-money"   required></td>
+        </tr>
+        @endforeach
+        <div ></div>
+        </tbody>
+        </table>
+        </div>
+
+        <div align="right">
+        <div class="row">
+        <div class="col-md-10">
+        <h3><strong>Total Amount:</strong></h3>
+        </div>
+        <div class="col-md-2">
+        <br><input type="text" name="flight_amount[]" value="{{ $flight->total_amount }}" onClick="FlightAmount(this);" class="form-control flight_amount" >
+        </div>
+        </div>
+        </div>
+        <div align="right">
+        <br><input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">
+        </div>
+        </div>
+        </div>
+        @endforeach
 			@foreach ($invoice->invoiceInfo as $info)
 				<div class="box box-primary">
 					<div class="box-body">
-							@if($info->service_name == 'Flight')
-							<input type="text" hidden value="{{$info->id}}">
-									<div class="row">
-										<div class="col-md-4">
-											<div class="form-group">
-												<label for="service_name[]"><strong>{{$i++}}.</strong>	Service Name</label>
-												<input name="service_name[]" class="form-control service" value="{{$info->service_name}}" readonly required>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-4">
-											<div class="form-group">
-												<label for="airline_name">Airline Name</label>
-												<input type="text" name="airline_name[]" value="{{$info->airline_name}}" required class="form-control">
-											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="form-group">
-												<label for="source">Departure</label>
-												<input type="text" name="source[]" value="{{$info->source}}" class="form-control">
-											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="form-group">
-												<label for="destination">Arrival</label>
-												<input type="text" name="destination[]" value="{{$info->destination}}" required class="form-control">
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-3">
-											<div class="form-group">
-												<label for="date_of_travel">Date</label>
-												<input type="date" name="date_of_travel[]" value="{{$info->date_of_travel}}" required class="form-control">
-											</div>
-										</div>
-										<div class="col-md-2">
-											<div class="form-group">
-												<label for="adult[]">Adult</label>
-												<input type="text" name="adult[]" value="{{$info->adult}}" class="form-control" onKeyUp="FlightAmount()">
-											</div>
-										</div>
-										<div class="col-md-2">
-											<div class="form-group">
-												<label for="adult_price[]">Adult Price</label>
-												<input type="text" name="adult_price[]" value="{{$info->adult_price}}" class="form-control" onKeyUp="FlightAmount()">
-											</div>
-										</div>
-										<div class="col-md-2">
-											<div class="form-group">
-												<label for="child[]">Child</label>
-												<input type="text" name="child[]" value="{{$info->child}}" required class="form-control" onKeyUp="FlightAmount()">
-											</div>
-										</div>
-										<div class="col-md-2">
-											<div class="form-group">
-												<label for="child_price[]">Child Price</label>
-												<input type="text" name="child_price[]" value="{{$info->child_price}}" required class="form-control" onKeyUp="FlightAmount()">
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-2">
-											<div class="form-group">
-												<label for="infant[]">Infant</label>
-												<input type="text" name="infant[]" value="{{$info->infant}}" required class="form-control" onKeyUp="FlightAmount()">
-											</div>
-										</div>
-										<div class="col-md-2">
-											<div class="form-group">
-												<label for="infant_price[]">Infant Price</label>
-												<input type="text" name="infant_price[]" value="{{$info->infant_price}}" required class="form-control" onKeyUp="FlightAmount()">
-											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="form-group">
-												<label for="flight_remarks[]">Remarks</label>
-												<input type="text" name="flight_remarks[]" value="{{$info->flight_remarks}}" required class="form-control">
-											</div>
-										</div>
-										<div class="col-md-3">
-											<div class="form-group">
-												<label for="flight_amount[]">Amount</label>
-												<input id="amount" type="number" name="flight_amount[]" value="{{$info->flight_amount}}" required class="form-control" readonly>
-											</div>
-										</div>
-									</div>
-									<div align="right">
-										<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">
-									</div>
-
-							@elseif($info->service_name == 'Visa Services')
+							@if($info->service_name == 'Visa Services')
 							<input type="text" hidden value="{{$info->id}}">
 									<div class="row">
 										<div class="col-md-4">
