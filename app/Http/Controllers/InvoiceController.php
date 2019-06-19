@@ -410,13 +410,18 @@ class InvoiceController extends Controller
      */
     public function edit($id)
     {
+        $dt = Carbon::now();
+        $dt->timezone('Asia/Kolkata');
+        $date_today = $dt->timezone('Europe/London');
+        $date = $date_today->toDateString();
         $invoice = invoice::find($id);
         $client = client::find($invoice->client_id);
         return view('invoice.edit')->with('invoice',$invoice)
                                         ->with('products',products::all())
                                         ->with('airlines',airlines::all())
                                         ->with('client',$client)
-                                        ->with('settings',ClientSettings::first());
+                                        ->with('settings',ClientSettings::first())
+                                        ->with('date',$date);
 
 
     }
