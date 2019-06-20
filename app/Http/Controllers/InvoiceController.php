@@ -221,26 +221,26 @@ class InvoiceController extends Controller
             //
         $flight = new Flight;
         $flight->invoice_id = $invoice->id;
-        $flight->universal_pnr = $request->universal_pnr[$flight_counter];
-        $flight->pnr = $request->pnr[$flight_counter];
-        $flight->agency_pcc = $request->agency_pcc[$flight_counter];
-        $flight->airline_ref = $request->airline_ref[$flight_counter];
+        $flight->universal_pnr = strtoupper($request->universal_pnr[$flight_counter]);
+        $flight->pnr = strtoupper($request->pnr[$flight_counter]);
+        $flight->agency_pcc = strtoupper($request->agency_pcc[$flight_counter]);
+        $flight->airline_ref = strtoupper($request->airline_ref[$flight_counter]);
         $flight->total_amount = $request->flight_amount[$flight_counter];
-        $flight->segment_one_from = $request->segment_one_from[$flight_counter];
-        $flight->segment_two_from = $request->segment_two_from[$flight_counter];
-        $flight->segment_one_to = $request->segment_one_to[$flight_counter];
-        $flight->segment_two_to = $request->segment_two_to[$flight_counter];
-        $flight->segment_one_carrier = $request->segment_one_carrier[$flight_counter];
-        $flight->segment_two_carrier = $request->segment_two_carrier[$flight_counter];
-        $flight->segment_one_flight = $request->segment_one_flight[$flight_counter];
-        $flight->segment_two_flight = $request->segment_two_flight[$flight_counter];
-        $flight->segment_one_class = $request->segment_one_class[$flight_counter];
-        $flight->segment_two_class = $request->segment_two_class[$flight_counter];
+        $flight->segment_one_from = strtoupper($request->segment_one_from[$flight_counter]);
+        $flight->segment_two_from = strtoupper($request->segment_two_from[$flight_counter]);
+        $flight->segment_one_to = strtoupper($request->segment_one_to[$flight_counter]);
+        $flight->segment_two_to = strtoupper($request->segment_two_to[$flight_counter]);
+        $flight->segment_one_carrier = strtoupper($request->segment_one_carrier[$flight_counter]);
+        $flight->segment_two_carrier = strtoupper($request->segment_two_carrier[$flight_counter]);
+        $flight->segment_one_flight = strtoupper($request->segment_one_flight[$flight_counter]);
+        $flight->segment_two_flight = strtoupper($request->segment_two_flight[$flight_counter]);
+        $flight->segment_one_class = strtoupper($request->segment_one_class[$flight_counter]);
+        $flight->segment_two_class = strtoupper($request->segment_two_class[$flight_counter]);
         $flight->segment_one_departure = $request->segment_one_departure[$flight_counter];
         $flight->segment_two_departure = $request->segment_two_departure[$flight_counter];
         $flight->segment_one_arrival = $request->segment_one_arrival[$flight_counter];
         $flight->segment_two_arrival = $request->segment_two_arrival[$flight_counter];
-        $flight->flight_remarks = $request->flight_remarks[$flight_counter];
+        $flight->flight_remarks = strtoupper($request->flight_remarks[$flight_counter]);
         $flight->save();
 
         foreach($request->pax_type as $index=>$pax_type){
@@ -272,7 +272,7 @@ class InvoiceController extends Controller
                             $invoice_info->name_of_visa_applicant = strtoupper($request->name_of_visa_applicant[$visa_counter]);
                             $invoice_info->passport_origin = strtoupper($request->passport_origin[$visa_counter]);
                             $invoice_info->passport_member_dob = $request->passport_member_dob[$visa_counter];
-                            $invoice_info->passport_no = $request->passport_no[$visa_counter];
+                            $invoice_info->passport_no = strtoupper($request->passport_no[$visa_counter]);
                             $invoice_info->visa_country = strtoupper($request->visa_country[$visa_counter]);
                             $invoice_info->visa_type = strtoupper($request->visa_type[$visa_counter]);
                             $invoice_info->visa_charges = $request->visa_charges[$visa_counter];
@@ -293,7 +293,7 @@ class InvoiceController extends Controller
                             $invoice_info->name_of_insurance_applicant = strtoupper($request->name_of_insurance_applicant[$insurance_counter]);
                             $invoice_info->name_of_insurance_company = strtoupper($request->name_of_insurance_company[$insurance_counter]);
                             $invoice_info->insurance_amount = $request->insurance_amount[$insurance_counter];
-                            $invoice_info->insurance_remarks = $request->insurance_remarks[$insurance_counter];
+                            $invoice_info->insurance_remarks = strtoupper($request->insurance_remarks[$insurance_counter]);
 
                         $invoice_info->save();
                         $insurance_counter++;
@@ -327,7 +327,7 @@ class InvoiceController extends Controller
 
 
                             $invoice_info->local_sight_sceen_amount = $request->local_sight_sceen_amount[$local_sight_sceen_counter];
-                            $invoice_info->local_sight_sceen_remarks = $request->local_sight_sceen_remarks[$local_sight_sceen_counter];
+                            $invoice_info->local_sight_sceen_remarks = strtoupper($request->local_sight_sceen_remarks[$local_sight_sceen_counter]);
 
                         $invoice_info->save();
                         $local_sight_sceen_counter++;
@@ -341,7 +341,7 @@ class InvoiceController extends Controller
 
 
                             $invoice_info->local_transport_amount = $request->local_transport_amount[$local_transport_counter];
-                            $invoice_info->local_transport_remarks = $request->local_transport_remarks[$local_transport_counter];
+                            $invoice_info->local_transport_remarks = strtoupper($request->local_transport_remarks[$local_transport_counter]);
 
                         $invoice_info->save();
                         $local_transport_counter++;
@@ -355,7 +355,7 @@ class InvoiceController extends Controller
 
 
                             $invoice_info->car_rental_amount = $request->car_rental_amount[$car_rental_counter];
-                            $invoice_info->car_rental_remarks = $request->car_rental_remarks[$car_rental_counter];
+                            $invoice_info->car_rental_remarks = strtoupper($request->car_rental_remarks[$car_rental_counter]);
 
                         $invoice_info->save();
                         $car_rental_counter++;
@@ -369,7 +369,7 @@ class InvoiceController extends Controller
 
 
                             $invoice_info->other_facilities_amount = $request->other_facilities_amount[$other_facilities_counter];
-                            $invoice_info->other_facilities_remarks = $request->other_facilities_remarks[$other_facilities_counter];
+                            $invoice_info->other_facilities_remarks = strtoupper($request->other_facilities_remarks[$other_facilities_counter]);
 
                         $invoice_info->save();
                         $other_facilities_counter++;
@@ -466,26 +466,26 @@ class InvoiceController extends Controller
             if ($request->service_name[$k]=='Flight') {
                 $flight = new Flight;
                 $flight->invoice_id = $invoice->id;
-                $flight->universal_pnr = $request->universal_pnr[$flight_counter];
-                $flight->pnr = $request->pnr[$flight_counter];
-                $flight->agency_pcc = $request->agency_pcc[$flight_counter];
-                $flight->airline_ref = $request->airline_ref[$flight_counter];
+                $flight->universal_pnr = strtoupper($request->universal_pnr[$flight_counter]);
+                $flight->pnr = strtoupper($request->pnr[$flight_counter]);
+                $flight->agency_pcc = strtoupper($request->agency_pcc[$flight_counter]);
+                $flight->airline_ref = strtoupper($request->airline_ref[$flight_counter]);
                 $flight->total_amount = $request->flight_amount[$flight_counter];
-                $flight->segment_one_from = $request->segment_one_from[$flight_counter];
-                $flight->segment_two_from = $request->segment_two_from[$flight_counter];
-                $flight->segment_one_to = $request->segment_one_to[$flight_counter];
-                $flight->segment_two_to = $request->segment_two_to[$flight_counter];
-                $flight->segment_one_carrier = $request->segment_one_carrier[$flight_counter];
-                $flight->segment_two_carrier = $request->segment_two_carrier[$flight_counter];
-                $flight->segment_one_flight = $request->segment_one_flight[$flight_counter];
-                $flight->segment_two_flight = $request->segment_two_flight[$flight_counter];
-                $flight->segment_one_class = $request->segment_one_class[$flight_counter];
-                $flight->segment_two_class = $request->segment_two_class[$flight_counter];
+                $flight->segment_one_from = strtoupper($request->segment_one_from[$flight_counter]);
+                $flight->segment_two_from = strtoupper($request->segment_two_from[$flight_counter]);
+                $flight->segment_one_to = strtoupper($request->segment_one_to[$flight_counter]);
+                $flight->segment_two_to = strtoupper($request->segment_two_to[$flight_counter]);
+                $flight->segment_one_carrier = strtoupper($request->segment_one_carrier[$flight_counter]);
+                $flight->segment_two_carrier = strtoupper($request->segment_two_carrier[$flight_counter]);
+                $flight->segment_one_flight = strtoupper($request->segment_one_flight[$flight_counter]);
+                $flight->segment_two_flight = strtoupper($request->segment_two_flight[$flight_counter]);
+                $flight->segment_one_class = strtoupper($request->segment_one_class[$flight_counter]);
+                $flight->segment_two_class = strtoupper($request->segment_two_class[$flight_counter]);
                 $flight->segment_one_departure = $request->segment_one_departure[$flight_counter];
                 $flight->segment_two_departure = $request->segment_two_departure[$flight_counter];
                 $flight->segment_one_arrival = $request->segment_one_arrival[$flight_counter];
                 $flight->segment_two_arrival = $request->segment_two_arrival[$flight_counter];
-                $flight->flight_remarks = $request->flight_remarks[$flight_counter];
+                $flight->flight_remarks = strtoupper($request->flight_remarks[$flight_counter]);
                 $flight->save();
 
             foreach($request->pax_type as $index=>$pax_type){
@@ -513,12 +513,12 @@ class InvoiceController extends Controller
                         $invoice_info->service_name = 'Visa Services';
 
 
-                            $invoice_info->name_of_visa_applicant = $request->name_of_visa_applicant[$visa_counter];
-                            $invoice_info->passport_origin = $request->passport_origin[$visa_counter];
+                            $invoice_info->name_of_visa_applicant = strtoupper($request->name_of_visa_applicant[$visa_counter]);
+                            $invoice_info->passport_origin = strtoupper($request->passport_origin[$visa_counter]);
                             $invoice_info->passport_member_dob = $request->passport_member_dob[$visa_counter];
-                            $invoice_info->passport_no = $request->passport_no[$visa_counter];
-                            $invoice_info->visa_country = $request->visa_country[$visa_counter];
-                            $invoice_info->visa_type = $request->visa_type[$visa_counter];
+                            $invoice_info->passport_no = strtoupper($request->passport_no[$visa_counter]);
+                            $invoice_info->visa_country = strtoupper($request->visa_country[$visa_counter]);
+                            $invoice_info->visa_type = strtoupper($request->visa_type[$visa_counter]);
                             $invoice_info->visa_charges = $request->visa_charges[$visa_counter];
                             $invoice_info->service_charge = $request->service_charge[$visa_counter];
                             $invoice_info->visa_amount = $request->visa_amount[$visa_counter];
@@ -534,9 +534,9 @@ class InvoiceController extends Controller
                         $invoice_info->service_name = 'Insurance';
 
 
-                            $invoice_info->name_of_insurance_applicant = $request->name_of_insurance_applicant[$insurance_counter];
+                            $invoice_info->name_of_insurance_applicant = strtoupper($request->name_of_insurance_applicant[$insurance_counter]);
                             $invoice_info->insurance_amount = $request->insurance_amount[$insurance_counter];
-                            $invoice_info->insurance_remarks = $request->insurance_remarks[$insurance_counter];
+                            $invoice_info->insurance_remarks = strtoupper($request->insurance_remarks[$insurance_counter]);
 
                         $invoice_info->save();
                         $insurance_counter++;
@@ -549,9 +549,9 @@ class InvoiceController extends Controller
                         $invoice_info->service_name = 'Hotel';
 
 
-                            $invoice_info->hotel_city = $request->hotel_city[$hotel_counter];
-                            $invoice_info->hotel_country = $request->hotel_country[$hotel_counter];
-                            $invoice_info->hotel_name = $request->hotel_name[$hotel_counter];
+                            $invoice_info->hotel_city = strtoupper($request->hotel_city[$hotel_counter]);
+                            $invoice_info->hotel_country = strtoupper($request->hotel_country[$hotel_counter]);
+                            $invoice_info->hotel_name = strtoupper($request->hotel_name[$hotel_counter]);
                             $invoice_info->check_in_date = $request->check_in_date[$hotel_counter];
                             $invoice_info->check_out_date = $request->check_out_date[$hotel_counter];
                             $invoice_info->no_of_children = $request->no_of_children[$hotel_counter];
@@ -570,7 +570,7 @@ class InvoiceController extends Controller
 
 
                             $invoice_info->local_sight_sceen_amount = $request->local_sight_sceen_amount[$local_sight_sceen_counter];
-                            $invoice_info->local_sight_sceen_remarks = $request->local_sight_sceen_remarks[$local_sight_sceen_counter];
+                            $invoice_info->local_sight_sceen_remarks = strtoupper($request->local_sight_sceen_remarks[$local_sight_sceen_counter]);
 
                         $invoice_info->save();
                         $local_sight_sceen_counter++;
@@ -584,7 +584,7 @@ class InvoiceController extends Controller
 
 
                             $invoice_info->local_transport_amount = $request->local_transport_amount[$local_transport_counter];
-                            $invoice_info->local_transport_remarks = $request->local_transport_remarks[$local_transport_counter];
+                            $invoice_info->local_transport_remarks = strtoupper($request->local_transport_remarks[$local_transport_counter]);
 
                         $invoice_info->save();
                         $local_transport_counter++;
@@ -598,7 +598,7 @@ class InvoiceController extends Controller
 
 
                             $invoice_info->car_rental_amount = $request->car_rental_amount[$car_rental_counter];
-                            $invoice_info->car_rental_remarks = $request->car_rental_remarks[$car_rental_counter];
+                            $invoice_info->car_rental_remarks = strtoupper($request->car_rental_remarks[$car_rental_counter]);
 
                         $invoice_info->save();
                         $car_rental_counter++;
@@ -612,7 +612,7 @@ class InvoiceController extends Controller
 
 
                             $invoice_info->other_facilities_amount = $request->other_facilities_amount[$other_facilities_counter];
-                            $invoice_info->other_facilities_remarks = $request->other_facilities_remarks[$other_facilities_counter];
+                            $invoice_info->other_facilities_remarks = strtoupper($request->other_facilities_remarks[$other_facilities_counter]);
 
                         $invoice_info->save();
                         $other_facilities_counter++;

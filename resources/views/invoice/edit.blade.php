@@ -272,7 +272,7 @@ Edit Invoice
                         <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="service_name[]">Service Name</label>
+                                        <label for="service_name[]"><strong>{{$i++}}.</strong>Service Name</label>
                                         <input name="service_name[]" class="form-control service" value="Flight" readonly required>
                                     </div>
                                 </div>
@@ -334,10 +334,10 @@ Edit Invoice
         <td><input type="text" name="segment_one_carrier[]" value="{{ $flight->segment_one_carrier }}" class="form-control" ></td>
         <td><select name="segment_one_class[]" class="form-control service"required >
             <option value="">--select--</option>
-            <option value="Economy class" {{($flight->segment_one_class == 'Economy class')?"selected":" "}}>Economy class</option>
-            <option value="Premium Economy class" {{($flight->segment_one_class == 'Premium Economy class')?"selected":" "}}>Premium Economy class</option>
-            <option value="Business Class" {{($flight->segment_one_class == 'Business Class')?"selected":" "}}>Business Class</option>
-            <option value="First Class" {{($flight->segment_one_class == 'First Class')?"selected":" "}}>First Class</option>
+            <option value="Economy class" {{($flight->segment_one_class == 'ECONOMY CLASS')?"selected":" "}}>Economy class</option>
+            <option value="Premium Economy class" {{($flight->segment_one_class == 'PREMIUM ECONOMY CLASS')?"selected":" "}}>Premium Economy class</option>
+            <option value="Business Class" {{($flight->segment_one_class == 'BUSINESS CLASS')?"selected":" "}}>Business Class</option>
+            <option value="First Class" {{($flight->segment_one_class == 'FIRST CLASS')?"selected":" "}}>First Class</option>
 
         </select></td>
         </tr>
@@ -370,10 +370,10 @@ Edit Invoice
         <td><input type="text" name="segment_two_carrier[]" value="{{ $flight->segment_two_carrier }}" class="form-control" ></td>
         <td><select name="segment_two_class[]" class="form-control service"required >
             <option value="">--select--</option>
-            <option value="Economy class" {{($flight->segment_two_class == 'Economy class')?"selected":" "}}>Economy class</option>
-            <option value="Premium Economy class" {{($flight->segment_two_class == 'Premium Economy class')?"selected":" "}}>Premium Economy class</oion>
-            <option value="Business Class" {{($flight->segment_two_class == 'Business Class')?"selected":" "}}>Business Class</option>
-            <option value="First Class" {{($flight->segment_two_class == 'First Class')?"selected":" "}}>First Class</option>
+            <option value="Economy class" {{($flight->segment_two_class == 'ECONOMY CLASS')?"selected":" "}}>Economy class</option>
+            <option value="Premium Economy class" {{($flight->segment_two_class == 'PREMIUM ECONOMY CLASS')?"selected":" "}}>Premium Economy class</oion>
+            <option value="Business Class" {{($flight->segment_two_class == 'BUSINESS CLASS')?"selected":" "}}>Business Class</option>
+            <option value="First Class" {{($flight->segment_two_class == 'FIRST CLASS')?"selected":" "}}>First Class</option>
         </select></td>
         </tr>
         <tr>
