@@ -896,7 +896,7 @@ Create Invoice
             var amount = 0;
             var temp = $(test).parents('.box').find('.fare');
             for (var i = 0; i < temp.length; i++) {
-                amount = Number(amount) + Number($(temp[i]).val());
+                amount = Number(amount) + Number($(temp[i]).val().replace(/\,/g,''));
             }
 			test.value = amount;
 
@@ -905,7 +905,7 @@ Create Invoice
 
 	function VisaAmount(){
 		for (var i = 0; i < document.getElementsByName("service_charge[]").length; i++) {
-    		var actual_amount = document.getElementsByName("service_charge[]")[i].value - (-document.getElementsByName("visa_charges[]")[i].value);
+    		var actual_amount = document.getElementsByName("service_charge[]")[i].value.replace(/\,/g,'') - (-document.getElementsByName("visa_charges[]")[i].value.replace(/\,/g,''));
      		document.getElementsByName("visa_amount[]")[i].value =actual_amount;
 
     	}
@@ -925,28 +925,28 @@ Create Invoice
 		var total_car_rental_amount = 0;
 		var total_local_transport_amount = 0;
     	for (var i = 0; i < document.getElementsByName("flight_amount[]").length; i++) {
-    		var total_flight_amount = total_flight_amount - (-document.getElementsByName("flight_amount[]")[i].value);
+    		var total_flight_amount = total_flight_amount - (-document.getElementsByName("flight_amount[]")[i].value.replace(/\,/g,''));
     	}
 		for (var i = 0; i < document.getElementsByName("visa_amount[]").length; i++) {
-    		var total_visa_amount = total_visa_amount - (-document.getElementsByName("visa_amount[]")[i].value);
+    		var total_visa_amount = total_visa_amount - (-document.getElementsByName("visa_amount[]")[i].value.replace(/\,/g,''));
     	}
 		for (var i = 0; i < document.getElementsByName("hotel_amount[]").length; i++) {
-    		var total_hotel_amount = total_hotel_amount - (-document.getElementsByName("hotel_amount[]")[i].value);
+    		var total_hotel_amount = total_hotel_amount - (-document.getElementsByName("hotel_amount[]")[i].value.replace(/\,/g,''));
     	}
 		for (var i = 0; i < document.getElementsByName("insurance_amount[]").length; i++) {
-    		var total_insurance_amount = total_insurance_amount - (-document.getElementsByName("insurance_amount[]")[i].value);
+    		var total_insurance_amount = total_insurance_amount - (-document.getElementsByName("insurance_amount[]")[i].value.replace(/\,/g,''));
     	}
 		for (var i = 0; i < document.getElementsByName("local_sight_sceen_amount[]").length; i++) {
-    		var total_local_sight_sceen_amount = total_local_sight_sceen_amount - (-document.getElementsByName("local_sight_sceen_amount[]")[i].value);
+    		var total_local_sight_sceen_amount = total_local_sight_sceen_amount - (-document.getElementsByName("local_sight_sceen_amount[]")[i].value.replace(/\,/g,''));
     	}
 		for (var i = 0; i < document.getElementsByName("other_facilities_amount[]").length; i++) {
-    		var total_other_facilities_amount = total_other_facilities_amount - (-document.getElementsByName("other_facilities_amount[]")[i].value);
+    		var total_other_facilities_amount = total_other_facilities_amount - (-document.getElementsByName("other_facilities_amount[]")[i].value.replace(/\,/g,''));
     	}
 		for (var i = 0; i < document.getElementsByName("car_rental_amount[]").length; i++) {
-    		var total_car_rental_amount = total_car_rental_amount - (-document.getElementsByName("car_rental_amount[]")[i].value);
+    		var total_car_rental_amount = total_car_rental_amount - (-document.getElementsByName("car_rental_amount[]")[i].value.replace(/\,/g,''));
     	}
 		for (var i = 0; i < document.getElementsByName("local_transport_amount[]").length; i++) {
-    		var total_local_transport_amount = total_local_transport_amount - (-document.getElementsByName("local_transport_amount[]")[i].value);
+    		var total_local_transport_amount = total_local_transport_amount - (-document.getElementsByName("local_transport_amount[]")[i].value.replace(/\,/g,''));
     	}
 		total_amount = Number(total_flight_amount) + Number(total_visa_amount) + Number(total_hotel_amount) + Number(total_insurance_amount) + Number(total_local_sight_sceen_amount) + Number(total_other_facilities_amount) + Number(total_car_rental_amount) + Number(total_local_transport_amount) ;
 		document.getElementsByName("total")[0].value = total_amount;

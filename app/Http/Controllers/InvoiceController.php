@@ -225,7 +225,7 @@ class InvoiceController extends Controller
         $flight->pnr = strtoupper($request->pnr[$flight_counter]);
         $flight->agency_pcc = strtoupper($request->agency_pcc[$flight_counter]);
         $flight->airline_ref = strtoupper($request->airline_ref[$flight_counter]);
-        $flight->total_amount = $request->flight_amount[$flight_counter];
+        $flight->total_amount =  str_replace(',', '', $request->flight_amount[$flight_counter]);
         $flight->segment_one_from = strtoupper($request->segment_one_from[$flight_counter]);
         $flight->segment_two_from = strtoupper($request->segment_two_from[$flight_counter]);
         $flight->segment_one_to = strtoupper($request->segment_one_to[$flight_counter]);
@@ -252,10 +252,10 @@ class InvoiceController extends Controller
                 $passenger->first_name = strtoupper($request->first_name[$index]);
                 $passenger->last_name = strtoupper($request->last_name[$index]);
                 $passenger->DOB = $request->DOB[$index];
-                $passenger->segment_one_fare_cost = $request->segment_one_fare_cost[$index];
-                $passenger->segment_two_fare_cost = $request->segment_two_fare_cost[$index];
-                $passenger->segment_one_fare_sell = $request->segment_one_fare_sell[$index];
-                $passenger->segment_two_fare_sell = $request->segment_two_fare_sell[$index];
+                $passenger->segment_one_fare_cost = str_replace(',', '', $request->segment_one_fare_cost[$index]);
+                $passenger->segment_two_fare_cost = str_replace(',', '', $request->segment_two_fare_cost[$index]);
+                $passenger->segment_one_fare_sell = str_replace(',', '', $request->segment_one_fare_sell[$index]);
+                $passenger->segment_two_fare_sell = str_replace(',', '', $request->segment_two_fare_sell[$index]);
                 $passenger->save();
             }
         }
@@ -275,9 +275,9 @@ class InvoiceController extends Controller
                             $invoice_info->passport_no = strtoupper($request->passport_no[$visa_counter]);
                             $invoice_info->visa_country = strtoupper($request->visa_country[$visa_counter]);
                             $invoice_info->visa_type = strtoupper($request->visa_type[$visa_counter]);
-                            $invoice_info->visa_charges = $request->visa_charges[$visa_counter];
-                            $invoice_info->service_charge = $request->service_charge[$visa_counter];
-                            $invoice_info->visa_amount = $request->visa_amount[$visa_counter];
+                            $invoice_info->visa_charges = str_replace(',', '', $request->visa_charges[$visa_counter]);
+                            $invoice_info->service_charge = str_replace(',', '', $request->service_charge[$visa_counter]);
+                            $invoice_info->visa_amount = str_replace(',', '', $request->visa_amount[$visa_counter]);
 
                         $invoice_info->save();
                         $visa_counter++;
@@ -292,7 +292,7 @@ class InvoiceController extends Controller
 
                             $invoice_info->name_of_insurance_applicant = strtoupper($request->name_of_insurance_applicant[$insurance_counter]);
                             $invoice_info->name_of_insurance_company = strtoupper($request->name_of_insurance_company[$insurance_counter]);
-                            $invoice_info->insurance_amount = $request->insurance_amount[$insurance_counter];
+                            $invoice_info->insurance_amount = str_replace(',', '', $request->insurance_amount[$insurance_counter]);
                             $invoice_info->insurance_remarks = strtoupper($request->insurance_remarks[$insurance_counter]);
 
                         $invoice_info->save();
@@ -313,7 +313,7 @@ class InvoiceController extends Controller
                             $invoice_info->check_out_date = $request->check_out_date[$hotel_counter];
                             $invoice_info->no_of_children = $request->no_of_children[$hotel_counter];
                             $invoice_info->no_of_rooms = $request->no_of_rooms[$hotel_counter];
-                            $invoice_info->hotel_amount = $request->hotel_amount[$hotel_counter];
+                            $invoice_info->hotel_amount = str_replace(',', '', $request->hotel_amount[$hotel_counter]);
 
                         $invoice_info->save();
                         $hotel_counter++;
@@ -326,7 +326,7 @@ class InvoiceController extends Controller
                         $invoice_info->service_name = 'Local Sight Sceen';
 
 
-                            $invoice_info->local_sight_sceen_amount = $request->local_sight_sceen_amount[$local_sight_sceen_counter];
+                            $invoice_info->local_sight_sceen_amount = str_replace(',', '', $request->local_sight_sceen_amount[$local_sight_sceen_counter]);
                             $invoice_info->local_sight_sceen_remarks = strtoupper($request->local_sight_sceen_remarks[$local_sight_sceen_counter]);
 
                         $invoice_info->save();
@@ -340,7 +340,7 @@ class InvoiceController extends Controller
                         $invoice_info->service_name = 'Local Transport';
 
 
-                            $invoice_info->local_transport_amount = $request->local_transport_amount[$local_transport_counter];
+                            $invoice_info->local_transport_amount = str_replace(',', '', $request->local_transport_amount[$local_transport_counter]);
                             $invoice_info->local_transport_remarks = strtoupper($request->local_transport_remarks[$local_transport_counter]);
 
                         $invoice_info->save();
@@ -354,7 +354,7 @@ class InvoiceController extends Controller
                         $invoice_info->service_name = 'Car Rental';
 
 
-                            $invoice_info->car_rental_amount = $request->car_rental_amount[$car_rental_counter];
+                            $invoice_info->car_rental_amount = str_replace(',', '', $request->car_rental_amount[$car_rental_counter]);
                             $invoice_info->car_rental_remarks = strtoupper($request->car_rental_remarks[$car_rental_counter]);
 
                         $invoice_info->save();
@@ -368,7 +368,7 @@ class InvoiceController extends Controller
                         $invoice_info->service_name = 'Other Facilities';
 
 
-                            $invoice_info->other_facilities_amount = $request->other_facilities_amount[$other_facilities_counter];
+                            $invoice_info->other_facilities_amount = str_replace(',', '', $request->other_facilities_amount[$other_facilities_counter]);
                             $invoice_info->other_facilities_remarks = strtoupper($request->other_facilities_remarks[$other_facilities_counter]);
 
                         $invoice_info->save();
@@ -470,7 +470,7 @@ class InvoiceController extends Controller
                 $flight->pnr = strtoupper($request->pnr[$flight_counter]);
                 $flight->agency_pcc = strtoupper($request->agency_pcc[$flight_counter]);
                 $flight->airline_ref = strtoupper($request->airline_ref[$flight_counter]);
-                $flight->total_amount = $request->flight_amount[$flight_counter];
+                $flight->total_amount = str_replace(',', '', $request->flight_amount[$flight_counter]);
                 $flight->segment_one_from = strtoupper($request->segment_one_from[$flight_counter]);
                 $flight->segment_two_from = strtoupper($request->segment_two_from[$flight_counter]);
                 $flight->segment_one_to = strtoupper($request->segment_one_to[$flight_counter]);
@@ -497,10 +497,10 @@ class InvoiceController extends Controller
                     $passenger->first_name = strtoupper($request->first_name[$index]);
                     $passenger->last_name = strtoupper($request->last_name[$index]);
                     $passenger->DOB = $request->DOB[$index];
-                    $passenger->segment_one_fare_cost = $request->segment_one_fare_cost[$index];
-                    $passenger->segment_two_fare_cost = $request->segment_two_fare_cost[$index];
-                    $passenger->segment_one_fare_sell = $request->segment_one_fare_sell[$index];
-                    $passenger->segment_two_fare_sell = $request->segment_two_fare_sell[$index];
+                    $passenger->segment_one_fare_cost = str_replace(',', '', $request->segment_one_fare_cost[$index]);
+                    $passenger->segment_two_fare_cost = str_replace(',', '', $request->segment_two_fare_cost[$index]);
+                    $passenger->segment_one_fare_sell = str_replace(',', '', $request->segment_one_fare_sell[$index]);
+                    $passenger->segment_two_fare_sell = str_replace(',', '', $request->segment_two_fare_sell[$index]);
                     $passenger->save();
                 }
         }
@@ -520,8 +520,8 @@ class InvoiceController extends Controller
                             $invoice_info->visa_country = strtoupper($request->visa_country[$visa_counter]);
                             $invoice_info->visa_type = strtoupper($request->visa_type[$visa_counter]);
                             $invoice_info->visa_charges = $request->visa_charges[$visa_counter];
-                            $invoice_info->service_charge = $request->service_charge[$visa_counter];
-                            $invoice_info->visa_amount = $request->visa_amount[$visa_counter];
+                            $invoice_info->service_charge = str_replace(',', '', $request->service_charge[$visa_counter]);
+                            $invoice_info->visa_amount = str_replace(',', '', $request->visa_amount[$visa_counter]);
 
                         $invoice_info->save();
                         $visa_counter++;
@@ -535,7 +535,7 @@ class InvoiceController extends Controller
 
 
                             $invoice_info->name_of_insurance_applicant = strtoupper($request->name_of_insurance_applicant[$insurance_counter]);
-                            $invoice_info->insurance_amount = $request->insurance_amount[$insurance_counter];
+                            $invoice_info->insurance_amount = str_replace(',', '', $request->insurance_amount[$insurance_counter]);
                             $invoice_info->insurance_remarks = strtoupper($request->insurance_remarks[$insurance_counter]);
 
                         $invoice_info->save();
@@ -556,7 +556,7 @@ class InvoiceController extends Controller
                             $invoice_info->check_out_date = $request->check_out_date[$hotel_counter];
                             $invoice_info->no_of_children = $request->no_of_children[$hotel_counter];
                             $invoice_info->no_of_rooms = $request->no_of_rooms[$hotel_counter];
-                            $invoice_info->hotel_amount = $request->hotel_amount[$hotel_counter];
+                            $invoice_info->hotel_amount = str_replace(',', '', $request->hotel_amount[$hotel_counter]);
 
                         $invoice_info->save();
                         $hotel_counter++;
@@ -569,7 +569,7 @@ class InvoiceController extends Controller
                         $invoice_info->service_name = 'Local Sight Sceen';
 
 
-                            $invoice_info->local_sight_sceen_amount = $request->local_sight_sceen_amount[$local_sight_sceen_counter];
+                            $invoice_info->local_sight_sceen_amount = str_replace(',', '', $request->local_sight_sceen_amount[$local_sight_sceen_counter]);
                             $invoice_info->local_sight_sceen_remarks = strtoupper($request->local_sight_sceen_remarks[$local_sight_sceen_counter]);
 
                         $invoice_info->save();
@@ -583,7 +583,7 @@ class InvoiceController extends Controller
                         $invoice_info->service_name = 'Local Transport';
 
 
-                            $invoice_info->local_transport_amount = $request->local_transport_amount[$local_transport_counter];
+                            $invoice_info->local_transport_amount = str_replace(',', '', $request->local_transport_amount[$local_transport_counter]);
                             $invoice_info->local_transport_remarks = strtoupper($request->local_transport_remarks[$local_transport_counter]);
 
                         $invoice_info->save();
@@ -597,7 +597,7 @@ class InvoiceController extends Controller
                         $invoice_info->service_name = 'Car Rental';
 
 
-                            $invoice_info->car_rental_amount = $request->car_rental_amount[$car_rental_counter];
+                            $invoice_info->car_rental_amount = str_replace(',', '', $request->car_rental_amount[$car_rental_counter]);
                             $invoice_info->car_rental_remarks = strtoupper($request->car_rental_remarks[$car_rental_counter]);
 
                         $invoice_info->save();
@@ -611,7 +611,7 @@ class InvoiceController extends Controller
                         $invoice_info->service_name = 'Other Facilities';
 
 
-                            $invoice_info->other_facilities_amount = $request->other_facilities_amount[$other_facilities_counter];
+                            $invoice_info->other_facilities_amount = str_replace(',', '', $request->other_facilities_amount[$other_facilities_counter]);
                             $invoice_info->other_facilities_remarks = strtoupper($request->other_facilities_remarks[$other_facilities_counter]);
 
                         $invoice_info->save();
