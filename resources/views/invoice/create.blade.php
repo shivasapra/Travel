@@ -182,7 +182,7 @@ Create Invoice
 
 
             /* Dropdown Content (Hidden by Default) */
-            .Country-content {
+            .Countrydropdown-content {
             display: block;
             position:absolute;
             background-color: #f6f6f6;
@@ -192,7 +192,7 @@ Create Invoice
             }
 
             /* Links inside the dropdown */
-            .Country-content-two a {
+            .Countrydropdown-content a {
             color: black;
             padding: 12px 16px;
             text-decoration: none;
@@ -200,7 +200,7 @@ Create Invoice
             }
 
             /* Change color of dropdown links on hover */
-            .Country-content-two a:hover {background-color: #f1f1f1}
+            .Countrydropdown-content a:hover {background-color: #f1f1f1}
 
         </style>
 @stop
@@ -850,7 +850,7 @@ Create Invoice
                 var date ="{{ $date }}";
             }
 				var data = '<div class="box-body"> <div class="row">			<div class="col-md-4">				<div class="form-group">					<label for="service_name[]">Select Service</label>					<select name="service_name[]" class="form-control service" required onChange="SelectService(this);">							<option value="">--select--</option>							@if($products->count()>0)							@foreach($products as $product)								<option value="{{$product->service}}" {{($product->service == "Hotel")?"selected":''}}>{{$product->service}}</option>							@endforeach							@endif					</select>				</div>			</div>		</div> <div class="row">		<div class="col-md-6">		<div class="form-group">			<label for="hotel_city">City</label>			<input type="text" name="hotel_city[]" required class="form-control">		</div>		</div>'+
-                '<div class="col-md-6">		<div class="form-group">			<label for="hotel_country">Country</label>'+
+                '<div class="col-md-6">		<div class="form-group">			<label for="hotel_country[]">Country</label>'+
                 // '<input type="text" name="hotel_country[]" class="form-control">'+
                 '<div class="Countrydropdown">	<div id="CountrymyDropdown" class="Countrydropdown-content">'+
                 '<input type="text" name="hotel_country[]" class="form-control country-name" placeholder="Search..." id="CountrymyInput" onkeyup="CountryExtract(this)">'+
@@ -1028,7 +1028,7 @@ Create Invoice
 
     function CountryExtract(test){
         $value=test.value;
-        console.log($value);
+        // console.log($value);
 
         $.ajax({
             type : 'get',
@@ -1036,14 +1036,16 @@ Create Invoice
             data:{'search':$value},
             success:function(data){
                 $(test).next(".country_html").html(data);
-                console.log(data);
+                // console.log(data);
             }
         });
 
     }
 
     function CountryAssign(temp){
-		var div = $(temp).closest(".country-content");
+		var div = $(temp).closest(".Countrydropdown-content");
+        // console.log(temp.value);
+
 		div.find('.country-name').val(temp.value);
 		$(temp).closest(".country_html").html('');
 	}

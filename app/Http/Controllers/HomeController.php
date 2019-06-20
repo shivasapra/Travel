@@ -339,7 +339,7 @@ class HomeController extends Controller
         if($request->ajax()){
             $output="";
             $country = Countries::where('name','LIKE','%'.$request->search."%")->get();
-            dd($country);
+            // dd($country);
 
             if($country){
                     foreach ($country as $key => $product) {

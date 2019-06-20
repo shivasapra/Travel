@@ -11,7 +11,8 @@ class CountrySeeder extends Seeder
      */
     public function run()
     {
-
+        $dt = Carbon\Carbon::now();
+        $date_today = $dt->timezone('Europe/London');
         App\Countries::create( [
             'id'=>1,
             'name'=>'China',
