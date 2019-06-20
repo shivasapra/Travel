@@ -760,11 +760,11 @@ Edit Invoice
 				</tr>
 				<tr>
 					<td class="col-md-8" align="right"><strong>SubTotal:</strong></td>
-					<td class="col-md-4"><input name="total"  type="text" id="total" required class="form-control" readonly></td>
+					<td class="col-md-4"><input name="total"  type="text" id="total" required class="form-control mask-money-total" readonly></td>
 				</tr>
 				<tr>
 					<td class="col-md-8" align="right"><strong>Discount:</strong></td>
-					<td class="col-md-4"><input name="discount" type="text" id="discount" value="{{$invoice->discount}}" required class="form-control" value="0"></td>
+					<td class="col-md-4"><input name="discount" type="text" id="discount" value="{{$invoice->discount}}" required class="form-control mask-money-total" value="0"></td>
 				</tr>
 				<tr>
 					<td class="col-md-8" align="right"><strong>Total:</strong></td>
@@ -1336,10 +1336,11 @@ Edit Invoice
 		for (var i = 0; i < document.getElementsByName("local_transport_amount[]").length; i++) {
     		var total_local_transport_amount = total_local_transport_amount - (-document.getElementsByName("local_transport_amount[]")[i].value.replace(/\,/g,''));
     	}
+        $('.mask-money-total').maskMoney();
 		total_amount = Number(total_flight_amount) + Number(total_visa_amount) + Number(total_hotel_amount) + Number(total_insurance_amount) + Number(total_local_sight_sceen_amount) + Number(total_other_facilities_amount) + Number(total_car_rental_amount) + Number(total_local_transport_amount) ;
-		document.getElementsByName("total")[0].value = total_amount;
+		document.getElementsByName("total")[0].value = total_amount.toFixed(2);
 		var discounted = Number(total_amount) - document.getElementsByName("discount")[0].value;
-		document.getElementsByName("discounted_total")[0].value = document.getElementById('currency').value + discounted;
+		document.getElementsByName("discounted_total")[0].value = document.getElementById('currency').value + discounted.toFixed(2);
     });
     });
 
