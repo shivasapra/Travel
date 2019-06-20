@@ -42,9 +42,9 @@ class CreateInvoiceInfosTable extends Migration
             $table->string('passport_no')->nullable();
             $table->string('visa_country')->nullable();
             $table->string('visa_type')->nullable();
-            $table->string('visa_charges')->nullable();
-            $table->string('service_charge')->nullable();
-            $table->string('visa_amount')->nullable();
+            $table->float('visa_charges')->nullable();
+            $table->float('service_charge')->nullable();
+            $table->float('visa_amount')->nullable();
 
             $table->string('hotel_city')->nullable();
             $table->string('hotel_country')->nullable();
@@ -53,23 +53,23 @@ class CreateInvoiceInfosTable extends Migration
             $table->string('check_out_date')->nullable();
             $table->string('no_of_children')->nullable();
             $table->string('no_of_rooms')->nullable();
-            $table->string('hotel_amount')->nullable();
+            $table->float('hotel_amount')->nullable();
 
             $table->string('name_of_insurance_applicant')->nullable();
             $table->string('name_of_insurance_company')->nullable();
-            $table->string('insurance_amount')->nullable();
+            $table->float('insurance_amount')->nullable();
             $table->string('insurance_remarks')->nullable();
 
-            $table->string('local_sight_sceen_amount')->nullable();
+            $table->float('local_sight_sceen_amount')->nullable();
             $table->string('local_sight_sceen_remarks')->nullable();
 
-            $table->string('other_facilities_amount')->nullable();
+            $table->float('other_facilities_amount')->nullable();
             $table->string('other_facilities_remarks')->nullable();
 
-            $table->string('car_rental_amount')->nullable();
+            $table->float('car_rental_amount')->nullable();
             $table->string('car_rental_remarks')->nullable();
 
-            $table->string('local_transport_amount')->nullable();
+            $table->float('local_transport_amount')->nullable();
             $table->string('local_transport_remarks')->nullable();
 
             $table->timestamps();

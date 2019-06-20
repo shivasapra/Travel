@@ -21,7 +21,7 @@ class CreateFlightsTable extends Migration
             $table->string('pnr')->nullable();
             $table->string('agency_pcc')->nullable();
             $table->string('airline_ref')->nullable();
-            $table->string('total_amount')->nullable();
+            $table->float('total_amount')->nullable();
 
             $table->string('segment_one_from')->nullable();
             $table->string('segment_two_from')->nullable();
