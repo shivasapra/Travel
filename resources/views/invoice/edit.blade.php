@@ -417,14 +417,14 @@ Edit Invoice
         <td><input type="text" name="last_name[]" value="{{ $passenger->last_name }}" class="form-control"></td>
         <td><input type="date" name="DOB[]" value="{{ $passenger->DOB }}" placeholder="dd/mm/yyyy"  class="form-control"></td>
         <td>Segment-1</td>
-        <td><input type="text" name="segment_one_fare_cost[]" value="{{ $passenger->segment_one_fare_cost }}" step="0.01" placeholder="0.00" class="form-control mask-money"   required onKeyUp="fareSell(this);"></td>
-        <td><input type="text" name="segment_one_fare_sell[]" step="0.01" value="{{ $passenger->segment_one_fare_sell }}" placeholder="0.00" class="form-control fare mask-money"  required></td>
+        <td><input type="text" name="segment_one_fare_cost[]" value="{{number_format( (float) $passenger->segment_one_fare_cost, 2, '.', '')  }}" step="0.01" placeholder="0.00" class="form-control mask-money"   required onKeyUp="fareSell(this);"></td>
+        <td><input type="text" name="segment_one_fare_sell[]" step="0.01" value="{{number_format( (float) $passenger->segment_one_fare_sell, 2, '.', '')  }}" placeholder="0.00" class="form-control fare mask-money"  required></td>
         </tr>
         <tr class="fare-parent">
         <td colspan="4">&nbsp;</td>
         <td>Segment-2</td>
-        <td><input type="text" name="segment_two_fare_cost[]" value="{{ $passenger->segment_two_fare_cost }}" step="0.01" placeholder="0.00" class="form-control mask-money"   required onKeyUp="fareSell(this);"></td>
-        <td><input type="text" name="segment_two_fare_sell[]" step="0.01" value="{{ $passenger->segment_two_fare_sell }}" placeholder="0.00" class="form-control fare mask-money"   required></td>
+        <td><input type="text" name="segment_two_fare_cost[]" value="{{number_format( (float) $passenger->segment_two_fare_cost, 2, '.', '')  }}" step="0.01" placeholder="0.00" class="form-control mask-money"   required onKeyUp="fareSell(this);"></td>
+        <td><input type="text" name="segment_two_fare_sell[]" step="0.01" value="{{   number_format( (float) $passenger->segment_two_fare_sell, 2, '.', '')  }}" placeholder="0.00" class="form-control fare mask-money"   required></td>
         </tr>
         @endforeach
         <div ></div>
@@ -438,7 +438,7 @@ Edit Invoice
         <h3><strong>Total Amount:</strong></h3>
         </div>
         <div class="col-md-2">
-        <br><input type="text" name="flight_amount[]" value="{{ $flight->total_amount }}" onClick="FlightAmount(this);" class="form-control flight_amount" >
+        <br><input type="text" name="flight_amount[]" value="{{ number_format( (float) $flight->total_amount, 2, '.', '') }}" onClick="FlightAmount(this);" class="form-control flight_amount" >
         </div>
         </div>
         </div>
@@ -503,7 +503,7 @@ Edit Invoice
 										<div class="col-md-4">
 											<div class="form-group">
 												<label for="visa_charges[]">Visa Fee</label>
-												<input type="text" name="visa_charges[]" value="{{$info->visa_charges}}" class="form-control mask-money" onKeyUp="VisaAmount()">
+												<input type="text" name="visa_charges[]" value="{{ number_format( (float) $info->visa_charges, 2, '.', '')}}" class="form-control mask-money" onKeyUp="VisaAmount()">
 											</div>
 										</div>
 									</div>
@@ -511,13 +511,13 @@ Edit Invoice
 										<div class="col-md-4">
 											<div class="form-group">
 												<label for="service_charge[]">Service Charge</label>
-												<input id="service_charge" type="text" name="service_charge[]" value="{{$info->service_charge}}" required class="form-control mask-money" onKeyUp="VisaAmount()">
+												<input id="service_charge" type="text" name="service_charge[]" value="{{ number_format( (float) $info->service_charge, 2, '.', '')}}" required class="form-control mask-money" onKeyUp="VisaAmount()">
 											</div>
 										</div>
 										<div class="col-md-4">
 											<div class="form-group">
 												<label for="visa_amount">Amount</label>
-												<input id="amount" type="number" name="visa_amount[]" value="{{$info->visa_amount}}" required class="form-control" readonly>
+												<input id="amount" type="number" name="visa_amount[]" value="{{  number_format( (float) $info->visa_amount, 2, '.', '')  }}" required class="form-control" readonly>
 											</div>
 										</div>
 									</div>
@@ -531,7 +531,7 @@ Edit Invoice
 										<div class="col-md-4">
 											<div class="form-group">
 												<label for="service_name[]"><strong>{{$i++}}.</strong> Service Name</label>
-												<input name="service_name[]" class="form-control service" value="{{$info->service_name}}" readonly required>
+												<input name="service_name[]" class="form-control service" value="{{ $info->service_name}}" readonly required>
 											</div>
 										</div>
 									</div>
@@ -585,7 +585,7 @@ Edit Invoice
 										<div class="col-md-3">
 											<div class="form-group">
 												<label for="hotel_amount[]">Amount</label>
-												<input type="text" name="hotel_amount[]" value="{{$info->hotel_amount}}" class="form-control mask-money">
+												<input type="text" name="hotel_amount[]" value="{{ number_format( (float) $info->hotel_amount, 2, '.', '')}}" class="form-control mask-money">
 											</div>
 										</div>
 									</div>
@@ -619,7 +619,7 @@ Edit Invoice
 										<div class="col-md-4">
 											<div class="form-group">
 												<label for="insurance_amount[]">Insurance Amount</label>
-												<input type="text" name="insurance_amount[]" value="{{$info->insurance_amount}}" required class="form-control mask-money">
+												<input type="text" name="insurance_amount[]" value="{{ number_format( (float) $info->insurance_amount, 2, '.', '')}}" required class="form-control mask-money">
 											</div>
 										</div>
 									</div>
@@ -647,7 +647,7 @@ Edit Invoice
 										<div class="col-md-6">
 											<div class="form-group">
 												<label for="local_sight_sceen_amount[]">Sight Sceen Charges</label>
-												<input type="text" name="local_sight_sceen_amount[]" value="{{$info->local_sight_sceen_amount}}" required class="form-control mask-money">
+												<input type="text" name="local_sight_sceen_amount[]" value="{{  number_format( (float) $info->local_sight_sceen_amount, 2, '.', '')}}" required class="form-control mask-money">
 											</div>
 										</div>
 									</div>
@@ -675,7 +675,7 @@ Edit Invoice
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="local_transport_amount[]">Transport Charges</label>
-											<input type="text" name="local_transport_amount[]" value="{{$info->local_transport_amount}}" required class="form-control mask-money">
+											<input type="text" name="local_transport_amount[]" value="{{ number_format( (float) $info->local_transport_amount, 2, '.', '')}}" required class="form-control mask-money">
 										</div>
 									</div>
 								</div>
@@ -703,7 +703,7 @@ Edit Invoice
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="car_rental_amount[]">Car Rental Charges</label>
-											<input type="text" name="car_rental_amount[]" value="{{$info->car_rental_amount}}" required class="form-control mask-money">
+											<input type="text" name="car_rental_amount[]" value="{{ number_format( (float) $info->car_rental_amount, 2, '.', '')}}" required class="form-control mask-money">
 										</div>
 									</div>
 								</div>
@@ -731,7 +731,7 @@ Edit Invoice
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="other_facilities_amount[]">Other Facilities Charges</label>
-											<input type="text" name="other_facilities_amount[]" value="{{$info->other_facilities_amount}}" required class="form-control mask-money">
+											<input type="text" name="other_facilities_amount[]" value="{{  number_format( (float) $info->other_facilities_amount, 2, '.', '')}}" required class="form-control mask-money">
 										</div>
 									</div>
 								</div>

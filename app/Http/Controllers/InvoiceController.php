@@ -437,6 +437,7 @@ class InvoiceController extends Controller
     {
         $invoice = invoice::find($id);
         $invoice->discount = $request->discount;
+        dd($invoice->discount);
         $invoice->currency = $request->currency;
         $invoice->total = $request->total;
         $invoice->discounted_total =$request->total - $request->discount;
@@ -519,7 +520,7 @@ class InvoiceController extends Controller
                             $invoice_info->passport_no = strtoupper($request->passport_no[$visa_counter]);
                             $invoice_info->visa_country = strtoupper($request->visa_country[$visa_counter]);
                             $invoice_info->visa_type = strtoupper($request->visa_type[$visa_counter]);
-                            $invoice_info->visa_charges = $request->visa_charges[$visa_counter];
+                            $invoice_info->visa_charges = str_replace(',', '', $request->visa_charges[$visa_counter]);
                             $invoice_info->service_charge = str_replace(',', '', $request->service_charge[$visa_counter]);
                             $invoice_info->visa_amount = str_replace(',', '', $request->visa_amount[$visa_counter]);
 

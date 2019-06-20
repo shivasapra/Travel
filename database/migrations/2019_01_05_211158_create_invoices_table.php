@@ -22,7 +22,7 @@ class CreateInvoicesTable extends Migration
             $table->string('invoice_no');
             $table->string('total');
             $table->string('currency')->nullable();
-            $table->integer('discount')->nullable();
+            $table->float('discount')->nullable();
             $table->integer('discounted_total')->nullable();
             $table->boolean('credit')->default(0);
             $table->float('credit_amount')->nullable();
