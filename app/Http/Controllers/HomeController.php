@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\employee;
 use App\client;
+use App\Countries;
 use App\expenses;
 use App\products;
 use App\airlines;
@@ -337,7 +338,9 @@ class HomeController extends Controller
     public function CountrySearch(Request $request){
         if($request->ajax()){
             $output="";
-            $country= App\Country::where('name','LIKE','%'.$request->search."%")->get();
+            $country = Countries::where('name','LIKE','%'.$request->search."%")->get();
+            dd($country);
+
             if($country){
                     foreach ($country as $key => $product) {
                         $output.='<a><option onClick="CountryAssign(this)" value="'.$product->name.'">'.$product->name.'</option></a>';
@@ -346,4 +349,6 @@ class HomeController extends Controller
             }
         }
     }
+
+
 }

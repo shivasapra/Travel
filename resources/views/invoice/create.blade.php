@@ -1028,14 +1028,18 @@ Create Invoice
 
     function CountryExtract(test){
         $value=test.value;
+        console.log($value);
+
         $.ajax({
             type : 'get',
             url : '{{URL::to('searchCountry')}}',
             data:{'search':$value},
             success:function(data){
-                $(test).next(".country").html(data);
+                $(test).next(".country_html").html(data);
+                console.log(data);
             }
         });
+
     }
 
     function CountryAssign(temp){
