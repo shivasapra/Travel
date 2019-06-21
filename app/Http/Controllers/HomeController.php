@@ -116,7 +116,8 @@ class HomeController extends Controller
         $clients = client::all();
         foreach ($clients as $client) {
             if ($client->invoice == null and $client->created_at->toDateString() == Carbon::now()->addDays(-1)->toDateString()) {
-                array_push($client_inactive_emails,$client->user->email);
+                $email = User::find($client->creator_id)->email;
+                array_push($client_inactive_emails,$email);
             }
         }
         if ($client_inactive_emails != null) {
@@ -225,7 +226,8 @@ class HomeController extends Controller
             $clients = client::all();
             foreach ($clients as $client) {
                 if ($client->invoice == null and $client->created_at->toDateString() == Carbon::now()->addDays(-1)->toDateString()) {
-                    array_push($client_inactive_emails,$client->user->email);
+                    $email = User::find($client->creator_id)->email;
+                    array_push($client_inactive_emails,$email);
                 }
             }
             $paid_invoices = invoice::where('status',1)->get();
