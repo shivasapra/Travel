@@ -160,7 +160,6 @@ class HomeController extends Controller
                                         ->with('messages',$messages);
         }
         else{
-            // dd();
             return view('clients.home')->with('assignments',assignment::where('date',Carbon::now()->timezone('Europe/London')->toDateString()));
         }
     }
