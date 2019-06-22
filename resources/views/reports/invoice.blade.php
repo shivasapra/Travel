@@ -31,7 +31,7 @@ Paid Invoices
                   <option value="">--select--</option>
                   @if($products->count()>0)
                   @foreach($products as $product)
-                    <option value="{{$product->service}}">{{$product->service}}</option>
+                    <option value="{{$product->service}}" {{($service_name == $product->service)?"selected":" "}}>{{$product->service}}</option>
                   @endforeach
                   @endif
               </select>
@@ -58,14 +58,14 @@ Paid Invoices
                     	
 	                    	@foreach($invoices as $invoice)
 	                    	<tr>
-	                    		<td>{{$invoice->invoice_no}}</td>
-	                    		<td>{{$invoice->invoice_date}}</td>
-	                    		<td>{{$invoice->receiver_name}}</td>
-													<?php $total = $invoice->discounted_total + $invoice->VAT_amount ?>
-					                <td>{{$invoice->currency}}{{$total}}</td>
+	                    		<td>{{$invoice->invoice->invoice_no}}</td>
+	                    		<td>{{$invoice->invoice->invoice_date}}</td>
+	                    		<td>{{$invoice->invoice->receiver_name}}</td>
+													<?php $total = $invoice->invoice->discounted_total + $invoice->invoice->VAT_amount ?>
+					                <td>{{$invoice->invoice->currency}}{{$total}}</td>
 
 
-	                    		@if($invoice->status == 1)
+	                    		@if($invoice->invoice->status == 1)
 	                    		<td><div class="text-success">{{'Paid'}}</div></td>
 	                    		@else
 	                    		<td><div class="text-danger">{{'Unpaid'}}</div></td>

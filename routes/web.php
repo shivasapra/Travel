@@ -328,8 +328,11 @@ Route::get('/visa/report',[
 Route::get('/document/movement/report',[
 	'uses'=> 'ReportController@docMovement',
 	'as'=>'docmov.report'
-		])->middleware('permission:View/Export Reports');
-
+])->middleware('permission:View/Export Reports');
+Route::post('/service',[
+'uses'=> 'ReportController@invoice',
+'as'=>'service'
+])->middleware('permission:View/Export Reports');
 
 
 
