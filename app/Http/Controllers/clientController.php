@@ -88,7 +88,7 @@ class clientController extends Controller
         $client->city = $request->city;
         $client->county = $request->county;
         $client->country = $request->country;
-        $client->DOB = $request->DOB;
+        $client->DOB = Carbon::parse($request->DOB)->format('d-m-Y');
         $client->email = $request->email;
         $client->phone = $request->phone;
         $client->permanent = $request->permanent;
@@ -138,7 +138,7 @@ class clientController extends Controller
                 $client_family = new ClientFamily;
                 $client_family->client_id = $client->id;
                 $client_family->member_name = $member_name;
-                $client_family->member_DOB = $request->member_DOB[$index];
+                $client_family->member_DOB = Carbon::parse($request->member_DOB[$index])->format('d-m-Y');
                 $client_family->member_passport_no = $request->member_passport_no[$index];
                 $client_family->member_passport_place = $request->member_passport_place[$index];
                 if($request->hasFile('member_passport_front'))

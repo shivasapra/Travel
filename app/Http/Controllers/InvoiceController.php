@@ -437,7 +437,7 @@ class InvoiceController extends Controller
     {
         $invoice = invoice::find($id);
         $invoice->discount = $request->discount;
-        dd($invoice->discount);
+        // dd($invoice->discount);
         $invoice->currency = $request->currency;
         $invoice->total = $request->total;
         $invoice->discounted_total =$request->total - $request->discount;

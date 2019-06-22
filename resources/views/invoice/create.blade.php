@@ -4,11 +4,8 @@ Create Invoice
 @endsection
 @section('css')
 <style>
-
     /* The search field when it gets focus/clicked on */
     #myInput:focus {outline: 3px solid #ddd;}
-
-
     /* Dropdown Content (Hidden by Default) */
     .dropdown-content {
     display: block;
@@ -18,7 +15,6 @@ Create Invoice
     border: 1px solid #ddd;
     z-index: 1;
     }
-
     /* Links inside the dropdown */
     .dropdown-content a {
     color: black;
@@ -26,18 +22,13 @@ Create Invoice
     text-decoration: none;
     display: block;
     }
-
     /* Change color of dropdown links on hover */
     .dropdown-content a:hover {background-color: #f1f1f1}
-
 </style>
 
 <style>
-
     /* The search field when it gets focus/clicked on */
     #myInputTwo:focus {outline: 3px solid #ddd;}
-
-
     /* Dropdown Content (Hidden by Default) */
     .dropdown-content-two {
     display: block;
@@ -47,7 +38,6 @@ Create Invoice
     border: 1px solid #ddd;
     z-index: 1;
     }
-
     /* Links inside the dropdown */
     .dropdown-content-two a {
     color: black;
@@ -55,18 +45,13 @@ Create Invoice
     text-decoration: none;
     display: block;
     }
-
     /* Change color of dropdown links on hover */
     .dropdown-content-two a:hover {background-color: #f1f1f1}
-
 </style>
 
 	<style>
-
 		/* The search field when it gets focus/clicked on */
 		#AirportmyInput:focus {outline: 3px solid #ddd;}
-
-
 		/* Dropdown Content (Hidden by Default) */
 		.Airportdropdown-content {
 		display: block;
@@ -76,7 +61,6 @@ Create Invoice
 		border: 1px solid #ddd;
 		z-index: 1;
 		}
-
 		/* Links inside the dropdown */
 		.Airportdropdown-content a {
 		color: black;
@@ -84,18 +68,13 @@ Create Invoice
 		text-decoration: none;
 		display: block;
 		}
-
 		/* Change color of dropdown links on hover */
 		.Airportdropdown-content a:hover {background-color: #f1f1f1}
-
     </style>
 
 <style>
-
     /* The search field when it gets focus/clicked on */
     #AirportmyInputTwo:focus {outline: 3px solid #ddd;}
-
-
     /* Dropdown Content (Hidden by Default) */
     .Airportdropdown-content-two {
     display: block;
@@ -105,7 +84,6 @@ Create Invoice
     border: 1px solid #ddd;
     z-index: 1;
     }
-
     /* Links inside the dropdown */
     .Airportdropdown-content-two a {
     color: black;
@@ -113,18 +91,13 @@ Create Invoice
     text-decoration: none;
     display: block;
     }
-
     /* Change color of dropdown links on hover */
     .Airportdropdown-content-two a:hover {background-color: #f1f1f1}
-
 </style>
 
 	<style>
-
 		/* The search field when it gets focus/clicked on */
 		#AirportArrivalmyInput:focus {outline: 3px solid #ddd;}
-
-
 		/* Dropdown Content (Hidden by Default) */
 		.AirportArrivaldropdown-content {
 		display: block;
@@ -134,7 +107,6 @@ Create Invoice
 		border: 1px solid #ddd;
 		z-index: 1;
 		}
-
 		/* Links inside the dropdown */
 		.AirportArrivaldropdown-content a {
 		color: black;
@@ -142,17 +114,12 @@ Create Invoice
 		text-decoration: none;
 		display: block;
 		}
-
 		/* Change color of dropdown links on hover */
 		.AirportArrivaldropdown-content a:hover {background-color: #f1f1f1}
-
     </style>
     <style>
-
 		/* The search field when it gets focus/clicked on */
 		#AirportArrivalmyInputTwo:focus {outline: 3px solid #ddd;}
-
-
 		/* Dropdown Content (Hidden by Default) */
 		.AirportArrivaldropdown-content-two {
 		display: block;
@@ -162,7 +129,6 @@ Create Invoice
 		border: 1px solid #ddd;
 		z-index: 1;
 		}
-
 		/* Links inside the dropdown */
 		.AirportArrivaldropdown-content-two a {
 		color: black;
@@ -170,17 +136,12 @@ Create Invoice
 		text-decoration: none;
 		display: block;
 		}
-
 		/* Change color of dropdown links on hover */
 		.AirportArrivaldropdown-content-two a:hover {background-color: #f1f1f1}
-
     </style>
     <style>
-
             /* The search field when it gets focus/clicked on */
             #CountrymyInput:focus {outline: 3px solid #ddd;}
-
-
             /* Dropdown Content (Hidden by Default) */
             .Countrydropdown-content {
             display: block;
@@ -190,7 +151,6 @@ Create Invoice
             border: 1px solid #ddd;
             z-index: 1;
             }
-
             /* Links inside the dropdown */
             .Countrydropdown-content a {
             color: black;
@@ -198,10 +158,8 @@ Create Invoice
             text-decoration: none;
             display: block;
             }
-
             /* Change color of dropdown links on hover */
             .Countrydropdown-content a:hover {background-color: #f1f1f1}
-
         </style>
 @stop
 @section('header')
@@ -381,7 +339,6 @@ Create Invoice
 @stop
 @section('js')
 <script>
-
 </script>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
@@ -400,16 +357,11 @@ Create Invoice
 			// }
 			var box = $(test).closest(".box-body");
 			box.find('#child-nikaalo').toggle();
-
 		}
-
 		function InfantAppend(test){
 			var box = $(test).closest(".box-body");
 			box.find('#infant-nikaalo').toggle();
 		}
-
-
-
 	  function filterFunction() {
 		var input, filter, ul, li, a, i;
 		input = document.getElementById("myInput");
@@ -425,7 +377,6 @@ Create Invoice
 		  }
 		}
 	  }
-
 	function AirlineAssign(temp){
 		var div = $(temp).closest(".dropdown-content");
 		div.find('.airline-name').val(temp.value);
@@ -441,8 +392,6 @@ Create Invoice
 		div.find('.airport-arrival-name').val(temp.value);
 		$(temp).closest(".airportArrival_html").html('');
 	}
-
-
     function AirlineDataExtract(test){
         $value=test.value;
         $.ajax({
@@ -454,7 +403,6 @@ Create Invoice
             }
         });
     }
-
     function AirportDataExtract(test){
         $value=test.value;
         $.ajax({
@@ -466,7 +414,6 @@ Create Invoice
             }
         });
     }
-
     function AirportArrivalDataExtract(test){
         $value=test.value;
         $.ajax({
@@ -478,7 +425,6 @@ Create Invoice
             }
         });
     }
-
 	function findFamily(test){
 		if (test.value != 'SELF') {
 			var familyId = test.value;
@@ -512,10 +458,6 @@ Create Invoice
 			  @endforeach
 		}
 	}
-
-
-
-
 	$(document).ready(function(){
     $("#add").click(function(){
     	var append = '<div class="box box-primary">			<div class="box-body">					<div class="row">						<div class="col-md-4">							<div class="form-group">								<label for="service_name[]">Select Service</label>								<select name="service_name[]" class="form-control service" onChange="SelectService(this);" required>										<option value="">--select--</option>										@if($products->count()>0)										@foreach($products as $product)											<option value="{{$product->service}}">{{$product->service}}</option>										@endforeach										@endif								</select>							</div>						</div>					</div>	<div class="Insert"></div>		<div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					</div>	</div>				</div>';
@@ -524,7 +466,6 @@ Create Invoice
     });
     // $(document).ready(function(){
     // $("#add").click(function(){
-
     //     $("#target").append(append);
     //     });
     // });
@@ -544,7 +485,6 @@ Create Invoice
 				 			'<option value="{{$product->service}}" {{($product->service == "Flight")?"selected":''}}>{{$product->service}}</option>'+
 				 			'@endforeach							@endif					</select>				</div>'+
 				 			'</div>		</div>'+
-
     '<div class="table-responsive">'+
       '<table class="table table-bordered">'+
         '<thead>'+
@@ -565,7 +505,6 @@ Create Invoice
         '</tbody>'+
       '</table>'+
     '</div>'+
-
     '<div class="table-responsive">'+
       '<table class="table table-bordered">'+
         '<thead>'+
@@ -607,7 +546,6 @@ Create Invoice
 											'<option value="Premium Economy class">Premium Economy class</option>'+
 											'<option value="Business Class">Business Class</option>'+
 											'<option value="First Class">First Class</option>'+
-
 			'</select></td>'+
             // '<td><input type="datetime-local" name="segment_one_departure[]" class="form-control" ></td>'+
             // '<td><input type="datetime-local" name="segment_one_arrival[]" class="form-control" ></td>'+
@@ -646,7 +584,6 @@ Create Invoice
 											'<option value="Premium Economy class">Premium Economy class</option>'+
 											'<option value="Business Class">Business Class</option>'+
 											'<option value="First Class">First Class</option>'+
-
 			'</select></td>'+
             // '<td><input type="datetime-local" name="segment_two_departure[]" class="form-control" ></td>'+
             // '<td><input type="datetime-local" name="segment_two_arrival[]" class="form-control" ></td>'+
@@ -660,8 +597,6 @@ Create Invoice
         '</tbody>'+
       '</table>'+
     '</div>'+
-
-
 '<div class="table-responsive" id="passengers">'+
     '<div class="col-md-12 text-right" style="margin-bottom:20px;"><button type="button" class="btn btn-sm btn-info" onClick="addPassenger(this);">Add Passenger </button></div>'+
     '<table class="add_row_invoice table table-bordered" id="passenger">'+
@@ -692,27 +627,26 @@ Create Invoice
             '<td><input type="date" name="DOB[]" value="{{ $date }}" placeholder="dd/mm/yyyy"  class="form-control"></td>'+
             '<td>Segment-1</td>'+
             '<td><input type="text" name="segment_one_fare_cost[]" step="0.01" placeholder="0.00" class="form-control mask-money"   required onKeyUp="fareSell(this);"></td>'+
-            '<td><input type="text" name="segment_one_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare mask-money"  required></td>'+
+            '<td><input type="text" name="segment_one_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare " readonly required></td>'+
           '</tr>'+
           '<tr class="fare-parent">'+
             '<td colspan="4">&nbsp;</td>'+
             '<td>Segment-2</td>'+
             '<td><input type="text" name="segment_two_fare_cost[]" step="0.01" placeholder="0.00" class="form-control mask-money"   required onKeyUp="fareSell(this);"></td>'+
-            '<td><input type="text" name="segment_two_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare mask-money"   required></td>'+
+            '<td><input type="text" name="segment_two_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare " readonly  required></td>'+
           '</tr>'+
           '<div ></div>'+
         '</tbody>'+
       '</table>'+
       '</div>'+
     //   '<div align="left">'+
-
       '<div align="right">'+
       '<div class="row">'+
       '<div class="col-md-10">'+
         '<h3><strong>Total Amount:</strong></h3>'+
         '</div>'+
         '<div class="col-md-2">'+
-        '<br><input type="text" name="flight_amount[]" value="0" onClick="FlightAmount(this);" class="form-control flight_amount mask-money" >'+
+        '<br><input type="text" name="flight_amount[]" value="0" onClick="FlightAmount(this);" class="form-control flight_amount" readonly >'+
        '</div>'+
        '</div>'+
       '</div>'+
@@ -744,23 +678,20 @@ Create Invoice
             '<td><input type="date" name="DOB[]" value="{{ $date }}" placeholder="dd/mm/yyyy"  class="form-control"></td>'+
             '<td>Segment-1</td>'+
             '<td><input type="text" name="segment_one_fare_cost[]" step="0.01" placeholder="0.00" class="form-control mask-money"  onKeyUp="fareSell(this);"></td>'+
-            '<td><input type="text" name="segment_one_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare mask-money"  ></td>'+
+            '<td><input type="text" name="segment_one_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare " readonly ></td>'+
         '</tr>'+
           '<tr class="fare-parent">'+
             '<td colspan="4">&nbsp;</td>'+
             '<td>Segment-2</td>'+
             '<td><input type="text" name="segment_two_fare_cost[]" step="0.01" placeholder="0.00" class="form-control mask-money"  onKeyUp="fareSell(this);"></td>'+
-            '<td><input type="text" name="segment_two_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare mask-money"  ></td>'+
+            '<td><input type="text" name="segment_two_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare " readonly ></td>'+
           '</tr>';
           $(test).parents('.box').find('.add_row_invoice').append(data);
         //   $(".add_row_invoice").append(data);
     }
     function fareSell(temp){
-
         var client_id = document.getElementById('client').value;
 // console.log(client_id);
-
-
         @foreach($clients as $client)
     		var test = {{ $client->id }};
 	    	if (client_id == test) {
@@ -774,7 +705,7 @@ Create Invoice
         var fare_cost = temp.value;
         fare_cost = fare_cost.replace(/\,/g,'');
         var fare_sell = Number(fare_cost) + Number((percentage / 100) * fare_cost );
-        $(temp).parents('.fare-parent').find('.fare').val(fare_sell);
+        $(temp).parents('.fare-parent').find('.fare').val(fare_sell.toFixed(2));
     }
     window.setInterval(function(){
         $('.mask-money').maskMoney();
@@ -840,9 +771,7 @@ Create Invoice
 						}
 			  @endforeach
 				var data = '<div class="box-body"> <div class="row">			<div class="col-md-4">				<div class="form-group">					<label for="service_name[]">Select Service</label>					<select name="service_name[]" class="form-control service" required onChange="SelectService(this);">							<option value="">--select--</option>							@if($products->count()>0)							@foreach($products as $product)								<option value="{{$product->service}}" {{($product->service == "Visa Services")?"selected":''}}>{{$product->service}}</option>							@endforeach							@endif					</select>				</div>			</div><div class="col-md-4"><div class="form-group"><label for="visa_applicant">Visa Applicant</label><select name="visa_applicant" id="visa-applicant" class="form-control" onChange="findFamily(this);">'+options+'</select></div></div>		</div><div class="row">	<div class="col-md-3">		<div class="form-group">			<label for="name_of_visa_applicant">Name Of Visa Applicant</label>			<input type="text" name="name_of_visa_applicant[]"  required class="form-control member_name">		</div>		</div>		<div class="col-md-3">		<div class="form-group">			<label for="passport_origin">Passport Origin</label>			<input type="text" name="passport_origin[]" class="form-control passport_origin" required>		</div>		</div>	<div class="col-md-3">		<div class="form-group">			<label for="passport_no">Passport No.</label>			<input type="text" name="passport_no[]" class="form-control passport_no">		</div>		</div> <div class="col-md-3">		<div class="form-group">			<label for="passport_member_dob">Passport Member DOB</label>			<input type="text" name="passport_member_dob[]" class="form-control member_dob">		</div>		</div>	</div>		<div class="row">				<div class="col-md-4">				<div class="form-group">					<label for="visa_country">Visa Country</label>					<input type="text" name="visa_country[]" required class="form-control">				</div>				</div>				<div class="col-md-4">				<div class="form-group">					<label for="visa_type">Visa Type</label>					<input type="text" name="visa_type[]" class="form-control">				</div>				</div>				<div class="col-md-4">						<div class="form-group">							<label for="visa_charges[]">Visa Fee</label>							<input type="text" name="visa_charges[]" class="form-control mask-money" onKeyUp="VisaAmount()">						</div>						</div>				</div><div class="row">						<div class="col-md-4">			<div class="form-group">	<label for="service_charge[]">Service Charge</label>		<input id="service_charge" type="text" name="service_charge[]" required class="form-control mask-money" onKeyUp="VisaAmount()">			</div>		</div>		<div class="col-md-4">			<div class="form-group">	<label for="visa_amount">Amount</label>		<input id="amount" type="number" name="visa_amount[]" required class="form-control" readonly>			</div>		</div></div><div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					</div>	</div>				</div></div>';
-
 				$(test).closest(".box").html(data);
-
 			}
 			if (value == 'Hotel') {
                 if(document.getElementsByName('segment_one_arrival[]').length>0){
@@ -891,28 +820,20 @@ Create Invoice
 				$(test).closest(".box").html(data);
 			}
 		}
-
 	function FlightAmount(test){
             var amount = 0;
             var temp = $(test).parents('.box').find('.fare');
             for (var i = 0; i < temp.length; i++) {
                 amount = Number(amount) + Number($(temp[i]).val().replace(/\,/g,''));
             }
-			test.value = amount;
-
-
+			test.value = amount.toFixed(2);
 	}
-
 	function VisaAmount(){
 		for (var i = 0; i < document.getElementsByName("service_charge[]").length; i++) {
     		var actual_amount = document.getElementsByName("service_charge[]")[i].value.replace(/\,/g,'') - (-document.getElementsByName("visa_charges[]")[i].value.replace(/\,/g,''));
-     		document.getElementsByName("visa_amount[]")[i].value =actual_amount;
-
+     		document.getElementsByName("visa_amount[]")[i].value =actual_amount.toFixed(2);
     	}
 	}
-
-
-
     $(document).ready(function(){
     $("#targetTotal").hover(function(){
 		var total_amount = 0;
@@ -955,8 +876,6 @@ Create Invoice
 		document.getElementsByName("discounted_total")[0].value = document.getElementById('currency').value + discounted.toFixed(2);
     });
     });
-
-
     $(document).ready(function(){
     $("#client").change(function(){
     	var client_id = this.value;
@@ -974,7 +893,6 @@ Create Invoice
     	$("#address").html(append);
     	});
     });
-
     function AirlineAssignTwo(temp){
 		var div = $(temp).closest(".dropdown-content-two");
 		div.find('.airline-name-two').val(temp.value);
@@ -990,8 +908,6 @@ Create Invoice
 		div.find('.airport-arrival-name-two').val(temp.value);
 		$(temp).closest(".airportArrival_html_two").html('');
 	}
-
-
     function AirlineDataExtractTwo(test){
         $value=test.value;
         $.ajax({
@@ -1003,7 +919,6 @@ Create Invoice
             }
         });
     }
-
     function AirportDataExtractTwo(test){
         $value=test.value;
         $.ajax({
@@ -1015,7 +930,6 @@ Create Invoice
             }
         });
     }
-
     function AirportArrivalDataExtractTwo(test){
         $value=test.value;
         $.ajax({
@@ -1027,12 +941,9 @@ Create Invoice
             }
         });
     }
-
-
     function CountryExtract(test){
         $value=test.value;
         // console.log($value);
-
         $.ajax({
             type : 'get',
             url : '{{URL::to('searchCountry')}}',
@@ -1042,13 +953,10 @@ Create Invoice
                 // console.log(data);
             }
         });
-
     }
-
     function CountryAssign(temp){
 		var div = $(temp).closest(".Countrydropdown-content");
         // console.log(temp.value);
-
 		div.find('.country-name').val(temp.value);
 		$(temp).closest(".country_html").html('');
 	}
@@ -1057,4 +965,3 @@ Create Invoice
 
 
 @stop
-
