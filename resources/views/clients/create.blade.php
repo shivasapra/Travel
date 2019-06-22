@@ -103,7 +103,7 @@ Client Registration
 					<div class="col-md-3">
 					<div class="form-group">
 						<label for="DOB">DOB</label>
-						<input type="date" name='DOB' value="{{old('DOB')}}" value="{{$date}}" required class="form-control">
+						<input type="date" name='DOB' required class="form-control">
 					</div>
                     </div>
                     <div class="col-md-3">

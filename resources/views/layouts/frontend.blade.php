@@ -652,7 +652,7 @@
 </script>
 <!-- Bootstrap 3.3.7 -->
 <script src="{{asset("bower_components/bootstrap/dist/js/bootstrap.min.js")}}"></script>
-<script src="//js.pusher.com/3.1/pusher.min.js"></script> //pusher
+<script src="//js.pusher.com/3.1/pusher.min.js"></script>
 <!-- Morris.js charts -->
 <script src="{{asset("bower_components/raphael/raphael.min.js")}}"></script>
 <script src="{{asset("bower_components/morris.js/morris.min.js")}}"></script>

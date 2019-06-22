@@ -59,7 +59,8 @@ class clientController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+        // dd($request->DOB);
         Validator::make($request->all(), [
             'first_name' => 'required',
             'last_name' => 'required',
@@ -68,14 +69,11 @@ class clientController extends Controller
             'city' => 'required',
             'county' => 'required',
             'country' => 'required',
-            'DOB' => 'required',
+            'DOB' => array('required','regex:/[0-9]{4,4}\-[0-9]{2}\-[0-9]{2}/'),
             'email' => 'unique:users',
             'phone' => 'required',
             ])->validate();
-            Validator::extend('DOB', function($attribute, $value, $parameters, $validator) {
-                $inserted = Carbon::parse($request->DOB)->year;
-                return $inserted > 9999;
-    });
+            // dd(date_format($request->date));
 
         $client = new client;
         $unique_id = 'CLDC'. mt_rand(100000, 999999);
