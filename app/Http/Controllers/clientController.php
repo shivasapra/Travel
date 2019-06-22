@@ -72,7 +72,10 @@ class clientController extends Controller
             'email' => 'unique:users',
             'phone' => 'required',
             ])->validate();
-
+            Validator::extend('DOB', function($attribute, $value, $parameters, $validator) {
+                $inserted = Carbon::parse($request->DOB)->year;
+                return $inserted > 9999;
+    });
 
         $client = new client;
         $unique_id = 'CLDC'. mt_rand(100000, 999999);

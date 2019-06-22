@@ -535,25 +535,25 @@ Invoice
                   </tr>
                   </thead> --}}
                   <tbody>
-                    @if($invoice->Debit != '0')
+                    @if($invoice->debit_amount != '0' or $invoice->debit_amount != null or $invoice->debit_amount != 0.00  )
                   <tr>
                     <td>Debit Card</td>
                     <td>{{ $invoice->currency.$invoice->debit_amount }}</td>
                   </tr>
                   @endif
-                    @if($invoice->credit != '0')
+                    @if($invoice->credit_amount != '0' or $invoice->credit_amount != null or $invoice->credit_amount != 0.00)
                   <tr>
                     <td>Credit Card</td>
                     <td>{{ $invoice->currency.$invoice->credit_amount }}</td>
                   </tr>
                   @endif
-                    @if($invoice->Cash != '0')
+                    @if($invoice->cash_amount != '0' or $invoice->cash_amount != null or $invoice->cash_amount != 0.00)
                   <tr>
                     <td>Cash</td>
                     <td>{{ $invoice->currency.$invoice->cash_amount }}</td>
                   </tr>
                   @endif
-                    @if($invoice->bank != '0')
+                    @if($invoice->bank_amount != '0' or $invoice->bank_amount != null or $invoice->bank_amount != 0.00)
                   <tr>
                     <td>Bank</td>
                     <td>{{ $invoice->currency.$invoice->bank_amount }}</td>
@@ -566,18 +566,44 @@ Invoice
           <div class="col-md-8 text-right">
             <div class="w-100">
             <div class="" style="display:inline-block;margin-right:30px;">
-            <p class="mb-1"><b>Total Package:</b></p>
-            @if($invoice->VAT_percentage != 0)<p class="mb-1"><b>VAT @ {{ $invoice->VAT_percentage }}:@endif</b></p>
+            @if($invoice->discount != 0 or $invoice->VAT_percentage != 0)
+              <p class="mb-1"><b>Sub Total:</b></p>
+              @if($invoice->discount != 0)
+                <p class="mb-1"><b>Discount:</b></p>
+              @endif
+              @if($invoice->VAT_percentage != 0)
+                <p class="mb-1"><b>VAT @ {{ $invoice->VAT_percentage }}%:</b></p>
+              @endif
+            @endif
             <p class="mb-1"><b>Total:</b></p>
-            <p class="mb-1"><b>Advance:</b></p>
+            @if($invoice->paid != 0)
+              <p class="mb-1"><b>Paid:</b></p>
+            @endif
+            @if($invoice->advance != 0)
+              <p class="mb-1"><b>Advance:</b></p>
+            @endif
           </div>
           <div class="" style="display:inline-block;">
-            <p class="mb-1">{{$invoice->currency}} {{$invoice->total}}</p>
-            @if($invoice->VAT_percentage != 0)<p class="mb-1">{{$invoice->currency}} {{$invoice->VAT_amount}}@endif</p>
-            <p class="mb-1">{{$invoice->currency}} {{ $invoice->total }}</p>
-            <p class="mb-1">{{  $invoice->currency}} {{$invoice->advance}}</p>
+            @if($invoice->discount != 0 or $invoice->VAT_percentage != 0)
+              <p class="mb-1"><b>{{ $invoice->currency}}{{$invoice->total}}</b></p>
+              @if($invoice->discount != 0)
+                <p class="mb-1"><b>{{ $invoice->currency}}{{$invoice->discount}}</b></p>
+              @endif
+              @if($invoice->VAT_amount != 0)
+                <p class="mb-1"><b>{{ $invoice->currency}}{{ $invoice->VAT_amount }}:</b></p>
+              @endif
+              @endif
+              <p class="mb-1"><b>{{ $invoice->currency}}{{$invoice->discounted_total + $invoice->VAT_amount}}</b></p>
+            @if($invoice->paid != 0)
+                <p class="mb-1"><b>{{ $invoice->currency}}{{$invoice->paid}}</b></p>
+            @endif
+            @if($invoice->advance != 0)
+                <p class="mb-1"><b>{{ $invoice->currency}}{{$invoice->advance}}</b></p>
+            @endif
           </div>
-        </div><hr>
+        </div>
+        @if($invoice->pending_amount != 0)
+        <hr>
         <div class="w-100">
             <div class="" style="display:inline-block;margin-right:30px;">
             <p class="mb-1"><b>Due Payment:</b></p>
@@ -588,6 +614,7 @@ Invoice
             @endif
         </div>
         </div>
+        @endif
           </div>
         </div><hr>
         <div class="row">

@@ -115,61 +115,61 @@ class InvoiceController extends Controller
         $invoice->billing_address = strtoupper($request->billing_address);
         $invoice->invoice_date = $request->invoice_date;
         $invoice->invoice_no = $request->invoice_no;
-        $invoice->discount = $request->discount;
+        $invoice->discount = str_replace(',', '', $request->discount);
         $invoice->currency = $request->currency;
-        $invoice->total = $request->total;
-        $invoice->discounted_total =$request->total - $request->discount;
+        $invoice->total = str_replace(',', '', $request->total);
+        $invoice->discounted_total =str_replace(',', '', $request->total) - str_replace(',', '', $request->discount);
         $invoice->mail_sent = $date;
         $invoice->save();
         $tax = settings::all();
         if($tax[0]->enable == 'yes'){
             $invoice->VAT_percentage = $tax[0]->tax;
-            $invoice->VAT_amount = ($tax[0]->tax)/100*($invoice->discounted_total);
+            $invoice->VAT_amount = ($tax[0]->tax)/100*(str_replace(',', '', $invoice->discounted_total));
         }
 
         $invoice->paid = 0;
-        if($request->credit != '0'){
+        if($request->credit != '0' or $request->credit != '0.00'){
             $invoice->credit = 1;
-            $invoice->credit_amount = $request->credit_amount;
-            $invoice->paid = $invoice->paid + $request->credit_amount;
+            $invoice->credit_amount = str_replace(',', '', $request->credit_amount);
+            $invoice->paid = str_replace(',', '', $invoice->paid) +str_replace(',', '', $request->credit_amount) ;
         }
         else{
             $invoice->credit = 0;
-            $invoice->credit_amount = $request->credit_amount;
-            $invoice->paid = $invoice->paid + $request->credit_amount;
+            $invoice->credit_amount = str_replace(',', '', $request->credit_amount);
+            $invoice->paid = str_replace(',', '', $invoice->paid) +str_replace(',', '', $request->credit_amount);
         }
-        if($request->debit != '0'){
+        if($request->debit != '0' or $request->debit != '0.00'){
             $invoice->debit = 1;
-            $invoice->debit_amount = $request->debit_amount;
-            $invoice->paid = $invoice->paid + $request->debit_amount;
+            $invoice->debit_amount = str_replace(',', '', $request->debit_amount);
+            $invoice->paid = str_replace(',', '', $invoice->paid) + str_replace(',', '', $request->debit_amount);
         }
         else{
             $invoice->debit = 0;
-            $invoice->debit_amount = $request->debit_amount;
-            $invoice->paid = $invoice->paid + $request->debit_amount;
+            $invoice->debit_amount = str_replace(',', '', $request->debit_amount);
+            $invoice->paid = str_replace(',', '', $invoice->paid) + str_replace(',', '', $request->debit_amount);
         }
-        if($request->cash != '0'){
+        if($request->cash != '0' or $request->cash != '0.00'){
             $invoice->cash = 1;
-            $invoice->cash_amount = $request->cash_amount;
-            $invoice->paid = $invoice->paid + $request->cash_amount;
+            $invoice->cash_amount = str_replace(',', '', $request->cash_amount);
+            $invoice->paid = str_replace(',', '', $invoice->paid)+ str_replace(',', '', $request->cash_amount);
         }
         else{
             $invoice->cash = 0;
-            $invoice->cash_amount = $request->cash_amount;
-            $invoice->paid = $invoice->paid + $request->cash_amount;
+            $invoice->cash_amount = str_replace(',', '', $request->cash_amount);
+            $invoice->paid = str_replace(',', '', $invoice->paid) + str_replace(',', '', $request->cash_amount);
         }
-        if($request->bank != '0'){
+        if($request->bank != '0' or $request->bank != '0.00'){
             $invoice->bank = 1;
-            $invoice->bank_amount = $request->bank_amount;
-            $invoice->paid = $invoice->paid + $request->bank_amount;
+            $invoice->bank_amount = str_replace(',', '', $request->bank_amount);
+            $invoice->paid = str_replace(',', '', $invoice->paid) + str_replace(',', '', $request->bank_amount);
         }
         else{
             $invoice->bank = 0;
-            $invoice->bank_amount = $request->bank_amount;
-            $invoice->paid = $invoice->paid + $request->bank_amount;
+            $invoice->bank_amount = str_replace(',', '', $request->bank_amount);
+            $invoice->paid = str_replace(',', '', $invoice->paid) + str_replace(',', '', $request->bank_amount);
         }
         $invoice->save();
-        $invoice->pending_amount = $invoice->discounted_total + $invoice->VAT_amount - $invoice->paid;
+        $invoice->pending_amount =str_replace(',', '', $invoice->discounted_total ) + str_replace(',', '', $invoice->VAT_amount ) - str_replace(',', '', $invoice->paid );
         $invoice->save();
         $flight_counter=0;
         $visa_counter=0;
