@@ -73,7 +73,7 @@ class InvoiceController extends Controller
         $date = $date_today->toDateString();
         $invoice = invoice::where('invoice_no','CLDI0001')->get();
         if ($invoice->count()>0) {
-            $latest = invoice::orderBy('created_at','desc')->take(1)->get();
+            $latest = invoice::withTrashed()->orderBy('created_at','desc')->take(1)->get();
             $invoice_prev_no = $latest[0]->invoice_no;
             $invoice_no = 'CLDI000'.(substr($invoice_prev_no,4,7)+1);
         }
@@ -619,6 +619,7 @@ class InvoiceController extends Controller
         $invoice = invoice::find($id);
 
         if ($invoice->status == 0) {
+            // $invoice->invoice_no = dd(substr($invoice->invoice_no,0,3).'C');
             $invoice->delete();
             Session::flash('success','Invoice Canceled Successfully');
             return redirect()->back()->with('invoices',invoice::all());
