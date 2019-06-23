@@ -286,7 +286,7 @@ Invoice
         </div>
           </div>
           <div class="col-md-12">
-            <h4 class="mt-3"><b>Total:</b> <b class="float-right"><span class="text-light-blue">{{ $invoice->currency.$flight->total_amount }}</span></b></h4>
+            <h4 class="mt-3"> <b class="float-right"><b>Total:  </b><span class="text-light-blue">{{ $invoice->currency.$flight->total_amount }}</span></b></h4>
           </div>
           @endforeach
         </div>
@@ -328,7 +328,7 @@ Invoice
         </div>
           </div>
           <div class="col-md-12">
-            <h4 class="mt-3"><b>Total:</b> <b class="float-right"><span class="text-light-blue">{{ $invoice->currency.$info->visa_amount }}</span></b></h4>
+            <h4 class="mt-3"> <b class="float-right"><b>Total:  </b><span class="text-light-blue">{{ $invoice->currency.$info->visa_amount }}</span></b></h4>
           </div>
         </div>
         @endif
@@ -368,7 +368,7 @@ Invoice
         </div>
       </div>
       <div class="col-md-12">
-        <h4 class="mt-3"><b>Total:</b> <b class="float-right"><span class="text-light-blue">{{ $invoice->currency.$info->hotel_amount }}</span></b></h4>
+        <h4 class="mt-3"> <b class="float-right"><b>Total:  </b><span class="text-light-blue">{{ $invoice->currency.$info->hotel_amount }}</span></b></h4>
       </div>
     </div>
       @endif
@@ -401,7 +401,7 @@ Invoice
         </div>
       </div>
       <div class="col-md-12">
-        <h4 class="mt-3"><b>Total:</b> <b class="float-right"><span class="text-light-blue">{{ $invoice->currency.$info->insurance_amount }}</span></b></h4>
+        <h4 class="mt-3"> <b class="float-right"><b>Total:  </b><span class="text-light-blue">{{ $invoice->currency.$info->insurance_amount }}</span></b></h4>
       </div>
     </div>
       @endif
@@ -430,7 +430,7 @@ Invoice
         </div>
       </div>
       <div class="col-md-12">
-        <h4 class="mt-3"><b>Total:</b> <b class="float-right"><span class="text-light-blue">{{ $invoice->currency.$info->local_sight_sceen_amount }}</span></b></h4>
+        <h4 class="mt-3"> <b class="float-right"><b>Total:  </b><span class="text-light-blue">{{ $invoice->currency.$info->local_sight_sceen_amount }}</span></b></h4>
       </div>
     </div>
       @endif
@@ -459,7 +459,7 @@ Invoice
         </div>
       </div>
       <div class="col-md-12">
-        <h4 class="mt-3"><b>Total:</b> <b class="float-right"><span class="text-light-blue">{{ $invoice->currency.$info->local_transport_amount }}</span></b></h4>
+        <h4 class="mt-3"> <b class="float-right"><b>Total:  </b><span class="text-light-blue">{{ $invoice->currency.$info->local_transport_amount }}</span></b></h4>
       </div>
     </div>
       @endif
@@ -489,7 +489,7 @@ Invoice
       </div>
 
       <div class="col-md-12">
-        <h4 class="mt-3"><b>Total:</b> <b class="float-right"><span class="text-light-blue">{{ $invoice->currency.$info->car_rental_amount}}</span></b></h4>
+        <h4 class="mt-3"> <b class="float-right"><b>Total:  </b><span class="text-light-blue">{{ $invoice->currency.$info->car_rental_amount}}</span></b></h4>
       </div>
         </div>
       @endif
@@ -518,7 +518,7 @@ Invoice
         </div>
       </div>
       <div class="col-md-12">
-        <h4 class="mt-3"><b>Total:</b> <b class="float-right"><span class="text-light-blue">{{ $invoice->currency.$info->other_facilities_amount }}</span></b></h4>
+        <h4 class="mt-3"> <b class="float-right"><b>Total:  </b><span class="text-light-blue">{{ $invoice->currency.$info->other_facilities_amount }}</span></b></h4>
       </div>
     </div>
       @endif
