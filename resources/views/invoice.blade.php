@@ -535,25 +535,25 @@ Invoice
                   </tr>
                   </thead> --}}
                   <tbody>
-                    @if($invoice->debit_amount != '0' or $invoice->debit_amount != null or $invoice->debit_amount != 0.00 or $invoice->debit_amount != 0 )
+                    @if($invoice->debit_amount > 0 )
                   <tr>
                     <td>Debit Card</td>
                     <td>{{ $invoice->currency.$invoice->debit_amount }}</td>
                   </tr>
                   @endif
-                    @if($invoice->credit_amount != '0' or $invoice->credit_amount != null or $invoice->credit_amount != 0.00 or $invoice->credit_amount != 0)
+                    @if($invoice->credit_amount > 0)
                   <tr>
                     <td>Credit Card</td>
                     <td>{{ $invoice->currency.$invoice->credit_amount }}</td>
                   </tr>
                   @endif
-                    @if($invoice->cash_amount != '0' or $invoice->cash_amount != null or $invoice->cash_amount != 0.00 or $invoice->cash_amount != 0)
+                    @if($invoice->cash_amount > 0)
                   <tr>
                     <td>Cash</td>
                     <td>{{ $invoice->currency.$invoice->cash_amount }}</td>
                   </tr>
                   @endif
-                    @if($invoice->bank_amount != '0' or $invoice->bank_amount != null or $invoice->bank_amount != 0.00 or $invoice->bank_amount != 0)
+                    @if($invoice->bank_amount > 0)
                   <tr>
                     <td>Bank</td>
                     <td>{{ $invoice->currency.$invoice->bank_amount }}</td>
