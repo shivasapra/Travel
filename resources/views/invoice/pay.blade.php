@@ -61,7 +61,7 @@ Pay
             </tr>
             <tr>
                 <td class="col-md-8" align="right"><strong>Total:</strong></td>
-                <td class="col-md-4"><input name="discounted_total" type="text" value="{{$invoice->currency.' '.$invoice->discounted_total}}" id="discounted_total" style="color:white;font-weight:500;background-color:#0066FF;" required class="form-control" readonly></td>
+                <td class="col-md-4"><input name="discounted_total" type="text" value="{{$invoice->currency.' '.number_format((float)$invoice->discounted_total, 2, '.', '')}}" id="discounted_total" style="color:white;font-weight:500;background-color:#0066FF;" required class="form-control" readonly></td>
             </tr>
         </table>
     </div>
