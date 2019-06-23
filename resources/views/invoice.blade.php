@@ -616,7 +616,7 @@ Invoice
             <p class="mb-1"><b>Advance:</b></p>
           </div>
           <div class="" style="display:inline-block;">
-            @if($invoice->pending_amount != 0 )
+            @if($invoice->advance != 0 )
             <p class="mb-1">{{ $invoice->currency}} {{ $invoice->advance}}</p>
             @endif
         </div>

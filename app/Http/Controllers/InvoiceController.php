@@ -43,6 +43,10 @@ class InvoiceController extends Controller
                 $invoice->status = 1;
                 $invoice->save();
             }
+            if ($invoice->pending_amount > 0) {
+                $invoice->status = 0;
+                $invoice->save();
+            }
         }
         return view('invoice.index')->with('invoices',invoice::all())
                                     ->with('tax',settings::all());
