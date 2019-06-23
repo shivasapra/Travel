@@ -87,7 +87,7 @@ Dashboard
       <h3 class="box-title">Direct Chat</h3>
 
       <div class="box-tools pull-right">
-        
+
         <button type="button" class="btn btn-box-tool" data-toggle="tooltip"  data-widget="chat-pane-toggle">
             <span data-toggle="tooltip" title="{{$unread_messages->count()}} New Messages" class="badge bg-red">{{$unread_messages->count()}}</span></button>
         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -116,7 +116,7 @@ Dashboard
                   src="{{asset(Auth::user()->avatar)}}"
                 @else
                   src="{{asset('app/images/user-placeholder.jpg')}}"
-              @endif 
+              @endif
               alt="Message User Image">
               <!-- /.direct-chat-img -->
               <div class="direct-chat-text">
@@ -133,12 +133,12 @@ Dashboard
                 <span class="direct-chat-timestamp pull-left">{{$message->date}}{{' '}}{{$message->time}}</span>
               </div>
               <!-- /.direct-chat-info -->
-              <img class="direct-chat-img" 
+              <img class="direct-chat-img"
               @if(App\User::find($message->user_id)->avatar)
                   src="{{asset(App\User::find($message->user_id)->avatar)}}"
                 @else
                   src="{{asset('app/images/user-placeholder.jpg')}}"
-              @endif 
+              @endif
               alt="Message User Image"><!-- /.direct-chat-img -->
               <div class="direct-chat-text">
                   {{$message->message}}
@@ -163,7 +163,7 @@ Dashboard
                   src="{{asset(App\User::find($unread->user_id)->avatar)}}"
                 @else
                   src="{{asset('app/images/user-placeholder.jpg')}}"
-              @endif 
+              @endif
               alt="User Image">
 
               <div class="contacts-list-info">
@@ -239,14 +239,14 @@ Dashboard
               </ul>
             </div>
         </div>
-        
+
       </div>
       <div class="col-md-6">
         <div class="box box-primary">
           <div class="box-body">
-            
-              
-            
+
+
+
             <section class="content-header">
               {{-- <span class="pull-right"><a href="{{route('invoice.report')}}" class="btn btn-xs bg-maroon">Report</a></span> --}}
               <h1 class="text-center">
@@ -271,22 +271,22 @@ Dashboard
                 </thead>
                 <tbody>
                   @if($invoices->count()>0)
-                  
+
                     @foreach($invoices as $invoice)
                     <tr>
                       <td><a href="{{route('invoice.view',['id'=>$invoice->id])}}">{{$invoice->invoice_no}}</a></td>
                       <td>{{$invoice->invoice_date}}</td>
                       <td>{{$invoice->receiver_name}}</td>
-                      
+
                       <?php $total = $invoice->discounted_total + $invoice->VAT_amount ?>
                       <td>{{$invoice->currency}}{{$total}}</td>
-                      
+
                       @if($invoice->status == 1)
                       <td><small class="label label-success">Paid</small></td>
                       @else
                       <td><small class="label label-danger">Unpaid</small></td>
                       @endif
-                      
+
                     </tr>
                     @endforeach
                   @endif
@@ -323,7 +323,7 @@ Dashboard
             </a>
             </div>
             <div class="col-md-6">
-            <a href="{{route('unpaidInvoice.report')}}">
+            <a href="{{route('paidInvoice.report')}}">
             <div class="info-box bg-navy">
               <span class="info-box-icon"><i class="fa fa-thumbs-o-down"></i></span>
 
@@ -359,9 +359,9 @@ Dashboard
       <div class="col-md-12">
         <div class="box box-danger">
           <div class="box-body">
-            
-              
-            
+
+
+
             <section class="content-header">
               <h1 class="text-center">
                 <a href="{{route('visa.report')}}"><span style="color:#0066FF;">Visa Report</span>
@@ -414,7 +414,7 @@ Dashboard
     </div>
     <div class="row">
        <div class="col-md-7">
-          
+
           <div class="box box-solid bg-black-gradient">
             <div class="box-header">
               <i class="fa fa-calendar"></i>
@@ -430,7 +430,7 @@ Dashboard
                     {{-- <li></li> --}}
                     {{-- <li><a href="#">Clear events</a></li> --}}
                     {{-- <li class="divider"></li>
-                    <li><a href="#">View calendar</a></li>--}}                  
+                    <li><a href="#">View calendar</a></li>--}}
                   {{-- </ul> --}}
                 </div>
                 <button type="button" class="btn btn-lg btn-default" data-toggle="modal" data-target="#modal-info" ><span style="color: white"><strong>Add New Event</strong></span></button>
@@ -512,10 +512,10 @@ Dashboard
                   <input type="text" class="form-control" name="subject" placeholder="Subject">
                 </div>
                 <div>
-                  <textarea class="textarea" placeholder="Message" name="message" 
+                  <textarea class="textarea" placeholder="Message" name="message"
                             style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
                 </div>
-              
+
             </div>
             <div class="box-footer clearfix">
               <button type="submit" class="pull-right btn btn-default" id="sendEmail">Send
@@ -544,18 +544,18 @@ Dashboard
               <ul class="users-list clearfix">
                 @foreach($wages as $wage)
                 <li>
-                  <img 
+                  <img
                   @if($wage->employee->user and $wage->employee->user->avatar)
                     src="{{asset($wage->employee->user->avatar)}}"
                   @else
                     src="{{asset('app/images/user-placeholder.jpg')}}"
-                  @endif 
+                  @endif
                   style="height: 50px" alt="User Image">
                   <a class="users-list-name" href="{{route('view.employee',['id'=>$wage->employee->id])}}">{{$wage->employee->first_name}}</a>
                   <span class="users-list-date">
-                    
+
                     {{$wage->login_time}}
-                    
+
                   </span>
                 </li>
                 @endforeach
@@ -581,18 +581,18 @@ Dashboard
                 @foreach($employees as $emp)
                 @if(!$emp->wage->count()>0 or $emp->wage->last()->date != Carbon\Carbon::now()->toDateString() )
                 <li>
-                  <img 
+                  <img
                   @if($emp->user and $emp->user->avatar)
                     src="{{asset($emp->user->avatar)}}"
                   @else
                     src="{{asset('app/images/user-placeholder.jpg')}}"
-                  @endif 
+                  @endif
                   style="height: 50px" alt="User Image">
                   <a class="users-list-name" href="{{route('view.employee',['id'=>$emp->id])}}">{{$emp->first_name}}</a>
                   <span class="users-list-date">
-                    
+
                     {{-- {{$logout->logout_time}} --}}
-                    
+
                   </span>
                 </li>
                 @endif
@@ -603,9 +603,9 @@ Dashboard
       </div>
     </div>
       @endif
-  
 
- 
+
+
 
 
 <div class="modal fade" id="modal-info">
@@ -652,7 +652,7 @@ Dashboard
     //   $("#create").click(function(){
 
     //     var data = '<form action="{{ route('tasks.store') }}" method="post">{{ csrf_field() }}<label for="name">Task Name</label><input type="text" name="name" class="form-control" /><label for="description">Task Description</label><textarea name="description" class="form-control"></textarea><label for="task_date">Task Date:</label><input type="date" name="task_date" class="date form-control" /><div class="text-center"><input type="submit" value="Save" class="btn btn-sm btn-info" /></div></form>';
-    //       $("#createEvent").html(data);   
+    //       $("#createEvent").html(data);
     //       });
     //   });
 

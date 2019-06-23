@@ -179,7 +179,7 @@ Invoice
         <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Home</a></li>
         @if(!Auth::user()->client)
         <li><a href="{{route('invoice')}}"><i class="fa fa-paperclip"></i> Invoices</a></li>
-        @endif 
+        @endif
         <li class="active">Invoice</li>
       </ol>
     </section>
@@ -572,15 +572,12 @@ Invoice
                 <p class="mb-1"><b>Discount:</b></p>
               @endif
               @if($invoice->VAT_percentage != 0)
-                <p class="mb-1"><b>VAT @ {{ $invoice->VAT_percentage }}%:</b></p>
+                <p class="mb-1"><b>VAT @ {{ $invoice->VAT_percentage }}%</b></p>
               @endif
             @endif
             <p class="mb-1"><b>Total:</b></p>
             @if($invoice->paid != 0)
               <p class="mb-1"><b>Paid:</b></p>
-            @endif
-            @if($invoice->advance != 0)
-              <p class="mb-1"><b>Advance:</b></p>
             @endif
           </div>
           <div class="" style="display:inline-block;">
@@ -597,9 +594,6 @@ Invoice
             @if($invoice->paid != 0)
                 <p class="mb-1"><b>{{ $invoice->currency}}{{$invoice->paid}}</b></p>
             @endif
-            @if($invoice->advance != 0)
-                <p class="mb-1"><b>{{ $invoice->currency}}{{$invoice->advance}}</b></p>
-            @endif
           </div>
         </div>
         @if($invoice->pending_amount != 0)
@@ -611,6 +605,19 @@ Invoice
           <div class="" style="display:inline-block;">
             @if($invoice->pending_amount != 0 )
             <p class="mb-1">{{ $invoice->currency}} {{ $invoice->pending_amount}}</p>
+            @endif
+        </div>
+        </div>
+        @endif
+        @if($invoice->advance != 0)
+        <hr>
+        <div class="w-100">
+            <div class="" style="display:inline-block;margin-right:30px;">
+            <p class="mb-1"><b>Advance:</b></p>
+          </div>
+          <div class="" style="display:inline-block;">
+            @if($invoice->pending_amount != 0 )
+            <p class="mb-1">{{ $invoice->currency}} {{ $invoice->advance}}</p>
             @endif
         </div>
         </div>

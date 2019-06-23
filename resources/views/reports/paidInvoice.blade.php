@@ -1,6 +1,6 @@
 @extends('layouts.frontend')
 @section('title')
-Paid Invoices
+Invoices Report
 @endsection
 @section('css')
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
@@ -9,16 +9,16 @@ Paid Invoices
 @section('header')
 	<section class="content-header">
       <h1>
-        Paid Invoice
+        Invoices Report
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active"><i class="fa fa-paperclip"></i>Paid Invoice</li>
+        <li class="active">Invoices Report</li>
       </ol>
     </section>
 @stop
 @section('content')
-	
+
 		<div class="box box-info">
       <div class="box-header">
         <div class="row">
@@ -41,8 +41,8 @@ Paid Invoices
         </div>
       </div>
 			<div class="box-body">
-				
-			
+
+
 			<table id="example" class="table table-striped display" style="width:100%">
                     <thead id="ignorePDF">
                       <tr>
@@ -55,7 +55,7 @@ Paid Invoices
                     	</thead>
                     <tbody id="invoices">
                     	@if($invoices->count()>0)
-                    	
+
 	                    	@foreach($invoices as $invoice)
 	                    	<tr>
 	                    		<td>{{$invoice->invoice_no}}</td>
@@ -70,16 +70,16 @@ Paid Invoices
 	                    		@else
 	                    		<td><div class="text-danger">{{'Unpaid'}}</div></td>
 	                    		@endif
-	                    		
+
 	                    	</tr>
 	                    	@endforeach
                     	@endif
                     </tbody>
             </table>
-        
+
 		</div>
 		</div>
-	
+
 @endsection
 @section('js')
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>

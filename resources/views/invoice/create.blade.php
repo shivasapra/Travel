@@ -304,25 +304,25 @@ Create Invoice
 					<td class="col-md-8" align="right">
 						<strong>Credit card:</strong>
 					</td>
-					<td class="col-md-4" id="creditInput"><input name="credit_amount" type="text" value="0" class="form-control mask-money"></td>
+					<td class="col-md-4" id="creditInput"><input name="credit_amount" type="text" class="form-control mask-money"></td>
 					</tr>
 					<tr>
 					<td class="col-md-8" align="right">
 						<strong>Debit card:</strong>
 					</td>
-					<td class="col-md-4" id="debitInput"><input name="debit_amount" type="text" value="0" class="form-control mask-money"></td>
+					<td class="col-md-4" id="debitInput"><input name="debit_amount" type="text" class="form-control mask-money"></td>
 					</tr>
 					<tr>
 					<td class="col-md-8" align="right">
 						<strong>Cash:</strong>
 					</td>
-					<td class="col-md-4" id="cashInput"><input name="cash_amount" type="text" value="0" class="form-control mask-money"></td>
+					<td class="col-md-4" id="cashInput"><input name="cash_amount" type="text" class="form-control mask-money"></td>
 					</tr>
 					<tr>
 					<td class="col-md-8" align="right">
 						<strong>Bank Transfer:</strong>
 					</td>
-					<td class="col-md-4" id="bankInput"><input name="bank_amount" type="text" value="0" class="form-control mask-money"></td>
+					<td class="col-md-4" id="bankInput"><input name="bank_amount" type="text" class="form-control mask-money"></td>
 					</tr>
 				</table>
 			</div>
@@ -706,7 +706,7 @@ Create Invoice
         fare_cost = fare_cost.replace(/\,/g,'');
         var fare_sell = Number(fare_cost) + Number((percentage / 100) * fare_cost );
         $(temp).parents('.fare-parent').find('.fare').val(fare_sell.toFixed(2));
-		
+
     }
     window.setInterval(function(){
         $('.mask-money').maskMoney();
