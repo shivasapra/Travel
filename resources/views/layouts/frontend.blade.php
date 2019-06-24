@@ -371,19 +371,21 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
             </a>
+            
             <ul class="treeview-menu">
                 <li><a href="{{route('visa.report')}}"><i class="fa fa-circle-o"></i>Visa Report</a></li>
                 <li><a href="{{route('paidInvoice.report')}}"><i class="fa fa-circle-o"></i>Paid Invoices Report</a></li>
                 <li><a href="{{route('unpaidInvoice.report')}}"><i class="fa fa-circle-o"></i>UnPaid Invoices Report</a></li>
-                <form action="{{route('service.report')}}" method="post">
-                @csrf
-                <li><button type="submit"><i class="fa fa-circle-o"></i>Invoices Report</button></li>
-                <input type="text" hidden name="service_name" value="Flight">
-              </form>
+                <li><a href="javascript:{}" onclick="document.getElementById('my_form').submit();"><i class="fa fa-circle-o"></i>Invoices Report</a>
+                </li>
                 <li><a href="{{route('expenses.report')}}"><i class="fa fa-circle-o"></i>Expenses Report</a></li>
                 <li><a href="{{route('docmov.report')}}"><i class="fa fa-circle-o"></i>Document Movement Report</a></li>
-            </ul>
+              </ul>
           </li>
+          <form action="{{route('service.report')}}" method="post" id="my_form">
+              @csrf
+              <input type="text" name="service_name" value="Flight" hidden>
+            </form>
           @endcan
         @if(!Auth::user()->client)
             <li><a href="{{route('assign')}}"><i class="fa fa-clock-o"></i><span>Assignments</span></a></li>
