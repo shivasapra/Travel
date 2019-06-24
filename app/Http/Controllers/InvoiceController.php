@@ -108,7 +108,8 @@ class InvoiceController extends Controller
     public function store(Request $request)
     {
 
-
+        
+      
          $dt = Carbon::now();
         $date_today = $dt->timezone('Europe/London');
         $date = $date_today->toDateString();
@@ -372,7 +373,48 @@ class InvoiceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
+    {   
+        $invoice = invoice::find($id);
+        $number = $invoice->discounted_total + $invoice->VAT_amount;
+        $no = round($number);
+        $point = round($number - $no, 2) * 100;
+        $hundred = null;
+        $digits_1 = strlen($no);
+        $i = 0;
+        $str = array();
+        $words = array('0' => '', '1' => 'one', '2' => 'two',
+         '3' => 'three', '4' => 'four', '5' => 'five', '6' => 'six',
+         '7' => 'seven', '8' => 'eight', '9' => 'nine',
+         '10' => 'ten', '11' => 'eleven', '12' => 'twelve',
+         '13' => 'thirteen', '14' => 'fourteen',
+         '15' => 'fifteen', '16' => 'sixteen', '17' => 'seventeen',
+         '18' => 'eighteen', '19' =>'nineteen', '20' => 'twenty',
+         '30' => 'thirty', '40' => 'forty', '50' => 'fifty',
+         '60' => 'sixty', '70' => 'seventy',
+         '80' => 'eighty', '90' => 'ninety');
+        $digits = array('', 'hundred', 'thousand', 'lakh', 'crore');
+        while ($i < $digits_1) {
+          $divider = ($i == 2) ? 10 : 100;
+          $number = floor($no % $divider);
+          $no = floor($no / $divider);
+          $i += ($divider == 10) ? 1 : 2;
+          if ($number) {
+             $plural = (($counter = count($str)) && $number > 9) ? 's' : null;
+             $hundred = ($counter == 1 && $str[0]) ? ' and ' : null;
+             $str [] = ($number < 21) ? $words[$number] .
+                 " " . $digits[$counter] . $plural . " " . $hundred
+                 :
+                 $words[floor($number / 10) * 10]
+                 . " " . $words[$number % 10] . " "
+                 . $digits[$counter] . $plural . " " . $hundred;
+          } else $str[] = null;
+       }
+       $str = array_reverse($str);
+       $result = implode('', $str);
+       $points = ($point) ?
+         "." . $words[$point / 10] . " " . 
+               $words[$point = $point % 10] : '';
+        $amount_in_words = $result . "Pounds  " . $points . " Scents";
         $visa = invoice::find($id)->invoiceInfo->where('service_name','Visa Services');
         $hotel = invoice::find($id)->invoiceInfo->where('service_name','Hotel');
         $insurance = invoice::find($id)->invoiceInfo->where('service_name','Insurance');
@@ -380,7 +422,7 @@ class InvoiceController extends Controller
         $local_transport = invoice::find($id)->invoiceInfo->where('service_name','Local Transport');
         $car_rental = invoice::find($id)->invoiceInfo->where('service_name','Car Rental');
         $other_facilities = invoice::find($id)->invoiceInfo->where('service_name','Other Facilities');
-        return view('invoice')->with('invoice',invoice::find($id))
+        return view('invoice')->with('invoice',$invoice)
                                 ->with('products',products::all())
                                     ->with('airlines',airlines::all())
                                     ->with('tax',settings::all())
@@ -390,7 +432,8 @@ class InvoiceController extends Controller
                                     ->with('local_sight_sceen',$local_sight_sceen)
                                     ->with('local_transport',$local_transport)
                                     ->with('car_rental',$car_rental)
-                                    ->with('other_facilities',$other_facilities);
+                                    ->with('other_facilities',$other_facilities)
+                                    ->with('amount_in_words',$amount_in_words);
     }
 
     public function test($id)
