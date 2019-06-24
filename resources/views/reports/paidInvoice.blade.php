@@ -1,6 +1,6 @@
 @extends('layouts.frontend')
 @section('title')
-Invoices Report
+Paid Invoices Report
 @endsection
 @section('css')
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
@@ -9,18 +9,18 @@ Invoices Report
 @section('header')
 	<section class="content-header">
       <h1>
-        Invoices Report
+        Paid Invoices Report
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Invoices Report</li>
+        <li class="active">Paid Invoices Report</li>
       </ol>
     </section>
 @stop
 @section('content')
 
 		<div class="box box-info">
-      <div class="box-header">
+      {{-- <div class="box-header">
         <div class="row">
           <div class="col-md-8"></div>
           <div class="col-md-4">
@@ -39,7 +39,7 @@ Invoices Report
             </form>
           </div>
         </div>
-      </div>
+      </div> --}}
 			<div class="box-body">
 
 
@@ -104,9 +104,9 @@ Invoices Report
     } );
 } );
 
-function SelectService(){
-  $('#button').click();
-}
+// function SelectService(){
+//   $('#button').click();
+// }
 
 </script>
 @endsection

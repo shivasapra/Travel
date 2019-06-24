@@ -53,15 +53,15 @@ Invoices
 								<a href="{{route('invoice.view',['id'=>$invoice->id])}}" class="btn btn-info btn-xs"><span class="fa fa-eye"></span></a>
 								<a href="{{route('invoice.edit',['id'=>$invoice->id])}}" class="btn btn-info btn-xs"><span class="fa fa-edit"></span></a>
 								</td>
-								@if($invoice->status == 0)
-									<td class="text-center"><a href="{{route('invoice.delete',['id'=>$invoice->id])}}" class="btn btn-danger btn-xs">Cancel</a></td>
-									<td class="text-center"><a href="{{route('invoice.pay',['id'=>$invoice->id])}}" class="btn btn-primary btn-xs">Pay</a></td>
-									<td class="text-center"><a href="{{route('invoice.reminder',['id'=>$invoice->id])}}" class="btn btn-warning btn-xs">Send Reminder</a></td>
-								@else
+								{{-- @if($invoice->status == 0) --}}
+									<td class="text-center"><a href="{{route('invoice.delete',['id'=>$invoice->id])}}" {{($invoice->status == 1)?"disabled":" "}} class="btn btn-danger btn-xs">Cancel</a></td>
+									<td class="text-center"><a href="{{route('invoice.pay',['id'=>$invoice->id])}}" {{($invoice->status == 1)?"disabled":" "}} class="btn btn-primary btn-xs">Pay</a></td>
+									<td class="text-center"><a href="{{route('invoice.reminder',['id'=>$invoice->id])}}" {{($invoice->status == 1)?"disabled":" "}} class="btn btn-warning btn-xs">Send Reminder</a></td>
+								{{-- @else --}}
+								{{-- <td>&nbsp;</td>
 								<td>&nbsp;</td>
-								<td>&nbsp;</td>
-								<td>&nbsp;</td>
-								@endif
+								<td>&nbsp;</td> --}}
+								{{-- @endif --}}
 	                    	</tr>
 	                    	@endforeach
                     	@endif

@@ -24,7 +24,7 @@ Invoices Report
         <div class="row">
           <div class="col-md-8"></div>
           <div class="col-md-4">
-          <form action="{{route('service')}}" method="post">
+          <form action="{{route('service.report')}}" method="post">
             @csrf
               <label for="service_name">Select Service</label>
               <select name="service_name" class="form-control service" required onChange="SelectService();">

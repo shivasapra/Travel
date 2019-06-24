@@ -1,6 +1,6 @@
 @extends('layouts.frontend')
 @section('title')
-UnPaid Invoices
+UnPaid Invoices Report
 @endsection
 @section('css')
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
@@ -9,11 +9,11 @@ UnPaid Invoices
 @section('header')
 	<section class="content-header">
       <h1>
-        UnPaid Invoice
+        UnPaid Invoices Report
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active"><i class="fa fa-paperclip"></i>UnPaid Invoice</li>
+        <li class="active"><i class="fa fa-paperclip"></i>UnPaid Invoices Report</li>
       </ol>
     </section>
 @stop

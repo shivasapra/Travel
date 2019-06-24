@@ -331,7 +331,7 @@ Route::get('/document/movement/report',[
 ])->middleware('permission:View/Export Reports');
 Route::post('/service',[
 'uses'=> 'ReportController@invoice',
-'as'=>'service'
+'as'=>'service.report'
 ])->middleware('permission:View/Export Reports');
 
 
