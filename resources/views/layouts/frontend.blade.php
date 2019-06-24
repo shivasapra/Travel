@@ -384,7 +384,7 @@
           </li><form action="{{route('service.report')}}" method="post" id="my_form">
               @csrf
               <input type="text" name="service_name" value="Flight" hidden>
-            </form>www
+            </form>
           <form action="{{route('service.report')}}" method="post" id="my_form">
               @csrf
               <input type="text" name="service_name" value="Flight" hidden>
