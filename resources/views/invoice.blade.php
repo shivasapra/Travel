@@ -348,7 +348,7 @@ Invoice
             <tr>
               <th>Hotel City</th>
               <th>Hotel Country</th>
-              <th>Name</th>
+            <th>Hotel Name</th>
               <th>Check-In-Date</th>
               <th>Check-Out-Date</th>
               <th>No. Of Children</th>

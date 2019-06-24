@@ -1,4 +1,8 @@
-
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+body{
+    font-family: 'Open Sans', sans-serif !important;
+    font-size:14px;
+}
 .generate-invoice{
     background-color:#fff;
     padding:3rem 0rem;
@@ -671,8 +675,7 @@ body {
     font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
     background-color: #fff;
     background: #626f80;
-    font-size: 13px;
-    color: #323a45;
+    color: #151515;
 }
 
 body,

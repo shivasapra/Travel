@@ -19,7 +19,7 @@ Invoices
 			<div class="box-body">
 
 
-			<table id="myTable" class="table table-striped">
+			<table id="myTable" class="table table-striped table-bordered">
                     <thead id="ignorePDF">
                       <tr>
                         <th>Invoice No.</th>
@@ -27,9 +27,10 @@ Invoices
                         <th>Receiver Name</th>
                         <th>Total</th>
                         <th>Status</th>
-                        {{-- <th>PDF</th> --}}
-                        <th>Action</th>
-                        {{-- <th>Delete</th> --}}
+						<th class="text-center">Action</th>
+						<th class="text-center">Cancel Invoice</th>
+						<th class="text-center">Pay</th>
+						<th class="text-center">Reminder</th>
                       </tr>
                     	</thead>
                     <tbody>
@@ -48,15 +49,19 @@ Invoices
 	                    		<td><div class="text-danger">{{'Unpaid'}}</div></td>
 	                    		@endif
 	                    		{{-- <td><button class="btn btn-xs btn-success" id="pdf">PDF</button></td> --}}
-	                    		<td>
-														<a href="{{route('invoice.view',['id'=>$invoice->id])}}" class="btn btn-info btn-xs"><span class="fa fa-eye"></span></a>
-                                                        <a href="{{route('invoice.edit',['id'=>$invoice->id])}}" class="btn btn-info btn-xs"><span class="fa fa-edit"></span></a>
-														@if($invoice->status == 0)
-														<a href="{{route('invoice.delete',['id'=>$invoice->id])}}" class="btn btn-danger btn-xs">Cancel</a>
-														<a href="{{route('invoice.pay',['id'=>$invoice->id])}}" class="btn btn-primary btn-xs">Pay</a>
-														<a href="{{route('invoice.reminder',['id'=>$invoice->id])}}" class="btn btn-warning btn-xs">Send Reminder</a>
-														@endif
-	                    		</td>
+	                    		<td class="text-center">
+								<a href="{{route('invoice.view',['id'=>$invoice->id])}}" class="btn btn-info btn-xs"><span class="fa fa-eye"></span></a>
+								<a href="{{route('invoice.edit',['id'=>$invoice->id])}}" class="btn btn-info btn-xs"><span class="fa fa-edit"></span></a>
+								</td>
+								@if($invoice->status == 0)
+									<td class="text-center"><a href="{{route('invoice.delete',['id'=>$invoice->id])}}" class="btn btn-danger btn-xs">Cancel</a></td>
+									<td class="text-center"><a href="{{route('invoice.pay',['id'=>$invoice->id])}}" class="btn btn-primary btn-xs">Pay</a></td>
+									<td class="text-center"><a href="{{route('invoice.reminder',['id'=>$invoice->id])}}" class="btn btn-warning btn-xs">Send Reminder</a></td>
+								@else
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								@endif
 	                    	</tr>
 	                    	@endforeach
                     	@endif
