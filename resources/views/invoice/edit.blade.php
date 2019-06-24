@@ -417,14 +417,14 @@ Edit Invoice
         <td><input type="text" name="last_name[]" value="{{ $passenger->last_name }}" class="form-control"></td>
         <td><input type="date" name="DOB[]" value="{{ $passenger->DOB }}" placeholder="dd/mm/yyyy"  class="form-control"></td>
         <td>Segment-1</td>
-        <td><input type="text" name="segment_one_fare_cost[]" value="{{number_format( (float) $passenger->segment_one_fare_cost, 2, '.', '')  }}" step="0.01" placeholder="0.00" class="form-control mask-money"   required onKeyUp="fareSell(this);"></td>
-        <td><input type="text" name="segment_one_fare_sell[]" step="0.01" value="{{number_format( (float) $passenger->segment_one_fare_sell, 2, '.', '')  }}" placeholder="0.00" class="form-control fare" readonly required></td>
+        <td><input type="text" name="segment_one_fare_cost[]" value="{{number_format( (float) $passenger->segment_one_fare_cost, 2, '.', '')  }}" step="0.01" placeholder="0.00" class="form-control mask-money"   required onKeyUp="fareSell(this);" onMouseOver="FlightAmount(this);"></td>
+        <td><input type="text" name="segment_one_fare_sell[]" step="0.01" value="{{number_format( (float) $passenger->segment_one_fare_sell, 2, '.', '')  }}" placeholder="0.00" class="form-control fare" readonly required onMouseOver="FlightAmount(this);"></td>
         </tr>
         <tr class="fare-parent">
         <td colspan="4">&nbsp;</td>
         <td>Segment-2</td>
-        <td><input type="text" name="segment_two_fare_cost[]" value="{{number_format( (float) $passenger->segment_two_fare_cost, 2, '.', '')  }}" step="0.01" placeholder="0.00" class="form-control mask-money"   required onKeyUp="fareSell(this);"></td>
-        <td><input type="text" name="segment_two_fare_sell[]" step="0.01" value="{{   number_format( (float) $passenger->segment_two_fare_sell, 2, '.', '')  }}" placeholder="0.00" class="form-control fare" readonly  required></td>
+        <td><input type="text" name="segment_two_fare_cost[]" value="{{number_format( (float) $passenger->segment_two_fare_cost, 2, '.', '')  }}" step="0.01" placeholder="0.00" class="form-control mask-money"   required onKeyUp="fareSell(this);" onMouseOver="FlightAmount(this);"></td>
+        <td><input type="text" name="segment_two_fare_sell[]" step="0.01" value="{{   number_format( (float) $passenger->segment_two_fare_sell, 2, '.', '')  }}" placeholder="0.00" class="form-control fare" readonly  required onMouseOver="FlightAmount(this);"></td>
         </tr>
         @endforeach
         <div ></div>
@@ -1090,14 +1090,14 @@ Edit Invoice
             '<td><input type="text" name="last_name[]" class="form-control"></td>'+
             '<td><input type="date" name="DOB[]" placeholder="dd/mm/yyyy" value="{{ $date }}"  class="form-control"></td>'+
             '<td>Segment-1</td>'+
-            '<td><input type="text" name="segment_one_fare_cost[]" step="0.01" placeholder="0.00" class="form-control mask-money"   required onKeyUp="fareSell(this);"></td>'+
-            '<td><input type="text" name="segment_one_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare " readonly required></td>'+
+            '<td><input type="text" name="segment_one_fare_cost[]" step="0.01" placeholder="0.00" class="form-control mask-money"   required onKeyUp="fareSell(this);" onMouseOver="FlightAmount(this);"></td>'+
+            '<td><input type="text" name="segment_one_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare " readonly required onMouseOver="FlightAmount(this);"></td>'+
           '</tr>'+
           '<tr class="fare-parent">'+
             '<td colspan="4">&nbsp;</td>'+
             '<td>Segment-2</td>'+
-            '<td><input type="text" name="segment_two_fare_cost[]" step="0.01" placeholder="0.00" class="form-control mask-money"   required onKeyUp="fareSell(this);"></td>'+
-            '<td><input type="text" name="segment_two_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare " readonly  required></td>'+
+            '<td><input type="text" name="segment_two_fare_cost[]" step="0.01" placeholder="0.00" class="form-control mask-money"   required onKeyUp="fareSell(this);" onMouseOver="FlightAmount(this);"></td>'+
+            '<td><input type="text" name="segment_two_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare " readonly  required onMouseOver="FlightAmount(this);"></td>'+
           '</tr>'+
           '<div ></div>'+
         '</tbody>'+
@@ -1111,7 +1111,7 @@ Edit Invoice
         '<h3><strong>Total Amount:</strong></h3>'+
         '</div>'+
         '<div class="col-md-2">'+
-        '<br><input type="text" name="flight_amount[]" value="0" onClick="FlightAmount(this);" class="form-control flight_amount "  readonly>'+
+        '<br><input type="text" name="flight_amount[]" value="0" onClick="FlightAmount(this);" onMouseOver="FlightAmount(this);" class="form-control flight_amount "  readonly>'+
        '</div>'+
        '</div>'+
       '</div>'+
@@ -1142,14 +1142,14 @@ Edit Invoice
             '<td><input type="text" name="last_name[]" class="form-control"></td>'+
             '<td><input type="date" name="DOB[]" placeholder="dd/mm/yyyy" value="{{ $date }}"  class="form-control"></td>'+
             '<td>Segment-1</td>'+
-            '<td><input type="text" name="segment_one_fare_cost[]" step="0.01" placeholder="0.00" class="form-control mask-money"  onKeyUp="fareSell(this);"></td>'+
-            '<td><input type="text" name="segment_one_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare " readonly ></td>'+
+            '<td><input type="text" name="segment_one_fare_cost[]" step="0.01" placeholder="0.00" class="form-control mask-money"  onKeyUp="fareSell(this);" onMouseOver="FlightAmount(this);"></td>'+
+            '<td><input type="text" name="segment_one_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare " readonly onMouseOver="FlightAmount(this);"></td>'+
         '</tr>'+
           '<tr class="fare-parent">'+
             '<td colspan="4">&nbsp;</td>'+
             '<td>Segment-2</td>'+
-            '<td><input type="text" name="segment_two_fare_cost[]" step="0.01" placeholder="0.00" class="form-control mask-money"  onKeyUp="fareSell(this);"></td>'+
-            '<td><input type="text" name="segment_two_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare " readonly ></td>'+
+            '<td><input type="text" name="segment_two_fare_cost[]" step="0.01" placeholder="0.00" class="form-control mask-money"  onKeyUp="fareSell(this);" onMouseOver="FlightAmount(this);"></td>'+
+            '<td><input type="text" name="segment_two_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare " readonly onMouseOver="FlightAmount(this);"></td>'+
           '</tr>';
           $(test).parents('.box').find('.add_row_invoice').append(data);
         //   $(".add_row_invoice").append(data);
@@ -1290,7 +1290,7 @@ Edit Invoice
             for (var i = 0; i < temp.length; i++) {
                 amount = Number(amount) + Number($(temp[i]).val().replace(/\,/g,''));
             }
-			test.value = amount.toFixed(2);
+			$(test).parents('.box').find('.flight_amount').val(amount.toFixed(2));
 
 
 	}
