@@ -153,7 +153,7 @@ class InvoiceController extends Controller
             $invoice->paid = $invoice->paid + $request->bank_amount;
         }
         $invoice->save();
-        $invoice->pending_amount =str_replace(',', '', $invoice->discounted_total ) + str_replace(',', '', $invoice->VAT_amount ) - str_replace(',', '', $invoice->paid );
+        $invoice->pending_amount =$invoice->discounted_total  + $invoice->VAT_amount  - $invoice->paid ;
         $invoice->save();
         $flight_counter=0;
         $visa_counter=0;
