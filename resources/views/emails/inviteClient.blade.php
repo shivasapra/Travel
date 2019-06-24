@@ -119,26 +119,26 @@ html { -webkit-text-size-adjust: none; -ms-text-size-adjust: none;}
                                        <tr>
                                           <td align="center" valign="top">
                                              <a href="#" target="_blank" style="display: block; max-width: 19px;">
-                                                <img src="{{asset('/public/images/soc_1.png')}}" alt="img" width="19" border="0" style="display: block; width: 19px;" />
+                                                <img src="{{asset('/images/soc_1.png')}}" alt="img" width="19" border="0" style="display: block; width: 19px;" />
                                              </a>
                                           </td>
                                           <td width="45" style="width: 45px; max-width: 45px; min-width: 45px;">&nbsp;</td>
                                           <td align="center" valign="top">
                                              <a href="#" target="_blank" style="display: block; max-width: 18px;">
-                                                <img src="{{asset('/public/images/soc_2.png')}}" alt="img" width="18" border="0" style="display: block; width: 18px;" />
+                                                <img src="{{asset('/images/soc_2.png')}}" alt="img" width="18" border="0" style="display: block; width: 18px;" />
                                              </a>
                                           </td>
                                           <td width="45" style="width: 45px; max-width: 45px; min-width: 45px;">&nbsp;</td>
                                           <td align="center" valign="top">
                                              <a href="#" target="_blank" style="display: block; max-width: 21px;">
-                                                <img src="{{asset('/public/images/soc_3.png')}}" alt="img" width="21" border="0" style="display: block; width: 21px;" />
+                                                <img src="{{asset('/images/soc_3.png')}}" alt="img" width="21" border="0" style="display: block; width: 21px;" />
                                              </a>
                                              {{-- src="{{asset('/uploads/logo.jpg')}}" --}}
                                           </td>
                                           <td width="45" style="width: 45px; max-width: 45px; min-width: 45px;">&nbsp;</td>
                                           <td align="center" valign="top">
                                              <a href="#" target="_blank" style="display: block; max-width: 25px;">
-                                                <img src="{{asset('/public/images/soc_4.png')}}" alt="img" width="25" border="0" style="display: block; width: 25px;" />
+                                                <img src="{{asset('/images/soc_4.png')}}" alt="img" width="25" border="0" style="display: block; width: 25px;" />
                                              </a>
                                           </td>
                                        </tr>
