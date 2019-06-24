@@ -32,14 +32,20 @@ Edit Profile
 		<div class="box box-warning">
 		<div class="box-body">
 			<div class="container text-center">
-            	<img 
+			<div class="image-outer-div">
+            	<img  id="blah"
             	@if(Auth::user()->avatar)
                   src="{{asset(Auth::user()->avatar)}}"
                 @else
                   src="{{asset('app/images/user-placeholder.jpg')}}"
                 @endif 
-                alt="avatar" height="300px" width="300px" style="border-radius:20px">
-            </div>
+				alt="avatar" height="250px" width="250px" style="border-radius:20px">
+				<label for="avatar" class="upload-icon">
+						<i class="fa fa-camera" aria-hidden="true"></i>
+				</label>
+				<input type="file" id="avatar" name='avatar' onchange="readURL(this);"  class="form-control" style="display:none;">
+			</div>
+		</div>
 			<div class="form-group">
 				<label for="name">Name</label>
 				<input type="text" name='name' value="{{$user->name}}" class="form-control">
@@ -53,8 +59,7 @@ Edit Profile
 				<input type="password" name='password' class="form-control">
 			</div>
 			<div class="form-group">
-				<label for="avatar">Image</label>
-				<input type="file" name='avatar' class="form-control">
+				
 			</div>
         	<div class="form-group">
 			<div class="text-center">
@@ -65,7 +70,20 @@ Edit Profile
 		</div>
 	</form>
 		
-		
+<script>
+  function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah')
+                        .attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+</script>		
 
 
 @stop
