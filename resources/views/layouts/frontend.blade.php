@@ -73,7 +73,7 @@
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
-          <li class="dropdown dropdown-notifications">
+          {{-- <li class="dropdown dropdown-notifications">
                 <a href="#notifications-panel" class="dropdown-toggle" data-toggle="dropdown">
                   <i data-count="0" class="glyphicon glyphicon-bell notification-icon"></i>
                 </a>
@@ -91,7 +91,7 @@
                     <a href="#">View All</a>
                   </div>
                 </div>
-              </li>
+              </li> --}}
           <!-- Notifications: style can be found in dropdown.less -->
           @if(!Auth::user()->admin and !Auth::user()->client)
           <li class="dropdown messages-menu">
@@ -381,7 +381,10 @@
                 <li><a href="{{route('expenses.report')}}"><i class="fa fa-circle-o"></i>Expenses Report</a></li>
                 <li><a href="{{route('docmov.report')}}"><i class="fa fa-circle-o"></i>Document Movement Report</a></li>
               </ul>
-          </li>
+          </li><form action="{{route('service.report')}}" method="post" id="my_form">
+              @csrf
+              <input type="text" name="service_name" value="Flight" hidden>
+            </form>www
           <form action="{{route('service.report')}}" method="post" id="my_form">
               @csrf
               <input type="text" name="service_name" value="Flight" hidden>
@@ -702,7 +705,7 @@
             toastr.danger("{{Session::get('danger')}}")
         @endif
     </script>
-<script type="text/javascript">
+{{-- <script type="text/javascript">
     var notificationsWrapper   = $('.dropdown-notifications');
     var notificationsToggle    = notificationsWrapper.find('a[data-toggle]');
     var notificationsCountElem = notificationsToggle.find('i[data-count]');
@@ -752,7 +755,7 @@
       notificationsWrapper.find('.notif-count').text(notificationsCount);
       notificationsWrapper.show();
     });
-  </script>
+  </script> --}}
 
 @yield('js')
 </body>

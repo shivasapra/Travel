@@ -497,7 +497,7 @@ Edit Invoice
 										<div class="col-md-4">
 											<div class="form-group">
 												<label for="visa_type">Visa Type</label>
-												<input type="text" name="visa_type[]" value="{{$info->visa_country}}" class="form-control">
+												<input type="text" name="visa_type[]" value="{{$info->visa_type}}" class="form-control">
 											</div>
 										</div>
 										<div class="col-md-4">
