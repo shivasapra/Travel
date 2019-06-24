@@ -48,7 +48,7 @@ class InvoiceController extends Controller
                 $invoice->save();
             }
         }
-        return view('invoice.index')->with('invoices',invoice::all())
+        return view('invoice.index')->with('invoices',invoice::orderBy('id','desc')->get())
                                     ->with('tax',settings::all());
     }
 
@@ -373,10 +373,24 @@ class InvoiceController extends Controller
      */
     public function show($id)
     {
+        $visa = invoice::find($id)->invoiceInfo->where('service_name','Visa Services');
+        $hotel = invoice::find($id)->invoiceInfo->where('service_name','Hotel');
+        $insurance = invoice::find($id)->invoiceInfo->where('service_name','Insurance');
+        $local_sight_sceen = invoice::find($id)->invoiceInfo->where('service_name','Local Sight Sceen');
+        $local_transport = invoice::find($id)->invoiceInfo->where('service_name','Local Transport');
+        $car_rental = invoice::find($id)->invoiceInfo->where('service_name','Car Rental');
+        $other_facilities = invoice::find($id)->invoiceInfo->where('service_name','Other Facilities');
         return view('invoice')->with('invoice',invoice::find($id))
                                 ->with('products',products::all())
                                     ->with('airlines',airlines::all())
-                                    ->with('tax',settings::all());
+                                    ->with('tax',settings::all())
+                                    ->with('visa',$visa)
+                                    ->with('hotel',$hotel)
+                                    ->with('insurance',$insurance)
+                                    ->with('local_sight_sceen',$local_sight_sceen)
+                                    ->with('local_transport',$local_transport)
+                                    ->with('car_rental',$car_rental)
+                                    ->with('other_facilities',$other_facilities);
     }
 
     public function test($id)
@@ -683,7 +697,7 @@ class InvoiceController extends Controller
     }
 
     public function canceled(){
-        $invoices = invoice::onlyTrashed()->get();
+        $invoices = invoice::onlyTrashed()->orderBy('id','desc')->get();
         return view('invoice.canceled')->with('invoices',$invoices)
                                     ->with('tax',settings::all());
 
@@ -800,6 +814,22 @@ class InvoiceController extends Controller
                 return Response($output);
             }
         }
+    }
+
+    public function refund($id){
+        $invoice = invoice::find($id);
+        $invoice->refund = 1;
+        $invoice->save();
+        Session::flash('success','Invoice Refunded!!');
+        return redirect()->back();
+    }
+
+    public function refunded(){
+        $invoices = invoice::where('refund',1)->get();
+       
+        Session::flash('success','Invoice Refunded!!');
+        return view('invoice.refunded')->with('invoices',$invoices)
+        ->with('tax',settings::all());
     }
 
 

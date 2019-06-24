@@ -211,6 +211,7 @@ Invoice
           </div>
         </div>
         @if($invoice->flights->count() > 0)
+        <?php $j =1 ?>
         <div class="row hide_div1">
           <div class="col-md-12">
             <h2 class="p-3 bg-light-blue d-inline-block text-white">Flight</h2>
@@ -221,7 +222,7 @@ Invoice
           </div>
       @foreach($invoice->flights as $flight)
           <div class="col-md-12">
-            <h4 class="mt-3"><b>Passanger Details</b></h4>
+          <h4 class="mt-3"><b>{{$j++}}. Passenger Details</b></h4>
 
           </div>
           <div class="col-md-12">
@@ -291,71 +292,71 @@ Invoice
           @endforeach
         </div>
         @endif
-        @foreach($invoice->invoiceInfo as $info)
-        @if($info->service_name == 'Visa Services')
-        <div class="row hide_div2">
-          <div class="col-md-12 mt-4">
-            <h2 class="p-3 bg-light-blue d-inline-block text-white">{{ $info->service_name }}</h2>
-            <label class="switch switch2">
-              <input type="checkbox" checked>
-              <span class="slider round"></span>
-            </label>
-          </div>
-          <div class="col-md-12">
-            <div class="table-responsive">
-            <table class="table table-bordered">
-            <thead>
+        @if($visa->count() > 0 )
+        <?php $visa_amount = 0 ; $k = 1;?>
+        <h2 class="p-3 bg-light-blue d-inline-block text-white">{{ 'Visa Services' }}</h2>         
+          <div class="table-responsive">
+          <table class="table table-bordered">
+          <thead>
             <tr>
-                    <th>Applicant Name</th>
-                    <th>Passport Origin</th>
-                    <th>Visa Country</th>
-                    <th>Visa Type</th>
-                    <th>Visa Fees</th>
-                    <th>Service Charge</th>
+              <th>SNo.</th>
+                <th>Applicant Name</th>
+                <th>Passport Origin</th>
+                <th>Visa Country</th>
+                <th>Visa Type</th>
+                <th>Visa Fees</th>
+                <th>Service Charge</th>
+                <th>Amount</th>
             </tr>
           </thead>
           <tbody>
+            @foreach($visa as $info)
             <tr>
-                    <td>{{$info->name_of_visa_applicant}}</td>
-                    <td>{{$info->passport_origin}}</td>
-                    <td>{{$info->visa_country}}</td>
-                    <td>{{$info->visa_type}}</td>
-                    <td>{{$info->visa_charges}}</td>
-                    <td>{{$info->service_charge}}</td>
+            <th>{{$k++}}.</th>
+              <td>{{$info->name_of_visa_applicant}}</td>
+              <td>{{$info->passport_origin}}</td>
+              <td>{{$info->visa_country}}</td>
+              <td>{{$info->visa_type}}</td>
+              <td>{{$info->visa_charges}}</td>
+              <td>{{$info->service_charge}}</td>
+              <td><b>{{ $invoice->currency.$info->visa_amount }}</b></td>
+              <?php $visa_amount = $visa_amount + $info->visa_amount; ?>
             </tr>
+            @endforeach
           </tbody>
           </table>
-        </div>
           </div>
           <div class="col-md-12">
-            <h4 class="mt-3"> <b class="float-right"><b>Total:  </b><span class="text-light-blue">{{ $invoice->currency.$info->visa_amount }}</span></b></h4>
+            <h4 class="mt-3"> <b class="float-right"><b>Total:  </b><span class="text-light-blue">{{ $invoice->currency.$visa_amount }}</span></b></h4>
           </div>
-        </div>
         @endif
-        @if($info->service_name == 'Hotel')
-        <div class="row hide_div3">
-      <div class="col-sm-12 mt-4">
-        <h2 class="p-3 bg-light-blue d-inline-block text-white">{{ $info->service_name }}</h2>
-        <label class="switch switch3">
-          <input type="checkbox" checked>
-          <span class="slider round"></span>
-        </label>
-      </div>
-      <div class="col-md-12">
+
+        
+        @if($hotel->count()>0)
+        <?php $hotel_amount = 0 ; $k = 1;?>
+      
+        <h2 class="p-3 bg-light-blue d-inline-block text-white">{{ 'Hotel' }}</h2>
+        
+      
+      
         <div class="table-responsive">
           <table class="table table-bordered">
             <thead>
             <tr>
+              <th>SNo.</th>
               <th>Hotel City</th>
               <th>Hotel Country</th>
-            <th>Hotel Name</th>
+              <th>Hotel Name</th>
               <th>Check-In-Date</th>
               <th>Check-Out-Date</th>
               <th>No. Of Children</th>
               <th>No. Of Rooms</th>
+              <th>Amount:</th>
             </tr>
         </thead>
+        @foreach($hotel as $info)
             <tr>
+                <th>{{$k++}}.</th>
               <td>{{ $info->hotel_city }}</td>
               <td>{{ $info->hotel_country }}</td>
               <td>{{ $info->hotel_name }}</td>
@@ -363,166 +364,186 @@ Invoice
               <td>{{ Carbon\Carbon::parse($info->check_out_date)->format('d/m/Y') }}</td>
               <td>{{ $info->no_of_children }}</td>
               <td>{{ $info->no_of_rooms }}</td>
+              <td><b>{{ $invoice->currency.$info->hotel_amount }}</b></td>
+              <?php $hotel_amount = $hotel_amount + $info->hotel_amount; ?>
             </tr>
+          @endforeach
           </table>
         </div>
-      </div>
+      
       <div class="col-md-12">
-        <h4 class="mt-3"> <b class="float-right"><b>Total:  </b><span class="text-light-blue">{{ $invoice->currency.$info->hotel_amount }}</span></b></h4>
+        <h4 class="mt-3"> <b class="float-right"><b>Total:  </b><span class="text-light-blue">{{ $invoice->currency.$hotel_amount }}</span></b></h4>
       </div>
-    </div>
+    
       @endif
-
-      @if($info->service_name == 'Insurance')
-      <div class="row hide_div4">
-        <div class="col-md-12 mt-4">
-            <h2 class="p-3 bg-light-blue d-inline-block text-white">{{ $info->service_name }}</h2>
-          <label class="switch switch4">
-            <input type="checkbox" checked>
-            <span class="slider round"></span>
-          </label>
-        </div>
-      <div class="col-md-12">
+      
+      @if($insurance->count()>0)
+      <?php $insurance_amount = 0 ; $k=1;?>
+        
+            <h2 class="p-3 bg-light-blue d-inline-block text-white">{{ 'Insurance' }}</h2>
+          
+        
         <div class="table-responsive">
           <table class="table table-bordered">
             <thead>
             <tr>
+              <th>SNo.</th>
               <th>Name Of Insurance Applicant</th>
               <th>Company Name</th>
               <th>Insurance Remarks</th>
+              <th>Amount:</th>
             </tr>
         </thead>
+        @foreach($insurance as $info)
             <tr>
+                <th>{{$k++}}.</th>
               <td>{{ $info->name_of_insurance_applicant }}</td>
               <td>{{ $info->name_of_insurance_company }}</td>
               <td>{{ $info->insurance_remarks }}</td>
+              <td><b>{{ $invoice->currency.$info->insurance_amount }}</b></td>
+              <?php $insurance_amount = $insurance_amount + $info->insurance_amount; ?>
             </tr>
+            @endforeach
           </table>
         </div>
-      </div>
+      
       <div class="col-md-12">
-        <h4 class="mt-3"> <b class="float-right"><b>Total:  </b><span class="text-light-blue">{{ $invoice->currency.$info->insurance_amount }}</span></b></h4>
+        <h4 class="mt-3"> <b class="float-right"><b>Total:  </b><span class="text-light-blue">{{ $invoice->currency.$insurance_amount }}</span></b></h4>
       </div>
-    </div>
       @endif
 
-      @if($info->service_name == 'Local Sight Sceen')
-      <div class="row hide_div5">
-            <div class="col-md-12 mt-4">
-              <h2 class="p-3 bg-light-blue d-inline-block text-white">{{ $info->service_name }}</h2>
-              <label class="switch switch5">
-                <input type="checkbox" checked>
-                <span class="slider round"></span>
-              </label>
-            </div>
+
+      
+      @if($local_sight_sceen->count()>0)
+      <?php $local_sight_sceen_amount = 0 ; $k =1;?>
+              <h2 class="p-3 bg-light-blue d-inline-block text-white">{{ 'Local Sight Sceen' }}</h2>
+              
+            
       <div class="col-md-12">
         <div class="table-responsive">
           <table class="table table-bordered">
                 <thead>
+                    
             <tr>
+              <th>SNo.</th>
               <th>Local Sight Sceen Remarks</th>
+              <th>Amount:</th>
             </tr>
         </thead>
+        @foreach($local_sight_sceen as $info)
             <tr>
+                <th>{{$k++}}.</th>
               <td>{{ $info->local_sight_sceen_remarks }}</td>
+              <td><b>{{ $invoice->currency.$info->local_sight_sceen_amount }}</b></td>
+              <?php $local_sight_sceen_amount = $local_sight_sceen_amount + $info->local_sight_sceen_amount; ?>
             </tr>
+            @endforeach
           </table>
         </div>
-      </div>
+      
       <div class="col-md-12">
-        <h4 class="mt-3"> <b class="float-right"><b>Total:  </b><span class="text-light-blue">{{ $invoice->currency.$info->local_sight_sceen_amount }}</span></b></h4>
+        <h4 class="mt-3"> <b class="float-right"><b>Total:  </b><span class="text-light-blue">{{ $invoice->currency.$local_sight_sceen_amount }}</span></b></h4>
       </div>
-    </div>
+    
       @endif
-
-      @if($info->service_name == 'Local Transport')
-      <div class="row hide_div6">
-            <div class="col-md-12 mt-4">
-              <h2 class="p-3 bg-light-blue d-inline-block text-white">{{ $info->service_name }}</h2>
-              <label class="switch switch6">
-                <input type="checkbox" checked>
-                <span class="slider round"></span>
-              </label>
-                  </div>
-      <div class="col-md-12">
+      
+      @if($local_transport->count() > 0)
+      <?php $local_transport_amount = 0 ; $k=1;?>
+              <h2 class="p-3 bg-light-blue d-inline-block text-white">{{ 'Local Transport' }}</h2>
+              
+                  
+      
         <div class="table-responsive">
           <table class="table table-bordered">
               <thead>
+                <tr>
+                  <th>SNo.</th>
+                  <th>Local Transport Remarks</th>
+                  <td>Amount:</td>
+                </tr>
+              </thead>
+              @foreach($local_transport as $info)
             <tr>
-              <th>Local Transport Remarks</th>
-            </tr>
-        </thead>
-            <tr>
+                <th>{{$k++}}.</th>
               <td>{{ $info->local_transport_remarks }}</td>
+              <td><b>{{ $invoice->currency.$info->local_transport_amount }}</b></td>
+              <?php $local_transport_amount = $local_transport_amount + $info->local_transport_amount; ?>
             </tr>
+            @endforeach
           </table>
         </div>
-      </div>
+      
       <div class="col-md-12">
-        <h4 class="mt-3"> <b class="float-right"><b>Total:  </b><span class="text-light-blue">{{ $invoice->currency.$info->local_transport_amount }}</span></b></h4>
+        <h4 class="mt-3"> <b class="float-right"><b>Total:  </b><span class="text-light-blue">{{ $invoice->currency.$local_transport_amount }}</span></b></h4>
       </div>
-    </div>
+    
       @endif
-
-      @if($info->service_name == 'Car Rental')
-      <div class="row hide_div7">
-      <div class="col-md-12 mt-4">
-            <h2 class="p-3 bg-light-blue d-inline-block text-white">{{ $info->service_name }}</h2>
-        <label class="switch switch7">
-          <input type="checkbox" checked>
-          <span class="slider round"></span>
-        </label>
-          </div>
-      <div class="col-md-12">
+      @if($car_rental->count() > 0)
+      
+            <h2 class="p-3 bg-light-blue d-inline-block text-white">{{ 'Car Rental' }}</h2>
+            <?php $car_rental_amount = 0 ; $k = 1;?>
+          
+      
         <div class="table-responsive">
           <table class="table table-bordered">
               <thead>
+                <tr>
+                  <th>SNo.</th>
+                  <th>Car Rental Remarks</th>
+                  <th>Amount:</th>
+                </tr>
+              </thead>
+              @foreach($car_rental as $info)
             <tr>
-              <th>Car Rental Remarks</th>
-            </tr>
-        </thead>
-            <tr>
+                <th>{{$k++}}.</th>
               <td>{{ $info->car_rental_remarks }}</td>
+              <td><b>{{ $invoice->currency.$info->car_rental_amount}}</b></td>
+              <?php $car_rental_amount = $car_rental_amount + $info->car_rental_amount; ?>
             </tr>
+            @endforeach
           </table>
         </div>
-      </div>
-
+      
+      
       <div class="col-md-12">
-        <h4 class="mt-3"> <b class="float-right"><b>Total:  </b><span class="text-light-blue">{{ $invoice->currency.$info->car_rental_amount}}</span></b></h4>
+        <h4 class="mt-3"> <b class="float-right"><b>Total:  </b><span class="text-light-blue">{{ $invoice->currency.$car_rental_amount}}</span></b></h4>
       </div>
-        </div>
+    
       @endif
-
-      @if($info->service_name == 'Other Facilities')
-      <div class="row hide_div8">
-      <div class="col-md-12 mt-4">
-            <h2 class="p-3 bg-light-blue d-inline-block text-white">{{ $info->service_name }}</h2>
-        <label class="switch switch8">
-          <input type="checkbox" checked>
-          <span class="slider round"></span>
-        </label>
-          </div>
-      <div class="col-md-12">
+      
+      
+      @if($other_facilities->count()>0)
+      <?php $other_facilities_amount = 0 ; $k=1;?>
+            <h2 class="p-3 bg-light-blue d-inline-block text-white">{{ "Other Facilities" }}</h2>
+        
         <div class="table-responsive">
           <table class="table table-bordered">
               <thead>
             <tr>
+              <th>SNo.</th>
               <th>Other Facilities Remarks</th>
+              <th>Amount:</th>
             </tr>
         </thead>
+        @foreach ($other_facilities as $info)
+            
+        
             <tr>
+                <th>{{$k++}}.</th>
               <td>{{ $info->other_facilities_remarks }}</td>
+              <td><b>{{ $invoice->currency.$info->other_facilities_amount }}</b></td>
+              <?php $other_facilities_amount = $other_facilities_amount + $info->other_facilities_amount; ?>
             </tr>
+            @endforeach
           </table>
         </div>
-      </div>
+      
       <div class="col-md-12">
-        <h4 class="mt-3"> <b class="float-right"><b>Total:  </b><span class="text-light-blue">{{ $invoice->currency.$info->other_facilities_amount }}</span></b></h4>
+        <h4 class="mt-3"> <b class="float-right"><b>Total:  </b><span class="text-light-blue">{{ $invoice->currency.$other_facilities_amount }}</span></b></h4>
       </div>
-    </div>
+    
       @endif
-      @endforeach<br>
+      <br><br>
         <div class="row">
           <div class="col-md-4">
              {{-- <h4><b>Payment Information</b></h4> --}}
@@ -650,7 +671,7 @@ function print() {
   window.print();
 }
 </script>
-<script>
+{{-- <script>
       $('.switch1 input:checkbox').change(function(){
           if($(this).is(":checked")) {
               $('.hide_div1').removeClass("noprint");
@@ -738,5 +759,5 @@ function print() {
               $('.hide_div8').addClass("opacity_05");
           }
       });
- </script>
+ </script> --}}
 @stop

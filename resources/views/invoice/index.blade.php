@@ -13,13 +13,17 @@ Invoices
       </ol>
     </section>
 @stop
+@section('css')
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">
+@stop
 @section('content')
 
 		<div class="box box-info">
 			<div class="box-body">
 
 
-			<table id="myTable" class="table table-striped table-bordered">
+			<table id="myTable" class="table table-striped table-bordered"  >
                     <thead id="ignorePDF">
                       <tr>
                         <th>Invoice No.</th>
@@ -28,7 +32,7 @@ Invoices
                         <th>Total</th>
                         <th>Status</th>
 						<th class="text-center">Action</th>
-						<th class="text-center">Cancel Invoice</th>
+						<th class="text-center">Cancel/Refund Invoice</th>
 						<th class="text-center">Pay</th>
 						<th class="text-center">Reminder</th>
                       </tr>
@@ -36,7 +40,8 @@ Invoices
                     <tbody>
                     	@if($invoices->count()>0)
 
-	                    	@foreach($invoices as $invoice)
+							@foreach($invoices as $invoice)
+							@if($invoice->refund == 0)
 	                    	<tr>
 	                    		<td>{{$invoice->invoice_no}}</td>
 	                    		<td>{{$invoice->invoice_date}}</td>
@@ -54,7 +59,13 @@ Invoices
 								<a href="{{route('invoice.edit',['id'=>$invoice->id])}}" class="btn btn-info btn-xs"><span class="fa fa-edit"></span></a>
 								</td>
 								{{-- @if($invoice->status == 0) --}}
-									<td class="text-center"><a href="{{route('invoice.delete',['id'=>$invoice->id])}}" {{($invoice->status == 1)?"disabled":" "}} class="btn btn-danger btn-xs">Cancel</a></td>
+									<td class="text-center">
+										@if($invoice->status == 0)
+											<a href="{{route('invoice.delete',['id'=>$invoice->id])}}" {{($invoice->status == 1)?"disabled":" "}} class="btn btn-danger btn-xs">Cancel</a>
+										@else
+											<a href="{{route('invoice.refund',['id'=>$invoice->id])}}" {{($invoice->status == 0)?"disabled":" "}} class="btn btn-success btn-xs">Refund</a>
+										@endif
+									</td>
 									<td class="text-center"><a href="{{route('invoice.pay',['id'=>$invoice->id])}}" {{($invoice->status == 1)?"disabled":" "}} class="btn btn-primary btn-xs">Pay</a></td>
 									<td class="text-center"><a href="{{route('invoice.reminder',['id'=>$invoice->id])}}" {{($invoice->status == 1)?"disabled":" "}} class="btn btn-warning btn-xs">Send Reminder</a></td>
 								{{-- @else --}}
@@ -62,7 +73,8 @@ Invoices
 								<td>&nbsp;</td>
 								<td>&nbsp;</td> --}}
 								{{-- @endif --}}
-	                    	</tr>
+							</tr>
+							@endif
 	                    	@endforeach
                     	@endif
                     </tbody>
@@ -78,6 +90,23 @@ Invoices
 @endsection
 @section('js')
 <script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+
+
+  <script>
+  	$(document).ready(function() {
+    $('#myTable').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+        ]
+    } );
+} );
+</script>
 <script>
 	$(document).ready(function(){
     $("#pdf").click(function(){

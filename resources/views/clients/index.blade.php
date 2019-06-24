@@ -13,13 +13,17 @@ Clients
       </ol>
     </section>
 @stop
+@section('css')
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">
+@stop
 @section('content')
 
 		<div class="box box-info">
 			<div class="box-body">
 
 
-			<table class="table table-hover mb-0">
+			<table class="table table-hover mb-0" id="example" >
                     <thead>
                       <tr>
                         <th>Sno.</th>
@@ -68,3 +72,22 @@ Clients
 		</div>
 
 @endsection
+@section('js')
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+
+
+  <script>
+  	$(document).ready(function() {
+    $('#example').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+        ]
+    } );
+} );
+</script>
+@stop

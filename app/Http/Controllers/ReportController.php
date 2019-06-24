@@ -15,16 +15,16 @@ class ReportController extends Controller
     public function paidInvoice(){
     	return view('reports.paidInvoice')
     	->with('tax',settings::all())
-        ->with('invoices',invoice::where('status',1)->get())
+        ->with('invoices',invoice::where('status',1)->orderBy('id','desc')->get())
         ->with('products',products::all());
     }
 
     public function invoice(Request $request){
         if ($request->service_name =='Flight') {
-            $invoices = Flight::all();
+            $invoices = Flight::orderBy('id','desc')->get();
         }
         else{
-            $invoices = invoiceInfo::where('service_name',$request->service_name)->get();
+            $invoices = invoiceInfo::where('service_name',$request->service_name)->orderBy('id','desc')->get();
         }
         return view('reports.invoice')
     	->with('tax',settings::all())
@@ -37,22 +37,22 @@ class ReportController extends Controller
     public function unpaidInvoice(){
     	return view('reports.unpaidInvoice')
     	->with('tax',settings::all())
-        ->with('invoices',invoice::where('status',0)->get())
+        ->with('invoices',invoice::where('status',0)->orderBy('id','desc')->get())
         ->with('products',products::all());
     }
 
     public function expenses(){
         return view('reports.expenses')
-        ->with('expenses',expenses::all());
-    }
+        ->with('expenses',expenses::orderBy('id','desc')->get());
+  }
 
     public function visa(){
-        $invoices = invoiceInfo::where('service_name','Visa Services')->get();
+        $invoices = invoiceInfo::where('service_name','Visa Services')->orderBy('id','desc')->get();
         return view('reports.visa')->with('invoices',$invoices);
     }
 
     public function docMovement(){
-        $docs = ClientDoc::all();
+        $docs = ClientDoc::orderBy('id','desc')->get();
         return view('reports.docsMovement')->with('docs',$docs);
     }
 }

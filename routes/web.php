@@ -114,6 +114,7 @@ Route::get('indexWithMessage/{id}',[
 
 
 Route::get('canceled/invoices',['uses'=>'InvoiceController@canceled','as'=>'canceled.invoices'])->middleware('permission:View Canceled Invoice');
+Route::get('refunded/invoices',['uses'=>'InvoiceController@refunded','as'=>'refunded.invoices'])->middleware('permission:View Canceled Invoice');
 Route::get('retrieve/invoice/{id}',['uses'=>'InvoiceController@retrieve','as'=>'invoice.retrieve'])->middleware('permission:Restore Invoice');
 Route::get('kill/invoice/{id}',['uses'=>'InvoiceController@kill','as'=>'invoice.kill'])->middleware('permission:Cancel Invoice');
 Route::get('pay/invoice/{id}',['uses'=>'InvoiceController@pay','as'=>'invoice.pay'])->middleware('permission:Pay Invoice');
@@ -548,6 +549,10 @@ Route::get('/delete/invoice/{id}',[
 	'uses'=>'InvoiceController@destroy',
 	'as'=>'invoice.delete'
 	])->middleware('permission:Cancel Invoice');
+	Route::get('/refund/invoice/{id}',[
+		'uses'=>'InvoiceController@refund',
+		'as'=>'invoice.refund'
+		])->middleware('permission:Cancel Invoice');
 Route::get('/edit/invoice/{id}',[
 	'uses'=>'InvoiceController@edit',
 	'as'=>'invoice.edit'

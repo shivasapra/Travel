@@ -30,10 +30,10 @@ class clientController extends Controller
     public function index()
     {
         if (Auth::user()->admin) {
-            $clients = client::all();
+            $clients = client::orderBy('id','desc')->get();
         }
         else{
-            $clients = client::where('creator_id',Auth::user()->id)->get();
+            $clients = client::where('creator_id',Auth::user()->id)->orderBy('id','desc')->get();
         }
         return view('clients.index')->with('clients',$clients);
     }

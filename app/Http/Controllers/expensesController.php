@@ -59,7 +59,7 @@ class expensesController extends Controller
             Session::flash('success','Expense Added');
         }
         // dd($date);
-        $expenses = expenses::where('auto',0)->get();
+        $expenses = expenses::where('auto',0)->orderBy('id','desc')->get();
         return view('expenses.index')->with('expenses',$expenses)
                                         ->with('date',$date);
     }

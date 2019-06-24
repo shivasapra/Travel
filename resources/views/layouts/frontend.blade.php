@@ -351,10 +351,13 @@
             </a>
             <ul class="treeview-menu">
               @can('View Invoices')
-                <li><a href="{{route('invoice')}}"><i class="fa fa-circle-o"></i>Invoice Generation</a></li>
+                <li><a href="{{route('invoice')}}"><i class="fa fa-circle-o"></i>Invoices</a></li>
               @endcan
               @can('View Canceled Invoice')
                 <li><a href="{{route('canceled.invoices')}}"><i class="fa fa-circle-o"></i>Canceled Invoices</a></li>
+              @endif
+              @can('View Canceled Invoice')
+                <li><a href="{{route('refunded.invoices')}}"><i class="fa fa-circle-o"></i>Refunded Invoices</a></li>
               @endif
               @can('VAT Updation')
                 <li><a href="{{route('tax')}}"><i class="fa fa-circle-o"></i>VAT</a></li>

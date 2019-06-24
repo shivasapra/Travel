@@ -1,15 +1,15 @@
 @extends('layouts.frontend')
 @section('title')
-Canceled Invoices
+Refunded Invoices
 @endsection
 @section('header')
 	<section class="content-header">
       <h1>
-       Canceled Invoice
+       Refunded Invoice
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active"><i class="fa fa-paperclip"></i>Canceled Invoice</li>
+        <li class="active"><i class="fa fa-paperclip"></i>Refunded Invoice</li>
       </ol>
     </section>
 @stop
@@ -53,7 +53,7 @@ Canceled Invoices
 	                    		<td>
 	                    			<a href="{{route('invoice.edit',['id'=>$invoice->id])}}" class="btn btn-info btn-xs"><span class="fa fa-edit"></span></a>
                                     <a href="{{route('invoice.view',['id'=>$invoice->id])}}" class="btn btn-info btn-xs"><span class="fa fa-eye"></span></a>
-                                    <a href="{{route('invoice.retrieve',['id'=>$invoice->id])}}" class="btn btn-success btn-xs">Retrieve</a>
+                                    {{-- <a href="{{route('invoice.retrieve',['id'=>$invoice->id])}}" class="btn btn-success btn-xs">Retrieve</a> --}}
                                     {{-- <a href="{{route('invoice.kill',['id'=>$invoice->id])}}" class="btn btn-danger btn-xs">Delete</a> --}}
 	                    		</td>
 	                    		{{-- <td><a href="{{route('invoice.delete',['id'=>$invoice->id])}}" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span></a></td> --}}

@@ -258,37 +258,37 @@ class HomeController extends Controller
 
     }
     public function products(){
-        return view('products')->with('products',products::all());
+        return view('products')->with('products',products::orderBy('id','desc')->get());
     }
     public function addProduct(Request $request){
         $product = new products;
         $product->service = $request->service;
         $product->save();
         Session::flash('success','Producr Added Successfully');
-        return redirect()->route('products')->with('products',products::all());
+        return redirect()->route('products')->with('products',products::orderBy('id','desc')-get());
     }
     public function destroyProduct($id){
         $product = products::find($id);
         $product->delete();
         Session::flash('success','Product Deleted Successfully');
-        return redirect()->route('products')->with('products',products::all());
+        return redirect()->route('products')->with('products',products::orderBy('id','desc')->get());
     }
 
     public function airlines(){
-        return view('airlines')->with('airlines',airlines::all());
+        return view('airlines')->with('airlines',airlines::orderBy('id','desc')->get());
     }
     public function addAirline(Request $request){
         $airline = new airlines;
         $airline->name = $request->name;
         $airline->save();
         Session::flash('success','Airline Added Successfully');
-        return redirect()->route('airlines')->with('airlines',airlines::all());
+        return redirect()->route('airlines')->with('airlines',airlines::orderBy('id','desc')->get());
     }
     public function destroyAirline($id){
         $airline = airlines::find($id);
         $airline->delete();
         Session::flash('success','Airline Deleted Successfully');
-        return redirect()->route('airlines')->with('airlines',airlines::all());
+        return redirect()->route('airlines')->with('airlines',airlines::orderBy('id','desc')->get());
     }
 
     public function tax()

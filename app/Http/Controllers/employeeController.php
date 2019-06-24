@@ -30,7 +30,7 @@ class employeeController extends Controller
     
     public function index()
     {
-        return view('employee.index')->with('employees',employee::all());
+        return view('employee.index')->with('employees',employee::orderBy('id','desc')->get());
     }
 
     /**
