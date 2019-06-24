@@ -646,10 +646,10 @@ Invoice
           </div>
         </div><hr>
         <div class="row">
-          <div class="col-md-12">
+          {{-- <div class="col-md-12">
             <h4><b>Remarks:</b></h4>
             <p class="text-danger">Only those invoices can be cancelled which are within 60 days from the current system date.</p>
-          </div>
+          </div> --}}
           <div class="col-md-12">
             <h4><b>Notes:</b></h4>
             <ul>
