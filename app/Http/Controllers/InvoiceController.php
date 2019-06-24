@@ -134,23 +134,23 @@ class InvoiceController extends Controller
         $invoice->paid = 0;
         if($request->credit_amount != null){
             $invoice->credit = 1;
-            $invoice->credit_amount = $invoice->credit_amount + $request->credit_amount;
-            $invoice->paid = $invoice->paid + $request->credit_amount;
+            $invoice->credit_amount = $invoice->credit_amount + str_replace(',', '', $request->credit_amount);
+            $invoice->paid = $invoice->paid + str_replace(',', '', $request->credit_amount);
         }
         if($request->debit_amount != null){
             $invoice->debit = 1;
-            $invoice->debit_amount = $invoice->debit_amount + $request->debit_amount;
-            $invoice->paid = $invoice->paid + $request->debit_amount;
+            $invoice->debit_amount = $invoice->debit_amount + str_replace(',', '', $request->debit_amount);
+            $invoice->paid = $invoice->paid + str_replace(',', '', $request->debit_amount);
         }
         if($request->cash_amount != null){
             $invoice->cash = 1;
-            $invoice->cash_amount = $invoice->cash_amount + $request->cash_amount;
-            $invoice->paid = $invoice->paid + $request->cash_amount;
+            $invoice->cash_amount = $invoice->cash_amount +str_replace(',', '', $request->cash_amount) ;
+            $invoice->paid = $invoice->paid + str_replace(',', '', $request->cash_amount);
         }
         if($request->bank_amount != null){
             $invoice->bank = 1;
-            $invoice->bank_amount = $invoice->bank_amount + $request->bank_amount;
-            $invoice->paid = $invoice->paid + $request->bank_amount;
+            $invoice->bank_amount = $invoice->bank_amount +str_replace(',', '', $request->bank_amount) ;
+            $invoice->paid = $invoice->paid + str_replace(',', '', $request->bank_amount);
         }
         $invoice->save();
         $invoice->pending_amount =$invoice->discounted_total  + $invoice->VAT_amount  - $invoice->paid ;
@@ -722,23 +722,23 @@ class InvoiceController extends Controller
         $invoice = invoice::find($id);
         if($request->credit_amount != null){
             $invoice->credit = 1;
-            $invoice->credit_amount = $invoice->credit_amount + $request->credit_amount;
-            $invoice->paid = $invoice->paid + $request->credit_amount;
+            $invoice->credit_amount = $invoice->credit_amount + str_replace(',', '', $request->credit_amount);
+            $invoice->paid = $invoice->paid + str_replace(',', '', $request->credit_amount);
         }
         if($request->debit_amount != null){
             $invoice->debit = 1;
-            $invoice->debit_amount = $invoice->debit_amount + $request->debit_amount;
-            $invoice->paid = $invoice->paid + $request->debit_amount;
+            $invoice->debit_amount = $invoice->debit_amount + str_replace(',', '', $request->debit_amount);
+            $invoice->paid = $invoice->paid + str_replace(',', '', $request->debit_amount);
         }
         if($request->cash_amount != null){
             $invoice->cash = 1;
-            $invoice->cash_amount = $invoice->cash_amount + $request->cash_amount;
-            $invoice->paid = $invoice->paid + $request->cash_amount;
+            $invoice->cash_amount = $invoice->cash_amount +str_replace(',', '', $request->cash_amount) ;
+            $invoice->paid = $invoice->paid + str_replace(',', '', $request->cash_amount);
         }
         if($request->bank_amount != null){
             $invoice->bank = 1;
-            $invoice->bank_amount = $invoice->bank_amount + $request->bank_amount;
-            $invoice->paid = $invoice->paid + $request->bank_amount;
+            $invoice->bank_amount = $invoice->bank_amount +str_replace(',', '', $request->bank_amount) ;
+            $invoice->paid = $invoice->paid + str_replace(',', '', $request->bank_amount);
         }
         $invoice->save();
         $invoice->pending_amount = $invoice->discounted_total + $invoice->VAT_amount - $invoice->paid;
