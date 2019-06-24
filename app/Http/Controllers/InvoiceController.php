@@ -420,12 +420,15 @@ class InvoiceController extends Controller
     public function update(Request $request, $id)
     {
         $invoice = invoice::find($id);
-        $invoice->discount = $request->discount;
+        $invoice->discount = str_replace(',', '', $request->discount);
         // dd($invoice->discount);
         $invoice->currency = $request->currency;
-        $invoice->total = $request->total;
-        $invoice->discounted_total =$request->total - $request->discount;
-
+        $invoice->total = str_replace(',', '', $request->total);
+        $invoice->discounted_total =str_replace(',', '', $request->total) - str_replace(',', '', $request->discount);
+        if($invoice->VAT_percentage  > 0){
+            $invoice->VAT_percentage = $tax[0]->tax;
+            $invoice->VAT_amount = ($invoice->VAT_percentage)/100*(str_replace(',', '', $invoice->discounted_total));
+        }
         $invoice->save();
         $invoice->pending_amount = $invoice->discounted_total + $invoice->VAT_amount - $invoice->paid;
         $invoice->save();
