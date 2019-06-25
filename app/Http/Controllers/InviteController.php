@@ -88,7 +88,13 @@ class InviteController extends Controller
             //if the invite doesn't exist do something more graceful than this
             abort(404);
         }
-
+        foreach ($$client->family as $family) {
+            $family->member_passport_no = null;
+            $family->member_passport_place = null;
+            $family->member_passport_front = null;        
+            $family->member_passport_back = null;
+            $family->save();
+        }
         $client->passport = 0;
         $client->passport_no = null;
         $client->passport_expiry_date = null;
