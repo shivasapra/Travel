@@ -483,7 +483,7 @@ Create Invoice
         return false;
     }}
     function flight(){
-        var data = '<div class="box-body"><div class="row">'+
+        var data = '<div class="box-body" onMouseOver="FlightAmount(this);"><div class="row">'+
 				 			'<div class="col-md-4">				<div class="form-group">'+
 				 			'<label for="service_name[]">Select Service</label>'+
 				 			'<select name="service_name[]" class="form-control service" required onChange="SelectService(this);">'+
@@ -606,7 +606,7 @@ Create Invoice
     '</div>'+
 '<div class="table-responsive" id="passengers">'+
     '<div class="col-md-12 text-right" style="margin-bottom:20px;"><button type="button" class="btn btn-sm btn-info" onClick="addPassenger(this);">Add Passenger </button></div>'+
-    '<table class="add_row_invoice table table-bordered" id="passenger">'+
+    '<table class=" table table-bordered add_row_invoice" id="passenger">'+
         '<thead>'+
           '<tr >'+
             '<th width="120px;">Pax Type*</th>'+
@@ -618,7 +618,8 @@ Create Invoice
             '<th>Fare Sell</th>'+
           '</tr>'+
         '</thead>'+
-        '<tbody>'+
+        '<tbody class="delete">'+
+		
           '<tr class="fare-parent">'+
             '<td>'+
               '<input type="text" name="verify[]" hidden class="verify"><select name="pax_type[]" class="form-control select-custom custom-select">'+
@@ -643,7 +644,6 @@ Create Invoice
             '<td><input type="text" name="segment_two_fare_cost[]" step="0.01" placeholder="0.00" class="form-control mask-money" onMouseOver="FlightAmount(this);"   required onKeyUp="fareSell(this);"></td>'+
             '<td><input type="text" name="segment_two_fare_sell[]" step="0.01" placeholder="0.00" onMouseOver="FlightAmount(this);" class="form-control fare " readonly  required></td>'+
           '</tr>'+
-          '<div ></div>'+
         '</tbody>'+
       '</table>'+
       '</div>'+
@@ -670,7 +670,7 @@ Create Invoice
     }
     function addPassenger(test){
         var value =  $(test).parents('.box').find('.pnr').val();
-        var data = '<tr class="fare-parent">'+
+        var data = '<tbody class="delete">'+'<tr class="fare-parent">'+
             '<td>'+
             '<input type="text" name="verify[]" hidden value="'+value+'">'+
               '<select name="pax_type[]" class="form-control select-custom custom-select">'+
@@ -694,7 +694,8 @@ Create Invoice
             '<td>Segment-2</td>'+
             '<td><input type="text" name="segment_two_fare_cost[]" step="0.01" placeholder="0.00" onMouseOver="FlightAmount(this);" class="form-control mask-money"  onKeyUp="fareSell(this);"></td>'+
             '<td><input type="text" name="segment_two_fare_sell[]" step="0.01" placeholder="0.00" onMouseOver="FlightAmount(this);" class="form-control fare " readonly ></td>'+
-          '</tr>';
+          '</tr>'+
+		  '</tbody>';
           $(test).parents('.box').find('.add_row_invoice').append(data);
         //   $(".add_row_invoice").append(data);
     }

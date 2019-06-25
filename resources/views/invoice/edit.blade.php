@@ -401,8 +401,8 @@ Edit Invoice
         <th>Fare Sell</th>
         </tr>
         </thead>
-        <tbody>
         @foreach($flight->passengers as $passenger)
+        <tbody class="delete">
         <tr class="fare-parent">
         <td>
         <input type="text" name="verify[]" value="{{ $flight->pnr }}" hidden class="verify"><select name="pax_type[]" class="form-control select-custom custom-select">
@@ -421,14 +421,14 @@ Edit Invoice
         <td><input type="text" name="segment_one_fare_sell[]" step="0.01" value="{{number_format( (float) $passenger->segment_one_fare_sell, 2, '.', '')  }}" placeholder="0.00" class="form-control fare" readonly required onMouseOver="FlightAmount(this);"></td>
         </tr>
         <tr class="fare-parent">
-        <td colspan="4">&nbsp;</td>
+		<td><input type="button" class="btn btn-danger btn-xs" value="X" onclick="SomeDeleteRow(this);"></td>
+		<td colspan="3">&nbsp;</td>
         <td>Segment-2</td>
         <td><input type="text" name="segment_two_fare_cost[]" value="{{number_format( (float) $passenger->segment_two_fare_cost, 2, '.', '')  }}" step="0.01" placeholder="0.00" class="form-control mask-money"   required onKeyUp="fareSell(this);" onMouseOver="FlightAmount(this);"></td>
         <td><input type="text" name="segment_two_fare_sell[]" step="0.01" value="{{   number_format( (float) $passenger->segment_two_fare_sell, 2, '.', '')  }}" placeholder="0.00" class="form-control fare" readonly  required onMouseOver="FlightAmount(this);"></td>
         </tr>
-        @endforeach
-        <div ></div>
-        </tbody>
+	</tbody>
+	@endforeach
         </table>
         </div>
 
@@ -933,6 +933,12 @@ Edit Invoice
     } else {
         return false;
     }}
+	function SomeDeleteRow(btndel) {
+    if (typeof(btndel) == "object") {
+        $(btndel).parents('.delete').remove();
+    } else {
+        return false;
+    }}
     function flight(){
         var data = '<div class="box-body"><div class="row">'+
 				 			'<div class="col-md-4">				<div class="form-group">'+
@@ -1075,7 +1081,7 @@ Edit Invoice
             '<th>Fare Sell</th>'+
           '</tr>'+
         '</thead>'+
-        '<tbody>'+
+        '<tbody class="delete">'+
           '<tr class="fare-parent">'+
             '<td>'+
               '<input type="text" name="verify[]" hidden class="verify"><select name="pax_type[]" class="form-control select-custom custom-select">'+
@@ -1094,12 +1100,12 @@ Edit Invoice
             '<td><input type="text" name="segment_one_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare " readonly required onMouseOver="FlightAmount(this);"></td>'+
           '</tr>'+
           '<tr class="fare-parent">'+
-            '<td colspan="4">&nbsp;</td>'+
+				'<td><input type="button" class="btn btn-danger btn-xs" value="X" onclick="SomeDeleteRow(this);"></td>'+
+            '<td colspan="3">&nbsp;</td>'+
             '<td>Segment-2</td>'+
             '<td><input type="text" name="segment_two_fare_cost[]" step="0.01" placeholder="0.00" class="form-control mask-money"   required onKeyUp="fareSell(this);" onMouseOver="FlightAmount(this);"></td>'+
             '<td><input type="text" name="segment_two_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare " readonly  required onMouseOver="FlightAmount(this);"></td>'+
           '</tr>'+
-          '<div ></div>'+
         '</tbody>'+
       '</table>'+
       '</div>'+
@@ -1127,7 +1133,8 @@ Edit Invoice
     }
     function addPassenger(test){
         var value =  $(test).parents('.box').find('.pnr').val();
-        var data = '<tr class="fare-parent">'+
+        var data = '<tbody class="delete">'+
+		'<tr class="fare-parent">'+
             '<td>'+
             '<input type="text" name="verify[]" hidden value="'+value+'">'+
               '<select name="pax_type[]" class="form-control select-custom custom-select">'+
@@ -1146,11 +1153,13 @@ Edit Invoice
             '<td><input type="text" name="segment_one_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare " readonly onMouseOver="FlightAmount(this);"></td>'+
         '</tr>'+
           '<tr class="fare-parent">'+
-            '<td colspan="4">&nbsp;</td>'+
+				'<td><input type="button" class="btn btn-danger btn-xs" value="X" onclick="SomeDeleteRow(this);"></td>'+
+            '<td colspan="3">&nbsp;</td>'+
             '<td>Segment-2</td>'+
             '<td><input type="text" name="segment_two_fare_cost[]" step="0.01" placeholder="0.00" class="form-control mask-money"  onKeyUp="fareSell(this);" onMouseOver="FlightAmount(this);"></td>'+
             '<td><input type="text" name="segment_two_fare_sell[]" step="0.01" placeholder="0.00" class="form-control fare " readonly onMouseOver="FlightAmount(this);"></td>'+
-          '</tr>';
+          '</tr>'+
+		  '</tbody>';
           $(test).parents('.box').find('.add_row_invoice').append(data);
         //   $(".add_row_invoice").append(data);
     }
