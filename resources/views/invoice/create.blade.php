@@ -874,7 +874,7 @@ Create Invoice
         $('.mask-money-total').maskMoney();
 		total_amount = Number(total_flight_amount) + Number(total_visa_amount) + Number(total_hotel_amount) + Number(total_insurance_amount) + Number(total_local_sight_sceen_amount) + Number(total_other_facilities_amount) + Number(total_car_rental_amount) + Number(total_local_transport_amount) ;
 		document.getElementsByName("total")[0].value = total_amount.toFixed(2);
-		var discounted = Number(total_amount) - document.getElementsByName("discount")[0].value;
+		var discounted = Number(total_amount) - document.getElementsByName("discount")[0].value.replace(/\,/g,'');
 		document.getElementsByName("discounted_total")[0].value = document.getElementById('currency').value + discounted.toFixed(2);
     });
     });

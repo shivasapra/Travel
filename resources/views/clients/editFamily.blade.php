@@ -40,7 +40,7 @@ Edit Family Member
                     <div class="col-md-4">		
                         <div class="form-group">			
                             <label for="member_DOB">Member DOB</label>			
-                            <input type="date" name="member_DOB" value="{{$family->member_DOB}}" required class="form-control">		
+                            <input type="date" name="member_DOB" value="{{Carbon\Carbon::parse($family->member_DOB)->toDateString()}}" required class="form-control">		
                         </div>	
                     </div>	
                     <div class="col-md-4">		
@@ -60,13 +60,31 @@ Edit Family Member
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="member_passport_front">Passport Front:</label>
-                            <input type="file" name="member_passport_front"  class="form-control" value="{{$family->member_passport_front}}">
+                            <div class="image-outer-div">
+                                    <img  id="member_passport_front"
+                                        src="{{asset($family->member_passport_front)}}"
+                                    alt="passport_front" height="250px" width="250px" style="border-radius:20px">
+                                    <label for="front" class="upload-icon">
+                                            <i class="fa fa-camera" aria-hidden="true"></i>
+                                    </label>
+                                    <input type="file" id="front" name='member_passport_front' onchange="readURLFront(this);"  class="form-control" style="display:none;">
+                                </div>
+                            {{-- <input type="file" name="member_passport_front"  class="form-control" value="{{$family->member_passport_front}}"> --}}
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                         <label for="member_passport_back">Passport Back:</label>
-                        <input type="file" name="member_passport_back"  class="form-control" value="{{$family->member_passport_back}}">
+                        <div class="image-outer-div">
+                                <img  id="member_passport_back"
+                                    src="{{asset($family->member_passport_back)}}"
+                                alt="passport_back" height="250px" width="250px" style="border-radius:20px">
+                                <label for="back" class="upload-icon">
+                                        <i class="fa fa-camera" aria-hidden="true"></i>
+                                </label>
+                                <input type="file" id="back" name='member_passport_back' onchange="readURLBack(this);"  class="form-control" style="display:none;">
+                            </div>
+                        {{-- <input type="file" name="member_passport_back"  class="form-control" value="{{$family->member_passport_back}}"> --}}
                         </div>
                     </div>
                 </div>
@@ -78,4 +96,32 @@ Edit Family Member
             </div>
         </div>
     </form>
+@stop
+@section('js')
+<script>
+        function readURLFront(input) {
+                  if (input.files && input.files[0]) {
+                      var reader = new FileReader();
+      
+                      reader.onload = function (e) {
+                          $('#member_passport_front')
+                              .attr('src', e.target.result);
+                      };
+      
+                      reader.readAsDataURL(input.files[0]);
+                  }
+              }
+              function readURLBack(input) {
+                  if (input.files && input.files[0]) {
+                      var reader = new FileReader();
+      
+                      reader.onload = function (e) {
+                          $('#member_passport_back')
+                              .attr('src', e.target.result);
+                      };
+      
+                      reader.readAsDataURL(input.files[0]);
+                  }
+              }
+</script>
 @stop

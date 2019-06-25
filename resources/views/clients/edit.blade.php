@@ -112,7 +112,7 @@ Edit Client
 					<div class="col-md-4">
 					<div class="form-group">
 						<label for="DOB">DOB</label>
-						<input type="date" name='DOB' required class="form-control" value="{{$client->DOB}}">
+						<input type="date" name='DOB' value="{{ Carbon\Carbon::parse($client->DOB)->toDateString()}}" required class="form-control">
 					</div>
 					</div>
 					@if($client->credit_limit != null)
@@ -158,19 +158,46 @@ Edit Client
 					<div class="col-md-4">
 						<div class="form-group">
 							<label for="passport_front">Passport Front</label>
-							<input type="file" name="passport_front"  class="form-control" value="{{$client->passport_front}}">
+							<div class="image-outer-div">
+								<img  id="passport_front"
+									src="{{asset($client->passport_front)}}"
+								alt="passport_front" height="250px" width="250px" style="border-radius:20px">
+								<label for="front" class="upload-icon">
+										<i class="fa fa-camera" aria-hidden="true"></i>
+								</label>
+								<input type="file" id="front" name='passport_front' onchange="readURLFront(this);"  class="form-control" style="display:none;">
+							</div>
 						</div>
 					</div>
 					<div class="col-md-4">
 						<div class="form-group">
 							<label for="passport_back">Passport Back</label>
-							<input type="file" name="passport_back"  class="form-control" value="{{$client->passport_back}}">
+							<div class="image-outer-div">
+								<img  id="passport_back"
+									src="{{asset($client->passport_back)}}"
+								alt="passport_back" height="250px" width="250px" style="border-radius:20px">
+								<label for="back" class="upload-icon">
+										<i class="fa fa-camera" aria-hidden="true"></i>
+								</label>
+								<input type="file" id="back" name='passport_back' onchange="readURLBack(this);"  class="form-control" style="display:none;">
+							</div>
+							{{-- <input type="file" name="passport_back"  class="form-control" value="{{$client->passport_back}}"> --}}
 						</div>
 					</div>
 					<div class="col-md-4">
 						<div class="form-group">
 							<label for="letter">Letter:</label>
-							<input type="file" name="letter"  class="form-control" value="{{$client->letter}}"> <br>	<br><hr>
+							<div class="image-outer-div">
+								<img  id="letter"
+									src="{{asset($client->letter)}}"
+								alt="letter" height="250px" width="250px" style="border-radius:20px">
+								<label for="lette" class="upload-icon">
+										<i class="fa fa-camera" aria-hidden="true"></i>
+								</label>
+								<input type="file" id="lette" name='letter' onchange="readURLLetter(this);"  class="form-control" style="display:none;">
+							</div>
+							{{-- <input type="file" name="letter"  class="form-control" value="{{$client->letter}}">  --}}
+							<br>	<br><hr>
 						</div>
 					</div>
 				</div>
@@ -261,5 +288,44 @@ function SomeDeleteRowFunction(btndel) {
         $(btndel).closest('.hatao').remove();
     } else {
         return false;
-    }}</script>
+	}}</script>
+	
+	<script>
+			function readURLFront(input) {
+					  if (input.files && input.files[0]) {
+						  var reader = new FileReader();
+		  
+						  reader.onload = function (e) {
+							  $('#passport_front')
+								  .attr('src', e.target.result);
+						  };
+		  
+						  reader.readAsDataURL(input.files[0]);
+					  }
+				  }
+				  function readURLBack(input) {
+					  if (input.files && input.files[0]) {
+						  var reader = new FileReader();
+		  
+						  reader.onload = function (e) {
+							  $('#passport_back')
+								  .attr('src', e.target.result);
+						  };
+		  
+						  reader.readAsDataURL(input.files[0]);
+					  }
+				  }
+				  function readURLLetter(input) {
+					  if (input.files && input.files[0]) {
+						  var reader = new FileReader();
+		  
+						  reader.onload = function (e) {
+							  $('#letter')
+								  .attr('src', e.target.result);
+						  };
+		  
+						  reader.readAsDataURL(input.files[0]);
+					  }
+				  }
+		  </script>
 @stop

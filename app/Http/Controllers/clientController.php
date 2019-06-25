@@ -222,6 +222,7 @@ class clientController extends Controller
     public function edit($id)
     {
         $client = client::find($id);
+        // dd($client->DOB);
         $dt = Carbon::now();
         $dt->timezone('Asia/Kolkata');
         $date_today = $dt->timezone('Europe/London');
