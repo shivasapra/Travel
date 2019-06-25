@@ -423,13 +423,13 @@ class InvoiceController extends Controller
         $car_rental = invoice::find($id)->invoiceInfo->where('service_name','Car Rental');
         $other_facilities = invoice::find($id)->invoiceInfo->where('service_name','Other Facilities');
 
-        $test = 1000025.05;
+        // $test = 1000025.05;
 
-        $f = new \NumberFormatter( locale_get_default(), \NumberFormatter::SPELLOUT );
+        // $f = new \NumberFormatter( locale_get_default(), \NumberFormatter::SPELLOUT );
 
-        $word = $f->format($test);
+        // $word = $f->format($test);
 
-        dd($word);
+        // dd($word);
         return view('invoice')->with('invoice',$invoice)
                                 ->with('products',products::all())
                                     ->with('airlines',airlines::all())
