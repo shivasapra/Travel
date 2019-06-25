@@ -88,7 +88,7 @@ class InviteController extends Controller
             //if the invite doesn't exist do something more graceful than this
             abort(404);
         }
-        foreach ($$client->family as $family) {
+        foreach ($client->family as $family) {
             $family->member_passport_no = null;
             $family->member_passport_place = null;
             $family->member_passport_front = null;        
