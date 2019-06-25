@@ -138,7 +138,7 @@ Invoices
 			'<span aria-hidden="true">&times;</span></button>'+
 		  '<h4 class="modal-title">Refund Invoice</h4>'+
 		'</div>'+
-		'<form action="/refund/invoice/'+ inv_id + '" method="post">'+
+		'<form action="{{/public/cloud/refund/invoice/'+ inv_id + '" method="post">'+
 		  '@csrf'+
 		'<div class="modal-body">'+
 			'<label for="invoice_no">Invoice No:</label>'+
