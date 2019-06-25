@@ -66,7 +66,7 @@ Invoices
 									{{-- <a href="{{route('invoice.refund',['id'=>$invoice->id])}}" {{($invoice->status == 0)?"disabled":" "}} class="btn btn-success btn-xs">Refund</a> --}}
 									<input type="text" value="{{$invoice->id}}" class="inv_id" hidden>
 									<input type="text" value="{{$invoice->invoice_no}}" class="inv_no" hidden>
-											<button type="button" onClick="Fun(this);" class="btn btn-success btn-xs">Refund</button>
+											<button  type="button" onClick="Fun(this);" class="btn btn-success btn-xs">Refund</button>
 										@endif
 									</td>
 									<td class="text-center"><a href="{{route('invoice.pay',['id'=>$invoice->id])}}" {{($invoice->status == 1)?"disabled":" "}} class="btn btn-primary btn-xs">Pay</a></td>
