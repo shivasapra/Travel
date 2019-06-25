@@ -550,7 +550,7 @@ Route::get('/delete/invoice/{id}',[
 	'uses'=>'InvoiceController@destroy',
 	'as'=>'invoice.delete'
 	])->middleware('permission:Cancel Invoice');
-	Route::post('/refund/invoice/{id}',[
+	Route::post('http://buildatwill.com/cloud/public/refund/invoice/{id}',[
 		'uses'=>'InvoiceController@refund',
 		'as'=>'invoice.refund'
 		])->middleware('permission:Cancel Invoice');
