@@ -143,7 +143,11 @@ client
 						<tr>
 							<td><strong>Passport Front:</strong></td>
 							<td>
-								<img src="{{asset($client->passport_front)}}" alt="passport front" height="300px" width="300px" style="border-radius:20px">
+								<div class="image-div">
+								<img src="{{asset($client->passport_front)}}" alt="passport front" height="200px" width="200px" style="border-radius:10px">
+								<a href="{{asset($client->passport_front)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
+								</div>
+								{{-- <img src="{{asset($client->passport_front)}}" alt="passport front" height="300px" width="300px" style="border-radius:20px"> --}}
 							</td>
 						</tr>
 						</div>
@@ -151,7 +155,11 @@ client
 						<tr>
 							<td><strong>Passport Back:</strong></td>
 							<td>
-								<img src="{{asset($client->passport_back)}}" alt="passport back" height="300px" width="300px" style="border-radius:20px">
+								<div class="image-div">
+								<img src="{{asset($client->passport_back)}}" alt="passport front" height="200px" width="200px" style="border-radius:10px">
+								<a href="{{asset($client->passport_back)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
+								</div>
+								{{-- <img src="{{asset($client->passport_back)}}" alt="passport back" height="300px" width="300px" style="border-radius:20px"> --}}
 							</td>
 						</tr>
 						</div>
@@ -159,7 +167,11 @@ client
 						<tr>
 							<td><strong>Letter:</strong></td>
 							<td>
-								<img src="{{asset($client->letter)}}" alt="letter" height="300px" width="300px" style="border-radius:20px">
+								<div class="image-div">
+								<img src="{{asset($client->letter)}}" alt="passport front" height="200px" width="200px" style="border-radius:10px">
+								<a href="{{asset($client->letter)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
+								</div>
+								{{-- <img src="{{asset($client->letter)}}" alt="letter" height="300px" width="300px" style="border-radius:20px"> --}}
 							</td>
 						</tr>
 						</div>
@@ -209,7 +221,10 @@ client
 								<td><strong>&nbsp;&nbsp;&nbsp;&nbsp;Passport Front:</strong></td>
 								<td>
 									@if($family->member_passport_front != null)
-									<img src="{{asset($family->member_passport_front)}}" alt="passport front" height="300px" width="300px" style="border-radius:20px">
+									<div class="image-div">
+									<img src="{{asset($family->member_passport_front)}}" alt="passport front" height="200px" width="200px" style="border-radius:10px">
+									<a href="{{asset($family->member_passport_front)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
+									</div>
 									@else
 									<strong>{{'N/A'}}</strong>
 									@endif
@@ -221,7 +236,11 @@ client
 								<td><strong>&nbsp;&nbsp;&nbsp;&nbsp;Passport Back:</strong></td>
 								<td>
 									@if($family->member_passport_back != null)
-									<img src="{{asset($family->member_passport_back)}}" alt="passport back" height="300px" width="300px" style="border-radius:20px">
+									<div class="image-div">
+									<img src="{{asset($family->member_passport_back)}}" alt="passport front" height="200px" width="200px" style="border-radius:10px">
+									<a href="{{asset($family->member_passport_back)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
+									</div>
+									{{-- <img src="{{asset($family->member_passport_back)}}" alt="passport back" height="300px" width="300px" style="border-radius:20px"> --}}
 									@else
 									<strong>{{'N/A'}}</strong>
 									@endif
@@ -246,5 +265,37 @@ client
             @endif
         </div>
 
+		<!-- The Modal -->
+{{-- <div id="myModal" class="modal">
+	<div class="float-right" style="margin-right:30px;margin-top:20px;">
+		<span class="close" style="opacity:1;color:#fff;"><i class="fa fa-times" aria-hidden="true"></i></span>
+		<a href="{{asset($family->member_passport_front)}}" download class="" style="color:#fff;float:right;margin-right:20px;font-size: 18px;"><i class="fa fa-download" aria-hidden="true"></i></a>
+	</div>
+		<img class="modal-content" id="img01">
+		<div id="caption"></div>
+	  </div>
+
+	  <script>
+			// Get the modal
+			var modal = document.getElementById("myModal");
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("myImg");
+			var modalImg = document.getElementById("img01");
+			var captionText = document.getElementById("caption");
+			img.onclick = function(){
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close")[0];
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function() { 
+			  modal.style.display = "none";
+			}
+		</script> --}}
 
 @endsection

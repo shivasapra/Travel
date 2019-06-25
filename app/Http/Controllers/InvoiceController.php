@@ -392,7 +392,7 @@ class InvoiceController extends Controller
          '30' => 'thirty', '40' => 'forty', '50' => 'fifty',
          '60' => 'sixty', '70' => 'seventy',
          '80' => 'eighty', '90' => 'ninety');
-        $digits = array('', 'hundred', 'thousand', 'lakh', 'crore');
+        $digits = array('', 'hundred', 'thousand', 'million', 'billion');
         while ($i < $digits_1) {
           $divider = ($i == 2) ? 10 : 100;
           $number = floor($no % $divider);
@@ -422,6 +422,14 @@ class InvoiceController extends Controller
         $local_transport = invoice::find($id)->invoiceInfo->where('service_name','Local Transport');
         $car_rental = invoice::find($id)->invoiceInfo->where('service_name','Car Rental');
         $other_facilities = invoice::find($id)->invoiceInfo->where('service_name','Other Facilities');
+
+        $test = 1000025.05;
+
+        $f = new \NumberFormatter( locale_get_default(), \NumberFormatter::SPELLOUT );
+
+        $word = $f->format($test);
+
+        dd($word);
         return view('invoice')->with('invoice',$invoice)
                                 ->with('products',products::all())
                                     ->with('airlines',airlines::all())

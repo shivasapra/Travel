@@ -61,7 +61,7 @@ Invoices
 								{{-- @if($invoice->status == 0) --}}
 								<td class="text-center test">
 									@if($invoice->status == 0)
-									<a href="{{route('invoice.delete',['id'=>$invoice->id])}}" {{($invoice->status == 1)?"disabled":" "}} class="btn btn-danger btn-xs">Cancel</a>
+									<a onClick="return confirm('Are You Sure You Want To Cancel This Invoice')" href="{{route('invoice.delete',['id'=>$invoice->id])}}" {{($invoice->status == 1)?"disabled":" "}} class="btn btn-danger btn-xs">Cancel</a>
 									@else
 									{{-- <a href="{{route('invoice.refund',['id'=>$invoice->id])}}" {{($invoice->status == 0)?"disabled":" "}} class="btn btn-success btn-xs">Refund</a> --}}
 									<input type="text" value="{{$invoice->id}}" class="inv_id" hidden>
