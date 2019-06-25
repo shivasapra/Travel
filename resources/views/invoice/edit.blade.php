@@ -268,7 +268,7 @@ Edit Invoice
         <?php $i = 1;?>
         @foreach($invoice->flights as $flight)
                 <div class="box box-primary">
-                <div class="box-body">
+                <div class="box-body" onMouseOver="FlightAmount(this);">
                         <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
@@ -940,7 +940,7 @@ Edit Invoice
         return false;
     }}
     function flight(){
-        var data = '<div class="box-body"><div class="row">'+
+        var data = '<div class="box-body" onMouseOver="FlightAmount(this);"><div class="row">'+
 				 			'<div class="col-md-4">				<div class="form-group">'+
 				 			'<label for="service_name[]">Select Service</label>'+
 				 			'<select name="service_name[]" class="form-control service" required onChange="SelectService(this);">'+

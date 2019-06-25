@@ -351,5 +351,20 @@ class HomeController extends Controller
         }
     }
 
+    public function CountryVisaSearch(Request $request){
+        if($request->ajax()){
+            $output="";
+            $country = Countries::where('name','LIKE','%'.$request->search."%")->get();
+            // dd($country);
+
+            if($country){
+                    foreach ($country as $key => $product) {
+                        $output.='<a><option onClick="CountryVisaAssign(this)" value="'.$product->name.'">'.$product->name.'</option></a>';
+                    }
+                return Response($output);
+            }
+        }
+    }
+
 
 }

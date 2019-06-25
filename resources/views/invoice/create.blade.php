@@ -160,7 +160,29 @@ Create Invoice
             }
             /* Change color of dropdown links on hover */
             .Countrydropdown-content a:hover {background-color: #f1f1f1}
-        </style>
+		</style>
+		<style>
+				/* The search field when it gets focus/clicked on */
+				#CountryVisamyInput:focus {outline: 3px solid #ddd;}
+				/* Dropdown Content (Hidden by Default) */
+				.CountryVisadropdown-content {
+				display: block;
+				position:absolute;
+				background-color: #f6f6f6;
+				min-width: 220px;
+				border: 1px solid #ddd;
+				z-index: 1;
+				}
+				/* Links inside the dropdown */
+				.CountryVisadropdown-content a {
+				color: black;
+				padding: 12px 16px;
+				text-decoration: none;
+				display: block;
+				}
+				/* Change color of dropdown links on hover */
+				.CountryVisadropdown-content a:hover {background-color: #f1f1f1}
+			</style>
 @stop
 @section('header')
 	<section class="content-header">
@@ -781,7 +803,13 @@ Create Invoice
 							@endforeach
 						}
 			  @endforeach
-				var data = '<div class="box-body"> <div class="row">			<div class="col-md-4">				<div class="form-group">					<label for="service_name[]">Select Service</label>					<select name="service_name[]" class="form-control service" required onChange="SelectService(this);">							<option value="">--select--</option>							@if($products->count()>0)							@foreach($products as $product)								<option value="{{$product->service}}" {{($product->service == "Visa Services")?"selected":''}}>{{$product->service}}</option>							@endforeach							@endif					</select>				</div>			</div><div class="col-md-4"><div class="form-group"><label for="visa_applicant">Visa Applicant</label><select name="visa_applicant" id="visa-applicant" class="form-control" onChange="findFamily(this);">'+options+'</select></div></div>		</div><div class="row">	<div class="col-md-3">		<div class="form-group">			<label for="name_of_visa_applicant">Name Of Visa Applicant</label>			<input type="text" name="name_of_visa_applicant[]"  required class="form-control member_name">		</div>		</div>		<div class="col-md-3">		<div class="form-group">			<label for="passport_origin">Passport Origin</label>			<input type="text" name="passport_origin[]" class="form-control passport_origin" required>		</div>		</div>	<div class="col-md-3">		<div class="form-group">			<label for="passport_no">Passport No.</label>			<input type="text" name="passport_no[]" class="form-control passport_no" maxlength="10">		</div>		</div> <div class="col-md-3">		<div class="form-group">			<label for="passport_member_dob">Passport Member DOB</label>			<input type="text" name="passport_member_dob[]" class="form-control member_dob">		</div>		</div>	</div>		<div class="row">				<div class="col-md-4">				<div class="form-group">					<label for="visa_country">Visa Country</label>					<input type="text" name="visa_country[]" required class="form-control">				</div>				</div>				<div class="col-md-4">				<div class="form-group">					<label for="visa_type">Visa Type</label>					<input type="text" name="visa_type[]" class="form-control">				</div>				</div>				<div class="col-md-4">						<div class="form-group">							<label for="visa_charges[]">Visa Fee</label>							<input type="text" name="visa_charges[]" class="form-control mask-money" onKeyUp="VisaAmount()">						</div>						</div>				</div><div class="row">						<div class="col-md-4">			<div class="form-group">	<label for="service_charge[]">Service Charge</label>		<input id="service_charge" type="text" name="service_charge[]" required class="form-control mask-money" onKeyUp="VisaAmount()">			</div>		</div>		<div class="col-md-4">			<div class="form-group">	<label for="visa_amount">Amount</label>		<input id="amount" type="number" name="visa_amount[]" required class="form-control" readonly>			</div>		</div></div><div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					</div>	</div>				</div></div>';
+				var data = '<div class="box-body"> <div class="row">			<div class="col-md-4">				<div class="form-group">					<label for="service_name[]">Select Service</label>					<select name="service_name[]" class="form-control service" required onChange="SelectService(this);">							<option value="">--select--</option>							@if($products->count()>0)							@foreach($products as $product)								<option value="{{$product->service}}" {{($product->service == "Visa Services")?"selected":''}}>{{$product->service}}</option>							@endforeach							@endif					</select>				</div>			</div><div class="col-md-4"><div class="form-group"><label for="visa_applicant">Visa Applicant</label><select name="visa_applicant" id="visa-applicant" class="form-control" onChange="findFamily(this);">'+options+'</select></div></div>		</div><div class="row">	<div class="col-md-3">		<div class="form-group">			<label for="name_of_visa_applicant">Name Of Visa Applicant</label>			<input type="text" name="name_of_visa_applicant[]"  required class="form-control member_name">		</div>		</div>		<div class="col-md-3">		<div class="form-group">			<label for="passport_origin">Passport Origin</label>			<input type="text" name="passport_origin[]" class="form-control passport_origin" required>		</div>		</div>	<div class="col-md-3">		<div class="form-group">			<label for="passport_no">Passport No.</label>			<input type="text" name="passport_no[]" class="form-control passport_no" maxlength="10">		</div>		</div> <div class="col-md-3">		<div class="form-group">			<label for="passport_member_dob">Passport Member DOB</label>			<input type="text" name="passport_member_dob[]" class="form-control member_dob">		</div>		</div>	</div>		<div class="row">				<div class="col-md-4">				<div class="form-group">'+
+				'<label for="visa_country">Visa Country</label>'+
+				// '<input type="text" name="visa_country[]" required class="form-control">'+
+				'<div class="CountryVisadropdown">	<div id="CountryVisamyDropdown" class="CountryVisadropdown-content">'+
+                '<input type="text" name="visa_country[]" class="form-control countryVisa-name" placeholder="Search..." id="CountryVisamyInput" onkeyup="CountryVisaExtract(this)">'+
+                '<div class="countryVisa_html"></div></div></div>'+
+				'</div>				</div>				<div class="col-md-4">				<div class="form-group">					<label for="visa_type">Visa Type</label>					<input type="text" name="visa_type[]" class="form-control">				</div>				</div>				<div class="col-md-4">						<div class="form-group">							<label for="visa_charges[]">Visa Fee</label>							<input type="text" name="visa_charges[]" class="form-control mask-money" onKeyUp="VisaAmount()">						</div>						</div>				</div><div class="row">						<div class="col-md-4">			<div class="form-group">	<label for="service_charge[]">Service Charge</label>		<input id="service_charge" type="text" name="service_charge[]" required class="form-control mask-money" onKeyUp="VisaAmount()">			</div>		</div>		<div class="col-md-4">			<div class="form-group">	<label for="visa_amount">Amount</label>		<input id="amount" type="number" name="visa_amount[]" required class="form-control" readonly>			</div>		</div></div><div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					</div>	</div>				</div></div>';
 				$(test).closest(".box").html(data);
 			}
 			if (value == 'Hotel') {
@@ -971,6 +999,27 @@ Create Invoice
         // console.log(temp.value);
 		div.find('.country-name').val(temp.value);
 		$(temp).closest(".country_html").html('');
+	}
+
+
+	function CountryVisaExtract(test){
+        $value=test.value;
+        // console.log($value);
+        $.ajax({
+            type : 'get',
+            url : '{{URL::to('searchCountryVisa')}}',
+            data:{'search':$value},
+            success:function(data){
+                $(test).next(".countryVisa_html").html(data);
+                // console.log(data);
+            }
+        });
+    }
+    function CountryVisaAssign(temp){
+		var div = $(temp).closest(".CountryVisadropdown-content");
+        // console.log(temp.value);
+		div.find('.countryVisa-name').val(temp.value);
+		$(temp).closest(".countryVisa_html").html('');
 	}
    	</script>
 

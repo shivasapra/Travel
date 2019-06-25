@@ -306,6 +306,7 @@ Route::get('/searchAirportTwo','InvoiceController@AirportSearchTwo');
 Route::get('/searchAirportArrivalTwo','InvoiceController@AirportArrivalSearchTwo');
 
 Route::get('/searchCountry','HomeController@CountrySearch');
+Route::get('/searchCountryVisa','HomeController@CountryVisaSearch');
 
 
 
