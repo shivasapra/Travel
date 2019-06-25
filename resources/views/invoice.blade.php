@@ -547,13 +547,17 @@ Invoice
         <div class="row">
           <div class="col-md-4">
              {{-- <h4><b>Payment Information</b></h4> --}}
+             @if($invoice->debit_amount > 0 or $invoice->credit_amount > 0 or $invoice->cash_amount > 0 or $invoice->bank_amount > 0)
               <div class="table-responsive">
                 <table class="table">
-                  {{-- <thead>
+                  <thead>
                   <tr>
-                    <th>Mode</th>
+                    <th>Payment Mode</th>
                     <th>Amount</th>
                   </tr>
+                  </thead>
+                  {{-- <thead>
+                    <th>Payment Method:</th>
                   </thead> --}}
                   <tbody>
                     @if($invoice->debit_amount > 0 )
@@ -583,6 +587,7 @@ Invoice
                   </tbody>
                 </table>
               </div>
+              @endif
           </div>
           <div class="col-md-8 text-right">
             <div class="w-100">
