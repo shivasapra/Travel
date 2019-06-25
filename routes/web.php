@@ -549,7 +549,7 @@ Route::get('/delete/invoice/{id}',[
 	'uses'=>'InvoiceController@destroy',
 	'as'=>'invoice.delete'
 	])->middleware('permission:Cancel Invoice');
-	Route::get('/refund/invoice/{id}',[
+	Route::post('/refund/invoice/{id}',[
 		'uses'=>'InvoiceController@refund',
 		'as'=>'invoice.refund'
 		])->middleware('permission:Cancel Invoice');

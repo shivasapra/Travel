@@ -859,9 +859,10 @@ class InvoiceController extends Controller
         }
     }
 
-    public function refund($id){
+    public function refund(Request $request,$id){
         $invoice = invoice::find($id);
         $invoice->refund = 1;
+        $invoice->refund_remarks = $request->refund_remarks;
         $invoice->save();
         Session::flash('success','Invoice Refunded!!');
         return redirect()->back();
