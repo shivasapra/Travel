@@ -70,7 +70,7 @@ class clientController extends Controller
             'county' => 'required',
             'country' => 'required',
             'DOB' => array('required','regex:/[0-9]{4,4}\-[0-9]{2}\-[0-9]{2}/'),
-            'email' => 'unique:users',
+            'email' => 'unique:users|unique:clients',
             'phone' => 'required',
             ])->validate();
             // dd(date_format($request->date));
@@ -188,7 +188,8 @@ class clientController extends Controller
         $invite->email = $client->email;
         $invite->token = $token;
         $invite->save();
-
+        $client->invite_id = $invite->id;
+        $client->save();
         // send the email
         $contactEmail = $client->email;
         $data = array('token'=>$token,'name'=>$client->first_name.' '.$client->last_name);
@@ -259,6 +260,11 @@ class clientController extends Controller
         $client->country = $request->country;
         $client->DOB = $request->DOB;
         $client->email = $request->email;
+        $user = User::find($client->user_id);
+        if($user->count()>0){
+            $user->email = $request->email;
+            $user->save();
+            }
         $client->phone = $request->phone;
         $client->credit_limit = $request->credit_limit;
         $client->client_type = $request->client_type;
@@ -406,7 +412,7 @@ class clientController extends Controller
 
     public function resendAccountConfirmation($id){
         $client = client::find($id);
-        $old_invite = Invite::where('email',$client->email)->first();
+        $old_invite = Invite::find($client->invite_id);
         // dd($old_invite);
         $old_invite->delete();
         do {

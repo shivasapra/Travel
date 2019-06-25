@@ -57,7 +57,7 @@ class employeeController extends Controller
     {   
         Validator::make($request->all(), [
             'passport_no' => 'unique:employees',
-            'email' => 'unique:users',
+            'email' => 'unique:users|unique:employees',
             'mobile_phone' => 'unique:employees',
             'rate' => 'integer'
             ])->validate();
@@ -262,8 +262,10 @@ class employeeController extends Controller
         $employee->mobile_phone = $request->mobile_phone;
         $employee->email = $request->email;
         $user = User::find($employee->user_id);
+        if($user->count()>0){
         $user->email = $request->email;
         $user->save();
+        }
         $employee->qualification = $request->qualification;
         $employee->experience = $request->experience;
         $employee->exp_in_dept = $request->exp_in_dept;
