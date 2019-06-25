@@ -475,6 +475,13 @@ Create Invoice
     } else {
         return false;
     }}
+
+	function SomeDeleteRow(btndel) {
+    if (typeof(btndel) == "object") {
+        $(btndel).parents('.delete').remove();
+    } else {
+        return false;
+    }}
     function flight(){
         var data = '<div class="box-body"><div class="row">'+
 				 			'<div class="col-md-4">				<div class="form-group">'+
@@ -630,7 +637,8 @@ Create Invoice
             '<td><input type="text" name="segment_one_fare_sell[]" step="0.01" placeholder="0.00" onMouseOver="FlightAmount(this);" class="form-control fare " readonly required></td>'+
           '</tr>'+
           '<tr class="fare-parent">'+
-            '<td colspan="4">&nbsp;</td>'+
+		  '<td><input type="button" class="btn btn-danger btn-xs" value="X" onclick="SomeDeleteRow(this);"></td>'+
+            '<td colspan="3">&nbsp;</td>'+
             '<td>Segment-2</td>'+
             '<td><input type="text" name="segment_two_fare_cost[]" step="0.01" placeholder="0.00" class="form-control mask-money" onMouseOver="FlightAmount(this);"   required onKeyUp="fareSell(this);"></td>'+
             '<td><input type="text" name="segment_two_fare_sell[]" step="0.01" placeholder="0.00" onMouseOver="FlightAmount(this);" class="form-control fare " readonly  required></td>'+
@@ -681,7 +689,8 @@ Create Invoice
             '<td><input type="text" name="segment_one_fare_sell[]" step="0.01" placeholder="0.00" onMouseOver="FlightAmount(this);" class="form-control fare " readonly ></td>'+
         '</tr>'+
           '<tr class="fare-parent">'+
-            '<td colspan="4">&nbsp;</td>'+
+				'<td><input type="button" class="btn btn-danger btn-xs" value="X" onclick="SomeDeleteRow(this);"></td>'+
+            '<td colspan="3">&nbsp;</td>'+
             '<td>Segment-2</td>'+
             '<td><input type="text" name="segment_two_fare_cost[]" step="0.01" placeholder="0.00" onMouseOver="FlightAmount(this);" class="form-control mask-money"  onKeyUp="fareSell(this);"></td>'+
             '<td><input type="text" name="segment_two_fare_sell[]" step="0.01" placeholder="0.00" onMouseOver="FlightAmount(this);" class="form-control fare " readonly ></td>'+

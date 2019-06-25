@@ -125,7 +125,7 @@ Invoices
 
 	function Fun(temp){
 		var inv_id = $(temp).parents('.test').find('.inv_id').val();
-		alert(inv_id);
+		// alert(inv_id);
 		var inv_no = $(temp).parents('.test').find('.inv_no').val();
 		// $(temp).parents('.fare-parent').find('.fare').val(fare_sell.toFixed(2));
 		// console.log(inv_id);
