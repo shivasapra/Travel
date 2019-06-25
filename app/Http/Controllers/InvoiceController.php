@@ -871,6 +871,7 @@ class InvoiceController extends Controller
         $invoice = invoice::find($id);
         $invoice->refund = 1;
         $invoice->refund_remarks = $request->refund_remarks;
+        $invoice->refund_on = Carbon::now()->timezone('Europe/London');
         $invoice->save();
         Session::flash('success','Invoice Refunded!!');
         return redirect()->back();

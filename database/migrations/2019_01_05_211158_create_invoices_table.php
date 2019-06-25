@@ -40,7 +40,8 @@ class CreateInvoicesTable extends Migration
             $table->float('VAT_percentage')->default(0);
             $table->float('VAT_amount')->default(0);
             $table->boolean('refund')->default(0);
-            $table->string('refund_remarks')->nullable();
+            $table->longText('refund_remarks')->nullable();
+            $table->date('refund_on')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

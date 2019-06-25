@@ -649,12 +649,19 @@ Invoice
         </div>
         @endif
           </div>
-        </div><hr>
+        </div><hr><br>
         <div class="row">
           <div class="col-md-12">
             {{-- <h4><b>Remarks:</b></h4>
             <p class="text-danger">Only those invoices can be cancelled which are within 60 days from the current system date.</p> --}}
             {{-- <div class="text-right">{{$amount_in_words}}</div> --}}
+            @if($invoice->refund)
+            <div class="text-right">
+              <h3 style="color:red">Refunded</h3> On: <b>{{$invoice->refund_on}}</b>
+              <br><b>Remarks:</b><br> {{$invoice->refund_remarks}}
+              <br><hr>
+            </div>
+            @endif
           </div>
           <div class="col-md-12">
             <h4><b>Notes:</b></h4>

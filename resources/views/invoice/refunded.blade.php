@@ -26,7 +26,7 @@ Refunded Invoices
                         <th>Invoice Date</th>
                         <th>Receiver Name</th>
 						<th>Total</th>
-						<th>Remarks</th>
+						{{-- <th>Remarks</th> --}}
                         <th>Status</th>
                         {{-- <th>PDF</th> --}}
                         <th>Action</th>
@@ -43,7 +43,7 @@ Refunded Invoices
 	                    		<td>{{$invoice->receiver_name}}</td>
 								<?php $total = $invoice->discounted_total + $invoice->VAT_amount ?>
 								<td>{{$invoice->currency}}{{$total}}</td>
-								<td>{{$invoice->refund_remarks}}</td>
+								{{-- <td>{{$invoice->refund_remarks}}</td> --}}
 	                    		<td><div class="text-warning">{{'Refunded'}}</div></td>
 	                    		
 	                    		{{-- <td><button class="btn btn-xs btn-success" id="pdf">PDF</button></td> --}}

@@ -138,13 +138,14 @@ Invoices
 			'<span aria-hidden="true">&times;</span></button>'+
 		  '<h4 class="modal-title">Refund Invoice</h4>'+
 		'</div>'+
-		'<form action="/refund/invoice/'+ inv_id + '" method="post">'+
+		'<form action="window.location.hostname./cloud/public/refund/invoice/'+inv_id+'" method="post">'+
 		  '@csrf'+
 		'<div class="modal-body">'+
 			'<label for="invoice_no">Invoice No:</label>'+
 			'<input type="text" name="invoice_no" class="form-control" value="'+inv_no+'" readonly />'+
 			'<label for="refund_remarks">Remarks:</label>'+
-			'<input type="text" name="refund_remarks" class="form-control" />'+
+			
+			'<textarea name="refund_remarks" id="" class="form-control" cols="30" rows="10"></textarea>'+
 		'</div>'+
 		'<div class="modal-footer" style="color:white;font-weight:500;background-color:#0066FF;">'+
 		  '<button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>'+
