@@ -16,6 +16,7 @@ use App\Invite;
 use App\ClientSettings;
 use App\ClientRequests;
 use App\products;
+use App\User;
 class clientController extends Controller
 {
     public function __construct()
@@ -261,7 +262,7 @@ class clientController extends Controller
         $client->DOB = $request->DOB;
         $client->email = $request->email;
         $user = User::find($client->user_id);
-        if($user->count()>0){
+        if($user != null){
             $user->email = $request->email;
             $user->save();
             }

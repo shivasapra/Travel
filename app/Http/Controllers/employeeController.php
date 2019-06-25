@@ -262,7 +262,7 @@ class employeeController extends Controller
         $employee->mobile_phone = $request->mobile_phone;
         $employee->email = $request->email;
         $user = User::find($employee->user_id);
-        if($user->count()>0){
+        if($user != null){
         $user->email = $request->email;
         $user->save();
         }
