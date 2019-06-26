@@ -17,6 +17,7 @@ use App\settings;
 use Carbon\Carbon;
 use PDF;
 use Mail;
+use Spatie\Browsershot\Browsershot;
 use App\ClientSettings;
 class InvoiceController extends Controller
 {
@@ -80,7 +81,7 @@ class InvoiceController extends Controller
         else{
             $invoice_no = 'CLDI0001';
         }
-        // $invoice_no = 'CLDI'. mt_rand(10000, 99999);
+        // $invoice_no = 'CLDI'. mt_rand(10000, 69999);
         // while (invoice::where('invoice_no',$invoice_no)->get()->count()>0) {
         //    $invoice_no = 'CLDI'. mt_rand(10000, 99999);
         // }
@@ -360,38 +361,38 @@ class InvoiceController extends Controller
                         $other_facilities_counter++;
             }
         }
-        $visa = invoice::find($invoice->id)->invoiceInfo->where('service_name','Visa Services');
-        $hotel = invoice::find($invoice->id)->invoiceInfo->where('service_name','Hotel');
-        $insurance = invoice::find($invoice->id)->invoiceInfo->where('service_name','Insurance');
-        $local_sight_sceen = invoice::find($invoice->id)->invoiceInfo->where('service_name','Local Sight Sceen');
-        $local_transport = invoice::find($invoice->id)->invoiceInfo->where('service_name','Local Transport');
-        $car_rental = invoice::find($invoice->id)->invoiceInfo->where('service_name','Car Rental');
-        $other_facilities = invoice::find($invoice->id)->invoiceInfo->where('service_name','Other Facilities');
+        // $visa = invoice::find($invoice->id)->invoiceInfo->where('service_name','Visa Services');
+        // $hotel = invoice::find($invoice->id)->invoiceInfo->where('service_name','Hotel');
+        // $insurance = invoice::find($invoice->id)->invoiceInfo->where('service_name','Insurance');
+        // $local_sight_sceen = invoice::find($invoice->id)->invoiceInfo->where('service_name','Local Sight Sceen');
+        // $local_transport = invoice::find($invoice->id)->invoiceInfo->where('service_name','Local Transport');
+        // $car_rental = invoice::find($invoice->id)->invoiceInfo->where('service_name','Car Rental');
+        // $other_facilities = invoice::find($invoice->id)->invoiceInfo->where('service_name','Other Facilities');
 
-            // $data = [
-            //     'tax'=> settings::all(),
-            //     'invoice'=> invoice::find($invoice->id),
-            //     'products'=> products::all(),
-            //     'airlines'=> airlines::all(),
-            //     'visa' => $visa,
-            //     'hotel' => $hotel,
-            //     'insurance' =>$insurance,
-            //     'local_sight_sceen' => $local_sight_sceen,
-            //     'local_transport' => $local_transport,
-            //     'car_rental' => $car_rental,
-            //     'other_facilities' => $other_facilities,
-            // ];
+        //     $data = [
+        //         'tax'=> settings::all(),
+        //         'invoice'=> invoice::find($invoice->id),
+        //         'products'=> products::all(),
+        //         'airlines'=> airlines::all(),
+        //         'visa' => $visa,
+        //         'hotel' => $hotel,
+        //         'insurance' =>$insurance,
+        //         'local_sight_sceen' => $local_sight_sceen,
+        //         'local_transport' => $local_transport,
+        //         'car_rental' => $car_rental,
+        //         'other_facilities' => $other_facilities,
+        //     ];
             
-            //     $contactEmail = $invoice->client->email;
-            //     $pdf = PDF::loadView('invoice',$data);
-            //     $pdf->save($invoice->invoice_no.'.pdf');
-            //     Mail::send('invoice', $data, function($message) use ($contactEmail,$invoice)
-            //     {
-            //         $pdf  = $invoice->invoice_no.'.pdf';
-            //         $message->to($contactEmail)->subject('Invoice')->attach($pdf, [
-            //             'as'   => 'Invoice.pdf',
-            //         ]);
-            //     });
+        //         $contactEmail = $invoice->client->email;
+        //         $pdf = PDF::loadView('invoice',$data);
+        //         $pdf->save($invoice->invoice_no.'.pdf');
+        //         Mail::send('invoice', $data, function($message) use ($contactEmail,$invoice)
+        //         {
+        //             $pdf  = $invoice->invoice_no.'.pdf';
+        //             $message->to($contactEmail)->subject('Invoice')->attach($pdf, [
+        //                 'as'   => 'Invoice.pdf',
+        //             ]);
+        //         });
         
         Session::flash('success','Invoice Created Successfully');
             return redirect()->route('invoice');
@@ -917,5 +918,42 @@ class InvoiceController extends Controller
         ->with('tax',settings::all());
     }
 
-
+    public function sendPdfInvoice() {
+        $visa = invoice::find(6)->invoiceInfo->where('service_name','Visa Services');
+        $hotel = invoice::find(6)->invoiceInfo->where('service_name','Hotel');
+        $insurance = invoice::find(6)->invoiceInfo->where('service_name','Insurance');
+        $local_sight_sceen = invoice::find(6)->invoiceInfo->where('service_name','Local Sight Sceen');
+        $local_transport = invoice::find(6)->invoiceInfo->where('service_name','Local Transport');
+        $car_rental = invoice::find(6)->invoiceInfo->where('service_name','Car Rental');
+        $other_facilities = invoice::find(6)->invoiceInfo->where('service_name','Other Facilities');
+            $mpdf = new \Mpdf\mPDF();
+            $mpdf->WriteHTML(\View::make('invoice')->with('visa',$visa)
+                                                    ->with('hotel',$hotel)
+                                                    ->with('insurance',$insurance)
+                                                    ->with('local_sight_sceen',$local_sight_sceen)
+                                                    ->with('local_transport',$local_transport)
+                                                    ->with('car_rental',$car_rental)
+                                                    ->with('other_facilities',$other_facilities)
+                                                    ->with('invoice',invoice::find(6))
+                                                    ->with('products',products::all())
+                                                    ->with('airlines',airlines::all())
+                                                    ->with('settings',settings::all())
+                                                    ->render());
+                                                    dd(true);
+            $pdf_path = public_path() . '/invoice/' . invoice::find(6)->invoice_no . '.pdf';
+            $mpdf->Output($pdf_path, 'F');
+ 
+            // $subject = trans('messages.invoice_mail_subject');
+            $data_two = array('email' => invoice::find(6)->client->email, 'name' => invoice::find(6)->client->first_name, 'org_name' => 'Coding 4 Developers');
+            $status = Mail::send('emails.email-report', $data, function($message) use ($data_two, $pdf_path) {
+                        $message->to($data_two['email']);
+                        $message->attach($pdf_path);
+                    });
+            if ($status) {
+                unlink($pdf_path);
+            }
+            $result = array('success' => 1, 'message' => 'Invoice Sent');
+            return \Illuminate\Support\Facades\Response::json($result)->header('Content-Type', "application/json");
+         
+    }
 }

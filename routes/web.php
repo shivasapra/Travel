@@ -521,7 +521,7 @@ Route::get('/expense/delete/{id}',[
 
 
 
-
+Route::get('/send-invoice-pdf-mail', 'InvoiceController@sendPdfInvoice');
 Route::get('/invoice',[
 	'uses'=>'InvoiceController@index',
 	'as'=>'invoice'
