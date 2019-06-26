@@ -465,7 +465,7 @@ Invoice
                 <tr>
                   <th>SNo.</th>
                   <th>Local Transport Remarks</th>
-                  <td>Amount:</td>
+                  <th>Amount:</th>
                 </tr>
               </thead>
               <tbody>
