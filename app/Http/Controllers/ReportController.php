@@ -11,7 +11,12 @@ use App\Flight;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
-{
+{   
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function paidInvoice(){
     	return view('reports.paidInvoice')
     	->with('tax',settings::all())
