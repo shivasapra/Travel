@@ -360,7 +360,28 @@ class InvoiceController extends Controller
                         $other_facilities_counter++;
             }
         }
-
+        $visa = invoice::find($invoice->id)->invoiceInfo->where('service_name','Visa Services');
+        $hotel = invoice::find($invoice->id)->invoiceInfo->where('service_name','Hotel');
+        $insurance = invoice::find($invoice->id)->invoiceInfo->where('service_name','Insurance');
+        $local_sight_sceen = invoice::find($invoice->id)->invoiceInfo->where('service_name','Local Sight Sceen');
+        $local_transport = invoice::find($invoice->id)->invoiceInfo->where('service_name','Local Transport');
+        $car_rental = invoice::find($invoice->id)->invoiceInfo->where('service_name','Car Rental');
+        $other_facilities = invoice::find($invoice->id)->invoiceInfo->where('service_name','Other Facilities');
+        $data = [
+            'tax'=> settings::all(),
+            'invoice'=> invoice::find($invoice->id),
+            'products'=> products::all(),
+            'airlines'=> airlines::all(),
+            'visa' => $visa,
+            'hotel' => $hotel,
+            'insurance' =>$insurance,
+            'local_sight_sceen' => $local_sight_sceen,
+            'local_transport' => $local_transport,
+            'car_rental' => $car_rental,
+            'other_facilities' => $other_facilities,
+            ];
+        $pdf = PDF::loadView('invoice',$data);
+        return $pdf->setPaper('a4')->stream('invoice.pdf');
         Session::flash('success','Invoice Created Successfully');
             return redirect()->route('invoice');
 
