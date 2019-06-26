@@ -380,8 +380,8 @@ class InvoiceController extends Controller
             'car_rental' => $car_rental,
             'other_facilities' => $other_facilities,
             ];
-        $pdf = PDF::loadView('invoice',$data);
-        return $pdf->setPaper('a4')->stream('invoice.pdf');
+        // $pdf = PDF::loadView('invoice',$data);
+        // return $pdf->setPaper('a4')->stream('invoice.pdf');
         Session::flash('success','Invoice Created Successfully');
             return redirect()->route('invoice');
 
