@@ -273,21 +273,22 @@ Dashboard
                   @if($invoices->count()>0)
 
                     @foreach($invoices as $invoice)
-                    <tr>
-                      <td><a href="{{route('invoice.view',['id'=>$invoice->id])}}">{{$invoice->invoice_no}}</a></td>
-                      <td>{{$invoice->invoice_date}}</td>
-                      <td>{{$invoice->receiver_name}}</td>
+                    @if($invoice->status != 2)
+                      <tr>
+                        <td><a href="{{route('invoice.view',['id'=>$invoice->id])}}">{{$invoice->invoice_no}}</a></td>
+                        <td>{{$invoice->invoice_date}}</td>
+                        <td>{{$invoice->receiver_name}}</td>
 
-                      <?php $total = $invoice->discounted_total + $invoice->VAT_amount ?>
-                      <td>{{$invoice->currency}}{{$total}}</td>
+                        <?php $total = $invoice->discounted_total + $invoice->VAT_amount ?>
+                        <td>{{$invoice->currency}}{{$total}}</td>
 
-                      @if($invoice->status == 1)
-                      <td><small class="label label-success">Paid</small></td>
-                      @else
-                      <td><small class="label label-danger">Unpaid</small></td>
-                      @endif
-
-                    </tr>
+                        @if($invoice->status == 1)
+                        <td><small class="label label-success">Paid</small></td>
+                        @else
+                        <td><small class="label label-danger">Unpaid</small></td>
+                        @endif
+                      </tr>
+                    @endif
                     @endforeach
                   @endif
                 </tbody>
