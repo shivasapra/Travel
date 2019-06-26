@@ -381,7 +381,7 @@ class InvoiceController extends Controller
             'other_facilities' => $other_facilities,
             ];
             // return $pdf->setPaper('a4')->stream('invoice.pdf');
-            // $contactEmail = $invoice->client->email;
+            $contactEmail = $invoice->client->email;
             $data = [
                 'tax'=> settings::all(),
                 'invoice'=> invoice::find($invoice->id),
@@ -396,10 +396,11 @@ class InvoiceController extends Controller
                 'other_facilities' => $other_facilities,
             ];
             $pdf = PDF::loadView('invoice',$data);
-        // Mail::send('invoice', $data, function($message) use ($contactEmail)
-        // {
-        //     $message->to($contactEmail)->subject('Invoice!!');
-        // });
+        Mail::send('invoice', $data, function($message) use ($contactEmail,$pdf)
+        {
+            $message->to($contactEmail)->subject('Invoice!!');
+            $message->attach($pdf);
+        });
         Session::flash('success','Invoice Created Successfully');
             return redirect()->route('invoice');
 
