@@ -367,44 +367,31 @@ class InvoiceController extends Controller
         $local_transport = invoice::find($invoice->id)->invoiceInfo->where('service_name','Local Transport');
         $car_rental = invoice::find($invoice->id)->invoiceInfo->where('service_name','Car Rental');
         $other_facilities = invoice::find($invoice->id)->invoiceInfo->where('service_name','Other Facilities');
-        $data = [
-            'tax'=> settings::all(),
-            'invoice'=> invoice::find($invoice->id),
-            'products'=> products::all(),
-            'airlines'=> airlines::all(),
-            'visa' => $visa,
-            'hotel' => $hotel,
-            'insurance' =>$insurance,
-            'local_sight_sceen' => $local_sight_sceen,
-            'local_transport' => $local_transport,
-            'car_rental' => $car_rental,
-            'other_facilities' => $other_facilities,
-            ];
 
-            $data = [
-                'tax'=> settings::all(),
-                'invoice'=> invoice::find($invoice->id),
-                'products'=> products::all(),
-                'airlines'=> airlines::all(),
-                'visa' => $visa,
-                'hotel' => $hotel,
-                'insurance' =>$insurance,
-                'local_sight_sceen' => $local_sight_sceen,
-                'local_transport' => $local_transport,
-                'car_rental' => $car_rental,
-                'other_facilities' => $other_facilities,
-            ];
+            // $data = [
+            //     'tax'=> settings::all(),
+            //     'invoice'=> invoice::find($invoice->id),
+            //     'products'=> products::all(),
+            //     'airlines'=> airlines::all(),
+            //     'visa' => $visa,
+            //     'hotel' => $hotel,
+            //     'insurance' =>$insurance,
+            //     'local_sight_sceen' => $local_sight_sceen,
+            //     'local_transport' => $local_transport,
+            //     'car_rental' => $car_rental,
+            //     'other_facilities' => $other_facilities,
+            // ];
             
-                $contactEmail = $invoice->client->email;
-                $pdf = PDF::loadView('invoice',$data);
-                $pdf->save($invoice->invoice_no.'.pdf');
-                Mail::send('invoice', $data, function($message) use ($contactEmail,$invoice)
-                {
-                    $pdf  = $invoice->invoice_no.'.pdf';
-                    $message->to($contactEmail)->subject('Invoice')->attach($pdf, [
-                        'as'   => 'Invoice.pdf',
-                    ]);
-                });
+            //     $contactEmail = $invoice->client->email;
+            //     $pdf = PDF::loadView('invoice',$data);
+            //     $pdf->save($invoice->invoice_no.'.pdf');
+            //     Mail::send('invoice', $data, function($message) use ($contactEmail,$invoice)
+            //     {
+            //         $pdf  = $invoice->invoice_no.'.pdf';
+            //         $message->to($contactEmail)->subject('Invoice')->attach($pdf, [
+            //             'as'   => 'Invoice.pdf',
+            //         ]);
+            //     });
         
         Session::flash('success','Invoice Created Successfully');
             return redirect()->route('invoice');
