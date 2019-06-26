@@ -380,8 +380,7 @@ class InvoiceController extends Controller
             'car_rental' => $car_rental,
             'other_facilities' => $other_facilities,
             ];
-            // return $pdf->setPaper('a4')->stream('invoice.pdf');
-            $contactEmail = $invoice->client->email;
+
             $data = [
                 'tax'=> settings::all(),
                 'invoice'=> invoice::find($invoice->id),
@@ -395,12 +394,18 @@ class InvoiceController extends Controller
                 'car_rental' => $car_rental,
                 'other_facilities' => $other_facilities,
             ];
-            $pdf = PDF::loadView('invoice',$data)->save('uploads/profile/'.time().'.pdf');
-        Mail::send('invoice', $data, function($message) use ($contactEmail,$pdf)
-        {
-            $message->to($contactEmail)->subject('Invoice!!');
-            $message->attach($pdf);
-        });
+            
+                $contactEmail = $invoice->client->email;
+                $pdf = PDF::loadView('invoice',$data);
+                $pdf->save($invoice->invoice_no.'.pdf');
+                Mail::send('invoice', $data, function($message) use ($contactEmail,$invoice)
+                {
+                    $pdf  = $invoice->invoice_no.'.pdf';
+                    $message->to($contactEmail)->subject('Invoice')->attach($pdf, [
+                        'as'   => 'Invoice.pdf',
+                    ]);
+                });
+        
         Session::flash('success','Invoice Created Successfully');
             return redirect()->route('invoice');
 
