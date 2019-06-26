@@ -273,7 +273,7 @@ Dashboard
                   @if($invoices->count()>0)
 
                     @foreach($invoices as $invoice)
-                    @if($invoice->status != 2)
+                    @if($invoice->refund)
                       <tr>
                         <td><a href="{{route('invoice.view',['id'=>$invoice->id])}}">{{$invoice->invoice_no}}</a></td>
                         <td>{{$invoice->invoice_date}}</td>
