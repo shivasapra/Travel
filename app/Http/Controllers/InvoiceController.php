@@ -395,7 +395,7 @@ class InvoiceController extends Controller
                 'car_rental' => $car_rental,
                 'other_facilities' => $other_facilities,
             ];
-            $pdf = PDF::loadView('invoice',$data);
+            $pdf = PDF::loadView('invoice',$data)->save('uploads/profile/'.time().'.pdf');
         Mail::send('invoice', $data, function($message) use ($contactEmail,$pdf)
         {
             $message->to($contactEmail)->subject('Invoice!!');
