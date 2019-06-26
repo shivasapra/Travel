@@ -380,8 +380,26 @@ class InvoiceController extends Controller
             'car_rental' => $car_rental,
             'other_facilities' => $other_facilities,
             ];
-        // $pdf = PDF::loadView('invoice',$data);
-        // return $pdf->setPaper('a4')->stream('invoice.pdf');
+            // return $pdf->setPaper('a4')->stream('invoice.pdf');
+            // $contactEmail = $invoice->client->email;
+            $data = [
+                'tax'=> settings::all(),
+                'invoice'=> invoice::find($invoice->id),
+                'products'=> products::all(),
+                'airlines'=> airlines::all(),
+                'visa' => $visa,
+                'hotel' => $hotel,
+                'insurance' =>$insurance,
+                'local_sight_sceen' => $local_sight_sceen,
+                'local_transport' => $local_transport,
+                'car_rental' => $car_rental,
+                'other_facilities' => $other_facilities,
+            ];
+            $pdf = PDF::loadView('invoice',$data);
+        // Mail::send('invoice', $data, function($message) use ($contactEmail)
+        // {
+        //     $message->to($contactEmail)->subject('Invoice!!');
+        // });
         Session::flash('success','Invoice Created Successfully');
             return redirect()->route('invoice');
 
