@@ -44,7 +44,7 @@ Refunded Invoices
 								<?php $total = $invoice->discounted_total + $invoice->VAT_amount ?>
 								<td>{{$invoice->currency}}{{$total}}</td>
 								{{-- <td>{{$invoice->refund_remarks}}</td> --}}
-	                    		<td><div class="text-warning">{{'Refunded'}}</div></td>
+	                    		<th><div class="text-danger">{{'Refunded'}}</div></th>
 	                    		
 	                    		{{-- <td><button class="btn btn-xs btn-success" id="pdf">PDF</button></td> --}}
 	                    		<td>

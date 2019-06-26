@@ -272,8 +272,7 @@ Dashboard
                 <tbody>
                   @if($invoices->count()>0)
 
-                    @foreach($invoices as $invoice)
-                    @if($invoice->refund)
+                    @foreach(App\invoice::withTrashed()->orderBy('id','desc')->take(5)->get() as $invoice)
                       <tr>
                         <td><a href="{{route('invoice.view',['id'=>$invoice->id])}}">{{$invoice->invoice_no}}</a></td>
                         <td>{{$invoice->invoice_date}}</td>
@@ -282,13 +281,16 @@ Dashboard
                         <?php $total = $invoice->discounted_total + $invoice->VAT_amount ?>
                         <td>{{$invoice->currency}}{{$total}}</td>
 
-                        @if($invoice->status == 1)
-                        <td><small class="label label-success">Paid</small></td>
-                        @else
-                        <td><small class="label label-danger">Unpaid</small></td>
+                        @if($invoice->status == 1 and $invoice->refund == 0 and $invoice->deleted_at == null)
+                          <td><small class="label label-success">Paid</small></td>
+                        @elseif($invoice->status == 0 and $invoice->refund == 0 and $invoice->deleted_at == null)
+                          <td><small class="label label-danger">Unpaid</small></td>
+                        @elseif($invoice->deleted_at != null)
+                          <td><small class="label label-warning">Canceled</small></td>
+                        @elseif($invoice->refund)
+                          <td><small class="label label-info">Refunded</small></td>
                         @endif
                       </tr>
-                    @endif
                     @endforeach
                   @endif
                 </tbody>
@@ -297,59 +299,112 @@ Dashboard
           </div>
           <div class="box-body">
             <div class="col-md-6">
-            <a href="{{route('paidInvoice.report')}}">
-              <div class="info-box bg-green">
-              <span class="info-box-icon"><i class="fa fa-thumbs-o-up"></i></span>
+                <a href="{{route('paidInvoice.report')}}">
+                    <div class="info-box bg-green">
+                    <span class="info-box-icon"><i class="fa fa-thumbs-o-up"></i></span>
+    
+                    <div class="info-box-content">
+                        <span class="info-box-text">Paid Invoices</span>
+                        <span class="info-box-number">{{$paid_invoices->count()}}</span>
+    
+                        <div class="progress">
+                        <div class="progress-bar" style="width: @if($invoices->count()>0)
+                        {{number_format( (float) (($paid_invoices->count()/$invoices->count())*100), 2, '.', '')}}%
+                        @else
+                        0%
+                        @endif"></div>
+                        </div>
+                            <span class="progress-description">
+                            @if($invoices->count()>0)
+                            {{number_format( (float) (($paid_invoices->count()/$invoices->count())*100), 2, '.', '')}}%
+                            @else
+                            0%
+                            @endif
+                            </span>
+                    </div>
+                    </div>
+                </a>
 
-              <div class="info-box-content">
-                <span class="info-box-text">Paid Invoices</span>
-                <span class="info-box-number">{{$paid_invoices->count()}}</span>
-
-                <div class="progress">
-                  <div class="progress-bar" style="width: @if($invoices->count()>0)
-                  {{(($paid_invoices->count()/$invoices->count())*100)}}%
-                  @else
-                  0%
-                  @endif"></div>
-                </div>
-                    <span class="progress-description">
-                      @if($invoices->count()>0)
-                      {{(($paid_invoices->count()/$invoices->count())*100)}}%
-                      @else
-                      0%
-                      @endif
-                    </span>
-              </div>
-            </div>
-            </a>
+                <a href="{{route('canceled.invoices')}}">
+                    <div class="info-box bg-red">
+                    <span class="info-box-icon"><i class="fa fa-ban"></i></span>
+    
+                    <div class="info-box-content">
+                        <span class="info-box-text">Canceled Invoices</span>
+                        <span class="info-box-number">{{$canceled_invoices->count()}}</span>
+    
+                        <div class="progress">
+                        <div class="progress-bar" style="width: @if($invoices->count()>0)
+                        {{number_format( (float) (($canceled_invoices->count()/$invoices->count())*100), 2, '.', '')}}%
+                        @else
+                        0%
+                        @endif"></div>
+                        </div>
+                            <span class="progress-description">
+                            @if($invoices->count()>0)
+                            {{number_format( (float) (($canceled_invoices->count()/$invoices->count())*100), 2, '.', '')}}%
+                            @else
+                            0%
+                            @endif
+                            </span>
+                    </div>
+                    </div>
+                </a>
             </div>
             <div class="col-md-6">
-            <a href="{{route('paidInvoice.report')}}">
-            <div class="info-box bg-navy">
-              <span class="info-box-icon"><i class="fa fa-thumbs-o-down"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">UnPaid Invoices</span>
-                <span class="info-box-number">{{$unpaid_invoices->count()}}</span>
-
-                <div class="progress">
-                  <div class="progress-bar" style="width:
-                  @if($invoices->count()>0)
-                  {{(($unpaid_invoices->count()/$invoices->count())*100)}}%
-                  @else
-                  0%
-                  @endif"></div>
+           <a href="{{route('unpaidInvoice.report')}}">
+                <div class="info-box bg-navy">
+                <span class="info-box-icon"><i class="fa fa-thumbs-o-down"></i></span>
+    
+                <div class="info-box-content">
+                    <span class="info-box-text">UnPaid Invoices</span>
+                    <span class="info-box-number">{{$unpaid_invoices->count()}}</span>
+    
+                    <div class="progress">
+                    <div class="progress-bar" style="width:
+                    @if($invoices->count()>0)
+                    {{number_format( (float) (($unpaid_invoices->count()/$invoices->count())*100), 2, '.', '')}}%
+                    @else
+                    0%
+                    @endif"></div>
+                    </div>
+                        <span class="progress-description">
+                        @if($invoices->count()>0)
+                        {{number_format( (float) (($unpaid_invoices->count()/$invoices->count())*100), 2, '.', '')}}%
+                        @else
+                        0%
+                        @endif
+                        </span>
                 </div>
-                    <span class="progress-description">
-                      @if($invoices->count()>0)
-                      {{(($unpaid_invoices->count()/$invoices->count())*100)}}%
-                      @else
-                      0%
-                      @endif
-                    </span>
-              </div>
-            </div>
-          </a>
+                </div>
+            </a>
+
+            <a href="{{route('refunded.invoices')}}">
+                <div class="info-box bg-blue">
+                <span class="info-box-icon"><i class="fa fa-money" aria-hidden="true"></i></span>
+    
+                <div class="info-box-content">
+                    <span class="info-box-text">Refunded Invoices</span>
+                    <span class="info-box-number">{{$refunded_invoices->count()}}</span>
+    
+                    <div class="progress">
+                    <div class="progress-bar" style="width:
+                    @if($invoices->count()>0)
+                    {{number_format( (float) (($refunded_invoices->count()/$invoices->count())*100), 2, '.', '')}}%
+                    @else
+                    0%
+                    @endif"></div>
+                    </div>
+                        <span class="progress-description">
+                        @if($invoices->count()>0)
+                        {{number_format( (float) (($refunded_invoices->count()/$invoices->count())*100), 2, '.', '')}}%
+                        @else
+                        0%
+                        @endif
+                        </span>
+                </div>
+                </div>
+            </a>
             </div>
           </div>
         </div>

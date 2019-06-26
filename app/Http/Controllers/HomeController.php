@@ -124,8 +124,10 @@ class HomeController extends Controller
             Mail::to($client_inactive_emails)->send(new \App\Mail\clientInactiveMail);
         }
 
-        $paid_invoices = invoice::where('status',1)->get();
-        $unpaid_invoices = invoice::where('status',0)->get();
+        $paid_invoices = invoice::where('status',1)->where('refund',0)->get();
+        $unpaid_invoices = invoice::where('status',0)->where('refund',0)->get();
+        $canceled_invoices = invoice::onlyTrashed()->get();
+        $refunded_invoices = invoice::where('refund',1)->get();
 
 
         $unread_messages = Chat::where('to_id',Auth::user()->id)->where('status',0)->get();
@@ -134,7 +136,7 @@ class HomeController extends Controller
                             ->with('clients',client::all())
                             ->with('expense',$total_amount)
                             ->with('date',$date)
-                            ->with('invoices',invoice::orderBy('created_at','desc')->take(7)->get())
+                            ->with('invoices',invoice::withTrashed()->get())
                             ->with('invoice_infos',invoiceInfo::where('service_name','Visa Services')->orderBy('created_at','desc')->take(7)->get())
                             ->with('total_wage',$total_wage)
                             ->with('expenses',expenses::all())
@@ -143,6 +145,8 @@ class HomeController extends Controller
                             ->with('tax',settings::all())
                             ->with('paid_invoices',$paid_invoices)
                             ->with('unpaid_invoices',$unpaid_invoices)
+                            ->with('canceled_invoices',$canceled_invoices)
+                            ->with('refunded_invoices',$refunded_invoices)
                             ->with('wages',$wages)
                             ->with('unread_messages',$unread_messages)
                             ->with('messages',null);

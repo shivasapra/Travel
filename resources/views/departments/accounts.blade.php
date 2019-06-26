@@ -62,7 +62,7 @@ Accounts Department
                 <section class="content-header">
                   {{-- <span class="pull-right"><a href="{{route('invoice.report')}}" class="btn btn-xs bg-maroon">Report</a></span> --}}
                   <h1 class="text-center">
-                    <span style="color:#0066FF;">Today's Invoices({{$invoices->count()}})</span>
+                    <span style="color:#0066FF;">Today's Invoices({{$todays_invoices->count()}})</span>
                   </h1>
     
                   <hr>
@@ -80,9 +80,9 @@ Accounts Department
                       </tr>
                     </thead>
                     <tbody>
-                      @if($invoices->count()>0)
+                      @if($todays_invoices->count()>0)
                       
-                        @foreach($invoices as $invoice)
+                        @foreach($todays_invoices as $invoice)
                         <tr>
                           <td><a href="{{route('invoice.view',['id'=>$invoice->id])}}">{{$invoice->invoice_no}}</a></td>
                           <td>{{$invoice->invoice_date}}</td>
@@ -91,10 +91,14 @@ Accounts Department
                           <?php $total = $invoice->discounted_total + $invoice->VAT_amount ?>
                           <td>{{$invoice->currency}}{{$total}}</td>
                           
-                          @if($invoice->status == 1)
-                          <td><small class="label label-success">Paid</small></td>
-                          @else
-                          <td><small class="label label-danger">Unpaid</small></td>
+                          @if($invoice->status == 1 and $invoice->refund == 0 and $invoice->deleted_at == null)
+                            <td><small class="label label-success">Paid</small></td>
+                          @elseif($invoice->status == 0 and $invoice->refund == 0 and $invoice->deleted_at == null)
+                            <td><small class="label label-danger">Unpaid</small></td>
+                          @elseif($invoice->deleted_at != null)
+                            <td><small class="label label-warning">Canceled</small></td>
+                          @elseif($invoice->refund)
+                            <td><small class="label label-info">Refunded</small></td>
                           @endif
                           
                         </tr>
@@ -117,14 +121,14 @@ Accounts Department
 
                     <div class="progress">
                     <div class="progress-bar" style="width: @if($invoices->count()>0)
-                    {{(($paid_invoices->count()/$invoices->count())*100)}}%
+                    {{number_format( (float) (($paid_invoices->count()/$invoices->count())*100), 2, '.', '')}}%
                     @else
                     0%
                     @endif"></div>
                     </div>
                         <span class="progress-description">
                         @if($invoices->count()>0)
-                        {{(($paid_invoices->count()/$invoices->count())*100)}}%
+                        {{number_format( (float) (($paid_invoices->count()/$invoices->count())*100), 2, '.', '')}}%
                         @else
                         0%
                         @endif
@@ -143,14 +147,14 @@ Accounts Department
 
                     <div class="progress">
                     <div class="progress-bar" style="width: @if($invoices->count()>0)
-                    {{(($canceled_invoices->count()/$invoices->count())*100)}}%
+                    {{number_format( (float) (($canceled_invoices->count()/$invoices->count())*100), 2, '.', '')}}%
                     @else
                     0%
                     @endif"></div>
                     </div>
                         <span class="progress-description">
                         @if($invoices->count()>0)
-                        {{(($canceled_invoices->count()/$invoices->count())*100)}}%
+                        {{number_format( (float) (($canceled_invoices->count()/$invoices->count())*100), 2, '.', '')}}%
                         @else
                         0%
                         @endif
@@ -171,14 +175,40 @@ Accounts Department
                     <div class="progress">
                     <div class="progress-bar" style="width:
                     @if($invoices->count()>0)
-                    {{(($unpaid_invoices->count()/$invoices->count())*100)}}%
+                    {{number_format( (float) (($unpaid_invoices->count()/$invoices->count())*100), 2, '.', '')}}%
                     @else
                     0%
                     @endif"></div>
                     </div>
                         <span class="progress-description">
                         @if($invoices->count()>0)
-                        {{(($unpaid_invoices->count()/$invoices->count())*100)}}%
+                        {{number_format( (float) (($unpaid_invoices->count()/$invoices->count())*100), 2, '.', '')}}%
+                        @else
+                        0%
+                        @endif
+                        </span>
+                </div>
+                </div>
+            </a>
+            <a href="{{route('refunded.invoices')}}">
+                <div class="info-box bg-blue">
+                <span class="info-box-icon"><i class="fa fa-money" aria-hidden="true"></i></span>
+    
+                <div class="info-box-content">
+                    <span class="info-box-text">Refunded Invoices</span>
+                    <span class="info-box-number">{{$refunded_invoices->count()}}</span>
+    
+                    <div class="progress">
+                    <div class="progress-bar" style="width:
+                    @if($invoices->count()>0)
+                    {{number_format( (float) (($refunded_invoices->count()/$invoices->count())*100), 2, '.', '')}}%
+                    @else
+                    0%
+                    @endif"></div>
+                    </div>
+                        <span class="progress-description">
+                        @if($invoices->count()>0)
+                        {{number_format( (float) (($refunded_invoices->count()/$invoices->count())*100), 2, '.', '')}}%
                         @else
                         0%
                         @endif

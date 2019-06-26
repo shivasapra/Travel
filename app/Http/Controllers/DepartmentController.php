@@ -20,14 +20,18 @@ class DepartmentController extends Controller
     }
 
     public function accounts(){
-        $paid_invoices = invoice::where('status',1)->get();
-        $unpaid_invoices = invoice::where('status',0)->get();
+        $paid_invoices = invoice::where('status',1)->where('refund',0)->get();
+        $unpaid_invoices = invoice::where('status',0)->where('refund',0)->get();
         $canceled_invoices = invoice::onlyTrashed()->get();
+        $refunded_invoices = invoice::where('refund',1)->get();
+        $todays_invoices = invoice::withTrashed()->where('invoice_date',Carbon::now()->timezone('Europe/London')->toDateString())->get();
         return view('departments.accounts')->with('roles',Role::all())
                                         ->with('paid_invoices',$paid_invoices)
                                         ->with('unpaid_invoices',$unpaid_invoices)
                                         ->with('canceled_invoices',$canceled_invoices)
-                                        ->with('invoices',invoice::where('invoice_date',Carbon::now()->timezone('Europe/London')->toDateString()));
+                                        ->with('refunded_invoices',$refunded_invoices)
+                                        ->with('todays_invoices',$todays_invoices)
+                                        ->with('invoices',invoice::withTrashed()->get());
     }
 
     public function marketing(){
