@@ -354,6 +354,7 @@ Invoice
               <th>Amount:</th>
             </tr>
         </thead>
+        <tbody>
         @foreach($hotel as $info)
             <tr>
                 <th>{{$k++}}.</th>
@@ -368,6 +369,7 @@ Invoice
               <?php $hotel_amount = $hotel_amount + $info->hotel_amount; ?>
             </tr>
           @endforeach
+        </tbody>
           </table>
         </div>
       
@@ -394,6 +396,7 @@ Invoice
               <th>Amount:</th>
             </tr>
         </thead>
+        <tbody>
         @foreach($insurance as $info)
             <tr>
                 <th>{{$k++}}.</th>
@@ -404,6 +407,7 @@ Invoice
               <?php $insurance_amount = $insurance_amount + $info->insurance_amount; ?>
             </tr>
             @endforeach
+          </tbody>
           </table>
         </div>
       
@@ -430,6 +434,7 @@ Invoice
               <th>Amount:</th>
             </tr>
         </thead>
+        <tbody>
         @foreach($local_sight_sceen as $info)
             <tr>
                 <th>{{$k++}}.</th>
@@ -438,6 +443,7 @@ Invoice
               <?php $local_sight_sceen_amount = $local_sight_sceen_amount + $info->local_sight_sceen_amount; ?>
             </tr>
             @endforeach
+          </tbody>
           </table>
         </div>
       
@@ -462,6 +468,7 @@ Invoice
                   <td>Amount:</td>
                 </tr>
               </thead>
+              <tbody>
               @foreach($local_transport as $info)
             <tr>
                 <th>{{$k++}}.</th>
@@ -470,6 +477,7 @@ Invoice
               <?php $local_transport_amount = $local_transport_amount + $info->local_transport_amount; ?>
             </tr>
             @endforeach
+          </tbody>
           </table>
         </div>
       
@@ -493,6 +501,7 @@ Invoice
                   <th>Amount:</th>
                 </tr>
               </thead>
+              <tbody>
               @foreach($car_rental as $info)
             <tr>
                 <th>{{$k++}}.</th>
@@ -501,6 +510,7 @@ Invoice
               <?php $car_rental_amount = $car_rental_amount + $info->car_rental_amount; ?>
             </tr>
             @endforeach
+          </tbody>
           </table>
         </div>
       
@@ -525,6 +535,7 @@ Invoice
               <th>Amount:</th>
             </tr>
         </thead>
+        <tbody>
         @foreach ($other_facilities as $info)
             
         
@@ -535,6 +546,7 @@ Invoice
               <?php $other_facilities_amount = $other_facilities_amount + $info->other_facilities_amount; ?>
             </tr>
             @endforeach
+          </tbody>
           </table>
         </div>
       
