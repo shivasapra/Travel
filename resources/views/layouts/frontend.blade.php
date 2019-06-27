@@ -359,6 +359,9 @@
               @can('View Canceled Invoice')
                 <li><a href="{{route('refunded.invoices')}}"><i class="fa fa-circle-o"></i>Refunded Invoices</a></li>
               @endif
+              @can('View Invoices')
+                <li><a href="{{route('invoice.issues')}}"><i class="fa fa-circle-o"></i>Issues</a></li>
+              @endcan
               @can('VAT Updation')
                 <li><a href="{{route('tax')}}"><i class="fa fa-circle-o"></i>VAT</a></li>
               @endcan

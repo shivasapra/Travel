@@ -579,6 +579,11 @@ Route::get('/invoice/print',[
 			'as'=>'invoice.print'
 		])->middleware('permission:View Invoices');
 
+		Route::get('/invoice/issues',[
+			'uses'=> 'InvoiceController@invoiceIssues',
+			'as'=>'invoice.issues'
+		])->middleware('permission:View Invoices');
+
 
 Route::get('/departments',[
 	'uses'=> 'DepartmentController@index',

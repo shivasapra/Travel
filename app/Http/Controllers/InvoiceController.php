@@ -1063,4 +1063,9 @@ class InvoiceController extends Controller
             return \Illuminate\Support\Facades\Response::json($result)->header('Content-Type', "application/json");
          
     }
+
+    public function invoiceIssues(){
+        $invoices = invoice::where('issues','!=',null)->get();
+        return view('invoice.issues')->with('invoices',$invoices);
+    }
 }
