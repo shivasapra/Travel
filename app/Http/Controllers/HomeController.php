@@ -43,12 +43,12 @@ class HomeController extends Controller
      */
     public function index()
     {   
-        $data = array();
-        $contactEmail = "786mohammadaslamkhan@gmail.com";
-        Mail::send('emails.invoice',$data, function($message) use ($contactEmail)
-        {
-            $message->to($contactEmail)->subject('Performa Invoice!!');
-        });
+        // $data = array();
+        // $contactEmail = "786mohammadaslamkhan@gmail.com";
+        // Mail::send('emails.invoice',$data, function($message) use ($contactEmail)
+        // {
+        //     $message->to($contactEmail)->subject('Performa Invoice!!');
+        // });
         // dd('gya');
         if (Auth::user()->admin) {
         $dt = Carbon::now();

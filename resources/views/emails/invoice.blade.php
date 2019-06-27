@@ -90,16 +90,15 @@
 </div>
 </div>
 <div class="row">
-<div class="col-md-6"><p class="m-0">Invoice No:<b> CLDI0007 </b></p></div>
+<div class="col-md-6"><p class="m-0">Invoice No:<b> {{$invoice->invoice_no}} </b></p></div>
 {{-- <div class="col-md-4 text-center"><h1>Invoice</h1></div> --}}
-<div class="col-md-6 text-right"><p class="m-0">Invoice Date:<b> 26 June 2019</b></p></div>
+<div class="col-md-6 text-right"><p class="m-0">Invoice Date:<b> {{ Carbon\Carbon::parse($invoice->invoice_date)->format('j F Y') }}</b></p></div>
 </div>
 <div class="row mt-5">
 <div class="col-md-8">
 <h3>To</h3>
-<p>shiva sapra<br>
-fghf<br>Alperton<br>jkbjhb<br>160102
-</div>
+<p>{{ $invoice->client->first_name }} {{ $invoice->client->last_name }}<br>
+    {{ $invoice->client->address }}<br>{{ $invoice->client->city }}<br>{{ $invoice->client->county }}<br>{{ $invoice->client->postal_code }}</div>
 <div class="col-md-4">
 <h3>Issued By</h3>
 <p>62 King street,<br> Southall, <br>Middlesex,<br> UB2 4DB<br>
@@ -108,8 +107,11 @@ fghf<br>Alperton<br>jkbjhb<br>160102
 </div>
 </div>
 
+@if($invoice->flights->count() > 0)
+<?php $j =1 ?>
 <h2 class="p-3 bg-light-blue d-inline-block text-white">Flight</h2>
-<h4 class="mt-3"><b>1. Passenger Details</b></h4>
+@foreach($invoice->flights as $flight)
+<h4 class="mt-3"><b>{{$j++}}. Passenger Details</b></h4>
 <div class="table-responsive">
 <table class="table table-bordered">
 <thead>
@@ -121,19 +123,22 @@ fghf<br>Alperton<br>jkbjhb<br>160102
 </tr>
 </thead>
 <tbody>
+        <?php $i = 1;?>
+        @foreach($flight->passengers as $passenger)
 <tr>
-<td>1</td>
-<td>ADULT</td>
-<td>SIBV</td>
-<td>KHGJB</td>
+        <td>{{ $i++ }}</td>
+        <td>{{ $passenger->pax_type }}</td>
+        <td>{{ $passenger->first_name}}</td>
+        <td>{{ $passenger->last_name }}</td>
 </tr>
+@endforeach
 </tbody>
 </table>
 </div>
 <p>Note - * denotes the lead passenger</p><br>
 
 <h4 class="mt-3"><b>Flight Details</b></h4>
-<p>Booking Ref: IEB 9003953 &nbsp;&nbsp; | &nbsp;&nbsp; Airline Ref: YTYGHG</p>
+<p>Booking Ref: IEB 9003953 &nbsp;&nbsp; | &nbsp;&nbsp; Airline Ref: {{ $flight->airline_ref }}</p>
 <div class="table-responsive">
 <table class="table table-bordered">
 <thead>
@@ -146,28 +151,33 @@ fghf<br>Alperton<br>jkbjhb<br>160102
 </tr>
 </thead>
 <tbody>
+    
 <tr>
-<td>KABUL, Tuesday, January 1st, 2019, 01:00 AM</td>
-<td>KABUL, Tuesday, January 1st, 2019, 01:00 AM</td>
-<td>AEGEAN AIRLINES</td>
-<td>ECONOMY CLASS</td>
-<td>SS</td>
+        <td>{{ $flight->segment_one_from.', '. Carbon\Carbon::parse($flight->segment_one_departure)->format('l\\, F jS\\, Y\\, h:i A') }}</td>
+        <td>{{ $flight->segment_one_to.', '.  Carbon\Carbon::parse($flight->segment_one_arrival)->format('l\\, F jS\\, Y\\, h:i A') }}</td>
+        <td>{{ $flight->segment_one_flight }}</td>
+        <td>{{ $flight->segment_one_class }}</td>
+        <td>{{ $flight->segment_one_carrier }}</td>
 </tr>
 <tr>
-<td>KABUL, Tuesday, January 1st, 2019, 01:00 AM</td>
-<td>KABUL, Tuesday, January 1st, 2019, 01:00 AM</td>
-<td>AEGEAN AIRLINES</td>
-<td>ECONOMY CLASS</td>
-<td>AA</td>
+        <td>{{ $flight->segment_two_from.', '. Carbon\Carbon::parse($flight->segment_two_departure)->format('l\\, F jS\\, Y\\, h:i A') }}</td>
+        <td>{{ $flight->segment_two_to.', '. Carbon\Carbon::parse($flight->segment_two_arrival)->format('l\\, F jS\\, Y\\, h:i A') }}</td>
+        <td>{{ $flight->segment_two_flight }}</td>
+        <td>{{ $flight->segment_two_class }}</td>
+        <td>{{ $flight->segment_two_carrier}}</td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="">
-<h4 class="mt-3"> <b class="float-right"><b>Total: </b><span class="text-light-blue">£240</span></b></h4>
+<h4 class="mt-3"> <b class="float-right"><b>Total: </b><span class="text-light-blue">{{ $invoice->currency.$flight->total_amount }}</span></b></h4>
+@endforeach
 </div>
+@endif
 
 
+@if($visa->count() > 0 )
+        <?php $visa_amount = 0 ; $k = 1;?>
 <h2 class="p-3 bg-light-blue d-inline-block text-white">Visa Services</h2>
 <div class="table-responsive">
 <table class="table table-bordered">
@@ -184,23 +194,29 @@ fghf<br>Alperton<br>jkbjhb<br>160102
 </tr>
 </thead>
 <tbody>
-<tr>
-<th>1.</th>
-<td>SHIVA SAPRA</td>
-<td>INDIA</td>
-<td>INDIA</td>
-<td>TOURIST</td>
-<td>120</td>
-<td>120</td>
-<td><b>£240</b></td>
-</tr>
+        @foreach($visa as $info)
+        <tr>
+        <th>{{$k++}}.</th>
+          <td>{{$info->name_of_visa_applicant}}</td>
+          <td>{{$info->passport_origin}}</td>
+          <td>{{$info->visa_country}}</td>
+          <td>{{$info->visa_type}}</td>
+          <td>{{$info->visa_charges}}</td>
+          <td>{{$info->service_charge}}</td>
+          <td><b>{{ $invoice->currency.$info->visa_amount }}</b></td>
+          <?php $visa_amount = $visa_amount + $info->visa_amount; ?>
+        </tr>
+        @endforeach
 </tbody>
 </table>
 </div>
 <div class="">
-<h4 class="mt-3"> <b class="float-right"><b>Total: </b><span class="text-light-blue">£240</span></b></h4>
+<h4 class="mt-3"> <b class="float-right"><b>Total: </b><span class="text-light-blue">{{ $invoice->currency.$visa_amount }}</span></b></h4>
 </div>
+@endif
 
+@if($hotel->count()>0)
+        <?php $hotel_amount = 0 ; $k = 1;?>
 <h2 class="p-3 bg-light-blue d-inline-block text-white">Hotel</h2>
 <div class="table-responsive">
 <table class="table table-bordered">
@@ -218,24 +234,31 @@ fghf<br>Alperton<br>jkbjhb<br>160102
 </tr>
 </thead>
 <tbody>
-<tr>
-<th>1.</th>
-<td>BANGALORE</td>
-<td>INDIA</td>
-<td>VEDANTA</td>
-<td>01/01/2019</td>
-<td>26/06/2019</td>
-<td>2</td>
-<td>5</td>
-<td><b>£120</b></td>
-</tr>
+        @foreach($hotel as $info)
+        <tr>
+            <th>{{$k++}}.</th>
+          <td>{{ $info->hotel_city }}</td>
+          <td>{{ $info->hotel_country }}</td>
+          <td>{{ $info->hotel_name }}</td>
+          <td>{{ Carbon\Carbon::parse($info->check_in_date)->format('d/m/Y') }}</td>
+          <td>{{ Carbon\Carbon::parse($info->check_out_date)->format('d/m/Y') }}</td>
+          <td>{{ $info->no_of_children }}</td>
+          <td>{{ $info->no_of_rooms }}</td>
+          <td><b>{{ $invoice->currency.$info->hotel_amount }}</b></td>
+          <?php $hotel_amount = $hotel_amount + $info->hotel_amount; ?>
+        </tr>
+      @endforeach
 </tbody>
 </table>
 </div>
 <div class="">
-<h4 class="mt-3"> <b class="float-right"><b>Total: </b><span class="text-light-blue">£120</span></b></h4>
+<h4 class="mt-3"> <b class="float-right"><b>Total: </b><span class="text-light-blue">{{ $invoice->currency.$hotel_amount }}</span></b></h4>
 </div>
+@endif
 
+
+@if($insurance->count()>0)
+<?php $insurance_amount = 0 ; $k=1;?>
 <h2 class="p-3 bg-light-blue d-inline-block text-white">Insurance</h2>
 <div class="table-responsive">
 <table class="table table-bordered">
@@ -249,19 +272,26 @@ fghf<br>Alperton<br>jkbjhb<br>160102
 </tr>
 </thead>
 <tbody>
-<tr>
-<th>1.</th>
-<td>SIBV KHGJB</td>
-<td>TEST</td>
-<td>GOOD</td>
-<td><b>£120</b></td>
-</tr>
+        @foreach($insurance as $info)
+        <tr>
+            <th>{{$k++}}.</th>
+          <td>{{ $info->name_of_insurance_applicant }}</td>
+          <td>{{ $info->name_of_insurance_company }}</td>
+          <td>{{ $info->insurance_remarks }}</td>
+          <td><b>{{ $invoice->currency.$info->insurance_amount }}</b></td>
+          <?php $insurance_amount = $insurance_amount + $info->insurance_amount; ?>
+        </tr>
+        @endforeach
 </tbody>
 </table>
 </div>
 <div class="">
-<h4 class="mt-3"> <b class="float-right"><b>Total: </b><span class="text-light-blue">£120</span></b></h4>
+<h4 class="mt-3"> <b class="float-right"><b>Total: </b><span class="text-light-blue">{{ $invoice->currency.$insurance_amount }}</span></b></h4>
 </div>
+@endif
+
+    @if($local_sight_sceen->count()>0)
+    <?php $local_sight_sceen_amount = 0 ; $k =1;?>
 <h2 class="p-3 bg-light-blue d-inline-block text-white">Local Sight Sceen</h2>
 <div class="">
 <div class="table-responsive">
@@ -274,17 +304,24 @@ fghf<br>Alperton<br>jkbjhb<br>160102
 </tr>
 </thead>
 <tbody>
-<tr>
-<th>1.</th>
-<td>GOOD</td>
-<td><b>£120</b></td>
-</tr>
+        @foreach($local_sight_sceen as $info)
+        <tr>
+            <th>{{$k++}}.</th>
+          <td>{{ $info->local_sight_sceen_remarks }}</td>
+          <td><b>{{ $invoice->currency.$info->local_sight_sceen_amount }}</b></td>
+          <?php $local_sight_sceen_amount = $local_sight_sceen_amount + $info->local_sight_sceen_amount; ?>
+        </tr>
+        @endforeach
 </tbody>
 </table>
 </div>
 <div class="">
-<h4 class="mt-3"> <b class="float-right"><b>Total: </b><span class="text-light-blue">£120</span></b></h4>
+<h4 class="mt-3"> <b class="float-right"><b>Total: </b><span class="text-light-blue">{{ $invoice->currency.$local_sight_sceen_amount }}</span></b></h4>
 </div>
+@endif
+
+@if($local_transport->count() > 0)
+      <?php $local_transport_amount = 0 ; $k=1;?>
 <h2 class="p-3 bg-light-blue d-inline-block text-white">Local Transport</h2>
 <div class="table-responsive">
 <table class="table table-bordered">
@@ -296,17 +333,24 @@ fghf<br>Alperton<br>jkbjhb<br>160102
 </tr>
 </thead>
 <tbody>
-<tr>
-<th>1.</th>
-<td>TESTING</td>
-<td><b>£125</b></td>
-</tr>
+        @foreach($local_transport as $info)
+        <tr>
+            <th>{{$k++}}.</th>
+          <td>{{ $info->local_transport_remarks }}</td>
+          <td><b>{{ $invoice->currency.$info->local_transport_amount }}</b></td>
+          <?php $local_transport_amount = $local_transport_amount + $info->local_transport_amount; ?>
+        </tr>
+        @endforeach
 </tbody>
 </table>
 </div>
 <div class="">
-<h4 class="mt-3"> <b class="float-right"><b>Total: </b><span class="text-light-blue">£125</span></b></h4>
+<h4 class="mt-3"> <b class="float-right"><b>Total: </b><span class="text-light-blue">{{ $invoice->currency.$local_transport_amount }}</span></b></h4>
 </div>
+
+@endif
+      @if($car_rental->count() > 0)
+      <?php $car_rental_amount = 0 ; $k = 1;?>
 <h2 class="p-3 bg-light-blue d-inline-block text-white">Car Rental</h2>
 <div class="table-responsive">
 <table class="table table-bordered">
@@ -318,17 +362,25 @@ fghf<br>Alperton<br>jkbjhb<br>160102
 </tr>
 </thead>
 <tbody>
-<tr>
-<th>1.</th>
-<td>TESTING</td>
-<td><b>£1254</b></td>
-</tr>
+        @foreach($car_rental as $info)
+        <tr>
+            <th>{{$k++}}.</th>
+          <td>{{ $info->car_rental_remarks }}</td>
+          <td><b>{{ $invoice->currency.$info->car_rental_amount}}</b></td>
+          <?php $car_rental_amount = $car_rental_amount + $info->car_rental_amount; ?>
+        </tr>
+        @endforeach
 </tbody>
 </table>
 </div>
 <div class="">
-<h4 class="mt-3"> <b class="float-right"><b>Total: </b><span class="text-light-blue">£1254</span></b></h4>
+<h4 class="mt-3"> <b class="float-right"><b>Total: </b><span class="text-light-blue">{{ $invoice->currency.$car_rental_amount}}</span></b></h4>
 </div>
+
+@endif
+
+@if($other_facilities->count()>0)
+      <?php $other_facilities_amount = 0 ; $k=1;?>
 <h2 class="p-3 bg-light-blue d-inline-block text-white">Other Facilities</h2>
 <div class="table-responsive">
 <table class="table table-bordered">
@@ -340,20 +392,27 @@ fghf<br>Alperton<br>jkbjhb<br>160102
 </tr>
 </thead>
 <tbody>
-<tr>
-<th>1.</th>
-<td>AWESOME!!</td>
-<td><b>£1258</b></td>
-</tr>
+        @foreach ($other_facilities as $info)
+            
+        
+            <tr>
+                <th>{{$k++}}.</th>
+              <td>{{ $info->other_facilities_remarks }}</td>
+              <td><b>{{ $invoice->currency.$info->other_facilities_amount }}</b></td>
+              <?php $other_facilities_amount = $other_facilities_amount + $info->other_facilities_amount; ?>
+            </tr>
+            @endforeach
 </tbody>
 </table>
 </div>
 <div class="">
-<h4 class="mt-3"> <b class="float-right"><b>Total: </b><span class="text-light-blue">£1258</span></b></h4>
+<h4 class="mt-3"> <b class="float-right"><b>Total: </b><span class="text-light-blue">{{ $invoice->currency.$other_facilities_amount }}</span></b></h4>
 </div>
+@endif
 <br><br>
 <div class="row">
 <div class="col-md-4">
+        @if($invoice->debit_amount > 0 or $invoice->credit_amount > 0 or $invoice->cash_amount > 0 or $invoice->bank_amount > 0)
 <div class="table-responsive">
 <table class="table table-bordered">
 <thead>
@@ -363,52 +422,94 @@ fghf<br>Alperton<br>jkbjhb<br>160102
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>Debit Card</td>
-<td>£300</td>
-</tr>
-<tr>
-<td>Credit Card</td>
-<td>£12000</td>
-</tr>
-<tr>
-<td>Cash</td>
-<td>£452</td>
-</tr>
-<tr>
-<td>Bank</td>
-<td>£250</td>
-</tr>
-</tbody>
+        @if($invoice->debit_amount > 0 )
+      <tr>
+        <td>Debit Card</td>
+        <td>{{ $invoice->currency.$invoice->debit_amount }}</td>
+      </tr>
+      @endif
+        @if($invoice->credit_amount > 0)
+      <tr>
+        <td>Credit Card</td>
+        <td>{{ $invoice->currency.$invoice->credit_amount }}</td>
+      </tr>
+      @endif
+        @if($invoice->cash_amount > 0)
+      <tr>
+        <td>Cash</td>
+        <td>{{ $invoice->currency.$invoice->cash_amount }}</td>
+      </tr>
+      @endif
+        @if($invoice->bank_amount > 0)
+      <tr>
+        <td>Bank</td>
+        <td>{{ $invoice->currency.$invoice->bank_amount }}</td>
+      </tr>
+      @endif
+      </tbody>
 </table>
 </div>
+@endif
 </div>
 <div class="col-md-8 text-right">
 <div class="w-100">
 <div class="" style="display:inline-block;margin-right:30px;">
-<p class="mb-1"><b>Sub Total:</b></p>
-<p class="mb-1"><b>Discount:</b></p>
-<p class="mb-1"><b>VAT @ 10%</b></p>
-<p class="mb-1"><b>Total:</b></p>
-<p class="mb-1"><b>Paid:</b></p>
+        @if($invoice->discount != 0 or $invoice->VAT_percentage != 0)
+        <p class="mb-1"><b>Sub Total:</b></p>
+        @if($invoice->discount != 0)
+          <p class="mb-1"><b>Discount:</b></p>
+        @endif
+        @if($invoice->VAT_percentage != 0)
+          <p class="mb-1"><b>VAT @ {{ $invoice->VAT_percentage }}%</b></p>
+        @endif
+      @endif
+      <p class="mb-1"><b>Total:</b></p>
+      @if($invoice->paid != 0)
+        <p class="mb-1"><b>Paid:</b></p>
+      @endif
 </div>
 <div class="" style="display:inline-block;">
-<p class="mb-1"><b>£3477.00</b></p>
-<p class="mb-1"><b>£477</b></p>
-<p class="mb-1"><b>£300:</b></p>
-<p class="mb-1"><b>£3300</b></p>
-<p class="mb-1"><b>£13002</b></p>
+        @if($invoice->discount != 0 or $invoice->VAT_percentage != 0)
+        <p class="mb-1"><b>{{ $invoice->currency}}{{$invoice->total}}</b></p>
+        @if($invoice->discount != 0)
+          <p class="mb-1"><b>{{ $invoice->currency}}{{$invoice->discount}}</b></p>
+        @endif
+        @if($invoice->VAT_amount != 0)
+          <p class="mb-1"><b>{{ $invoice->currency}}{{ $invoice->VAT_amount }}:</b></p>
+        @endif
+        @endif
+        <p class="mb-1"><b>{{ $invoice->currency}}{{$invoice->discounted_total + $invoice->VAT_amount}}</b></p>
+      @if($invoice->paid != 0)
+          <p class="mb-1"><b>{{ $invoice->currency}}{{$invoice->paid}}</b></p>
+      @endif
 </div>
 </div>
-<hr>
-<div class="w-100">
-<div class="" style="display:inline-block;margin-right:30px;">
-<h4 class="mb-1"><b>Advance:</b></h4>
-</div>
-<div class="" style="display:inline-block;">
-<h4 class="mb-1"><b>£ 9702</b></h4>
-</div>
-</div>
+@if($invoice->pending_amount != 0)
+        <hr>
+        <div class="w-100">
+            <div class="" style="display:inline-block;margin-right:30px;">
+            <p class="mb-1"><b>Due Payment:</b></p>
+          </div>
+          <div class="" style="display:inline-block;">
+            @if($invoice->pending_amount != 0 )
+            <p class="mb-1">{{ $invoice->currency}} {{ $invoice->pending_amount}}</p>
+            @endif
+        </div>
+        </div>
+        @endif
+        @if($invoice->advance != 0)
+        <hr>
+        <div class="w-100">
+            <div class="" style="display:inline-block;margin-right:30px;">
+            <p class="mb-1"><b>Advance:</b></p>
+          </div>
+          <div class="" style="display:inline-block;">
+            @if($invoice->advance != 0 )
+            <p class="mb-1">{{ $invoice->currency}} {{ $invoice->advance}}</p>
+            @endif
+        </div>
+        </div>
+        @endif
 </div>
 </div><hr><br>
 
