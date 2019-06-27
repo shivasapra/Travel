@@ -526,8 +526,8 @@
     <div class="row">
         <div class="col-md-12">
             <p>If the above information is correct then click on confirm button.</p>
-            <a href="#" class="btn btn-success btn-md">Confirm</a>
-             <p>If No then <a href="#">Click Here </a></p>
+            <a href="{{route('confirmInvoice', $token)}}" class="btn btn-success btn-md">Confirm</a>
+             <p>If No then <a href="{{route('refuseInvoice', $token)}}">Click Here </a></p>
         </div>
         <div class="col-md-12">
             <p>

@@ -124,6 +124,10 @@ Route::get('accept/Client/{token}', 'InviteController@acceptClient')->name('acce
 Route::get('confirm/{token}', 'InviteController@confirm')->name('confirm');
 Route::get('deleteClientPassportData/{token}', 'InviteController@deleteClientPassportData')->name('deleteClientPassportData');
 
+Route::get('confirm/Invoice/{token}', 'InviteController@confirmInvoice')->name('confirmInvoice');
+Route::get('refuse/Invoice/{token}', 'InviteController@refuseInvoice')->name('refuseInvoice');
+Route::post('Invoice/Issue/{id}', 'InviteController@InvoiceIssue')->name('InvoiceIssue');
+
 
 Route::get('/client/documents/movement',[
 	'uses' => 'ClientDocController@index',
