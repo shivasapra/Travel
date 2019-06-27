@@ -41,7 +41,7 @@ Invoice Issues
 	                    		<td>{{$invoice->invoice_no}}</td>
 	                    		<td>{{$invoice->invoice_date}}</td>
                                 <td>{{$invoice->receiver_name}}</td>
-                                <td>{{$invoice->issues}}</td>
+                                <th>{{$invoice->issues}}</th>
 							</tr>
 							@endif
 	                    	@endforeach

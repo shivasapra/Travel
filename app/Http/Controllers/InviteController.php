@@ -121,6 +121,7 @@ class InviteController extends Controller
         }
 
         $invoice->confirmation = 1;
+        $invoice->issues = null;
         $invoice->token =  null;
         $invoice->save();
 
