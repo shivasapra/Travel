@@ -475,7 +475,7 @@
           <p class="mb-1"><b>{{ $invoice->currency}}{{$invoice->discount}}</b></p>
         @endif
         @if($invoice->VAT_amount != 0)
-          <p class="mb-1"><b>{{ $invoice->currency}}{{ $invoice->VAT_amount }}</b></p>
+          <p class="mb-1"><b>{{ $invoice->currency}}{{ $invoice->VAT_amount }}:</b></p>
         @endif
         @endif
         <p class="mb-1"><b>{{ $invoice->currency}}{{$invoice->discounted_total + $invoice->VAT_amount}}</b></p>
