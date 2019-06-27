@@ -61,7 +61,7 @@ class InviteController extends Controller
 
         // here you would probably log the user in and show them the dashboard, but we'll just prove it worked
 
-        return view('ThankYou')->with('name',$client->first_name.' '.$client->last_name);
+        return view('ThankYou')->with('name',$client[0]->first_name.' '.$client[0]->last_name);
     }
 
     public function confirm($token)
