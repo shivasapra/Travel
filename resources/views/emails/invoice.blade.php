@@ -71,7 +71,7 @@
 }
     </style>
   </head>
-  <body style="background-color:#ecf0f5;margin:0;padding:3rem 0;font-size:15px;font-family: 'Lato', sans-serif;color:#00;">
+  <body style="background-color:#ecf0f5;margin:0;padding:3rem 0;font-size:15px;font-family: 'Lato', sans-serif !important;color:#000;">
 <!-- Main content -->
 <section class="content">
 <div class="outer-div">
