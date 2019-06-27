@@ -478,7 +478,7 @@
           <p class="mb-1"><b>{{ $invoice->currency}}{{ $invoice->VAT_amount }}:</b></p>
         @endif
         @endif
-        <p class="mb-1"><b>{{ $invoice->currency}}{{$invoice->discounted_total + $invoice->VAT_amount}}</b></p>
+        <p class="mb-1"><b>{{ $invoice->currency}}{{number_format( (float) ($invoice->discounted_total + $invoice->VAT_amount), 2, '.', '')}}</b></p>
       @if($invoice->paid != 0)
           <p class="mb-1"><b>{{ $invoice->currency}}{{$invoice->paid}}</b></p>
       @endif
