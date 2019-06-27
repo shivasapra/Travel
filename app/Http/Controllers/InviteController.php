@@ -34,7 +34,7 @@ class InviteController extends Controller
 
         // here you would probably log the user in and show them the dashboard, but we'll just prove it worked
 
-        return view('ThankYou.blade.php')->with('name',$employee[0]->first_name.' '.$employee[0]->last_name);
+        return view('ThankYou')->with('name',$employee[0]->first_name.' '.$employee[0]->last_name);
     }
 
     public function acceptClient($token)
@@ -61,7 +61,7 @@ class InviteController extends Controller
 
         // here you would probably log the user in and show them the dashboard, but we'll just prove it worked
 
-        return view('ThankYou.blade.php')->with('name',$client->first_name.' '.$client->last_name);
+        return view('ThankYou')->with('name',$client->first_name.' '.$client->last_name);
     }
 
     public function confirm($token)
@@ -78,7 +78,7 @@ class InviteController extends Controller
 
         // here you would probably log the user in and show them the dashboard, but we'll just prove it worked
 
-        return view('ThankYou.blade.php')->with('name',$client->first_name.' '.$client->last_name);
+        return view('ThankYou')->with('name',$client->first_name.' '.$client->last_name);
     }
 
     public function deleteClientPassportData($token)
@@ -108,7 +108,7 @@ class InviteController extends Controller
 
         // here you would probably log the user in and show them the dashboard, but we'll just prove it worked
 
-        return view('ThankYou.blade.php')->with('name',$client->first_name.' '.$client->last_name);
+        return view('ThankYou')->with('name',$client->first_name.' '.$client->last_name);
     }
 
     public function confirmInvoice($token)
@@ -125,7 +125,7 @@ class InviteController extends Controller
 
         // here you would probably log the user in and show them the dashboard, but we'll just prove it worked
 
-        return view('ThankYou.blade.php')->with('name',$invoice->client->first_name.' '.$invoice->client->last_name);
+        return view('ThankYou')->with('name',$invoice->client->first_name.' '.$invoice->client->last_name);
     }
 
     public function refuseInvoice($token)
@@ -136,7 +136,7 @@ class InviteController extends Controller
             //if the invite doesn't exist do something more graceful than this
             abort(404);
         }
-        return view('InvoiceIssue.blade.php')->with('name',$invoice->client->first_name.' '.$invoice->client->last_name)
+        return view('InvoiceIssue')->with('name',$invoice->client->first_name.' '.$invoice->client->last_name)
                                                 ->with('invoice',$invoice);
 
         // $invoice->confirmation = 1;
@@ -153,6 +153,6 @@ class InviteController extends Controller
             $invoice->issue = $request->issue;
             $invoice->save();
 
-            return view('ThankYou.blade.php')->with('name',$invoice->client->first_name.' '.$invoice->client->last_name);
+            return view('ThankYou')->with('name',$invoice->client->first_name.' '.$invoice->client->last_name);
         }
     }
