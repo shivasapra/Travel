@@ -7,6 +7,7 @@ use App\employee;
 use App\User;
 use App\Invite;
 use App\client;
+use App\invoice;
 class InviteController extends Controller
 {
     public function accept($token)
