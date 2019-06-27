@@ -349,7 +349,14 @@ Create Invoice
 				</table>
 			</div>
 		</div>
+		<div class="box box-info">
+			<div class="box-body">
 
+				<label><h3>Confirmation Via:</h3></label>
+					<input type="radio" name="confirmation_via" value="email">Email
+					<input type="radio" name="confirmation_via" value="paper_print">Paper-Print
+			</div>
+		</div>
 			<div class="form-group">
 			<div class="text-center">
 				<button class="btn btn-primary" type="submit">Create</button>
