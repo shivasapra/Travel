@@ -69,7 +69,7 @@ Accounts Department
     
                 </section>
                 <div class="table-responsive">
-                  <table id="recent-orders" class="table table-hover mb-0 ps-container ps-theme-default">
+                  <table  class="table table-hover mb-0 ps-container ps-theme-default recent-orders">
                     <thead>
                       <tr>
                         <th>Invoice No.</th>
@@ -110,6 +110,7 @@ Accounts Department
               </div>
             </div>
         </div>
+      
         <div class="col-md-3">
             <a href="{{route('paidInvoice.report')}}">
                 <div class="info-box bg-green">
@@ -216,7 +217,49 @@ Accounts Department
                 </div>
                 </div>
             </a>
-        </div> 
+        </div>
+        <div class="col-md-6">
+            <div class="box box-info">
+                <div class="box-body">
+                  <section class="content-header">
+                    {{-- <span class="pull-right"><a href="{{route('invoice.report')}}" class="btn btn-xs bg-maroon">Report</a></span> --}}
+                    <h1 class="text-center">
+                      <span style="color:#0066FF;">Invoice Issues({{$invoice_issues->count()}})</span>
+                    </h1>
+      
+                    <hr>
+      
+                  </section>
+                  <div class="table-responsive">
+                      <table  class="table table-striped table-bordered recent-orders"  >
+                          <thead id="ignorePDF">
+                            <tr>
+                              <th>Invoice No.</th>
+                              <th>Invoice Date</th>
+                              <th>Receiver Name</th>
+                  <th class="text-center">Issue</th>
+                            </tr>
+                            </thead>
+                          <tbody>
+                            @if($invoices->count()>0)
+      
+                    @foreach($invoices as $invoice)
+                    @if($invoice->refund == 0)
+                              <tr>
+                                <td>{{$invoice->invoice_no}}</td>
+                                <td>{{$invoice->invoice_date}}</td>
+                                      <td>{{$invoice->receiver_name}}</td>
+                                      <th>{{$invoice->issues}}</th>
+                    </tr>
+                    @endif
+                              @endforeach
+                            @endif
+                          </tbody>
+                  </table>
+                  </div>
+                </div>
+              </div>
+        </div>
     </div>
 @stop
 @section('js')
@@ -231,7 +274,7 @@ Accounts Department
 
   <script>
   	$(document).ready(function() {
-    $('#recent-orders').DataTable( {
+    $('.recent-orders').DataTable( {
         dom: 'Bfrtip',
         buttons: [
         ]

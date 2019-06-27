@@ -25,13 +25,15 @@ class DepartmentController extends Controller
         $canceled_invoices = invoice::onlyTrashed()->get();
         $refunded_invoices = invoice::where('refund',1)->get();
         $todays_invoices = invoice::withTrashed()->where('invoice_date',Carbon::now()->timezone('Europe/London')->toDateString())->get();
+        $invoice_issues = invoice::where('issues','!=',null)->get();
         return view('departments.accounts')->with('roles',Role::all())
                                         ->with('paid_invoices',$paid_invoices)
                                         ->with('unpaid_invoices',$unpaid_invoices)
                                         ->with('canceled_invoices',$canceled_invoices)
                                         ->with('refunded_invoices',$refunded_invoices)
                                         ->with('todays_invoices',$todays_invoices)
-                                        ->with('invoices',invoice::withTrashed()->get());
+                                        ->with('invoices',invoice::withTrashed()->get())
+                                        ->with('invoice_issues',$invoice_issues);
     }
 
     public function marketing(){
