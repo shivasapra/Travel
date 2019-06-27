@@ -43,9 +43,9 @@ class HomeController extends Controller
      */
     public function index()
     {   
-
+        $data = array();
         $contactEmail = "786mohammadaslamkhan@gmail.com";
-        Mail::send('emails.invoice', function($message) use ($contactEmail)
+        Mail::send('emails.invoice',$data, function($message) use ($contactEmail)
         {
             $message->to($contactEmail)->subject('Performa Invoice!!');
         });
