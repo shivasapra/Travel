@@ -524,12 +524,16 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-12 text-center">
-                <font face="'Source Sans Pro', sans-serif" color="#585858" style="font-size: 20px; line-height: 21px;">
-                        <span style="font-family: 'Source Sans Pro', Arial, Tahoma, Geneva, sans-serif; color: #585858; font-size: 20px; line-height: 28px;">We need your permission to keep your passport details to inform you in future when your passport is going to expire. If you are happy to proceed please give your consent by clicking below button.<br><a href="{{ route('confirm', $token) }}" style="color: #fff;background-color: green;text-decoration: none;padding: 10px 20px;
-border-radius: 4px;display: inline-block;margin-top:10px;">Confirm</a><br><br><br>
-                        If no, then <a href="{{route('deleteClientPassportData', $token)}}">Click Here</a> and we will remove your passport details.</span>
-                     </font>
+        <div class="col-md-12">
+            <p>If the above information is correct then click on confirm button.</p>
+            <a href="#" class="btn btn-success btn-md">Confirm</a>
+             <p>If No then <a href="#">Click Here </a></p>
+        </div>
+        <div class="col-md-12">
+            <p>
+                <b>Terms & Conditions</b><br>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            </p>
         </div>
     </div>
 </div>
