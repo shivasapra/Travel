@@ -241,17 +241,16 @@ Accounts Department
                             </tr>
                             </thead>
                           <tbody>
-                            @if($invoices->count()>0)
+                            @if($invoice_issues->count()>0)
       
-                    @foreach($invoices as $invoice)
-                    @if($invoice->refund == 0)
+                    @foreach($invoice_issues as $invoice)
                               <tr>
                                 <td>{{$invoice->invoice_no}}</td>
                                 <td>{{$invoice->invoice_date}}</td>
                                       <td>{{$invoice->receiver_name}}</td>
                                       <th>{{$invoice->issues}}</th>
                     </tr>
-                    @endif
+                    
                               @endforeach
                             @endif
                           </tbody>
