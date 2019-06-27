@@ -20,7 +20,7 @@ class CreateInvoicesTable extends Migration
             $table->string('billing_address');
             $table->Date('invoice_date');
             $table->string('invoice_no');
-            $table->string('total');
+            $table->float('total');
             $table->string('currency')->nullable();
             $table->float('discount')->nullable();
             $table->integer('discounted_total')->nullable();
