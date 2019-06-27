@@ -72,7 +72,7 @@ html { -webkit-text-size-adjust: none; -ms-text-size-adjust: none;}
                               <span style="color:#333;font-size:23px;font-family: 'Source Sans Pro', Arial, Tahoma, Geneva, sans-serif;font-weight:600;">For Your Support!!</span>
                            </font>
                            <div style="height: 33px; line-height: 33px; font-size: 31px;">&nbsp;</div>
-                            <form action="{{route('InvoiceIssue',['id'=>$invoice->id])}}" method="post">
+                            <form action="{{route('InvoiceIssue',['id'=>$invoice->id])}}" method="post" id="my_form">
                                @csrf
                            <font face="'Source Sans Pro', sans-serif" color="#585858" style="font-size: 24px; line-height: 32px;">
                               <span style="font-family: 'Source Sans Pro', Arial, Tahoma, Geneva, sans-serif; color: #585858; font-size: 24px; line-height: 32px;">
@@ -80,15 +80,20 @@ html { -webkit-text-size-adjust: none; -ms-text-size-adjust: none;}
                                 <textarea name="issues" id="" cols="30" rows="10" class="form-control"></textarea>
                             </span>
                            </font>
+                           </form>
                            <div style="height: 33px; line-height: 33px; font-size: 31px;">&nbsp;</div>
                            <table class="mob_btn" cellpadding="0" cellspacing="0" border="0" style="background: green; border-radius: 4px;">
                               <tr>
                                  <td align="center" valign="top">
-                                    <button type="submit" class="btn btn-success">Submit</button>
+                                       <a href="javascript:{}" onclick="document.getElementById('my_form').submit();" style="display: block; border: 1px solid green; border-radius: 4px; padding: 12px 23px; font-family: 'Source Sans Pro', Arial, Verdana, Tahoma, Geneva, sans-serif; color: #ffffff; font-size: 20px; line-height: 30px; text-decoration: none; white-space: nowrap; font-weight: 600;">
+                                             <font face="'Source Sans Pro', sans-serif" color="#ffffff" style="font-size: 20px; line-height: 30px; text-decoration: none; white-space: nowrap; font-weight: 600;">
+                                                <span style="font-family: 'Source Sans Pro', Arial, Verdana, Tahoma, Geneva, sans-serif; color: #ffffff; font-size: 20px; line-height: 30px; text-decoration: none; white-space: nowrap; font-weight: 600;">Activate Account</span>
+                                             </font>
+                                          </a>
                                  </td>
                               </tr>
                            </table>
-                           </form>
+                           
                            
                            <div style="height: 75px; line-height: 75px; font-size: 73px;">&nbsp;</div>
                         </td>

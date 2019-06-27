@@ -35,6 +35,7 @@ Invoices
 						<th class="text-center">Cancel/Refund Invoice</th>
 						<th class="text-center">Pay</th>
 						<th class="text-center">Reminder</th>
+						<th>##</th>
                       </tr>
                     	</thead>
                     <tbody>
@@ -71,11 +72,13 @@ Invoices
 									</td>
 									<td class="text-center"><a href="{{route('invoice.pay',['id'=>$invoice->id])}}" {{($invoice->status == 1)?"disabled":" "}} class="btn btn-primary btn-xs">Pay</a></td>
 									<td class="text-center"><a href="{{route('invoice.reminder',['id'=>$invoice->id])}}" {{($invoice->status == 1)?"disabled":" "}} class="btn btn-warning btn-xs">Send Reminder</a></td>
-								{{-- @else --}}
-								{{-- <td>&nbsp;</td>
-								<td>&nbsp;</td>
-								<td>&nbsp;</td> --}}
-								{{-- @endif --}}
+									<td>
+									@if($invoice->confirmation)
+										<span class="text-success"><b>{{'Confirmed By Client'}}</b></span>
+									@else
+										<span class="text-danger"><b>{{'Not Yet Confirmed By Client'}}</b></span>
+									@endif
+									</td>
 							</tr>
 							@endif
 	                    	@endforeach
