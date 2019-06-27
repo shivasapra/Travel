@@ -21,6 +21,9 @@
 
  @import url('https://fonts.googleapis.com/css?family=Lato:400,700&display=swap');
  @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700&display=swap');
+ body{
+    font-family: 'Lato', sans-serif !important;
+ }
 .text-center {
     text-align: center;
 }
@@ -33,7 +36,7 @@
 .text-light-blue {
     color: #26ace2 !important;
 }
-    .outer-div-inner h3 {
+.outer-div-inner h3 {
     font-size: 24px;
     text-transform: uppercase;
     font-weight: 600;
@@ -71,7 +74,7 @@
 }
     </style>
   </head>
-  <body style="background-color:#ecf0f5;margin:0;padding:3rem 0;font-size:15px;font-family: 'Lato', sans-serif !important;color:#000;">
+  <body style="background-color:#ecf0f5;margin:0;padding:3rem 0;font-size:15px;color:#000;">
 <!-- Main content -->
 <section class="content">
 <div class="outer-div">
