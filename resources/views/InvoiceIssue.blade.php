@@ -76,8 +76,10 @@ html { -webkit-text-size-adjust: none; -ms-text-size-adjust: none;}
                                @csrf
                            <font face="'Source Sans Pro', sans-serif" color="#585858" style="font-size: 24px; line-height: 32px;">
                               <span style="font-family: 'Source Sans Pro', Arial, Tahoma, Geneva, sans-serif; color: #585858; font-size: 24px; line-height: 32px;">
-                                <label for="issues">Enter: </label>
-                                <textarea name="issues" id="" cols="30" rows="10" class="form-control"></textarea>
+                              <div class="form-group">
+                                <label for="issues"><strong>Enter:</strong> </label>
+                                <br><textarea name="issues" id="" cols="30" rows="10" class="form-control" required></textarea>
+                                 </div>
                             </span>
                            </font>
                            </form>
@@ -87,7 +89,7 @@ html { -webkit-text-size-adjust: none; -ms-text-size-adjust: none;}
                                  <td align="center" valign="top">
                                        <a href="javascript:{}" onclick="document.getElementById('my_form').submit();" style="display: block; border: 1px solid green; border-radius: 4px; padding: 12px 23px; font-family: 'Source Sans Pro', Arial, Verdana, Tahoma, Geneva, sans-serif; color: #ffffff; font-size: 20px; line-height: 30px; text-decoration: none; white-space: nowrap; font-weight: 600;">
                                              <font face="'Source Sans Pro', sans-serif" color="#ffffff" style="font-size: 20px; line-height: 30px; text-decoration: none; white-space: nowrap; font-weight: 600;">
-                                                <span style="font-family: 'Source Sans Pro', Arial, Verdana, Tahoma, Geneva, sans-serif; color: #ffffff; font-size: 20px; line-height: 30px; text-decoration: none; white-space: nowrap; font-weight: 600;">Activate Account</span>
+                                                <span style="font-family: 'Source Sans Pro', Arial, Verdana, Tahoma, Geneva, sans-serif; color: #ffffff; font-size: 20px; line-height: 30px; text-decoration: none; white-space: nowrap; font-weight: 600;">Submit</span>
                                              </font>
                                           </a>
                                  </td>

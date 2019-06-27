@@ -526,7 +526,7 @@
     <div class="row">
         <div class="col-md-12">
             <br><br><h5>If the above information is correct then click on confirm button.</h5>
-            <a href="{{route('confirmInvoice', $token)}}" class="btn btn-success btn-md" style="display: block;border: 1px solid green; border-radius: 4px; padding: 12px 23px; color: #ffffff; font-size: 20px; line-height: 30px; text-decoration: none; white-space: nowrap; font-weight: 600;background-color:green;">Confirm</a>
+            <a href="{{route('confirmInvoice', $token)}}" class="btn btn-success btn-md" style="display:inline-block; border: 1px solid green; border-radius: 4px; padding: 12px 23px; color: #ffffff; font-size: 20px; line-height: 30px; text-decoration: none; white-space: nowrap; font-weight: 600;background-color:green;">Confirm</a>
             <br><h5>If No then <a href="{{route('refuseInvoice', $token)}}">Click Here </a></h5>
           
              <hr>
