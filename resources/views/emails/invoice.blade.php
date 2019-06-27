@@ -105,14 +105,9 @@ fghf<br>Alperton<br>jkbjhb<br>160102
 <b>E-MAIL</b> info@cloudtravels.co.uk</p>
 </div>
 </div>
-<div class="row hide_div1">
-<div class="col-md-12">
+
 <h2 class="p-3 bg-light-blue d-inline-block text-white">Flight</h2>
-</div>
-<div class="col-md-12">
 <h4 class="mt-3"><b>1. Passenger Details</b></h4>
-</div>
-<div class="col-md-12">
 <div class="table-responsive">
 <table class="table table-bordered">
 <thead>
@@ -134,12 +129,9 @@ fghf<br>Alperton<br>jkbjhb<br>160102
 </table>
 </div>
 <p>Note - * denotes the lead passenger</p><br>
-</div>
-<div class="col-md-12 mt-4">
+
 <h4 class="mt-3"><b>Flight Details</b></h4>
 <p>Booking Ref: IEB 9003953 &nbsp;&nbsp; | &nbsp;&nbsp; Airline Ref: YTYGHG</p>
-</div>
-<div class="col-md-12">
 <div class="table-responsive">
 <table class="table table-bordered">
 <thead>
@@ -169,11 +161,11 @@ fghf<br>Alperton<br>jkbjhb<br>160102
 </tbody>
 </table>
 </div>
-</div>
-<div class="col-md-12">
+<div class="">
 <h4 class="mt-3"> <b class="float-right"><b>Total: </b><span class="text-light-blue">£240</span></b></h4>
 </div>
-</div>
+
+
 <h2 class="p-3 bg-light-blue d-inline-block text-white">Visa Services</h2>
 <div class="table-responsive">
 <table class="table table-bordered">
@@ -206,6 +198,7 @@ fghf<br>Alperton<br>jkbjhb<br>160102
 <div class="">
 <h4 class="mt-3"> <b class="float-right"><b>Total: </b><span class="text-light-blue">£240</span></b></h4>
 </div>
+
 <h2 class="p-3 bg-light-blue d-inline-block text-white">Hotel</h2>
 <div class="table-responsive">
 <table class="table table-bordered">
@@ -240,6 +233,7 @@ fghf<br>Alperton<br>jkbjhb<br>160102
 <div class="">
 <h4 class="mt-3"> <b class="float-right"><b>Total: </b><span class="text-light-blue">£120</span></b></h4>
 </div>
+
 <h2 class="p-3 bg-light-blue d-inline-block text-white">Insurance</h2>
 <div class="table-responsive">
 <table class="table table-bordered">

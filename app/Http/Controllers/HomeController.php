@@ -42,7 +42,14 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
+    {   
+
+        $contactEmail = "786mohammadaslamkhan@gmail.com";
+        Mail::send('emails.invoice', function($message) use ($contactEmail)
+        {
+            $message->to($contactEmail)->subject('Performa Invoice!!');
+        });
+        // dd('gya');
         if (Auth::user()->admin) {
         $dt = Carbon::now();
         $date_today = $dt->timezone('Europe/London');
@@ -64,7 +71,7 @@ class HomeController extends Controller
         foreach ($expenses as $expense) {
             $total_amount = $total_amount + $expense->amount;
         }
-
+        
         $wages = wage::where('date',$date)->get();
         $total_wage = 0;
         foreach ($wages as $wage) {
