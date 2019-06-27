@@ -151,7 +151,7 @@ class InviteController extends Controller
     
             $invoice = invoice::find($id);
             $invoice->token = null;
-            $invoice->issues = $request->issue;
+            $invoice->issues = $request->issues;
             $invoice->save();
 
             return view('ThankYou')->with('name',$invoice->client->first_name.' '.$invoice->client->last_name);
