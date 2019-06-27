@@ -519,7 +519,19 @@
 <li>There is no liability if airline(s) above cease to trade, unless Scheduled Airline Failure Insurance (SAFI) has been paid.</li>
 <li>Passengers travelling to/ or via USA/CANADA : will require an ESTA at least 72 hours prior to travel, even for transit purposes.Children under 18 travelling to South Africa and Botswana : All minors travelling will be required to carry certified copies Birth Certificate, and in the event that only one parent is travelling, certified written consent from the other parent to allow the child to travel.</li>
 </ul>
+</div>
+</div>
 
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 text-center">
+                <font face="'Source Sans Pro', sans-serif" color="#585858" style="font-size: 20px; line-height: 21px;">
+                        <span style="font-family: 'Source Sans Pro', Arial, Tahoma, Geneva, sans-serif; color: #585858; font-size: 20px; line-height: 28px;">We need your permission to keep your passport details to inform you in future when your passport is going to expire. If you are happy to proceed please give your consent by clicking below button.<br><a href="{{ route('confirm', $token) }}" style="color: #fff;background-color: green;text-decoration: none;padding: 10px 20px;
+border-radius: 4px;display: inline-block;margin-top:10px;">Confirm</a><br><br><br>
+                        If no, then <a href="{{route('deleteClientPassportData', $token)}}">Click Here</a> and we will remove your passport details.</span>
+                     </font>
+        </div>
+    </div>
 </div>
 </div>
 </section>

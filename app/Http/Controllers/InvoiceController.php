@@ -778,7 +778,12 @@ class InvoiceController extends Controller
         $local_transport = invoice::find($invoice->id)->invoiceInfo->where('service_name','Local Transport');
         $car_rental = invoice::find($invoice->id)->invoiceInfo->where('service_name','Car Rental');
         $other_facilities = invoice::find($invoice->id)->invoiceInfo->where('service_name','Other Facilities');
-
+        do {
+            $token = str_random();
+        }
+        while (invoice::where('token', $token)->first());
+        $invoice->token = $token;
+        $invoice->save();
             $data = [
                 'tax'=> settings::all(),
                 'invoice'=> invoice::find($invoice->id),
@@ -791,11 +796,12 @@ class InvoiceController extends Controller
                 'local_transport' => $local_transport,
                 'car_rental' => $car_rental,
                 'other_facilities' => $other_facilities,
+                'token' =>$token,
             ];
         $contactEmail = $invoice->client->email;
         Mail::send('emails.invoice', $data, function($message) use ($contactEmail)
         {
-            $message->to($contactEmail)->subject('Invoice!!');
+            $message->to($contactEmail)->subject('Performa Invoice!!');
         });
             Session::flash('success','Invoice Updated Successfully');
             return redirect()->route('invoice')->with('invoices',invoice::all());

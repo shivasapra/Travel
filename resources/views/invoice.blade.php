@@ -286,7 +286,7 @@ Invoice
           </table>
         </div>
           </div>
-          <div class="">
+          <div class="col-md-12">
             <h4 class="mt-3"> <b class="float-right"><b>Total:  </b><span class="text-light-blue">{{ $invoice->currency.$flight->total_amount }}</span></b></h4>
           </div>
           @endforeach
@@ -326,7 +326,7 @@ Invoice
           </tbody>
           </table>
           </div>
-          <div class="">
+          <div class="col-md-12">
             <h4 class="mt-3"> <b class="float-right"><b>Total:  </b><span class="text-light-blue">{{ $invoice->currency.$visa_amount }}</span></b></h4>
           </div>
         @endif
@@ -373,7 +373,7 @@ Invoice
           </table>
         </div>
       
-      <div class="">
+      <div class="col-md-12">
         <h4 class="mt-3"> <b class="float-right"><b>Total:  </b><span class="text-light-blue">{{ $invoice->currency.$hotel_amount }}</span></b></h4>
       </div>
     
@@ -411,7 +411,7 @@ Invoice
           </table>
         </div>
       
-      <div class="">
+      <div class="col-md-12">
         <h4 class="mt-3"> <b class="float-right"><b>Total:  </b><span class="text-light-blue">{{ $invoice->currency.$insurance_amount }}</span></b></h4>
       </div>
       @endif
@@ -447,7 +447,7 @@ Invoice
           </table>
         </div>
       
-      <div class="">
+      <div class="col-md-12">
         <h4 class="mt-3"> <b class="float-right"><b>Total:  </b><span class="text-light-blue">{{ $invoice->currency.$local_sight_sceen_amount }}</span></b></h4>
       </div>
     
@@ -481,7 +481,7 @@ Invoice
           </table>
         </div>
       
-      <div class="">
+      <div class="col-md-12">
         <h4 class="mt-3"> <b class="float-right"><b>Total:  </b><span class="text-light-blue">{{ $invoice->currency.$local_transport_amount }}</span></b></h4>
       </div>
     
@@ -515,7 +515,7 @@ Invoice
         </div>
       
       
-      <div class="">
+      <div class="col-md-12">
         <h4 class="mt-3"> <b class="float-right"><b>Total:  </b><span class="text-light-blue">{{ $invoice->currency.$car_rental_amount}}</span></b></h4>
       </div>
     
@@ -550,7 +550,7 @@ Invoice
           </table>
         </div>
       
-      <div class="">
+      <div class="col-md-12">
         <h4 class="mt-3"> <b class="float-right"><b>Total:  </b><span class="text-light-blue">{{ $invoice->currency.$other_facilities_amount }}</span></b></h4>
       </div>
     
@@ -560,7 +560,7 @@ Invoice
           <div class="col-md-4">
              {{-- <h4><b>Payment Information</b></h4> --}}
              @if($invoice->debit_amount > 0 or $invoice->credit_amount > 0 or $invoice->cash_amount > 0 or $invoice->bank_amount > 0)
-              <div class="table-responsive table-bordered">
+              <div class="table table-bordered">
                 <table class="table">
                   <thead>
                   <tr>
@@ -625,7 +625,7 @@ Invoice
                 <p class="mb-1"><b>{{ $invoice->currency}}{{$invoice->discount}}</b></p>
               @endif
               @if($invoice->VAT_amount != 0)
-                <p class="mb-1"><b>{{ $invoice->currency}}{{ $invoice->VAT_amount }}</b></p>
+                <p class="mb-1"><b>{{ $invoice->currency}}{{ $invoice->VAT_amount }}:</b></p>
               @endif
               @endif
               <p class="mb-1"><b>{{ $invoice->currency}}{{$invoice->discounted_total + $invoice->VAT_amount}}</b></p>

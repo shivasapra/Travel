@@ -20,6 +20,7 @@ class CreateInvoicesTable extends Migration
             $table->string('billing_address');
             $table->Date('invoice_date');
             $table->string('invoice_no');
+            $table->string('token')->nullable();
             $table->float('total');
             $table->string('currency')->nullable();
             $table->float('discount')->nullable();
@@ -41,6 +42,7 @@ class CreateInvoicesTable extends Migration
             $table->float('VAT_amount')->default(0);
             $table->boolean('refund')->default(0);
             $table->longText('refund_remarks')->nullable();
+            $table->longText('Issues')->nullable();
             $table->date('refund_on')->nullable();
             $table->softDeletes();
             $table->timestamps();
