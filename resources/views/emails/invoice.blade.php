@@ -409,18 +409,14 @@ fghf<br>Alperton<br>jkbjhb<br>160102
 </div>
 </div>
 </div><hr><br>
-<div class="row">
-<div class="col-md-12">
-</div>
-<div class="col-md-12">
+
 <h4><b>Notes:</b></h4>
 <ul>
 <li>This sale is covered by ATOL number 3853.</li>
 <li>There is no liability if airline(s) above cease to trade, unless Scheduled Airline Failure Insurance (SAFI) has been paid.</li>
 <li>Passengers travelling to/ or via USA/CANADA : will require an ESTA at least 72 hours prior to travel, even for transit purposes.Children under 18 travelling to South Africa and Botswana : All minors travelling will be required to carry certified copies Birth Certificate, and in the event that only one parent is travelling, certified written consent from the other parent to allow the child to travel.</li>
 </ul>
-</div>
-</div>
+
 </div>
 </div>
 </section>
