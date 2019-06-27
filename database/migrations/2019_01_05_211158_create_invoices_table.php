@@ -24,7 +24,7 @@ class CreateInvoicesTable extends Migration
             $table->float('total');
             $table->string('currency')->nullable();
             $table->float('discount')->nullable();
-            $table->integer('discounted_total')->nullable();
+            $table->float('discounted_total')->nullable();
             $table->boolean('credit')->default(0);
             $table->float('credit_amount')->nullable();
             $table->boolean('debit')->default(0);
@@ -33,7 +33,7 @@ class CreateInvoicesTable extends Migration
             $table->float('cash_amount')->nullable();
             $table->boolean('bank')->default(0);
             $table->float('bank_amount')->nullable();
-            $table->integer('paid')->nullable();
+            $table->float('paid')->nullable();
             $table->float('pending_amount')->nullable();
             $table->float('advance')->default(0);
             $table->boolean('status')->default(0);
