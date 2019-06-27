@@ -427,6 +427,8 @@ class clientController extends Controller
         $invite->email = $client->email;
         $invite->token = $token;
         $invite->save();
+        $client->invite_id = $invite->id;
+        $client->save();
 
         // send the email
         $contactEmail = $client->email;
