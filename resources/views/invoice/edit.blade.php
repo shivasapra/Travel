@@ -844,7 +844,7 @@ Edit Invoice
 					
 					<tr>
 						<td class="col-md-8" align="right"><strong>Refunded Amount:</strong></td>
-						<td class="col-md-4"><input name="refunded_amount" value="{{$invoice->refunded_amount}}"  type="text"  required class="form-control mask-money" readonly></td>
+						<td class="col-md-4"><input name="refunded_amount" value="{{$invoice->refunded_amount}}"  type="text"  required class="form-control mask-money"></td>
 					</tr>
 					
 				</table>
