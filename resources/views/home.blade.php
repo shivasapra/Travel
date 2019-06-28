@@ -278,8 +278,8 @@ Dashboard
                         <td>{{$invoice->invoice_date}}</td>
                         <td>{{$invoice->receiver_name}}</td>
 
-                        <?php $total = $invoice->discounted_total + $invoice->VAT_amount ?>
-                        <td>{{$invoice->currency}}{{$total}}</td>
+                        
+                        <td>{{$invoice->currency}}{{number_format( (float) ($invoice->discounted_total + $invoice->VAT_amount), 2, '.', '')}}</td>
 
                         @if($invoice->status == 1 and $invoice->refund == 0 and $invoice->deleted_at == null)
                           <td><small class="label label-success">Paid</small></td>
