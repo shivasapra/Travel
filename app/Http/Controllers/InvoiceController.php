@@ -126,6 +126,7 @@ class InvoiceController extends Controller
         $invoice->total = str_replace(',', '', $request->total);
         $invoice->discounted_total =str_replace(',', '', $request->total) - str_replace(',', '', $request->discount);
         $invoice->mail_sent = $date;
+        $invoice->remarks = $request->remarks;
         $invoice->save();
         $tax = settings::all();
         if($tax[0]->enable == 'yes'){
