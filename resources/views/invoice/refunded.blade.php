@@ -51,6 +51,7 @@ Refunded Invoices
 									<div class="text-danger">{{'Partially Refunded'}}</div>
 									@else
 									<div class="text-success">{{'Refunded'}}</div>
+									@endif
 								</th>
 	                    		
 	                    		{{-- <td><button class="btn btn-xs btn-success" id="pdf">PDF</button></td> --}}
