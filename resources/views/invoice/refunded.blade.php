@@ -59,9 +59,9 @@ Refunded Invoices
 	                    		{{-- <td><button class="btn btn-xs btn-success" id="pdf">PDF</button></td> --}}
 	                    		<td>
 									<a href="{{route('invoice.view',['id'=>$invoice->id])}}" class="btn btn-info btn-xs"><span class="fa fa-eye"></span></a>
-									@if($invoice->refunded_amount < number_format( (float) ($invoice->discounted_total + $invoice->VAT_amount), 2, '.', ''))
+									{{-- @if($invoice->refunded_amount < number_format( (float) ($invoice->discounted_total + $invoice->VAT_amount), 2, '.', '')) --}}
 										<a href="{{route('invoice.edit',['id'=>$invoice->id])}}" class="btn btn-info btn-xs"><span class="fa fa-edit"></span></a>
-									@endif
+									{{-- @endif --}}
                                     {{-- <a href="{{route('invoice.retrieve',['id'=>$invoice->id])}}" class="btn btn-success btn-xs">Retrieve</a> --}}
                                     {{-- <a href="{{route('invoice.kill',['id'=>$invoice->id])}}" class="btn btn-danger btn-xs">Delete</a> --}}
 	                    		</td>
