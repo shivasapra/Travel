@@ -561,7 +561,18 @@ Edit Invoice
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-md-6">
+											<div class="col-md-3">
+													<div class="form-group">
+														<label for="hotel_applicant_name">member Name:</label>
+														<select name="hotel_applicant_name[]"  class="form-control" ">
+															@foreach($client->family as $family)
+														<option value="{{$family->member_name}}" {{($info->hotel_applicant_name == $family->member_name)?"selected":" "}}>{{$family->member_name}}</option>
+															@endforeach
+														</select>
+														
+													</div>
+												</div>
+										<div class="col-md-3">
 											<div class="form-group">
 												<label for="hotel_city">City</label>
 												<input type="text" name="hotel_city[]" value="{{$info->hotel_city}}" required class="form-control">
@@ -632,6 +643,11 @@ Edit Invoice
 										<div class="col-md-4">
 											<div class="form-group">
 												<label for="name_of_insurance_applicant">Name Of Insurance Applicant</label>
+												<select name="name_of_insurance_applicant[]"  class="form-control" ">
+														@foreach($client->family as $family)
+													<option value="{{$family->member_name}}" {{($info->name_of_insurance_applicant == $family->member_name)?"selected":" "}}>{{$family->member_name}}</option>
+														@endforeach
+													</select>
 												<input type="text" name="name_of_insurance_applicant[]" value="{{$info->name_of_insurance_applicant}}" required class="form-control">
 											</div>
 										</div>
@@ -1276,7 +1292,7 @@ Edit Invoice
 			}
 			if (value == 'Visa Services') {
 
-				var options = "<option value=''>---SELECT---</option><option value='SELF'>SELF</option>";
+				var options = "<option value=''>---SELECT---</option>";
 
 							@foreach($client->family as $family)
 							var temp = {!! json_encode($family->member_name) !!}
@@ -1294,7 +1310,7 @@ Edit Invoice
 				$(test).closest(".box").html(data);
 			}
 			if (value == 'Hotel') {
-				var options = "<option value=''>---SELECT---</option><option value='SELF'>SELF</option>";
+				var options = "<option value=''>---SELECT---</option>";
 				options = options + "<option value='{{$client->first_name." ".$client->last_name}}'>{{$client->first_name." ".$client->last_name}}</option>";
 							@foreach($client->family as $family)
 							var temp = {!! json_encode($family->member_name) !!}

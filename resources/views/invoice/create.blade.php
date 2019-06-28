@@ -836,7 +836,7 @@ Create Invoice
 						options = options + "<option value='{{$client->first_name." ".$client->last_name}}'>{{$client->first_name." ".$client->last_name}}</option>";
 							@foreach($client->family as $family)
 							var temp = {!! json_encode($family->member_name) !!}
-							options = options + "<option value='{{$family->id}}'>{{$family->member_name}}</option>";
+							options = options + "<option value='{{$family->member_name}}'>{{$family->member_name}}</option>";
 							@endforeach
 						}
 			  @endforeach
@@ -860,7 +860,7 @@ Create Invoice
 						options = options + "<option value='{{$client->first_name." ".$client->last_name}}'>{{$client->first_name." ".$client->last_name}}</option>";
 							@foreach($client->family as $family)
 							var temp = {!! json_encode($family->member_name) !!}
-							options = options + "<option value='{{$family->id}}'>{{$family->member_name}}</option>";
+							options = options + "<option value='{{$family->member_name}}'>{{$family->member_name}}</option>";
 							@endforeach
 						}
 			  @endforeach
