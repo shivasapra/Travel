@@ -1075,4 +1075,12 @@ class InvoiceController extends Controller
         $invoices = invoice::where('issues','!=',null)->get();
         return view('invoice.issues')->with('invoices',$invoices);
     }
+
+    public function confirmViaPaperPrint($id){
+        $invoice = invoice::find($id);
+        $invoice->confirmation = 1;
+        $invoice->save();
+        Session::flash('success','Invoice Confirmed!!');
+        return redirect()->back();
+    }
 }

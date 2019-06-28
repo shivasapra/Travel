@@ -583,6 +583,10 @@ Route::get('/invoice/print',[
 			'uses'=> 'InvoiceController@invoiceIssues',
 			'as'=>'invoice.issues'
 		])->middleware('permission:View Invoices');
+		Route::get('/invoice/confirm-via/paper-print/{id}',[
+			'uses'=> 'InvoiceController@confirmViaPaperPrint',
+			'as'=>'confirm.via.paperprint'
+		])->middleware('permission:View Invoices');
 
 
 Route::get('/departments',[
