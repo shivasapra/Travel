@@ -45,6 +45,7 @@ class CreateInvoicesTable extends Migration
             $table->longText('issues')->nullable();
             $table->date('refund_on')->nullable();
             $table->boolean('confirmation')->default(0);
+            $table->string('confirmation_via')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

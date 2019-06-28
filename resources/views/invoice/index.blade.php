@@ -73,7 +73,7 @@ Invoices
 									<td class="text-center"><a href="{{route('invoice.reminder',['id'=>$invoice->id])}}" {{($invoice->status == 1)?"disabled":" "}} class="btn btn-warning btn-xs">Send Reminder</a></td>
 									<td>
 									@if($invoice->confirmation)
-										<span class="text-success"><b>{{'Confirmed By Client'}}</b></span>
+									<span class="text-success"><b>{{'Confirmed By Client'}}</b><br>Through: <br>{{$invoice->confirmation_via}}</span>
 									@else
 										<span class="text-danger"><b>{{'Not Yet Confirmed By Client'}}</b></span>
 										<br><a href="{{route('confirm.via.paperprint',['id'=>$invoice->id])}}" class="btn btn-xs btn-success">Confirm Via Paper-Print</a>
