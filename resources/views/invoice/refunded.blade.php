@@ -46,7 +46,12 @@ Refunded Invoices
 								<td>{{$invoice->currency}}{{number_format( (float) ($invoice->discounted_total + $invoice->VAT_amount), 2, '.', '')}}</td>
 								<td>{{$invoice->currency}}{{$invoice->refunded_amount}}</td>
 								{{-- <td>{{$invoice->refund_remarks}}</td> --}}
-	                    		<th><div class="text-danger">{{'Refunded'}}</div></th>
+	                    		<th>
+									@if($invoice->refunded_amount < number_format( (float) ($invoice->discounted_total + $invoice->VAT_amount), 2, '.', ''))	
+									<div class="text-danger">{{'Partially Refunded'}}</div>
+									@else
+									<div class="text-success">{{'Refunded'}}</div>
+								</th>
 	                    		
 	                    		{{-- <td><button class="btn btn-xs btn-success" id="pdf">PDF</button></td> --}}
 	                    		<td>
