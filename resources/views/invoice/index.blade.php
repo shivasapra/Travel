@@ -151,11 +151,11 @@ Invoices
 			'<label for="invoice_no">Invoice No:</label>'+
 			'<input type="text" name="invoice_no" class="form-control" value="'+inv_no+'" readonly />'+
 
-			'<label for="total">Enter Amount To Refund::</label>'+
-			'<input type="number" name="total" class="form-control mask-money" value="'+inv_total+'" readonly/>'+
+			'<label for="total">Total:</label>'+
+			'<input type="text" name="total" class="form-control" value="'+inv_total+'" readonly/>'+
 
-			'<label for="refunded_amount">Enter Amount To Refund::</label>'+
-			'<input type="number" name="refunded_amount" class="form-control mask-money" max="'+inv_total+'" required/>'+
+			'<label for="refunded_amount">Enter Amount To Refund:</label>'+
+			'<input type="text" name="refunded_amount" class="form-control mask-money" max="'+inv_total+'" required/>'+
 			'<label for="refund_remarks">Remarks:</label>'+
 			'<textarea name="refund_remarks" id="" class="form-control" cols="30" rows="10"></textarea>'+
 		'</div>'+
