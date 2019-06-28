@@ -66,6 +66,7 @@ Invoices
 									{{-- <a href="{{route('invoice.refund',['id'=>$invoice->id])}}" {{($invoice->status == 0)?"disabled":" "}} class="btn btn-success btn-xs">Refund</a> --}}
 									<input type="text" value="{{$invoice->id}}" class="inv_id" hidden>
 									<input type="text" value="{{$invoice->invoice_no}}" class="inv_no" hidden>
+									<input type="text" value="{{number_format( (float) ($invoice->discounted_total + $invoice->VAT_amount), 2, '.', '')}}" class="inv_total" hidden>
 											<button   type="button" onClick="Fun(this);" class="btn btn-success btn-xs">Refund</button>
 										@endif
 									</td>
@@ -131,8 +132,8 @@ Invoices
 		var foo = confirm('Are You Sure You Want To Refund This Invoice');
 		if(foo){
 		var inv_id = $(temp).parents('.test').find('.inv_id').val();
-		// alert(inv_id);
 		var inv_no = $(temp).parents('.test').find('.inv_no').val();
+		var inv_total = $(temp).parents('.test').find('.inv_total').val();
 		// $(temp).parents('.fare-parent').find('.fare').val(fare_sell.toFixed(2));
 		// console.log(inv_id);
 		
@@ -149,11 +150,14 @@ Invoices
 		'<div class="modal-body">'+
 			'<label for="invoice_no">Invoice No:</label>'+
 			'<input type="text" name="invoice_no" class="form-control" value="'+inv_no+'" readonly />'+
-			'<label for="refund_remarks">Remarks:</label>'+
-			
-			'<textarea name="refund_remarks" id="" class="form-control" cols="30" rows="10"></textarea>'+
+
+			'<label for="total">Enter Amount To Refund::</label>'+
+			'<input type="number" name="total" class="form-control mask-money" value="'+inv_total+'" readonly/>'+
+
 			'<label for="refunded_amount">Enter Amount To Refund::</label>'+
-			'<input type="text" name="refunded_amount" class="form-control mask-money"  />'+
+			'<input type="number" name="refunded_amount" class="form-control mask-money" max="'+inv_total+'" required/>'+
+			'<label for="refund_remarks">Remarks:</label>'+
+			'<textarea name="refund_remarks" id="" class="form-control" cols="30" rows="10"></textarea>'+
 		'</div>'+
 		'<div class="modal-footer" style="color:white;font-weight:500;background-color:#0066FF;">'+
 		  '<button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>'+
