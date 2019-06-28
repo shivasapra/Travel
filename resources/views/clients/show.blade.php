@@ -207,21 +207,25 @@ client
 					<div class="row">
 							<tr>
 								<td><strong>&nbsp;&nbsp;&nbsp;&nbsp;Member Passport No:</strong></td>
-								@if($family->member_passport_no != null)
-									<td>{{$family->member_passport_no}}</td>
-								@else
-									<strong>{{'N/A'}}</strong>
-								@endif
+								<td>
+									@if($family->member_passport_no != null)
+										{{$family->member_passport_no}}
+									@else
+										<strong>{{'N/A'}}</strong>
+									@endif
+								</td>
 							</tr>
 					</div>
 					<div class="row">
 							<tr>
 								<td><strong>&nbsp;&nbsp;&nbsp;&nbsp;Place Of Issue:</strong></td>
-								@if($family->member_passport_place != null)
-									<td>{{$family->member_passport_place}}</td>
-								@else
-									<td><strong>{{'N/A'}}</strong></td>
-								@endif
+								<td>
+									@if($family->member_passport_place != null)
+										{{$family->member_passport_place}}
+									@else
+										<strong>{{'N/A'}}</strong>
+									@endif
+								</td>
 							</tr>
 					</div>
 					<div class="row">
@@ -234,7 +238,7 @@ client
 									<a href="{{asset($family->member_passport_front)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
 									</div>
 									@else
-									<td><strong>{{'N/A'}}</strong></td>
+									<strong>{{'N/A'}}</strong>
 									@endif
 								</td>
 							</tr>
