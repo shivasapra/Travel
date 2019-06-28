@@ -40,8 +40,8 @@ Canceled Invoices
 	                    		<td>{{$invoice->invoice_no}}</td>
 	                    		<td>{{$invoice->invoice_date}}</td>
 	                    		<td>{{$invoice->receiver_name}}</td>
-								<?php $total = $invoice->discounted_total + $invoice->VAT_amount ?>
-					                <td>{{$invoice->currency}}{{$total}}</td>
+								
+					                <td>{{$invoice->currency}}{{number_format( (float) ($invoice->discounted_total + $invoice->VAT_amount), 2, '.', '')}}</td>
 
 							<th><span class="text-danger">{{'Canceled'}}</span></th>
 	                    		{{-- <td><button class="btn btn-xs btn-success" id="pdf">PDF</button></td> --}}
