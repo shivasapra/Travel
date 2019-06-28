@@ -1080,6 +1080,7 @@ class InvoiceController extends Controller
     public function confirmViaPaperPrint($id){
         $invoice = invoice::find($id);
         $invoice->confirmation = 1;
+        $invoice->issues = null;
         $invoice->confirmation_via = 'Paper-Print';
         $invoice->save();
         Session::flash('success','Invoice Confirmed!!');
