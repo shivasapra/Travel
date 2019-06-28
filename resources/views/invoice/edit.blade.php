@@ -1294,7 +1294,12 @@ Edit Invoice
 				$(test).closest(".box").html(data);
 			}
 			if (value == 'Hotel') {
-
+				var options = "<option value=''>---SELECT---</option><option value='SELF'>SELF</option>";
+				options = options + "<option value='{{$client->first_name." ".$client->last_name}}'>{{$client->first_name." ".$client->last_name}}</option>";
+							@foreach($client->family as $family)
+							var temp = {!! json_encode($family->member_name) !!}
+							options = options + "<option value='{{$family->id}}'>{{$family->member_name}}</option>";
+							@endforeach
                 if(document.getElementsByName('segment_one_arrival[]').length>0){
                     var date = document.getElementsByName('segment_one_arrival[]')[0].value;
             }
@@ -1313,18 +1318,12 @@ Edit Invoice
 			}
 			if (value == 'Insurance') {
 
-				var options = "<option value=''>---SELECT---</option>";
-				var client_id = document.getElementById('client').value;
-				@foreach($clients as $client)
- 				var fetched_client_id = {!! json_encode($client->id) !!}
-			    	if(fetched_client_id == client_id){
-						options = options + "<option value='{{$client->first_name." ".$client->last_name}}'>{{$client->first_name." ".$client->last_name}}</option>";
+				var options = "<option value=''>---SELECT---</option><option value='SELF'>SELF</option>";
+				options = options + "<option value='{{$client->first_name." ".$client->last_name}}'>{{$client->first_name." ".$client->last_name}}</option>";
 							@foreach($client->family as $family)
 							var temp = {!! json_encode($family->member_name) !!}
 							options = options + "<option value='{{$family->id}}'>{{$family->member_name}}</option>";
 							@endforeach
-						}
-			  @endforeach
 				var data = '<div class="box-body"> <div class="row">			<div class="col-md-4">				<div class="form-group">					<label for="service_name[]">Select Service</label>					<select name="service_name[]" class="form-control service" required onChange="SelectService(this);">							<option value="">--select--</option>							@if($products->count()>0)							@foreach($products as $product)								<option value="{{$product->service}}" {{($product->service == "Insurance")?"selected":''}}>{{$product->service}}</option>							@endforeach							@endif					</select>				</div>			</div>	<div class="col-md-4">		<div class="form-group">			<label for="name_of_insurance_applicant">Name Of Insurance Company</label>			<input type="text" name="name_of_insurance_company[]" required class="form-control">		</div>		</div>	</div><div class="row">	<div class="col-md-4">		<div class="form-group">			<label for="name_of_insurance_applicant">Name Of Insurance Applicant</label>			<select name="name_of_insurance_applicant[]"  class="form-control" ">'+options+'</select>		</div>		</div>		<div class="col-md-4">		<div class="form-group">			<label for="insurance_remarks">Insurance Remarks</label>			<input type="text" name="insurance_remarks[]" class="form-control">		</div>		</div>						<div class="col-md-4">				<div class="form-group">					<label for="insurance_amount[]">Insurance Amount</label>					<input type="text" name="insurance_amount[]" required class="form-control mask-money">				</div>				</div>				</div><div align="right">						<input type="button" class="btn btn-danger btn-xs" value="Remove" onclick="SomeDeleteRowFunction(this);">					</div>	</div>				</div></div>';
 				$(test).closest(".box").html(data);
 			}
