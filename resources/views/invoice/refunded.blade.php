@@ -26,6 +26,7 @@ Refunded Invoices
                         <th>Invoice Date</th>
                         <th>Receiver Name</th>
 						<th>Total</th>
+						<th>Paid</th>
 						<th>Refunded Amount</th>
 						{{-- <th>Remarks</th> --}}
                         <th>Status</th>
@@ -44,10 +45,11 @@ Refunded Invoices
 	                    		<td>{{$invoice->receiver_name}}</td>
 								
 								<td>{{$invoice->currency}}{{number_format( (float) ($invoice->discounted_total + $invoice->VAT_amount), 2, '.', '')}}</td>
+								<td>{{$invoice->currency}}{{$invoice->paid}}</td>
 								<td>{{$invoice->currency}}{{$invoice->refunded_amount}}</td>
 								{{-- <td>{{$invoice->refund_remarks}}</td> --}}
 	                    		<th>
-									@if($invoice->refunded_amount < number_format( (float) ($invoice->discounted_total + $invoice->VAT_amount), 2, '.', ''))	
+									@if($invoice->paid < number_format( (float) ($invoice->discounted_total + $invoice->VAT_amount), 2, '.', ''))	
 									<div class="text-danger">{{'Partially Refunded'}}</div>
 									@else
 									<div class="text-success">{{'Refunded'}}</div>
@@ -57,7 +59,7 @@ Refunded Invoices
 	                    		{{-- <td><button class="btn btn-xs btn-success" id="pdf">PDF</button></td> --}}
 	                    		<td>
 									<a href="{{route('invoice.view',['id'=>$invoice->id])}}" class="btn btn-info btn-xs"><span class="fa fa-eye"></span></a>
-									@if($invoice->refunded_amount < number_format( (float) ($invoice->discounted_total + $invoice->VAT_amount), 2, '.', ''))
+									@if($invoice->paid < number_format( (float) ($invoice->discounted_total + $invoice->VAT_amount), 2, '.', ''))
 										<a href="{{route('invoice.edit',['id'=>$invoice->id])}}" class="btn btn-info btn-xs"><span class="fa fa-edit"></span></a>
 									@endif
                                     {{-- <a href="{{route('invoice.retrieve',['id'=>$invoice->id])}}" class="btn btn-success btn-xs">Retrieve</a> --}}
