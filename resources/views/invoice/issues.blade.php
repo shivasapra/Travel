@@ -29,7 +29,8 @@ Invoice Issues
                         <th>Invoice No.</th>
                         <th>Invoice Date</th>
                         <th>Receiver Name</th>
-						<th class="text-center">Issue</th>
+                        <th class="text-center">Issue</th>
+                        <th>##</th>
                       </tr>
                     	</thead>
                     <tbody>
@@ -37,10 +38,11 @@ Invoice Issues
 
 							@foreach($invoices as $invoice)
 	                    	<tr>
-	                    		<td>{{$invoice->invoice_no}}</td>
+	                    		<td><a href="{{route('invoice.view',['id'=>$invoice->id])}}" class="btn btn-info btn-xs">{{$invoice->invoice_no}}</a></td>
 	                    		<td>{{$invoice->invoice_date}}</td>
-                                <td>{{$invoice->receiver_name}}</td>
-                                <th>{{$invoice->issues}}</th>
+                          <td>{{$invoice->receiver_name}}</td>
+                          <th>{{$invoice->issues}}</th>
+                          <td><a href="{{route('invoice.edit',['id'=>$invoice->id])}}" class="btn btn-info btn-xs"><span class="fa fa-edit"></span></a></td>
 							</tr>
 	                    	@endforeach
                     	@endif
