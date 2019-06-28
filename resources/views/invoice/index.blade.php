@@ -163,11 +163,12 @@ Invoices
 			'</div>'+
 	  '</div>';
 	  $('#append').html(data);
+	  $('.mask-money').maskMoney();
 	  $('#refund').click();}
 	}
-	window.setInterval(function(){
-        $('.mask-money').maskMoney();
-}, 500);
+// 	window.setInterval(function(){
+//         $('.mask-money').maskMoney();
+// }, 500);
 </script>
 @stop
 
