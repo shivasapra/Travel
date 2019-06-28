@@ -1364,8 +1364,7 @@ Edit Invoice
      		document.getElementsByName("visa_amount[]")[i].value =actual_amount.toFixed(2);
     	}
 	}
-    $(document).ready(function(){
-    $("#targetTotal").hover(function(){
+    window.setInterval(function(){
 		var total_amount = 0;
     	var total_flight_amount = 0;
 		var total_visa_amount = 0;
@@ -1404,8 +1403,7 @@ Edit Invoice
 		document.getElementsByName("total")[0].value = total_amount.toFixed(2);
 		var discounted = Number(total_amount) - document.getElementsByName("discount")[0].value;
 		document.getElementsByName("discounted_total")[0].value = document.getElementById('currency').value + discounted.toFixed(2);
-    });
-    });
+    }, 1000);
 
     function AirlineAssignTwo(temp){
 		var div = $(temp).closest(".dropdown-content-two");
