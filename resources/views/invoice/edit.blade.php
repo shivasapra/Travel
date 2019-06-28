@@ -791,7 +791,7 @@ Edit Invoice
 				</tr>
 				<tr>
 					<td class="col-md-8" align="right"><strong>Discount:</strong></td>
-					<td class="col-md-4"><input name="discount" type="text" id="discount" value="{{$invoice->discount}}" required class="form-control mask-money-total" ></td>
+					<td class="col-md-4"><input name="discount" type="text" id="discount" value="{{ number_format( (float) $invoice->discount, 2, '.', '')}}" required class="form-control mask-money-total" ></td>
 				</tr>
 				<tr>
 					<td class="col-md-8" align="right"><strong>Total:</strong></td>
@@ -1401,9 +1401,9 @@ Edit Invoice
         $('.mask-money-total').maskMoney();
 		total_amount = Number(total_flight_amount) + Number(total_visa_amount) + Number(total_hotel_amount) + Number(total_insurance_amount) + Number(total_local_sight_sceen_amount) + Number(total_other_facilities_amount) + Number(total_car_rental_amount) + Number(total_local_transport_amount) ;
 		document.getElementsByName("total")[0].value = total_amount.toFixed(2);
-		var discounted = Number(total_amount) - document.getElementsByName("discount")[0].value;
+		var discounted = Number(total_amount) - document.getElementsByName("discount")[0].value.replace(/\,/g,'');
 		document.getElementsByName("discounted_total")[0].value = document.getElementById('currency').value + discounted.toFixed(2);
-    }, 1000);
+    }, 200);
 
     function AirlineAssignTwo(temp){
 		var div = $(temp).closest(".dropdown-content-two");

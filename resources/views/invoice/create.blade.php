@@ -921,7 +921,7 @@ Create Invoice
 		document.getElementsByName("total")[0].value = total_amount.toFixed(2);
 		var discounted = Number(total_amount) - document.getElementsByName("discount")[0].value.replace(/\,/g,'');
 		document.getElementsByName("discounted_total")[0].value = document.getElementById('currency').value + discounted.toFixed(2);
-    }, 1000);
+    }, 200);
     
     $(document).ready(function(){
     $("#client").change(function(){
