@@ -105,6 +105,7 @@ Invoices
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
 
 
   <script>
@@ -166,9 +167,6 @@ Invoices
 	  $('.mask-money').maskMoney();
 	  $('#refund').click();}
 	}
-// 	window.setInterval(function(){
-//         $('.mask-money').maskMoney();
-// }, 500);
 </script>
 @stop
 
