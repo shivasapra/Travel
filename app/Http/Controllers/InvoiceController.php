@@ -1022,7 +1022,7 @@ class InvoiceController extends Controller
         $invoice = invoice::find($id);
         $invoice->refund = 1;
         $invoice->refund_remarks = $request->refund_remarks;
-        $invoice->refunded_amount = $request->refunded_amount;
+        $invoice->refunded_amount = str_replace(',', '', $request->refunded_amount);
         $invoice->refund_on = Carbon::now()->timezone('Europe/London');
         $invoice->save();
         Session::flash('success','Invoice Refunded!!');
