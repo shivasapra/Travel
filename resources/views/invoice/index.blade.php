@@ -153,7 +153,7 @@ Invoices
 			
 			'<textarea name="refund_remarks" id="" class="form-control" cols="30" rows="10"></textarea>'+
 			'<label for="refunded_amount">Enter Amount To Refund::</label>'+
-			'<input type="text" name="refunded_amount" class="form-control" mask-money />'+
+			'<input type="text" name="refunded_amount" class="form-control mask-money"  />'+
 		'</div>'+
 		'<div class="modal-footer" style="color:white;font-weight:500;background-color:#0066FF;">'+
 		  '<button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>'+
