@@ -768,9 +768,11 @@ Edit Invoice
 				</div>
 			@endforeach
 		</div>
+		@if($invoice->refund == 0)
 			<div class="text-center"  style="margin-top: 5px">
 				<button class="btn btn-success btn-sm"  type="button" id="add">Add Service</button><br><br>
 			</div>
+		@endif
 		<div class="box box-primary" id="targetTotal">
 		<div class="box-body">
 			<table class="table table-bordered">

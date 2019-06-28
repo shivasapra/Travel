@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
-<title>Mailto</title>
+<title>Cloud Travels Uk</title>
 <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
 <style type="text/css">
 html { -webkit-text-size-adjust: none; -ms-text-size-adjust: none;}
@@ -73,7 +73,7 @@ html { -webkit-text-size-adjust: none; -ms-text-size-adjust: none;}
                            </font>
                            <div style="height: 33px; line-height: 33px; font-size: 31px;">&nbsp;</div>
                            <font face="'Source Sans Pro', sans-serif" color="#585858" style="font-size: 24px; line-height: 32px;">
-                              <span style="font-family: 'Source Sans Pro', Arial, Tahoma, Geneva, sans-serif; color: #585858; font-size: 24px; line-height: 32px;">Your Request Has Been Registered.</span>
+                              <span style="font-family: 'Source Sans Pro', Arial, Tahoma, Geneva, sans-serif; color: #585858; font-size: 24px; line-height: 32px;">Your Request Has Been Registered. <br> Visit Our Website: <a href="www.cloudtravels.co.uk">www.cloudtravels.co.uk</a></span>
                            </font>
                            <div style="height: 33px; line-height: 33px; font-size: 31px;">&nbsp;</div>
                            {{-- <table class="mob_btn" cellpadding="0" cellspacing="0" border="0" style="background: green; border-radius: 4px;">

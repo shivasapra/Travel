@@ -26,6 +26,7 @@ Refunded Invoices
                         <th>Invoice Date</th>
                         <th>Receiver Name</th>
 						<th>Total</th>
+						<th>Refunded Amount</th>
 						{{-- <th>Remarks</th> --}}
                         <th>Status</th>
                         {{-- <th>PDF</th> --}}
@@ -43,6 +44,7 @@ Refunded Invoices
 	                    		<td>{{$invoice->receiver_name}}</td>
 								
 								<td>{{$invoice->currency}}{{number_format( (float) ($invoice->discounted_total + $invoice->VAT_amount), 2, '.', '')}}</td>
+								<td>{{$invoice->refunded_amount}}</td>
 								{{-- <td>{{$invoice->refund_remarks}}</td> --}}
 	                    		<th><div class="text-danger">{{'Refunded'}}</div></th>
 	                    		
