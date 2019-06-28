@@ -585,7 +585,7 @@ class InvoiceController extends Controller
         // dd($invoice->discount);
         $invoice->currency = $request->currency;
         $invoice->total = str_replace(',', '', $request->total);
-        if ($request->has($request->refunded_amount)) {
+        if ($request->has('refunded_amount')) {
             $invoice->refunded_amount = str_replace(',', '', $request->refunded_amount);
         }
         $invoice->discounted_total =str_replace(',', '', $request->total) - str_replace(',', '', $request->discount);
