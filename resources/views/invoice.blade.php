@@ -669,7 +669,7 @@ Invoice
             {{-- <div class="text-right">{{$amount_in_words}}</div> --}}
             @if($invoice->refund)
             <div class="text-right">
-              <h3 style="color:red">Refunded</h3> On: <b>{{$invoice->refund_on}}</b>
+              <h3 style="color:red">Refunded: {{$invoice->currency}}{{$invoice->refunded_amount}}</h3> On: <b>{{$invoice->refund_on}}</b>
               <br><b>Remarks:</b><br> {{$invoice->refund_remarks}}
               <br><hr>
             </div>

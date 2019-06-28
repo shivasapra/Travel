@@ -837,7 +837,21 @@ Edit Invoice
 				</table>
 			</div>
 		</div> --}}
-		<div class="box box-info">
+		@if($invoice->refunded_amount > 0)
+		<div class="box box-primary">
+			<div class="box-body">
+				<table class="table table-bordered">
+					
+					<tr>
+						<td class="col-md-8" align="right"><strong>Refunded Amount:</strong></td>
+						<td class="col-md-4"><input name="refunded_amount" value="{{$invoice->refunded_amount}}"  type="text"  required class="form-control mask-money" readonly></td>
+					</tr>
+					
+				</table>
+			</div>
+		</div>
+		@endif
+		<div class="box box-primary">
 				<div class="box-body">
 	
 					<label><h3>Confirmation Via:</h3></label>
