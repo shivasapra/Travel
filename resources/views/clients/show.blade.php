@@ -220,7 +220,7 @@ client
 								@if($family->member_passport_place != null)
 									<td>{{$family->member_passport_place}}</td>
 								@else
-									<strong>{{'N/A'}}</strong>
+									<td><strong>{{'N/A'}}</strong></td>
 								@endif
 							</tr>
 					</div>
@@ -234,7 +234,7 @@ client
 									<a href="{{asset($family->member_passport_front)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
 									</div>
 									@else
-									<strong>{{'N/A'}}</strong>
+									<td><strong>{{'N/A'}}</strong></td>
 									@endif
 								</td>
 							</tr>
