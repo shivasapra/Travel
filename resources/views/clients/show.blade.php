@@ -207,13 +207,21 @@ client
 					<div class="row">
 							<tr>
 								<td><strong>&nbsp;&nbsp;&nbsp;&nbsp;Member Passport No:</strong></td>
-								<td>{{$family->member_passport_no}}</td>
+								@if($family->member_passport_no != null)
+									<td>{{$family->member_passport_no}}</td>
+								@else
+									<strong>{{'N/A'}}</strong>
+								@endif
 							</tr>
 					</div>
 					<div class="row">
 							<tr>
 								<td><strong>&nbsp;&nbsp;&nbsp;&nbsp;Place Of Issue:</strong></td>
-								<td>{{$family->member_passport_place}}</td>
+								@if($family->member_passport_place != null)
+									<td>{{$family->member_passport_place}}</td>
+								@else
+									<strong>{{'N/A'}}</strong>
+								@endif
 							</tr>
 					</div>
 					<div class="row">
