@@ -119,17 +119,17 @@ class HomeController extends Controller
             Mail::to($invoice_emails)->send(new \App\Mail\invoiceMail);
         }
 
-        $client_inactive_emails = array();
-        $clients = client::all();
-        foreach ($clients as $client) {
-            if ($client->invoice == null and $client->created_at->toDateString() == Carbon::now()->addDays(-1)->toDateString()) {
-                $email = User::find($client->creator_id)->email;
-                array_push($client_inactive_emails,$email);
-            }
-        }
-        if ($client_inactive_emails != null) {
-            Mail::to($client_inactive_emails)->send(new \App\Mail\clientInactiveMail);
-        }
+        // $client_inactive_emails = array();
+        // $clients = client::all();
+        // foreach ($clients as $client) {
+        //     if ($client->invoice == null and $client->created_at->toDateString() == Carbon::now()->addDays(-1)->toDateString()) {
+        //         $email = User::find($client->creator_id)->email;
+        //         array_push($client_inactive_emails,$email);
+        //     }
+        // }
+        // if ($client_inactive_emails != null) {
+        //     Mail::to($client_inactive_emails)->send(new \App\Mail\clientInactiveMail);
+        // }
 
         $paid_invoices = invoice::where('status',1)->where('refund',0)->get();
         $unpaid_invoices = invoice::where('status',0)->where('refund',0)->get();
@@ -232,14 +232,14 @@ class HomeController extends Controller
                $invoice->save();
                }
 
-            $client_inactive_emails = array();
-            $clients = client::all();
-            foreach ($clients as $client) {
-                if ($client->invoice == null and $client->created_at->toDateString() == Carbon::now()->addDays(-1)->toDateString()) {
-                    $email = User::find($client->creator_id)->email;
-                    array_push($client_inactive_emails,$email);
-                }
-            }
+            // $client_inactive_emails = array();
+            // $clients = client::all();
+            // foreach ($clients as $client) {
+            //     if ($client->invoice == null and $client->created_at->toDateString() == Carbon::now()->addDays(-1)->toDateString()) {
+            //         $email = User::find($client->creator_id)->email;
+            //         array_push($client_inactive_emails,$email);
+            //     }
+            // }
             $paid_invoices = invoice::where('status',1)->get();
             $unpaid_invoices = invoice::where('status',0)->get();
 

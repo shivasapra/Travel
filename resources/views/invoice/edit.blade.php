@@ -839,8 +839,8 @@ Edit Invoice
 				<div class="box-body">
 	
 					<label><h3>Confirmation Via:</h3></label>
-						<input type="radio" name="confirmation_via" value="email">Email
-						<input type="radio" name="confirmation_via" value="paper_print">Paper-Print
+						<input type="radio" name="confirmation_via" value="email" required>Email
+						<input type="radio" name="confirmation_via" value="paper_print" required>Paper-Print
 				</div>
 			</div>
 			<div class="form-group">
