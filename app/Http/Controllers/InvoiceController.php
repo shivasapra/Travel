@@ -292,7 +292,7 @@ class InvoiceController extends Controller
                         $invoice_info->receiver_name = $invoice->receiver_name;
                         $invoice_info->service_name = 'Hotel';
 
-
+                            $invoice_info->hotel_applicant_name = strtoupper($request->hotel_applicant_name[$hotel_counter]);
                             $invoice_info->hotel_city = strtoupper($request->hotel_city[$hotel_counter]);
                             $invoice_info->hotel_country = strtoupper($request->hotel_country[$hotel_counter]);
                             $invoice_info->hotel_name = strtoupper($request->hotel_name[$hotel_counter]);
@@ -700,7 +700,7 @@ class InvoiceController extends Controller
                         $invoice_info->receiver_name = $invoice->receiver_name;
                         $invoice_info->service_name = 'Hotel';
 
-
+                            $invoice_info->hotel_applicant_name = strtoupper($request->hotel_applicant_name[$hotel_counter]);
                             $invoice_info->hotel_city = strtoupper($request->hotel_city[$hotel_counter]);
                             $invoice_info->hotel_country = strtoupper($request->hotel_country[$hotel_counter]);
                             $invoice_info->hotel_name = strtoupper($request->hotel_name[$hotel_counter]);

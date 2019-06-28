@@ -344,6 +344,7 @@ Invoice
             <thead>
             <tr>
               <th>SNo.</th>
+              <th>Member Name</th>
               <th>Hotel City</th>
               <th>Hotel Country</th>
               <th>Hotel Name</th>
@@ -358,6 +359,7 @@ Invoice
         @foreach($hotel as $info)
             <tr>
                 <th>{{$k++}}.</th>
+                <td>{{ $info->hotel_applicant_name }}</td>
               <td>{{ $info->hotel_city }}</td>
               <td>{{ $info->hotel_country }}</td>
               <td>{{ $info->hotel_name }}</td>

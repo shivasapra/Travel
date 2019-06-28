@@ -46,6 +46,7 @@ class CreateInvoiceInfosTable extends Migration
             $table->float('service_charge')->nullable();
             $table->float('visa_amount')->nullable();
 
+            $table->string('hotel_applicant_name')->nullable();
             $table->string('hotel_city')->nullable();
             $table->string('hotel_country')->nullable();
             $table->string('hotel_name')->nullable();
