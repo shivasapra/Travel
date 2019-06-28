@@ -565,6 +565,7 @@ Edit Invoice
 													<div class="form-group">
 														<label for="hotel_applicant_name">member Name:</label>
 														<select name="hotel_applicant_name[]"  class="form-control" ">
+																<option value="{{$client->first_name.' '.$client->last_name}}" {{($info->hotel_applicant_name == $client->first_name.' '.$client->last_name)?"selected":" "}}>{{$client->first_name.' '.$client->last_name}}</option>
 															@foreach($client->family as $family)
 														<option value="{{$family->member_name}}" {{($info->hotel_applicant_name == $family->member_name)?"selected":" "}}>{{$family->member_name}}</option>
 															@endforeach
@@ -644,11 +645,12 @@ Edit Invoice
 											<div class="form-group">
 												<label for="name_of_insurance_applicant">Name Of Insurance Applicant</label>
 												<select name="name_of_insurance_applicant[]"  class="form-control" ">
+													<option value="{{$client->first_name.' '.$client->last_name}}" {{($info->hotel_applicant_name == $client->first_name.' '.$client->last_name)?"selected":" "}}+>{{$client->first_name.' '.$client->last_name}}</option>
 														@foreach($client->family as $family)
 													<option value="{{$family->member_name}}" {{($info->name_of_insurance_applicant == $family->member_name)?"selected":" "}}>{{$family->member_name}}</option>
 														@endforeach
 													</select>
-												<input type="text" name="name_of_insurance_applicant[]" value="{{$info->name_of_insurance_applicant}}" required class="form-control">
+												{{-- <input type="text" name="name_of_insurance_applicant[]" value="{{$info->name_of_insurance_applicant}}" required class="form-control"> --}}
 											</div>
 										</div>
 										<div class="col-md-4">
