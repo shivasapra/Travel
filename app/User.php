@@ -41,4 +41,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Chat');
     }
+
+    public function leads()
+    {
+        return $this->hasMany('App\Leads');
+    }
 }

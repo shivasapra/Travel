@@ -614,3 +614,37 @@ Route::get('/departments/{slug}',[
 	'uses'=> 'DepartmentController@displaySpecific',
 	'as'=>'display.specific'
 	])->middleware('permission:View Departments');
+
+//lead Routes
+	Route::get('/leads',[
+		'uses' => 'LeadsController@index',
+		'as' => 'leads'
+	]);
+	Route::get('/lead/create',[
+		'uses' => 'LeadsController@create',
+		'as' => 'lead.create'
+	]);
+	Route::post('/lead/store',[
+		'uses' => 'LeadsController@store',
+		'as' => 'lead.store'
+	]);
+	Route::get('/lead/show/{id}',[
+		'uses' => 'LeadsController@show',
+		'as' => 'lead.show'
+	]);
+	Route::get('/lead/edit/{id}',[
+		'uses' => 'LeadsController@edit',
+		'as' => 'lead.edit'
+	]);
+	Route::post('/lead/update/{id}',[
+		'uses' => 'LeadsController@update',
+		'as' => 'lead.update'
+	]);
+	Route::get('/lead/convert/form/{id}',[
+		'uses' => 'LeadsController@convertForm',
+		'as' => 'lead.convert.form'
+	]);
+	Route::post('/lead/convert',[
+		'uses' => 'LeadsController@convert',
+		'as' => 'lead.convert'
+	]);

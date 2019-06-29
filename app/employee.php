@@ -20,4 +20,5 @@ class employee extends Model
     {
     	return $this->hasMany('App\assignment');
     }
+    
 }

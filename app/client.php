@@ -31,4 +31,9 @@ class client extends Model
     {
         return $this->hasMany('App\ClientRequests');
     }
+
+    public function lead()
+    {
+        return $this->hasOne('App\Leads');
+    }
 }
