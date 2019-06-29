@@ -839,6 +839,8 @@ class InvoiceController extends Controller
 
         if ($invoice->status == 0) {
             // $invoice->invoice_no = dd(substr($invoice->invoice_no,0,3).'C');
+            $invoice->invoice_no = 'CLDCI'.substr($invoice->invoice_no,4);
+            $invoice->save();
             $invoice->delete();
             Session::flash('success','Invoice Canceled Successfully');
             return redirect()->back()->with('invoices',invoice::all());
@@ -908,6 +910,8 @@ class InvoiceController extends Controller
 
     public function retrieve($id){
         $invoice = invoice::withTrashed()->where('id',$id)->first();
+        $invoice->invoice_no = 'CLD'.substr($invoice->invoice_no,4);
+        $invoice->save();
         $invoice->restore();
         Session::flash('success','Invoice Retreived');
         return redirect()->route('invoice')->with('invoices',invoice::all())
@@ -1023,6 +1027,7 @@ class InvoiceController extends Controller
         $invoice = invoice::find($id);
         $invoice->refund = 1;
         $invoice->refund_remarks = $request->refund_remarks;
+        $invoice->invoice_no = 'CLDRI'.substr($invoice->invoice_no,4);
         $invoice->refunded_amount = str_replace(',', '', $request->refunded_amount);
         $invoice->refund_on = Carbon::now()->timezone('Europe/London');
         $invoice->save();
