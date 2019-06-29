@@ -23,7 +23,7 @@ Refunded Invoices
 			<div class="box-body">
 				
 			
-			<table id="myTable" class="table table-striped" id="example">
+			<table class="table table-striped" id="example">
                     <thead id="ignorePDF">
                       <tr>
                         <th>Invoice No.</th>
