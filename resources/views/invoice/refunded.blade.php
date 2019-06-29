@@ -13,6 +13,10 @@ Refunded Invoices
       </ol>
     </section>
 @stop
+@section('css')
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">
+@stop
 @section('content')
 	
 		<div class="box box-info">
