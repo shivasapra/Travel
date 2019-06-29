@@ -79,7 +79,7 @@ Invoices
 										<span class="text-danger"><b>{{'Not Yet Confirmed By Client'}}</b></span>
 										<br><a href="{{route('confirm.via.paperprint',['id'=>$invoice->id])}}" class="btn btn-xs btn-success">Confirm Via Paper-Print</a><br>
 										@if($invoice->issues != null)
-											<span class="text-warning"><strong>{{'1 Issue'}}</strong></span>
+											<span class="text-warning text-center"><b>{{'1 Issue'}}</b></span>
 										@endif
 									@endif
 									</td>
