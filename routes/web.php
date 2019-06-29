@@ -592,6 +592,10 @@ Route::get('/invoice/print',[
 			'uses'=> 'InvoiceController@invoiceIssues',
 			'as'=>'invoice.issues'
 		])->middleware('permission:View Invoices');
+		Route::get('/invoice/issue/{id}',[
+			'uses'=> 'InvoiceController@invoiceIssue',
+			'as'=>'invoice.issue'
+		])->middleware('permission:View Invoices');
 		Route::get('/invoice/confirm-via/paper-print/{id}',[
 			'uses'=> 'InvoiceController@confirmViaPaperPrint',
 			'as'=>'confirm.via.paperprint'
