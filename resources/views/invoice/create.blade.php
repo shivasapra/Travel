@@ -1,3 +1,4 @@
+<?php use Carbon\Carbon;?>
 @extends('layouts.frontend')
 @section('title')
 Create Invoice
@@ -514,6 +515,40 @@ Create Invoice
         return false;
     }}
     function flight(){
+		var options = "";
+				var client_id = document.getElementById('client').value;
+				@foreach($clients as $client)
+					var fetched_client_id = {!! json_encode($client->id) !!}
+						if(fetched_client_id == client_id){
+							@foreach($client->family as $family)
+							options = options + '<tr class="fare-parent">'+
+								'<td>'+
+									'<input type="text" name="verify[]" hidden class="verify"><select name="pax_type[]" class="form-control select-custom custom-select">'+
+										'<option value="">--Select--</option>'+
+									'<option value="Adult">Adult</option>'+
+									'<option value="Youth">Youth</option>'+
+									'<option value="Child">Child</option>'+
+									'<option value="Infant">Infant</option>'+
+									'</select>'+
+								'</td>'+
+								'<td><input type="text" name="first_name[]" value="{{explode(" ",$family->member_name)[0]}}" class="form-control"></td>'+
+								'<td><input type="text" name="last_name[]" @if(count(explode(" ",$family->member_name)) > 1) value="{{explode(" ",$family->member_name)[1]}}" @endif  class="form-control"></td>'+
+								'<td><input type="date" name="DOB[]" value="{{Carbon::parse($family->member_DOB)->toDateString()}}" placeholder="dd/mm/yyyy"  class="form-control"></td>'+
+								'<td>Segment-1</td>'+
+								'<td><input type="text" name="segment_one_fare_cost[]" step="0.01" placeholder="0.00" onMouseOver="FlightAmount(this);" class="form-control mask-money"   required onKeyUp="fareSell(this);"></td>'+
+								'<td><input type="text" name="segment_one_fare_sell[]" step="0.01" placeholder="0.00" onMouseOver="FlightAmount(this);" class="form-control fare " readonly required></td>'+
+							'</tr>'+
+							'<tr class="fare-parent">'+
+								'<td><input type="button" class="btn btn-danger btn-xs" value="X" onclick="SomeDeleteRow(this);"></td>'+
+								'<td colspan="3">&nbsp;</td>'+
+								'<td>Segment-2</td>'+
+								'<td><input type="text" name="segment_two_fare_cost[]" step="0.01" placeholder="0.00" class="form-control mask-money" onMouseOver="FlightAmount(this);"   required onKeyUp="fareSell(this);"></td>'+
+								'<td><input type="text" name="segment_two_fare_sell[]" step="0.01" placeholder="0.00" onMouseOver="FlightAmount(this);" class="form-control fare " readonly  required></td>'+
+							'</tr>';
+								// options = options + "<option value='{{$family->id}}'>{{$family->member_name}}</option>";
+							@endforeach
+						}
+			  	@endforeach
         var data = '<div class="box-body" onMouseOver="FlightAmount(this);"><div class="row">'+
 				 			'<div class="col-md-4">				<div class="form-group">'+
 				 			'<label for="service_name[]">Select Service</label>'+
@@ -650,31 +685,7 @@ Create Invoice
           '</tr>'+
         '</thead>'+
         '<tbody class="delete">'+
-		
-          '<tr class="fare-parent">'+
-            '<td>'+
-              '<input type="text" name="verify[]" hidden class="verify"><select name="pax_type[]" class="form-control select-custom custom-select">'+
-                '<option value="">--Select--</option>'+
-              '<option value="Adult">Adult</option>'+
-              '<option value="Youth">Youth</option>'+
-              '<option value="Child">Child</option>'+
-              '<option value="Infant">Infant</option>'+
-            '</select>'+
-          '</td>'+
-            '<td><input type="text" name="first_name[]" class="form-control"></td>'+
-            '<td><input type="text" name="last_name[]" class="form-control"></td>'+
-            '<td><input type="date" name="DOB[]" value="{{ $date }}" placeholder="dd/mm/yyyy"  class="form-control"></td>'+
-            '<td>Segment-1</td>'+
-            '<td><input type="text" name="segment_one_fare_cost[]" step="0.01" placeholder="0.00" onMouseOver="FlightAmount(this);" class="form-control mask-money"   required onKeyUp="fareSell(this);"></td>'+
-            '<td><input type="text" name="segment_one_fare_sell[]" step="0.01" placeholder="0.00" onMouseOver="FlightAmount(this);" class="form-control fare " readonly required></td>'+
-          '</tr>'+
-          '<tr class="fare-parent">'+
-		  '<td><input type="button" class="btn btn-danger btn-xs" value="X" onclick="SomeDeleteRow(this);"></td>'+
-            '<td colspan="3">&nbsp;</td>'+
-            '<td>Segment-2</td>'+
-            '<td><input type="text" name="segment_two_fare_cost[]" step="0.01" placeholder="0.00" class="form-control mask-money" onMouseOver="FlightAmount(this);"   required onKeyUp="fareSell(this);"></td>'+
-            '<td><input type="text" name="segment_two_fare_sell[]" step="0.01" placeholder="0.00" onMouseOver="FlightAmount(this);" class="form-control fare " readonly  required></td>'+
-          '</tr>'+
+         options+
         '</tbody>'+
       '</table>'+
       '</div>'+
