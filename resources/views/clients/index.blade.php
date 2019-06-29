@@ -73,7 +73,7 @@ Clients
 														@endif
                           </td>
                           <td>
-                            @if($client->passport)
+                            @if($client->confirmation)
                               <span class="text-success"><strong>{{'Verified'}}</strong></span>
                             @else
                               <span class="text-danger"><strong>{{'Not Verified'}}</strong></span>
