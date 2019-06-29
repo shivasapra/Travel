@@ -90,7 +90,7 @@ client
 								@if($client->user)
 									<span class="text-success">&nbsp;&nbsp;(Verified)</span>
 								@else
-								<span class="text-danger">&nbsp;&nbsp;(Not VErified Yet)</span>
+								<span class="text-danger">&nbsp;&nbsp;(Not Verified Yet)</span>
 								@endif
 							</td>
 						</tr>

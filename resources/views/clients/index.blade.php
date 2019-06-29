@@ -33,6 +33,8 @@ Clients
                         <th>Contact</th>
                         <th>Email</th>
                         <th>Action</th>
+                        <th>Reminders</th>
+                        <th>Account Activation</th>
                       </tr>
                     	</thead>
                     <tbody>
@@ -50,16 +52,20 @@ Clients
 	                    			<a href="{{route('view.client',['id'=>$client->id])}}" class="btn btn-success btn-xs"><span class="fa fa-eye"></span></a>
 	                    			<a href="{{route('edit.client',['id'=>$client->id])}}" class="btn btn-info btn-xs"><span class="fa fa-edit"></span></a>
                                     {{-- <a href="{{route('delete.client',['id'=>$client->id])}}" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span></a> --}}
-                                    @if($client->reminder == 1)
-                                    <a href="{{ url('/stop/reminder', ['id'=>$client->id]) }}" class="btn btn-primary btn-xs">Stop Reminders</a>
-                                    @else
-                                    <a href="{{ url('/start/reminder', ['id'=>$client->id]) }}" class="btn btn-primary btn-xs">Resume Reminders</a>
-                                    @endif
-                                    @if($client->user)
+                          </td>
+                          <td>
+                            @if($client->reminder == 1)
+                            <a href="{{ url('/stop/reminder', ['id'=>$client->id]) }}" class="btn btn-primary btn-xs">Stop Reminders</a>
+                            @else
+                            <a href="{{ url('/start/reminder', ['id'=>$client->id]) }}" class="btn btn-primary btn-xs">Resume Reminders</a>
+                            @endif
+                          </td>
+                          <td>
+                            @if($client->user)
 															@if($client->user->active)
-															<a onClick="return confirm('Are You Sure You Want To Deactivate This Client')" href="{{route('deactivateClient',['id'=>$client->id])}}" class="btn btn-danger btn-xs">Deactivate</a>
+															  <a onClick="return confirm('Are You Sure You Want To Deactivate This Client')" href="{{route('deactivateClient',['id'=>$client->id])}}" class="btn btn-danger btn-xs">Deactivate</a>
 															@else
-															<a onClick="return confirm('Are You Sure You Want To Activate This Client')" href="{{route('activateClient',['id'=>$client->id])}}" class="btn btn-success btn-xs">Activate</a>
+															  <a onClick="return confirm('Are You Sure You Want To Activate This Client')" href="{{route('activateClient',['id'=>$client->id])}}" class="btn btn-success btn-xs">Activate</a>
 															@endif
 														@endif
 	                    		</td>
