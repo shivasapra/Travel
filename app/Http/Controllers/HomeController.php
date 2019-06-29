@@ -243,8 +243,8 @@ class HomeController extends Controller
             $paid_invoices = invoice::where('status',1)->get();
             $unpaid_invoices = invoice::where('status',0)->get();
 
-            $messages = Chat::where('user_id',$id)->orWhere('to_id',$id)->orderBy('created_at','asc')->get();
-            $last = Chat::where('user_id',$id)->orderBy('created_at','desc')->get()->first();
+            $messages = Chat::where('user_id',$id)->orWhere('to_id',$id)->orderBy('id','asc')->get();
+            $last = Chat::where('user_id',$id)->orderBy('id','desc')->get()->first();
             $last->status = 1;
             $last->save();
             $unread_messages = Chat::where('to_id',Auth::user()->id)->where('status',0)->get();
@@ -254,10 +254,10 @@ class HomeController extends Controller
                                 ->with('expense',$total_amount)
                                 ->with('date',$date)
                                 ->with('invoices',invoice::orderBy('id','desc')->take(7)->get())
-                                ->with('invoice_infos',invoiceInfo::where('service_name','Visa Services')->orderBy('created_at','desc')->take(7)->get())
+                                ->with('invoice_infos',invoiceInfo::where('service_name','Visa Services')->orderBy('id','desc')->take(7)->get())
                                 ->with('total_wage',$total_wage)
                                 ->with('expenses',expenses::all())
-                                ->with('recent_expenses',expenses::where('auto',0)->orderBy('created_at','desc')->take(4)->get())
+                                ->with('recent_expenses',expenses::where('auto',0)->orderBy('id','desc')->take(4)->get())
                                 ->with('tasks',$tasks)
                                 ->with('tax',settings::all())
                                 ->with('paid_invoices',$paid_invoices)
