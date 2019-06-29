@@ -1088,7 +1088,7 @@ public function AirportSearch(Request $request){
     }
 
     public function invoiceIssue($id){
-        $invoices = invoice::find($id);
+        $invoices = invoice::where('id',$id)->get();
         return view('invoice.issues')->with('invoices',$invoices);
     }
     public function confirmViaPaperPrint($id){
