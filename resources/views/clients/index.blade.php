@@ -27,11 +27,10 @@ Clients
                     <thead>
                       <tr>
                         <th>Sno.</th>
+                        <th>Unique Id.</th>
                         <th>Name</th>
                         <th>Country</th>
-                        <th>Postal Code</th>
                         <th>Contact</th>
-                        <th>DOB</th>
                         <th>Email</th>
                         <th>Action</th>
                       </tr>
@@ -41,12 +40,11 @@ Clients
                     	<?php $i = 1; ?>
 	                    	@foreach($clients as $client)
 	                    	<tr>
-	                    		<td>{{$i++}}</td>
+                          <td>{{$i++}}</td>
+                          <td>{{$client->unique_id}}</td>
 	                    		<td>{{$client->first_name}}</td>
 	                    		<td>{{$client->country}}</td>
-	                    		<td>{{$client->postal_code}}</td>
 	                    		<td>{{$client->phone}}</td>
-	                    		<td>{{$client->DOB}}</td>
 	                    		<td>{{$client->email}}</td>
 	                    		<td>
 	                    			<a href="{{route('view.client',['id'=>$client->id])}}" class="btn btn-success btn-xs"><span class="fa fa-eye"></span></a>
@@ -57,6 +55,13 @@ Clients
                                     @else
                                     <a href="{{ url('/start/reminder', ['id'=>$client->id]) }}" class="btn btn-primary btn-xs">Resume Reminders</a>
                                     @endif
+                                    @if($client->user)
+															@if($client->user->active)
+															<a onClick="return confirm('Are You Sure You Want To Deactivate This Client')" href="{{route('deactivateClient',['id'=>$client->id])}}" class="btn btn-danger btn-xs">Deactivate</a>
+															@else
+															<a onClick="return confirm('Are You Sure You Want To Activate This Client')" href="{{route('activateClient',['id'=>$client->id])}}" class="btn btn-success btn-xs">Activate</a>
+															@endif
+														@endif
 	                    		</td>
 	                    		</tr>
 	                    	@endforeach

@@ -86,7 +86,13 @@ client
 					<div class="row">
 						<tr>
 							<td><strong>Email:</strong></td>
-							<td>{{$client->email}}</td>
+							<td>{{$client->email}}
+								@if($client->user)
+									<span class="text-success">&nbsp;&nbsp;(Verified)</span>
+								@else
+								<span class="text-danger">&nbsp;&nbsp;(Not VErified Yet)</span>
+								@endif
+							</td>
 						</tr>
 					</div>
 					<div class="row">

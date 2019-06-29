@@ -553,4 +553,20 @@ class clientController extends Controller
         $client_request->save();
         return redirect()->back();
     }
+
+    public function activate($id){
+        $user = client::find($id)->user;
+        $user->active = 1;
+        $user->save();
+        Session::flash('success','Client Activated');
+        return redirect()->back();
+    }
+
+    public function deactivate($id){
+        $user = client::find($id)->user;
+        $user->active = 0;
+        $user->save();
+        Session::flash('success','Client Deactivated');
+        return redirect()->back();
+    }
 }
