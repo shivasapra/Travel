@@ -35,6 +35,7 @@ Clients
                         <th>Action</th>
                         <th>Reminders</th>
                         <th>Account Activation</th>
+                        <th>Passport Verification</th>
                       </tr>
                     	</thead>
                     <tbody>
@@ -68,7 +69,14 @@ Clients
 															  <a onClick="return confirm('Are You Sure You Want To Activate This Client')" href="{{route('activateClient',['id'=>$client->id])}}" class="btn btn-success btn-xs">Activate</a>
 															@endif
 														@endif
-	                    		</td>
+                          </td>
+                          <td>
+                            @if($client->passport)
+                              <span class="text-success"><strong>{{'Verified'}}</strong></span>
+                            @else
+                              <span class="text-danger"><strong>{{'Not Verified'}}</strong></span>
+                            @endif
+                          </td>
 	                    		</tr>
 	                    	@endforeach
                     	@endif
