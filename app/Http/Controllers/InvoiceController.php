@@ -875,7 +875,7 @@ class InvoiceController extends Controller
         }
     }
 
-    public function AirportSearch(Request $request){
+public function AirportSearch(Request $request){
         if($request->ajax()){
             $output="";
             $airline= airports::where('name','LIKE','%'.$request->search."%")->get();

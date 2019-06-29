@@ -144,10 +144,10 @@ class HomeController extends Controller
                             ->with('expense',$total_amount)
                             ->with('date',$date)
                             ->with('invoices',invoice::withTrashed()->get())
-                            ->with('invoice_infos',invoiceInfo::where('service_name','Visa Services')->orderBy('created_at','desc')->take(7)->get())
+                            ->with('invoice_infos',invoiceInfo::where('service_name','Visa Services')->orderBy('id','desc')->take(7)->get())
                             ->with('total_wage',$total_wage)
                             ->with('expenses',expenses::all())
-                            ->with('recent_expenses',expenses::where('auto',0)->orderBy('created_at','desc')->take(4)->get())
+                            ->with('recent_expenses',expenses::where('auto',0)->orderBy('id','desc')->take(4)->get())
                             ->with('tasks',$tasks)
                             ->with('tax',settings::all())
                             ->with('paid_invoices',$paid_invoices)
@@ -160,12 +160,12 @@ class HomeController extends Controller
         }
         elseif(Auth::user()->employee->count()>0){
             // dd();
-            $last = Chat::where('to_id',Auth::user()->id)->orderBy('created_at','desc')->get()->first();
+            $last = Chat::where('to_id',Auth::user()->id)->orderBy('id','desc')->get()->first();
             if($last != null){
                 $last->status = 1;
                 $last->save();
             }
-            $messages = Chat::where('to_id',Auth::user()->id)->orWhere('user_id',Auth::user()->id)->orderBy('created_at','asc')->get();
+            $messages = Chat::where('to_id',Auth::user()->id)->orWhere('user_id',Auth::user()->id)->orderBy('id','asc')->get();
             return view('employee.home')->with('assignments',assignment::where('date',Carbon::now()->timezone('Europe/London')->toDateString())
                                         ->where('employee_id',null)->get())
                                         ->with('messages',$messages);
@@ -253,7 +253,7 @@ class HomeController extends Controller
                                 ->with('clients',client::all())
                                 ->with('expense',$total_amount)
                                 ->with('date',$date)
-                                ->with('invoices',invoice::orderBy('created_at','desc')->take(7)->get())
+                                ->with('invoices',invoice::orderBy('id','desc')->take(7)->get())
                                 ->with('invoice_infos',invoiceInfo::where('service_name','Visa Services')->orderBy('created_at','desc')->take(7)->get())
                                 ->with('total_wage',$total_wage)
                                 ->with('expenses',expenses::all())

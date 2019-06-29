@@ -55,7 +55,7 @@ return [
     |
     */
 
-    'from' => ['address' => 'ashishsapra7@gmail.com', 'name' => 'Cloud Travels'],
+    'from' => ['address' => 'noreply@cloudtravels.co.uk', 'name' => 'Cloud Travels'],
 
     /*
     |--------------------------------------------------------------------------
