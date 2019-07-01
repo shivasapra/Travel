@@ -270,14 +270,14 @@ Invoice
           <tbody>
             <tr>
                     <td>{{ $flight->segment_one_from.', '. strtoupper(Carbon\Carbon::parse($flight->segment_one_departure)->format('l\\, F jS\\, Y\\, h:i A')) }}</td>
-                    <td>{{ $flight->segment_one_to.', '.  Carbon\Carbon::parse($flight->segment_one_arrival)->format('l\\, F jS\\, Y\\, h:i A') }}</td>
+                    <td>{{ $flight->segment_one_to.', '.  strtoupper(Carbon\Carbon::parse($flight->segment_one_arrival)->format('l\\, F jS\\, Y\\, h:i A')) }}</td>
                     <td>{{ $flight->segment_one_flight }}</td>
                     <td>{{ $flight->segment_one_class }}</td>
                     <td>{{ $flight->segment_one_carrier }}</td>
             </tr>
             <tr>
-                    <td>{{ $flight->segment_two_from.', '. Carbon\Carbon::parse($flight->segment_two_departure)->format('l\\, F jS\\, Y\\, h:i A') }}</td>
-                    <td>{{ $flight->segment_two_to.', '. Carbon\Carbon::parse($flight->segment_two_arrival)->format('l\\, F jS\\, Y\\, h:i A') }}</td>
+                    <td>{{ $flight->segment_two_from.', '. strtoupper(Carbon\Carbon::parse($flight->segment_two_departure)->format('l\\, F jS\\, Y\\, h:i A')) }}</td>
+                    <td>{{ $flight->segment_two_to.', '. strtoupper(Carbon\Carbon::parse($flight->segment_two_arrival)->format('l\\, F jS\\, Y\\, h:i A')) }}</td>
                     <td>{{ $flight->segment_two_flight }}</td>
                     <td>{{ $flight->segment_two_class }}</td>
                     <td>{{ $flight->segment_two_carrier}}</td>
