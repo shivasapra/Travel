@@ -73,7 +73,7 @@ html { -webkit-text-size-adjust: none; -ms-text-size-adjust: none;}
                            </font>
                            <div style="height: 33px; line-height: 33px; font-size: 31px;">&nbsp;</div>
                            <font face="'Source Sans Pro', sans-serif" color="#585858" style="font-size: 24px; line-height: 32px;">
-                              <span style="font-family: 'Source Sans Pro', Arial, Tahoma, Geneva, sans-serif; color: #585858; font-size: 24px; line-height: 32px;">Your Have Been Registered With Us. <br> Here Are Your Credentials: <br>
+                              <span style="font-family: 'Source Sans Pro', Arial, Tahoma, Geneva, sans-serif; color: #585858; font-size: 24px; line-height: 32px;">You Have Been Registered With Us. <br> Here Are Your Credentials: <br>
                                 <strong>Email:</strong> {{$email}} <br>
                                 <strong>Password:</strong> 'pass@123'<br>
                                 You can change your password by logging into your acount. <br>

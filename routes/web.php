@@ -458,6 +458,10 @@ Route::get('/client/family/edit/{id}',[
 	'uses' => 'clientController@editFamily',
 	'as' => 'edit.family'
 ])->middleware('permission:Edit Client');
+Route::get('/client/family/delete/{id}',[
+	'uses' => 'clientController@deleteFamily',
+	'as' => 'delete.family'
+])->middleware('permission:Edit Client');
 Route::get('/client/view/{id}',[
 		'uses' => 'clientController@show',
 		'as' => 'view.client'

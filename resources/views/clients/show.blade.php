@@ -263,7 +263,9 @@ client
 									<strong>{{'N/A'}}</strong>
 									@endif
 									<div align='right'>
-										<a href="{{route('edit.family',['id'=>$family->id])}}" class="btn btn-xs btn-danger">Edit</a><br><hr>
+										<a href="{{route('edit.family',['id'=>$family->id])}}" class="btn btn-xs btn-info">Edit</a>
+										<a href="{{route('delete.family',['id'=>$family->id])}}" class="btn btn-xs btn-danger">Delete</a>
+										<br><hr>
 									</div>
 								</td>
 							</tr>

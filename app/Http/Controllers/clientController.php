@@ -251,6 +251,13 @@ class clientController extends Controller
         return view('clients.editFamily')->with('family',$family)->with('date',$date);
     }
 
+    public function deleteFamily($id)
+    {
+        $family = ClientFamily::find($id);
+        $family->delete();
+        return redirect()->back();
+    }
+
     /**
      * Update the specified resource in storage.
      *
