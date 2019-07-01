@@ -563,7 +563,7 @@ Invoice
              {{-- <h4><b>Payment Information</b></h4> --}}
              @if($invoice->debit_amount > 0 or $invoice->credit_amount > 0 or $invoice->cash_amount > 0 or $invoice->bank_amount > 0)
               
-                <table class="table table-bordered">
+                <table class="table table-bordered noprint">
                   <thead>
                   <tr>
                     <th>Payment Mode</th>
