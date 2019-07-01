@@ -264,7 +264,7 @@ client
 									@endif
 									<div align='right'>
 										<a href="{{route('edit.family',['id'=>$family->id])}}" class="btn btn-xs btn-info">Edit</a>
-										<a href="{{route('delete.family',['id'=>$family->id])}}" class="btn btn-xs btn-danger">Delete</a>
+										<a onClick="return confirm('Are You Sure You Want To Delete {{$family->member_name}}?')" href="{{route('delete.family',['id'=>$family->id])}}" class="btn btn-xs btn-danger">Delete</a>
 										<br><hr>
 									</div>
 								</td>
