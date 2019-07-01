@@ -1289,7 +1289,7 @@ Edit Invoice
 			}
 			if (value == 'Visa Services') {
 
-				var options = "<option value=''>---SELECT---</option>";
+				var options = "<option value=''>---SELECT---</option><option value='SELF'>SELF</option>";
 
 							@foreach($client->family as $family)
 							var temp = {!! json_encode($family->member_name) !!}
@@ -1331,7 +1331,7 @@ Edit Invoice
 			}
 			if (value == 'Insurance') {
 
-				var options = "<option value=''>---SELECT---</option><option value='SELF'>SELF</option>";
+				var options = "<option value=''>---SELECT---</option>";
 				options = options + "<option value='{{$client->first_name." ".$client->last_name}}'>{{$client->first_name." ".$client->last_name}}</option>";
 							@foreach($client->family as $family)
 							var temp = {!! json_encode($family->member_name) !!}
