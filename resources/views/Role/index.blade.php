@@ -99,10 +99,10 @@ Role Management
                                         {{-- <input type="checkbox"  value="{{$permission->name}}" name="permissions[]" @if($role->hasPermissionTo($permission->name)) checked @endif> --}}
                                         <a 
                                         @if($role->hasPermissionTo($permission->name))
-                                        onClick="return confirm('Are You Sure You Want To Revoke This Invoice')" 
+                                        onClick="return confirm('Are You Sure You Want To Revoke This Permission')" 
                                         href="{{route('revoke.permissions',['id'=>$role->id, 'permission_id'=>$permission->id])}}"
                                         @else
-                                        onClick="return confirm('Are You Sure You Want To Assign This Invoice')"
+                                        onClick="return confirm('Are You Sure You Want To Assign This Permission')"
                                         href="{{route('assign.permissions',['id'=>$role->id, 'permission_id'=>$permission->id])}}"
                                         @endif
 
