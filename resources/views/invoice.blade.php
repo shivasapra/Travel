@@ -253,7 +253,7 @@ Invoice
           </div>
           <div class="col-md-12 mt-4">
             <h4 class="mt-3"><b>Flight Details</b></h4>
-            <p>Booking Ref: IEB 9003953 &nbsp;&nbsp; | &nbsp;&nbsp; Airline Ref: {{ $flight->airline_ref }}</p>
+            <p>Booking Ref: IBE 9003953 &nbsp;&nbsp; | &nbsp;&nbsp; Airline Ref: {{ $flight->airline_ref }}</p>
           </div>
           <div class="col-md-12">
             <div class="table-responsive">
@@ -269,7 +269,7 @@ Invoice
           </thead>
           <tbody>
             <tr>
-                    <td>{{ $flight->segment_one_from.', '. Carbon\Carbon::parse($flight->segment_one_departure)->format('l\\, F jS\\, Y\\, h:i A') }}</td>
+                    <td>{{ $flight->segment_one_from.', '. strtoupper(Carbon\Carbon::parse($flight->segment_one_departure)->format('l\\, F jS\\, Y\\, h:i A')) }}</td>
                     <td>{{ $flight->segment_one_to.', '.  Carbon\Carbon::parse($flight->segment_one_arrival)->format('l\\, F jS\\, Y\\, h:i A') }}</td>
                     <td>{{ $flight->segment_one_flight }}</td>
                     <td>{{ $flight->segment_one_class }}</td>
@@ -327,7 +327,7 @@ Invoice
           </table>
           </div>
           <div class="col-md-12">
-            <h4 class="mt-3"> <b class="float-right"><b>Total:  </b><span class="text-light-blue">{{ $invoice->currency.$visa_amount }}</span></b></h4>
+            <h4 class="mt-3"> <b class="float-right"><b>Total:  </b><span class="text-light-blue">{{ $invoice->currency.number_format( (float) ($visa_amount), 2, '.', '') }}</span></b></h4>
           </div>
         @endif
 
@@ -376,7 +376,7 @@ Invoice
         </div>
       
       <div class="col-md-12">
-        <h4 class="mt-3"> <b class="float-right"><b>Total:  </b><span class="text-light-blue">{{ $invoice->currency.$hotel_amount }}</span></b></h4>
+        <h4 class="mt-3"> <b class="float-right"><b>Total:  </b><span class="text-light-blue">{{ $invoice->currency.number_format( (float) ($hotel_amount), 2, '.', '') }}</span></b></h4>
       </div>
     
       @endif
@@ -414,7 +414,7 @@ Invoice
         </div>
       
       <div class="col-md-12">
-        <h4 class="mt-3"> <b class="float-right"><b>Total:  </b><span class="text-light-blue">{{ $invoice->currency.$insurance_amount }}</span></b></h4>
+        <h4 class="mt-3"> <b class="float-right"><b>Total:  </b><span class="text-light-blue">{{ $invoice->currency.number_format( (float) ($insurance_amount), 2, '.', '') }}</span></b></h4>
       </div>
       @endif
 
@@ -450,7 +450,7 @@ Invoice
         </div>
       
       <div class="col-md-12">
-        <h4 class="mt-3"> <b class="float-right"><b>Total:  </b><span class="text-light-blue">{{ $invoice->currency.$local_sight_sceen_amount }}</span></b></h4>
+        <h4 class="mt-3"> <b class="float-right"><b>Total:  </b><span class="text-light-blue">{{ $invoice->currency.number_format( (float) ($local_sight_sceen_amount), 2, '.', '') }}</span></b></h4>
       </div>
     
       @endif
@@ -484,7 +484,7 @@ Invoice
         </div>
       
       <div class="col-md-12">
-        <h4 class="mt-3"> <b class="float-right"><b>Total:  </b><span class="text-light-blue">{{ $invoice->currency.$local_transport_amount }}</span></b></h4>
+        <h4 class="mt-3"> <b class="float-right"><b>Total:  </b><span class="text-light-blue">{{ $invoice->currency.number_format( (float) ($local_transport_amount), 2, '.', '') }}</span></b></h4>
       </div>
     
       @endif
@@ -518,7 +518,7 @@ Invoice
       
       
       <div class="col-md-12">
-        <h4 class="mt-3"> <b class="float-right"><b>Total:  </b><span class="text-light-blue">{{ $invoice->currency.$car_rental_amount}}</span></b></h4>
+        <h4 class="mt-3"> <b class="float-right"><b>Total:  </b><span class="text-light-blue">{{ $invoice->currency.number_format( (float) ($car_rental_amount), 2, '.', '')}}</span></b></h4>
       </div>
     
       @endif
@@ -553,7 +553,7 @@ Invoice
         </div>
       
       <div class="col-md-12">
-        <h4 class="mt-3"> <b class="float-right"><b>Total:  </b><span class="text-light-blue">{{ $invoice->currency.$other_facilities_amount }}</span></b></h4>
+        <h4 class="mt-3"> <b class="float-right"><b>Total:  </b><span class="text-light-blue">{{ $invoice->currency.number_format( (float) ($other_facilities_amount), 2, '.', '') }}</span></b></h4>
       </div>
     
       @endif
