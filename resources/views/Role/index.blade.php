@@ -47,7 +47,7 @@ Role Management
                                 {{-- <button type="button" class="btn btn-xs btn-success" onClick="findRole({{$role->id}})" >Permissions</button> --}}
                                 <a href="{{route('find.role',['id'=>$rol->id])}}" class="btn btn-xs btn-success">Permissions</a>
                                 @if($rol->name != 'Admin')
-                                    <a onClick="return confirm('Are You Sure You Want To Delete The {{$rol->name}} Role')" href="{{route('role.delete',['id'=>$rol->id])}}" class="btn btn-xs btn-danger">Delete Role</a>
+                                    <a onClick="return confirm('Are You Sure You Want To Delete The {{$rol->name}} Role?')" href="{{route('role.delete',['id'=>$rol->id])}}" class="btn btn-xs btn-danger">Delete Role</a>
                                 @endif
                             </td>
                         </tr>
@@ -99,10 +99,10 @@ Role Management
                                         {{-- <input type="checkbox"  value="{{$permission->name}}" name="permissions[]" @if($role->hasPermissionTo($permission->name)) checked @endif> --}}
                                         <a 
                                         @if($role->hasPermissionTo($permission->name))
-                                        onClick="return confirm('Are You Sure You Want To Revoke This Permission')" 
+                                    onClick="return confirm('Are You Sure You Want To Revoke {{$permission->name}} Permission From {{$role->name}}?')" 
                                         href="{{route('revoke.permissions',['id'=>$role->id, 'permission_id'=>$permission->id])}}"
                                         @else
-                                        onClick="return confirm('Are You Sure You Want To Assign This Permission')"
+                                        onClick="return confirm('Are You Sure You Want To Assign {{$permission->name}} Permission To {{$role->name}}?')"
                                         href="{{route('assign.permissions',['id'=>$role->id, 'permission_id'=>$permission->id])}}"
                                         @endif
 
