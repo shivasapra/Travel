@@ -94,7 +94,7 @@ Expenses
 					</div>
 					<div class="text-center">
 					<div class="form-group">
-						<br><br><button class="btn btn-success btn-xs" name="button" type="submit">Add Expense</button>
+						<br><br>@can('Expense Entry')<button class="btn btn-success btn-xs" name="button" type="submit">Add Expense</button>@endcan
 					</div>
 					</div>
 				</div>
@@ -154,7 +154,9 @@ Expenses
 	                    			@endif
 	                    		</td>
 	                    		<td>
-	                    			<a href="{{route('expense.delete',['id'=>$expense->id])}}" class="btn btn-danger btn-xs">Delete</a>
+									@can('Delete Expense')
+										<a href="{{route('expense.delete',['id'=>$expense->id])}}" class="btn btn-danger btn-xs">Delete</a>
+									@endcan
 	                    		</td>
 	                    		</tr>
 	                    	@endforeach

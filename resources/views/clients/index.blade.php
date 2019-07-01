@@ -50,24 +50,32 @@ Clients
 	                    		<td>{{$client->phone}}</td>
 	                    		<td>{{$client->email}}</td>
 	                    		<td>
-	                    			<a href="{{route('view.client',['id'=>$client->id])}}" class="btn btn-success btn-xs"><span class="fa fa-eye"></span></a>
-	                    			<a href="{{route('edit.client',['id'=>$client->id])}}" class="btn btn-info btn-xs"><span class="fa fa-edit"></span></a>
+                            @can('View Clients')
+                            <a href="{{route('view.client',['id'=>$client->id])}}" class="btn btn-success btn-xs"><span class="fa fa-eye"></span></a>
+                            @endcan
+                            @can('Edit Client')
+                            <a href="{{route('edit.client',['id'=>$client->id])}}" class="btn btn-info btn-xs"><span class="fa fa-edit"></span></a>
+                            @endcan
                                     {{-- <a href="{{route('delete.client',['id'=>$client->id])}}" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span></a> --}}
                           </td>
                           <td>
+                            @can('Client Notification Reminder Toggle')
                             @if($client->reminder == 1)
                             <a href="{{ url('/stop/reminder', ['id'=>$client->id]) }}" class="btn btn-primary btn-xs">Stop Payment Reminders</a>
                             @else
                             <a href="{{ url('/start/reminder', ['id'=>$client->id]) }}" class="btn btn-primary btn-xs">Resume Payment Reminders</a>
                             @endif
+                            @endcan
                           </td>
                           <td>
                             @if($client->user)
+                            @can('Activate/Deactivate Client')
 															@if($client->user->active)
 															  <a onClick="return confirm('Are You Sure You Want To Deactivate This Client')" href="{{route('deactivateClient',['id'=>$client->id])}}" class="btn btn-danger btn-xs">Deactivate</a>
 															@else
 															  <a onClick="return confirm('Are You Sure You Want To Activate This Client')" href="{{route('activateClient',['id'=>$client->id])}}" class="btn btn-success btn-xs">Activate</a>
                               @endif
+                            @endcan
                             @else
                               <span class="text-warning"><strong>Not Yet Verified</strong></span>
 														@endif
@@ -87,8 +95,10 @@ Clients
 		</div>
 		</div>
 		<div class="text-center">
-			<a href="{{route('create.client')}}">
-				<button class="btn btn-success">Add Client</button>
+      <a href="{{route('create.client')}}">
+        @can('Create Client')
+        <button class="btn btn-success">Add Client</button>
+        @endcan
 			</a>
 		</div>
 

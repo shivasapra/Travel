@@ -32,9 +32,11 @@ Products and services
 						<td>{{$i++}}</td>
 						<td>{{$product->service}}</td>
 						<td>
+							@can('Services Registration')
 							<a href="{{route('product.delete',['id'=>$product->id])}}">
 								<button class="btn btn-xs btn-danger">Delete</button>
 							</a>
+							@endcan
 						</td>
 						</tr>
 					@endforeach
@@ -57,9 +59,9 @@ Products and services
 				</div>
 				</div>
 				<div class="col-md-2">
-					
+					@can('Services Registration')
 						<button class="btn btn-xs btn-success" type="submit">Add</button>
-					
+					@endcan
 				</div>
 			</form>
 			</div>

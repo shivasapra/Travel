@@ -38,11 +38,18 @@ Invoice Issues
 
 							@foreach($invoices as $invoice)
 	                    	<tr>
-	                    		<td><a href="{{route('invoice.view',['id'=>$invoice->id])}}" class="btn btn-info btn-xs">{{$invoice->invoice_no}}</a></td>
+	                    		<td>{{$invoice->invoice_no}}</td>
 	                    		<td>{{$invoice->invoice_date}}</td>
                           <td>{{$invoice->receiver_name}}</td>
                           <th>{{$invoice->issues}}</th>
-                          <td><a href="{{route('invoice.edit',['id'=>$invoice->id])}}" class="btn btn-info btn-xs"><span class="fa fa-edit"></span></a></td>
+                          <td>
+                            @can('View Invoices')
+                            <a href="{{route('invoice.view',['id'=>$invoice->id])}}" class="btn btn-info btn-xs"><span class="fa fa-eye"></span></a>  
+                            @endcan
+                            @can('Edit Invoice')
+                            <a href="{{route('invoice.edit',['id'=>$invoice->id])}}" class="btn btn-info btn-xs"><span class="fa fa-edit"></span></a>
+                            @endcan
+                          </td>
 							</tr>
 	                    	@endforeach
                     	@endif

@@ -238,7 +238,9 @@ Edit Client
 		</div>
 				<div class="form-group">
 					<div class="text-center">
+						@can('Edit Client')
 						<button class="btn btn-success" type="submit">Update</button>
+						@endcan
 					</div>
 				</div>
 			</form>

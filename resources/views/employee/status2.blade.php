@@ -72,7 +72,9 @@ Employees Status
 			<input type="date" name="date" required max="{{$date}}" class="form-control">
 			</div>
 			<div class=" text-center">
-			<input type="submit" class="btn btn-info btn-xs" value="submit" class="form-control"></div>
+			@can('Employee Attendance Status')
+				<input type="submit" class="btn btn-info btn-xs" value="submit" class="form-control"></div>
+			@endcan
 			</div>
 			</div>
 		</form>

@@ -77,7 +77,7 @@ Auto Deduction
 					</div>
 					<div class="text-center">
 					<div class="form-group">
-						<br><br><button class="btn btn-info btn-xs" name="button" type="submit">Save</button>
+						<br><br>@can('Auto Deduction Expense Entry')<button class="btn btn-info btn-xs" name="button" type="submit">Save</button>@endcan
 					</div>
 					</div>
 				</div>
@@ -129,7 +129,9 @@ Auto Deduction
 	                    			@endif
 	                    		</td>
 	                    		<td>
-	                    			<a href="{{route('expense.delete',['id'=>$expense->id])}}" class="btn btn-danger btn-xs">Delete</a>
+									@can('Delete Expense')
+									<a href="{{route('expense.delete',['id'=>$expense->id])}}" class="btn btn-danger btn-xs">Delete</a>
+									@endcan
 	                    		</td>
 	                    		</tr>
 	                    	@endforeach

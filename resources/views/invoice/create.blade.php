@@ -362,7 +362,9 @@ Create Invoice
 		</div>
 			<div class="form-group">
 			<div class="text-center">
+				@can('Generate Invoice')
 				<button class="btn btn-primary" type="submit">Create</button>
+				@endcan
 				<div id="daalo"></div>
 			</div>
 			</div>

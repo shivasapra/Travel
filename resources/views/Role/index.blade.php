@@ -45,10 +45,12 @@ Role Management
                             <td>{{$rol->name}}</td>
                             <td>
                                 {{-- <button type="button" class="btn btn-xs btn-success" onClick="findRole({{$role->id}})" >Permissions</button> --}}
+                                @can('Role Management')
                                 <a href="{{route('find.role',['id'=>$rol->id])}}" class="btn btn-xs btn-success">Permissions</a>
                                 @if($rol->name != 'Admin')
                                     <a onClick="return confirm('Are You Sure You Want To Delete The {{$rol->name}} Role?')" href="{{route('role.delete',['id'=>$rol->id])}}" class="btn btn-xs btn-danger">Delete Role</a>
                                 @endif
+                                @endcan
                             </td>
                         </tr>
                         @endforeach
@@ -96,6 +98,7 @@ Role Management
                                 <td>{{$permission->name}}</td>
                                 @if($role->name != 'Admin')
                                     <td>
+                                        @can('Role Management')
                                         {{-- <input type="checkbox"  value="{{$permission->name}}" name="permissions[]" @if($role->hasPermissionTo($permission->name)) checked @endif> --}}
                                         <a 
                                         @if($role->hasPermissionTo($permission->name))
@@ -112,9 +115,11 @@ Role Management
                                             class="btn btn-sm btn-danger" 
                                         @endif 
                                         style="border-radius:50%"></a>
+                                        @endcan
                                     </td>
                                 @else
                                 <td>
+                                    @can('Role Management')
                                     <button  type="button"
                                     @if($role->hasPermissionTo($permission->name)) 
                                         class="btn btn-sm btn-success" 
@@ -122,6 +127,7 @@ Role Management
                                         class="btn btn-sm btn-danger" 
                                     @endif 
                                     style="border-radius:50%"></button>
+                                    @endcan
                                 </td>
                                 @endif
                             </tr>

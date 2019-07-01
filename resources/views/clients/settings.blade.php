@@ -31,7 +31,9 @@ Client Settings
     </div>
 </div>
     <div class="text-center">
-        <button type="submit" class="btn btn-sm btn-success">Update</button>
+        @can('Update Client Settings')
+            <button type="submit" class="btn btn-sm btn-success">Update</button>
+        @endcan
     </div>
 </form>
 @stop

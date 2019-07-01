@@ -263,8 +263,10 @@ client
 									<strong>{{'N/A'}}</strong>
 									@endif
 									<div align='right'>
+										@can('Edit Client')
 										<a href="{{route('edit.family',['id'=>$family->id])}}" class="btn btn-xs btn-info">Edit</a>
 										<a onClick="return confirm('Are You Sure You Want To Delete {{$family->member_name}}?')" href="{{route('delete.family',['id'=>$family->id])}}" class="btn btn-xs btn-danger">Delete</a>
+										@endcan
 										<br><hr>
 									</div>
 								</td>

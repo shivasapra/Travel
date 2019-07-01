@@ -72,7 +72,9 @@ Users
                                 {{-- <a href="{{route('user.roles',['id'=>$user->id])}}" class="btn btn-xs btn-success">Roles/Permisssions</a> --}}
                             </td>
                             <td>
-                                <button type="submit" class="btn btn-xs btn-success">Save</button>
+                                @can('Role Management')
+                                    <button type="submit" class="btn btn-xs btn-success">Save</button>
+                                @endcan
                             </td>
                         </form>
                     </tr>

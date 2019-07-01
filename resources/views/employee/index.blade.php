@@ -47,17 +47,25 @@ Employees
 	                    		<td>{{$employee->hiring_date}}</td>
 	                    		<td>{{$employee->currency.$employee->rate}}</td>
 	                    		<td>
-	                    			<a href="{{route('view.employee',['id'=>$employee->id])}}" class="btn btn-success btn-xs"><span class="fa fa-eye"></span></a>
-	                    			<a href="{{route('edit.employee',['id'=>$employee->id])}}" class="btn btn-info btn-xs"><span class="fa fa-edit"></span></a>
-	                    			{{-- <a href="{{route('delete.employee',['id'=>$employee->id])}}" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span></a> --}}
-	                    			<a href="{{route('letter.employee',['id'=>$employee->id])}}" class="btn btn-primary btn-xs">Letter</a>
+									@can('View Employees')
+									<a href="{{route('view.employee',['id'=>$employee->id])}}" class="btn btn-success btn-xs"><span class="fa fa-eye"></span></a>
+									@endcan
+									@can('Edit Employee')
+									<a href="{{route('edit.employee',['id'=>$employee->id])}}" class="btn btn-info btn-xs"><span class="fa fa-edit"></span></a>
+									@endcan
+									{{-- <a href="{{route('delete.employee',['id'=>$employee->id])}}" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span></a> --}}
+									@can('Letter To Employee')
+									<a href="{{route('letter.employee',['id'=>$employee->id])}}" class="btn btn-primary btn-xs">Letter</a>
+									@endcan
 														<a href="{{route('assignments',['id'=>$employee->id])}}" class="btn btn-warning btn-xs">Tasks</a>
 														@if($employee->user)
 															@if($employee->user->active)
+															@can('Activate/Deactivate Employee')
 															<a href="{{route('deactivateEmployee',['id'=>$employee->id])}}" class="btn btn-danger btn-xs">Deactivate</a>
 															@else
 															<a href="{{route('activateEmployee',['id'=>$employee->id])}}" class="btn btn-success btn-xs">Activate</a>
 															@endif
+															@endcan
 														@endif
 	                    		</td>
 	                    	</tr>
@@ -70,7 +78,9 @@ Employees
 		</div>
 		<div class="text-center">
 			<a href="{{route('create.employee')}}">
+				@can('Create Employee')
 				<button class="btn btn-success">Add employee</button>
+				@endcan
 			</a>
 		</div>
 	

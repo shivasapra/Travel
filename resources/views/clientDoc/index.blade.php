@@ -75,7 +75,9 @@ Client Document Movement
                           <td>{{$invoice->visa_country}}</td>
                           <td>{{$invoice->visa_type}}</td>
                           <td>
+                            @can('Client Documents Movement')
                             <a href="{{route('clientDoc.store',['id'=>$invoice->id])}}" class="btn btn-xs btn-success">Add</a>
+                            @endcan
                             {{-- <input type="text" value="{{$invoice->id}}" hidden id="invoiceId"> --}}
                             {{-- <button type="button" id="add" class="btn btn-xs btn-success">Add</button> --}}
                           </td>
@@ -122,7 +124,9 @@ Client Document Movement
                           <td>{{$doc->visa_country}}</td>
                           <td>{{$doc->visa_type}}</td>
                           <td>
-                            <a href="{{route('clientDoc.destroy',['id'=>$doc->id])}}" class="btn btn-xs btn-danger">Remove</a>
+                            @can('Client Documents Movement')
+                              <a href="{{route('clientDoc.destroy',['id'=>$doc->id])}}" class="btn btn-xs btn-danger">Remove</a>
+                            @endcan
                           </td>
                           </tr>
                         @endforeach
@@ -159,7 +163,9 @@ Client Document Movement
                         <textarea type="text" name="message" class="form-control" placeholder="Enter Message"></textarea>
                     </div>
                     <div class="col-md-1">
+                      @can('Client Documents Movement')
                         <button type="submit" class="btn btn-sm btn-danger">Send</button>
+                      @endcan
                     </div>
                 </div>
             </form>

@@ -47,16 +47,22 @@ Leads
                             <td>{{$lead->DOB}}</td>
                             <td>{{$lead->email}}</td>
                             <td>
+                                @can('View Leads')
                                 <a href="{{route('lead.show',['id'=>$lead->id])}}" class="btn btn-success btn-xs"><span class="fa fa-eye"></span></a>
+                                @endcan
                                 @if(!$lead->converted)
+                                @can('Edit Lead')
                                     <a href="{{route('lead.edit',['id'=>$lead->id])}}" class="btn btn-info btn-xs"><span class="fa fa-edit"></span></a>
+                                @endcan
                                 @endif
                             </td>
                             <td>
                                 @if($lead->converted)
                                     <span class="text-success"><strong>{{'Converted'}}</strong></span>
                                 @else
+                                @can('Convert Lead')
                                     <a href="{{route('lead.convert.form',['id'=>$lead->id])}}" class="btn btn-primary btn-xs">Convert To Client</a>
+                                @endcan
                                 @endif
                             </td>
                         </tr>
@@ -67,9 +73,11 @@ Leads
     </div>
 </div>
 <div class="text-center">
+    @can('Create Lead')
     <a href="{{route('lead.create')}}">
         <button class="btn btn-success">Add Lead</button>
     </a>
+    @endcan
 </div>
 @stop
 @section('js')

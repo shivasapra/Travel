@@ -17,6 +17,7 @@ class PermissionsSeeder extends Seeder
         Permission::create(['name' => 'View Clients']);
         Permission::create(['name' => 'Create Client']);
         Permission::create(['name' => 'Edit Client']);
+        Permission::create(['name' => 'Activate/Deactivate Client']);
         Permission::create(['name' => 'Client Notification Reminder Toggle']);
         Permission::create(['name' => 'Client Visa Application Status']);
         Permission::create(['name' => 'Client Documents Movement']);
@@ -69,6 +70,7 @@ class PermissionsSeeder extends Seeder
         $role_admin->givePermissionTo('View Leads');
         $role_admin->givePermissionTo('Convert Lead');
         $role_admin->givePermissionTo('Create Lead');
+        $role_admin->givePermissionTo('Activate/Deactivate Client');
         $role_admin->givePermissionTo('Edit Lead');
         $role_admin->givePermissionTo('Client Notification Reminder Toggle');
         $role_admin->givePermissionTo('Client Visa Application Status');

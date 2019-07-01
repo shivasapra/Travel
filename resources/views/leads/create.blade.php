@@ -102,7 +102,9 @@ Lead Registration
     </div>
     <div class="form-group">
         <div class="text-center">
+            @can('Create Lead')
             <button class="btn btn-success" type="submit">Add Lead</button>
+            @endcan
         </div>
     </div>
 </form>

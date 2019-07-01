@@ -5,9 +5,11 @@ Client Visa Application Status
 @section('header')
 	<section class="content-header">
       <h1>
-        Client Visa Application Status
+		Client Visa Application Status
+		@can('Client Visa Application Status')
       <button type="button" data-toggle="modal" data-target="#modal-info" class="btn btn-sm btn-info" id="searchClient">Search Client&nbsp;&nbsp;&nbsp;<i class="fa fa-search"></i></button>
-      </h1>
+		@endcan
+	</h1>
       <div class="modal fade" id="modal-info">
   		<div class="modal-dialog">
    			<div class="modal-content">
@@ -364,7 +366,9 @@ Client Visa Application Status
     	</div>
 	</div>
 	<div class="text-center">
+		@can('Client Visa Application Status')
 		<button type="submit" class="btn btn-xs btn-success">Send</button>
+		@endcan
 	</div>
 	
 </form>

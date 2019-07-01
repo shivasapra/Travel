@@ -27,9 +27,9 @@ Airlines
 				</div>
 				</div>
 				<div class="col-md-4">
-					
+					@can('Airlines Name Registration')
 						<button class="btn  btn-success" type="submit">Add</button>
-					
+					@endcan
 				</div>
 			</form>
 		</div>
@@ -55,9 +55,11 @@ Airlines
 					<td>{{$i++}}</td>
 					<td>{{$airline->name}}</td>
 					<td>
+						@can('Airlines Name Registration')
 						<a href="{{route('airline.delete',['id'=>$airline->id])}}">
 							<button class="btn btn-xs btn-danger">Delete</button>
 						</a>
+						@endcan
 					</td>
 				</tr>
 				@endforeach

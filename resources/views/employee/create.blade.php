@@ -441,12 +441,14 @@ Employee Registration
 			
 			<div class="form-group">
 				<div class="text-center">
+					@can('Create Employee')
 					<button class="btn btn-success" type="submit">Add employee</button>
+					@endcan
 				</div>
 			</div>
 			</form>
-			<button type="button" onclick="scan();">Scan</button> <!-- Triggers scan -->   
-			<div id="images"/> <!-- Displays scanned images  -->
+			{{-- <button type="button" onclick="scan();">Scan</button> <!-- Triggers scan -->   
+			<div id="images"/> <!-- Displays scanned images  --> --}}
 		
 		
 

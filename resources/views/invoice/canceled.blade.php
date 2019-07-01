@@ -50,9 +50,13 @@ Canceled Invoices
 							<th><span class="text-danger">{{'Canceled'}}</span></th>
 	                    		{{-- <td><button class="btn btn-xs btn-success" id="pdf">PDF</button></td> --}}
 	                    		<td>
-	                    			{{-- <a href="{{route('invoice.edit',['id'=>$invoice->id])}}" class="btn btn-info btn-xs"><span class="fa fa-edit"></span></a> --}}
-                                    <a href="{{route('invoice.view',['id'=>$invoice->id])}}" class="btn btn-info btn-xs"><span class="fa fa-eye"></span></a>
-                                    <a href="{{route('invoice.retrieve',['id'=>$invoice->id])}}" class="btn btn-success btn-xs">Retrieve</a>
+                            {{-- <a href="{{route('invoice.edit',['id'=>$invoice->id])}}" class="btn btn-info btn-xs"><span class="fa fa-edit"></span></a> --}}
+                              @can('View Invoices')
+                                <a href="{{route('invoice.view',['id'=>$invoice->id])}}" class="btn btn-info btn-xs"><span class="fa fa-eye"></span></a>
+                              @endcan
+                              @can('Restore Invoice')
+                                <a href="{{route('invoice.retrieve',['id'=>$invoice->id])}}" class="btn btn-success btn-xs">Retrieve</a>
+                              @endcan
                                     {{-- <a href="{{route('invoice.kill',['id'=>$invoice->id])}}" class="btn btn-danger btn-xs">Delete</a> --}}
 	                    		</td>
 	                    		{{-- <td><a href="{{route('invoice.delete',['id'=>$invoice->id])}}" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span></a></td> --}}

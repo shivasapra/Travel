@@ -100,7 +100,9 @@ Employee's Letter
 		</div>
 	</div>
 	<div class="text-center">
-    <button type="submit" class="btn btn-success btn-xs">Send</button>
+	@can('Letter To Employee')
+		<button type="submit" class="btn btn-success btn-xs">Send</button>
+	@endcan
 	</div>
 </form>
 @stop

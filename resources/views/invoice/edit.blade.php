@@ -869,7 +869,9 @@ Edit Invoice
 			</div>
 			<div class="form-group">
 			<div class="text-center">
+				@can('Edit Invoice')
 				<button class="btn btn-primary" type="submit">Update</button>
+				@endcan
 			</div>
 			</div>
 	</form>

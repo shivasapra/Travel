@@ -110,7 +110,9 @@ Pay
     </div>
 </div>
 <div class="text-center">
+    @can('Pay Invoice')
 <button type="submit" class="btn btn-success">Pay</button>
+@endcan
 </div>
 </form>
 

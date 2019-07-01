@@ -40,7 +40,9 @@ VAT
 			</div>
 		</div>
 	</div><div class="text-center">
-	<button class="btn btn-sm btn-info" type="submit">Save</button>
+		@can('VAT Updation')
+		<button class="btn btn-sm btn-info" type="submit">Save</button>
+		@endcan
 	</div>
 </form>
 @stop

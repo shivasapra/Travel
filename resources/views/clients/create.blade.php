@@ -150,7 +150,9 @@ Client Registration
 		</div>
 				<div class="form-group">
 					<div class="text-center">
-						<button class="btn btn-success" type="submit">Add client</button>
+						@can('Create Client')
+							<button class="btn btn-success" type="submit">Add client</button>
+						@endcan
 					</div>
 				</div>
 			</form>

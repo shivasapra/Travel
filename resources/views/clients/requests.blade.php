@@ -62,7 +62,9 @@ Requests
                             </select>
                         </td>
                         <td>
+                            @can('Generate Request')
                             <button type="submit" class="btn btn-xs btn-success">Save</button>
+                            @endcan
                         </td>
                     </form>
                     @endif
@@ -95,7 +97,9 @@ Requests
             </div>
         </div>
         <div class="text-center">
+            @can('Generate Request')
             <button class="btn btn-small btn-info" type="submit">Generate Request</button>
+            @endcan
         </div>
     </form>
 @endif

@@ -248,7 +248,9 @@ Direct Chat
                                   <td>{{$employee->hiring_date}}</td>
                                   <td>{{$employee->currency.$employee->rate}}</td>
                                   <td>
+                                    @can('Direct Chat')
                                       <a href="{{route('index.message',['id'=>$employee->user->id])}}" class="btn btn-primary btn-xs">Start Conversation</a>
+                                    @endcan
                                   </td>
                               </tr>
                               @endforeach

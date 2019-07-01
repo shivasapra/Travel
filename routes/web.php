@@ -249,11 +249,11 @@ Route::get('/deactivate/employee/{id}',[
 Route::get('/activate/client/{id}',[
 	'uses'=> 'clientController@activate',
 	'as'=>'activateClient'
-])->middleware('permission:Activate/Deactivate Employee');
+])->middleware('permission:Activate/Deactivate Client');
 Route::get('/deactivate/client/{id}',[
 	'uses'=> 'clientController@deactivate',
 	'as'=>'deactivateClient'
-])->middleware('permission:Activate/Deactivate Employee');
+])->middleware('permission:Activate/Deactivate Client');
 // Route::get('/search/client',['as'=>'searchClient'],function(){
 // 	dd(true);
 // 	$clients = App\client::where('first_name', 'like', '%'.request('client_name').'%')->get();

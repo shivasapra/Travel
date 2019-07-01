@@ -6,7 +6,9 @@ Generate Salary Slip
     <section class="content-header">
       <h1>
 				Salary Slip
+				@can('Employee Salary Slip')
 				<button type="button" data-toggle="modal" data-target="#modal-info" class="btn btn-sm btn-info" id="searchEmployee">Search Employee&nbsp;&nbsp;&nbsp;<i class="fa fa-search"></i></button>
+				@endcan
 			</h1>
 			<div class="modal fade" id="modal-info">
 					<div class="modal-dialog">
@@ -120,7 +122,9 @@ Generate Salary Slip
 		</div>
 				<div class="form-group">
 					<div class="text-center">
+						@can('Employee Salary Slip')
 						<button class="btn btn-success" type="submit">Generate</button>
+						@endcan
 					</div>
 				</div>
 			</form>

@@ -422,7 +422,9 @@ Edit employee
 		
 				
 		<div class="text-center">
+			@can('Edit Employee')
 				<button class="btn btn-success">Update</button>
+			@endcan
 		</div>
 			</form>
 		

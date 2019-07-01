@@ -102,7 +102,9 @@ Edit Lead
     </div>
     <div class="form-group">
         <div class="text-center">
+            @can('Edit Lead')
             <button class="btn btn-success" type="submit">Update Lead</button>
+            @endcan
         </div>
     </div>
 </form>

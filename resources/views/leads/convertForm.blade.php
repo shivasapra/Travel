@@ -150,7 +150,9 @@ Convert Lead
 		</div>
 				<div class="form-group">
 					<div class="text-center">
+						@can('Convert Lead')
 						<button class="btn btn-success" type="submit">Convert Lead To client</button>
+						@endcan
 					</div>
 				</div>
 			</form>
