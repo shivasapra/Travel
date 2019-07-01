@@ -152,10 +152,19 @@ class employeeController extends Controller
             $employee->work_permit = 'uploads/passport/'.$work_permit_new_name;
             // $client->save();
             }
-        $unique_id = 'CLDE'. mt_rand(100000, 999999);
-        while (employee::where('unique_id',$unique_id)->get()->count()>0) {
-           $unique_id = 'CLDE'. mt_rand(100000, 999999); 
-        }
+            $test_employee = employee::where('unique_id','CLDE0001')->get();
+            if ($test_employee->count()>0) {
+                $latest = employee::orderBy('id','desc')->take(1)->get();
+                $employee_prev_no = $latest[0]->unique_id;
+                $unique_id = 'CLDE000'.(substr($employee_prev_no,4,7)+1);
+            }
+            else{
+                $unique_id = 'CLDE0001';
+            }
+        // $unique_id = 'CLDE'. mt_rand(100000, 999999);
+        // while (employee::where('unique_id',$unique_id)->get()->count()>0) {
+        //    $unique_id = 'CLDE'. mt_rand(100000, 999999); 
+        // }
         $employee->unique_id = $unique_id;
         $employee->save();
         // $user = new User;

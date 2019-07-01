@@ -138,7 +138,7 @@
 <p>Note - * denotes the lead passenger</p><br>
 
 <h4 class="mt-3"><b>Flight Details</b></h4>
-<p>Booking Ref: IEB 9003953 &nbsp;&nbsp; | &nbsp;&nbsp; Airline Ref: {{ $flight->airline_ref }}</p>
+<p>Booking Ref: IBE 9003953 &nbsp;&nbsp; | &nbsp;&nbsp; Airline Ref: {{ $flight->airline_ref }}</p>
 <div class="table-responsive">
 <table class="table table-bordered">
 <thead>
@@ -153,15 +153,15 @@
 <tbody>
     
 <tr>
-        <td>{{ $flight->segment_one_from.', '. Carbon\Carbon::parse($flight->segment_one_departure)->format('l\\, F jS\\, Y\\, h:i A') }}</td>
-        <td>{{ $flight->segment_one_to.', '.  Carbon\Carbon::parse($flight->segment_one_arrival)->format('l\\, F jS\\, Y\\, h:i A') }}</td>
+        <td>{{ $flight->segment_one_from.', '. strtoupper(Carbon\Carbon::parse($flight->segment_one_departure)->format('l\\, F jS\\, Y\\, h:i A')) }}</td>
+        <td>{{ $flight->segment_one_to.', '.  strtoupper(Carbon\Carbon::parse($flight->segment_one_arrival)->format('l\\, F jS\\, Y\\, h:i A')) }}</td>
         <td>{{ $flight->segment_one_flight }}</td>
         <td>{{ $flight->segment_one_class }}</td>
         <td>{{ $flight->segment_one_carrier }}</td>
 </tr>
 <tr>
-        <td>{{ $flight->segment_two_from.', '. Carbon\Carbon::parse($flight->segment_two_departure)->format('l\\, F jS\\, Y\\, h:i A') }}</td>
-        <td>{{ $flight->segment_two_to.', '. Carbon\Carbon::parse($flight->segment_two_arrival)->format('l\\, F jS\\, Y\\, h:i A') }}</td>
+        <td>{{ $flight->segment_two_from.', '. strtoupper(Carbon\Carbon::parse($flight->segment_two_departure)->format('l\\, F jS\\, Y\\, h:i A')) }}</td>
+        <td>{{ $flight->segment_two_to.', '. strtoupper(Carbon\Carbon::parse($flight->segment_two_arrival)->format('l\\, F jS\\, Y\\, h:i A')) }}</td>
         <td>{{ $flight->segment_two_flight }}</td>
         <td>{{ $flight->segment_two_class }}</td>
         <td>{{ $flight->segment_two_carrier}}</td>
@@ -211,7 +211,7 @@
 </table>
 </div>
 <div class="">
-<h4 class="mt-3"> <b class="float-right"><b>Total: </b><span class="text-light-blue">{{ $invoice->currency.$visa_amount }}</span></b></h4>
+<h4 class="mt-3"> <b class="float-right"><b>Total: </b><span class="text-light-blue">{{ $invoice->currency.number_format( (float) ($visa_amount), 2, '.', '')}}</span></b></h4>
 </div>
 @endif
 
@@ -252,7 +252,7 @@
 </table>
 </div>
 <div class="">
-<h4 class="mt-3"> <b class="float-right"><b>Total: </b><span class="text-light-blue">{{ $invoice->currency.$hotel_amount }}</span></b></h4>
+<h4 class="mt-3"> <b class="float-right"><b>Total: </b><span class="text-light-blue">{{ $invoice->currency.number_format( (float) ($hotel_amount), 2, '.', '') }}</span></b></h4>
 </div>
 @endif
 
@@ -286,7 +286,7 @@
 </table>
 </div>
 <div class="">
-<h4 class="mt-3"> <b class="float-right"><b>Total: </b><span class="text-light-blue">{{ $invoice->currency.$insurance_amount }}</span></b></h4>
+<h4 class="mt-3"> <b class="float-right"><b>Total: </b><span class="text-light-blue">{{ $invoice->currency.number_format( (float) ($insurance_amount), 2, '.', '') }}</span></b></h4>
 </div>
 @endif
 
@@ -316,7 +316,7 @@
 </table>
 </div>
 <div class="">
-<h4 class="mt-3"> <b class="float-right"><b>Total: </b><span class="text-light-blue">{{ $invoice->currency.$local_sight_sceen_amount }}</span></b></h4>
+<h4 class="mt-3"> <b class="float-right"><b>Total: </b><span class="text-light-blue">{{ $invoice->currency.number_format( (float) ($local_sight_sceen_amount), 2, '.', '') }}</span></b></h4>
 </div>
 @endif
 
@@ -345,7 +345,7 @@
 </table>
 </div>
 <div class="">
-<h4 class="mt-3"> <b class="float-right"><b>Total: </b><span class="text-light-blue">{{ $invoice->currency.$local_transport_amount }}</span></b></h4>
+<h4 class="mt-3"> <b class="float-right"><b>Total: </b><span class="text-light-blue">{{ $invoice->currency.number_format( (float) ($local_transport_amount), 2, '.', '') }}</span></b></h4>
 </div>
 
 @endif
@@ -374,7 +374,7 @@
 </table>
 </div>
 <div class="">
-<h4 class="mt-3"> <b class="float-right"><b>Total: </b><span class="text-light-blue">{{ $invoice->currency.$car_rental_amount}}</span></b></h4>
+<h4 class="mt-3"> <b class="float-right"><b>Total: </b><span class="text-light-blue">{{ $invoice->currency.number_format( (float) ($car_rental_amount), 2, '.', '')}}</span></b></h4>
 </div>
 
 @endif
@@ -406,14 +406,14 @@
 </table>
 </div>
 <div class="">
-<h4 class="mt-3"> <b class="float-right"><b>Total: </b><span class="text-light-blue">{{ $invoice->currency.$other_facilities_amount }}</span></b></h4>
+<h4 class="mt-3"> <b class="float-right"><b>Total: </b><span class="text-light-blue">{{ $invoice->currency.number_format( (float) ($other_facilities_amount), 2, '.', '') }}</span></b></h4>
 </div>
 @endif
 <br><br>
 <div class="row">
 <div class="col-md-4">
         @if($invoice->debit_amount > 0 or $invoice->credit_amount > 0 or $invoice->cash_amount > 0 or $invoice->bank_amount > 0)
-<div class="table-responsive">
+
 <table class="table table-bordered">
 <thead>
 <tr>
@@ -448,7 +448,7 @@
       @endif
       </tbody>
 </table>
-</div>
+
 @endif
 </div>
 <div class="col-md-8 text-right">
@@ -478,7 +478,7 @@
           <p class="mb-1"><b>{{ $invoice->currency}}{{ $invoice->VAT_amount }}:</b></p>
         @endif
         @endif
-        <p class="mb-1"><b>{{ $invoice->currency}}{{number_format( (float) ($invoice->discounted_total + $invoice->VAT_amount), 2, '.', '')}}</b></p>
+        <p class="mb-1"><b>{{ $invoice->currency}}</b></p>
       @if($invoice->paid != 0)
           <p class="mb-1"><b>{{ $invoice->currency}}{{$invoice->paid}}</b></p>
       @endif

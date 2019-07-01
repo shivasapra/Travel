@@ -562,8 +562,8 @@ Invoice
           <div class="col-md-4">
              {{-- <h4><b>Payment Information</b></h4> --}}
              @if($invoice->debit_amount > 0 or $invoice->credit_amount > 0 or $invoice->cash_amount > 0 or $invoice->bank_amount > 0)
-              <div class="table table-bordered">
-                <table class="table">
+              
+                <table class="table table-bordered">
                   <thead>
                   <tr>
                     <th>Payment Mode</th>
@@ -600,7 +600,7 @@ Invoice
                   @endif
                   </tbody>
                 </table>
-              </div>
+              
               @endif
           </div>
           <div class="col-md-8 text-right">
