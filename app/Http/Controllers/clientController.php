@@ -79,7 +79,7 @@ class clientController extends Controller
         $client = new client;
         $test_client = client::where('unique_id','CLDC0001')->get();
         if ($test_client->count()>0) {
-            $latest = client::all()->orderBy('id','desc')->take(1)->get();
+            $latest = client::orderBy('id','desc')->take(1)->get();
             $client_prev_no = $latest[0]->unique_id;
             $unique_id = 'CLDC000'.(substr($client_prev_no,4,7)+1);
         }
