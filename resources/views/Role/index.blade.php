@@ -47,7 +47,7 @@ Role Management
                                 {{-- <button type="button" class="btn btn-xs btn-success" onClick="findRole({{$role->id}})" >Permissions</button> --}}
                                 <a href="{{route('find.role',['id'=>$rol->id])}}" class="btn btn-xs btn-success">Permissions</a>
                                 @if($rol->name != 'Admin')
-                                    <a href="{{route('role.delete',['id'=>$rol->id])}}" class="btn btn-xs btn-danger">Delete Role</a>
+                                    <a onClick="return confirm('Are You Sure You Want To Delete The {{$rol->name}} Role')" href="{{route('role.delete',['id'=>$rol->id])}}" class="btn btn-xs btn-danger">Delete Role</a>
                                 @endif
                             </td>
                         </tr>
@@ -94,14 +94,16 @@ Role Management
                             <tr>
                                 <th>{{$i++}}.</th>
                                 <td>{{$permission->name}}</td>
-                                @if($rol->name != 'Admin')
+                                @if($role->name != 'Admin')
                                     <td>
                                         {{-- <input type="checkbox"  value="{{$permission->name}}" name="permissions[]" @if($role->hasPermissionTo($permission->name)) checked @endif> --}}
                                         <a 
                                         @if($role->hasPermissionTo($permission->name))
-                                            href="{{route('revoke.permissions',['id'=>$role->id, 'permission_id'=>$permission->id])}}"
+                                        onClick="return confirm('Are You Sure You Want To Revoke This Invoice')" 
+                                        href="{{route('revoke.permissions',['id'=>$role->id, 'permission_id'=>$permission->id])}}"
                                         @else
-                                            href="{{route('assign.permissions',['id'=>$role->id, 'permission_id'=>$permission->id])}}"
+                                        onClick="return confirm('Are You Sure You Want To Assign This Invoice')"
+                                        href="{{route('assign.permissions',['id'=>$role->id, 'permission_id'=>$permission->id])}}"
                                         @endif
 
                                         @if($role->hasPermissionTo($permission->name)) 
