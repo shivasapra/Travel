@@ -150,7 +150,7 @@ client
 							<td><strong>Passport Front:</strong></td>
 							<td>
 								<div class="image-div">
-								<img src="{{asset($client->passport_front)}}" alt="passport front" height="200px" width="200px" style="border-radius:10px">
+								<img @if(explode('.',$client->passport_front)[1] != 'pdf') src="{{asset($client->passport_front)}}" @else src="{{asset('/images/pdf.png')}}" @endif alt="passport front" height="200px" width="200px" style="border-radius:10px">
 								<a href="{{asset($client->passport_front)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
 								</div>
 								{{-- <img src="{{asset($client->passport_front)}}" alt="passport front" height="300px" width="300px" style="border-radius:20px"> --}}
@@ -162,7 +162,7 @@ client
 							<td><strong>Passport Back:</strong></td>
 							<td>
 								<div class="image-div">
-								<img src="{{asset($client->passport_back)}}" alt="passport front" height="200px" width="200px" style="border-radius:10px">
+								<img @if(explode('.',$client->passport_back)[1] != 'pdf') src="{{asset($client->passport_back)}}" @else src="{{asset('/images/pdf.png')}}" @endif alt="passport back" height="200px" width="200px" style="border-radius:10px">
 								<a href="{{asset($client->passport_back)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
 								</div>
 								{{-- <img src="{{asset($client->passport_back)}}" alt="passport back" height="300px" width="300px" style="border-radius:20px"> --}}
@@ -174,7 +174,7 @@ client
 							<td><strong>Letter:</strong></td>
 							<td>
 								<div class="image-div">
-								<img src="{{asset($client->letter)}}" alt="passport front" height="200px" width="200px" style="border-radius:10px">
+								<img @if(explode('.',$client->letter)[1] != 'pdf') src="{{asset($client->letter)}}" @else src="{{asset('/images/pdf.png')}}" @endif alt="letter" height="200px" width="200px" style="border-radius:10px">
 								<a href="{{asset($client->letter)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
 								</div>
 								{{-- <img src="{{asset($client->letter)}}" alt="letter" height="300px" width="300px" style="border-radius:20px"> --}}
@@ -240,7 +240,7 @@ client
 								<td>
 									@if($family->member_passport_front != null)
 									<div class="image-div">
-									<img src="{{asset($family->member_passport_front)}}" alt="passport front" height="200px" width="200px" style="border-radius:10px">
+									<img @if(explode('.',$family->member_passport_front)[1] != 'pdf') src="{{asset($family->member_passport_front)}}" @else src="{{asset('/images/pdf.png')}}" @endif alt="passport front" height="200px" width="200px" style="border-radius:10px">
 									<a href="{{asset($family->member_passport_front)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
 									</div>
 									@else
@@ -255,7 +255,7 @@ client
 								<td>
 									@if($family->member_passport_back != null)
 									<div class="image-div">
-									<img src="{{asset($family->member_passport_back)}}" alt="passport front" height="200px" width="200px" style="border-radius:10px">
+									<img @if(explode('.',$family->member_passport_back)[1] != 'pdf') src="{{asset($family->member_passport_back)}}" @else src="{{asset('/images/pdf.png')}}" @endifsrc="{{asset($family->member_passport_back)}}" alt="passport front" height="200px" width="200px" style="border-radius:10px">
 									<a href="{{asset($family->member_passport_back)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
 									</div>
 									{{-- <img src="{{asset($family->member_passport_back)}}" alt="passport back" height="300px" width="300px" style="border-radius:20px"> --}}

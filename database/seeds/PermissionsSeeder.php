@@ -14,7 +14,6 @@ class PermissionsSeeder extends Seeder
     public function run()
     {
         Permission::create(['name' => 'View Users']);
-
         Permission::create(['name' => 'View Clients']);
         Permission::create(['name' => 'Create Client']);
         Permission::create(['name' => 'Edit Client']);
@@ -22,12 +21,10 @@ class PermissionsSeeder extends Seeder
         Permission::create(['name' => 'Client Visa Application Status']);
         Permission::create(['name' => 'Client Documents Movement']);
         Permission::create(['name' => 'Update Client Settings']);
-
         Permission::create(['name' => 'View Leads']);
         Permission::create(['name' => 'Create Lead']);
         Permission::create(['name' => 'Edit Lead']);
         Permission::create(['name' => 'Convert Lead']);
-
         Permission::create(['name' => 'View Employees']);
         Permission::create(['name' => 'Create Employee']);
         Permission::create(['name' => 'Edit Employee']);
@@ -36,11 +33,9 @@ class PermissionsSeeder extends Seeder
         Permission::create(['name' => 'Employee Attendance Status']);
         Permission::create(['name' => 'Employee Salary Slip']);
         Permission::create(['name' => 'Staff Wage management']);
-
         Permission::create(['name' => 'Expense Entry']);
         Permission::create(['name' => 'Delete Expense']);
         Permission::create(['name' => 'Auto Deduction Expense Entry']);
-
         Permission::create(['name' => 'View Invoices']);
         Permission::create(['name' => 'Generate Invoice']);
         Permission::create(['name' => 'Edit Invoice']);
@@ -53,23 +48,14 @@ class PermissionsSeeder extends Seeder
         Permission::create(['name' => 'Confirm Invoice']);
         Permission::create(['name' => 'Restore Invoice']);
         Permission::create(['name' => 'Send Reminder For Unpaid Invoice']);
-
         Permission::create(['name' => 'Generate Request']);
-
         Permission::create(['name' => 'VAT Updation']);
-
         Permission::create(['name' => 'Role Management']);
-
         Permission::create(['name' => 'View/Export Reports']);
-
         Permission::create(['name' => 'Generate Letter']);
-
         Permission::create(['name' => 'Direct Chat']);
-
         Permission::create(['name' => 'Services Registration']);
-
         Permission::create(['name' => 'Airlines Name Registration']);
-
         Permission::create(['name' => 'View Departments']);
 
 

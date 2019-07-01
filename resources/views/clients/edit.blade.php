@@ -160,7 +160,7 @@ Edit Client
 							<label for="passport_front">Passport Front</label>
 							<div class="image-outer-div">
 								<img  id="passport_front"
-									src="{{asset($client->passport_front)}}"
+								@if(explode('.',$client->passport_front)[1] != 'pdf') src="{{asset($client->passport_front)}}" @else src="{{asset('/images/pdf.png')}}" @endif
 								alt="passport_front" height="250px" width="250px" style="border-radius:20px">
 								<label for="front" class="upload-icon">
 										<i class="fa fa-camera" aria-hidden="true"></i>
@@ -174,7 +174,7 @@ Edit Client
 							<label for="passport_back">Passport Back</label>
 							<div class="image-outer-div">
 								<img  id="passport_back"
-									src="{{asset($client->passport_back)}}"
+								@if(explode('.',$client->passport_back)[1] != 'pdf') src="{{asset($client->passport_back)}}" @else src="{{asset('/images/pdf.png')}}" @endif
 								alt="passport_back" height="250px" width="250px" style="border-radius:20px">
 								<label for="back" class="upload-icon">
 										<i class="fa fa-camera" aria-hidden="true"></i>
@@ -189,7 +189,7 @@ Edit Client
 							<label for="letter">Letter:</label>
 							<div class="image-outer-div">
 								<img  id="letter"
-									src="{{asset($client->letter)}}"
+								@if(explode('.',$client->letter)[1] != 'pdf') src="{{asset($client->letter)}}" @else src="{{asset('/images/pdf.png')}}" @endif
 								alt="letter" height="250px" width="250px" style="border-radius:20px">
 								<label for="lette" class="upload-icon">
 										<i class="fa fa-camera" aria-hidden="true"></i>

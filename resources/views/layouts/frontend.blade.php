@@ -267,10 +267,10 @@
         @can('View Departments')
           <li><a href="{{route('departments')}}"><i class="fa fa-briefcase"></i><span>Departments</span></a></li>
         @endcan
-        @can('View Clients')
+        @can('View Leads')
           <li><a href="{{route('leads')}}"><i class="fa fa-users"></i><span>Leads</span></a></li>
         @endcan
-        @if(Auth::user()->can('View Clients') or Auth::user()->can('Client Visa Application Status') or Auth::user()->can('Client Documents Movement'))
+        @if(Auth::user()->can('View Clients') or Auth::user()->can('Client Visa Application Status') or Auth::user()->can('Client Documents Movement') or Auth::user()->can('Update Client Settings') or Auth::user()->can('Generate Request'))
         <li class="treeview">
             <a href="">
               <i class="fa fa-user-circle"></i><span>Client Management</span>
@@ -288,17 +288,14 @@
               @can('Client Documents Movement')
                 <li><a href="{{route('clientDocIndex')}}"><i class="fa fa-circle-o"></i>Client Documents Movement</a></li>
               @endcan
-              @can('View Clients')
+              @can('Update Client Settings')
                 <li><a href="{{route('client.settings')}}"><i class="fa fa-circle-o"></i>Client Settings</a></li>
               @endcan
-              @can('View Clients')
+              @can('Generate Request')
                 <li><a href="{{route('requests')}}"><i class="fa fa-circle-o"></i>Client Requests</a></li>
               @endcan
             </ul>
           </li>
-        @endif
-        @if(Auth::user()->client)
-            <li><a href="{{ route('requests') }}"><i class="fa fa-plus-square"></i><span>Generate Request</span></a></li>
         @endif
         @if(Auth::user()->can('View Employees') or Auth::user()->can('Employee Attendance Status') or Auth::user()->can('Employee Salary Slip') or Auth::user()->can('Staff Wage management'))
         <li class="treeview">
@@ -343,7 +340,7 @@
             </ul>
           </li>
         @endif
-        @if(Auth::user()->can('View Invoices') or Auth::user()->can('View Canceled Invoice') or Auth::user()->can('VAT Updation'))
+        @if(Auth::user()->can('View Invoices') or Auth::user()->can('View Canceled Invoice') or Auth::user()->can('VAT Updation') or Auth::user()->can('View Refunded Invoices') or Auth::user()->can('View Invoice Issues'))
           <li class="treeview">
             <a href="">
               <i class="fa fa-wrench"></i><span>Invoices</span>
@@ -358,10 +355,10 @@
               @can('View Canceled Invoice')
                 <li><a href="{{route('canceled.invoices')}}"><i class="fa fa-circle-o"></i>Canceled Invoices</a></li>
               @endif
-              @can('View Canceled Invoice')
+              @can('View Refunded Invoice')
                 <li><a href="{{route('refunded.invoices')}}"><i class="fa fa-circle-o"></i>Refunded Invoices</a></li>
               @endif
-              @can('View Invoices')
+              @can('View Invoice Issues')
                 <li><a href="{{route('invoice.issues')}}"><i class="fa fa-circle-o"></i>Issues</a></li>
               @endcan
               @can('VAT Updation')

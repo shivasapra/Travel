@@ -62,6 +62,7 @@ class clientController extends Controller
     public function store(Request $request)
     {   
         // dd($request->DOB);
+        
         Validator::make($request->all(), [
             'first_name' => 'required',
             'last_name' => 'required',
@@ -221,6 +222,7 @@ class clientController extends Controller
     {
         $client = client::find($id);
         // dd($client);
+        // dd(explode('.',$client->letter));
         return view('clients.show')->with('client',$client);
     }
 
