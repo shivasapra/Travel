@@ -56,9 +56,9 @@ Clients
                           </td>
                           <td>
                             @if($client->reminder == 1)
-                            <a href="{{ url('/stop/reminder', ['id'=>$client->id]) }}" class="btn btn-primary btn-xs">Stop Reminders</a>
+                            <a href="{{ url('/stop/reminder', ['id'=>$client->id]) }}" class="btn btn-primary btn-xs">Stop Payment Reminders</a>
                             @else
-                            <a href="{{ url('/start/reminder', ['id'=>$client->id]) }}" class="btn btn-primary btn-xs">Resume Reminders</a>
+                            <a href="{{ url('/start/reminder', ['id'=>$client->id]) }}" class="btn btn-primary btn-xs">Resume Payment Reminders</a>
                             @endif
                           </td>
                           <td>
