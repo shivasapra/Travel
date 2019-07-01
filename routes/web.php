@@ -106,7 +106,7 @@ Route::post('/chat/store/admin',[
 Route::get('homeWithMessage/{id}',[
 	'uses'=>'HomeController@HomeWithMessage',
 	'as'=>'home.message'
-	])->middleware('permission:Direct Chat');
+	]);
 Route::get('indexWithMessage/{id}',[
 	'uses'=>'ChatController@IndexWithMessage',
 	'as'=>'index.message'
@@ -114,11 +114,13 @@ Route::get('indexWithMessage/{id}',[
 
 
 Route::get('canceled/invoices',['uses'=>'InvoiceController@canceled','as'=>'canceled.invoices'])->middleware('permission:View Canceled Invoice');
-Route::get('refunded/invoices',['uses'=>'InvoiceController@refunded','as'=>'refunded.invoices'])->middleware('permission:View Canceled Invoice');
+Route::get('refunded/invoices',['uses'=>'InvoiceController@refunded','as'=>'refunded.invoices'])->middleware('permission:View Refunded Invoice');
 Route::get('retrieve/invoice/{id}',['uses'=>'InvoiceController@retrieve','as'=>'invoice.retrieve'])->middleware('permission:Restore Invoice');
 Route::get('kill/invoice/{id}',['uses'=>'InvoiceController@kill','as'=>'invoice.kill'])->middleware('permission:Cancel Invoice');
 Route::get('pay/invoice/{id}',['uses'=>'InvoiceController@pay','as'=>'invoice.pay'])->middleware('permission:Pay Invoice');
 Route::post('payy/invoice/{id}',['uses'=>'InvoiceController@payy','as'=>'invoice.payy'])->middleware('permission:Pay Invoice');
+
+
 Route::get('accept/{token}', 'InviteController@accept')->name('accept');
 Route::get('accept/Client/{token}', 'InviteController@acceptClient')->name('acceptClient');
 Route::get('confirm/{token}', 'InviteController@confirm')->name('confirm');
@@ -149,18 +151,19 @@ Route::post('/emergency/message',[
 	'uses' => 'ClientDocController@emergency',
 	'as' => 'emergency'
 ])->middleware('permission:Client Documents Movement');
+
 Route::get('/requests',[
 	'uses'=> 'ClientController@requests',
 	'as'=>'requests'
-]);
+])->middleware('permission:Generate Request');
 Route::post('/requests/generate',[
 	'uses'=> 'ClientController@requestsGenerate',
 	'as'=>'requests.generate'
-]);
+])->middleware('permission:Generate Request');
 Route::post('/requests/status/save/{id}',[
 	'uses'=> 'ClientController@requestStatusSave',
 	'as'=>'request.status.save'
-]);
+])->middleware('permission:Generate Request');
 // Route::get('/aslam', function () {
 //     event(new App\Events\NewClientRequest('shiva','Hotel'));
 //     return "Event has been sent!";
@@ -399,7 +402,7 @@ Route::post('/employee/store',[
 Route::post('/employee/update/{id}',[
 		'uses' => 'employeeController@update',
 		'as' => 'update.employee'
-		])->middleware('permission:Create Employee');
+		])->middleware('permission:Edit Employee');
 Route::get('/employee/edit/{id}',[
 		'uses' => 'employeeController@edit',
 		'as' => 'edit.employee'
@@ -470,11 +473,11 @@ Route::get('/resend/client/passport/confirmation/{id}',[
 Route::get('/client/settings',[
     'uses' => 'clientController@clientSettings',
     'as' => 'client.settings'
-])->middleware('permission:View Clients');
+])->middleware('permission:Update Client Settings');
 Route::post('/client/settings/update',[
     'uses' => 'clientController@clientSettingsUpdate',
     'as' => 'client.settings.update'
-])->middleware('permission:View Clients');
+])->middleware('permission:Update Client Settings');
 // Route::get('/client/delete/{id}',[
 // 		'uses' => 'clientController@destroy',
 // 		'as' => 'delete.client'
@@ -534,7 +537,7 @@ Route::get('/expense/delete/{id}',[
 
 
 
-Route::get('/send-invoice-pdf-mail', 'InvoiceController@sendPdfInvoice');
+// Route::get('/send-invoice-pdf-mail', 'InvoiceController@sendPdfInvoice');
 Route::get('/invoice',[
 	'uses'=>'InvoiceController@index',
 	'as'=>'invoice'
@@ -543,10 +546,10 @@ Route::get('/invoice/view/{id}',[
 	'uses'=>'InvoiceController@show',
 	'as'=>'invoice.view'
     ])->middleware('permission:View Invoices');
-    Route::get('/test/{id}',[
-        'uses'=>'InvoiceController@test',
-        'as'=>'test'
-        ])->middleware('permission:View Invoices');
+    // Route::get('/test/{id}',[
+    //     'uses'=>'InvoiceController@test',
+    //     'as'=>'test'
+    //     ])->middleware('permission:View Invoices');
 Route::get('/invoice/print/{id}',[
 			'uses'=> 'InvoiceController@invoicePrint',
 			'as'=>'invoice.print'
@@ -566,7 +569,7 @@ Route::get('/delete/invoice/{id}',[
 	Route::post('/refund/invoice/{id}',[
 		'uses'=>'InvoiceController@refund',
 		'as'=>'invoice.refund'
-		])->middleware('permission:Cancel Invoice');
+		])->middleware('permission:Refund Invoice');
 Route::get('/edit/invoice/{id}',[
 	'uses'=>'InvoiceController@edit',
 	'as'=>'invoice.edit'
@@ -579,27 +582,27 @@ Route::get('/invoice/reminder/{id}',[
 	'uses'=>'InvoiceController@reminder',
 	'as'=>'invoice.reminder'
 	])->middleware('permission:Send Reminder For Unpaid Invoice');
-Route::get('/generate/invoice/pdf/{id}',[
-	'uses'=> 'InvoiceController@generatePdf',
-	'as'=>'pdf.invoice'
-	])->middleware('permission:View Invoices');
-Route::get('/invoice/print',[
-			'uses'=> 'InvoiceController@invoicePrint',
-			'as'=>'invoice.print'
-		])->middleware('permission:View Invoices');
+// Route::get('/generate/invoice/pdf/{id}',[
+// 	'uses'=> 'InvoiceController@generatePdf',
+// 	'as'=>'pdf.invoice'
+// 	])->middleware('permission:View Invoices');
+// Route::get('/invoice/print',[
+// 			'uses'=> 'InvoiceController@invoicePrint',
+// 			'as'=>'invoice.print'
+// 		])->middleware('permission:View Invoices');
 
 		Route::get('/invoice/issues',[
 			'uses'=> 'InvoiceController@invoiceIssues',
 			'as'=>'invoice.issues'
-		])->middleware('permission:View Invoices');
+		])->middleware('permission:View Invoice Issues');
 		Route::get('/invoice/issue/{id}',[
 			'uses'=> 'InvoiceController@invoiceIssue',
 			'as'=>'invoice.issue'
-		])->middleware('permission:View Invoices');
+		])->middleware('permission:View Invoice Issues');
 		Route::get('/invoice/confirm-via/paper-print/{id}',[
 			'uses'=> 'InvoiceController@confirmViaPaperPrint',
 			'as'=>'confirm.via.paperprint'
-		])->middleware('permission:View Invoices');
+		])->middleware('permission:Confirm Invoice');
 
 
 Route::get('/departments',[
@@ -632,32 +635,32 @@ Route::get('/departments/{slug}',[
 	Route::get('/leads',[
 		'uses' => 'LeadsController@index',
 		'as' => 'leads'
-	]);
+	])->middleware('permission:View Leads');
 	Route::get('/lead/create',[
 		'uses' => 'LeadsController@create',
 		'as' => 'lead.create'
-	]);
+	])->middleware('permission:Create Lead');
 	Route::post('/lead/store',[
 		'uses' => 'LeadsController@store',
 		'as' => 'lead.store'
-	]);
+	])->middleware('permission:Create Lead');
 	Route::get('/lead/show/{id}',[
 		'uses' => 'LeadsController@show',
 		'as' => 'lead.show'
-	]);
+	])->middleware('permission:View Leads');
 	Route::get('/lead/edit/{id}',[
 		'uses' => 'LeadsController@edit',
 		'as' => 'lead.edit'
-	]);
+	])->middleware('permission:Edit Lead');
 	Route::post('/lead/update/{id}',[
 		'uses' => 'LeadsController@update',
 		'as' => 'lead.update'
-	]);
+	])->middleware('permission:Edit Lead');
 	Route::get('/lead/convert/form/{id}',[
 		'uses' => 'LeadsController@convertForm',
 		'as' => 'lead.convert.form'
-	]);
+	])->middleware('permission:Convert Lead');
 	Route::post('/lead/convert',[
 		'uses' => 'LeadsController@convert',
 		'as' => 'lead.convert'
-	]);
+	])->middleware('permission:Convert Lead');

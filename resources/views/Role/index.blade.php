@@ -45,9 +45,9 @@ Role Management
                             <td>{{$rol->name}}</td>
                             <td>
                                 {{-- <button type="button" class="btn btn-xs btn-success" onClick="findRole({{$role->id}})" >Permissions</button> --}}
-                                @if($rol->name != 'Admin')
                                 <a href="{{route('find.role',['id'=>$rol->id])}}" class="btn btn-xs btn-success">Permissions</a>
-                                <a href="{{route('role.delete',['id'=>$rol->id])}}" class="btn btn-xs btn-danger">Delete Role</a>
+                                @if($rol->name != 'Admin')
+                                    <a href="{{route('role.delete',['id'=>$rol->id])}}" class="btn btn-xs btn-danger">Delete Role</a>
                                 @endif
                             </td>
                         </tr>
@@ -74,6 +74,7 @@ Role Management
                             <tr>
                             <th>Sno.</th>
                             <th>Name</th>
+                            <th>##</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -93,22 +94,34 @@ Role Management
                             <tr>
                                 <th>{{$i++}}.</th>
                                 <td>{{$permission->name}}</td>
-                                <td>
-                                    {{-- <input type="checkbox"  value="{{$permission->name}}" name="permissions[]" @if($role->hasPermissionTo($permission->name)) checked @endif> --}}
-                                    <a 
-                                    @if($role->hasPermissionTo($permission->name))
-                                        href="{{route('revoke.permissions',['id'=>$role->id, 'permission_id'=>$permission->id])}}"
-                                    @else
-                                        href="{{route('assign.permissions',['id'=>$role->id, 'permission_id'=>$permission->id])}}"
-                                    @endif
+                                @if($rol->name != 'Admin')
+                                    <td>
+                                        {{-- <input type="checkbox"  value="{{$permission->name}}" name="permissions[]" @if($role->hasPermissionTo($permission->name)) checked @endif> --}}
+                                        <a 
+                                        @if($role->hasPermissionTo($permission->name))
+                                            href="{{route('revoke.permissions',['id'=>$role->id, 'permission_id'=>$permission->id])}}"
+                                        @else
+                                            href="{{route('assign.permissions',['id'=>$role->id, 'permission_id'=>$permission->id])}}"
+                                        @endif
 
+                                        @if($role->hasPermissionTo($permission->name)) 
+                                            class="btn btn-sm btn-success" 
+                                        @else 
+                                            class="btn btn-sm btn-danger" 
+                                        @endif 
+                                        style="border-radius:50%"></a>
+                                    </td>
+                                @else
+                                <td>
+                                    <button  type="button"
                                     @if($role->hasPermissionTo($permission->name)) 
                                         class="btn btn-sm btn-success" 
                                     @else 
                                         class="btn btn-sm btn-danger" 
                                     @endif 
-                                    style="border-radius:50%"></a>
+                                    style="border-radius:50%"></button>
                                 </td>
+                                @endif
                             </tr>
                             @endforeach
                             @endif

@@ -21,6 +21,12 @@ class PermissionsSeeder extends Seeder
         Permission::create(['name' => 'Client Notification Reminder Toggle']);
         Permission::create(['name' => 'Client Visa Application Status']);
         Permission::create(['name' => 'Client Documents Movement']);
+        Permission::create(['name' => 'Update Client Settings']);
+
+        Permission::create(['name' => 'View Leads']);
+        Permission::create(['name' => 'Create Lead']);
+        Permission::create(['name' => 'Edit Lead']);
+        Permission::create(['name' => 'Convert Lead']);
 
         Permission::create(['name' => 'View Employees']);
         Permission::create(['name' => 'Create Employee']);
@@ -40,9 +46,15 @@ class PermissionsSeeder extends Seeder
         Permission::create(['name' => 'Edit Invoice']);
         Permission::create(['name' => 'Pay Invoice']);
         Permission::create(['name' => 'Cancel Invoice']);
+        Permission::create(['name' => 'Refund Invoice']);
         Permission::create(['name' => 'View Canceled Invoice']);
+        Permission::create(['name' => 'View Refunded Invoice']);
+        Permission::create(['name' => 'View Invoice Issues']);
+        Permission::create(['name' => 'Confirm Invoice']);
         Permission::create(['name' => 'Restore Invoice']);
         Permission::create(['name' => 'Send Reminder For Unpaid Invoice']);
+
+        Permission::create(['name' => 'Generate Request']);
 
         Permission::create(['name' => 'VAT Updation']);
 
@@ -62,14 +74,20 @@ class PermissionsSeeder extends Seeder
 
 
 
+
         $role_admin = Role::create(['name'=>'Admin']);
         $role_admin->givePermissionTo('View Users');
         $role_admin->givePermissionTo('View Clients');
         $role_admin->givePermissionTo('Create Client');
         $role_admin->givePermissionTo('Edit Client');
+        $role_admin->givePermissionTo('View Leads');
+        $role_admin->givePermissionTo('Convert Lead');
+        $role_admin->givePermissionTo('Create Lead');
+        $role_admin->givePermissionTo('Edit Lead');
         $role_admin->givePermissionTo('Client Notification Reminder Toggle');
         $role_admin->givePermissionTo('Client Visa Application Status');
         $role_admin->givePermissionTo('Client Documents Movement');
+        $role_admin->givePermissionTo('Update Client Settings');
         $role_admin->givePermissionTo('View Employees');
         $role_admin->givePermissionTo('Create Employee');
         $role_admin->givePermissionTo('Edit Employee');
@@ -86,9 +104,13 @@ class PermissionsSeeder extends Seeder
         $role_admin->givePermissionTo('Edit Invoice');
         $role_admin->givePermissionTo('Pay Invoice');
         $role_admin->givePermissionTo('Cancel Invoice');
+        $role_admin->givePermissionTo('Refund Invoice');
         $role_admin->givePermissionTo('View Canceled Invoice');
+        $role_admin->givePermissionTo('View Refunded Invoice');
         $role_admin->givePermissionTo('Restore Invoice');
         $role_admin->givePermissionTo('Send Reminder For Unpaid Invoice');
+        $role_admin->givePermissionTo('View Invoice Issues');
+        $role_admin->givePermissionTo('Confirm Invoice');
         $role_admin->givePermissionTo('VAT Updation');
         $role_admin->givePermissionTo('View/Export Reports');
         $role_admin->givePermissionTo('Generate Letter');
@@ -97,6 +119,7 @@ class PermissionsSeeder extends Seeder
         $role_admin->givePermissionTo('Services Registration');
         $role_admin->givePermissionTo('Airlines Name Registration');
         $role_admin->givePermissionTo('View Departments');
+        $role_admin->givePermissionTo('Generate Request');
 
         User::find(1)->assignRole('Admin');
         User::find(2)->assignRole('Admin');
