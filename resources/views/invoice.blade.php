@@ -678,8 +678,10 @@ Invoice
             @endif
           </div>
           <div class="col-md-12">
-            <h4><b>Remarks:</b></h4>
-            <p>{{$invoice->remarks}}</p><br>
+            @if($invoice->remarks != null)
+              <h4><b>Remarks:</b></h4>
+              <p>{{$invoice->remarks}}</p><br>
+            @endif
             <h4><b>Notes:</b></h4>
             <ul>
               <li>This sale is covered by ATOL number 3853.</li>
