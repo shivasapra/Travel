@@ -81,25 +81,57 @@ html { -webkit-text-size-adjust: none; -ms-text-size-adjust: none;}
                               <span style="font-family: 'Source Sans Pro', Arial, Tahoma, Geneva, sans-serif; color: #26ace2;font-weight:700; font-size: 50px;text-transform:uppercase;">Thank you!</span><br>
                               <span style="color:#333;font-size:23px;font-family: 'Source Sans Pro', Arial, Tahoma, Geneva, sans-serif;font-weight:600;">for Sign Up</span>
                            </font> -->
-                           <p style="font-family: 'Source Sans Pro', Arial, Tahoma, Geneva, sans-serif; font-size:16px;"><b>Your Passport Details:</b><br>
-                           <b>Name:</b> {{$client->first_name.' '.$client->last_name}}<br>
-                           <b>Passport No:</b>{{$client->passport_no}}<br>
-                           <b>Place Of Issue:</b>{{$client->passport_place}}<br>
-                           <b>Date Of Issue:</b>{{$client->passport_issue_date}}<br>
-                           <b>Expiry Date:</b>{{$client->passport_expiry_date}}<br>
-                           <b>Expiry Date:</b>{{$client->passport_expiry_date}}<br><br>
-                           </p>
-                           <p style="font-family: 'Source Sans Pro', Arial, Tahoma, Geneva, sans-serif; font-size:16px;"><b>Passport Front:</b><br></p>
-                           <div class="image-div">
-                              <img src="{{asset($client->passport_front)}}" alt="passport front" height="200px" width="200px" style="border-radius:10px">
-                              <a href="{{asset($client->passport_front)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
-                              </div>
-                           <p style="font-family: 'Source Sans Pro', Arial, Tahoma, Geneva, sans-serif; font-size:16px;"><b>Passport Back:</b><br></p>
-                           <div class="image-div">
-                              <img src="{{asset($client->passport_back)}}" alt="passport back" height="200px" width="200px" style="border-radius:10px">
-                              <a href="{{asset($client->passport_back)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
-                              </div>
-                           <hr>
+                           <table class="table table-bordered">
+                              <thead>
+                                 <th>Name</th>
+                                 <th>Passport No</th>
+                                 <th>Place Of Issue</th>
+                                 <th>Date Of Issue</th>
+                                 <th>Expiry Date</th>
+                                 <th>Passport Front</th>
+                                 <th>Passport Back</th>
+                              </thead>
+                              <tbody>
+                                 <td>{{$client->first_name.' '.$client->last_name}}</td>
+                                 <td>{{$client->passport_no}}</td>
+                                 <td>{{$client->passport_place}}</td>
+                                 <td>{{$client->passport_issue_date}}</td>
+                                 <td>{{$client->passport_expiry_date}}</td>
+                                 <td>
+                                    <div class="image-div">
+                                       <img src="{{asset($client->passport_front)}}" alt="passport front" height="200px" width="200px" style="border-radius:10px">
+                                       <a href="{{asset($client->passport_front)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
+                                    </div>
+                                 </td>
+                                 <td>
+                                    <div class="image-div">
+                                       <img src="{{asset($client->passport_back)}}" alt="passport back" height="200px" width="200px" style="border-radius:10px">
+                                       <a href="{{asset($client->passport_back)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
+                                    </div>
+                                 </td>
+                              </tbody>
+                              @if($client->family->count()>0)
+                                 @foreach($client->familty as $family)
+                                    <td>{{$faimly->member_name}}</td>
+                                    <td>{{$family->member_passport_no}}</td>
+                                    <td>{{$family->member_passport_place}}</td>
+                                    <td>{{'N/A'}}</td>
+                                    <td>{{'N/A'}}</td>
+                                    <td>
+                                       <div class="image-div">
+                                          <img src="{{asset($family->member_passport_front)}}" alt="member_passport front" height="200px" width="200px" style="border-radius:10px">
+                                          <a href="{{asset($family->member_passport_front)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
+                                       </div>
+                                    </td>
+                                    <td>
+                                       <div class="image-div">
+                                          <img src="{{asset($family->member_passport_back)}}" alt="member_passport back" height="200px" width="200px" style="border-radius:10px">
+                                          <a href="{{asset($family->member_passport_back)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
+                                       </div>
+                                    </td>
+                                 @endforeach
+                              @endif
+                           </table>
                            <div style="height: 33px; line-height: 33px; font-size: 31px;">&nbsp;</div>
                            <font face="'Source Sans Pro', sans-serif" color="#585858" style="font-size: 20px; line-height: 21px;">
                               <span style="font-family: 'Source Sans Pro', Arial, Tahoma, Geneva, sans-serif; color: #585858; font-size: 20px; line-height: 28px;">We need your permission to keep your passport details to inform you in future when your passport is going to expire. If you are happy to proceed please give your consent by clicking below button.<br><a href="{{ route('confirm', $token) }}" style="color: #fff;background-color: green;text-decoration: none;padding: 10px 20px;
