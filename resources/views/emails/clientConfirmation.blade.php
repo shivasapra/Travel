@@ -19,7 +19,7 @@
 html {-webkit-text-size-adjust: none; -ms-text-size-adjust: none;}
 body{ font-size:16px;}
 	@media only screen and (min-device-width: 750px) {
-		.table750 {width: 750px !important;}
+		.table750 {width: 850px !important;}
 	}
 	@media only screen and (max-device-width: 750px), only screen and (max-width: 750px){
       table[class="table750"] {width: 100% !important;}
@@ -36,13 +36,13 @@ body{ font-size:16px;}
    @media only screen and (max-device-width: 550px), only screen and (max-width: 550px){
       .mod_div {display: block !important;}
    }
-	.table750 {width: 750px;}
+	.table750 {width: 850px;}
    .details-table th, .details-table td{padding:10px;}
 </style>
 </head>
 <body style="margin: 0; padding: 0;">
 
-<table cellpadding="0" cellspacing="0" border="0" width="100%" style="background: #f3f3f3; min-width: 350px; font-size: 1px; line-height: normal;">
+<table cellpadding="0" cellspacing="0" border="0" width="100%" style="background: #f3f3f3; min-width: 550px; font-size: 1px; line-height: normal;">
  	<tr>
    	<td align="center" valign="top">   			
    		<!--[if (gte mso 9)|(IE)]>
