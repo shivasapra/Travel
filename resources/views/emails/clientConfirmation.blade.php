@@ -16,6 +16,9 @@
 <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
 <style type="text/css">
 html { -webkit-text-size-adjust: none; -ms-text-size-adjust: none;}
+body{
+   font-size:16px;
+}
 
 	@media only screen and (min-device-width: 750px) {
 		.table750 {width: 750px !important;}
