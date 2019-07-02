@@ -81,7 +81,7 @@
 <div class="container outer-div-inner" style="background-color:#fff;padding:30px;box-shadow:0px 0px 40px rgba(0,0,0,0.05);">
     <div class="row">
         <div class="col-md-12 text-center">
-            <h1>Performa Invoice</h1>
+            <h1>@if($token != null)Performa Invoice @endif</h1>
         </div>
     </div>
 <div class="row" style="border-bottom:1px solid #797777;padding-bottom:10px;margin-bottom:10px;">
@@ -478,7 +478,7 @@
           <p class="mb-1"><b>{{ $invoice->currency}}{{ $invoice->VAT_amount }}:</b></p>
         @endif
         @endif
-        <p class="mb-1"><b>{{ $invoice->currency}}</b></p>
+        <p class="mb-1"><b>{{ $invoice->currency}}{{number_format( (float) ($invoice->discounted_total + $invoice->VAT_amount), 2, '.', '')}}</b></p>
       @if($invoice->paid != 0)
           <p class="mb-1"><b>{{ $invoice->currency}}{{$invoice->paid}}</b></p>
       @endif
