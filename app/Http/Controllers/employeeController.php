@@ -189,10 +189,10 @@ class employeeController extends Controller
         
         // send the email
         $contactEmail = $employee->email;
-        $data = array('token'=>$token);
-        Mail::send('emails.invite', $data, function($message) use ($contactEmail)
+        $data = array('token'=>$token, 'name' => $employee->first_name.' '.$employee->last_name);
+        Mail::send('emails.inviteClient', $data, function($message) use ($contactEmail)
         {  
-            $message->to($contactEmail);
+            $message->to($contactEmail)->subject('Activate Your Account!!');
         });
         // Mail::to($employee->email)->send(new InviteCreated($invite));
         Session::flash('success','Employee created Successfully');

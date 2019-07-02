@@ -587,4 +587,17 @@ class clientController extends Controller
         Session::flash('success','Client Deactivated');
         return redirect()->back();
     }
+
+    public function resendCredentials($id){
+        $user = client::find($id)->user;
+        $data =array('email'=>$user->email,'name'=>$user->name);
+        $contactEmail = $user->email;
+        // Hash::check($request->password,Auth::user()->password);
+        Mail::send('emails.credentials', $data, function($message) use ($contactEmail)
+        {
+            $message->to($contactEmail)->subject('You Have Been Registered!!');
+        });
+        Session::flash('success','Credentials Resent!!');
+        return redirect()->back();
+    }
 }

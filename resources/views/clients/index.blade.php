@@ -75,6 +75,7 @@ Clients
 															@else
 															  <a onClick="return confirm('Are You Sure You Want To Activate This Client')" href="{{route('activateClient',['id'=>$client->id])}}" class="btn btn-success btn-xs">Activate</a>
                               @endif
+                              <br><a href="{{route('resend.credentials',['id'=>$client->id])}}" class="btn btn-info btn-xs">Resend Credentials</a>
                             @endcan
                             @else
                               <span class="text-warning"><strong>Not Yet Verified</strong></span>

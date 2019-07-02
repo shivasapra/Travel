@@ -33,7 +33,12 @@ class InviteController extends Controller
 
         // delete the invite so it can't be used again
         $invite->delete();
-
+        $data =array('email'=>$user->email,'name'=>$user->name);
+        $contactEmail = $user->email;
+        Mail::send('emails.credentials', $data, function($message) use ($contactEmail)
+        {
+            $message->to($contactEmail)->subject('You Have Been Registered!!');
+        });
         // here you would probably log the user in and show them the dashboard, but we'll just prove it worked
 
         return view('ThankYou')->with('name',$employee[0]->first_name.' '.$employee[0]->last_name);

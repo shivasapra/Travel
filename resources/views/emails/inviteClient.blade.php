@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
-<title>Mailto</title>
+<title>Cloud Travels Uk</title>
 <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
 <style type="text/css">
 html { -webkit-text-size-adjust: none; -ms-text-size-adjust: none;}

@@ -131,5 +131,6 @@ class PermissionsSeeder extends Seeder
         $role_client->givePermissionTo('View/Export Reports');
         $role_client->givePermissionTo('View Invoices');
         $role_client->givePermissionTo('Edit Client');
+        $role_client->givePermissionTo('Direct Chat');
     }
 }

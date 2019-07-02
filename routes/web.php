@@ -254,6 +254,10 @@ Route::get('/deactivate/client/{id}',[
 	'uses'=> 'clientController@deactivate',
 	'as'=>'deactivateClient'
 ])->middleware('permission:Activate/Deactivate Client');
+Route::get('/resend/credentials/to/client/{id}',[
+	'uses'=> 'clientController@resendCredentials',
+	'as'=>'resend.credentials'
+])->middleware('permission:Activate/Deactivate Client');
 // Route::get('/search/client',['as'=>'searchClient'],function(){
 // 	dd(true);
 // 	$clients = App\client::where('first_name', 'like', '%'.request('client_name').'%')->get();
