@@ -1125,10 +1125,11 @@ public function AirportSearch(Request $request){
             'token' => null
         ];
         $contactEmail = $invoice->client->email;
-    Mail::send('emails.invoice', $data, function($message) use ($contactEmail)
-    {
-        $message->to($contactEmail)->subject('Commercial Invoice!!');
-    });
-
+        Mail::send('emails.invoice', $data, function($message) use ($contactEmail)
+        {
+            $message->to($contactEmail)->subject('Commercial Invoice!!');
+        });
+        Session::flash('success','Commercial Invoice Sent!!');
+        return redirect()->back();
     }
 }
