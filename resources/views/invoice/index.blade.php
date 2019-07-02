@@ -110,7 +110,7 @@ Invoices
 		</div>
 		<div class="text-center">
 			<a href="{{route('invoice.create')}}">
-				@can('Create Invoice')
+				@can('Generate Invoice')
 					<button class="btn btn-success">Create</button>
 				@endcan
 			</a>
