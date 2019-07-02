@@ -29,7 +29,8 @@ class clientController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
+        // Auth::loginUsingId(2);
         if (Auth::user()->admin) {
             $clients = client::orderBy('id','desc')->get();
         }

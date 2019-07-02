@@ -82,7 +82,7 @@ Role Management
                             </tr>
                         </thead>
                         <tbody>
-                            @if($permissions->count() == 0 and $role != null)
+                            @if($permissions->count()>0 and $role == null)
                             <?php $i = 1; ?>
                             @foreach($permissions as $permission)
                             <tr>
