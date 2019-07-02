@@ -3,6 +3,12 @@ body{
     font-family: 'Open Sans', sans-serif !important;
     font-size:14px;
 }
+.add-employee-list .list-group-item.active a{
+    color:#fff;
+}
+.add-employee-list .list-group-item a{
+    color:#333;
+}
 .image-div{
     position:relative;
     width:200px;
