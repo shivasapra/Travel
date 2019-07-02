@@ -1103,13 +1103,13 @@ public function AirportSearch(Request $request){
 
     public function SendCommercialInvoice($id){
         $invoice = invoice::find($id);
-        $visa = $invoice->invoiceInfo->where('service_name','Visa Services')->get();
-        $hotel = $invoice->invoiceInfo->where('service_name','Hotel')->get();
-        $insurance = $invoice->invoiceInfo->where('service_name','Insurance')->get();
-        $local_sight_sceen = $invoice->invoiceInfo->where('service_name','Local Sight Sceen')->get();
-        $local_transport = $invoice->invoiceInfo->where('service_name','Local Transport')->get();
-        $car_rental = $invoice->invoiceInfo->where('service_name','Car Rental')->get();
-        $other_facilities = $invoice->invoiceInfo->where('service_name','Other Facilities')->get();
+        $visa = $invoice->invoiceInfo->where('service_name','Visa Services');
+        $hotel = $invoice->invoiceInfo->where('service_name','Hotel');
+        $insurance = $invoice->invoiceInfo->where('service_name','Insurance');
+        $local_sight_sceen = $invoice->invoiceInfo->where('service_name','Local Sight Sceen');
+        $local_transport = $invoice->invoiceInfo->where('service_name','Local Transport');
+        $car_rental = $invoice->invoiceInfo->where('service_name','Car Rental');
+        $other_facilities = $invoice->invoiceInfo->where('service_name','Other Facilities');
         $data = [
             'tax'=> settings::all(),
             'invoice'=> invoice::find($invoice->id),
