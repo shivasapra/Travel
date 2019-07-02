@@ -33,7 +33,7 @@ Role Management
                         <tr>
                         <th>Sno.</th>
                         <th>Name</th>
-                        <th>##</th>
+                        <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -76,7 +76,9 @@ Role Management
                             <tr>
                             <th>Sno.</th>
                             <th>Name</th>
-                            <th>##</th>
+                            @if($permissions->count()>0 and $role == null)
+                            <th>Permissions</th>
+                            @endif
                             </tr>
                         </thead>
                         <tbody>
