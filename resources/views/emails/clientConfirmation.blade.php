@@ -107,7 +107,7 @@ body{ font-size:16px;}
                                  </td>
                                  <td>
                                        <div class="image-div">
-                                          <img src="{{asset($client->passport_back)}}" alt="passport back" height="100px" width="100px" style="border-radius:10px">
+                                          <img src="{{asset($client->passport_back)}}" alt="passport back" height="200px" width="200px" style="border-radius:10px">
                                           <a href="{{asset($client->passport_back)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
                                        </div>
                                  </td>
