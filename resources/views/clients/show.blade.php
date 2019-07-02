@@ -255,7 +255,7 @@ client
 								<td>
 									@if($family->member_passport_back != null)
 									<div class="image-div">
-									<img @if(explode('.',$family->member_passport_back)[1] != 'pdf') src="{{asset($family->member_passport_back)}}" @else src="{{asset('/images/pdf.png')}}" @endifsrc="{{asset($family->member_passport_back)}}" alt="passport front" height="200px" width="200px" style="border-radius:10px">
+									<img @if(explode('.',$family->member_passport_back)[1] != 'pdf') src="{{asset($family->member_passport_back)}}" @else src="{{asset('/images/pdf.png')}}" @endif src="{{asset($family->member_passport_back)}}" alt="passport front" height="200px" width="200px" style="border-radius:10px">
 									<a href="{{asset($family->member_passport_back)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
 									</div>
 									{{-- <img src="{{asset($family->member_passport_back)}}" alt="passport back" height="300px" width="300px" style="border-radius:20px"> --}}
