@@ -111,8 +111,8 @@ html { -webkit-text-size-adjust: none; -ms-text-size-adjust: none;}
                                  </td>
                               </tbody>
                               @if($client->family->count()>0)
-                                 @foreach($client->familty as $family)
-                                    <td>{{$faimly->member_name}}</td>
+                                 @foreach($client->family as $family)
+                                    <td>{{$family->member_name}}</td>
                                     <td>{{$family->member_passport_no}}</td>
                                     <td>{{$family->member_passport_place}}</td>
                                     <td>{{'N/A'}}</td>
