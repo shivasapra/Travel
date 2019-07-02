@@ -76,13 +76,13 @@ Role Management
                             <tr>
                             <th>Sno.</th>
                             <th>Name</th>
-                            @if($permissions->count()>0 and $role == null)
+                            @if($role != null)
                             <th>Permissions</th>
                             @endif
                             </tr>
                         </thead>
                         <tbody>
-                            @if($permissions->count()>0 and $role == null)
+                            @if($permissions->count() == 0 and $role != null)
                             <?php $i = 1; ?>
                             @foreach($permissions as $permission)
                             <tr>
