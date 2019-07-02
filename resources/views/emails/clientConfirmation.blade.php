@@ -93,7 +93,7 @@ html { -webkit-text-size-adjust: none; -ms-text-size-adjust: none;}
                            <div class="image-div">
                               <img src="{{asset($client->passport_front)}}" alt="passport front" height="200px" width="200px" style="border-radius:10px">
                               <a href="{{asset($client->passport_front)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
-                              </div>
+                              </div>0
                            <b>Passport Back:</b><div class="image-div">
                               <img src="{{asset($client->passport_back)}}" alt="passport back" height="200px" width="200px" style="border-radius:10px">
                               <a href="{{asset($client->passport_back)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
