@@ -104,13 +104,13 @@ body{ font-size:16px;}
                                  <td>{{$client->passport_expiry_date}}</td>
                                  <td>
                                        <div class="image-div">
-                                    <img src="{{asset($client->passport_front)}}" alt="passport front" height="100px" width="100px" style="border-radius:10px">
+                                    <img src="{{asset($client->passport_front)}}" alt="passport front" height="150px" width="150px" style="border-radius:10px">
                                     <a href="{{asset($client->passport_front)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
                                        </div>
                                  </td>
                                  <td>
                                        <div class="image-div">
-                                          <img src="{{asset($client->passport_back)}}" alt="passport back" height="100px" width="100px" style="border-radius:10px">
+                                          <img src="{{asset($client->passport_back)}}" alt="passport back" height="150px" width="150px" style="border-radius:10px">
                                           <a href="{{asset($client->passport_back)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
                                        </div>
                                  </td>
@@ -125,13 +125,13 @@ body{ font-size:16px;}
                                  <td>{{'N/A'}}</td>
                                  <td>
                                        <div class="image-div">
-                                       <img src="{{asset($family->member_passport_front)}}" alt="member_passport front" height="100px" width="100px" style="border-radius:10px">
+                                       <img src="{{asset($family->member_passport_front)}}" alt="member_passport front" height="150px" width="150px" style="border-radius:10px">
                                        <a href="{{asset($client->member_passport_front)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
                                        </div>
                                  </td>
                                  <td>   
                                     <div class="image-div">
-                                       <img src="{{asset($family->member_passport_back)}}" alt="member_passport back" height="100px" width="100px" style="border-radius:10px">   
+                                       <img src="{{asset($family->member_passport_back)}}" alt="member_passport back" height="150px" width="150px" style="border-radius:10px">   
                                        <a href="{{asset($client->member_passport_back)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
                                        </div>
                                  </td>
