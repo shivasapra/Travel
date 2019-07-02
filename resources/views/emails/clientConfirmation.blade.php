@@ -37,7 +37,7 @@ body{ font-size:16px;}
       .mod_div {display: block !important;}
    }
 	.table750 {width: 750px;}
-   .table tr, .table td{padding:5px;}
+   .table th, .table td{padding:10px;}
 </style>
 </head>
 <body style="margin: 0; padding: 0;">
@@ -107,7 +107,7 @@ body{ font-size:16px;}
                                  </td>
                                  <td>
                                        <div class="image-div">
-                                          <img src="{{asset($client->passport_back)}}" alt="passport back" height="200px" width="200px" style="border-radius:10px">
+                                          <img src="{{asset($client->passport_back)}}" alt="passport back" height="100px" width="100px" style="border-radius:10px">
                                           <a href="{{asset($client->passport_back)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
                                        </div>
                                  </td>
