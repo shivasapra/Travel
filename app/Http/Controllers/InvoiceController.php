@@ -1100,4 +1100,35 @@ public function AirportSearch(Request $request){
         Session::flash('success','Invoice Confirmed!!');
         return redirect()->back();
     }
+
+    public function SendCommercialInvoice($id){
+        $invoice = invoice::find($id);
+        $visa = $invoice->invoiceInfo->where('service_name','Visa Services')->get();
+        $hotel = $invoice->invoiceInfo->where('service_name','Hotel')->get();
+        $insurance = $invoice->invoiceInfo->where('service_name','Insurance')->get();
+        $local_sight_sceen = $invoice->invoiceInfo->where('service_name','Local Sight Sceen')->get();
+        $local_transport = $invoice->invoiceInfo->where('service_name','Local Transport')->get();
+        $car_rental = $invoice->invoiceInfo->where('service_name','Car Rental')->get();
+        $other_facilities = $invoice->invoiceInfo->where('service_name','Other Facilities')->get();
+        $data = [
+            'tax'=> settings::all(),
+            'invoice'=> invoice::find($invoice->id),
+            'products'=> products::all(),
+            'airlines'=> airlines::all(),
+            'visa' => $visa,
+            'hotel' => $hotel,
+            'insurance' =>$insurance,
+            'local_sight_sceen' => $local_sight_sceen,
+            'local_transport' => $local_transport,
+            'car_rental' => $car_rental,
+            'other_facilities' => $other_facilities,
+            'token' => null
+        ];
+        $contactEmail = $invoice->client->email;
+    Mail::send('emails.invoice', $data, function($message) use ($contactEmail)
+    {
+        $message->to($contactEmail)->subject('Commercial Invoice!!');
+    });
+
+    }
 }

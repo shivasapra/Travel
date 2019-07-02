@@ -86,7 +86,8 @@ Invoices
 									@endcan
 									<td>
 									@if($invoice->confirmation)
-									<span class="text-success"><b>{{'Confirmed By Client'}}</b><br>Through: <br>{{$invoice->confirmation_via}}</span>
+									<span class="text-success"><b>{{'Confirmed By Client'}}</b><br>Through: <br>{{$invoice->confirmation_via}}</span><br>
+									<a href="{{route('send.commercial.invoice',['id'=>$invoice->id])}}" class="btn btn-xs btn-success">Send Commercial Invoice</a>
 									@else
 										<span class="text-danger"><b>{{'Not Yet Confirmed By Client'}}</b></span>
 										<br>

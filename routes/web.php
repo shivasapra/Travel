@@ -586,6 +586,10 @@ Route::get('/invoice/reminder/{id}',[
 	'uses'=>'InvoiceController@reminder',
 	'as'=>'invoice.reminder'
 	])->middleware('permission:Send Reminder For Unpaid Invoice');
+Route::get('/send/commercial/invoice/{id}',[
+	'uses'=>'InvoiceController@SendCommercialInvoice',
+	'as'=>'send.commercial.invoice'
+	])->middleware('permission:Send Reminder For Unpaid Invoice');
 // Route::get('/generate/invoice/pdf/{id}',[
 // 	'uses'=> 'InvoiceController@generatePdf',
 // 	'as'=>'pdf.invoice'
