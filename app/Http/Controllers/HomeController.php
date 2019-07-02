@@ -171,7 +171,9 @@ class HomeController extends Controller
                                         ->with('messages',$messages);
         }
         else{
-            return view('clients.home')->with('assignments',assignment::where('date',Carbon::now()->timezone('Europe/London')->toDateString()));
+            $client = Auth::user()->client;
+            return view('clients.home')->with('assignments',assignment::where('date',Carbon::now()->timezone('Europe/London')->toDateString()))
+                                    ->with('client',$client);
         }
     }
 

@@ -54,6 +54,7 @@ class InviteController extends Controller
         $user->name = $client[0]->first_name ." ". $client[0]->last_name;
         $user->email = $client[0]->email;
         $user->password = bcrypt('pass@123');
+        $user->assignRole('Client');
         $user->save();
         $client[0]->user_id = $user->id;
         $client[0]->save();

@@ -125,5 +125,11 @@ class PermissionsSeeder extends Seeder
         $role_operations_Executive = Role::create(['name'=>'Operations Executive']);
         
         $role_pso = Role::create(['name'=>'PSO']);
+
+        $role_client = Role::create(['name'=>'Client']);
+        $role_client->givePermissionTo('Generate Request');
+        $role_client->givePermissionTo('View/Export Reports');
+        $role_client->givePermissionTo('View Invoices');
+        $role_client->givePermissionTo('Edit Client');
     }
 }
