@@ -49,7 +49,13 @@ class InvoiceController extends Controller
                 $invoice->save();
             }
         }
-        return view('invoice.index')->with('invoices',invoice::orderBy('id','desc')->get())
+        if(!Auth::user()->client){
+            $invoices = invoice::orderBy('id','desc')->get();
+        }
+        else{
+            $invoices = Auth::user()->client->invoices;
+        }
+        return view('invoice.index')->with('invoices',$invoice)
                                     ->with('tax',settings::all());
     }
 

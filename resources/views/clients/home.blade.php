@@ -123,7 +123,7 @@ Dashboard
 							<td><strong>Passport Number:</strong></td>
 							<td>{{$client->passport_no}}
 							@if($client->confirmation == 1)
-								<span class="text-success">&nbsp;&nbsp;(Confirmed by client)</span>
+								<span class="text-success">&nbsp;&nbsp;(Confirmed)</span>
 							@else
 							<span class="text-danger">&nbsp;&nbsp;(Not Confirmed Yet)</span>
 							@endif</td>

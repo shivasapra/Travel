@@ -32,10 +32,12 @@ Invoices
                         <th>Total</th>
                         <th>Status</th>
 						<th class="text-center">Action</th>
-						<th class="text-center">Cancel/Refund Invoice</th>
-						<th class="text-center">Pay</th>
-						<th class="text-center">Reminder</th>
-						<th>##</th>
+						@if(!Auth::user()->client)
+							<th class="text-center">Cancel/Refund Invoice</th>
+							<th class="text-center">Pay</th>
+							<th class="text-center">Reminder</th>
+							<th>##</th>
+						@endif
                       </tr>
                     	</thead>
                     <tbody>
@@ -62,7 +64,8 @@ Invoices
 								<a href="{{route('invoice.edit',['id'=>$invoice->id])}}" class="btn btn-info btn-xs"><span class="fa fa-edit"></span></a>
 								@endcan
 							</td>
-								{{-- @if($invoice->status == 0) --}}
+							{{-- @if($invoice->status == 0) --}}
+							@if(Auth::user()->client)
 								<td class="text-center test">
 									@if($invoice->status == 0)
 									@can('Cancel Invoice')
@@ -100,6 +103,7 @@ Invoices
 										@endif
 									@endif
 									</td>
+								@endif
 							</tr>
 							@endif
 	                    	@endforeach
