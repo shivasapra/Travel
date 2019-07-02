@@ -182,13 +182,13 @@ Role Management
 
   <script>
   	$(document).ready(function() {
-    $('#example').DataTable( {
+    $('.table').DataTable( {
         dom: 'Bfrtip',
         buttons: [
         ]
     } );
 
-    $('#example2').DataTable( {
+    $('.table').DataTable( {
         dom: 'Bfrtip',
         buttons: [
         ]
