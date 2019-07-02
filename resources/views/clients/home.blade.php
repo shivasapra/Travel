@@ -19,6 +19,16 @@ Dashboard
 @stop
 @section('content')
 <div class="box box-info">
+    <div class="box-header">
+        <div class="text-center">
+            <h3>Personal Information</h3>
+        </div>
+        <div class="text-right">
+            @can('Edit Client')
+                <a href="{{route('edit.client',['id'=>$client->id])}}" class="btn btn-info btn-xs"><span class="fa fa-edit"></span> Edit</a>
+            @endcan
+        </div>
+    </div>
 		<div class="box-body">
 
 			<table class="table table-hover mb-0">
@@ -280,11 +290,11 @@ Dashboard
 			@endif
         </div>
     </div>
-    <div class="text-center">
+    {{-- <div class="text-center">
         @can('Edit Client')
         <a href="{{route('edit.client',['id'=>$client->id])}}" class="btn btn-info btn-xs"><span class="fa fa-edit"></span></a>
         @endcan
-    </div>
+    </div> --}}
 @stop
 @section('js')
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>

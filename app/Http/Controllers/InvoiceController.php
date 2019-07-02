@@ -15,6 +15,7 @@ use App\client;
 use GuzzleHttp;
 use App\settings;
 use Carbon\Carbon;
+use Auth;
 use PDF;
 use Mail;
 // use Spatie\Browsershot\Browsershot;
