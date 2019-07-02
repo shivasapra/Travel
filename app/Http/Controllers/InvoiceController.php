@@ -56,7 +56,7 @@ class InvoiceController extends Controller
         else{
             $invoices = Auth::user()->client->invoices;
         }
-        return view('invoice.index')->with('invoices',$invoice)
+        return view('invoice.index')->with('invoices',$invoices)
                                     ->with('tax',settings::all());
     }
 
