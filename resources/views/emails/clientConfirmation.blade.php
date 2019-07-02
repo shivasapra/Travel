@@ -37,6 +37,7 @@ body{ font-size:16px;}
       .mod_div {display: block !important;}
    }
 	.table750 {width: 750px;}
+   .table tr, .table td{padding:5px;}
 </style>
 </head>
 <body style="margin: 0; padding: 0;">
@@ -82,7 +83,7 @@ body{ font-size:16px;}
                               <span style="font-family: 'Source Sans Pro', Arial, Tahoma, Geneva, sans-serif; color: #26ace2;font-weight:700; font-size: 50px;text-transform:uppercase;">Thank you!</span><br>
                               <span style="color:#333;font-size:23px;font-family: 'Source Sans Pro', Arial, Tahoma, Geneva, sans-serif;font-weight:600;">for Sign Up</span>
                            </font> -->
-                           <table class="table table-bordered" style="font-family: 'Source Sans Pro', Arial, Tahoma, Geneva, sans-serif; color: #1a1a1a; font-size: 16px;font-weight: 300; ">
+                           <table border="1" class="table table-bordered" style="font-family: 'calibri'; color: #1a1a1a; font-size: 16px;font-weight: 300;text-align: left;border-collapse: collapse; ">
                               <thead>
                                  <tr>
                                  <th>Name</th>
@@ -105,7 +106,10 @@ body{ font-size:16px;}
                                     <img src="{{asset($client->passport_front)}}" alt="passport front" height="100px" width="100px" style="border-radius:10px">
                                  </td>
                                  <td>
-                                    <img src="{{asset($client->passport_back)}}" alt="passport back" height="100px" width="100px" style="border-radius:10px">
+                                       <div class="image-div">
+                                          <img src="{{asset($client->passport_back)}}" alt="passport back" height="200px" width="200px" style="border-radius:10px">
+                                          <a href="{{asset($client->passport_back)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
+                                       </div>
                                  </td>
                                  </tr>
                                  @if($client->family->count()>0)
