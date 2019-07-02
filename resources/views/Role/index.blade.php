@@ -22,7 +22,7 @@ Role Management
     <div class="col-md-6">
         <div class="box box-primary">
             <div class="box-body">
-                <table class="table table-hover mb-0" id="example">
+                <table class="table table-hover mb-0">
                     <div class="pull-right">
                         <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#Role">Create Role</button>
                     </div>
@@ -68,9 +68,9 @@ Role Management
                 {{-- <form action="{{route('assign.permissions',['id'=>$role->id])}}" method="post">
                         @csrf --}}
                 @endif
-                    <table class="table table-hover mb-0" id="example2">
+                    <table class="table table-hover mb-0">
                         <div class="text-center">
-                            <h2>All Permissions @if($permissions->count()>0 and $role != null) Under ({{$role->name}}) @endif</h2><hr>
+                            <h2>All Permissions @if($permissions->count()>0 and $role != null) Under ({{$role->name}}) @endif</h2>
                         </div>
                         <thead>
                             <tr>
@@ -182,12 +182,6 @@ Role Management
 
   <script>
   	$(document).ready(function() {
-    $('.table').DataTable( {
-        dom: 'Bfrtip',
-        buttons: [
-        ]
-    } );
-
     $('.table').DataTable( {
         dom: 'Bfrtip',
         buttons: [
