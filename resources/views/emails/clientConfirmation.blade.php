@@ -81,14 +81,16 @@ html { -webkit-text-size-adjust: none; -ms-text-size-adjust: none;}
                               <span style="font-family: 'Source Sans Pro', Arial, Tahoma, Geneva, sans-serif; color: #26ace2;font-weight:700; font-size: 50px;text-transform:uppercase;">Thank you!</span><br>
                               <span style="color:#333;font-size:23px;font-family: 'Source Sans Pro', Arial, Tahoma, Geneva, sans-serif;font-weight:600;">for Sign Up</span>
                            </font> -->
-                           <p><b>Your Passport Details:</b></p><br>
+                           <p style="font-family: 'Source Sans Pro', Arial, Tahoma, Geneva, sans-serif; font-size:16px;"><b>Your Passport Details:</b><br>
                            <b>Name:</b> {{$client->first_name.' '.$client->last_name}}
                            <b>Passport No:</b>{{$client->passport_no}}
                            <b>Place Of Issue:</b>{{$client->passport_place}}
                            <b>Date Of Issue:</b>{{$client->passport_issue_date}}
                            <b>Expiry Date:</b>{{$client->passport_expiry_date}}
                            <b>Expiry Date:</b>{{$client->passport_expiry_date}}
-                           <b>Passport Front:</b><div class="image-div">
+                           <b>Passport Front:</b>
+                           
+                           <div class="image-div">
                               <img src="{{asset($client->passport_front)}}" alt="passport front" height="200px" width="200px" style="border-radius:10px">
                               <a href="{{asset($client->passport_front)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
                               </div>
@@ -96,6 +98,7 @@ html { -webkit-text-size-adjust: none; -ms-text-size-adjust: none;}
                               <img src="{{asset($client->passport_back)}}" alt="passport back" height="200px" width="200px" style="border-radius:10px">
                               <a href="{{asset($client->passport_back)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
                               </div>
+                           </p>
                            <hr>
                            <div style="height: 33px; line-height: 33px; font-size: 31px;">&nbsp;</div>
                            <font face="'Source Sans Pro', sans-serif" color="#585858" style="font-size: 20px; line-height: 21px;">
