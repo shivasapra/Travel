@@ -21,7 +21,7 @@ Dashboard
 <div class="box box-info">
     <div class="box-header">
         <div class="text-center">
-            <h3>Personal Information</h3>
+            <h2>Personal Information</h2>
         </div>
         <div class="text-right">
             @can('Edit Client')

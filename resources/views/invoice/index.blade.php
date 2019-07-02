@@ -65,7 +65,7 @@ Invoices
 								@endcan
 							</td>
 							{{-- @if($invoice->status == 0) --}}
-							@if(Auth::user()->client)
+							@if(!Auth::user()->client)
 								<td class="text-center test">
 									@if($invoice->status == 0)
 									@can('Cancel Invoice')
