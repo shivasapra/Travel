@@ -174,7 +174,7 @@ client
 							<td><strong>Letter:</strong></td>
 							<td>
 								<div class="image-div">
-								<img @if(explode('.',$client->letter)[1] != 'pdf') src="{{asset($client->letter)}}" @else src="{{asset('/images/pdf.png')}}" @endif alt="letter" height="200px" width="200px" style="border-radius:10px">
+								<img @if(explode('.',$client->letter)->count()>0)@if(explode('.',$client->letter)[1] != 'pdf') src="{{asset($client->letter)}}" @else src="{{asset('/images/pdf.png')}}" @endif @endif alt="letter" height="200px" width="200px" style="border-radius:10px">
 								<a href="{{asset($client->letter)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
 								</div>
 								{{-- <img src="{{asset($client->letter)}}" alt="letter" height="300px" width="300px" style="border-radius:20px"> --}}
