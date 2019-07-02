@@ -37,7 +37,7 @@ body{ font-size:16px;}
       .mod_div {display: block !important;}
    }
 	.table750 {width: 750px;}
-   .table th, .table td{padding:10px;}
+   .details-table th, .details-table td{padding:10px;}
 </style>
 </head>
 <body style="margin: 0; padding: 0;">
@@ -83,7 +83,7 @@ body{ font-size:16px;}
                               <span style="font-family: 'Source Sans Pro', Arial, Tahoma, Geneva, sans-serif; color: #26ace2;font-weight:700; font-size: 50px;text-transform:uppercase;">Thank you!</span><br>
                               <span style="color:#333;font-size:23px;font-family: 'Source Sans Pro', Arial, Tahoma, Geneva, sans-serif;font-weight:600;">for Sign Up</span>
                            </font> -->
-                           <table border="1" class="table table-bordered" style="font-family: 'calibri'; color: #1a1a1a; font-size: 16px;font-weight: 300;text-align: left;border-collapse: collapse; ">
+                           <table border="1" class="details-table table table-bordered" style="font-family: 'calibri'; color: #1a1a1a; font-size: 16px;font-weight: 300;text-align: left;border-collapse: collapse; ">
                               <thead>
                                  <tr>
                                  <th>Name</th>
@@ -103,11 +103,14 @@ body{ font-size:16px;}
                                  <td>{{$client->passport_issue_date}}</td>
                                  <td>{{$client->passport_expiry_date}}</td>
                                  <td>
+                                       <div class="image-div">
                                     <img src="{{asset($client->passport_front)}}" alt="passport front" height="100px" width="100px" style="border-radius:10px">
+                                    <a href="{{asset($client->passport_front)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
+                                       </div>
                                  </td>
                                  <td>
                                        <div class="image-div">
-                                          <img src="{{asset($client->passport_back)}}" alt="passport back" height="200px" width="200px" style="border-radius:10px">
+                                          <img src="{{asset($client->passport_back)}}" alt="passport back" height="100px" width="100px" style="border-radius:10px">
                                           <a href="{{asset($client->passport_back)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
                                        </div>
                                  </td>
@@ -121,10 +124,16 @@ body{ font-size:16px;}
                                  <td>{{'N/A'}}</td>
                                  <td>{{'N/A'}}</td>
                                  <td>
+                                       <div class="image-div">
                                        <img src="{{asset($family->member_passport_front)}}" alt="member_passport front" height="100px" width="100px" style="border-radius:10px">
+                                       <a href="{{asset($client->member_passport_front)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
+                                       </div>
                                  </td>
                                  <td>   
+                                    <div class="image-div">
                                        <img src="{{asset($family->member_passport_back)}}" alt="member_passport back" height="100px" width="100px" style="border-radius:10px">   
+                                       <a href="{{asset($client->member_passport_back)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
+                                       </div>
                                  </td>
                                  </tr>
                                  @endforeach
