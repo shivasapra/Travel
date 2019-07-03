@@ -56,7 +56,7 @@ Users
                         <td>
                             <img alt="" height="50px" class="img-circle "
                             @if($user->avatar)
-                                src="{{asset(Auth::user()->avatar)}}"
+                                src="{{asset($user->avatar)}}"
                             @else
                                 src="{{asset('app/images/user-placeholder.jpg')}}"
                             @endif 
