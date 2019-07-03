@@ -91,7 +91,7 @@ class employeeController extends Controller
         $invite->save();
         $contactEmail = $employee->email;
         $data = array('token'=>$token, 'name' => $employee->first_name.' '.$employee->last_name);
-        Mail::send('emails.inviteClient', $data, function($message) use ($contactEmail)
+        Mail::send('emails.invite', $data, function($message) use ($contactEmail)
         {  
             $message->to($contactEmail)->subject('Activate Your Account!!');
         });
