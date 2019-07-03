@@ -25,11 +25,12 @@ Employees
                     <thead>
                       <tr>
                         <th>Sno.</th>
-                        <th>Name</th>
                         <th>Unique Id</th>
+                        <th>Name</th>
+                        <th>Email</th>
                         <th>country</th>
-                        <th>Department</th>
-                        <th>Hiring Date</th>
+						<th>Hired For Department</th>
+						<th>Hiring Date</th>
                         <th>Rate Contract</th>
                         <th>Action</th>
                       </tr>
@@ -40,19 +41,20 @@ Employees
 	                    	@foreach($employees as $employee)
 	                    	<tr>
 	                    		<td>{{$i++}}</td>
-	                    		<td>{{$employee->first_name}}</td>
 	                    		<td>{{$employee->unique_id}}</td>
+	                    		<td>{{$employee->first_name . ' '. $employee->last_name}}</td>
+	                    		<td>{{$employee->email}}</td>
 	                    		<td>{{$employee->country}}</td>
-	                    		<td>{{$employee->hired_for_dep}}</td>
-	                    		<td>{{$employee->hiring_date}}</td>
+								<td>{{$employee->hired_for_dep}}</td>
+								<td>{{$employee->hiring_date}}</td>
 	                    		<td>{{$employee->currency.$employee->rate}}</td>
 	                    		<td>
 									@can('View Employees')
 									<a href="{{route('view.employee',['id'=>$employee->id])}}" class="btn btn-success btn-xs"><span class="fa fa-eye"></span></a>
 									@endcan
-									@can('Edit Employee')
+									{{-- @can('Edit Employee')
 									<a href="{{route('edit.employee',['id'=>$employee->id])}}" class="btn btn-info btn-xs"><span class="fa fa-edit"></span></a>
-									@endcan
+									@endcan --}}
 									{{-- <a href="{{route('delete.employee',['id'=>$employee->id])}}" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span></a> --}}
 									@can('Letter To Employee')
 									<a href="{{route('letter.employee',['id'=>$employee->id])}}" class="btn btn-primary btn-xs">Letter</a>
