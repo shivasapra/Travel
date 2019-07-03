@@ -26,6 +26,9 @@ Employee
 			<li class="list-group-item"><a data-toggle="tab" href="#passport-information">Passport Information</a></li>																
 		</ul>
 		@if($employee->user)
+		<br><strong>Name: </strong> {{$employee->user->name}}
+		<strong>Unique Id: </strong> {{$employee->unique_id}}
+		<strong>Email: </strong> {{$employee->user->email}} <br>
 		<div class="image-div">
 			<br><img @if($employee->user->avatar) src="{{asset($employee->user->avatar)}}" @else src="{{asset('/images/user-placeholder.jpg')}}" @endif alt="passport back"  height="300px" width="300px" style="border-radius:10px">
 			<a href="{{asset($employee->passport_back)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
@@ -40,7 +43,7 @@ Employee
 				<div id="personal-information" class="tab-pane fade in active">
 					<div class="box box-primary">
 						<div class="box-header with-border">
-							<h3 class="box-title"><strong>{{"Personal Information"}}</strong></h3>
+							<h3 class="box-title"><strong>{{"Personal Information"}}</strong> <b>( {{$employee->unique_id}} )</b></h3>
 						</div>
 						<div class="box-body">
 							<div class="row">
