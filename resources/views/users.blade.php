@@ -37,6 +37,7 @@ Users
                 <th>Sno.</th>
                 <th>Photo</th>
                 <th>Name</th>
+                <th>Unique Id </th>
                 <th>Email</th>
                 <th>Department</th>
                 <th>Role</th>
@@ -64,6 +65,15 @@ Users
                             class="img-circle" alt="User Image">
                         </td>
                         <td>{{$user->name}}</td>
+                        <td>
+                            @if(!$user->admin)
+                                @if($user->client)
+                                    <a href="{{route('view.client',['id'=>$user->client->id])}}">{{$user->client->unique_id}}</a>
+                                @else
+                                    <a href="{{route('view.employee',['id'=>$user->employee[0]->id])}}">{{$user->employee[0]->unique_id}}</a>
+                                @endif
+                            @endif
+                        </td>
                         <td>{{$user->email}}</td>
                         <td>
                             @if($user->roles->pluck('name')[0] == 'Admin' or $user->roles->pluck('name')[0] == 'Client')
