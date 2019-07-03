@@ -2,6 +2,10 @@
 @section('title')
 Users
 @endsection
+@section('css')
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">
+@stop
 @section('header')
 	<section class="content-header">
       <h1>
@@ -12,10 +16,6 @@ Users
         <li class="active">Users</li>
       </ol>
     </section>
-@stop
-@section('css')
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">
 @stop
 @section('content')
 	
@@ -31,7 +31,7 @@ Users
 
 <div class="box box-primary">
     <div class="box-body">
-        <table id="example" class="table table-hover mb-0">
+        <table class="table table-bordered" id="example">
             <thead>
                 <tr>
                 <th>Sno.</th>
@@ -40,9 +40,11 @@ Users
                 <th>Email</th>
                 <th>Role</th>
                 <th>Action</th>
-                @if(Auth::user()->admin and request()->session()->get('impersonated') == null)
-                    <th>Login As:</th>
-                @endif
+                <th>
+                    @if(Auth::user()->admin and request()->session()->get('impersonated') == null)
+                    Login As:
+                    @endif
+                </th>
                 </tr>
                 </thead>
             <tbody>
@@ -58,8 +60,7 @@ Users
                             @else
                                 src="{{asset('app/images/user-placeholder.jpg')}}"
                             @endif 
-                            class="img-circle" alt="User Image"><br>
-                            <div class="text-center">
+                            class="img-circle" alt="User Image">
                         </td>
                         <td>{{$user->name}}</td>
                         <td>{{$user->email}}</td>
@@ -72,19 +73,19 @@ Users
                                         <option value="{{$role->name}}" @if($user->hasRole($role->name)) selected @endif>{{$role->name}}</option>
                                     @endforeach
                                 </select>
-                                {{-- <a href="{{route('user.roles',['id'=>$user->id])}}" class="btn btn-xs btn-success">Roles/Permisssions</a> --}}
+                                
                             </td>
                             <td>
                                 @can('Role Management')
                                     <button type="submit" class="btn btn-xs btn-success">Save</button>
                                 @endcan
                             </td>
-                            @if(Auth::user()->admin and Auth::user()->id != $user->id and request()->session()->get('impersonated') == null)
-                                <td>
-                                    <a href="{{route('ImpersonateIn',['id'=>$user->id])}}" class="btn btn-xs btn-info">Click To Login As {{$user->name}}</a>
-                                </td>   
-                            @endif
                         </form>
+                        <td>
+                            @if(Auth::user()->admin and Auth::user()->id != $user->id and request()->session()->get('impersonated') == null)
+                                    <a href="{{route('ImpersonateIn',['id'=>$user->id])}}" class="btn btn-xs btn-info">Click To Login As {{$user->name}}</a>
+                            @endif
+                        </td>   
                     </tr>
                     @endforeach
                 @endif
@@ -112,4 +113,5 @@ Users
     } );
 } );
 </script>
-@endsection
+
+@stop
