@@ -72,11 +72,14 @@ Users
                                 @else
                                     <a href="{{route('view.employee',['id'=>$user->employee[0]->id])}}">{{$user->employee[0]->unique_id}}</a>
                                 @endif
+                            @else
+                                <span class="text-success"><h4>ADMINISTRATOR</h4></span>
                             @endif
                         </td>
                         <td>{{$user->email}}</td>
                         <td>
-                            @if($user->roles->pluck('name')[0] == 'Admin' or $user->roles->pluck('name')[0] == 'Client')
+                            @if($user->roles->pluck('name')[0] == 'Admin')
+                                <span class="text-success"><h4>ADMINISTRATOR</h4></span>
                             @else
                                 {{explode(' ',$user->roles->pluck('name')[0])[0]}}
                             @endif
