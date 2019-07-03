@@ -21,7 +21,7 @@ class InviteController extends Controller
 
         // create the user with the details from the invite
         $employee = employee::where('email',$invite->email)->take(1)->get();
-        dd($employee);
+        // dd($employee);
         $user = new User;
         $user->name = $employee[0]->first_name ." ". $employee[0]->last_name;
         $user->email = $employee[0]->email;
