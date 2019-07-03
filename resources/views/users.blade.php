@@ -35,14 +35,15 @@ Users
             <thead>
                 <tr>
                 <th>Sno.</th>
-                <th>Avatar</th>
+                <th>Photo</th>
                 <th>Name</th>
                 <th>Email</th>
+                <th>Department</th>
                 <th>Role</th>
                 <th>Action</th>
                 <th>
                     @if(Auth::user()->admin and request()->session()->get('impersonated') == null)
-                    Login As:
+                    Login
                     @endif
                 </th>
                 </tr>
@@ -64,6 +65,11 @@ Users
                         </td>
                         <td>{{$user->name}}</td>
                         <td>{{$user->email}}</td>
+                        <td>
+                            @if($user->roles->pluck('name')[0] != 'Admin')
+                                {{explode(' ',$user->roles->pluck('name')[0])[0]}}
+                            @endif
+                        </td>
                         <form action="{{route('assignuser.roles',['id'=>$user->id])}}" method="post">
                         @csrf
                             <td>
@@ -83,7 +89,7 @@ Users
                         </form>
                         <td>
                             @if(Auth::user()->admin and Auth::user()->id != $user->id and request()->session()->get('impersonated') == null)
-                                    <a href="{{route('ImpersonateIn',['id'=>$user->id])}}" class="btn btn-xs btn-info">Click To Login As {{$user->name}}</a>
+                                    <a href="{{route('ImpersonateIn',['id'=>$user->id])}}" class="btn btn-xs btn-info">Login</a>
                             @endif
                         </td>   
                     </tr>
