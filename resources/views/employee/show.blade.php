@@ -28,7 +28,7 @@ Employee
 	<form action="{{route('update.employee',['id'=>$employee->id])}}" method="post" enctype="multipart/form-data">
 		@csrf
 		@if($employee->user)
-		<div class="image-outer-div">
+		<div class="image-div">
 			<img  id="blah"
 			@if($employee->user->avatar)
 				src="{{asset($employee->user->avatar)}}"
@@ -40,7 +40,7 @@ Employee
 			<label for="avatar" class="upload-icon">
 					<i class="fa fa-camera" aria-hidden="true"></i>
 			</label>
-			<input type="file" id="avatar" name='avatar' onchange="readURL(this);"  class="form-control" style="display:none;">
+			<input type="file" id="avatar" name='avatar' onchange="readURL(this);"  class="form-control disabled_attribute" disabled style="display:none;">
 		</div>
 		@endif
 	</div>
