@@ -25,6 +25,12 @@ Employee
 			<li class="list-group-item"><a data-toggle="tab" href="#account-information">Account Information</a></li>
 			<li class="list-group-item"><a data-toggle="tab" href="#passport-information">Passport Information</a></li>																
 		</ul>
+		@if($employee->user)
+		<div class="image-div">
+			<img @if($employee->user->avatar) src="{{asset($employee->user->avatar)}}" @else src="{{asset('/images/user-placeholder.jpg')}}" @endif alt="passport back"  height="200px" width="200px" style="border-radius:10px">
+			<a href="{{asset($employee->passport_back)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
+		</div>
+		@endif
 	</div>
 	<div class="col-md-9">
 		<form action="{{route('update.employee',['id'=>$employee->id])}}" method="post" enctype="multipart/form-data">
