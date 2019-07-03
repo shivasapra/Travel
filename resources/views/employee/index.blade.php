@@ -32,7 +32,10 @@ Employees
 						<th>Hired For Department</th>
 						<th>Hiring Date</th>
                         <th>Rate Contract</th>
-                        <th>Action</th>
+						<th>Action</th>
+						<th>Letter</th>
+						<th>Tasks</th>	
+						<th>Account Activation</th>	
                       </tr>
                     	</thead>
                     <tbody>
@@ -50,25 +53,36 @@ Employees
 	                    		<td>{{$employee->currency.$employee->rate}}</td>
 	                    		<td>
 									@can('View Employees')
-									<a href="{{route('view.employee',['id'=>$employee->id])}}" class="btn btn-success btn-xs"><span class="fa fa-eye"></span></a>
+										<a href="{{route('view.employee',['id'=>$employee->id])}}" class="btn btn-success btn-xs"><span class="fa fa-eye"></span></a>
 									@endcan
+								</td>
+								<td>
+									@can('Letter To Employee')
+										<a href="{{route('letter.employee',['id'=>$employee->id])}}" class="btn btn-primary btn-xs">Letter</a>
+									@endcan
+								</td>
+								<td>
+										<a href="{{route('assignments',['id'=>$employee->id])}}" class="btn btn-warning btn-xs">Tasks</a>
+								</td>
 									{{-- @can('Edit Employee')
 									<a href="{{route('edit.employee',['id'=>$employee->id])}}" class="btn btn-info btn-xs"><span class="fa fa-edit"></span></a>
 									@endcan --}}
 									{{-- <a href="{{route('delete.employee',['id'=>$employee->id])}}" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span></a> --}}
-									@can('Letter To Employee')
-									<a href="{{route('letter.employee',['id'=>$employee->id])}}" class="btn btn-primary btn-xs">Letter</a>
-									@endcan
-														<a href="{{route('assignments',['id'=>$employee->id])}}" class="btn btn-warning btn-xs">Tasks</a>
-														@if($employee->user)
-														@can('Activate/Deactivate Employee')
-															@if($employee->user->active)
-															<a href="{{route('deactivateEmployee',['id'=>$employee->id])}}" class="btn btn-danger btn-xs">Deactivate</a>
-															@else
-															<a href="{{route('activateEmployee',['id'=>$employee->id])}}" class="btn btn-success btn-xs">Activate</a>
-															@endif
-														@endcan
-														@endif
+								<td>
+									@if($employee->user)
+										@can('Activate/Deactivate Employee')
+											@if($employee->user->active)
+											<a href="{{route('deactivateEmployee',['id'=>$employee->id])}}" class="btn btn-danger btn-xs">Deactivate</a>
+											@else
+											<a href="{{route('activateEmployee',['id'=>$employee->id])}}" class="btn btn-success btn-xs">Activate</a>
+											@endif
+										@endcan
+									@else
+									<span class="text-warning">{{'Not Yet Verified'}}</span>
+									@endif
+								</td>
+									
+									
 	                    		</td>
 	                    	</tr>
 	                    	@endforeach
