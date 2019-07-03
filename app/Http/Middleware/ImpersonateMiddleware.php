@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 use Illuminate\Http\Request;
+use Auth;
 use Closure;
 
 class ImpersonateMiddleware
@@ -16,10 +17,10 @@ class ImpersonateMiddleware
      */
     public function handle($request, Closure $next)
     {   
-        // if(Request::session()->has('impersonated'))
-        // {
-        //     Auth::onceUsingId(Request::session()->get('impersonated'));
-        //     }
+        if(request()->session()->has('impersonated'))
+        {
+            Auth::onceUsingId(request()->session()->get('impersonated'));
+            }
         return $next($request);
     }
 }

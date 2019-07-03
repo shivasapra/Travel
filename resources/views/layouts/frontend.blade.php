@@ -207,7 +207,7 @@
                       <i class="ft-power"> {{ __('Logout') }}</i>
                   </a>
 
-                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                  <form id="logout-form" @if(request()->session()->get('backUrl')) action="{{ route('ImpersonateOut') }}" @else action="{{ route('logout') }}" @endif method="post" style="display: none;">
                       @csrf
                   </form>
                 </div>
