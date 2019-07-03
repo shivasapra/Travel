@@ -61,13 +61,13 @@ Employees
 									@endcan
 														<a href="{{route('assignments',['id'=>$employee->id])}}" class="btn btn-warning btn-xs">Tasks</a>
 														@if($employee->user)
+														@can('Activate/Deactivate Employee')
 															@if($employee->user->active)
-															@can('Activate/Deactivate Employee')
 															<a href="{{route('deactivateEmployee',['id'=>$employee->id])}}" class="btn btn-danger btn-xs">Deactivate</a>
 															@else
 															<a href="{{route('activateEmployee',['id'=>$employee->id])}}" class="btn btn-success btn-xs">Activate</a>
 															@endif
-															@endcan
+														@endcan
 														@endif
 	                    		</td>
 	                    	</tr>
