@@ -28,6 +28,14 @@ Employee
 	<form action="{{route('update.employee',['id'=>$employee->id])}}" method="post" enctype="multipart/form-data">
 		@csrf
 		@if($employee->user)
+		{{-- <div class="image-div">
+			<img id="blah" @if($employee->user->avatar) src="{{asset($employee->user->avatar)}}" @else src="{{asset('/images/placeholder.png')}}" @endif alt="avatar"  height="200px" width="200px" style="border-radius:10px">
+			<a href="{{asset($employee->user->avatar)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
+			<label for="front" class="upload-icon">
+					<i class="fa fa-camera" aria-hidden="true"></i>
+			</label>
+			<input type="file" id="front" name='passport_front' onchange="readURLFront(this);"  class="form-control disabled_attribute" disabled style="display:none;">
+		</div> --}}
 		<div class="image-div">
 			<img  id="blah"
 			@if($employee->user->avatar)
@@ -35,7 +43,7 @@ Employee
 			@else
 				src="{{asset('app/images/user-placeholder.jpg')}}"
 			@endif 
-			alt="avatar" height="250px" width="250px" style="border-radius:20px">
+			alt="avatar" height="200px" width="200px" style="border-radius:20px">
 			<a href="{{asset($employee->user->avatar)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
 			<label for="avatar" class="upload-icon">
 					<i class="fa fa-camera" aria-hidden="true"></i>
