@@ -30,12 +30,13 @@ Employee
 		@if($employee->user)
 		<div class="image-outer-div">
 			<img  id="blah"
-			@if($employee->user()->avatar)
-				src="{{asset($employee->user()->avatar)}}"
+			@if($employee->user->avatar)
+				src="{{asset($employee->user->avatar)}}"
 			@else
 				src="{{asset('app/images/user-placeholder.jpg')}}"
 			@endif 
 			alt="avatar" height="250px" width="250px" style="border-radius:20px">
+			<a href="{{asset($employee->user->avatar)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
 			<label for="avatar" class="upload-icon">
 					<i class="fa fa-camera" aria-hidden="true"></i>
 			</label>
