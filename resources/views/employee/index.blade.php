@@ -72,9 +72,9 @@ Employees
 									@if($employee->user)
 										@can('Activate/Deactivate Employee')
 											@if($employee->user->active)
-											<a href="{{route('deactivateEmployee',['id'=>$employee->id])}}" class="btn btn-danger btn-xs">Deactivate</a>
+											<a onClick="return confirm('Are You Sure You Want To Deactivate Account?')" href="{{route('deactivateEmployee',['id'=>$employee->id])}}" class="btn btn-danger btn-xs">Deactivate</a>
 											@else
-											<a href="{{route('activateEmployee',['id'=>$employee->id])}}" class="btn btn-success btn-xs">Activate</a>
+											<a onClick="return confirm('Are You Sure You Want To Activate Account?')" href="{{route('activateEmployee',['id'=>$employee->id])}}" class="btn btn-success btn-xs">Activate</a>
 											@endif
 										@endcan
 									@else
