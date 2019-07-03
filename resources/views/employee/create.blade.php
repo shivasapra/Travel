@@ -53,7 +53,9 @@ Employee Registration
 					<select name='hired_for_dep' required class="form-control">
 						<option value="" class="form-control">---Select---</option>
 							@foreach(Spatie\Permission\Models\Role::all() as $role)
-									<option value="{{$role->name}}" class="form-control">{{$role->name}}</option>	
+								@if($role->name != 'Admin' or $role->name != 'Client')
+									<option value="{{$role->name}}" class="form-control">{{$role->name}}</option>
+								@endif	
 							@endforeach
 					</select>
 				</div>
