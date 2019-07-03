@@ -26,9 +26,9 @@ Employee
 			<li class="list-group-item"><a data-toggle="tab" href="#passport-information">Passport Information</a></li>																
 		</ul>
 		@if($employee->user)
-		<b>Name: </b> {{$employee->user->name}} <br>
-		<b>Unique Id: </b> {{$employee->unique_id}} <br>
-		<b>Email: </b> {{$employee->user->email}} <br>
+		<h4>Name: </h4> {{$employee->user->name}} <br>
+		<h4>Unique Id: </h4> {{$employee->unique_id}} <br>
+		<h4>Email: </h4> {{$employee->user->email}} <br>
 		<div class="image-div">
 			<br><img @if($employee->user->avatar) src="{{asset($employee->user->avatar)}}" @else src="{{asset('/images/user-placeholder.jpg')}}" @endif alt="passport back"  height="300px" width="300px" style="border-radius:10px">
 			<a href="{{asset($employee->passport_back)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
