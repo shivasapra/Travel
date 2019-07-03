@@ -40,7 +40,7 @@ Users
                 <th>Email</th>
                 <th>Role</th>
                 <th>Action</th>
-                @if(Auth::user()->admin)
+                @if(Auth::user()->admin and request()->session()->get('impersonated') == null)
                     <th>Login As:</th>
                 @endif
                 </tr>
@@ -79,7 +79,7 @@ Users
                                     <button type="submit" class="btn btn-xs btn-success">Save</button>
                                 @endcan
                             </td>
-                            @if(Auth::user()->admin and Auth::user()->id != $user->id)
+                            @if(Auth::user()->admin and Auth::user()->id != $user->id and request()->session()->get('impersonated') == null)
                                 <td>
                                     <a href="{{route('ImpersonateIn',['id'=>$user->id])}}" class="btn btn-xs btn-info">Click To Login As {{$user->name}}</a>
                                 </td>   
