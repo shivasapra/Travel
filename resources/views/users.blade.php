@@ -66,7 +66,7 @@ Users
                         <td>{{$user->name}}</td>
                         <td>{{$user->email}}</td>
                         <td>
-                            @if($user->roles->pluck('name')[0] != 'Admin' or $user->roles->pluck('name')[0] != 'Client')
+                            @if($user->roles->pluck('name')[0] == 'Admin' or $user->roles->pluck('name')[0] == 'Client')
                             @else
                                 {{explode(' ',$user->roles->pluck('name')[0])[0]}}
                             @endif
