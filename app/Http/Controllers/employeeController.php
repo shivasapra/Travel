@@ -287,6 +287,14 @@ class employeeController extends Controller
             $work_permit->move('uploads/passport',$work_permit_new_name);
             $employee->work_permit = 'uploads/passport/'.$work_permit_new_name;
         }
+        if($request->hasFile('avatar'))
+        {
+            $avatar = $request->avatar;
+            $avatar_new_name = time().$avatar->getClientOriginalName();
+            $avatar->move('uploads/profile',$avatar_new_name);
+            $employee->user->avatar = 'uploads/profile/'.$avatar_new_name;
+            $employee->user->save();
+        }
         $employee->save();
         Session::flash('success','Employee Updated Successfully');
         return redirect()->back();

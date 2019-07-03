@@ -25,20 +25,25 @@ Employee
 			<li class="list-group-item"><a data-toggle="tab" href="#account-information">Account Information</a></li>
 			<li class="list-group-item"><a data-toggle="tab" href="#passport-information">Passport Information</a></li>																
 		</ul>
+	<form action="{{route('update.employee',['id'=>$employee->id])}}" method="post" enctype="multipart/form-data">
+		@csrf
 		@if($employee->user)
-		<h4>Name: </h4> {{$employee->user->name}} <br>
-		<h4>Unique Id: </h4> {{$employee->unique_id}} <br>
-		<h4>Email: </h4> {{$employee->user->email}} <br>
-		<div class="image-div">
-			<br><img @if($employee->user->avatar) src="{{asset($employee->user->avatar)}}" @else src="{{asset('/images/user-placeholder.jpg')}}" @endif alt="passport back"  height="300px" width="300px" style="border-radius:10px">
-			<a href="{{asset($employee->passport_back)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
-			{{-- <b>{{$employee->user->name}}</b> --}}
+		<div class="image-outer-div">
+			<img  id="blah"
+			@if($employee->user()->avatar)
+				src="{{asset($employee->user()->avatar)}}"
+			@else
+				src="{{asset('app/images/user-placeholder.jpg')}}"
+			@endif 
+			alt="avatar" height="250px" width="250px" style="border-radius:20px">
+			<label for="avatar" class="upload-icon">
+					<i class="fa fa-camera" aria-hidden="true"></i>
+			</label>
+			<input type="file" id="avatar" name='avatar' onchange="readURL(this);"  class="form-control" style="display:none;">
 		</div>
 		@endif
 	</div>
 	<div class="col-md-9">
-		<form action="{{route('update.employee',['id'=>$employee->id])}}" method="post" enctype="multipart/form-data">
-			@csrf
 			<div class="tab-content">
 				<div id="personal-information" class="tab-pane fade in active">
 					<div class="box box-primary">
@@ -485,8 +490,8 @@ Employee
 				<button type="button" id="remove_readonly_class" class="btn btn-info">Edit</button>
 				<button type="submit" id="save_details" class="btn btn-success" style="display:none;">Save</button>
 			@endcan
-		</form>
-	</div>
+		</div>
+	</form>
 </div>	
 @endsection
 @section('js')
@@ -551,5 +556,17 @@ Employee
 				reader.readAsDataURL(input.files[0]);
 			}
 		}
+		function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah')
+                        .attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
 </script>
 @stop
