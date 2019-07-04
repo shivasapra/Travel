@@ -16,6 +16,7 @@ Add Leave Application
 @section('css')
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css" rel="stylesheet">
 @stop
 @section('content')
 		<div class="box box-info">
@@ -43,7 +44,6 @@ Add Leave Application
                         <div class="row">
                             <br>
                             <div class="col-md-6">
-                                <br>
                                 <label for="from"><b> From: </b></label>
                                 <input type="date" class="form-control" required name="from">
                             </div>
@@ -55,8 +55,8 @@ Add Leave Application
                         <div class="row">
                             <div class="col-md-12">
                                 <br>
-                                <label for="comment"><b>Comment:</b></label>
-                                <textarea name="comment" id="" class="form-control" style="height:120px;"></textarea>
+                                <label for="pdf"><b>Message:</b></label>
+                                <textarea name="pdf" id="summernote" class="form-control" style="height:120px;"></textarea>
                             </div>
                         </div><br>
                         <button type="submit" class="btn btn-success btn-md">Save</button>
@@ -74,7 +74,12 @@ Add Leave Application
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
-
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script>
+<script>
+  $(document).ready(function() {
+  $('#summernote').summernote();
+});
+</script>
 
   <script>
   	$(document).ready(function() {
