@@ -115,8 +115,50 @@ Leave Applications
                 </div>
             </div>
             
-            <a href="#" id="target" data-toggle="modal" data-target="#leave_status" class="btn btn-icons btn-rounded btn-success" style="display:none;"></a>
-        
+            <a href="#" id="target" data-toggle="modal" data-target="#leave_status" class="btn btn-icons btn-rounded btn-success"></a>
+            <div class="modal fade" id="leave_status">
+                    <div class="modal-dialog modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+            
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">Leave Status</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+            
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                <form action="{{route("leave.application.status")}}" method="post">
+                                    @csrf
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Add Status</label>
+                                                <select class="form-control" name="status" required>
+                                                    <option value="">--Select--</option>
+                                                    <option value="1">Approved</option>
+                                                    <option value="2">Rejected</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Comment</label>
+                                                <textarea placeholder="Enter Message" class="form-control" name="comment" style="height:70px;" required>
+                                                </textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button type="submit" class="btn btn-success">Save</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         <div id="status-modal"></div>
         
 @endsection
@@ -142,36 +184,51 @@ Leave Applications
 function Fun(temp){
 		var leave_id = $(temp).parents('.test').find('.leave_id').val();
 		
-		var data = '<div class="modal fade" id="leave_status">'+
-			'<div class="modal-dialog">'+
-				 '<div class="modal-content">'+
-		'<div class="modal-header" style="color:white;font-weight:500;background-color:#0066FF;">'+
-		  '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'+
-			'<span aria-hidden="true">&times;</span></button>'+
-		  '<h4 class="modal-title">Refund Invoice</h4>'+
-		'</div>'+
-		'<form action="{{route("leave.application.status")}}" method="post">'+
-		  '@csrf'+
-		'<div class="modal-body">'+
-			'<label for="invoice_no">Invoice No:</label>'+
-			'<input type="text" name="invoice_no" class="form-control" value="''" readonly />'+
-
-			'<label for="total">Total:</label>'+
-			'<input type="text" name="total" class="form-control" value="''" readonly/>'+
-
-			'<label for="refunded_amount">Enter Amount To Refund:</label>'+
-			'<input type="text" name="refunded_amount" class="form-control mask-money" max="''" required/>'+
-			'<label for="refund_remarks">Remarks:</label>'+
-			'<textarea name="refund_remarks" id="" class="form-control" cols="30" rows="10"></textarea>'+
-		'</div>'+
-		'<div class="modal-footer" style="color:white;font-weight:500;background-color:#0066FF;">'+
-		  '<button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>'+
-		  '<button type="submit" class="btn btn-outline">Refund</button>'+
-		'</div>'+
-		'</form>'+
-			  '</div>'+
-			'</div>'+
-	  '</div>';
+		var data = 
+        '<div class="modal fade" id="leave_status">'+
+            '<div class="modal-dialog modal-dialog modal-dialog-centered">'+
+                '<div class="modal-content">'+
+    
+                    '<!-- Modal Header -->'+
+                    '<div class="modal-header">'+
+                        '<h4 class="modal-title">Leave Status</h4>'+
+                        '<button type="button" class="close" data-dismiss="modal">&times;</button>'+
+                    '</div>'+
+    
+                    '<!-- Modal body -->'+
+                    '<div class="modal-body">'+
+                        '<form action="{{route("leave.application.status")}}" method="post">'+
+                            '@csrf'+
+                            '<input type="text" hidden value="'+leave_id+'" class="leave_id">'+
+                            '<div class="row">'+
+                                '<div class="col-md-12">'+
+                                    '<div class="form-group">'+
+                                        '<label>Add Status</label>'+
+                                        '<select class="form-control" name="status" required>'+
+                                            '<option value="">--Select--</option>'+
+                                            '<option value="1">Approved</option>'+
+                                            '<option value="2">Rejected</option>'+
+                                        '</select>'+
+                                    '</div>'+
+                                '</div>'+
+                                '<div class="col-md-12">'+
+                                    '<div class="form-group">'+
+                                        '<label>Comment</label>'+
+                                        '<textarea placeholder="Enter Message" class="form-control" name="comment" style="height:70px;" required>'+
+                                        '</textarea>'+
+                                    '</div>'+
+                                '</div>'+
+                            '</div>'+
+                            '<div class="row">'+
+                                '<div class="col-md-12">'+
+                                    '<button type="submit" class="btn btn-success">Save</button>'+
+                                '</div>'+
+                            '</div>'+
+                        '</form>'+
+                    '</div>'+
+                '</div>'+
+            '</div>'+
+        '</div>';
 	  $('#status-modal').html(data);
 	  $('#target').click();
 	}
