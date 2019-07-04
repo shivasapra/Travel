@@ -142,51 +142,34 @@ Leave Applications
 function Fun(temp){
 		var leave_id = $(temp).parents('.test').find('.leave_id').val();
 		
-		var data = 
-        '<div class="modal fade" id="leave_status">'+
-        '<form action="{{route("leave.application.status")}}" method="post">'+
-            '@csrf'+
-            '<div class="modal-dialog modal-dialog modal-dialog-centered">'+
-                '<div class="modal-content">'+
-    
-                    '<!-- Modal Header -->'+
-                    '<div class="modal-header">'+
-                        '<h4 class="modal-title">Leave Status</h4>'+
-                        '<button type="button" class="close" data-dismiss="modal">&times;</button>'+
-                    '</div>'+
-    
-                    '<!-- Modal body -->'+
-                    '<div class="modal-body">'+
-                            '<input type="text"  value="'+leave_id+'" class="leave_id">'+
-                            '<div class="row">'+
-                                '<div class="col-md-12">'+
-                                    '<div class="form-group">'+
-                                        '<label>Add Status</label>'+
-                                        '<select class="form-control" name="status" required>'+
-                                            '<option value="">--Select--</option>'+
-                                            '<option value="1">Approved</option>'+
-                                            '<option value="2">Rejected</option>'+
-                                        '</select>'+
-                                    '</div>'+
-                                '</div>'+
-                                '<div class="col-md-12">'+
-                                    '<div class="form-group">'+
-                                        '<label>Comment</label>'+
-                                        '<textarea placeholder="Enter Message" class="form-control" name="comment" style="height:70px;" required>'+
-                                        '</textarea>'+
-                                    '</div>'+
-                                '</div>'+
-                            '</div>'+
-                            '<div class="row">'+
-                                '<div class="col-md-12">'+
-                                    '<button type="submit" class="btn btn-success">Save</button>'+
-                                '</div>'+
-                            '</div>'+
-                    '</div>'+
-                '</div>'+
-            '</div>'+
-            '</form>'+
-        '</div>';
+		var data = '<div class="modal fade" id="modal-info">'+
+			'<div class="modal-dialog">'+
+				 '<div class="modal-content">'+
+		'<div class="modal-header" style="color:white;font-weight:500;background-color:#0066FF;">'+
+		  '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'+
+			'<span aria-hidden="true">&times;</span></button>'+
+		  '<h4 class="modal-title">Leave Application Status</h4>'+
+		'</div>'+
+		'<form action="{{route("leave.application.status")}}" method="post">'+
+		  '@csrf'+
+          '<input type="text" value="'+leave_id+'" hidden>'+
+		'<div class="modal-body">'+
+            '<label for="status">Status</label>'
+            '<select name="status" id="" class="form-control">'+
+            '<option value="">--SELECT--</option>'+
+            '<option value="1">Approved</option>'+
+            '<option value="0">Rejected</option>'+
+            '</select>'+
+            '<textarea name="comment" id="" class="form-control"></textarea>'+
+		'</div>'+
+		'<div class="modal-footer" style="color:white;font-weight:500;background-color:#0066FF;">'+
+		  '<button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>'+
+		  '<button type="submit" class="btn btn-outline">Refund</button>'+
+		'</div>'+
+		'</form>'+
+			  '</div>'+
+			'</div>'+
+	  '</div>';
 	  $('#status-modal').html(data);
 	  $('#target').click();
 	}
