@@ -77,7 +77,7 @@ Leave Applications
                                     @endif
                                 </td>
                                 @if(Auth::user()->admin)
-                                    <td class="text">
+                                    <td class="test">
                                             <input type="text" hidden value="{{$leave->id}}" class="leave_id">
                                             <button   type="button" onClick="Fun(this);" class="btn btn-icons btn-rounded btn-success">
                                             <i class="fa fa-arrow-right" aria-hidden="true"></i>
@@ -106,7 +106,7 @@ Leave Applications
                     
                     <!-- Modal body -->
                     <div class="modal-body">
-                        <embed src="{{App\Leave::find(1)->pdf}}" width="100%" height="500px" />
+                        <embed src="{{PDF::loadFile($leave->pdf)->stream()}}" width="100%" height="500px" />
                         </div>
                     </div>
                 </div>
