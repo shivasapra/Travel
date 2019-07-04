@@ -106,7 +106,7 @@ Leave Applications
                     
                     <!-- Modal body -->
                     <div class="modal-body">
-                        <embed src="{{$leave->pdf}}" width="100%" height="500px" />
+                        <embed src="{{App\Leave::find(1)->pdf}}" width="100%" height="500px" />
                         </div>
                     </div>
                 </div>
@@ -165,7 +165,7 @@ function Fun(temp){
                                         '</select>'+
                                     '</div>'+
                                 '</div>'+
-                                '<input type="text" hidden value="'+leave_id+'" class="leave_id">'
+                                '<input type="text" value="'+leave_id+'" class="leave_id">'
                                 '<div class="col-md-12">'+
                                     '<div class="form-group">'+
                                         '<label>Comment</label>'+
