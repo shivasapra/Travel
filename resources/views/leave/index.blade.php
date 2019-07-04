@@ -76,7 +76,7 @@ Leave Applications
                                         <label class="badge bg-warning">In progress</label>
                                     @endif
                                     @if($leave->status != 2)
-                                        {{$leave->comment}}
+                                        <br>{{$leave->comment}}
                                     @endif
                                 </td>
                                 @if(Auth::user()->admin)
@@ -114,7 +114,7 @@ Leave Applications
                     </div>
                 </div>
             </div>
-            <a href="#" id="target" data-toggle="modal" data-target="#leave_status" class="btn btn-icons btn-rounded btn-success"></a>
+            <a href="#" id="target" style="display:none;" data-toggle="modal" data-target="#leave_status" class="btn btn-icons btn-rounded btn-success"></a>
             {{-- <div class="modal fade" id="leave_status">
                     <div class="modal-dialog modal-dialog modal-dialog-centered">
                         <div class="modal-content">
@@ -208,7 +208,7 @@ function Fun(temp){
                                         '<select class="form-control" name="status" required>'+
                                             '<option value="">--Select--</option>'+
                                             '<option value="1">Approved</option>'+
-                                            '<option value="2">Rejected</option>'+
+                                            '<option value="0">Rejected</option>'+
                                         '</select>'+
                                     '</div>'+
                                 '</div>'+
