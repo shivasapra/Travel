@@ -688,7 +688,7 @@ Route::get('/assign/leave/index',[
 ]);
 Route::get('/request/leave/index',[
 	'uses' => 'LeaveController@requestLeaveIndex',
-	'as' => 'arequest.leave.index'
+	'as' => 'request.leave.index'
 ]);
 Route::post('/assign/leave/',[
 	'uses' => 'LeaveController@assignLeave',

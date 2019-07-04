@@ -367,7 +367,9 @@
             </ul>
           </li>
         @endif
-        <li><a href="{{route('leaves')}}"><i class="fa fa-plus-square"></i>Leave Applications</a></li>
+        @if(!Auth::user()->client)
+          <li><a href="{{route('leaves')}}"><i class="fa fa-plus-square"></i>Leave Applications</a></li>
+        @endif
           @can('View/Export Reports')
           <li class="treeview">
             <a href="">
