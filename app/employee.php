@@ -20,5 +20,9 @@ class employee extends Model
     {
     	return $this->hasMany('App\assignment');
     }
+    public function leaves()
+    {
+    	return $this->hasMany('App\Leave');
+    }
     
 }

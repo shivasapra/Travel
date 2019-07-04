@@ -367,7 +367,7 @@
             </ul>
           </li>
         @endif
-
+        <li><a href="{{route('leaves')}}"><i class="fa fa-plus-square"></i>Leave Applications</a></li>
           @can('View/Export Reports')
           <li class="treeview">
             <a href="">
@@ -395,6 +395,7 @@
               <input type="text" name="service_name" value="Flight" hidden>
             </form>
           @endcan
+
         @if(!Auth::user()->client)
             <li><a href="{{route('assign')}}"><i class="fa fa-clock-o"></i><span>Assignments</span></a></li>
         @endif

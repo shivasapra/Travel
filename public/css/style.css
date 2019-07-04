@@ -1,7 +1,14 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
 body{
     font-family: 'Open Sans', sans-serif !important;
     font-size:14px;
+}
+.bt-0{
+    border-top:0 !important;
+}
+.tabs-design .nav-link.active, .tabs-design .nav-item.show .nav-link {
+    border: 0;
+    border-bottom: 3px solid #ff8100;
 }
 .add-employee-list .list-group-item.active a{
     color:#fff;
@@ -891,7 +898,7 @@ body.rtl {
 
 b,
 strong {
-    font-weight: 500;
+    font-weight: 700;
 }
 
 h5 {
@@ -7178,14 +7185,16 @@ div.dataTables_wrapper div.dataTables_length label,
 
 .dataTables_empty {
     padding-top: 25px !important;
-    padding-bottom: 180px !important;
+    padding-bottom: 50px !important;
     text-align: left !important;
     color: #777777;
     font-size: 15px;
-    background: url(../images/table-no-data.png);
+    background: url(..../images/table-no-data.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: auto 161px;
+    text-align: center !important;
+    font-weight: 600;
 }
 
 .app_dt_empty .dataTables_paginate,

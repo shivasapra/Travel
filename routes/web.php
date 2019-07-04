@@ -677,3 +677,16 @@ Route::get('/departments/{slug}',[
 		'uses' => 'LeadsController@convert',
 		'as' => 'lead.convert'
 	])->middleware('permission:Convert Lead');
+
+Route::get('/leave/applications',[
+	'uses' => 'LeaveController@index',
+	'as' => 'leaves'
+]);
+Route::get('/assign/leave/index',[
+	'uses' => 'LeaveController@assignLeaveIndex',
+	'as' => 'assign.leave.index'
+]);
+Route::post('/assign/leave/',[
+	'uses' => 'LeaveController@assignLeave',
+	'as' => 'assign.leave'
+]);

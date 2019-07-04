@@ -15,13 +15,14 @@ class CreateLeavesTable extends Migration
     {
         Schema::create('leaves', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('Leave Type')->nullable();
+            $table->integer('employee_id');
+            $table->string('leave_type')->nullable();
             $table->Date('from')->nullable();
             $table->Date('to')->nullable();
             $table->string('no_of_days')->nullable();
             $table->longText('comment')->nullable();
             $table->string('pdf')->nullable();
-            $table->integer('status')->default(0);
+            $table->integer('status')->default(2);
             $table->timestamps();
         });
     }
