@@ -142,25 +142,27 @@ Leave Applications
 function Fun(temp){
 		var leave_id = $(temp).parents('.test').find('.leave_id').val();
 		
-		var data = '<div class="modal fade" id="leave_status">'+
+		var data = '<div class="modal fade" id="modal-info">'+
 			'<div class="modal-dialog">'+
 				 '<div class="modal-content">'+
 		'<div class="modal-header" style="color:white;font-weight:500;background-color:#0066FF;">'+
 		  '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'+
 			'<span aria-hidden="true">&times;</span></button>'+
-		  '<h4 class="modal-title">Leave Application Status</h4>'+
+		  '<h4 class="modal-title">Refund Invoice</h4>'+
 		'</div>'+
 		'<form action="{{route("leave.application.status")}}" method="post">'+
 		  '@csrf'+
-        //   '<input type="text" value="'+leave_id+'" hidden>'+
 		'<div class="modal-body">'+
-            '<label for="status">Status</label>'
-            '<select name="status" id="" class="form-control">'+
-            '<option value="">--SELECT--</option>'+
-            '<option value="1">Approved</option>'+
-            '<option value="0">Rejected</option>'+
-            '</select>'+
-            '<textarea name="comment" id="" class="form-control"></textarea>'+
+			'<label for="invoice_no">Invoice No:</label>'+
+			'<input type="text" name="invoice_no" class="form-control" value="''" readonly />'+
+
+			'<label for="total">Total:</label>'+
+			'<input type="text" name="total" class="form-control" value="''" readonly/>'+
+
+			'<label for="refunded_amount">Enter Amount To Refund:</label>'+
+			'<input type="text" name="refunded_amount" class="form-control mask-money" max="''" required/>'+
+			'<label for="refund_remarks">Remarks:</label>'+
+			'<textarea name="refund_remarks" id="" class="form-control" cols="30" rows="10"></textarea>'+
 		'</div>'+
 		'<div class="modal-footer" style="color:white;font-weight:500;background-color:#0066FF;">'+
 		  '<button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>'+
