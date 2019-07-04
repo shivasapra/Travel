@@ -39,12 +39,12 @@ class LeaveController extends Controller
 
     public function requestLeave(Request $request){
         $leave = new Leave;
-        $leave->employee_id = Auth::user()->employee->id;
+        $leave->employee_id = Auth::user()->employee[0]->id;
         $leave->leave_type = $request->leave_type;
         $leave->from = $request->from;
         $leave->to = $request->to;
         $leave->no_of_days = Carbon::parse($request->from)->diffInDays(Carbon::parse($request->to))+1;
-        $pdf = PDF::loadHTML($request->pdf);
+        $pdf = \PDF::loadHTML($request->pdf);
         return $pdf->stream();
         // $leave->save();
         // return redirect()->route('leaves');
