@@ -144,6 +144,8 @@ function Fun(temp){
 		
 		var data = 
         '<div class="modal fade" id="leave_status">'+
+        '<form action="{{route("leave.application.status")}}" method="post">'+
+            '@csrf'+
             '<div class="modal-dialog modal-dialog modal-dialog-centered">'+
                 '<div class="modal-content">'+
     
@@ -155,8 +157,6 @@ function Fun(temp){
     
                     '<!-- Modal body -->'+
                     '<div class="modal-body">'+
-                        '<form action="{{route("leave.application.status")}}" method="post">'+
-                            '@csrf'+
                             '<input type="text" hidden value="'+leave_id+'" class="leave_id">'+
                             '<div class="row">'+
                                 '<div class="col-md-12">'+
@@ -182,10 +182,10 @@ function Fun(temp){
                                     '<button type="submit" class="btn btn-success">Save</button>'+
                                 '</div>'+
                             '</div>'+
-                        '</form>'+
                     '</div>'+
                 '</div>'+
             '</div>'+
+            '</form>'+
         '</div>';
 	  $('#status-modal').html(data);
 	  $('#target').click();
