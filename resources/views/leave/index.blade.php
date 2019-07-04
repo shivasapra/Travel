@@ -115,7 +115,7 @@ Leave Applications
                 </div>
             </div>
             <a href="#" id="target" data-toggle="modal" data-target="#leave_status" class="btn btn-icons btn-rounded btn-success"></a>
-            <div class="modal fade" id="leave_status">
+            {{-- <div class="modal fade" id="leave_status">
                     <div class="modal-dialog modal-dialog modal-dialog-centered">
                         <div class="modal-content">
             
@@ -158,7 +158,7 @@ Leave Applications
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
         <div id="status-modal"></div>
         
 @endsection
@@ -230,6 +230,8 @@ function Fun(temp){
             '</div>'+
         '</div>';
 	  $('#status-modal').html(data);
+      console.log('testing');
+      
 	  $('#target').click();
 	}
 </script>
