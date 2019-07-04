@@ -157,7 +157,7 @@ function Fun(temp){
     
                     '<!-- Modal body -->'+
                     '<div class="modal-body">'+
-                            '<input type="text" hidden value="'+leave_id+'" class="leave_id">'+
+                            '<input type="text"  value="'+leave_id+'" class="leave_id">'+
                             '<div class="row">'+
                                 '<div class="col-md-12">'+
                                     '<div class="form-group">'+
