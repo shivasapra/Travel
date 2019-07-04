@@ -199,11 +199,12 @@ function Fun(temp){
                     '<div class="modal-body">'+
                         '<form action="{{route("leave.application.status")}}" method="post">'+
                             '@csrf'+
-                            '<input type="text" style="display:none;" value="'+leave_id+'" class="leave_id">'+
                             '<div class="row">'+
                                 '<div class="col-md-12">'+
                                     '<div class="form-group">'+
-                                        '<label>Add Status</label>'+
+                                        // '<label for="status">Add Status</label>'+
+                                        '<input type="text" hidden value="'+leave_id+'" name="leave_id">'+
+                                        '<label for="status">Add Status</label>'+
                                         '<select class="form-control" name="status" required>'+
                                             '<option value="">--Select--</option>'+
                                             '<option value="1">Approved</option>'+
