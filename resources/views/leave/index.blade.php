@@ -128,7 +128,7 @@ Leave Applications
             
                             <!-- Modal body -->
                             <div class="modal-body">
-                                <form action="{{route("leave.application.status")}}" method="post">
+                                <form action="{{route("request.leave")}}" method="post">
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-12">

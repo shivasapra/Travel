@@ -38,6 +38,7 @@ class LeaveController extends Controller
     }
 
     public function requestLeave(Request $request){
+        dd($request);
         $leave = new Leave;
         $leave->employee_id = Auth::user()->employee[0]->id;
         $leave->leave_type = $request->leave_type;
