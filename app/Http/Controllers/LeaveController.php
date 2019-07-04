@@ -38,7 +38,6 @@ class LeaveController extends Controller
     }
 
     public function requestLeave(Request $request){
-        dd($request);
         $leave = new Leave;
         $leave->employee_id = Auth::user()->employee[0]->id;
         $leave->leave_type = $request->leave_type;
@@ -56,7 +55,7 @@ class LeaveController extends Controller
 
     public function leaveApplicationStatus(Request $request){
         $leave = Leave::find($request->leave_id);
-        dd($request);
+        dd($request->comment);
         $leave->status = $request->status;
         $leave->comment = $request->comment;
         $leave->save();

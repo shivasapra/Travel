@@ -114,7 +114,6 @@ Leave Applications
                     </div>
                 </div>
             </div>
-            
             <a href="#" id="target" data-toggle="modal" data-target="#leave_status" class="btn btn-icons btn-rounded btn-success"></a>
             <div class="modal fade" id="leave_status">
                     <div class="modal-dialog modal-dialog modal-dialog-centered">
@@ -128,8 +127,9 @@ Leave Applications
             
                             <!-- Modal body -->
                             <div class="modal-body">
-                                <form action="{{route("request.leave")}}" method="post">
+                                <form action="{{route("leave.application.status")}}" method="post">
                                     @csrf
+                                    <input type="text" hidden value="'+leave_id+'" class="leave_id">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
