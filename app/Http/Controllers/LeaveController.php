@@ -47,8 +47,8 @@ class LeaveController extends Controller
 
         $pdf = \PDF::loadHTML($request->pdf);
         $pdf_new_name = time().$request->from.$request->to.'.pdf';
-        $pdf->save('/leaveApplications/'.$pdf_new_name);
-        $leave->pdf = '/leaveApplications/'.$pdf_new_name;
+        $pdf->save($pdf_new_name);
+        $leave->pdf = $pdf_new_name;
         $leave->save();
         return redirect()->route('leaves');
     }
