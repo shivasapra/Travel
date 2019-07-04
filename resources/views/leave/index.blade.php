@@ -142,7 +142,7 @@ Leave Applications
 function Fun(temp){
 		var leave_id = $(temp).parents('.test').find('.leave_id').val();
 		
-		var data = '<div class="modal fade" id="modal-info">'+
+		var data = '<div class="modal fade" id="leave_status">'+
 			'<div class="modal-dialog">'+
 				 '<div class="modal-content">'+
 		'<div class="modal-header" style="color:white;font-weight:500;background-color:#0066FF;">'+
