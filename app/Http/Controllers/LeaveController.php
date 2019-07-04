@@ -55,7 +55,7 @@ class LeaveController extends Controller
 
     public function leaveApplicationStatus(Request $request){
         $leave = Leave::find($request->leave_id);
-        dd($request->leave_id);
+        dd($request);
         $leave->status = $request->status;
         $leave->comment = $request->comment;
         $leave->save();
