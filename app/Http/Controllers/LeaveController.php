@@ -53,7 +53,7 @@ class LeaveController extends Controller
         return redirect()->route('leaves');
     }
 
-    public function leaveapplicationstatus(Request $request){
+    public function leaveApplicationStatus(Request $request){
         $leave = Leave::find($request->leave_id);
         dd($leave);
         $leave->status = $request->status;
