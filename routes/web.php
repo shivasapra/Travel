@@ -702,7 +702,7 @@ Route::post('/request/leave/',[
 	'uses' => 'LeaveController@requestLeave',
 	'as' => 'request.leave'
 ]);
-Route::post('/leave/application/status/{id}',[
+Route::post('/leave/application/status',[
 	'uses' => 'LeaveController@leaveApplicationStatus',
 	'as' => 'leave.application.status'
 ]);
