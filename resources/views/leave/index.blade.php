@@ -152,7 +152,7 @@ function Fun(temp){
 		'</div>'+
 		'<form action="{{route("leave.application.status")}}" method="post">'+
 		  '@csrf'+
-          '<input type="text" value="'+leave_id+'" hidden>'+
+        //   '<input type="text" value="'+leave_id+'" hidden>'+
 		'<div class="modal-body">'+
             '<label for="status">Status</label>'
             '<select name="status" id="" class="form-control">'+
