@@ -47,7 +47,7 @@ Leave Applications
                             <th>To</th>
                             <th>Leave Type</th>
                             <th>No. Of Days</th>
-                            <th>View</th>
+                            <th>Application/th>
                             <th>Status</th>
                             @if(Auth::user()->admin)
                                 <th>Action</th>
@@ -74,6 +74,9 @@ Leave Applications
                                         <label class="badge bg-success">Approved</label>
                                     @elseif($leave->status == 2)
                                         <label class="badge bg-warning">In progress</label>
+                                    @endif
+                                    @if($leave->status != 2)
+                                        {{$leave->comment}}
                                     @endif
                                 </td>
                                 @if(Auth::user()->admin)
