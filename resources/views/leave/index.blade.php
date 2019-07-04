@@ -69,7 +69,7 @@ Leave Applications
                                 <td><a href="#" class="btn btn-primary" data-toggle="modal" data-target="#leave_view">View</a></td>
                                 <td>
                                     @if($leave->status == 0)
-                                        <label class="badge bg-danger">Rejected</label>
+                                        <label class="badge bg-red">Rejected</label>
                                     @elseif($leave->status == 1)
                                         <label class="badge bg-success">Approved</label>
                                     @elseif($leave->status == 2)

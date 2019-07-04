@@ -54,6 +54,8 @@ class LeaveController extends Controller
     }
 
     public function leaveApplicationStatus(Request $request){
+        $pdf = \PDF::loadFile(Leave::find(1)->pdf);
+        $pdf->stream();
         $leave = Leave::find($request->leave_id);
         // dd($request->leave_id);
         $leave->status = $request->status;
