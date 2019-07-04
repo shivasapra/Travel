@@ -47,7 +47,7 @@ Leave Applications
                             <th>To</th>
                             <th>Leave Type</th>
                             <th>No. Of Days</th>
-                            <th>Application/th>
+                            <th>Application</th>
                             <th>Status</th>
                             @if(Auth::user()->admin)
                                 <th>Action</th>
