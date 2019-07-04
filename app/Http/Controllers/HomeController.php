@@ -51,6 +51,8 @@ class HomeController extends Controller
         // });
         // dd('gya');
         if (Auth::user()->admin) {
+            // $pdf = \PDF::loadHTML('<h1>testing</h1>');
+            // $pdf->save('haha.pdf');
         $dt = Carbon::now();
         $date_today = $dt->timezone('Europe/London');
         $date = $date_today->toDateString();
@@ -160,6 +162,7 @@ class HomeController extends Controller
         }
         elseif(Auth::user()->employee->count()>0){
             // dd();
+            
             $last = Chat::where('to_id',Auth::user()->id)->orderBy('id','desc')->get()->first();
             if($last != null){
                 $last->status = 1;

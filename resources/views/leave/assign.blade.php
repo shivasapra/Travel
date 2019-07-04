@@ -58,7 +58,7 @@ Assign Leave
                             <div class="col-md-12">
                                 <br>
                                 <label for="comment"><b>Comment:</b></label>
-                                <textarea name="comment" id="" class="form-control" style="height:120px;"></textarea>
+                                <textarea name="comment" id="" class="form-control" style="height:120px;" required></textarea>
                             </div>
                         </div><br>
                         <button type="submit" class="btn btn-success btn-md">Save</button>

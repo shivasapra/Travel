@@ -56,7 +56,7 @@ Add Leave Application
                             <div class="col-md-12">
                                 <br>
                                 <label for="pdf"><b>Message:</b></label>
-                                <textarea name="pdf" id="summernote" class="form-control" style="height:170px;"></textarea>
+                                <textarea name="pdf" id="summernote" class="form-control" style="height:170px;" required></textarea>
                             </div>
                         </div><br>
                         <button type="submit" class="btn btn-success btn-md">Save</button>
