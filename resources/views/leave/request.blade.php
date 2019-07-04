@@ -89,5 +89,6 @@ Add Leave Application
         ]
     } );
 } );
+
 </script>
 @stop
