@@ -24,9 +24,16 @@ Leave Applications
                     <li class="nav-item">
                         <a class="nav-link active" href="{{route('leaves')}}">Leave List</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('assign.leave.index')}}">Assign Leave</a>
-                    </li>
+                    @if(Auth::user()->admin)
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('assign.leave.index')}}">Assign Leave</a>
+                        </li>
+                    @endif
+                    @if(Auth::user()->employee->count() > 0)
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('request.leave.index')}}">Add Leave Application</a>
+                        </li>
+                    @endif
                 </ul>
             </div>
 			<div class="box-body">

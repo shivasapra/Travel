@@ -18,6 +18,10 @@ class LeaveController extends Controller
         return view('leave.assign')->with('employees',employee::all());
     }
 
+    public function requestLeaveIndex(){
+        return view('leave.request');
+    }
+
     public function assignLeave(Request $request){
         $employee = employee::find($request->employee_name);
         $leave = new Leave;
