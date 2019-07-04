@@ -26,13 +26,13 @@ Add Leave Application
                         <a class="nav-link" href="{{route('leaves')}}">Leave List</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('request.leave.index')}}">Add Leave Application</a>
+                        <a class="nav-link active" href="{{route('request.leave.index')}}">Add Leave Application</a>
                     </li>
                 </ul>
             </div>
 			<div class="box-body">
                 <div class="row">
-                <form action="{{route('assign.leave')}}" method="post">
+                <form action="{{route('request.leave')}}" method="post">
                     @csrf
                     <div class="col-md-6">
                         <div class="row">
@@ -56,7 +56,7 @@ Add Leave Application
                             <div class="col-md-12">
                                 <br>
                                 <label for="pdf"><b>Message:</b></label>
-                                <textarea name="pdf" id="summernote" class="form-control" style="height:120px;"></textarea>
+                                <textarea name="pdf" id="summernote" class="form-control" style="height:170px;"></textarea>
                             </div>
                         </div><br>
                         <button type="submit" class="btn btn-success btn-md">Save</button>

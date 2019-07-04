@@ -694,3 +694,7 @@ Route::post('/assign/leave/',[
 	'uses' => 'LeaveController@assignLeave',
 	'as' => 'assign.leave'
 ]);
+Route::post('/request/leave/',[
+	'uses' => 'LeaveController@requestLeave',
+	'as' => 'request.leave'
+]);

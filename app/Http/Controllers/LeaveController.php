@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Leave;
 use App\employee;
 use Carbon\Carbon;
+use Auth;
 
 class LeaveController extends Controller
 {
@@ -34,5 +35,18 @@ class LeaveController extends Controller
         $leave->status = 1;
         $leave->save();
         return redirect()->route('leaves');
+    }
+
+    public function requestLeave(Request $request){
+        $leave = new Leave;
+        $leave->employee_id = Auth::user()->employee->id;
+        $leave->leave_type = $request->leave_type;
+        $leave->from = $request->from;
+        $leave->to = $request->to;
+        $leave->no_of_days = Carbon::parse($request->from)->diffInDays(Carbon::parse($request->to))+1;
+        $pdf = PDF::loadHTML($request->pdf);
+        return $pdf->stream();
+        // $leave->save();
+        // return redirect()->route('leaves');
     }
 }
