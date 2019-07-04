@@ -53,6 +53,8 @@ class HomeController extends Controller
         if (Auth::user()->admin) {
             // $pdf = \PDF::loadHTML('<h1>testing</h1>');
             // $pdf->save('haha.pdf');
+            // $pdf = \PDF::loadHTML('<h1>testing</h1>');
+            // dd($pdf);
         $dt = Carbon::now();
         $date_today = $dt->timezone('Europe/London');
         $date = $date_today->toDateString();
