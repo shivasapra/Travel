@@ -195,7 +195,7 @@ function Fun2(temp){
                     
                     '<!-- Modal body -->'+
                     '<div class="modal-body">'+
-                        '<iframe src="{{route("show.pdf",["id"=>'+leave_id+'])}}" width="100%" height="500px"></iframe>'+
+                        '<iframe src="{{route("show.pdf",["id"=>'<script>console.log(leave_id);</script>'])}}" width="100%" height="500px"></iframe>'+
                     '</div>'+
                 '</div>'+
             '</div>'+
