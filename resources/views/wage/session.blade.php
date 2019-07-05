@@ -5,7 +5,7 @@ Session
 @section('content')
 <div class="lockscreen-wrapper">
   <div class="lockscreen-logo">
-    <a href="../../index2.html"><b>Cloud</b>Travel</a>
+      <img src="{{asset('images/logo.png')}}" alt="logo" class="img-responsive" style="margin: auto;width: 248px;">
   </div>
   <!-- User name -->
   <div class="text-center">
@@ -59,7 +59,7 @@ Session
   </div>
   <div class="text-center">
       @if($latest_wageLog != null and $latest_wageLog->logout_time == null) 
-      <div class="lockscreen-name"><h4><strong>Total Hours This Session:</strong></h4><h3><span class="text-red"><strong>{{$total_hours_this_session}}</strong></span></h3></div>
+      <div class="lockscreen-name"><h4><strong>Total Time This Session:</strong></h4><h3><span class="text-red"><strong>{{$total_hours_this_session}} Hours</strong></span></h3></div>
       @endif
   </div>
   <div class="lockscreen-footer text-center">

@@ -3,6 +3,16 @@ body{
     font-family: 'Open Sans', sans-serif !important;
     font-size:14px;
 }
+.details h4 {
+    border-bottom: 1px solid #f1f1f1;
+    margin: 0;
+    padding: 0.8rem 0;
+    font-size: 17px;
+}
+.details h4 span {
+    width: 22%;
+    display: inline-block;
+}
 .bt-0{
     border-top:0 !important;
 }

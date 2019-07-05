@@ -415,6 +415,9 @@
         @endcan
 
       @if(!Auth::user()->admin and !Auth::user()->client)
+      @can('Edit Employee')
+        <li><a href="{{route('view.employee',['id'=>Auth::user()->employee[0]->id])}}"><i class="fa fa-user-plus" aria-hidden="true"></i><span>Edit Details</span></a></li>
+      @endcan
         <li>
           <a href="{{route('session')}}">
             <i class="fa fa-clock-o"></i> <span>Mark Attendance
