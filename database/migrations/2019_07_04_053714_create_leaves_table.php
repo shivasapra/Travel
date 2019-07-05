@@ -21,7 +21,7 @@ class CreateLeavesTable extends Migration
             $table->Date('to')->nullable();
             $table->string('no_of_days')->nullable();
             $table->longText('comment')->nullable();
-            $table->string('pdf')->nullable();
+            $table->longText('pdf')->nullable();
             $table->integer('status')->default(2);
             $table->timestamps();
         });

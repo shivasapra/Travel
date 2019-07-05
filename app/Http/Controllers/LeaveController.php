@@ -44,10 +44,7 @@ class LeaveController extends Controller
         $leave->from = $request->from;
         $leave->to = $request->to;
         $leave->no_of_days = Carbon::parse($request->from)->diffInDays(Carbon::parse($request->to))+1;
-        $name = str_random();
-        $pdf = \PDF::loadHTML($request->pdf);
-        $pdf->save($name.'.pdf');
-        $leave->pdf = $name.'.pdf';
+        $leave->pdf = $request->pdf;
         $leave->save();
         return redirect()->route('leaves');
     }

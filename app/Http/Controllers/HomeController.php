@@ -24,6 +24,7 @@ use App\User;
 use App\assignment;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Dompdf\Dompdf;
 class HomeController extends Controller
 {
     /**
@@ -51,10 +52,9 @@ class HomeController extends Controller
         // });
         // dd('gya');
         if (Auth::user()->admin) {
-            // $pdf = \PDF::loadHTML('<h1>testing</h1>');
-            // $pdf->save('haha.pdf');
-            // $pdf = \PDF::loadHTML('<h1>testing</h1>');
-            // dd($pdf);
+
+            // return \PDF::loadHtml("<h1>testing</h1>")->stream();
+            
         $dt = Carbon::now();
         $date_today = $dt->timezone('Europe/London');
         $date = $date_today->toDateString();
