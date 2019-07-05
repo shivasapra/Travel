@@ -174,7 +174,7 @@ Dashboard
   <div class="col-md-3">
     <div class="small-box bg-blue">
         <div class="inner">
-          <h3>{{$total_wage}}</h3>
+          <h3>{{$employee->currency.' '.$total_wage}}</h3>
 
           <p>Total Wage</p>
         </div>
@@ -195,26 +195,37 @@ Dashboard
         <table class="table table-bordered">
           <thead>
             <tr>
-              <th>Date</th>
-              <th>Status</th>
-              <th>Wage</th>
+              <th><strong>Date</strong></th>
+              <th><strong>Status</strong></th>
+              <th><strong>Wage</strong></th>
             </tr>
           </thead>
           <tbody>
             <?php
-              $array_one = array();
               $array_two = array();
-              $period = Carbon\CarbonPeriod::since(Carbon\Carbon::now()->toDateString()->addDays(-7))->days(1)->until(Carbon\Carbon::now()->toDateString())->toArray();
-              foreach($period as $date){
-					      array_push($array_one,$date);
-              }
+              $period = Carbon\CarbonPeriod::since(Carbon\Carbon::now()->addDays(-7)->toDateString())->days(1)->until(Carbon\Carbon::now()->toDateString())->toArray();
+              
               foreach(App\Wage::where('employee_id',Auth::user()->employee[0]->id)->get() as $wage){
-                array_push($array_two,$wage->date);
+                array_push($array_two,Carbon\Carbon::parse($wage->date)->toDateString());
               }
             ?>
-            @foreach($period as $d)
+            @foreach(collect($period)->reverse() as $d)
               <tr>
-          
+                <td style="font-weight:10px;">{{$d->format('d-m-Y')}}</td>
+                <td>
+                  @if(collect($array_two)->contains($d->toDateString()))
+                    <span class="text-success"><strong>{{'PRESENT'}}</strong></span>
+                  @else
+                    <span class="text-danger"><strong>{{'ABSENT'}}</strong></span>
+                  @endif
+                </td>
+                <td>
+                  @if(App\Wage::where('employee_id',Auth::user()->employee[0]->id)->where('date',$d->toDateString())->get()->count()>0)
+                    {{$employee->currency.' '.App\Wage::where('employee_id',Auth::user()->employee[0]->id)->where('date',$d->toDateString())->get()[0]->today_wage}}
+                  @else
+                    --
+                  @endif
+                </td>
               </tr>
             @endforeach
           </tbody>
