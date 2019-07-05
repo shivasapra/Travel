@@ -297,7 +297,7 @@
             </ul>
           </li>
         @endif
-        @if(Auth::user()->can('Employee Attendance Status') or Auth::user()->can('Employee Salary Slip') or Auth::user()->can('Staff Wage management'))
+        @if(Auth::user()->admin)
         <li class="treeview">
             <a href="">
               <i class="fa fa-pencil-square-o"></i><span>Employee Management</span>
@@ -309,7 +309,7 @@
               @can('View Employees')
               @if(Auth::user()->admin)
                 <li><a href="{{route('employees')}}"><i class="fa fa-circle-o"></i><span>Employees</span></a></li>
-              @endif
+              
               @endcan
               @can('Employee Attendance Status')
                 <li><a href="{{route('status')}}"><i class="fa fa-circle-o"></i> <span>Employee Attendance Status</span></a></li>
@@ -320,10 +320,10 @@
               @can('Staff Wage management')
                 <li><a href="{{route('wage')}}"><i class="fa fa-circle-o"></i><span>Staff Wage Management</span></a></li>
               @endcan
+              @endif
             </ul>
           </li>
-          @endif
-
+        @endif
         @if(Auth::user()->can('Expense Entry') or Auth::user()->can('Auto Deduction Expense Entry'))
         <li class="treeview">
             <a href="">
@@ -420,6 +420,10 @@
       @can('Edit Employee')
         <li><a href="{{route('view.employee',['id'=>Auth::user()->employee[0]->id])}}"><i class="fa fa-user-plus" aria-hidden="true"></i><span>Edit Details</span></a></li>
       @endcan
+      @can('Employee Attendance Status')
+        <li><a href="#"><i class="fa fa-id-card-o" aria-hidden="true"></i><span>Attendance</span></a></li>
+      @endcan
+      <li><a href="{{route('wage.log',['id'=>Auth::user()->employee[0]->id])}}"><i class="fa fa-money" aria-hidden="true"></i><span>Wage Log</span></a></li>
         <li>
           <a href="{{route('session')}}">
             <i class="fa fa-clock-o"></i> <span>Mark Attendance
