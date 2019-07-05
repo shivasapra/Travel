@@ -66,7 +66,10 @@ Leave Applications
                                 <td>{{$leave->to}}</td>
                                 <td>{{$leave->leave_type}}</td>
                                 <td>{{$leave->no_of_days}}</td>
-                                <td><a href="#" class="btn btn-primary" data-toggle="modal" data-target="#leave_view">View</a></td>
+                                <td class="test2">
+                                    <input type="text" hidden value="{{$leave->id}}" class="leave_id">
+                                    <button   type="button" onClick="Fun2(this);" class="btn btn-primary">View</button>
+                                </td>
                                 <td>
                                     @if($leave->status == 0)
                                         <label class="badge bg-red">Rejected</label>
@@ -96,71 +99,11 @@ Leave Applications
         </div>
         
         
-        @if($leaves->count()>0)
-        <div class="modal fade" id="leave_view">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content">
-    
-                    <!-- Modal Header -->
-                    <div class="modal-header">
-                        <h4 class="modal-title">Leave Application</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    
-                    <!-- Modal body -->
-                    <div class="modal-body">
-                        <iframe src="{{route('show.pdf',['id'=>1])}}" width="100%" height="500px"></iframe>
-                    </div>
-                </div>
-            </div>
-        </div>
-        @endif
-            <a href="#" id="target" style="display:none;" data-toggle="modal" data-target="#leave_status" class="btn btn-icons btn-rounded btn-success"></a>
-            {{-- <div class="modal fade" id="leave_status">
-                    <div class="modal-dialog modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-            
-                            <!-- Modal Header -->
-                            <div class="modal-header">
-                                <h4 class="modal-title">Leave Status</h4>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            </div>
-            
-                            <!-- Modal body -->
-                            <div class="modal-body">
-                                <form action="{{route("leave.application.status")}}" method="post">
-                                    @csrf
-                                    <input type="text" hidden value="'+leave_id+'" class="leave_id">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Add Status</label>
-                                                <select class="form-control" name="status" required>
-                                                    <option value="">--Select--</option>
-                                                    <option value="1">Approved</option>
-                                                    <option value="2">Rejected</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Comment</label>
-                                                <textarea placeholder="Enter Message" class="form-control" name="comment" style="height:70px;" required>
-                                                </textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <button type="submit" class="btn btn-success">Save</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
+        
+        <a href="#" id="target2" style="display:none;" data-toggle="modal" data-target="#leave_view"></a>
+        <a href="#" id="target" style="display:none;" data-toggle="modal" data-target="#leave_status"></a>
         <div id="status-modal"></div>
+        <div id="view"></div>
         
 @endsection
 @section('js')
@@ -232,9 +175,33 @@ function Fun(temp){
             '</div>'+
         '</div>';
 	  $('#status-modal').html(data);
-      console.log('testing');
       
 	  $('#target').click();
+	}
+
+
+function Fun2(temp){
+    var leave_id = $(temp).parents('.test2').find('.leave_id').val();
+    var data = 
+    '<div class="modal fade" id="leave_view">'+
+            '<div class="modal-dialog modal-dialog-centered modal-lg">'+
+                '<div class="modal-content">'+
+    
+                    '<!-- Modal Header -->'+
+                    '<div class="modal-header">'+
+                        '<h4 class="modal-title">Leave Application</h4>'+
+                        '<button type="button" class="close" data-dismiss="modal">&times;</button>'+
+                    '</div>'+
+                    
+                    '<!-- Modal body -->'+
+                    '<div class="modal-body">'+
+                        '<iframe src="{{route("show.pdf",["id"=>'+leave_id+'])}}" width="100%" height="500px"></iframe>'+
+                    '</div>'+
+                '</div>'+
+            '</div>'+
+        '</div>';
+	  $('#view').html(data);
+	  $('#target2').click();
 	}
 </script>
 @stop
