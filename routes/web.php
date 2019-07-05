@@ -432,6 +432,10 @@ Route::post('/employee/status',[
 		'uses' => 'employeeController@status2',
 		'as' => 'status2'
 	])->middleware('permission:Employee Attendance Status');
+Route::get('/attendance/{id}',[
+	'uses' => 'employeeController@attendance',
+	'as' => 'attendance'
+]);
 
 
 

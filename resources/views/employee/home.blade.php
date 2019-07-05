@@ -181,19 +181,17 @@ Dashboard
         <div class="icon">
           <i class="ion ion-pie-graph"></i>
         </div>
-        <a href="#" class="small-box-footer">
+        <a href="{{route('wage.log',['id'=>Auth::user()->employee[0]->id])}}" class="small-box-footer">
           More info <i class="fa fa-arrow-circle-right"></i>
         </a>
     </div>
-    <div class="box box-primary">
-      <div class="box-header">
+    <div class="box">
           <div class="box-header with-border">
             <h3 class="box-title"><strong>{{"Attendance"}}</strong></h3>
           </div>
-      </div>
       <div class="box-body">
-        <table class="table table-bordered">
-          <thead>
+        <table class="table table-bordered mb-0" style="margin-top:0px;">
+          <thead class="bg-light-gray">
             <tr>
               <th><strong>Date</strong></th>
               <th><strong>Status</strong></th>
@@ -230,6 +228,13 @@ Dashboard
             @endforeach
           </tbody>
         </table>
+      </div>
+      <div class="box-footer">
+<div class="text-left">
+        <a href="{{route('attendance',['id'=>Auth::user()->employee[0]->id])}}" class="btn btn-success">
+            More info <i class="fa fa-arrow-circle-right"></i>
+          </a>
+        </div>
       </div>
       
     </div>

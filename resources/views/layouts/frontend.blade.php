@@ -420,9 +420,8 @@
       @can('Edit Employee')
         <li><a href="{{route('view.employee',['id'=>Auth::user()->employee[0]->id])}}"><i class="fa fa-user-plus" aria-hidden="true"></i><span>Edit Details</span></a></li>
       @endcan
-      @can('Employee Attendance Status')
-        <li><a href="#"><i class="fa fa-id-card-o" aria-hidden="true"></i><span>Attendance</span></a></li>
-      @endcan
+        <li><a href="{{route('attendance',['id'=>Auth::user()->employee[0]->id])}}"><i class="fa fa-id-card-o" aria-hidden="true"></i><span>Attendance</span></a></li>
+      
       <li><a href="{{route('wage.log',['id'=>Auth::user()->employee[0]->id])}}"><i class="fa fa-money" aria-hidden="true"></i><span>Wage Log</span></a></li>
         <li>
           <a href="{{route('session')}}">

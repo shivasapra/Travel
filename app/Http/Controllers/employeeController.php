@@ -366,4 +366,9 @@ class employeeController extends Controller
         $employees = employee::where('first_name', 'like', '%'.request('employee_name').'%')->get();
         return redirect()->back()->with('employees',$employees);
     }
+
+    public function attendance($id){
+        $employee = employee::find($id);
+        return view('employee.attendance')->with('employee',$employee);
+    }
 }

@@ -38,8 +38,8 @@ Employee wage log
                 		<td>{{$employee->unique_id}}</td>
                         <td>{{$wage->date}}</td>
                         <td>{{$wage->total_hours}}</td>
-                        <td>{{$wage->hourly}}</td>
-                        <td>{{$wage->today_wage}}</td>
+                        <td>{{$employee->currency.' '.$wage->hourly}}</td>
+                        <td>{{$employee->currency.' '.$wage->today_wage}}</td>
                 		</tr>
                     @endforeach
                     @endif
