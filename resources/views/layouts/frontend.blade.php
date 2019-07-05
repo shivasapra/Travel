@@ -297,7 +297,7 @@
             </ul>
           </li>
         @endif
-        @if(Auth::user()->can('View Employees') or Auth::user()->can('Employee Attendance Status') or Auth::user()->can('Employee Salary Slip') or Auth::user()->can('Staff Wage management'))
+        @if(Auth::user()->can('Employee Attendance Status') or Auth::user()->can('Employee Salary Slip') or Auth::user()->can('Staff Wage management'))
         <li class="treeview">
             <a href="">
               <i class="fa fa-pencil-square-o"></i><span>Employee Management</span>
@@ -307,7 +307,9 @@
             </a>
             <ul class="treeview-menu">
               @can('View Employees')
+              @if(Auth::user()->admin)
                 <li><a href="{{route('employees')}}"><i class="fa fa-circle-o"></i><span>Employees</span></a></li>
+              @endif
               @endcan
               @can('Employee Attendance Status')
                 <li><a href="{{route('status')}}"><i class="fa fa-circle-o"></i> <span>Employee Attendance Status</span></a></li>

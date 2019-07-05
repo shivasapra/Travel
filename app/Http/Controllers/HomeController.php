@@ -170,11 +170,17 @@ class HomeController extends Controller
                 $last->status = 1;
                 $last->save();
             }
+            $wages = wage::where('employee_id',Auth::user()->employee[0]->id)->get();
+            $total_wage = 0;
+            foreach ($wages as $wage) {
+                $total_wage = $total_wage + $wage->today_wage;
+            }
             $messages = Chat::where('to_id',Auth::user()->id)->orWhere('user_id',Auth::user()->id)->orderBy('id','asc')->get();
             return view('employee.home')->with('assignments',assignment::where('date',Carbon::now()->timezone('Europe/London')->toDateString())
                                         ->where('employee_id',null)->get())
                                         ->with('messages',$messages)
-                                        ->with('employee',Auth::user()->employee[0]);
+                                        ->with('employee',Auth::user()->employee[0])
+                                        ->with('total_wage',$total_wage);
         }
         else{
             $client = Auth::user()->client;

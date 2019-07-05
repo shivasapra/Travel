@@ -15,36 +15,36 @@ Dashboard
 @stop
 @section('content')
 <div class="row">
-    <div class="col-md-3">
-      <form action="{{route('update.employee',['id'=>$employee->id])}}" method="post" enctype="multipart/form-data">
-        @csrf
-        <div class="image-div">
-            <img  id="blah"
-            @if($employee->user->avatar)
-              src="{{asset($employee->user->avatar)}}"
-            @else
-              src="{{asset('app/images/user-placeholder.jpg')}}"
-            @endif 
-            alt="avatar" class="img-responsive">
-            <a href="{{asset($employee->user->avatar)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
-            {{-- <label for="avatar" class="upload-icon">
-                <i class="fa fa-camera" aria-hidden="true"></i>
-            </label>
-            <input type="file" id="avatar" name='avatar' onchange="readURL(this);"  class="form-control" style="display:none;"> --}}
-          </div>
-      </form>
-      <br>
-      <ul class="list-group add-employee-list">
-        <li class="active list-group-item"><a data-toggle="tab" href="#personal-information">Personal Information</a></li>
-        <li class="list-group-item"><a data-toggle="tab" href="#contact-information">Contact Information</a></li>
-        <li class="list-group-item"><a data-toggle="tab" href="#professional-information">Professional Information</a></li>
-        <li class="list-group-item"><a data-toggle="tab" href="#emergency-contact-information">Emergency Contact Information</a></li>
-        <li class="list-group-item"><a data-toggle="tab" href="#account-information">Account Information</a></li>
-        <li class="list-group-item"><a data-toggle="tab" href="#passport-information">Passport Information</a></li>																
-      </ul>
-    
-    </div>
-    <div class="col-md-9">
+  <div class="col-md-3">
+    <form action="{{route('update.employee',['id'=>$employee->id])}}" method="post" enctype="multipart/form-data">
+      @csrf
+      <div class="image-div">
+          <img  id="blah"
+          @if($employee->user->avatar)
+            src="{{asset($employee->user->avatar)}}"
+          @else
+            src="{{asset('app/images/user-placeholder.jpg')}}"
+          @endif 
+          alt="avatar" class="img-responsive">
+          <a href="{{asset($employee->user->avatar)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
+          {{-- <label for="avatar" class="upload-icon">
+              <i class="fa fa-camera" aria-hidden="true"></i>
+          </label>
+          <input type="file" id="avatar" name='avatar' onchange="readURL(this);"  class="form-control" style="display:none;"> --}}
+        </div>
+    </form>
+    <br>
+    <ul class="list-group add-employee-list">
+      <li class="active list-group-item"><a data-toggle="tab" href="#personal-information">Personal Information</a></li>
+      <li class="list-group-item"><a data-toggle="tab" href="#contact-information">Contact Information</a></li>
+      <li class="list-group-item"><a data-toggle="tab" href="#professional-information">Professional Information</a></li>
+      <li class="list-group-item"><a data-toggle="tab" href="#emergency-contact-information">Emergency Contact Information</a></li>
+      <li class="list-group-item"><a data-toggle="tab" href="#account-information">Account Information</a></li>
+      <li class="list-group-item"><a data-toggle="tab" href="#passport-information">Passport Information</a></li>																
+    </ul>
+  
+  </div>
+  <div class="col-md-6">
         <div class="tab-content">
           <div id="personal-information" class="tab-pane fade in active">
             <div class="box box-primary">
@@ -119,42 +119,12 @@ Dashboard
               <div class="box-header with-border">
                 <h3 class="box-title"><strong>{{"Emergency Contact Information"}}</strong></h3>
               </div>
-              <div class="box-body">
-                  <h4><span>Qualification</span> : &nbsp;&nbsp;@if($employee->qualification){{$employee->qualification}}@else -- @endif</h4>
-                <div class="row">
-                  <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="emer_contact_name">Contact Name</label>
-                    <input type="text" value="{{$employee->emer_contact_name}}" name='emer_contact_name' class="form-control readonly_attribute" readonly>
-                  </div>
-                  </div>
-                  <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="emer_contact_address">Contact Address</label>
-                    <input type="text" value="{{$employee->emer_contact_address}}" name='emer_contact_address' class="form-control readonly_attribute" readonly>
-                  </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="emer_contact_phone">Contact Phone No.</label>
-                    <input type="text" value="{{$employee->emer_contact_phone}}" name='emer_contact_phone' class="form-control readonly_attribute" readonly>
-                  </div>
-                  </div>
-                  <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="emer_contact_email">Contact Email</label>
-                    <input type="text" value="{{$employee->emer_contact_email}}" name='emer_contact_email' class="form-control readonly_attribute" readonly>
-                  </div>
-                  </div>
-                  <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="emer_contact_ralation">Relation</label>
-                    <input type="text" value="{{$employee->emer_contact_relation}}" name='emer_contact_ralation' class="form-control readonly_attribute" readonly>
-                  </div>
-                  </div>
-                </div>
+              <div class="box-body details">
+                  <h4><span>Contact Name</span> : &nbsp;&nbsp;@if($employee->emer_contact_name){{$employee->emer_contact_name}}@else -- @endif</h4>
+                  <h4><span>Contact Address</span> : &nbsp;&nbsp;@if($employee->emer_contact_address){{$employee->emer_contact_address}}@else -- @endif</h4>
+                  <h4><span>Contact Phone No.</span> : &nbsp;&nbsp;@if($employee->emer_contact_phone){{$employee->emer_contact_phone}}@else -- @endif</h4>
+                  <h4><span>Contact Email</span> : &nbsp;&nbsp;@if($employee->emer_contact_email){{$employee->emer_contact_email}}@else -- @endif</h4>
+                  <h4><span>Relation</span> : &nbsp;&nbsp;@if($employee->emer_contact_relation){{$employee->emer_contact_relation}}@else -- @endif</h4>
               </div>
             </div>
           </div>
@@ -163,55 +133,14 @@ Dashboard
               <div class="box-header with-border">
                 <h3 class="box-title"><strong>{{"Account Information"}}</strong></h3>
               </div>
-              <div class="box-body">
-                <div class="row">
-                  <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="sort_code">SORT Code</label>
-                    <input type="text" value="{{$employee->sort_code}}" name='sort_code' class="form-control readonly_attribute" readonly>
-                  </div>
-                  </div>
-                  <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="account_no">Account No</label>
-                    <input type="text" value="{{$employee->account_no}}" name='account_no' class="form-control readonly_attribute" readonly>
-                  </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="bank_name">Bank Name</label>
-                    <input type="text" value="{{$employee->bank_name}}" name='bank_name' class="form-control readonly_attribute" readonly>
-                  </div>
-                  </div>
-                  <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="bank_address">Bank Address</label>
-                    <input type="text" value="{{$employee->bank_address}}" name='bank_address' class="form-control readonly_attribute" readonly>
-                  </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-3">
-                  <div class="form-group">
-                    <label for="income_tax_no">Income Tax No.</label>
-                    <input type="text" value="{{$employee->income_tax_no}}" name='income_tax_no' class="form-control readonly_attribute" readonly>
-                  </div>
-                  </div>
-                  <div class="col-md-3">
-                  <div class="form-group">
-                    <label for="tax_ref_no">Tax Ref No.</label>
-                    <input type="text" value="{{$employee->tax_ref_no}}" name='tax_ref_no' class="form-control readonly_attribute" readonly>
-                  </div>
-                  </div>
-                  <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="national_insurance_no">National Insurance No.</label>
-                    <input type="text" value="{{$employee->national_insurance_no}}" name='national_insurance_no' class="form-control readonly_attribute" readonly>
-                  </div>
-                  </div>
-                </div>
+              <div class="box-body details">
+                  <h4><span>SORT Code</span> : &nbsp;&nbsp;@if($employee->sort_code){{$employee->sort_code}}@else -- @endif</h4>
+                  <h4><span>Account No</span> : &nbsp;&nbsp;@if($employee->account_no){{$employee->account_no}}@else -- @endif</h4>
+                  <h4><span>Bank Name</span> : &nbsp;&nbsp;@if($employee->bank_name){{$employee->bank_name}}@else -- @endif</h4>
+                  <h4><span>Bank Address</span> : &nbsp;&nbsp;@if($employee->bank_address){{$employee->bank_address}}@else -- @endif</h4>
+                  <h4><span>Income Tax No</span> : &nbsp;&nbsp;@if($employee->income_tax_no){{$employee->income_tax_no}}@else -- @endif</h4>
+                  <h4><span>Tax Ref No</span> : &nbsp;&nbsp;@if($employee->tax_ref_no){{$employee->tax_ref_no}}@else -- @endif</h4>
+                  <h4><span>National Insurance No</span> : &nbsp;&nbsp;@if($employee->national_insurance_no){{$employee->national_insurance_no}}@else -- @endif</h4>
               </div>
             </div>
           </div>
@@ -220,70 +149,87 @@ Dashboard
               <div class="box-header with-border">
                 <h3 class="box-title"><strong>{{"Passport Information"}}</strong></h3>
               </div>
-              <div class="box-body">
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="passport_no">Passport Number</label>
-                      <input type="text" name="passport_no"  class="form-control readonly_attribute" value="{{$employee->passport_no}}" readonly>
-                    </div>
+              <div class="box-body details">
+                <h4><span>Passport No</span> : &nbsp;&nbsp;@if($employee->passport_no){{$employee->passport_no}}@else -- @endif</h4>
+                <h4><span>Passport Expiry Date</span> : &nbsp;&nbsp;@if($employee->passport_expiry_date){{$employee->passport_expiry_date}}@else -- @endif</h4>
+                <h4><span>Place Of Issue</span> : &nbsp;&nbsp;@if($employee->passport_place){{$employee->passport_place}}@else -- @endif</h4>
+                <h4><span>Date Of Issue</span> : &nbsp;&nbsp;@if($employee->passport_issue_date){{$employee->passport_issue_date}}@else -- @endif</h4>
+                <h4><span>Passport Front</span> : &nbsp;&nbsp;
+                  <div class="image-div">
+                      <img id="passport_front" @if($employee->passport_front) src="{{asset($employee->passport_front)}}" @else src="{{asset('/images/placeholder.png')}}" @endif alt="work permit" style="width:120px;height:100px;" class="img-responsive">
+                      <a href="{{asset($employee->passport_front)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
                   </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="passport_expiry_date">Passport Expire date</label>
-                      <input type="date" name="passport_expiry_date"  class="form-control readonly_attribute" value="{{$employee->passport_expiry_date}}" readonly>
-                    </div>
+                </h4>
+                <h4><span>Passport Back </span> : &nbsp;&nbsp;
+                  <div class="image-div">
+                      <img id="passport_back" @if($employee->passport_back) src="{{asset($employee->passport_back)}}" @else src="{{asset('/images/placeholder.png')}}" @endif alt="work permit" style="width:120px;height:100px;" class="img-responsive">
+                      <a href="{{asset($employee->passport_back)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
                   </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="passport_place">Place of Issue</label>
-                      <input type="text" name="passport_place"  class="form-control readonly_attribute" value="{{$employee->passport_place}}" readonly>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="passport_issue_date">Date Of Issue</label>
-                      <input type="date" name="passport_issue_date"  class="form-control readonly_attribute" value="{{$employee->passport_issue_date}}" readonly>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="passport_front">Passport Front:</label>
-                      <div class="image-div">
-                        <img id="passport_front" @if($employee->passport_front) src="{{asset($employee->passport_front)}}" @else src="{{asset('/images/placeholder.png')}}" @endif alt="passport_front"  height="200px" width="200px" style="border-radius:10px">
-                        <a href="{{asset($employee->passport_front)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
-                        <label for="front" class="upload-icon">
-                            <i class="fa fa-camera" aria-hidden="true"></i>
-                        </label>
-                        <input type="file" id="front" name='passport_front' onchange="readURLFront(this);"  class="form-control disabled_attribute" disabled style="display:none;">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="passport_back">Passport Back:</label>
-                      <div class="image-div">
-                        <img id="passport_back" @if($employee->passport_back) src="{{asset($employee->passport_back)}}" @else src="{{asset('/images/placeholder.png')}}" @endif alt="passport back"  height="200px" width="200px" style="border-radius:10px">
-                        <a href="{{asset($employee->passport_back)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
-                        <label for="back" class="upload-icon">
-                            <i class="fa fa-camera" aria-hidden="true"></i>
-                        </label>
-                        <input type="file" id="back" name='passport_back' onchange="readURLBack(this);"  class="form-control disabled_attribute" disabled style="display:none;">
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                </h4>
               </div>
             </div>
           </div>
         </div>
+  </div>
+  <div class="col-md-3">
+    <div class="small-box bg-blue">
+        <div class="inner">
+          <h3>{{$total_wage}}</h3>
+
+          <p>Total Wage</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-pie-graph"></i>
+        </div>
+        <a href="#" class="small-box-footer">
+          More info <i class="fa fa-arrow-circle-right"></i>
+        </a>
+    </div>
+    <div class="box box-primary">
+      <div class="box-header">
+          <div class="box-header with-border">
+            <h3 class="box-title"><strong>{{"Attendance"}}</strong></h3>
+          </div>
       </div>
+      <div class="box-body">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Status</th>
+              <th>Wage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php
+              $array_one = array();
+              $array_two = array();
+              $period = Carbon\CarbonPeriod::since(Carbon\Carbon::now()->toDateString()->addDays(-7))->days(1)->until(Carbon\Carbon::now()->toDateString())->toArray();
+              foreach($period as $date){
+					      array_push($array_one,$date);
+              }
+              foreach(App\Wage::where('employee_id',Auth::user()->employee[0]->id)->get() as $wage){
+                array_push($array_two,$wage->date);
+              }
+            ?>
+            @foreach($period as $d)
+              <tr>
+          
+              </tr>
+            @endforeach
+          </tbody>
+        </table>
+      </div>
+      
+    </div>
+  </div>
     
-  </div>	
+</div>
+
+
+
+
+
   <div class="row">
     {{-- <div class="col-md-4">
       <div class="box box-primary direct-chat direct-chat-primary">
