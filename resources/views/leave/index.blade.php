@@ -96,7 +96,7 @@ Leave Applications
         </div>
         
         
-        
+        @if($leaves->count()>0)
         <div class="modal fade" id="leave_view">
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
@@ -114,6 +114,7 @@ Leave Applications
                     </div>
                 </div>
             </div>
+            @endif
             <a href="#" id="target" style="display:none;" data-toggle="modal" data-target="#leave_status" class="btn btn-icons btn-rounded btn-success"></a>
             {{-- <div class="modal fade" id="leave_status">
                     <div class="modal-dialog modal-dialog modal-dialog-centered">
