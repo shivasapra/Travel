@@ -28,9 +28,10 @@ body{
 }
 .image-div{
     position:relative;
-    width:200px;
-    height:200px;
+    width:auto;
+    height:auto;
     border-radius:10px;
+    display: inline-block;
 }
 .image-div:hover .download-image-icon{
     opacity: 1;

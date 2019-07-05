@@ -25,7 +25,7 @@ Dashboard
             @else
               src="{{asset('app/images/user-placeholder.jpg')}}"
             @endif 
-            alt="avatar" height="200px" width="200px" style="border-radius:20px">
+            alt="avatar" class="img-responsive">
             <a href="{{asset($employee->user->avatar)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
             {{-- <label for="avatar" class="upload-icon">
                 <i class="fa fa-camera" aria-hidden="true"></i>
@@ -53,144 +53,20 @@ Dashboard
               </div>
               <div class="box-body details">
                 <br>
-                  <h4><span>Employee ID</span> : {{$employee->unique_id}}</h4> 
-                  <h4><span>First Name</span> : {{$employee->first_name}}</h4>
-                  <h4><span>Last Name</span> : {{$employee->last_name}}</h4>
-                  <h4><span>Father's Name</span> : {{$employee->father_name}}</h4>
-                  <h4><span>Mother's Name</span> : {{$employee->mother_name}}</h4>
-                  <h4><span>Gender</span> : {{$employee->gender}}</h4>
-                  <h4><span>Date Of Birth</span> : {{$employee->DOB}}</h4>
-                  <h4><span>Marital Status</span> : {{$employee->marital_status}}</h4>
-                  <h4><span>Disability</span> : {{$employee->disability}}</h4>
-                  <h4><span>Blood Group</span> : {{$employee->blood_group}}</h4>
-                  <h4><span>Country</span> : {{$employee->country}}</h4>
-                  <h4><span>County</span> : {{$employee->county}}</h4>
-                <div class="row">
-                  <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="first_name">First Name</label>
-                    <input type="text" name='first_name' value="{{$employee->first_name}}" class="form-control readonly_attribute" readonly>
-                  </div>
-                  </div>
-                  <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="middle_name">Middle Name</label>
-                    <input type="text" name='middle_name' value="{{$employee->middle_name}}" class="form-control readonly_attribute" readonly>
-                  </div>
-                  </div>
-                  <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="last_name">Last Name</label>
-                    <input type="text" value="{{$employee->last_name}}" name='last_name' class="form-control readonly_attribute" readonly>
-                  </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="father_name">Father's Name</label>
-                    <input type="text" value="{{$employee->father_name}}" name='father_name' class="form-control readonly_attribute" readonly>
-                  </div>
-                  </div>
-                  <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="mother_name">Mother's Name</label>
-                    <input type="text" value="{{$employee->mother_name}}" name='mother_name' class="form-control readonly_attribute" readonly>
-                  </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="gender">Gender</label>
-                    <select name="gender" class="form-control disabled_attribute" disabled>
-                      <option value="">{{"---Select Gender---"}}</option>
-                      <option value="Male" class="form-control" {{($employee->gender == 'Male')?"selected":" "}}>Male</option>
-                      <option value="Female" class="form-control" {{($employee->gender == 'Female')?"selected":" "}}>Female</option>
-                      <option value="Others" class="form-control" {{($employee->gender == 'Others')?"selected":" "}}>Others</option>
-                    </select>
-                  </div>
-                  </div>
-                  <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="DOB">Date of Birth</label>
-                    <input type="date" value="{{$employee->DOB}}" name='DOB' class="form-control readonly_attribute"  readonly>
-                  </div>
-                  </div>
-                  <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="marital_status">Marital Status</label>
-                    <select name="marital_status" class="form-control disabled_attribute" disabled>
-                      <option value="">{{"---Select status---"}}</option>
-                      <option value="Married" class="form-control" {{($employee->marital_status == 'Married')?"selected":" "}}>Married</option>
-                      <option value="Unmarried" class="form-control" {{($employee->marital_status == 'Unmarried')?"selected":" "}}>Unmarried</option>
-                      <option value="Divorced" class="form-control" {{($employee->marital_status == 'Divorced')?"selected":" "}}>Divorced</option>
-                      <option value="Widowed" class="form-control" {{($employee->marital_status == 'Widowed')?"selected":" "}}>Widowed</option>
-                    </select>
-                  </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-3">
-                  <div class="form-group">
-                    <label for="disability">Disability</label>
-                    <input type="text" name='disability' value="{{$employee->disability}}" class="form-control readonly_attribute" readonly>
-                  </div>
-                  </div>
-                  <div class="col-md-3">
-                  <div class="form-group">
-                    <label for="blood_group">Blood Group</label>
-                    <select name="blood_group" class="form-control disabled_attribute" disabled>
-                      <option value="">{{"---Select one---"}}</option>
-                      <option value="A+" class="form-control" {{($employee->blood_group == 'A+')?"selected":" "}}>A+</option>
-                      <option value="A-" class="form-control" {{($employee->blood_group == 'A-')?"selected":" "}}>A-</option>
-                      <option value="A Unknown" class="form-control" {{($employee->blood_group == 'A Unknown')?"selected":" "}}>A Unknown</option>
-                      <option value="B+" class="form-control" {{($employee->blood_group == 'B+')?"selected":" "}}>B+</option>
-                      <option value="B-" class="form-control" {{($employee->blood_group == 'B-')?"selected":" "}}>B-</option>
-                      <option value="B Unknown" class="form-control" {{($employee->blood_group == 'B Unknown')?"selected":" "}}>B Unknown</option>
-                      <option value="AB+" class="form-control"  {{($employee->blood_group == 'AB+')?"selected":" "}}>AB+</option>
-                      <option value="AB-" class="form-control" {{($employee->blood_group == 'AB-')?"selected":" "}}>AB-</option>
-                      <option value="AB Unknown" class="form-control" {{($employee->blood_group == 'AB Unknown')?"selected":" "}}>AB Unknown</option>
-                      <option value="O+" class="form-control" {{($employee->blood_group == 'O+')?"selected":" "}}>O+</option>
-                      <option value="O-" class="form-control" {{($employee->blood_group == 'O-')?"selected":" "}}>O-</option>
-                      <option value="O Unknown" class="form-control"{{($employee->blood_group == 'O Unkonown')?"selected":" "}}>O Unknown</option>
-                      <option value="Unknown" class="form-control" {{($employee->blood_group == 'Unknown')?"selected":" "}}>Unknown</option>
-                    </select>
-                  </div>
-                  </div>
-                  <div class="col-md-3">
-                  <div class="form-group">
-                    <label for="country">Country</label>
-                    <input type="text" name='country' value="{{$employee->country}}" class="form-control readonly_attribute" readonly>
-                  </div>
-                  </div>
-                  <div class="col-md-3">
-                  <div class="form-group">
-                    <label for="county">County</label>
-                    <input type="text" name='county' value="{{$employee->county}}" class="form-control readonly_attribute" readonly>
-                  </div>
-                  </div>
-                </div>
-                <div class="row">
-                  {{-- <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="passport">Passport</label>
-                    <input type="text" name='passport' value="{{$employee->passport}}" class="form-control" readonly>
-                  </div>
-                  </div> --}}
-                  <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="visa">Visa</label>
-                    <input type="text" value="{{$employee->visa}}" name='visa' class="form-control readonly_attribute" readonly>
-                  </div>
-                  </div>
-                  <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="visa_expired">Visa valid upto</label>
-                    <input type="date" value="{{$employee->visa_expired}}" name='visa_expired' class="form-control readonly_attribute" readonly>
-                  </div>
-                  </div>
-                </div>
+                  <h4><span>Employee ID</span> : &nbsp;&nbsp;@if($employee->unique_id){{$employee->unique_id}}@else -- @endif</h4> 
+                  <h4><span>First Name</span> :&nbsp;&nbsp; @if($employee->first_name){{$employee->first_name}}@else -- @endif</h4>
+                  <h4><span>Last Name</span> :&nbsp;&nbsp;  @if($employee->last_name){{$employee->last_name}}@else -- @endif</h4>
+                  <h4><span>Father's Name</span> : &nbsp;&nbsp; @if($employee->father_name){{$employee->father_name}}@else -- @endif</h4>
+                  <h4><span>Mother's Name</span> : &nbsp;&nbsp; @if($employee->mother_name){{$employee->mother_name}}@else -- @endif</h4>
+                  <h4><span>Gender</span> : &nbsp;&nbsp; @if($employee->gender){{$employee->gender}}@else -- @endif</h4>
+                  <h4><span>Date Of Birth</span> : &nbsp;&nbsp; @if($employee->DOB){{$employee->DOB}}@else -- @endif</h4>
+                  <h4><span>Marital Status</span> :  &nbsp;&nbsp;@if($employee->marital_status){{$employee->marital_status}}@else -- @endif</h4>
+                  <h4><span>Disability</span> : &nbsp;&nbsp; @if($employee->disability){{$employee->disability}}@else -- @endif</h4>
+                  <h4><span>Blood Group</span> : &nbsp;&nbsp; @if($employee->blood_group){{$employee->blood_group}}@else -- @endif</h4>
+                  <h4><span>Country</span> :  &nbsp;&nbsp;@if($employee->country){{$employee->country}}@else -- @endif</h4>
+                  <h4><span>County</span> :  &nbsp;&nbsp;@if($employee->county){{$employee->county}}@else -- @endif</h4>
+                  <h4><span>Visa</span> :  &nbsp;&nbsp;@if($employee->visa){{$employee->visa}}@else -- @endif</h4>
+                  <h4><span>Visa Valid Upto</span> :  &nbsp;&nbsp;@if($employee->visa_expired){{$employee->visa_expired}}@else -- @endif</h4>
               </div>
             </div>
           </div>
@@ -199,41 +75,12 @@ Dashboard
               <div class="box-header with-border">
                 <h3 class="box-title"><strong>{{"Contact Information"}}</strong></h3>
               </div>
-              <div class="box-body">
-                <div class="row">
-                  <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="permanent_address">Permanent Home Address</label>
-                    <input type="text" value="{{$employee->permanent_address}}" name='permanent_address' class="form-control readonly_attribute" readonly>
-                  </div>
-                  </div>
-                  <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="temporary_address">Temporary Home Address</label>
-                    <input type="text" value="{{$employee->temporary_address}}" name='temporary_address' class="form-control readonly_attribute" readonly>
-                  </div>
-                  </div>
-                  <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="home_phone">Home Phone</label>
-                    <input type="text" value="{{$employee->home_phone}}" name='home_phone' class="form-control readonly_attribute" readonly>
-                  </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="mobile_phone">Mobile Phone</label>
-                    <input type="text" value="{{$employee->mobile_phone}}" name='mobile_phone' class="form-control readonly_attribute" readonly>
-                  </div>
-                  </div>
-                  <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" value="{{$employee->email}}" name='email' class="form-control readonly_attribute" readonly>
-                  </div>
-                  </div>
-                </div>
+              <div class="box-body details">
+                  <h4><span>Permanent Home Address</span> : &nbsp;&nbsp;@if($employee->permanent_address){{$employee->permanent_address}}@else -- @endif</h4> 
+                  <h4><span>Temporary Home Address</span> : &nbsp;&nbsp;@if($employee->temporary_address){{$employee->temporary_address}}@else -- @endif</h4> 
+                  <h4><span>Home Phone</span> : &nbsp;&nbsp;@if($employee->home_phone){{$employee->home_phone}}@else -- @endif</h4> 
+                  <h4><span>Mobile Phone</span> : &nbsp;&nbsp;@if($employee->mobile_phone){{$employee->mobile_phone}}@else -- @endif</h4> 
+                  <h4><span>Email</span> : &nbsp;&nbsp;@if($employee->email){{$employee->email}}@else -- @endif</h4> 
               </div>
             </div>
           </div>
@@ -242,95 +89,28 @@ Dashboard
               <div class="box-header with-border">
                 <h3 class="box-title"><strong>{{"Professional Information"}}</strong></h3>
               </div>
-              <div class="box-body">
-                <div class="row">
-                  <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="qualification">Quaification</label>
-                    <input type="text" value="{{$employee->qualification}}" name='qualification' class="form-control readonly_attribute" readonly>
-                  </div>
-                  </div>
-                  <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="experience">Experience</label>
-                    <input type="text" name='experience' value="{{$employee->experience}}" class="form-control readonly_attribute" readonly>
-                  </div>
-                  </div>
-                  <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="exp_in_dept">Experience In: Department</label>
-                    <input type="text" value="{{$employee->exp_in_dept}}" name='exp_in_dept' class="form-control readonly_attribute" readonly>
-                  </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-3">
-                  <div class="form-group">
-                    <label for="hired_for_dep">Hired For: Department</label>
-                    <input type="text" name='hired_for_dep' value="{{$employee->hired_for_dep}}" class="form-control readonly_attribute" readonly>
-                  </div>
-                  </div>
-                  <div class="col-md-3">
-                  <div class="form-group">
-                    <label for="hiring_date">Hiring Date</label>
-                    <input type="date" value="{{$employee->hiring_date}}"name='hiring_date' class="form-control readonly_attribute" readonly>
-                  </div>
-                  </div>
-                  <div class="col-md-2">
-                  <div class="form-group">
-                    <label for="currency">Currency</label>
-                    <select name="currency" class="form-control disabled_attribute" disabled>
-                      <option value="" class="form-control" ></option>
-                      <option value="$" class="form-control" {{($employee->currency == '$')?"selected":" "}}>$</option>
-                      <option value="&#163;" class="form-control" {{($employee->currency != '$')?"selected":" "}}>&#163;</option>
-                    </select>
-                  </div>
-                  </div>
-                  <div class="col-md-2">
-                  <div class="form-group">
-                    <label for="rate">Rate Contract</label>
-                    <input type="text" value="{{$employee->rate}}" name='rate' class="form-control readonly_attribute" readonly>
-                  </div>
-                  </div>
-                  <div class="col-md-2">
-                  <div class="form-group">
-                    <label for="per">Per</label>
-                    <select name="per" class="form-control disabled_attribute" disabled>
-                      <option value="" class="form-control">--Select--</option>
-                      <option value="Hour" {{($employee->per == 'Hour')?"selected":" "}} class="form-control">Hour</option>
-                      <option value="Month" class="form-control" {{($employee->per == 'Month')?"selected":" "}}>Month</option>
-                    </select>
-                  </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="work_permit">Work Permit:</label>
-                      <div class="image-div">
-                        <img id="work_permit" @if($employee->work_permit) src="{{asset($employee->work_permit)}}" @else src="{{asset('/images/placeholder.png')}}" @endif alt="work permit"  height="200px" width="200px" style="border-radius:10px">
+              <div class="box-body details">
+                  <h4><span>Qualification</span> : &nbsp;&nbsp;@if($employee->qualification){{$employee->qualification}}@else -- @endif</h4> 
+                  <h4><span>Experience</span> : &nbsp;&nbsp;@if($employee->experience){{$employee->experience}}@else -- @endif</h4> 
+                  <h4><span>Experience In Department</span> : &nbsp;&nbsp;@if($employee->exp_in_dept){{$employee->exp_in_dept}}@else -- @endif</h4> 
+                  <h4><span>Hired For Department</span> : &nbsp;&nbsp;@if($employee->hired_for_dep){{$employee->hired_for_dep}}@else -- @endif</h4> 
+                  <h4><span>Hiring Date</span> : &nbsp;&nbsp;@if($employee->hiring_date){{$employee->hiring_date}}@else -- @endif</h4>
+                  <h4><span>Currency</span> : &nbsp;&nbsp;@if($employee->currency){{$employee->currency}}@else -- @endif</h4> 
+                  <h4><span>Hiring Date</span> : &nbsp;&nbsp;@if($employee->hiring_date){{$employee->hiring_date}}@else -- @endif</h4>
+                  <h4><span>Rate Contract</span> : &nbsp;&nbsp;@if($employee->rate){{$employee->rate}}@else -- @endif</h4>
+                  <h4><span>Per</span> : &nbsp;&nbsp;@if($employee->per){{$employee->per}}@else -- @endif</h4>
+                  <h4><span>Work Permit</span> : &nbsp;&nbsp;
+                    <div class="image-div">
+                        <img id="work_permit" @if($employee->work_permit) src="{{asset($employee->work_permit)}}" @else src="{{asset('/images/placeholder.png')}}" @endif alt="work permit" style="width:120px;height:100px;" class="img-responsive">
                         <a href="{{asset($employee->work_permit)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
-                        <label for="work" class="upload-icon">
-                            <i class="fa fa-camera" aria-hidden="true"></i>
-                        </label>
-                        <input type="file" id="work" name='work_permit' onchange="readURLWork(this);"  class="form-control disabled_attribute" disabled style="display:none;">
-                      </div>
                     </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="utility_bill">Utility Bill:</label>
-                      <div class="image-div">
-                        <img id="utility_bill" @if($employee->utility_bill) src="{{asset($employee->utility_bill)}}" @else src="{{asset('/images/placeholder.png')}}" @endif alt="utility bill"  height="200px" width="200px" style="border-radius:10px">
+                  </h4>
+                  <h4><span>Utility Bill</span> : &nbsp;&nbsp;
+                    <div class="image-div">
+                        <img id="utility_bill" @if($employee->utility_bill) src="{{asset($employee->utility_bill)}}" @else src="{{asset('/images/placeholder.png')}}" @endif alt="utility bill" style="width:120px;height:100px;" class="img-responsive">
                         <a href="{{asset($employee->utility_bill)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>
-                        <label for="utility" class="upload-icon">
-                            <i class="fa fa-camera" aria-hidden="true"></i>
-                        </label>
-                        <input type="file" id="utility" name='utility_bill' onchange="readURLUtility(this);"  class="form-control disabled_attribute" disabled style="display:none;">
-                      </div>
                     </div>
-                  </div>
-                </div>
+                  </h4>
               </div>
             </div>
           </div>
@@ -340,6 +120,7 @@ Dashboard
                 <h3 class="box-title"><strong>{{"Emergency Contact Information"}}</strong></h3>
               </div>
               <div class="box-body">
+                  <h4><span>Qualification</span> : &nbsp;&nbsp;@if($employee->qualification){{$employee->qualification}}@else -- @endif</h4>
                 <div class="row">
                   <div class="col-md-6">
                   <div class="form-group">
