@@ -56,4 +56,9 @@ class LeaveController extends Controller
         $leave->save();
         return redirect()->back();
     }
+
+    public function showPdf($id){
+        $leave = Leave::find($id);
+        return \PDF::loadHtml($leave->pdf)->stream();
+    }
 }

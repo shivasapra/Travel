@@ -706,3 +706,8 @@ Route::post('/leave/application/status',[
 	'uses' => 'LeaveController@leaveApplicationStatus',
 	'as' => 'leave.application.status'
 ]);
+
+Route::get('/show/pdf/{id}',[
+	'uses' => 'LeaveController@showPdf',
+	'as' => 'show.pdf'
+]);

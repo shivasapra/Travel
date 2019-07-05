@@ -109,12 +109,12 @@ Leave Applications
                     
                     <!-- Modal body -->
                     <div class="modal-body">
-                        <embed src="www.youtube.com" width="100%" height="500px" />
-                        </div>
+                        <iframe src="{{route('show.pdf',['id'=>1])}}" width="100%" height="500px"></iframe>
                     </div>
                 </div>
             </div>
-            @endif
+        </div>
+        @endif
             <a href="#" id="target" style="display:none;" data-toggle="modal" data-target="#leave_status" class="btn btn-icons btn-rounded btn-success"></a>
             {{-- <div class="modal fade" id="leave_status">
                     <div class="modal-dialog modal-dialog modal-dialog-centered">

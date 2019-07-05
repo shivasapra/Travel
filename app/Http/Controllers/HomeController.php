@@ -53,7 +53,7 @@ class HomeController extends Controller
         // dd('gya');
         if (Auth::user()->admin) {
 
-            return \PDF::loadHtml("<h1>testing</h1>")->stream();
+            // return \PDF::loadHtml("<h1>testing</h1>")->stream();
             
         $dt = Carbon::now();
         $date_today = $dt->timezone('Europe/London');
