@@ -109,7 +109,7 @@ Leave Applications
                     
                     <!-- Modal body -->
                     <div class="modal-body">
-                        <embed src="{{\PDF::loadHtml($leave->pdf)->stream();}}" width="100%" height="500px" />
+                        <embed src="{{\PDF::loadHtml($leave->pdf)->stream()}}" width="100%" height="500px" />
                         </div>
                     </div>
                 </div>
