@@ -53,11 +53,8 @@ Dashboard
     <div class="small-box bg-purple">
       <div class="inner">
         <h3>
-          @if($total_hours_this_session != null)
             {{$total_hours_this_session}}
-          @else
-            {{'--'}}
-          @endif
+          
         </h3>
 
         <p>Total Hours This Session</p>

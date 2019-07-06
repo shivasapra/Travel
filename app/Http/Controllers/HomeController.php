@@ -164,23 +164,24 @@ class HomeController extends Controller
         }
         elseif(Auth::user()->employee->count()>0){
             // dd();
-            $today_wage = wage::where('employee_id',Auth::user()->employee[0]->id)->where('date',Carbon::now()->toDateString())->get();
-            if ($today_wage->count()>0) {
-                $today_wageLogs = wageLog::where('wage_id',$today_wage[0]->id)->get();
-                $latest_wageLog = wageLog::where('wage_id',$today_wage[0]->id)
-                                            ->orderBy('created_at','desc')
-                                            ->first();
-                if($latest_wageLog != null and $latest_wageLog->logout_time == null){ 
-                $total_hours_this_session =  substr(Carbon::now()->totimeString(),0,2) - substr($latest_wageLog->login_time,0,2);
-                }
-                else{
-                    $total_hours_this_session = null;
-                }
-             }
-             else{
-                $latest_wageLog = null;
+            $today_wage = wage::where('employee_id',Auth::user()->employee[0]->id)
+                    ->where('date',Carbon::now()->toDateString())->get();
+        if ($today_wage->count()>0) {
+            $today_wageLogs = wageLog::where('wage_id',$today_wage[0]->id)->get();
+            $latest_wageLog = wageLog::where('wage_id',$today_wage[0]->id)
+                                        ->orderBy('created_at','desc')
+                                        ->first();
+            if($latest_wageLog != null and $latest_wageLog->logout_time == null){ 
+            $total_hours_this_session =  substr(Carbon::now()->totimeString(),0,2) - substr($latest_wageLog->login_time,0,2);
+            }
+            else{
                 $total_hours_this_session = null;
-             }
+            }
+         }
+         else{
+            $latest_wageLog = null;
+            $total_hours_this_session = null;
+         }
 
             $last = Chat::where('to_id',Auth::user()->id)->orderBy('id','desc')->get()->first();
             if($last != null){
