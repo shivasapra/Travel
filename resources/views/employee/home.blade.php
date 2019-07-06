@@ -16,8 +16,86 @@ Dashboard
 @section('content')
 <div class="row">
   <div class="col-md-3">
-    <form action="{{route('update.employee',['id'=>$employee->id])}}" method="post" enctype="multipart/form-data">
-      @csrf
+    <div class="small-box bg-blue">
+        <div class="inner">
+          <h3>{{$employee->currency.' '.$total_wage}}</h3>
+
+          <p>Total Wage</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-pie-graph"></i>
+        </div>
+        <a href="{{route('wage.log',['id'=>Auth::user()->employee[0]->id])}}" class="small-box-footer">
+          More info <i class="fa fa-arrow-circle-right"></i>
+        </a>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+
+    <div class="small-box bg-orange">
+      <div class="inner">
+        <h3>{{App\wage::where('employee_id',Auth::user()->employee[0]->id)->where('date',Carbon\Carbon::now()->toDateString())->get()[0]->total_hours}}</h3>
+
+        <p>Total Hours Today</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-clock"></i>
+      </div>
+      <a href="{{route('wage.log',['id'=>Auth::user()->employee[0]->id])}}" class="small-box-footer">
+        More info <i class="fa fa-arrow-circle-right"></i>
+      </a>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+
+    <div class="small-box bg-purple">
+      <div class="inner">
+        <h3>
+          @if($total_hours_this_session != null)
+            {{$total_hours_this_session}}
+          @else
+            {{'--'}}
+          @endif
+        </h3>
+
+        <p>Total Hours This Session</p>
+      </div>
+      <div class="icon">
+          <i class="fa fa-clock-o" aria-hidden="true"></i>
+      </div>
+      <a href="{{route('session')}}" class="small-box-footer">
+          @if($latest_wageLog != null and $latest_wageLog->logout_time == null) 
+          End Your Session.
+          @else 
+          Start Your Session.
+          @endif <i class="fa fa-arrow-circle-right"></i>
+      </a>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+
+      <div class="small-box bg-teal">
+        <div class="inner">
+          <h3>
+            {{App\assignment::where('employee_id',Auth::user()->employee[0]->id)->get()->count()}}
+          </h3>
+  
+          <p>Assignments Accepted</p>
+        </div>
+        <div class="icon">
+            <i class="fa fa-paperclip" aria-hidden="true"></i>
+        </div>
+        <a href="{{route('assign')}}" class="small-box-footer">
+            More info <i class="fa fa-arrow-circle-right"></i>
+        </a>
+      </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-3">
       <div class="image-div">
           <img  id="blah"
           @if($employee->user->avatar)
@@ -26,13 +104,7 @@ Dashboard
             src="{{asset('app/images/user-placeholder.jpg')}}"
           @endif 
           alt="avatar" class="img-responsive">
-          {{-- <a href="{{asset($employee->user->avatar)}}" download class="download-image-icon"><i class="fa fa-download" aria-hidden="true"></i></a>               --}}
-          {{-- <label for="avatar" class="upload-icon">
-              <i class="fa fa-camera" aria-hidden="true"></i>
-          </label>
-          <input type="file" id="avatar" name='avatar' onchange="readURL(this);"  class="form-control" style="display:none;"> --}}
-        </div>
-    </form>
+      </div>
     <br>
     <ul class="list-group add-employee-list">
       <li class="active list-group-item"><a data-toggle="tab" href="#personal-information">Personal Information</a></li>
@@ -52,7 +124,6 @@ Dashboard
                 <h3 class="box-title"><strong>{{"Personal Information"}}</strong></h3>
               </div>
               <div class="box-body details">
-                <br>
                   <h4><span>Employee ID</span> : &nbsp;&nbsp;@if($employee->unique_id){{$employee->unique_id}}@else -- @endif</h4> 
                   <h4><span>First Name</span> :&nbsp;&nbsp; @if($employee->first_name){{$employee->first_name}}@else -- @endif</h4>
                   <h4><span>Last Name</span> :&nbsp;&nbsp;  @if($employee->last_name){{$employee->last_name}}@else -- @endif</h4>
@@ -172,22 +243,14 @@ Dashboard
         </div>
   </div>
   <div class="col-md-3">
-    <div class="small-box bg-blue">
-        <div class="inner">
-          <h3>{{$employee->currency.' '.$total_wage}}</h3>
-
-          <p>Total Wage</p>
-        </div>
-        <div class="icon">
-          <i class="ion ion-pie-graph"></i>
-        </div>
-        <a href="{{route('wage.log',['id'=>Auth::user()->employee[0]->id])}}" class="small-box-footer">
-          More info <i class="fa fa-arrow-circle-right"></i>
-        </a>
-    </div>
     <div class="box">
           <div class="box-header with-border">
             <h3 class="box-title"><strong>{{"Attendance"}}</strong></h3>
+            <span class="float-right">
+            <a href="{{route('attendance',['id'=>Auth::user()->employee[0]->id])}}" class="btn btn-xs btn-success">
+              More info <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </span>
           </div>
       <div class="box-body">
         <table class="table table-bordered mb-0" style="margin-top:0px;">
@@ -201,7 +264,7 @@ Dashboard
           <tbody>
             <?php
               $array_two = array();
-              $period = Carbon\CarbonPeriod::since(Carbon\Carbon::now()->addDays(-7)->toDateString())->days(1)->until(Carbon\Carbon::now()->toDateString())->toArray();
+              $period = Carbon\CarbonPeriod::since(Carbon\Carbon::now()->addDays(-6)->toDateString())->days(1)->until(Carbon\Carbon::now()->toDateString())->toArray();
               
               foreach(App\Wage::where('employee_id',Auth::user()->employee[0]->id)->get() as $wage){
                 array_push($array_two,Carbon\Carbon::parse($wage->date)->toDateString());
@@ -229,17 +292,8 @@ Dashboard
           </tbody>
         </table>
       </div>
-      <div class="box-footer">
-<div class="text-left">
-        <a href="{{route('attendance',['id'=>Auth::user()->employee[0]->id])}}" class="btn btn-success">
-            More info <i class="fa fa-arrow-circle-right"></i>
-          </a>
-        </div>
-      </div>
-      
     </div>
   </div>
-    
 </div>
 
 
