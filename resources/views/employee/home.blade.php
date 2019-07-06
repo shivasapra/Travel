@@ -35,8 +35,13 @@ Dashboard
 
     <div class="small-box bg-orange">
       <div class="inner">
-        <h3>{{App\wage::where('employee_id',Auth::user()->employee[0]->id)->where('date',Carbon\Carbon::now()->toDateString())->get()[0]->total_hours}}</h3>
-
+        
+        <h3>
+            @if(App\wage::where('employee_id',Auth::user()->employee[0]->id)->where('date',Carbon\Carbon::now()->toDateString())->get()->count()>0)
+              {{App\wage::where('employee_id',Auth::user()->employee[0]->id)->where('date',Carbon\Carbon::now()->toDateString())->get()[0]->total_hours}}</h3>
+            @else
+              {{'--'}}
+            @endif
         <p>Total Hours Today</p>
       </div>
       <div class="icon">
@@ -242,7 +247,7 @@ Dashboard
   <div class="col-md-3">
     <div class="box">
           <div class="box-header with-border">
-            <h3 class="box-title"><strong>{{"Attendance"}}</strong></h3>
+            <h3 class="box-title"><strong>{{"This Week"}}</strong></h3>
             <span class="float-right">
             <a href="{{route('attendance',['id'=>Auth::user()->employee[0]->id])}}" class="btn btn-xs btn-success">
               More info <i class="fa fa-arrow-circle-right"></i>
@@ -261,9 +266,13 @@ Dashboard
           <tbody>
             <?php
               $array_two = array();
-              $period = Carbon\CarbonPeriod::since(Carbon\Carbon::now()->addDays(-6)->toDateString())->days(1)->until(Carbon\Carbon::now()->toDateString())->toArray();
-              
-              foreach(App\Wage::where('employee_id',Auth::user()->employee[0]->id)->get() as $wage){
+              if(Auth::user()->created_at->toDateString() < Carbon\Carbon::now()->startOfWeek()->toDateString() ){
+              $period = Carbon\CarbonPeriod::since(Carbon\Carbon::now()->startOfWeek()->toDateString())->days(1)->until(Carbon\Carbon::now()->toDateString())->toArray();
+            }
+            else{
+              $period = Carbon\CarbonPeriod::since(Auth::user()->created_at->toDateString())->days(1)->until(Carbon\Carbon::now()->toDateString())->toArray();
+            }
+              foreach(App\wage::where('employee_id',Auth::user()->employee[0]->id)->get() as $wage){
                 array_push($array_two,Carbon\Carbon::parse($wage->date)->toDateString());
               }
             ?>
@@ -278,8 +287,10 @@ Dashboard
                   @endif
                 </td>
                 <td>
-                  @if(App\Wage::where('employee_id',Auth::user()->employee[0]->id)->where('date',$d->toDateString())->get()->count()>0)
+                  @if(App\wage::where('employee_id',Auth::user()->employee[0]->id)->where('date',$d->toDateString())->get()->count()>0)
+
                     {{$employee->currency.' '.App\Wage::where('employee_id',Auth::user()->employee[0]->id)->where('date',$d->toDateString())->get()[0]->today_wage}}
+
                   @else
                     --
                   @endif
