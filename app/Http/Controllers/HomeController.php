@@ -172,7 +172,8 @@ class HomeController extends Controller
                                         ->orderBy('created_at','desc')
                                         ->first();
             if($latest_wageLog != null and $latest_wageLog->logout_time == null){ 
-            $total_hours_this_session =  substr(Carbon::now()->totimeString(),0,2) - substr($latest_wageLog->login_time,0,2);
+                $total_hours_this_session = (Carbon::now())->diffInMinutes($latest_wageLog->login_time);
+            // $total_hours_this_session =  substr(Carbon::now()->totimeString(),0,2) - substr($latest_wageLog->login_time,0,2);
             }
             else{
                 $total_hours_this_session = null;
@@ -182,7 +183,7 @@ class HomeController extends Controller
             $latest_wageLog = null;
             $total_hours_this_session = null;
          }
-
+// dd($total_hours_this_session);
             $last = Chat::where('to_id',Auth::user()->id)->orderBy('id','desc')->get()->first();
             if($last != null){
                 $last->status = 1;

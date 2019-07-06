@@ -53,7 +53,7 @@ Dashboard
     <div class="small-box bg-purple">
       <div class="inner">
         <h3>
-            {{$total_hours_this_session}}
+            {{number_format( (float) ($total_hours_this_session/60), 2, '.', '')}}
           
         </h3>
 

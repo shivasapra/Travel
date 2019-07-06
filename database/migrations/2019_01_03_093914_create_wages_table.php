@@ -19,9 +19,9 @@ class CreateWagesTable extends Migration
             $table->string('unique_id');
             $table->Date('date');
             $table->integer('no_of_logins')->nullable();
-            $table->string('total_hours')->nullable();
+            $table->float('total_hours')->nullable();
             $table->string('hourly')->nullable();
-            $table->string('today_wage')->nullable();
+            $table->float('today_wage')->nullable();
             $table->timestamps();
         });
     }

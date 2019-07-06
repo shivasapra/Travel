@@ -59,7 +59,7 @@ Session
   </div>
   <div class="text-center">
       @if($latest_wageLog != null and $latest_wageLog->logout_time == null) 
-      <div class="lockscreen-name"><h4><strong>Total Time This Session:</strong></h4><h3><span class="text-red"><strong>{{$total_hours_this_session}} Hours</strong></span></h3></div>
+      <div class="lockscreen-name"><h4><strong>Total Time This Session:</strong></h4><h3><span class="text-red"><strong>{{number_format( (float) ($total_hours_this_session/60), 2, '.', '')}} Hours</strong></span></h3></div>
       @endif
   </div>
   <div class="lockscreen-footer text-center">

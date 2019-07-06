@@ -36,7 +36,7 @@ class wageController extends Controller
                                         ->orderBy('created_at','desc')
                                         ->first();
             if($latest_wageLog != null and $latest_wageLog->logout_time == null){ 
-            $total_hours_this_session =  substr(Carbon::now()->totimeString(),0,2) - substr($latest_wageLog->login_time,0,2);
+                $total_hours_this_session = (Carbon::now())->diffInMinutes($latest_wageLog->login_time);
             }
             else{
                 $total_hours_this_session = null;
@@ -53,14 +53,12 @@ class wageController extends Controller
             $wageLog = wageLog::find($request->wageLogId);
             $wageLog->logout_time = Carbon::now()->totimeString();
             $wageLog->save();
-            $time1 = substr($wageLog->logout_time,0,2);
-            $time2 = substr($wageLog->login_time,0,2);
-            $wageLog->hours = $time1-$time2;
+            $wageLog->hours = number_format( (float) ( ((Carbon::parse($wageLog->logout_time))->diffInMinutes(Carbon::parse($wageLog->login_time)))/60 ), 2, '.', '') ;
             $wageLog->save();
             $wage = $wageLog->wage;
             $wage->total_hours =  $wage->total_hours + $wageLog->hours;
             $wage->save();
-            $wage->today_wage =  $wage->total_hours * $wage->hourly;
+            $wage->today_wage =  number_format( (float) ($wage->total_hours * $wage->hourly), 2, '.', '') ;
             $wage->save();
         }
         Session::flash('success','Session Ends');

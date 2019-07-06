@@ -19,7 +19,7 @@ class CreateWageLogsTable extends Migration
             $table->Date('date');
             $table->Time('login_time')->nullable();
             $table->Time('logout_time')->nullable();
-            $table->integer('hours')->nullable();
+            $table->float('hours')->nullable();
             $table->timestamps();
         });
     }
