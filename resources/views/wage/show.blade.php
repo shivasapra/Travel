@@ -15,11 +15,15 @@ Employee wage log
       </ol>
     </section>
 @stop
+@section('css')
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">
+@stop
 @section('content')
 		<div class="box box-info">
 			<div class="box-body">
 				
-			<table class="table table-bordered mb-0">
+			<table id="example" class="table table-bordered mb-0">
                 <thead>
                     <tr>
                     	<th><b> Sno.</b></th>
