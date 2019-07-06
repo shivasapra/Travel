@@ -29,7 +29,7 @@ Attendance
                     $array_two = array();
                     $period = Carbon\CarbonPeriod::since(Auth::user()->created_at->toDateString())->days(1)->until(Carbon\Carbon::now()->toDateString())->toArray();
                     
-                    foreach(App\Wage::where('employee_id',Auth::user()->employee[0]->id)->get() as $wage){
+                    foreach(App\wage::where('employee_id',Auth::user()->employee[0]->id)->get() as $wage){
                         array_push($array_two,Carbon\Carbon::parse($wage->date)->toDateString());
                     }
                     ?>
@@ -44,8 +44,8 @@ Attendance
                         @endif
                         </td>
                         <td>
-                        @if(App\Wage::where('employee_id',Auth::user()->employee[0]->id)->where('date',$d->toDateString())->get()->count()>0)
-                            {{$employee->currency.' '.App\Wage::where('employee_id',Auth::user()->employee[0]->id)->where('date',$d->toDateString())->get()[0]->today_wage}}
+                        @if(App\wage::where('employee_id',Auth::user()->employee[0]->id)->where('date',$d->toDateString())->get()->count()>0)
+                            {{$employee->currency.' '.App\wage::where('employee_id',Auth::user()->employee[0]->id)->where('date',$d->toDateString())->get()[0]->today_wage}}
                         @else
                             --
                         @endif
