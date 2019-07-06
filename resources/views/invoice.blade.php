@@ -425,7 +425,7 @@ Invoice
               <h2 class="p-3 bg-light-blue d-inline-block text-white">{{ 'Local Sight Sceen' }}</h2>
               
             
-      <div class="col-md-12">
+      <div class="">
         <div class="table-responsive">
           <table class="table table-bordered">
                 <thead>
