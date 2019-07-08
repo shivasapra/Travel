@@ -531,7 +531,7 @@ class clientController extends Controller
         $client->save();
         // send the email
         $contactEmail = $client->email;
-        $data = array('token'=>$token, 'name'=>$client->first_name.' '.$client->last_name);
+        $data = array('token'=>$token, 'name'=>$client->first_name.' '.$client->last_name,'client'=>$client);
         Mail::send('emails.clientConfirmation', $data, function($message) use ($contactEmail)
         {
             $message->to($contactEmail)->subject( 'Permission For Keeping Your Details' );
