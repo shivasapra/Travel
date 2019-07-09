@@ -11,4 +11,8 @@ class Chat extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    protected $attributes = [
+        'admin' => null,
+    ];
 }

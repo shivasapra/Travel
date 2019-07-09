@@ -131,7 +131,7 @@ Direct Chat
     </div>
     <!-- /.box-body -->
     <div class="box-footer">
-        @if($messages != null)
+        {{-- @if($messages != null)
         <form action="{{route('admin.message.send')}}" method="post">
           @csrf
           <div class="input-group">
@@ -144,7 +144,7 @@ Direct Chat
         </form>
         @else
         <strong><span class="text-info">{{$unread_messages->count()}}{{' Unread Conversations'}}</span></strong>
-        @endif
+        @endif --}}
       </div>
       <!-- /.box-footer-->
     </div>
@@ -218,48 +218,37 @@ Direct Chat
 </div>
 </div>
 <div class="row">
-<div class="box box-info">
-        <div class="box-body">
-            
-        
+  <div class="box box-info">
+    <div class="box-body">
         <table id="example" class="table table-striped display" style="width:100%">
-                <thead>
-                        <tr>
-                          <th>Sno.</th>
-                          <th>Name</th>
-                          <th>Unique Id</th>
-                          <th>country</th>
-                          <th>Department</th>
-                          <th>Hiring Date</th>
-                          <th>Rate Contract</th>
-                          <th>Action</th>
-                        </tr>
-                          </thead>
-                      <tbody>
-                          @if($employees->count()>0)
-                          <?php $i = 1; ?>
-                              @foreach($employees as $employee)
-                              <tr>
-                                  <td>{{$i++}}</td>
-                                  <td>{{$employee->first_name}}</td>
-                                  <td>{{$employee->unique_id}}</td>
-                                  <td>{{$employee->country}}</td>
-                                  <td>{{$employee->hired_for_dep}}</td>
-                                  <td>{{$employee->hiring_date}}</td>
-                                  <td>{{$employee->currency.$employee->rate}}</td>
-                                  <td>
-                                    @can('Direct Chat')
-                                      <a href="{{route('index.message',['id'=>$employee->user->id])}}" class="btn btn-primary btn-xs">Start Conversation</a>
-                                    @endcan
-                                  </td>
-                              </tr>
-                              @endforeach
-                          @endif
-                      </tbody>
+          <thead>
+            <tr>
+              <th>Sno.</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            @if($users->count()>0)
+            <?php $i = 1; ?>
+              @foreach($users as $user)
+                <tr>
+                    <td>{{$i++}}</td>
+                    <td>{{$user->name}}</td>
+                    <td>{{$user->email}}</td>
+                    <td>
+                      @can('Direct Chat')
+                        <a href="{{route('direct.chat',['id'=>$user->id])}}" class="btn btn-primary btn-xs">Start Conversation</a>
+                      @endcan
+                    </td>
+                </tr>
+              @endforeach
+            @endif
+          </tbody>
         </table>
-    
     </div>
-    </div>
+  </div>
 </div>
 @stop
 @section('js')

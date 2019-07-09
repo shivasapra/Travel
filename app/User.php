@@ -37,13 +37,14 @@ class User extends Authenticatable
         return $this->hasOne('App\client');
     }
 
-    public function message()
-    {
-        return $this->hasMany('App\Chat');
-    }
-
+    
     public function leads()
     {
         return $this->hasMany('App\Leads');
+    }
+
+    public function message()
+    {
+        return $this->hasMany('App\Chat');
     }
 }
