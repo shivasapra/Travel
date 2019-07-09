@@ -89,7 +89,7 @@ Dashboard
       <div class="box-tools pull-right">
 
         <button type="button" class="btn btn-box-tool" data-toggle="tooltip"  data-widget="chat-pane-toggle">
-            <span data-toggle="tooltip" title="{{$unread_messages->count()}} New Messages" class="badge bg-red">{{$unread_messages->count()}}</span></button>
+            <span data-toggle="tooltip" title="{{$unread_messages->count()}} " class="badge bg-red">{{$unread_messages->count()}} New Messages</span></button>
         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
         </button>
         {{-- <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Contacts" data-widget="chat-pane-toggle"> --}}
@@ -171,7 +171,7 @@ Dashboard
                       {{App\User::find($unread->user_id)->name}}
                       <small class="contacts-list-date pull-right">{{$unread->date}}{{' '}}{{$unread->time}}</small>
                     </span>
-                <span class="contacts-list-msg">{{$unread->message}}</span>
+                <span class="contacts-list-msg"><i class="fa fa-circle text-info"></i> {{$unread->message}}</span>
               </div>
               <!-- /.contacts-list-info -->
             </a>
@@ -187,10 +187,10 @@ Dashboard
     <!-- /.box-body -->
     <div class="box-footer">
         @if($messages != null)
-        <form action="{{route('admin.message.send')}}" method="post">
+        <form action="{{route('chat.store')}}" method="post">
           @csrf
           <div class="input-group">
-            <input name='user_id' value="{{$id}}" hidden>
+            <input name='to_id' value="{{$id}}" hidden>
             <input type="text" name="message" placeholder="Type Message ..." class="form-control">
                 <span class="input-group-btn">
                   <button type="submit" class="btn btn-danger btn-flat">Send</button>

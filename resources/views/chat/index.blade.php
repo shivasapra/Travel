@@ -162,7 +162,7 @@ Direct Chat
     <!-- DIRECT CHAT PRIMARY -->
   <div class="box box-info direct-chat direct-chat-info">
     <div class="box-header with-border">
-      <h3 class="box-title">{{App\ChatLog::all()->count()}} Previous Conversations!!</h3>
+      <h3 class="box-title">Previous Conversations!!</h3>
 
       <div class="box-tools pull-right">
         
@@ -181,21 +181,20 @@ Direct Chat
       <div class="direct-chat-messages">
         <!-- Message. Default to the left -->
         <ul class="contacts-list">
+          <?php $i = 0;?>
             @foreach(App\ChatLog::all() as $ChatLog)
             <?php
-            if (Auth::user()->id == $ChatLog->user_id) {
-              $user_id = $ChatLog->user_id;
-            }
-            elseif(Auth::user()->id == $ChatLog->to_id){
-              $to_id = $ChatLog->to_id;
-            }
               $user_id = (Auth::user()->id == $ChatLog->user_id)? $ChatLog->user_id : $ChatLog->to_id;
               $to_id = (Auth::user()->id == $ChatLog->user_id)? $ChatLog->to_id : $ChatLog->user_id;
-              if($user_id == Auth::user()->id and $to_id == ){
+              if($user_id == Auth::user()->id or $to_id == Auth::user()->id){
                 $messages = App\Chat::whereIn('user_id',[$user_id,$to_id])->whereIn('to_id',[$user_id,$to_id])->orderBy('id','desc')->get()->first();
+              }
+              else{
+                $messages = collect();
               }
             ?>
             @if($messages->count()>0)
+            <?php $i++ ?>
             <li>
               <a href="{{route('index.message',['id'=>$to_id])}}">
                 <img class="contacts-list-img"
@@ -214,6 +213,10 @@ Direct Chat
                   <span class="contacts-list-msg" >
                     @if($messages->user_id == $to_id and $messages->status == 0 )
                       <i class="fa fa-circle text-info"></i>
+                    @elseif($messages->user_id == Auth::user()->id and $messages->status == 1)
+                      <i class="fa fa-check text-info"></i>
+                    @elseif($messages->user_id == Auth::user()->id)
+                      <i class="fa fa-reply" aria-hidden="true"></i>
                     @endif
                     &nbsp;{{$messages->message}}
                   </span>
@@ -233,7 +236,7 @@ Direct Chat
     <!-- /.box-body -->
     <div class="box-footer">
         
-        <strong><span class="text-info">{{App\ChatLog::all()->count()}} Previous Conversations!!</span></strong>
+        <strong><span class="text-info">{{$i}} Previous Conversations!!</span></strong>
       </div>
       <!-- /.box-footer-->
     </div>

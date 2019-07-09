@@ -22,20 +22,7 @@ class ChatController extends Controller
      */
     public function index()
     {   
-        // $i = 0;
-        // foreach(ChatLog::all() as $ChatLog){
-        //   $i = $i+1;  
-        //   $user_id = (Auth::user()->id == $ChatLog->user_id)? $ChatLog->user_id : $ChatLog->to_id;
-        //   $to_id = (Auth::user()->id == $ChatLog->user_id)? $ChatLog->to_id : $ChatLog->user_id;
-        //   $messages = Chat::whereIn('user_id',[$user_id,$to_id])->whereIn('to_id',[$user_id,$to_id])->orderBy('id','desc')->get()->first();
-        //   if($i == 3){
-        //   dd($messages);
-        //   }
-        // }
-          
-
         $unread_messages = Chat::where('to_id',Auth::user()->id)->where('status',0)->get();
-        // dd($unread_messages);
         return view('chat.index')->with('unread_messages',$unread_messages)
                                 ->with('messages',null)
                                 ->with('users',User::all())
@@ -84,11 +71,6 @@ class ChatController extends Controller
             $chatLogg->user_id = Auth::user()->id;
             $chatLogg->to_id = $request->to_id;
             $chatLogg->save();
-        }
-        $last = Chat::where('user_id',Auth::user()->id)->where('to_id',$request->to_id)->orderBy('id','desc')->get()->first();
-        if ($last != null) {
-            $last->status = 1;
-            $last->save();
         }
         $chat = new Chat;
         $chat->user_id = Auth::user()->id;

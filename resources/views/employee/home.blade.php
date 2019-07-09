@@ -40,7 +40,7 @@ Dashboard
             @if(App\wage::where('employee_id',Auth::user()->employee[0]->id)->where('date',Carbon\Carbon::now()->toDateString())->get()->count()>0)
               {{App\wage::where('employee_id',Auth::user()->employee[0]->id)->where('date',Carbon\Carbon::now()->toDateString())->get()[0]->total_hours}}</h3>
             @else
-              {{'--'}}
+              0.00
             @endif
         <p>Total Hours Today</p>
       </div>
