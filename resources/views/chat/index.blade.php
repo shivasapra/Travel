@@ -21,7 +21,7 @@ Direct Chat
 <div class="row">
 <div class="col-md-6">
     <!-- DIRECT CHAT PRIMARY -->
-  <div class="box box-info direct-chat direct-chat-info">
+  <div class="box box-danger direct-chat direct-chat-danger">
     <div class="box-header with-border">
       <h3 class="box-title">
           @if($name != null)
@@ -51,7 +51,7 @@ Direct Chat
         @foreach($messages as $message)
           @if($message->user_id == Auth::user()->id)
             <div class="direct-chat-msg ">
-              <div class="direct-chat-info clearfix">
+              <div class="direct-chat-danger clearfix">
                 <span class="direct-chat-name pull-left">{{'You'}}</span>
               <span class="direct-chat-timestamp pull-right">{{$message->date}}{{' '}}{{$message->time}}</span>
               </div>
@@ -73,7 +73,7 @@ Direct Chat
           @elseif($message->to_id == Auth::user()->id)
             <!-- Message to the right -->
             <div class="direct-chat-msg right">
-              <div class="direct-chat-info clearfix">
+              <div class="direct-chat-danger clearfix">
                 <span class="direct-chat-name pull-right">{{App\User::find($message->user_id)->name}}</span>
                 <span class="direct-chat-timestamp pull-left">{{$message->date}}{{' '}}{{$message->time}}</span>
               </div>
@@ -111,7 +111,7 @@ Direct Chat
               @endif 
               alt="User Image">
 
-              <div class="contacts-list-info">
+              <div class="contacts-list-danger">
                     <span class="contacts-list-name">
                       {{App\User::find($unread->user_id)->name}}
                       <small class="contacts-list-date pull-right">{{$unread->date}}{{' '}}{{$unread->time}}</small>
@@ -138,12 +138,12 @@ Direct Chat
             <input name='to_id' value="{{$id}}" hidden>
             <input type="text" name="message" placeholder="Type Message ..." class="form-control">
                 <span class="input-group-btn">
-                  <button type="submit" class="btn btn-info btn-flat">Send</button>
+                  <button type="submit" class="btn btn-danger btn-flat">Send</button>
                 </span>
           </div>
         </form>
         @else
-        <strong><span class="text-info">{{$unread_messages->count()}}{{' Unread Conversations'}}</span></strong>
+        <strong><span class="text-danger">{{$unread_messages->count()}}{{' Unread Conversations'}}</span></strong>
         @endif
       </div>
       <!-- /.box-footer-->

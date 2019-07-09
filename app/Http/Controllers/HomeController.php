@@ -277,11 +277,13 @@ class HomeController extends Controller
             // }
             $paid_invoices = invoice::where('status',1)->get();
             $unpaid_invoices = invoice::where('status',0)->get();
+            $refunded_invoices = invoice::where('refund',1)->get();
+            $canceled_invoices = invoice::onlyTrashed()->get();
 
             $messages = Chat::where('user_id',$id)->orWhere('to_id',$id)->orderBy('id','asc')->get();
-            // $last = Chat::where('user_id',$id)->orderBy('id','desc')->get()->first();
-            // $last->status = 1;
-            // $last->save();
+            $last = Chat::where('user_id',$id)->orderBy('id','desc')->get()->first();
+            $last->status = 1;
+            $last->save();
             $unread_messages = Chat::where('to_id',Auth::user()->id)->where('status',0)->get();
             return view('home')->with('employees',employee::all())
 
@@ -298,6 +300,8 @@ class HomeController extends Controller
                                 ->with('paid_invoices',$paid_invoices)
                                 ->with('unpaid_invoices',$unpaid_invoices)
                                 ->with('wages',$wages)
+                                ->with('canceled_invoices',$canceled_invoices)
+                                ->with('refunded_invoices',$refunded_invoices)
                                 ->with('unread_messages',$unread_messages)
                                 ->with('messages',$messages)
                                 ->with('id',$id);
