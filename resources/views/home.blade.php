@@ -100,7 +100,7 @@ Dashboard
     <!-- /.box-header -->
     <div class="box-body">
       <!-- Conversations are loaded here -->
-      <div class="direct-chat-messages">
+      <div class="direct-chat-messages" style="height:350px;" id="testing">
         <!-- Message. Default to the left -->
         @if($messages != null)
         @foreach($messages as $message)
@@ -713,6 +713,11 @@ Dashboard
     //   });
 
     $(document).ready(function() {
+      
+      var messageBody = document.querySelector('#testing');
+      
+      messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
+    
         // page is now ready, initialize the calendar...
         $('#calendar').fullCalendar({
             // put your options and callbacks here
@@ -734,4 +739,8 @@ Dashboard
     };
     });
 </script>
+<script>
+
+    
+    </script>
 @stop

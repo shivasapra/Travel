@@ -197,7 +197,7 @@ class HomeController extends Controller
             // $messages = Chat::where('to_id',Auth::user()->id)->orWhere('user_id',Auth::user()->id)->orderBy('id','asc')->get();
             return view('employee.home')->with('assignments',assignment::where('date',Carbon::now()->timezone('Europe/London')->toDateString())
                                         ->where('employee_id',null)->get())
-                                        ->with('messages',$messages)
+                                        // ->with('messages',$messages)
                                         ->with('employee',Auth::user()->employee[0])
                                         ->with('total_wage',$total_wage)
                                         ->with('total_hours_this_session',$total_hours_this_session)
