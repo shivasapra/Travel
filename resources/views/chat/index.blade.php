@@ -183,10 +183,19 @@ Direct Chat
         <ul class="contacts-list">
             @foreach(App\ChatLog::all() as $ChatLog)
             <?php
+            if (Auth::user()->id == $ChatLog->user_id) {
+              $user_id = $ChatLog->user_id;
+            }
+            elseif(Auth::user()->id == $ChatLog->to_id){
+              $to_id = $ChatLog->to_id;
+            }
               $user_id = (Auth::user()->id == $ChatLog->user_id)? $ChatLog->user_id : $ChatLog->to_id;
               $to_id = (Auth::user()->id == $ChatLog->user_id)? $ChatLog->to_id : $ChatLog->user_id;
-              $message = App\Chat::whereIn('user_id',[$user_id,$to_id])->whereIn('to_id',[$user_id,$to_id])->orderBy('id','desc')->get()->first();
+              if($user_id == Auth::user()->id and $to_id == ){
+                $messages = App\Chat::whereIn('user_id',[$user_id,$to_id])->whereIn('to_id',[$user_id,$to_id])->orderBy('id','desc')->get()->first();
+              }
             ?>
+            @if($messages->count()>0)
             <li>
               <a href="{{route('index.message',['id'=>$to_id])}}">
                 <img class="contacts-list-img"
@@ -200,18 +209,19 @@ Direct Chat
                 <div class="contacts-list-info">
                       <span class="contacts-list-name">
                         <strong><span style="color:black;">{{App\User::find($to_id)->name}}</span></strong>
-                        <small class="contacts-list-date pull-right" style="color:black;">{{$message->date}}{{' '}}{{$message->time}}</small>
+                        <small class="contacts-list-date pull-right" style="color:black;">{{$messages->date}}{{' '}}{{$messages->time}}</small>
                       </span>
                   <span class="contacts-list-msg" >
-                    @if($message->user_id == $to_id and $message->status == 0 )
+                    @if($messages->user_id == $to_id and $messages->status == 0 )
                       <i class="fa fa-circle text-info"></i>
                     @endif
-                    &nbsp;{{$message->message}}
+                    &nbsp;{{$messages->message}}
                   </span>
                 </div>
                 <!-- /.contacts-list-info -->
               </a>
             </li>
+            @endif
             @endforeach
             <!-- End Contact Item -->
           </ul>
