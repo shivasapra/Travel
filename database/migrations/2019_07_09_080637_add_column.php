@@ -13,7 +13,7 @@ class AddColumn extends Migration
      */
     public function up()
     {
-        Schema::create('chat_logs', function (Blueprint $table) {
+        Schema::table('chat_logs', function (Blueprint $table) {
             $table->integer('to_id');
         });
     }
