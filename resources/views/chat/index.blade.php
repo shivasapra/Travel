@@ -116,7 +116,12 @@ Direct Chat
                       {{App\User::find($unread->user_id)->name}}
                       <small class="contacts-list-date pull-right">{{$unread->date}}{{' '}}{{$unread->time}}</small>
                     </span>
-                <span class="contacts-list-msg">{{$unread->message}}</span>
+                <span class="contacts-list-msg">
+                  @if($unread->status == 0 )
+                  <i class="fa fa-circle text-info"></i>
+                  @endif
+                   {{$unread->message}}
+                </span>
               </div>
               <!-- /.contacts-list-info -->
             </a>
@@ -183,7 +188,7 @@ Direct Chat
               $message = App\Chat::whereIn('user_id',[$user_id,$to_id])->whereIn('to_id',[$user_id,$to_id])->orderBy('id','desc')->get()->first();
             ?>
             <li>
-              <a href="{{route('index.message',['id'=>$ChatLog->user_id])}}">
+              <a href="{{route('index.message',['id'=>$to_id])}}">
                 <img class="contacts-list-img"
                 @if(App\User::find($to_id)->avatar)
                     src="{{asset(App\User::find($to_id)->avatar)}}"
@@ -197,7 +202,12 @@ Direct Chat
                         <strong><span style="color:black;">{{App\User::find($to_id)->name}}</span></strong>
                         <small class="contacts-list-date pull-right" style="color:black;">{{$message->date}}{{' '}}{{$message->time}}</small>
                       </span>
-                  <span class="contacts-list-msg" >{{$message->message}}</span>
+                  <span class="contacts-list-msg" >
+                    @if($message->user_id == $to_id and $message->status == 0 )
+                      <i class="fa fa-circle text-info"></i>
+                    @endif
+                    &nbsp;{{$message->message}}
+                  </span>
                 </div>
                 <!-- /.contacts-list-info -->
               </a>

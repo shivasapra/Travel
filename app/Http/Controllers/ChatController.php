@@ -32,8 +32,8 @@ class ChatController extends Controller
 
     public function IndexWithMessage($id)
     {   
-        $messages = Chat::where('user_id',$id)->orWhere('to_id',$id)->orderBy('id','asc')->get();
-        $last = Chat::where('user_id',$id)->orderBy('id','desc')->get()->first();
+        $messages = Chat::whereIn('user_id',[$id,Auth::user()->id])->WhereIn('to_id',[$id,Auth::user()->id])->orderBy('id','asc')->get();
+        $last = Chat::where('user_id',$id)->where('to_id',Auth::user()->id)->orderBy('id','desc')->get()->first();
         if ($last != null) {
             $last->status = 1;
             $last->save();
