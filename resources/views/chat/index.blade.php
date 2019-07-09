@@ -131,11 +131,11 @@ Direct Chat
     </div>
     <!-- /.box-body -->
     <div class="box-footer">
-        {{-- @if($messages != null)
-        <form action="{{route('admin.message.send')}}" method="post">
+        @if($messages != null)
+        <form action="{{route('chat.store')}}" method="post">
           @csrf
           <div class="input-group">
-            <input name='user_id' value="{{$id}}" hidden>
+            <input name='to_id' value="{{$id}}" hidden>
             <input type="text" name="message" placeholder="Type Message ..." class="form-control">
                 <span class="input-group-btn">
                   <button type="submit" class="btn btn-info btn-flat">Send</button>
@@ -144,7 +144,7 @@ Direct Chat
         </form>
         @else
         <strong><span class="text-info">{{$unread_messages->count()}}{{' Unread Conversations'}}</span></strong>
-        @endif --}}
+        @endif
       </div>
       <!-- /.box-footer-->
     </div>
@@ -217,6 +217,8 @@ Direct Chat
         <!--/.direct-chat -->   
 </div>
 </div>
+
+<br><br>
 <div class="row">
   <div class="box box-info">
     <div class="box-body">
@@ -233,16 +235,18 @@ Direct Chat
             @if($users->count()>0)
             <?php $i = 1; ?>
               @foreach($users as $user)
-                <tr>
-                    <td>{{$i++}}</td>
-                    <td>{{$user->name}}</td>
-                    <td>{{$user->email}}</td>
-                    <td>
-                      @can('Direct Chat')
-                        <a href="{{route('direct.chat',['id'=>$user->id])}}" class="btn btn-primary btn-xs">Start Conversation</a>
-                      @endcan
-                    </td>
-                </tr>
+                @if($user->id != Auth::user()->id)
+                  <tr>
+                      <td>{{$i++}}</td>
+                      <td>{{$user->name}}</td>
+                      <td>{{$user->email}}</td>
+                      <td>
+                        @can('Direct Chat')
+                          <a href="{{route('index.message',['id'=>$user->id])}}" class="btn btn-primary btn-xs">Start Conversation</a>
+                        @endcan
+                      </td>
+                  </tr>
+                @endif
               @endforeach
             @endif
           </tbody>

@@ -13,6 +13,6 @@ class Chat extends Model
     }
 
     protected $attributes = [
-        'admin' => null,
+        'admin' => 0,
     ];
 }

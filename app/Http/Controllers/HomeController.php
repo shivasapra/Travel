@@ -184,11 +184,11 @@ class HomeController extends Controller
             $total_hours_this_session = null;
          }
 // dd($total_hours_this_session);
-            $last = Chat::where('to_id',Auth::user()->id)->orderBy('id','desc')->get()->first();
-            if($last != null){
-                $last->status = 1;
-                $last->save();
-            }
+            // $last = Chat::where('to_id',Auth::user()->id)->orderBy('id','desc')->get()->first();
+            // if($last != null){
+            //     $last->status = 1;
+            //     $last->save();
+            // }
             $wages = wage::where('employee_id',Auth::user()->employee[0]->id)->get();
             $total_wage = 0;
             foreach ($wages as $wage) {
@@ -279,9 +279,9 @@ class HomeController extends Controller
             $unpaid_invoices = invoice::where('status',0)->get();
 
             $messages = Chat::where('user_id',$id)->orWhere('to_id',$id)->orderBy('id','asc')->get();
-            $last = Chat::where('user_id',$id)->orderBy('id','desc')->get()->first();
-            $last->status = 1;
-            $last->save();
+            // $last = Chat::where('user_id',$id)->orderBy('id','desc')->get()->first();
+            // $last->status = 1;
+            // $last->save();
             $unread_messages = Chat::where('to_id',Auth::user()->id)->where('status',0)->get();
             return view('home')->with('employees',employee::all())
 

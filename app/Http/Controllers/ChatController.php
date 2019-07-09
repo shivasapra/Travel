@@ -23,28 +23,29 @@ class ChatController extends Controller
     public function index()
     {   
         $unread_messages = Chat::where('to_id',Auth::user()->id)->where('status',0)->get();
+        // dd($unread_messages);
         return view('chat.index')->with('unread_messages',$unread_messages)
                                 ->with('messages',null)
                                 ->with('users',User::all())
                                 ->with('name',null);
     }
 
-    // public function IndexWithMessage($id)
-    // {   
-    //     $messages = Chat::where('user_id',$id)->orWhere('to_id',$id)->orderBy('created_at','asc')->get();
-    //     $last = Chat::where('user_id',$id)->orderBy('created_at','desc')->get()->first();
-    //     if ($last != null) {
-    //         # code...
-    //         $last->status = 1;
-    //         $last->save();
-    //     }
-    //     $name = User::find($id)->name;
-    //     $unread_messages = Chat::where('to_id',Auth::user()->id)->where('status',0)->get();
-    //     return view('chat.index')->with('unread_messages',$unread_messages)
-    //                             ->with('messages',$messages)
-    //                             ->with('id',$id)->with('employees',employee::all())
-    //                             ->with('name',$name);
-    // }
+    public function IndexWithMessage($id)
+    {   
+        $messages = Chat::where('user_id',$id)->orWhere('to_id',$id)->orderBy('id','asc')->get();
+        $last = Chat::where('user_id',$id)->orderBy('id','desc')->get()->first();
+        if ($last != null) {
+            $last->status = 1;
+            $last->save();
+        }
+        $name = User::find($id)->name;
+        $unread_messages = Chat::where('to_id',Auth::user()->id)->where('status',0)->get();
+        return view('chat.index')->with('unread_messages',$unread_messages)
+                                ->with('messages',$messages)
+                                ->with('id',$id)
+                                ->with('users',User::all())
+                                ->with('name',$name);
+    }
 
     /**
      * Show the form for creating a new resource.
