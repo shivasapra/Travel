@@ -19,7 +19,7 @@ Direct Chat
 @stop
 @section('content')
 <div class="row">
-<div class="col-md-6">
+<div class="col-md-3">
     <!-- DIRECT CHAT PRIMARY -->
   <div class="box box-danger direct-chat direct-chat-danger">
     <div class="box-header with-border">
@@ -34,7 +34,7 @@ Direct Chat
       <div class="box-tools pull-right">
         
         <button type="button" class="btn btn-box-tool" data-toggle="tooltip"  data-widget="chat-pane-toggle">
-            <span data-toggle="tooltip" title="{{$unread_messages->count()}} New Messages" class="badge bg-light-blue">{{$unread_messages->count()}}</span></button>
+            <span data-toggle="tooltip" title="{{$unread_messages->count()}} New Messages" class="badge bg-red">{{$unread_messages->count()}}</span></button>
         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
         </button>
         {{-- <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Contacts" data-widget="chat-pane-toggle"> --}}
@@ -153,7 +153,7 @@ Direct Chat
 </div>
 
 
-<div class="col-md-4">
+<div class="col-md-5">
     <!-- DIRECT CHAT PRIMARY -->
   <div class="box box-info direct-chat direct-chat-info">
     <div class="box-header with-border">
@@ -216,44 +216,46 @@ Direct Chat
     <!--/.direct-chat -->
         <!--/.direct-chat -->   
 </div>
+
+<div class="col-md-4">
+    <div class="box box-default">
+      <div class="box-body">
+          <table id="example" class="table table-striped display" style="width:100%">
+            <thead>
+              <tr>
+                <th>Sno.</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              @if($users->count()>0)
+              <?php $i = 1; ?>
+                @foreach($users as $user)
+                  @if($user->id != Auth::user()->id)
+                    <tr>
+                        <td>{{$i++}}</td>
+                        <td>{{$user->name}}</td>
+                        <td>{{$user->email}}</td>
+                        <td>
+                          @can('Direct Chat')
+                            <a href="{{route('index.message',['id'=>$user->id])}}" class="btn btn-primary btn-xs">Start Conversation</a>
+                          @endcan
+                        </td>
+                    </tr>
+                  @endif
+                @endforeach
+              @endif
+            </tbody>
+          </table>
+      </div>
+    </div>
+</div>
 </div>
 
 <br><br>
-<div class="row">
-  <div class="box box-info">
-    <div class="box-body">
-        <table id="example" class="table table-striped display" style="width:100%">
-          <thead>
-            <tr>
-              <th>Sno.</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            @if($users->count()>0)
-            <?php $i = 1; ?>
-              @foreach($users as $user)
-                @if($user->id != Auth::user()->id)
-                  <tr>
-                      <td>{{$i++}}</td>
-                      <td>{{$user->name}}</td>
-                      <td>{{$user->email}}</td>
-                      <td>
-                        @can('Direct Chat')
-                          <a href="{{route('index.message',['id'=>$user->id])}}" class="btn btn-primary btn-xs">Start Conversation</a>
-                        @endcan
-                      </td>
-                  </tr>
-                @endif
-              @endforeach
-            @endif
-          </tbody>
-        </table>
-    </div>
-  </div>
-</div>
+
 @stop
 @section('js')
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
