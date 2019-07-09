@@ -152,7 +152,7 @@ Dashboard
       </div>
       <!--/.direct-chat-messages-->
       <!-- Contacts are loaded here -->
-      <div class="direct-chat-contacts">
+      <div class="direct-chat-contacts" style="height:350px;">
         <ul class="contacts-list">
           @if($unread_messages->count()>0)
           @foreach($unread_messages as $unread)
