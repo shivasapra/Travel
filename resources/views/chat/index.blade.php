@@ -21,7 +21,7 @@ Direct Chat
 <div class="row">
 <div class="col-md-6">
     <!-- DIRECT CHAT PRIMARY --> 
-  <div class="box box-danger direct-chat direct-chat-danger">
+  <div class="box box-danger direct-chat direct-chat-danger ">
     <div class="box-header with-border">
       <h3 class="box-title">
           @if($name != null)
@@ -45,7 +45,7 @@ Direct Chat
     <!-- /.box-header -->
     <div class="box-body" >
       <!-- Conversations are loaded here -->
-      <div class="direct-chat-messages" style="height:450px;">
+      <div class="direct-chat-messages" style="height:450px;" id="testing">
         <!-- Message. Default to the left -->
         @if($messages != null)
         @foreach($messages as $message)
@@ -62,7 +62,7 @@ Direct Chat
                 @else
                   src="{{asset('app/images/user-placeholder.jpg')}}"
               @endif 
-              alt="Message User Image">
+              alt="Message User Image"  >
               <!-- /.direct-chat-img -->
               <div class="direct-chat-text">
                 {{$message->message}}
@@ -111,7 +111,7 @@ Direct Chat
               @endif 
               alt="User Image">
 
-              <div class="contacts-list-danger">
+              <div class="contacts-list-info">
                     <span class="contacts-list-name">
                       {{App\User::find($unread->user_id)->name}}
                       <small class="contacts-list-date pull-right">{{$unread->date}}{{' '}}{{$unread->time}}</small>
@@ -279,19 +279,12 @@ Direct Chat
 } );
 </script>
 <script>
-var scrolled = false;
-setInterval(updateScroll,1000);
-function updateScroll(){
-    if(!scrolled){
-        var element = document.getElementById("yourDivID");
-        element.scrollTop = element.scrollHeight;
-    }
+
+window.onload=function(){
+  var messageBody = document.querySelector('#testing');
+  messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
 }
-
-$("#yourDivID").on('scroll', function(){
-    scrolled=true;
-});
-
-
+// function updateScroll(){
+//     }
 </script>
 @endsection

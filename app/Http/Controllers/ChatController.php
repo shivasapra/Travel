@@ -65,6 +65,13 @@ class ChatController extends Controller
      */
     public function store(Request $request)
     {   
+        $chatLog = ChatLog::where('user_id',Auth::user()->id)->where('to_id',$request->to_id)->get();
+        if($chatLog->count() == 0){
+            $chatLog = new ChatLog;
+            $chatLog->user_id = Auth::user()->id;
+            $chatLog->to_id = $request->to_id;
+            $chatLog->save();
+        }
         $last = Chat::where('user_id',Auth::user()->id)->where('to_id',$request->to_id)->orderBy('id','desc')->get()->first();
         if ($last != null) {
             $last->status = 1;
