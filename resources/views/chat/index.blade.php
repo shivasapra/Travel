@@ -19,8 +19,8 @@ Direct Chat
 @stop
 @section('content')
 <div class="row">
-<div class="col-md-3">
-    <!-- DIRECT CHAT PRIMARY -->
+<div class="col-md-6">
+    <!-- DIRECT CHAT PRIMARY --> 
   <div class="box box-danger direct-chat direct-chat-danger">
     <div class="box-header with-border">
       <h3 class="box-title">
@@ -34,7 +34,7 @@ Direct Chat
       <div class="box-tools pull-right">
         
         <button type="button" class="btn btn-box-tool" data-toggle="tooltip"  data-widget="chat-pane-toggle">
-            <span data-toggle="tooltip" title="{{$unread_messages->count()}} New Messages" class="badge bg-red">{{$unread_messages->count()}}</span></button>
+            <span data-toggle="tooltip" title="{{$unread_messages->count()}} " class="badge bg-red">{{$unread_messages->count()}} New Messages </span></button>
         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
         </button>
         {{-- <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Contacts" data-widget="chat-pane-toggle"> --}}
@@ -43,9 +43,9 @@ Direct Chat
       </div>
     </div>
     <!-- /.box-header -->
-    <div class="box-body">
+    <div class="box-body" >
       <!-- Conversations are loaded here -->
-      <div class="direct-chat-messages">
+      <div class="direct-chat-messages" style="height:450px;">
         <!-- Message. Default to the left -->
         @if($messages != null)
         @foreach($messages as $message)
@@ -97,7 +97,7 @@ Direct Chat
       </div>
       <!--/.direct-chat-messages-->
       <!-- Contacts are loaded here -->
-      <div class="direct-chat-contacts">
+      <div class="direct-chat-contacts" style="height:450px;">
         <ul class="contacts-list">
           @if($unread_messages->count()>0)
           @foreach($unread_messages as $unread)
@@ -153,7 +153,7 @@ Direct Chat
 </div>
 
 
-<div class="col-md-5">
+<div class="col-md-6">
     <!-- DIRECT CHAT PRIMARY -->
   <div class="box box-info direct-chat direct-chat-info">
     <div class="box-header with-border">
@@ -215,42 +215,44 @@ Direct Chat
     </div>
     <!--/.direct-chat -->
         <!--/.direct-chat -->   
+<br>
+        <div class="box box-default">
+          <div class="box-body">
+              <table id="example" class="table table-striped display" style="width:100%">
+                <thead>
+                  <tr>
+                    <th>Sno.</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @if($users->count()>0)
+                  <?php $i = 1; ?>
+                    @foreach($users as $user)
+                      @if($user->id != Auth::user()->id)
+                        <tr>
+                            <td>{{$i++}}</td>
+                            <td>{{$user->name}}</td>
+                            <td>{{$user->email}}</td>
+                            <td>
+                              @can('Direct Chat')
+                                <a href="{{route('index.message',['id'=>$user->id])}}" class="btn btn-primary btn-xs">Start Conversation</a>
+                              @endcan
+                            </td>
+                        </tr>
+                      @endif
+                    @endforeach
+                  @endif
+                </tbody>
+              </table>
+          </div>
+        </div>
 </div>
 
-<div class="col-md-4">
-    <div class="box box-default">
-      <div class="box-body">
-          <table id="example" class="table table-striped display" style="width:100%">
-            <thead>
-              <tr>
-                <th>Sno.</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              @if($users->count()>0)
-              <?php $i = 1; ?>
-                @foreach($users as $user)
-                  @if($user->id != Auth::user()->id)
-                    <tr>
-                        <td>{{$i++}}</td>
-                        <td>{{$user->name}}</td>
-                        <td>{{$user->email}}</td>
-                        <td>
-                          @can('Direct Chat')
-                            <a href="{{route('index.message',['id'=>$user->id])}}" class="btn btn-primary btn-xs">Start Conversation</a>
-                          @endcan
-                        </td>
-                    </tr>
-                  @endif
-                @endforeach
-              @endif
-            </tbody>
-          </table>
-      </div>
-    </div>
+<div class="col-md-5">
+    
 </div>
 </div>
 
@@ -275,5 +277,21 @@ Direct Chat
         ]
     } );
 } );
+</script>
+<script>
+var scrolled = false;
+setInterval(updateScroll,1000);
+function updateScroll(){
+    if(!scrolled){
+        var element = document.getElementById("yourDivID");
+        element.scrollTop = element.scrollHeight;
+    }
+}
+
+$("#yourDivID").on('scroll', function(){
+    scrolled=true;
+});
+
+
 </script>
 @endsection
