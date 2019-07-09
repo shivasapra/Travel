@@ -177,11 +177,16 @@ Direct Chat
         <!-- Message. Default to the left -->
         <ul class="contacts-list">
             @foreach(App\ChatLog::all() as $ChatLog)
+            <?php
+              $user_id = (Auth::user()->id == $ChatLog->user_id)? $ChatLog->user_id : $ChatLog->to_id;
+              $to_id = (Auth::user()->id == $ChatLog->user_id)? $ChatLog->to_id : $ChatLog->user_id;
+              $message = App\Chat::whereIn('user_id',[$user_id,$to_id])->whereIn('to_id',[$user_id,$to_id])->orderBy('id','desc')->get()->first();
+            ?>
             <li>
               <a href="{{route('index.message',['id'=>$ChatLog->user_id])}}">
                 <img class="contacts-list-img"
-                @if(App\User::find($ChatLog->user_id)->avatar)
-                    src="{{asset(App\User::find($ChatLog->user_id)->avatar)}}"
+                @if(App\User::find($to_id)->avatar)
+                    src="{{asset(App\User::find($to_id)->avatar)}}"
                   @else
                     src="{{asset('app/images/user-placeholder.jpg')}}"
                 @endif 
@@ -189,11 +194,10 @@ Direct Chat
   
                 <div class="contacts-list-info">
                       <span class="contacts-list-name">
-                        <strong><span style="color:black;">{{App\User::find($ChatLog->user_id)->name}}</span></strong>
-                        <?php $conversation = App\Chat::where('user_id',$ChatLog->user_id)->orWhere('to_id',$ChatLog->user_id)->orderBy('created_at','desc')->get()->first();?>
-                        <small class="contacts-list-date pull-right" style="color:black;">{{$conversation->date}}{{' '}}{{$conversation->time}}</small>
+                        <strong><span style="color:black;">{{App\User::find($to_id)->name}}</span></strong>
+                        <small class="contacts-list-date pull-right" style="color:black;">{{$message->date}}{{' '}}{{$message->time}}</small>
                       </span>
-                  <span class="contacts-list-msg" >{{$conversation->message}}</span>
+                  <span class="contacts-list-msg" >{{$message->message}}</span>
                 </div>
                 <!-- /.contacts-list-info -->
               </a>
