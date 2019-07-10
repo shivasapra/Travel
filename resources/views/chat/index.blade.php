@@ -311,7 +311,7 @@ function sendMessage(test){
     var to_id = $(test).parents("#form").find('#to_id').val();
 		var message = $(test).parents("#form").find('#message').val();
 		var params = 'to_id='+to_id+'&message='+message;
-		var Url = "http://127.0.0.1:8000/chat/store";
+		var Url = "https://buildatwill.com/cloud/public/chat/store";
 		 var xhr = new XMLHttpRequest();
 		 xhr.open('GET', Url+"?"+params, true);
 		 xhr.send();
@@ -366,6 +366,7 @@ function sendMessage(test){
 
 setInterval(function(){
   $("#previous").load(" #previous > *");
+  // $("#reload").load(" #reload > *");
 },10000);
 
 
