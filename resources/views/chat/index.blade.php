@@ -57,7 +57,7 @@ Direct Chat
             <div class="direct-chat-msg ">
               <div class="direct-chat-danger clearfix">
                 <span class="direct-chat-name pull-left">{{'You'}}</span>
-              <span class="direct-chat-timestamp pull-right">{{$message->date}}{{' '}}{{$message->time}}</span>
+              <span class="direct-chat-timestamp " style="margin-left:390px">{{$message->date}}{{' '}}{{$message->time}}</span>
               </div>
               <!-- /.direct-chat-info -->
               <img class="direct-chat-img"
@@ -68,7 +68,7 @@ Direct Chat
               @endif 
               alt="Message User Image"  >
               <!-- /.direct-chat-img -->
-              <div class="direct-chat-text">
+              <div class="direct-chat-text" style="width:500px;">
                 {{$message->message}}
               </div>
               <!-- /.direct-chat-text -->
@@ -79,7 +79,7 @@ Direct Chat
             <div class="direct-chat-msg right">
               <div class="direct-chat-danger clearfix">
                 <span class="direct-chat-name pull-right">{{App\User::find($message->user_id)->name}}</span>
-                <span class="direct-chat-timestamp pull-left">{{$message->date}}{{' '}}{{$message->time}}</span>
+                <span class="direct-chat-timestamp pull-left" style="margin-left:60px">{{$message->date}}{{' '}}{{$message->time}}</span>
               </div>
               <!-- /.direct-chat-info -->
               <img class="direct-chat-img" 
@@ -89,7 +89,7 @@ Direct Chat
                   src="{{asset('app/images/user-placeholder.jpg')}}"
               @endif 
               alt="Message User Image"><!-- /.direct-chat-img -->
-              <div class="direct-chat-text">
+              <div class="direct-chat-text" style="margin-left:60px">
                   {{$message->message}}
               </div>
               <!-- /.direct-chat-text -->
@@ -120,11 +120,11 @@ Direct Chat
               <div class="contacts-list-info">
                     <span class="contacts-list-name">
                       {{App\User::find($unread->user_id)->name}}
-                      <small class="contacts-list-date pull-right">{{$unread->date}}{{' '}}{{$unread->time}}</small>
+                      <small class="contacts-list-date pull-right" >{{$unread->date}}{{' '}}{{$unread->time}}</small>
                     </span>
                 <span class="contacts-list-msg">
                   @if($unread->status == 0 )
-                  <i class="fa fa-circle text-info"></i>
+                  <i class="fa fa-circle text-info" "></i>
                   @endif
                    {{$unread->message}}
                 </span>
