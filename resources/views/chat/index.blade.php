@@ -20,7 +20,7 @@ Direct Chat
 @stop
 @section('content')
 <div class="row">
-<div class="col-md-6" id="reload">
+<div class="col-md-6" >
     <!-- DIRECT CHAT PRIMARY --> 
   <div class="box box-danger direct-chat direct-chat-danger ">
     <div class="box-header with-border">
@@ -46,8 +46,9 @@ Direct Chat
     <!-- /.box-header -->
     <div class="box-body" >
       <!-- Conversations are loaded here -->
-      <div class="direct-chat-messages" style="height:450px;" id="testing">
+      <div class="direct-chat-messages" style="height:450px;" id="testing" >
         <!-- Message. Default to the left -->
+        <?php $messages = Chat::whereIn('user_id',[$id,Auth::user()->id])->WhereIn('to_id',[$id,Auth::user()->id])->orderBy('id','asc')->get(); ?>
         @if($messages != null)
         @foreach($messages as $message)
           @if($message->user_id == Auth::user()->id)
@@ -366,8 +367,8 @@ function sendMessage(test){
 
 setInterval(function(){
   $("#previous").load(" #previous > *");
-  // $("#reload").load(" #reload > *");
-},1000);
+  $("#testing").load(" #testing > *");
+},5000);
 
 
     
