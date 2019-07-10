@@ -171,7 +171,7 @@ Direct Chat
     <div class="box-header with-border">
       <h3 class="box-title">Previous Conversations!!</h3>
     </div>
-    <div class="box-body">
+    <div class="box-body" >
       <div class="direct-chat-messages">
         <!-- Message. Default to the left -->
         <ul class="contacts-list">
@@ -340,17 +340,11 @@ function sendMessage(test){
               $('#message').val('');
               $('#button').attr('disabled','disabled');
               $('#testing').append(data);
+              
               test = false;
             }
             var messageBody = document.querySelector('#testing');
             messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
-
-            // $.ajax({
-            //     url: "http://127.0.0.1:8000/test",
-            //     async: true
-            // }).done(function(result) {
-            //     $("#previous").html(result);
-            // });
               }
           }
          
@@ -363,62 +357,20 @@ function sendMessage(test){
       }
       else{
         $('#button').removeAttr('disabled');
+          
+          
+        
       }
     }
+setInterval(function(){
+  $("#previous").load(" #previous > *");
+},200);
 
+setInterval(function(){
+  $("#reload").load(" #reload > *");
+},10000);
     
 </script>
 
-<script>
 
-setInterval(function(){  
-
-  var Url = "http://127.0.0.1:8000/chat/store";
-  var xhr = new XMLHttpRequest();
-		 xhr.open('GET', Url+"?"+params, true);
-		 xhr.send();
-		 xhr.onreadystatechange = processRequest;
-			 function processRequest(e) {
-			 	var m = JSON.parse(xhr.responseText);
-         for (let i = 0; i < response.length; i++) {
-           var data = 
-           '<li>'+
-           
-              '<a href="{{route("index.message",["id"=>(Auth::user()->id == '+m[i]["user_id"]+')? '+m[i]["to_id"]+' : '+m[i]["user_id"]+'])}}">'+
-                '<img class="contacts-list-img"'+
-                '@if(User::find((Auth::user()->id == '+m[i]["user_id"]+')? '+m[i]["to_id"]+' : '+m[i]["user_id"]+')->avatar)'+
-                    'src="{{asset(User::find((Auth::user()->id == '+m[i]["user_id"]+')? '+m[i]["to_id"]+' : '+m[i]["user_id"]+')->avatar)}}"'+
-                  '@else'+
-                    'src="{{asset("app/images/user-placeholder.jpg")}}"'+
-                '@endif '+
-                'alt="User Image">'+
-  
-                '<div class="contacts-list-info">'+
-                      '<span class="contacts-list-name">'+
-                        '<strong><span style="color:black;">{{User::find((Auth::user()->id == '+m[i]["user_id"]+')? '+m[i]["to_id"]+' : '+m[i]["user_id"]+')->name}}</span></strong>'+
-                        '<small class="contacts-list-date pull-right" style="color:black;">{{'+m[i]["date"]+'}}{{" "}}{{'+m[i]["time"]+'}}</small>'+
-                      '</span>'+
-                  '<span class="contacts-list-msg" >'+
-                    '@if('+m[i]["user_id"]+' == ((Auth::user()->id == '+m[i]["user_id"]+')? '+m[i]["to_id"]+' : '+m[i]["user_id"]+') and '+m[i]["status"]+' == 0 )'+
-                      '<i class="fa fa-circle text-info"></i>'+
-                    '@elseif('+m[i]["user_id"]+' == Auth::user()->id and '+m[i]["status"]+' == 1)'+
-                      '<i class="fa fa-check text-info"></i>'+
-                    '@elseif('+m[i]["user_id"]+' == Auth::user()->id)'+
-                      '<i class="fa fa-reply" aria-hidden="true"></i>'+
-                    '@endif'+
-                    '&nbsp;{{'+m[i]["message"]+'}}'+
-                  '</span>'+
-                '</div>'+
-                '<!-- /.contacts-list-info -->'+
-              '</a>'+
-            '</li>';
-           
-          }
-        }
-var temp = 
-            
-            
-    $("#previous").html(temp);
-  }, 100);
-</script>
 @endsection
