@@ -1,3 +1,4 @@
+<?php use App\User; use App\Chat; ?>
 @extends('layouts.frontend')
 @section('title')
 Direct Chat
@@ -327,18 +328,42 @@ function sendMessage(test){
     
     var to_id = $(test).parents("#form").find('#to_id').val();
 		var message = $(test).parents("#form").find('#message').val();
-		var params = '/'+to_id+'/'+message;
-		var Url = "http://127.0.0.1:8000/test";
+		var params = 'to_id='+to_id+'&message='+message;
+		var Url = "http://127.0.0.1:8000/chat/store";
 		 var xhr = new XMLHttpRequest();
-		 xhr.open('GET', Url+params, true);
+		 xhr.open('GET', Url+"?"+params, true);
 		 xhr.send();
 		 xhr.onreadystatechange = processRequest;
 			 function processRequest(e) {
 			 	var response1 = JSON.parse(xhr.responseText);
-         console.log(response1);
+          if (response1){
+            var data =
+            '<div class="direct-chat-msg ">'+
+              '<div class="direct-chat-danger clearfix">'+
+                '<span class="direct-chat-name pull-left">{{"You"}}</span>'+
+              '<span class="direct-chat-timestamp pull-right">'+response1[2]+'{{' '}}'+response1[1]+'</span>'+
+              '</div>'+
+              '<img class="direct-chat-img"'+
+                '@if(Auth::user()->avatar)'+
+                  'src="{{asset(Auth::user()->avatar)}}"'+
+                '@else'+
+                  'src="{{asset("app/images/user-placeholder.jpg")}}"'+
+              '@endif '+
+              'alt="Message User Image"  >'+
+              '<div class="direct-chat-text">'+
+                response1[0]+
+              '</div>'+
+            '</div>';
+            $('#message').val('');
+            $('#button').attr('disabled','disabled');
+            $('#testing').append(data);
+            var messageBody = document.querySelector('#testing');
+            messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
+              }
+          }
          
 			 }
-    }
+    
 
     function test(temp){
       if (temp.value.trim() == '') {
@@ -348,5 +373,7 @@ function sendMessage(test){
         $('#button').removeAttr('disabled');
       }
     }
+
+    
 </script>
 @endsection

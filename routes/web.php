@@ -74,24 +74,25 @@ Route::get('/find/family/{id}', function ($id) {
     return $family;
 });
 
-Route::get('/test/{to_id}/{message}', function ($to_id,$message) {
-	$chatLog = ChatLog::where('user_id',Auth::user()->id)->where('to_id',$to_id)->get();
-	$chatLogTwo = ChatLog::where('to_id',Auth::user()->id)->where('user_id',$to_id)->get();
-	if($chatLog->count() == 0 and $chatLogTwo->count() == 0){
-		$chatLogg = new ChatLog;
-		$chatLogg->user_id = Auth::user()->id;
-		$chatLogg->to_id = $to_id;
-		$chatLogg->save();
-	}
-	$chat = new Chat;
-	$chat->user_id = Auth::user()->id;
-	$chat->to_id = $to_id;
-	return str($message);               
-	$chat->message = str($message);
-	$chat->time = Carbon::now()->timezone('Europe/London')->toTimeString();
-	$chat->date = Carbon::now()->timezone('Europe/London')->toDateString();
-	$chat->save();
-});
+// Route::get('/test/{to_id}/{message}', function ($to_id,$message) {
+// 	$chatLog = ChatLog::where('user_id',Auth::user()->id)->where('to_id',$to_id)->get();
+// 	$chatLogTwo = ChatLog::where('to_id',Auth::user()->id)->where('user_id',$to_id)->get();
+// 	if($chatLog->count() == 0 and $chatLogTwo->count() == 0){
+// 		$chatLogg = new ChatLog;
+// 		$chatLogg->user_id = Auth::user()->id;
+// 		$chatLogg->to_id = $to_id;
+// 		$chatLogg->save();
+// 	}
+// 	$chat = new Chat;
+// 	$chat->user_id = Auth::user()->id;
+// 	$chat->to_id = $to_id;
+// 	$chat->message = $message;
+// 	$chat->time = Carbon::now()->timezone('Europe/London')->toTimeString();
+// 	$chat->date = Carbon::now()->timezone('Europe/London')->toDateString();
+// 	$chat->save();
+// 	return $chat;               
+// });
+
 
 Route::get('/start/reminder/{id}', function ($id) {
 	$client = App\client::find($id);
@@ -117,7 +118,7 @@ Route::get('/direct/chat',[
 	'uses' => 'ChatController@index',
 	'as' => 'direct.chat'
 ])->middleware('permission:Direct Chat');
-Route::post('/chat/store',[
+Route::get('/chat/store',[
 	'uses' => 'ChatController@store',
 	'as' => 'chat.store'
 ])->middleware('permission:Direct Chat');

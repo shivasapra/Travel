@@ -81,7 +81,7 @@ class ChatController extends Controller
         $chat->time = Carbon::now()->timezone('Europe/London')->toTimeString();
         $chat->date = Carbon::now()->timezone('Europe/London')->toDateString();
         $chat->save();
-        return redirect()->back();
+        return [$chat->message,$chat->time,$chat->date];
     }
 
     // public function AdminMessageStore(Request $request)
