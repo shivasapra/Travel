@@ -354,9 +354,12 @@ function sendMessage(test){
                 response1[0]+
               '</div>'+
             '</div>';
-            $('#message').val('');
-            $('#button').attr('disabled','disabled');
-            $('#testing').append(data);
+            if (test) {
+              $('#message').val('');
+              $('#button').attr('disabled','disabled');
+              $('#testing').append(data);
+              test = false;
+            }
             var messageBody = document.querySelector('#testing');
             messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
               }
