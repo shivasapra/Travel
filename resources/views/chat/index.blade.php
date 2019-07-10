@@ -143,13 +143,13 @@ Direct Chat
     <!-- /.box-body -->
     <div class="box-footer">
         @if($messages != null)
-        <form action="{{route('chat.store')}}" method="post">
+        <form action="{{route('chat.store')}}" method="post" id="form">
           @csrf
           <div class="input-group">
-            <input name='to_id' value="{{$id}}" hidden>
-            <input type="text" name="message" placeholder="Type Message ..." class="form-control">
+            <input name='to_id' value="{{$id}}" id="to_id" hidden>
+            <input type="text" name="message" id="message" onkeyup="test(this)" placeholder="Type Message ..." class="form-control" required>
                 <span class="input-group-btn">
-                  <button type="submit" class="btn btn-danger btn-flat">Send</button>
+                  <button type="button" onclick="sendMessage(this);" id="button" class="btn btn-danger btn-flat" disabled>Send</button>
                 </span>
           </div>
         </form>
@@ -319,5 +319,34 @@ window.onload=function(){
 }
 // function updateScroll(){
 //     }
+</script>
+
+<script>
+function sendMessage(test){
+  
+    
+    var to_id = $(test).parents("#form").find('#to_id').val();
+		var message = $(test).parents("#form").find('#message').val();
+		var params = '/'+to_id+'/'+message;
+		var Url = "http://127.0.0.1:8000/test";
+		 var xhr = new XMLHttpRequest();
+		 xhr.open('GET', Url+params, true);
+		 xhr.send();
+		 xhr.onreadystatechange = processRequest;
+			 function processRequest(e) {
+			 	var response1 = JSON.parse(xhr.responseText);
+         console.log(response1);
+         
+			 }
+    }
+
+    function test(temp){
+      if (temp.value.trim() == '') {
+      $('#button').attr('disabled','disabled');
+      }
+      else{
+        $('#button').removeAttr('disabled');
+      }
+    }
 </script>
 @endsection
