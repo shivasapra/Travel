@@ -108,7 +108,7 @@
                   @foreach(App\Chat::where('to_id',Auth::user()->id)->where('status',0)->orderBy('id','desc')->get() as $m)
                   @if(!$notified->contains($m->user_id))
                     <li><!-- start message -->
-                      <a href="#">
+                      <a href="{{route('index.message',['id'=>$m->user_id])}}">
                         <div class="pull-left">
                           <img 
                           @if(App\User::find($m->user_id)->avatar)
@@ -131,7 +131,7 @@
                   @endif
                   @endforeach
                   <!-- end message -->
-              <li class="footer"><a href="#">See All Messages</a></li>
+              <li class="footer"><a href="{{route('direct.chat')}}">See All Messages</a></li>
             </ul>
           </li>
             </ul>
