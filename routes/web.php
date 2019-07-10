@@ -74,17 +74,17 @@ Route::get('/find/family/{id}', function ($id) {
     return $family;
 });
 
-Route::get('/test', function () {
-	$messages = collect();
-	foreach(App\ChatLog::all() as $ChatLog){
-	  $user_id = (Auth::user()->id == $ChatLog->user_id)? $ChatLog->user_id : $ChatLog->to_id;
-	  $to_id = (Auth::user()->id == $ChatLog->user_id)? $ChatLog->to_id : $ChatLog->user_id;
-	  if($user_id == Auth::user()->id or $to_id == Auth::user()->id){
-		$messages->push(App\Chat::whereIn('user_id',[$user_id,$to_id])->whereIn('to_id',[$user_id,$to_id])->orderBy('id','desc')->get()->first());
-	  }
-	}
-	return $messages->sortBy("created_at")->reverse();
-});
+// Route::get('/test', function () {
+// 	$messages = collect();
+// 	foreach(App\ChatLog::all() as $ChatLog){
+// 	  $user_id = (Auth::user()->id == $ChatLog->user_id)? $ChatLog->user_id : $ChatLog->to_id;
+// 	  $to_id = (Auth::user()->id == $ChatLog->user_id)? $ChatLog->to_id : $ChatLog->user_id;
+// 	  if($user_id == Auth::user()->id or $to_id == Auth::user()->id){
+// 		$messages->push(App\Chat::whereIn('user_id',[$user_id,$to_id])->whereIn('to_id',[$user_id,$to_id])->orderBy('id','desc')->get()->first());
+// 	  }
+// 	}
+// 	return $messages->sortBy("created_at")->reverse();
+// });
 
 
 Route::get('/start/reminder/{id}', function ($id) {

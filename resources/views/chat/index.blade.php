@@ -340,7 +340,7 @@ function sendMessage(test){
               $('#message').val('');
               $('#button').attr('disabled','disabled');
               $('#testing').append(data);
-              
+              $("#previous").load(" #previous > *");
               test = false;
             }
             var messageBody = document.querySelector('#testing');
@@ -362,13 +362,13 @@ function sendMessage(test){
         
       }
     }
-setInterval(function(){
-  $("#previous").load(" #previous > *");
-},200);
+
 
 setInterval(function(){
-  $("#reload").load(" #reload > *");
+  $("#previous").load(" #previous > *");
 },10000);
+
+
     
 </script>
 
