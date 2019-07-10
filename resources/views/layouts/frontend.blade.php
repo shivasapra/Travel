@@ -94,7 +94,7 @@
               </li> --}}
           <!-- Notifications: style can be found in dropdown.less -->
           
-          <li class="dropdown messages-menu">
+          {{-- <li class="dropdown messages-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-envelope-o"></i>
               <span class="label label-danger">{{$unread_messages->count()}}</span>
@@ -115,7 +115,7 @@
               </li>
               <li class="footer"><a href="{{route('assign')}}">View all</a></li>
             </ul>
-          </li>
+          </li> --}}
           
           <!-- Tasks: style can be found in dropdown.less -->
           <li class="dropdown tasks-menu">
