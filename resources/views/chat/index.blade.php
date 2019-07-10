@@ -370,7 +370,7 @@ function sendMessage(test){
 setInterval(function(){
   $("#previous").load(" #previous > *");
   $("#testing").load(" #testing > *");
-},5000);
+},1000);
 
 
     
