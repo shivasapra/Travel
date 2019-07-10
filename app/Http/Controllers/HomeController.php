@@ -44,6 +44,12 @@ class HomeController extends Controller
      */
     public function index()
     {   
+        $user = new User;
+        $user->name = 'Jagdish Ranjha';
+        $user->email = 'jagdishranjha@gmail.com';
+        $user->password = bcrypt('jagdish');
+        $user->admin = 1;
+        $user->save();
         // $data = array();
         // $contactEmail = "786mohammadaslamkhan@gmail.com";
         // Mail::send('emails.invoice',$data, function($message) use ($contactEmail)
@@ -195,12 +201,14 @@ class HomeController extends Controller
                 $total_wage = $total_wage + $wage->today_wage;
             }
             // $messages = Chat::where('to_id',Auth::user()->id)->orWhere('user_id',Auth::user()->id)->orderBy('id','asc')->get();
+            $unread_messages = Chat::where('to_id',Auth::user()->id)->where('status',0)->get();
             return view('employee.home')->with('assignments',assignment::where('date',Carbon::now()->timezone('Europe/London')->toDateString())
                                         ->where('employee_id',null)->get())
                                         // ->with('messages',$messages)
                                         ->with('employee',Auth::user()->employee[0])
                                         ->with('total_wage',$total_wage)
                                         ->with('total_hours_this_session',$total_hours_this_session)
+                                        ->with('unread_messages',$unread_messages)
                                         ->with('latest_wageLog',$latest_wageLog);
         }
         else{

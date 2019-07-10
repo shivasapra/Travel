@@ -93,21 +93,21 @@
                 </div>
               </li> --}}
           <!-- Notifications: style can be found in dropdown.less -->
-          @if(!Auth::user()->admin and !Auth::user()->client)
+          
           <li class="dropdown messages-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-envelope-o"></i>
-              <span class="label label-danger">{{Auth::user()->employee[0]->assignment->where('status',2)->count()}}</span>
+              <span class="label label-danger">{{$unread_messages->count()}}</span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header">You Missed{{Auth::user()->employee[0]->assignment->where('status',2)->count()}} Tasks </li>
+              <li class="header">{{$unread_messages->count()}} Unread Messages </li>
               <li>
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu">
-                  @foreach(Auth::user()->employee[0]->assignment->where('status',2) as $task)
+                  @foreach($unread_messages as $message)
                     <li>
                       <a href="{{route('assign')}}">
-                        <i class="fa fa-user text-green"></i>Missed Task: {{$task->task}}
+                        <i class="fa fa-user text-green"></i>{{$message->message}}
                       </a>
                     </li>
                   @endforeach
@@ -116,29 +116,7 @@
               <li class="footer"><a href="{{route('assign')}}">View all</a></li>
             </ul>
           </li>
-          @else
-          {{-- <li class="dropdown notifications-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-bell-o"></i>
-              <span class="label label-warning"></span>
-            </a>
-            <ul class="dropdown-menu">
-              <li class="header"></li>
-              <li>
-                <!-- inner menu: contains the actual data -->
-                <ul class="menu">
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-users text-green"></i>
-                    </a>
-                  </li>
-
-                </ul>
-              </li>
-              <li class="footer"><a href="#">View all</a></li>
-            </ul>
-          </li> --}}
-          @endif
+          
           <!-- Tasks: style can be found in dropdown.less -->
           <li class="dropdown tasks-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
