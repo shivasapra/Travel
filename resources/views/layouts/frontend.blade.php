@@ -97,10 +97,11 @@
           <li class="dropdown messages-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-envelope-o"></i>
-              <span class="label label-success">{{App\Chat::where('to_id',Auth::user()->id)->where('status',0)->get()->count()}}</span>
+              
+              <span class="label label-success">{{App\Chat::where('to_id',Auth::user()->id)->where('status',0)->get()->pluck('user_id')->unique()->values()->count()}}</span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header">You have {{App\Chat::where('to_id',Auth::user()->id)->where('status',0)->get()->count()}} Unread Messages</li>
+              <li class="header">You have {{App\Chat::where('to_id',Auth::user()->id)->where('status',0)->get()->pluck('user_id')->unique()->values()->count()}} Unread Messages</li>
               <li>
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu">

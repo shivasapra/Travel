@@ -34,7 +34,7 @@ Direct Chat
       <div class="box-tools pull-right">
         
         <button type="button" class="btn btn-box-tool" data-toggle="tooltip"  data-widget="chat-pane-toggle">
-            <span data-toggle="tooltip" title="{{$unread_messages->count()}} " class="badge bg-red">{{$unread_messages->count()}} New Messages </span></button>
+            <span data-toggle="tooltip" title="{{$unread_messages->count()}} " class="badge bg-red">{{$unread_messages->pluck('user_id')->unique()->count()}} New Messages </span></button>
         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
         </button>
         {{-- <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Contacts" data-widget="chat-pane-toggle"> --}}
@@ -154,7 +154,7 @@ Direct Chat
           </div>
         </form>
         @else
-        <strong><span class="text-danger">{{$unread_messages->count()}}{{' Unread Conversations'}}</span></strong>
+        <strong><span class="text-danger">{{$unread_messages->pluck('user_id')->unique()->count()}}{{' Unread Conversations'}}</span></strong>
         @endif
       </div>
       <!-- /.box-footer-->
