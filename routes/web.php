@@ -74,24 +74,17 @@ Route::get('/find/family/{id}', function ($id) {
     return $family;
 });
 
-// Route::get('/test/{to_id}/{message}', function ($to_id,$message) {
-// 	$chatLog = ChatLog::where('user_id',Auth::user()->id)->where('to_id',$to_id)->get();
-// 	$chatLogTwo = ChatLog::where('to_id',Auth::user()->id)->where('user_id',$to_id)->get();
-// 	if($chatLog->count() == 0 and $chatLogTwo->count() == 0){
-// 		$chatLogg = new ChatLog;
-// 		$chatLogg->user_id = Auth::user()->id;
-// 		$chatLogg->to_id = $to_id;
-// 		$chatLogg->save();
-// 	}
-// 	$chat = new Chat;
-// 	$chat->user_id = Auth::user()->id;
-// 	$chat->to_id = $to_id;
-// 	$chat->message = $message;
-// 	$chat->time = Carbon::now()->timezone('Europe/London')->toTimeString();
-// 	$chat->date = Carbon::now()->timezone('Europe/London')->toDateString();
-// 	$chat->save();
-// 	return $chat;               
-// });
+Route::get('/test', function () {
+	$messages = collect();
+	foreach(App\ChatLog::all() as $ChatLog){
+	  $user_id = (Auth::user()->id == $ChatLog->user_id)? $ChatLog->user_id : $ChatLog->to_id;
+	  $to_id = (Auth::user()->id == $ChatLog->user_id)? $ChatLog->to_id : $ChatLog->user_id;
+	  if($user_id == Auth::user()->id or $to_id == Auth::user()->id){
+		$messages->push(App\Chat::whereIn('user_id',[$user_id,$to_id])->whereIn('to_id',[$user_id,$to_id])->orderBy('id','desc')->get()->first());
+	  }
+	}
+	return $messages;
+});
 
 
 Route::get('/start/reminder/{id}', function ($id) {

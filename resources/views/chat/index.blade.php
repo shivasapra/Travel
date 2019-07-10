@@ -1,4 +1,4 @@
-<?php use App\User; use App\Chat; ?>
+<?php use App\User; use App\Chat; use App\ChatLog;?>
 @extends('layouts.frontend')
 @section('title')
 Direct Chat
@@ -20,7 +20,7 @@ Direct Chat
 @stop
 @section('content')
 <div class="row">
-<div class="col-md-6">
+<div class="col-md-6" id="reload">
     <!-- DIRECT CHAT PRIMARY --> 
   <div class="box box-danger direct-chat direct-chat-danger ">
     <div class="box-header with-border">
@@ -36,11 +36,11 @@ Direct Chat
         
         <button type="button" class="btn btn-box-tool" data-toggle="tooltip"  data-widget="chat-pane-toggle">
             <span data-toggle="tooltip" title="{{$unread_messages->pluck('user_id')->unique()->count()}} " class="badge bg-red">{{$unread_messages->pluck('user_id')->unique()->count()}} New Messages </span></button>
-        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+        {{-- <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i> --}}
         </button>
         {{-- <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Contacts" data-widget="chat-pane-toggle"> --}}
           {{-- <i class="fa fa-comments"></i></button> --}}
-        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+        {{-- <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button> --}}
       </div>
     </div>
     <!-- /.box-header -->
@@ -157,9 +157,9 @@ Direct Chat
         @else
         <strong><span class="text-danger">{{$unread_messages->pluck('user_id')->unique()->count()}}{{' Unread Conversations'}}</span></strong>
         @endif
-      </div>
-      <!-- /.box-footer-->
     </div>
+      <!-- /.box-footer-->
+  </div>
     <!--/.direct-chat -->
         <!--/.direct-chat -->   
 </div>
@@ -167,24 +167,11 @@ Direct Chat
 
 <div class="col-md-6">
     <!-- DIRECT CHAT PRIMARY -->
-  <div class="box box-info direct-chat direct-chat-info">
+  <div class="box box-info direct-chat direct-chat-info" id="previous">
     <div class="box-header with-border">
       <h3 class="box-title">Previous Conversations!!</h3>
-
-      <div class="box-tools pull-right">
-        
-        {{-- <button type="button" class="btn btn-box-tool" data-toggle="tooltip"  data-widget="chat-pane-toggle">
-            <span data-toggle="tooltip" title="{{$unread_messages->count()}} New Messages" class="badge bg-red">{{$unread_messages->count()}}</span></button> --}}
-        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-        </button>
-        {{-- <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Contacts" data-widget="chat-pane-toggle"> --}}
-          {{-- <i class="fa fa-comments"></i></button> --}}
-        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-      </div>
     </div>
-    <!-- /.box-header -->
     <div class="box-body">
-      <!-- Conversations are loaded here -->
       <div class="direct-chat-messages">
         <!-- Message. Default to the left -->
         <ul class="contacts-list">
@@ -237,19 +224,14 @@ Direct Chat
           </ul>
         <!-- /.direct-chat-msg -->
       </div>
-      <!--/.direct-chat-messages-->
-      
     </div>
-    <!-- /.box-body -->
     <div class="box-footer">
-        
-        <strong><span class="text-info">{{$messages->count()}} Previous Conversations!!</span></strong>
-      </div>
-      <!-- /.box-footer-->
+      <strong><span class="text-info">{{$messages->count()}} Previous Conversations!!</span></strong>
     </div>
-    <!--/.direct-chat -->
-        <!--/.direct-chat -->   
-<br>
+  </div>
+  
+  
+  <br>
         <div class="box box-default">
           <div class="box-body">
               <table id="example" class="table table-striped display" style="width:100%">
@@ -362,6 +344,13 @@ function sendMessage(test){
             }
             var messageBody = document.querySelector('#testing');
             messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
+
+            // $.ajax({
+            //     url: "http://127.0.0.1:8000/test",
+            //     async: true
+            // }).done(function(result) {
+            //     $("#previous").html(result);
+            // });
               }
           }
          
@@ -378,5 +367,70 @@ function sendMessage(test){
     }
 
     
+</script>
+
+<script>
+
+setInterval(function(){  
+var temp = 
+            '<div class="box-header with-border">'+
+      '<h3 class="box-title">Previous Conversationss!!</h3>'+
+    '</div>'+
+    '<div class="box-body">'+
+      '<div class="direct-chat-messages">'+
+        '<!-- Message. Default to the left -->'+
+        '<ul class="contacts-list">'+
+            '<?php $messages = collect();?>'+
+            '@foreach(ChatLog::all() as $ChatLog)'+
+            '<?php $user_id = (Auth::user()->id == $ChatLog->user_id)? $ChatLog->user_id : $ChatLog->to_id;?>'+
+              '<?php $to_id = (Auth::user()->id == $ChatLog->user_id)? $ChatLog->to_id : $ChatLog->user_id;?>'+
+              '<?php if($user_id == Auth::user()->id or $to_id == Auth::user()->id){?>'+
+                '<?php $messages->push(Chat::whereIn("user_id",[$user_id,$to_id])->whereIn("to_id",[$user_id,$to_id])->orderBy("id","desc")->get()->first());?>'+
+              '<?php }'+
+            '?>'+
+            '@endforeach'+
+            '@if($messages->count()>0)'+
+            '@foreach($messages->sortBy("created_at")->reverse() as $m)'+
+            '<li>'+
+              '<a href="{{route("index.message",["id"=>(Auth::user()->id == $m->user_id)? $m->to_id : $m->user_id])}}">'+
+                '<img class="contacts-list-img"'+
+                '@if(User::find((Auth::user()->id == $m->user_id)? $m->to_id : $m->user_id)->avatar)'+
+                    'src="{{asset(User::find((Auth::user()->id == $m->user_id)? $m->to_id : $m->user_id)->avatar)}}"'+
+                  '@else'+
+                    'src="{{asset("app/images/user-placeholder.jpg")}}"'+
+                '@endif '+
+                'alt="User Image">'+
+  
+                '<div class="contacts-list-info">'+
+                      '<span class="contacts-list-name">'+
+                        '<strong><span style="color:black;">{{User::find((Auth::user()->id == $m->user_id)? $m->to_id : $m->user_id)->name}}</span></strong>'+
+                        '<small class="contacts-list-date pull-right" style="color:black;">{{$m->date}}{{" "}}{{$m->time}}</small>'+
+                      '</span>'+
+                  '<span class="contacts-list-msg" >'+
+                    '@if($m->user_id == ((Auth::user()->id == $m->user_id)? $m->to_id : $m->user_id) and $m->status == 0 )'+
+                      '<i class="fa fa-circle text-info"></i>'+
+                    '@elseif($m->user_id == Auth::user()->id and $m->status == 1)'+
+                      '<i class="fa fa-check text-info"></i>'+
+                    '@elseif($m->user_id == Auth::user()->id)'+
+                      '<i class="fa fa-reply" aria-hidden="true"></i>'+
+                    '@endif'+
+                    '&nbsp;{{$m->message}}'+
+                  '</span>'+
+                '</div>'+
+                '<!-- /.contacts-list-info -->'+
+              '</a>'+
+            '</li>'+
+            '@endforeach'+
+            '@endif'+
+            '<!-- End Contact Item -->'+
+          '</ul>'+
+        '<!-- /.direct-chat-msg -->'+
+      '</div>'+
+    '</div>'+
+    '<div class="box-footer">'+
+      '<strong><span class="text-info">{{$messages->count()}} Previous Conversations!!</span></strong>'+
+    '</div>  ';
+    $("#previous").html(temp);
+  }, 100000000);
 </script>
 @endsection
