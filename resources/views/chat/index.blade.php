@@ -187,25 +187,25 @@ Direct Chat
       <div class="direct-chat-messages">
         <!-- Message. Default to the left -->
         <ul class="contacts-list">
-          <?php $i = 0;?>
+            <?php 
+              $messages = collect();
+            ?>
             @foreach(App\ChatLog::all() as $ChatLog)
             <?php
               $user_id = (Auth::user()->id == $ChatLog->user_id)? $ChatLog->user_id : $ChatLog->to_id;
               $to_id = (Auth::user()->id == $ChatLog->user_id)? $ChatLog->to_id : $ChatLog->user_id;
               if($user_id == Auth::user()->id or $to_id == Auth::user()->id){
-                $messages = App\Chat::whereIn('user_id',[$user_id,$to_id])->whereIn('to_id',[$user_id,$to_id])->orderBy('id','desc')->get()->first();
-              }
-              else{
-                $messages = collect();
+                $messages->push(App\Chat::whereIn('user_id',[$user_id,$to_id])->whereIn('to_id',[$user_id,$to_id])->orderBy('id','desc')->get()->first());
               }
             ?>
+            @endforeach
             @if($messages->count()>0)
-            <?php $i++ ?>
+            @foreach($messages->sortBy('created_at')->reverse() as $m)
             <li>
-              <a href="{{route('index.message',['id'=>$to_id])}}">
+              <a href="{{route('index.message',['id'=>(Auth::user()->id == $m->user_id)? $m->to_id : $m->user_id])}}">
                 <img class="contacts-list-img"
-                @if(App\User::find($to_id)->avatar)
-                    src="{{asset(App\User::find($to_id)->avatar)}}"
+                @if(App\User::find((Auth::user()->id == $m->user_id)? $m->to_id : $m->user_id)->avatar)
+                    src="{{asset(App\User::find((Auth::user()->id == $m->user_id)? $m->to_id : $m->user_id)->avatar)}}"
                   @else
                     src="{{asset('app/images/user-placeholder.jpg')}}"
                 @endif 
@@ -213,25 +213,25 @@ Direct Chat
   
                 <div class="contacts-list-info">
                       <span class="contacts-list-name">
-                        <strong><span style="color:black;">{{App\User::find($to_id)->name}}</span></strong>
-                        <small class="contacts-list-date pull-right" style="color:black;">{{$messages->date}}{{' '}}{{$messages->time}}</small>
+                        <strong><span style="color:black;">{{App\User::find((Auth::user()->id == $m->user_id)? $m->to_id : $m->user_id)->name}}</span></strong>
+                        <small class="contacts-list-date pull-right" style="color:black;">{{$m->date}}{{' '}}{{$m->time}}</small>
                       </span>
                   <span class="contacts-list-msg" >
-                    @if($messages->user_id == $to_id and $messages->status == 0 )
+                    @if($m->user_id == ((Auth::user()->id == $m->user_id)? $m->to_id : $m->user_id) and $m->status == 0 )
                       <i class="fa fa-circle text-info"></i>
-                    @elseif($messages->user_id == Auth::user()->id and $messages->status == 1)
+                    @elseif($m->user_id == Auth::user()->id and $m->status == 1)
                       <i class="fa fa-check text-info"></i>
-                    @elseif($messages->user_id == Auth::user()->id)
+                    @elseif($m->user_id == Auth::user()->id)
                       <i class="fa fa-reply" aria-hidden="true"></i>
                     @endif
-                    &nbsp;{{$messages->message}}
+                    &nbsp;{{$m->message}}
                   </span>
                 </div>
                 <!-- /.contacts-list-info -->
               </a>
             </li>
-            @endif
             @endforeach
+            @endif
             <!-- End Contact Item -->
           </ul>
         <!-- /.direct-chat-msg -->
@@ -242,7 +242,7 @@ Direct Chat
     <!-- /.box-body -->
     <div class="box-footer">
         
-        <strong><span class="text-info">{{$i}} Previous Conversations!!</span></strong>
+        <strong><span class="text-info">{{$messages->count()}} Previous Conversations!!</span></strong>
       </div>
       <!-- /.box-footer-->
     </div>
