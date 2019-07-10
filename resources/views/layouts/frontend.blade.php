@@ -93,29 +93,50 @@
                 </div>
               </li> --}}
           <!-- Notifications: style can be found in dropdown.less -->
-          
-          {{-- <li class="dropdown messages-menu">
+          @if(App\Chat::where('to_id',Auth::user()->id)->where('status',0)->get()->count() > 0)
+          <li class="dropdown messages-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-envelope-o"></i>
-              <span class="label label-danger">{{$unread_messages->count()}}</span>
+              <span class="label label-success">{{App\Chat::where('to_id',Auth::user()->id)->where('status',0)->get()->count()}}</span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header">{{$unread_messages->count()}} Unread Messages </li>
+              <li class="header">You have {{App\Chat::where('to_id',Auth::user()->id)->where('status',0)->get()->count()}} Unread Messages</li>
               <li>
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu">
-                  @foreach($unread_messages as $message)
-                    <li>
-                      <a href="{{route('assign')}}">
-                        <i class="fa fa-user text-green"></i>{{$message->message}}
+                  <?php $notified = collect();?>
+                  @foreach(App\Chat::where('to_id',Auth::user()->id)->where('status',0)->orderBy('id','desc')->get() as $m)
+                  @if(!$notified->contains($m->user_id))
+                    <li><!-- start message -->
+                      <a href="#">
+                        <div class="pull-left">
+                          <img 
+                          @if(App\User::find($m->user_id)->avatar)
+                            src="{{asset(App\User::find($m->user_id)->avatar)}}" 
+                          @else
+                            src="{{asset('images/user-placeholder.jpg')}}"
+                          @endif
+                          class="img-circle" alt="User Image">
+                        </div>
+                        <h4>
+                          {{App\User::find($m->user_id)->name}}
+                          <small><i class="fa fa-clock-o"></i> {{$m->time}}</small>
+                        </h4>
+                        <p>{{$m->message}}</p>
                       </a>
                     </li>
+                    <?php
+                      $notified->push($m->user_id);
+                    ?>
+                  @endif
                   @endforeach
-                </ul>
-              </li>
-              <li class="footer"><a href="{{route('assign')}}">View all</a></li>
+                  <!-- end message -->
+              <li class="footer"><a href="#">See All Messages</a></li>
             </ul>
-          </li> --}}
+          </li>
+            </ul>
+          </li>
+          @endif
           
           <!-- Tasks: style can be found in dropdown.less -->
           <li class="dropdown tasks-menu">
