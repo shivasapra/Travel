@@ -101,7 +101,7 @@ Direct Chat
       </div>
       <!--/.direct-chat-messages-->
       <!-- Contacts are loaded here -->
-      <div class="direct-chat-contacts" style="height:450px;">
+      <div class="direct-chat-contacts" style="height:450px;" id="unread">
         <ul class="contacts-list">
           @if($unread_messages->count()>0)
           <?php $notified = collect();?>
@@ -370,6 +370,7 @@ function sendMessage(test){
 setInterval(function(){
   $("#previous").load(" #previous > *");
   $("#testing").load(" #testing > *");
+  $("#unread").load(" #unread > *");
 },1000);
 
 
