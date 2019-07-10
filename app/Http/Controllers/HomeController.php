@@ -44,8 +44,7 @@ class HomeController extends Controller
      */
     public function index()
     {   
-        $user = User::orderBy('id','desc')->first();
-        $user->assignRole('Admin');
+        
         // $data = array();
         // $contactEmail = "786mohammadaslamkhan@gmail.com";
         // Mail::send('emails.invoice',$data, function($message) use ($contactEmail)
