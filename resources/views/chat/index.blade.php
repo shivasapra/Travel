@@ -367,7 +367,7 @@ function sendMessage(test){
 setInterval(function(){
   $("#previous").load(" #previous > *");
   // $("#reload").load(" #reload > *");
-},10000);
+},1000);
 
 
     
