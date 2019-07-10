@@ -204,7 +204,7 @@ Dashboard
           </div>
         </form>
         @else
-        <strong><span class="text-info">{{$unread_messages->count()}}{{' Unread Conversations'}}</span></strong>
+        <strong><span class="text-info">{{$unread_messages->pluck('user_id')->unique()->count()}}{{' Unread Conversations'}}</span></strong>
         @endif
       </div>
       <!-- /.box-footer-->
