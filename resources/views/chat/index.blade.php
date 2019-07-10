@@ -48,7 +48,9 @@ Direct Chat
       <!-- Conversations are loaded here -->
       <div class="direct-chat-messages" style="height:450px;" id="testing" >
         <!-- Message. Default to the left -->
+        @if($messages)
         <?php $messages = Chat::whereIn('user_id',[$id,Auth::user()->id])->WhereIn('to_id',[$id,Auth::user()->id])->orderBy('id','asc')->get(); ?>
+        @endif
         @if($messages != null)
         @foreach($messages as $message)
           @if($message->user_id == Auth::user()->id)
