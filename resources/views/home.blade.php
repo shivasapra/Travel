@@ -752,7 +752,7 @@ Dashboard
         var to_id = $(test).parents("#form").find('#to_id').val();
         var message = $(test).parents("#form").find('#message').val();
         var params = 'to_id='+to_id+'&message='+message;
-        var Url = "https://buildatwill.com/cloud/public/chat/store";
+        var Url = "http://buildatwill.com/cloud/public/chat/store";
          var xhr = new XMLHttpRequest();
          xhr.open('GET', Url+"?"+params, true);
          xhr.send();
