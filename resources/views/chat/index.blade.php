@@ -372,30 +372,22 @@ function sendMessage(test){
 <script>
 
 setInterval(function(){  
-var temp = 
-            '<div class="box-header with-border">'+
-      '<h3 class="box-title">Previous Conversationss!!</h3>'+
-    '</div>'+
-    '<div class="box-body">'+
-      '<div class="direct-chat-messages">'+
-        '<!-- Message. Default to the left -->'+
-        '<ul class="contacts-list">'+
-            '<?php $messages = collect();?>'+
-            '@foreach(ChatLog::all() as $ChatLog)'+
-            '<?php $user_id = (Auth::user()->id == $ChatLog->user_id)? $ChatLog->user_id : $ChatLog->to_id;?>'+
-              '<?php $to_id = (Auth::user()->id == $ChatLog->user_id)? $ChatLog->to_id : $ChatLog->user_id;?>'+
-              '<?php if($user_id == Auth::user()->id or $to_id == Auth::user()->id){?>'+
-                '<?php $messages->push(Chat::whereIn("user_id",[$user_id,$to_id])->whereIn("to_id",[$user_id,$to_id])->orderBy("id","desc")->get()->first());?>'+
-              '<?php }'+
-            '?>'+
-            '@endforeach'+
-            '@if($messages->count()>0)'+
-            '@foreach($messages->sortBy("created_at")->reverse() as $m)'+
-            '<li>'+
-              '<a href="{{route("index.message",["id"=>(Auth::user()->id == $m->user_id)? $m->to_id : $m->user_id])}}">'+
+
+  var Url = "http://127.0.0.1:8000/chat/store";
+  var xhr = new XMLHttpRequest();
+		 xhr.open('GET', Url+"?"+params, true);
+		 xhr.send();
+		 xhr.onreadystatechange = processRequest;
+			 function processRequest(e) {
+			 	var m = JSON.parse(xhr.responseText);
+         for (let i = 0; i < response.length; i++) {
+           var data = 
+           '<li>'+
+           
+              '<a href="{{route("index.message",["id"=>(Auth::user()->id == '+m[i]["user_id"]+')? '+m[i]["to_id"]+' : '+m[i]["user_id"]+'])}}">'+
                 '<img class="contacts-list-img"'+
-                '@if(User::find((Auth::user()->id == $m->user_id)? $m->to_id : $m->user_id)->avatar)'+
-                    'src="{{asset(User::find((Auth::user()->id == $m->user_id)? $m->to_id : $m->user_id)->avatar)}}"'+
+                '@if(User::find((Auth::user()->id == '+m[i]["user_id"]+')? '+m[i]["to_id"]+' : '+m[i]["user_id"]+')->avatar)'+
+                    'src="{{asset(User::find((Auth::user()->id == '+m[i]["user_id"]+')? '+m[i]["to_id"]+' : '+m[i]["user_id"]+')->avatar)}}"'+
                   '@else'+
                     'src="{{asset("app/images/user-placeholder.jpg")}}"'+
                 '@endif '+
@@ -403,34 +395,30 @@ var temp =
   
                 '<div class="contacts-list-info">'+
                       '<span class="contacts-list-name">'+
-                        '<strong><span style="color:black;">{{User::find((Auth::user()->id == $m->user_id)? $m->to_id : $m->user_id)->name}}</span></strong>'+
-                        '<small class="contacts-list-date pull-right" style="color:black;">{{$m->date}}{{" "}}{{$m->time}}</small>'+
+                        '<strong><span style="color:black;">{{User::find((Auth::user()->id == '+m[i]["user_id"]+')? '+m[i]["to_id"]+' : '+m[i]["user_id"]+')->name}}</span></strong>'+
+                        '<small class="contacts-list-date pull-right" style="color:black;">{{'+m[i]["date"]+'}}{{" "}}{{'+m[i]["time"]+'}}</small>'+
                       '</span>'+
                   '<span class="contacts-list-msg" >'+
-                    '@if($m->user_id == ((Auth::user()->id == $m->user_id)? $m->to_id : $m->user_id) and $m->status == 0 )'+
+                    '@if('+m[i]["user_id"]+' == ((Auth::user()->id == '+m[i]["user_id"]+')? '+m[i]["to_id"]+' : '+m[i]["user_id"]+') and '+m[i]["status"]+' == 0 )'+
                       '<i class="fa fa-circle text-info"></i>'+
-                    '@elseif($m->user_id == Auth::user()->id and $m->status == 1)'+
+                    '@elseif('+m[i]["user_id"]+' == Auth::user()->id and '+m[i]["status"]+' == 1)'+
                       '<i class="fa fa-check text-info"></i>'+
-                    '@elseif($m->user_id == Auth::user()->id)'+
+                    '@elseif('+m[i]["user_id"]+' == Auth::user()->id)'+
                       '<i class="fa fa-reply" aria-hidden="true"></i>'+
                     '@endif'+
-                    '&nbsp;{{$m->message}}'+
+                    '&nbsp;{{'+m[i]["message"]+'}}'+
                   '</span>'+
                 '</div>'+
                 '<!-- /.contacts-list-info -->'+
               '</a>'+
-            '</li>'+
-            '@endforeach'+
-            '@endif'+
-            '<!-- End Contact Item -->'+
-          '</ul>'+
-        '<!-- /.direct-chat-msg -->'+
-      '</div>'+
-    '</div>'+
-    '<div class="box-footer">'+
-      '<strong><span class="text-info">{{$messages->count()}} Previous Conversations!!</span></strong>'+
-    '</div>  ';
+            '</li>';
+           
+          }
+        }
+var temp = 
+            
+            
     $("#previous").html(temp);
-  }, 100000000);
+  }, 100);
 </script>
 @endsection

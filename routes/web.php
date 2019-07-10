@@ -83,7 +83,7 @@ Route::get('/test', function () {
 		$messages->push(App\Chat::whereIn('user_id',[$user_id,$to_id])->whereIn('to_id',[$user_id,$to_id])->orderBy('id','desc')->get()->first());
 	  }
 	}
-	return $messages;
+	return $messages->sortBy("created_at")->reverse();
 });
 
 
