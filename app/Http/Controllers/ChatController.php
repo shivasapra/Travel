@@ -22,7 +22,7 @@ class ChatController extends Controller
      */
     public function index()
     {   
-        $unread_messages = Chat::where('to_id',Auth::user()->id)->where('status',0)->get();
+        $unread_messages = Chat::where('to_id',Auth::user()->id)->where('status',0)->orderBy('id','desc')->get();
         return view('chat.index')->with('unread_messages',$unread_messages)
                                 ->with('messages',null)
                                 ->with('users',User::all())
@@ -32,13 +32,15 @@ class ChatController extends Controller
     public function IndexWithMessage($id)
     {   
         $messages = Chat::whereIn('user_id',[$id,Auth::user()->id])->WhereIn('to_id',[$id,Auth::user()->id])->orderBy('id','asc')->get();
-        $last = Chat::where('user_id',$id)->where('to_id',Auth::user()->id)->orderBy('id','desc')->get()->first();
-        if ($last != null) {
-            $last->status = 1;
-            $last->save();
+        $last = Chat::where('user_id',$id)->where('to_id',Auth::user()->id)->orderBy('id','desc')->get();
+        if ($last->count()>0) {
+            foreach($last as $l){
+                $l->status = 1;
+                $l->save();
+            }    
         }
         $name = User::find($id)->name;
-        $unread_messages = Chat::where('to_id',Auth::user()->id)->where('status',0)->get();
+        $unread_messages = Chat::where('to_id',Auth::user()->id)->where('status',0)->orderBy('id','desc')->get();
         return view('chat.index')->with('unread_messages',$unread_messages)
                                 ->with('messages',$messages)
                                 ->with('id',$id)

@@ -142,7 +142,7 @@ class HomeController extends Controller
         $refunded_invoices = invoice::where('refund',1)->get();
 
 
-        $unread_messages = Chat::where('to_id',Auth::user()->id)->where('status',0)->get();
+        $unread_messages = Chat::where('to_id',Auth::user()->id)->where('status',0)->orderBy('id','desc')->get();
         return view('home')->with('employees',employee::all())
 
                             ->with('clients',client::all())
@@ -196,7 +196,7 @@ class HomeController extends Controller
                 $total_wage = $total_wage + $wage->today_wage;
             }
             // $messages = Chat::where('to_id',Auth::user()->id)->orWhere('user_id',Auth::user()->id)->orderBy('id','asc')->get();
-            $unread_messages = Chat::where('to_id',Auth::user()->id)->where('status',0)->get();
+            $unread_messages = Chat::where('to_id',Auth::user()->id)->where('status',0)->orderBy('id','desc')->get();
             return view('employee.home')->with('assignments',assignment::where('date',Carbon::now()->timezone('Europe/London')->toDateString())
                                         ->where('employee_id',null)->get())
                                         // ->with('messages',$messages)
@@ -284,12 +284,14 @@ class HomeController extends Controller
             $canceled_invoices = invoice::onlyTrashed()->get();
 
             $messages = Chat::whereIn('user_id',[$id,Auth::user()->id])->WhereIn('to_id',[$id,Auth::user()->id])->orderBy('id','asc')->get();
-            $last = Chat::where('user_id',$id)->where('to_id',Auth::user()->id)->orderBy('id','desc')->get()->first();
-            if ($last != null) {
-                $last->status = 1;
-                $last->save();
+            $last = Chat::where('user_id',$id)->where('to_id',Auth::user()->id)->orderBy('id','desc')->get();
+            if ($last->count()>0) {
+                foreach($last as $l){
+                    $l->status = 1;
+                    $l->save();
+                }    
             }
-            $unread_messages = Chat::where('to_id',Auth::user()->id)->where('status',0)->get();
+            $unread_messages = Chat::where('to_id',Auth::user()->id)->where('status',0)->orderBy('id','desc')->get();
             return view('home')->with('employees',employee::all())
 
                                 ->with('clients',client::all())

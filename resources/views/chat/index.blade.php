@@ -100,7 +100,9 @@ Direct Chat
       <div class="direct-chat-contacts" style="height:450px;">
         <ul class="contacts-list">
           @if($unread_messages->count()>0)
+          <?php $notified = collect();?>
           @foreach($unread_messages as $unread)
+          @if(!$notified->contains($unread->user_id))
           <li>
             <a href="{{route('index.message',['id'=>$unread->user_id])}}">
               <img class="contacts-list-img"
@@ -126,6 +128,10 @@ Direct Chat
               <!-- /.contacts-list-info -->
             </a>
           </li>
+            <?php
+              $notified->push($unread->user_id);
+            ?>
+          @endif
           @endforeach
           @endif
           <!-- End Contact Item -->

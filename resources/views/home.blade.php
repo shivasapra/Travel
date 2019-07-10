@@ -155,7 +155,9 @@ Dashboard
       <div class="direct-chat-contacts" style="height:350px;">
         <ul class="contacts-list">
           @if($unread_messages->count()>0)
+          <?php $notified = collect();?>
           @foreach($unread_messages as $unread)
+          @if(!$notified->contains($unread->user_id))
           <li>
             <a href="{{route('home.message',['id'=>$unread->user_id])}}">
               <img class="contacts-list-img"
@@ -176,6 +178,10 @@ Dashboard
               <!-- /.contacts-list-info -->
             </a>
           </li>
+          <?php
+              $notified->push($unread->user_id);
+            ?>
+          @endif
           @endforeach
           @endif
           <!-- End Contact Item -->

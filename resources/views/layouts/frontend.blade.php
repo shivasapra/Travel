@@ -122,7 +122,7 @@
                           {{App\User::find($m->user_id)->name}}
                           <small><i class="fa fa-clock-o"></i> {{$m->time}}</small>
                         </h4>
-                        <p>{{$m->message}}</p>
+                        <p><i class="fa fa-circle text-info"></i> {{$m->message}}</p>
                       </a>
                     </li>
                     <?php
@@ -139,14 +139,14 @@
           @endif
           
           <!-- Tasks: style can be found in dropdown.less -->
-          <li class="dropdown tasks-menu">
+          {{-- <li class="dropdown tasks-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-flag-o"></i>
               <span class="label label-danger"></span>
             </a>
             <ul class="dropdown-menu">
             </ul>
-          </li>
+          </li> --}}
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
