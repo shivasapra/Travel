@@ -33,7 +33,6 @@ Clients
                         <th>Contact</th>
                         <th>Email</th>
                         <th>Action</th>
-                        <th>Reminders</th>
                         <th>Account Activation</th>
                         <th>Passport Verification</th>
                       </tr>
@@ -48,25 +47,34 @@ Clients
 	                    		<td>{{$client->first_name}}</td>
 	                    		<td>{{$client->country}}</td>
 	                    		<td>{{$client->phone}}</td>
-	                    		<td>{{$client->email}}</td>
-	                    		<td>
-                            @can('View Clients')
-                            <a href="{{route('view.client',['id'=>$client->id])}}" class="btn btn-success btn-xs"><span class="fa fa-eye"></span></a>
-                            @endcan
-                            @can('Edit Client')
-                            <a href="{{route('edit.client',['id'=>$client->id])}}" class="btn btn-info btn-xs"><span class="fa fa-edit"></span></a>
-                            @endcan
-                                    {{-- <a href="{{route('delete.client',['id'=>$client->id])}}" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span></a> --}}
-                          </td>
-                          <td>
-                            @can('Client Notification Reminder Toggle')
-                            @if($client->reminder == 1)
-                            <a href="{{ url('/stop/reminder', ['id'=>$client->id]) }}" class="btn btn-primary btn-xs">Stop Payment Reminders</a>
-                            @else
-                            <a href="{{ url('/start/reminder', ['id'=>$client->id]) }}" class="btn btn-primary btn-xs">Resume Payment Reminders</a>
-                            @endif
-                            @endcan
-                          </td>
+                          <td>{{$client->email}}</td>
+                          <td class="text-center">
+                              <div class="btn-group">
+                                <button type="button" class="btn bg-teal">Action</button>
+                                <button type="button" class="btn bg-teal dropdown-toggle" data-toggle="dropdown">
+                                  <span class="caret"></span>
+                                  <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                  @can('View Clients')
+                                  <li><a href="{{route('view.client',['id'=>$client->id])}}" style="color:white" class="btn bg-aqua btn-xs"> View</a></li>
+                                  @endcan
+                                  @can('Edit Client')
+                                  <li><a href="{{route('edit.client',['id'=>$client->id])}}" style="color:white;margin-top:2px;" class="btn bg-navy btn-xs"> Edit</a></li>
+                                  @endcan
+                                  @can('Client Notification Reminder Toggle')
+                                  <li>
+                                    @if($client->reminder == 1)
+                                      <a href="{{ url('/stop/reminder', ['id'=>$client->id]) }}" style="color:white;margin-top:2px;" class="btn bg-red btn-xs"> Stop Payment Reminders</a>
+                                    @else
+                                      <a href="{{ url('/start/reminder', ['id'=>$client->id]) }}" style="color:white;margin-top:2px;" class="btn bg-success btn-xs"> Resume Payment Reminders</a>
+                                    @endif
+                                  </li>
+                                </ul>
+                              </div>
+                            </td>
+	                    		
+                          
                           <td>
                             @if($client->user)
                             @can('Activate/Deactivate Client')

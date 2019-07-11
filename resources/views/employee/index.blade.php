@@ -83,8 +83,8 @@ Employees
 											@endif
 										@endcan
 									@else
-									<a onClick="return confirm('Are You Sure You Want To Resend Confirmation?')" href="{{route('resend.employee.account.confirmation',['id'=>$employee->id])}}" class="btn btn-info btn-xs">Resend</a>
-									<br><span class="text-warning">{{'Not Yet Verified'}}</span>
+									<span class="text-warning">{{'Not Yet Verified'}}</span><br>
+									<a onClick="return confirm('Are You Sure You Want To Resend Confirmation?')" href="{{route('resend.employee.account.confirmation',['id'=>$employee->id])}}" class="btn btn-info btn-xs">Resend Verification</a>
 									@endif
 								</td>
 									
