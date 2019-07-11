@@ -278,14 +278,14 @@ client
 			@endif
         </div>
     </div>
-        <div class="text-center">
+        {{-- <div class="text-center">
             @if($client->user_id == null)
                 <a href="{{route('resend.client.account.confirmation',['id'=>$client->id])}}" class="btn btn-info btn-xs">Resend Account Confirmation</a>
             @endif
             @if($client->token != null)
                 <a href="{{route('resend.client.passport.confirmation',['id'=>$client->id])}}" class="btn btn-info btn-xs">Resend Passport Confirmation</a>
             @endif
-        </div>
+        </div> --}}
 
 		<!-- The Modal -->
 {{-- <div id="myModal" class="modal">

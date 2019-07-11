@@ -78,14 +78,16 @@ Clients
                               <br><a href="{{route('resend.credentials',['id'=>$client->id])}}" class="btn btn-info btn-xs">Resend Credentials</a>
                             @endcan
                             @else
-                              <span class="text-warning"><strong>Not Yet Verified</strong></span>
+                              <span class="text-warning"><strong>Not Yet Verified</strong></span><br>
+                              <a href="{{route('resend.client.account.confirmation',['id'=>$client->id])}}" class="btn btn-info btn-xs">Resend Verification</a>
 														@endif
                           </td>
                           <td>
                             @if($client->confirmation)
                               <span class="text-success"><strong>{{'Verified'}}</strong></span>
                             @else
-                              <span class="text-danger"><strong>{{'Not Verified'}}</strong></span>
+                              <span class="text-danger"><strong>{{'Not Verified'}}</strong></span><br>
+                              <a href="{{route('resend.client.passport.confirmation',['id'=>$client->id])}}" class="btn btn-info btn-xs">Resend Verification</a>
                             @endif
                           </td>
 	                    		</tr>
