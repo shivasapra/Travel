@@ -54,22 +54,22 @@ Invoices
 								@endif
 								<td class="text-center">
 									<div class="btn-group">
-										<button type="button" class="btn bg-orange">Action</button>
-										<button type="button" class="btn bg-orange dropdown-toggle" data-toggle="dropdown">
+										<button type="button" class="btn bg-teal">Action</button>
+										<button type="button" class="btn bg-teal dropdown-toggle" data-toggle="dropdown">
 											<span class="caret"></span>
 											<span class="sr-only">Toggle Dropdown</span>
 										</button>
 										<ul class="dropdown-menu" role="menu">
 											@can('View Invoices')
-											<li><a href="{{route('invoice.view',['id'=>$invoice->id])}}" style="color:white" class="btn btn-info btn-xs"><span class="fa fa-eye"></span> View</a></li>
+											<li><a href="{{route('invoice.view',['id'=>$invoice->id])}}" style="color:white" class="btn bg-aqua btn-xs"> View</a></li>
 											@endcan
 											@can('Edit Invoice')
-											<li><a href="{{route('invoice.edit',['id'=>$invoice->id])}}" style="color:white;margin-top:2px;" class="btn btn-primary btn-xs"><span class="fa fa-edit"></span> Edit</a></li>
+											<li><a href="{{route('invoice.edit',['id'=>$invoice->id])}}" style="color:white;margin-top:2px;" class="btn bg-purple btn-xs"> Edit</a></li>
 											@endcan
 											@if(!Auth::user()->client)
 												@if($invoice->status == 0)
 													@can('Cancel Invoice')
-														<li class="test"><a onClick="return confirm('Are You Sure You Want To Cancel This Invoice')" href="{{route('invoice.delete',['id'=>$invoice->id])}}" {{($invoice->status == 1)?"disabled":" "}} style="color:white;margin-top:2px;" class="btn btn-danger btn-xs">Cancel</a></li>
+														<li class="test"><a onClick="return confirm('Are You Sure You Want To Cancel This Invoice')" href="{{route('invoice.delete',['id'=>$invoice->id])}}" {{($invoice->status == 1)?"disabled":" "}} style="color:white;margin-top:2px;" class="btn bg-red btn-xs">Cancel</a></li>
 													@endcan
 													@else
 													@can('Refund Invoice')
@@ -77,17 +77,17 @@ Invoices
 															<input type="text" value="{{$invoice->id}}" class="inv_id" hidden>
 															<input type="text" value="{{$invoice->invoice_no}}" class="inv_no" hidden>
 															<input type="text" value="{{number_format( (float) ($invoice->discounted_total + $invoice->VAT_amount), 2, '.', '')}}" class="inv_total" hidden>
-															<a type="button" onClick="Fun(this);" class="btn btn-success btn-xs" style="color:white;margin-top:2px;">Refund</a>
+															<a type="button" onClick="Fun(this);" class="btn bg-success btn-xs" style="color:white;margin-top:2px;">Refund</a>
 														</li>
 													@endcan
 												@endif
 												@if($invoice->status == 0)
 													@can('Pay Invoice')
-														<li><a href="{{route('invoice.pay',['id'=>$invoice->id])}}" style="color:white;margin-top:2px;" class="btn btn-primary btn-xs">Pay</a></li>
+														<li><a href="{{route('invoice.pay',['id'=>$invoice->id])}}" style="color:white;margin-top:2px;" class="btn bg-success btn-xs">Pay</a></li>
 													@endcan
 												
 													@can('Send Reminder For Unpaid Invoice')
-														<li><a href="{{route('invoice.reminder',['id'=>$invoice->id])}}" style="color:white;margin-top:2px;" class="btn btn-warning btn-xs">Send Reminder</a></li>
+														<li><a href="{{route('invoice.reminder',['id'=>$invoice->id])}}" style="color:white;margin-top:2px;" class="btn bg-maroon btn-xs">Send Reminder</a></li>
 													@endcan
 												@endif
 											@endif
@@ -104,7 +104,7 @@ Invoices
 										<span class="text-danger"><b>{{'Not Yet Confirmed By Client'}}</b></span>
 										<br>
 										@can('Confirm Invoice')
-										<a href="{{route('confirm.via.paperprint',['id'=>$invoice->id])}}" class="btn btn-xs btn-success">Confirm Via Paper-Print</a>
+										<a onClick="return confirm('Are You Sure You Want To Confirm Invoice')" href="{{route('confirm.via.paperprint',['id'=>$invoice->id])}}" class="btn btn-xs btn-success">Confirm Via Paper-Print</a>
 										@endcan
 										<br>
 										@if($invoice->issues != null)
