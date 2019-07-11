@@ -41,28 +41,16 @@ class RolesController extends Controller
                                 ->with('role',$role);
     }
 
-    public function assignPermissions(Request $request,$id,$permission_id){
+    public function assignPermissions($id,$permission_id){
         $role = Role::find($id);
-        // $permissions = $role->Permissions;
-        // foreach ($permissions as $per) {
-        //     $role->revokePermissionTo($per);
-        // }
-        // dd($request->permissions);
-        // foreach($request->permissions as $permission){
-        //     $role->givePermissionTo($permission);
-        // }
-        // return view('Role.index')->with('roles',Role::all())
-        //                         ->with('permissions',Permission::all())
-        //                         ->with('role',$role);
-
         $role->givePermissionTo($permission_id);
-        return redirect()->back();
+        return $role;
     }
 
-    public function revokePermissions(Request $request,$id,$permission_id){
+    public function revokePermissions($id,$permission_id){
         $role = Role::find($id);
         $role->revokePermissionTo($permission_id);
-        return redirect()->back();
+        return $role;
     }
 
     public function userRole($id){

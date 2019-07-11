@@ -103,6 +103,7 @@ Direct Chat
       <!-- Contacts are loaded here -->
       <div class="direct-chat-contacts" style="height:450px;" id="unread">
         <ul class="contacts-list">
+            <?php $unread_messages = Chat::where('to_id',Auth::user()->id)->where('status',0)->orderBy('id','desc')->get(); ?>
           @if($unread_messages->count()>0)
           <?php $notified = collect();?>
           @foreach($unread_messages as $unread)

@@ -62,7 +62,7 @@ Role Management
     </div>
     <div class="col-md-6">
         <div class="box box-primary">
-            <div class="box-body">
+            <div class="box-body" id="reload">
                 <div id="permissions">
                 @if($permissions->count()>0 and $role != null)
                 {{-- <form action="{{route('assign.permissions',['id'=>$role->id])}}" method="post">
@@ -95,16 +95,18 @@ Role Management
                             <?php $i = 1; ?>
                             @foreach($permissions as $permission)
                             
-                            <tr>
+                            <tr >
                                 <th>{{$i++}}.</th>
                                 <td>{{$permission->name}}</td>
+                                
                                 @if($role->name != 'Admin')
-                                    <td>
+                                    <td class="parent">
+                                            <input type="text" hidden class="role_id" value="{{$role->id}}">
+                                            <input type="text" hidden class="permission_id" value="{{$permission->id}}">
                                         @can('Role Management')
-                                        {{-- <input type="checkbox"  value="{{$permission->name}}" name="permissions[]" @if($role->hasPermissionTo($permission->name)) checked @endif> --}}
-                                        <a 
+                                    {{-- <a 
                                         @if($role->hasPermissionTo($permission->name))
-                                    onClick="return confirm('Are You Sure You Want To Revoke {{$permission->name}} Permission From {{$role->name}}?')" 
+                                        onClick="return confirm('Are You Sure You Want To Revoke {{$permission->name}} Permission From {{$role->name}}?')" 
                                         href="{{route('revoke.permissions',['id'=>$role->id, 'permission_id'=>$permission->id])}}"
                                         @else
                                         onClick="return confirm('Are You Sure You Want To Assign {{$permission->name}} Permission To {{$role->name}}?')"
@@ -116,7 +118,23 @@ Role Management
                                         @else 
                                             class="btn btn-sm btn-danger" 
                                         @endif 
-                                        style="border-radius:50%"></a>
+                                        style="border-radius:50%">
+                                    </a> --}}
+                                    <button type="button" 
+                                    @if($role->hasPermissionTo($permission->name))
+                                        onClick="revoke(this);"
+                                    @else
+                                        onClick="assign(this);"
+                                    @endif
+
+                                    @if($role->hasPermissionTo($permission->name)) 
+                                        class="btn btn-sm btn-success change" 
+                                    @else 
+                                        class="btn btn-sm btn-danger change" 
+                                    @endif 
+                                    style="border-radius:50%">
+
+                                    </button>
                                         @endcan
                                     </td>
                                 @else
@@ -190,5 +208,41 @@ Role Management
         ]
     } );
 } );
+</script>
+
+<script>
+function revoke(temp){
+    var role_id = $(temp).parents(".parent").find('.role_id').val();
+	var permission_id = $(temp).parents('.parent').find('.permission_id').val();
+    console.log(role_id);
+    console.log(permission_id);
+    var Url = "http://127.0.0.1:8000/revoke/permissions/"+role_id+"/"+permission_id;
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', Url, true);
+        xhr.send();
+        xhr.onreadystatechange = processRequest;
+            function processRequest(e) {
+            var response1 = JSON.parse(xhr.responseText);
+            $(temp).removeClass('btn-success');
+            $(temp).addClass('btn-danger');
+        }
+}
+
+function assign(temp){
+    var role_id = $(temp).parents(".parent").find('.role_id').val();
+	var permission_id = $(temp).parents('.parent').find('.permission_id').val();
+    console.log(role_id);
+    console.log(permission_id);
+    var Url = "http://127.0.0.1:8000/assign/permissions/"+role_id+"/"+permission_id;
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', Url, true);
+        xhr.send();
+        xhr.onreadystatechange = processRequest;
+            function processRequest(e) {
+            var response1 = JSON.parse(xhr.responseText);
+            $(temp).removeClass('btn-danger');
+            $(temp).addClass('btn-success');
+        }
+    }
 </script>
 @endsection
