@@ -388,8 +388,6 @@ class employeeController extends Controller
         $invite->email = $employee->email;
         $invite->token = $token;
         $invite->save();
-        $employee->invite_id = $invite->id;
-        $employee->save();
 
         // send the email
         $contactEmail = $employee->email;
