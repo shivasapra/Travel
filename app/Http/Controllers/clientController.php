@@ -30,7 +30,6 @@ class clientController extends Controller
      */
     public function index()
     {   
-        // Auth::loginUsingId(2);
         if (Auth::user()->admin) {
             $clients = client::orderBy('id','desc')->get();
         }
@@ -51,7 +50,7 @@ class clientController extends Controller
         $dt->timezone('Asia/Kolkata');
         $date_today = $dt->timezone('Europe/London');
         $date = $date_today->toDateString();
-         return view('clients.create')->with('date',$date);
+        return view('clients.create')->with('date',$date);
     }
 
     /**
@@ -62,8 +61,6 @@ class clientController extends Controller
      */
     public function store(Request $request)
     {   
-        // dd($request->DOB);
-        
         Validator::make($request->all(), [
             'first_name' => 'required',
             'last_name' => 'required',
@@ -76,21 +73,17 @@ class clientController extends Controller
             'email' => 'unique:users|unique:clients',
             'phone' => 'required',
             ])->validate();
-            // dd(date_format($request->date));
 
-            $test_client = client::where('unique_id','CLDC0001')->get();
-            if ($test_client->count()>0) {
-                $latest = client::orderBy('id','desc')->take(1)->get();
-                $client_prev_no = $latest[0]->unique_id;
-                $unique_id = 'CLDC000'.(substr($client_prev_no,4,7)+1);
-            }
-            else{
-                $unique_id = 'CLDC0001';
-            }
-            // $unique_id = 'CLDC'. mt_rand(100000, 999999);
-            // while (client::where('unique_id',$unique_id)->get()->count()>0) {
-                //    $unique_id = 'CLDC'. mt_rand(100000, 999999);
-                // }
+        $test_client = client::where('unique_id','CLDC0001')->get();
+        if ($test_client->count()>0) {
+            $latest = client::orderBy('id','desc')->take(1)->get();
+            $client_prev_no = $latest[0]->unique_id;
+            $unique_id = 'CLDC000'.(substr($client_prev_no,4,7)+1);
+        }
+        else{
+            $unique_id = 'CLDC0001';
+        }
+
         $client = new client;
         $client->unique_id = $unique_id;
         $client->creator_id = Auth::user()->id;
@@ -116,34 +109,24 @@ class clientController extends Controller
             $client->passport_expiry_date = $request->passport_expiry_date;
             $client->passport_issue_date = $request->passport_issue_date;
             $client->passport_place = $request->passport_place;
-            if($request->hasFile('passport_front'))
-                {
-                    // dd('true');
+            if($request->hasFile('passport_front')){
                 $passport_front = $request->passport_front;
                 $passport_front_new_name = time().$passport_front->getClientOriginalName();
                 $passport_front->move('uploads/passport',$passport_front_new_name);
                 $client->passport_front = 'uploads/passport/'.$passport_front_new_name;
-                // $client->save();
-                }
-            if($request->hasFile('passport_back'))
-                {
-                    // dd('true');
+            }
+            if($request->hasFile('passport_back')){
                 $passport_back = $request->passport_back;
                 $passport_back_new_name = time().$passport_back->getClientOriginalName();
                 $passport_back->move('uploads/passport',$passport_back_new_name);
                 $client->passport_back = 'uploads/passport/'.$passport_back_new_name;
-                // $client->save();
                 }
-            if($request->hasFile('letter'))
-                {
-                    // dd('true');
+            if($request->hasFile('letter')){
                 $letter = $request->letter;
                 $letter_new_name = time().$letter->getClientOriginalName();
                 $letter->move('uploads/passport',$letter_new_name);
                 $client->letter = 'uploads/passport/'.$letter_new_name;
-                // $client->save();
-                }
-
+            }
         }
         $client->save();
         if($request->member_name){
@@ -154,55 +137,44 @@ class clientController extends Controller
                 $client_family->member_DOB = Carbon::parse($request->member_DOB[$index])->format('d-m-Y');
                 $client_family->member_passport_no = $request->member_passport_no[$index];
                 $client_family->member_passport_place = $request->member_passport_place[$index];
-                if($request->hasFile('member_passport_front'))
-                {
+                if($request->hasFile('member_passport_front')){
                 $member_passport_front = $request->member_passport_front[$index];
                 $member_passport_front_new_name = time().$member_passport_front->getClientOriginalName();
                 $member_passport_front->move('uploads/passport',$member_passport_front_new_name);
                 $client_family->member_passport_front = 'uploads/passport/'.$member_passport_front_new_name;
                 }
-            if($request->hasFile('member_passport_back'))
-                {
+                if($request->hasFile('member_passport_back')){
                 $member_passport_back = $request->member_passport_back[$index];
                 $member_passport_back_new_name = time().$member_passport_back->getClientOriginalName();
                 $member_passport_back->move('uploads/passport',$member_passport_back_new_name);
                 $client_family->member_passport_back = 'uploads/passport/'.$member_passport_back_new_name;
                 }
                 $client_family->save();
-
             }
         }
         if ($request->passport == 1 and $client->confirmation == 0) {
             do {
-                    //generate a random string using Laravel's str_random helper
-                    $token = str_random();
-                } //check if the token already exists and if it does, try again
-                while (client::where('token', $token)->first());
-                $client->token = $token;
-                $client->save();
-                // send the email
-                $contactEmail = $client->email;
-                
-                Mail::send('emails.clientConfirmation',['token'=>$token,'name'=>$client->first_name.' '.$client->last_name,'client'=>$client], function($message) use ($contactEmail)
-                {
-                    $message->to($contactEmail)->subject( 'Permission For Keeping Your Details' );
-                });
+                $token = str_random();
+            }while (client::where('token', $token)->first());
+            $client->token = $token;
+            $client->save();
+            $contactEmail = $client->email;
+            Mail::send('emails.clientConfirmation',['token'=>$token,'name'=>$client->first_name.' '.$client->last_name,'client'=>$client], function($message) use ($contactEmail)
+            {
+                $message->to($contactEmail)->subject( 'Permission For Keeping Your Details' );
+            });
         }
 
         do {
-            //generate a random string using Laravel's str_random helper
             $token = str_random();
-        } //check if the token already exists and if it does, try again
-        while (Invite::where('token', $token)->first());
+        } while (Invite::where('token', $token)->first());
 
-        //create a new invite record
         $invite = new Invite;
         $invite->email = $client->email;
         $invite->token = $token;
         $invite->save();
         $client->invite_id = $invite->id;
         $client->save();
-        // send the email
         $contactEmail = $client->email;
         $data = array('token'=>$token,'name'=>$client->first_name.' '.$client->last_name);
         Mail::send('emails.inviteClient', $data, function($message) use ($contactEmail)
@@ -222,8 +194,6 @@ class clientController extends Controller
     public function show($id)
     {
         $client = client::find($id);
-        // dd($client);
-        // dd(explode('.',$client->letter));
         return view('clients.show')->with('client',$client);
     }
 
@@ -236,7 +206,6 @@ class clientController extends Controller
     public function edit($id)
     {
         $client = client::find($id);
-        // dd($client->DOB);
         $dt = Carbon::now();
         $dt->timezone('Asia/Kolkata');
         $date_today = $dt->timezone('Europe/London');
@@ -284,7 +253,7 @@ class clientController extends Controller
         if($user != null){
             $user->email = $request->email;
             $user->save();
-            }
+        }
         $client->phone = $request->phone;
         $client->credit_limit = $request->credit_limit;
         $client->client_type = $request->client_type;
@@ -295,38 +264,30 @@ class clientController extends Controller
                 $client->passport_expiry_date = $request->passport_expiry_date;
                 $client->passport_issue_date = $request->passport_issue_date;
                 $client->passport_place = $request->passport_place;
-                if($request->hasFile('passport_front'))
-                    {
+                if($request->hasFile('passport_front')) {
                     $passport_front = $request->passport_front;
                     $passport_front_new_name = time().$passport_front->getClientOriginalName();
                     $passport_front->move('uploads/passport',$passport_front_new_name);
                     $client->passport_front = 'uploads/passport/'.$passport_front_new_name;
                 }
-                if($request->hasFile('passport_back'))
-                    {
+                if($request->hasFile('passport_back')){
                     $passport_back = $request->passport_back;
                     $passport_back_new_name = time().$passport_back->getClientOriginalName();
                     $passport_back->move('uploads/passport',$passport_back_new_name);
                     $client->passport_back = 'uploads/passport/'.$passport_back_new_name;
                 }
-                if($request->hasFile('letter'))
-                    {
+                if($request->hasFile('letter')){
                     $letter = $request->letter;
                     $letter_new_name = time().$letter->getClientOriginalName();
                     $letter->move('uploads/passport',$letter_new_name);
                     $client->letter = 'uploads/passport/'.$letter_new_name;
                 }
-
                 do {
-                    //generate a random string using Laravel's str_random helper
                     $token = str_random();
-                } //check if the token already exists and if it does, try again
-                while (client::where('token', $token)->first());
+                }while (client::where('token', $token)->first());
                 $client->token = $token;
                 $client->save();
-                // send the email
                 $contactEmail = $client->email;
-                
                 Mail::send('emails.clientConfirmation', ['token'=>$token,'name'=>$client->first_name.' '.$client->last_name,'client'=>$client], function($message) use ($contactEmail)
                 {
                     $message->to($contactEmail)->subject( 'Permission For Keeping Your Details' );
@@ -339,22 +300,19 @@ class clientController extends Controller
                 $client->passport_expiry_date = $request->passport_expiry_date;
                 $client->passport_issue_date = $request->passport_issue_date;
                 $client->passport_place = $request->passport_place;
-                if($request->hasFile('passport_front'))
-                    {
+                if($request->hasFile('passport_front')){
                     $passport_front = $request->passport_front;
                     $passport_front_new_name = time().$passport_front->getClientOriginalName();
                     $passport_front->move('uploads/passport',$passport_front_new_name);
                     $client->passport_front = 'uploads/passport/'.$passport_front_new_name;
                 }
-                if($request->hasFile('passport_back'))
-                    {
+                if($request->hasFile('passport_back')){
                     $passport_back = $request->passport_back;
                     $passport_back_new_name = time().$passport_back->getClientOriginalName();
                     $passport_back->move('uploads/passport',$passport_back_new_name);
                     $client->passport_back = 'uploads/passport/'.$passport_back_new_name;
                 }
-                if($request->hasFile('letter'))
-                    {
+                if($request->hasFile('letter')){
                     $letter = $request->letter;
                     $letter_new_name = time().$letter->getClientOriginalName();
                     $letter->move('uploads/passport',$letter_new_name);
@@ -384,19 +342,17 @@ class clientController extends Controller
                 $client_family->member_DOB = $request->member_DOB[$index];
                 $client_family->member_passport_no = $request->member_passport_no[$index];
                 $client_family->member_passport_place = $request->member_passport_place[$index];
-                if($request->hasFile('member_passport_front'))
-                {
-                $member_passport_front = $request->member_passport_front[$index];
-                $member_passport_front_new_name = time().$member_passport_front->getClientOriginalName();
-                $member_passport_front->move('uploads/passport',$member_passport_front_new_name);
-                $client_family->member_passport_front = 'uploads/passport/'.$member_passport_front_new_name;
+                if($request->hasFile('member_passport_front')){
+                    $member_passport_front = $request->member_passport_front[$index];
+                    $member_passport_front_new_name = time().$member_passport_front->getClientOriginalName();
+                    $member_passport_front->move('uploads/passport',$member_passport_front_new_name);
+                    $client_family->member_passport_front = 'uploads/passport/'.$member_passport_front_new_name;
                 }
-            if($request->hasFile('member_passport_back'))
-                {
-                $member_passport_back = $request->member_passport_back[$index];
-                $member_passport_back_new_name = time().$member_passport_back->getClientOriginalName();
-                $member_passport_back->move('uploads/passport',$member_passport_back_new_name);
-                $client_family->member_passport_back = 'uploads/passport/'.$member_passport_back_new_name;
+                if($request->hasFile('member_passport_back')){
+                    $member_passport_back = $request->member_passport_back[$index];
+                    $member_passport_back_new_name = time().$member_passport_back->getClientOriginalName();
+                    $member_passport_back->move('uploads/passport',$member_passport_back_new_name);
+                    $client_family->member_passport_back = 'uploads/passport/'.$member_passport_back_new_name;
                 }
                 $client_family->save();
             }
@@ -412,19 +368,17 @@ class clientController extends Controller
         $client_family->member_DOB = $request->member_DOB;
         $client_family->member_passport_no = $request->member_passport_no;
         $client_family->member_passport_place = $request->member_passport_place;
-        if($request->hasFile('member_passport_front'))
-        {
-        $member_passport_front = $request->member_passport_front;
-        $member_passport_front_new_name = time().$member_passport_front->getClientOriginalName();
-        $member_passport_front->move('uploads/passport',$member_passport_front_new_name);
-        $client_family->member_passport_front = 'uploads/passport/'.$member_passport_front_new_name;
+        if($request->hasFile('member_passport_front')){
+            $member_passport_front = $request->member_passport_front;
+            $member_passport_front_new_name = time().$member_passport_front->getClientOriginalName();
+            $member_passport_front->move('uploads/passport',$member_passport_front_new_name);
+            $client_family->member_passport_front = 'uploads/passport/'.$member_passport_front_new_name;
         }
-        if($request->hasFile('member_passport_back'))
-        {
-        $member_passport_back = $request->member_passport_back;
-        $member_passport_back_new_name = time().$member_passport_back->getClientOriginalName();
-        $member_passport_back->move('uploads/passport',$member_passport_back_new_name);
-        $client_family->member_passport_back = 'uploads/passport/'.$member_passport_back_new_name;
+        if($request->hasFile('member_passport_back')){
+            $member_passport_back = $request->member_passport_back;
+            $member_passport_back_new_name = time().$member_passport_back->getClientOriginalName();
+            $member_passport_back->move('uploads/passport',$member_passport_back_new_name);
+            $client_family->member_passport_back = 'uploads/passport/'.$member_passport_back_new_name;
         }
         $client_family->save();
         return redirect()->route('clients');
@@ -450,6 +404,7 @@ class clientController extends Controller
         $clients =client::where('passport',2)->get();
         return view('status')->with('clients',$clients);
     }
+
     public function statusSave(Request $request){
         $client = client::where('unique_id',$request->client_id)->get();
         if ($client->count()>0) {
@@ -461,7 +416,7 @@ class clientController extends Controller
             {
                 $message->to($contactEmail);
             });
-        Session::flash('success','Status Sent');
+            Session::flash('success','Status Sent');
         }
         else{
             Session::flash('warning','Please Enter Valid Client Id');
@@ -493,15 +448,11 @@ class clientController extends Controller
     public function resendAccountConfirmation($id){
         $client = client::find($id);
         $old_invite = Invite::find($client->invite_id);
-        // dd($old_invite);
         $old_invite->delete();
         do {
-            //generate a random string using Laravel's str_random helper
             $token = str_random();
-        } //check if the token already exists and if it does, try again
-        while (Invite::where('token', $token)->first());
+        }while (Invite::where('token', $token)->first());
 
-        //create a new invite record
         $invite = new Invite;
         $invite->email = $client->email;
         $invite->token = $token;
@@ -509,7 +460,6 @@ class clientController extends Controller
         $client->invite_id = $invite->id;
         $client->save();
 
-        // send the email
         $contactEmail = $client->email;
         $data = array('token'=>$token,'name'=>$client->first_name.' '.$client->last_name);
         Mail::send('emails.inviteClient', $data, function($message) use ($contactEmail)
@@ -523,13 +473,11 @@ class clientController extends Controller
     public function resendPassportConfirmation($id){
         $client = client::find($id);
         do {
-            //generate a random string using Laravel's str_random helper
             $token = str_random();
-        } //check if the token already exists and if it does, try again
+        }
         while (client::where('token', $token)->first());
         $client->token = $token;
         $client->save();
-        // send the email
         $contactEmail = $client->email;
         $data = array('token'=>$token, 'name'=>$client->first_name.' '.$client->last_name,'client'=>$client);
         Mail::send('emails.clientConfirmation', $data, function($message) use ($contactEmail)
@@ -544,6 +492,7 @@ class clientController extends Controller
     public function clientSettings(){
         return view('clients.settings')->with('settings',ClientSettings::first());
     }
+
     public function clientSettingsUpdate(Request $request){
         $settings = ClientSettings::first();
         $settings->corporate_percentage = $request->corporate_percentage;
@@ -593,7 +542,6 @@ class clientController extends Controller
         $user = client::find($id)->user;
         $data =array('email'=>$user->email,'name'=>$user->name);
         $contactEmail = $user->email;
-        // Hash::check($request->password,Auth::user()->password);
         Mail::send('emails.credentials', $data, function($message) use ($contactEmail)
         {
             $message->to($contactEmail)->subject('You Have Been Registered!!');

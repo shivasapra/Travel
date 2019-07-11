@@ -8,10 +8,8 @@ use App\User;
 use Carbon\Carbon;
 use Session;
 use App\Invite;
-use App\Mail\InviteCreated;
 use Mail;
 use App\wage;
-use App\assignment;
 use Validator;
 
 class employeeController extends Controller
@@ -96,71 +94,9 @@ class employeeController extends Controller
         });
         Session::flash('success','Employee created Successfully');
         return redirect()->route('employees');
-        // $employee->tax_ref_no = $request->tax_ref_no;
-        // $employee->national_insurance_no = $request->national_insurance_no;
-        // if($request->has('passport')){
-        //     $employee->passport = $request->passport;
-        // }
-        // if ($request->passport == 1 ) {
-        //     $employee->passport_no = $request->passport_no;
-        //     $employee->passport_expiry_date = $request->passport_expiry_date;
-        //     $employee->passport_issue_date = $request->passport_issue_date;
-        //     $employee->passport_place = $request->passport_place;
-        //     if($request->hasFile('passport_front'))
-        //         {
-        //             // dd('true');
-        //         $passport_front = $request->passport_front;
-        //         $passport_front_new_name = time().$passport_front->getClientOriginalName();
-        //         $passport_front->move('uploads/passport',$passport_front_new_name);
-        //         $employee->passport_front = 'uploads/passport/'.$passport_front_new_name;
-        //         // $client->save();
-        //         }
-        //     if($request->hasFile('passport_back'))
-        //         {
-        //             // dd('true');
-        //         $passport_back = $request->passport_back;
-        //         $passport_back_new_name = time().$passport_back->getClientOriginalName();
-        //         $passport_back->move('uploads/passport',$passport_back_new_name);
-        //         $employee->passport_back = 'uploads/passport/'.$passport_back_new_name;
-        //         // $client->save();
-        //         }
-        //     }
-        //     if($request->hasFile('utility_bill'))
-        //         {
-        //             // dd('true');
-        //         $utility_bill = $request->utility_bill;
-        //         $utility_bill_new_name = time().$utility_bill->getClientOriginalName();
-        //         $utility_bill->move('uploads/passport',$utility_bill_new_name);
-        //         $employee->utility_bill = 'uploads/passport/'.$utility_bill_new_name;
-        //         // $client->save();
-        //         }
-        //     if($request->hasFile('work_permit'))
-        //     {
-        //         // dd('true');
-        //     $work_permit = $request->work_permit;
-        //     $work_permit_new_name = time().$work_permit->getClientOriginalName();
-        //     $work_permit->move('uploads/passport',$work_permit_new_name);
-        //     $employee->work_permit = 'uploads/passport/'.$work_permit_new_name;
-        //     // $client->save();
-        //     }
-            
-        // $unique_id = 'CLDE'. mt_rand(100000, 999999);
-        // while (employee::where('unique_id',$unique_id)->get()->count()>0) {
-        //    $unique_id = 'CLDE'. mt_rand(100000, 999999); 
-        // }
-        
-        // $user = new User;
-        // $user->name = $employee->first_name ." ". $employee->last_name;
-        // $user->email = $employee->email;
-        // $user->password = bcrypt('pass@123');
-        // $user->save();
-        // $employee->user_id = $user->id;
-        // $employee->save();
-        // send the email
     }
 
     public function sendLetterTOEmployee(Request $request,$id){
-        
         $contactEmail = employee::find($id)->email;
         $data = array('content'=>$request->content);
         Mail::send('emails.letter', $data, function($message) use ($contactEmail)
@@ -191,7 +127,7 @@ class employeeController extends Controller
      */
     public function edit($id)
     {
-            $employee = employee::find($id);
+        $employee = employee::find($id);
         return view('employee.edit')->with('employee',$employee);
     }
 
@@ -256,38 +192,32 @@ class employeeController extends Controller
             $employee->passport_expiry_date = $request->passport_expiry_date;
             $employee->passport_issue_date = $request->passport_issue_date;
             $employee->passport_place = $request->passport_place;
-
         }
-        if($request->hasFile('passport_front'))
-                {
-                $passport_front = $request->passport_front;
-                $passport_front_new_name = time().$passport_front->getClientOriginalName();
-                $passport_front->move('uploads/passport',$passport_front_new_name);
-                $employee->passport_front = 'uploads/passport/'.$passport_front_new_name;
-            }
-        if($request->hasFile('passport_back'))
-            {
+        if($request->hasFile('passport_front')){
+            $passport_front = $request->passport_front;
+            $passport_front_new_name = time().$passport_front->getClientOriginalName();
+            $passport_front->move('uploads/passport',$passport_front_new_name);
+            $employee->passport_front = 'uploads/passport/'.$passport_front_new_name;
+        }
+        if($request->hasFile('passport_back')){
             $passport_back = $request->passport_back;
             $passport_back_new_name = time().$passport_back->getClientOriginalName();
             $passport_back->move('uploads/passport',$passport_back_new_name);
             $employee->passport_back = 'uploads/passport/'.$passport_back_new_name;
         }
-        if($request->hasFile('utility_bill'))
-                {
-                $utility_bill = $request->utility_bill;
-                $utility_bill_new_name = time().$utility_bill->getClientOriginalName();
-                $utility_bill->move('uploads/passport',$utility_bill_new_name);
-                $employee->utility_bill = 'uploads/passport/'.$utility_bill_new_name;
-            }
-        if($request->hasFile('work_permit'))
-            {
+        if($request->hasFile('utility_bill')) {
+            $utility_bill = $request->utility_bill;
+            $utility_bill_new_name = time().$utility_bill->getClientOriginalName();
+            $utility_bill->move('uploads/passport',$utility_bill_new_name);
+            $employee->utility_bill = 'uploads/passport/'.$utility_bill_new_name;
+        }
+        if($request->hasFile('work_permit')){
             $work_permit = $request->work_permit;
             $work_permit_new_name = time().$work_permit->getClientOriginalName();
             $work_permit->move('uploads/passport',$work_permit_new_name);
             $employee->work_permit = 'uploads/passport/'.$work_permit_new_name;
         }
-        if($request->hasFile('avatar'))
-        {
+        if($request->hasFile('avatar')){
             $avatar = $request->avatar;
             $avatar_new_name = time().$avatar->getClientOriginalName();
             $avatar->move('uploads/profile',$avatar_new_name);
@@ -305,8 +235,7 @@ class employeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id){
         $employee = employee::find($id);
         $employee->delete();
         Session::flash('success','Employee Deleted Successfully');
@@ -319,7 +248,6 @@ class employeeController extends Controller
         return view('employee.status')->with('date',$date)->with('employees',employee::all());
     }
     public function status2(Request $request){
-        
         $date = $request->date;
         return view('employee.status2')->with('date',$date)->with('employees',employee::all());
     }
@@ -332,8 +260,8 @@ class employeeController extends Controller
             $total_wage = $total_wage + $wage->today_wage;
         }
         return view('employee.letter')->with('employee',$employee)
-                                        ->with('date',Carbon::now()->toDateString())
-                                        ->with('wage',$total_wage);
+                                      ->with('date',Carbon::now()->toDateString())
+                                      ->with('wage',$total_wage);
     }
 
     public function search(Request $request){
@@ -375,21 +303,16 @@ class employeeController extends Controller
     public function resendAccountConfirmation($id){
         $employee = employee::find($id);
         $old_invite = Invite::where('email',$employee->email);
-        // dd($old_invite);
         $old_invite->delete();
         do {
-            //generate a random string using Laravel's str_random helper
             $token = str_random();
-        } //check if the token already exists and if it does, try again
-        while (Invite::where('token', $token)->first());
+        }while (Invite::where('token', $token)->first());
 
-        //create a new invite record
         $invite = new Invite;
         $invite->email = $employee->email;
         $invite->token = $token;
         $invite->save();
 
-        // send the email
         $contactEmail = $employee->email;
         $data = array('token'=>$token, 'name' => $employee->first_name.' '.$employee->last_name);
         Mail::send('emails.invite', $data, function($message) use ($contactEmail)

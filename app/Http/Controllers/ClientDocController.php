@@ -33,16 +33,13 @@ class ClientDocController extends Controller
                 }
             }
         }
-        // dd($clients);
         return view('clientDoc.index')->with('invoices',$invoices)
                                         ->with('docs',$docs)
                                         ->with('clients',$clients);
     }
 
     public function redirected($name){
-        // dd($name);
         $invoices = invoiceInfo::where('service_name','Visa Services')->where('receiver_name', 'like', '%'.$name.'%')->get();
-        // dd($invoices);
         $docs = ClientDoc::where('date',Carbon::now()->timezone('Europe/London')->toDateString())->get();
         $clients = array();
         foreach(client::all() as $client){
@@ -70,10 +67,6 @@ class ClientDocController extends Controller
 
     public function emergency(Request $request){
         $emails = array();
-        // $clientDocs = ClientDoc::where('date',Carbon::now()->timezone('Europe/London')->toDateString())->get();
-        //     foreach ($clientDocs as $client) {
-        //             array_push($emails,$client->client->user->email);
-        //     }
         foreach($request->email as $email){
             array_push($emails,$email);
         }
@@ -111,6 +104,13 @@ class ClientDocController extends Controller
         return redirect()->route('redirected',['name'=>$invoiceInfo->receiver_name]);
     }
 
+    public function destroy($id)
+    {
+        $doc = ClientDoc::find($id);
+        $doc->delete();
+        Session::flash('warning','One Record Removed');
+        return redirect()->route('clientDocIndex');
+    }
     /**
      * Display the specified resource.
      *
@@ -151,11 +151,5 @@ class ClientDocController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        $doc = ClientDoc::find($id);
-        $doc->delete();
-        Session::flash('warning','One Record Removed');
-        return redirect()->route('clientDocIndex');
-    }
+    
 }

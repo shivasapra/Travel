@@ -39,11 +39,6 @@ class expensesController extends Controller
             }
         }
         
-        
-
-
-
-
         if ($request->date) {
             $expense = new expenses;
             $expense->date = $request->date;
@@ -58,7 +53,6 @@ class expensesController extends Controller
             $expense->save();
             Session::flash('success','Expense Added');
         }
-        // dd($date);
         $expenses = expenses::where('auto',0)->orderBy('id','desc')->get();
         return view('expenses.index')->with('expenses',$expenses)
                                         ->with('date',$date);
@@ -99,6 +93,13 @@ class expensesController extends Controller
                                         ->with('date',$date);
     }
 
+    public function destroy($id)
+    {
+        $expense = expenses::find($id);
+        $expense->delete();
+        Session::flash('success','Expense Deleted');
+        return redirect()->route('expenses.get')->with('expenses',expenses::all());
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -160,11 +161,5 @@ class expensesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        $expense = expenses::find($id);
-        $expense->delete();
-        Session::flash('success','Expense Deleted');
-        return redirect()->route('expenses.get')->with('expenses',expenses::all());
-    }
+    
 }

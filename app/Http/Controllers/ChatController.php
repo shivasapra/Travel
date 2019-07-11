@@ -24,9 +24,9 @@ class ChatController extends Controller
     {   
         $unread_messages = Chat::where('to_id',Auth::user()->id)->where('status',0)->orderBy('id','desc')->get();
         return view('chat.index')->with('unread_messages',$unread_messages)
-                                ->with('messages',null)
-                                ->with('users',User::all())
-                                ->with('name',null);
+                                 ->with('messages',null)
+                                 ->with('users',User::all())
+                                 ->with('name',null);
     }
 
     public function IndexWithMessage($id)
@@ -42,10 +42,10 @@ class ChatController extends Controller
         $name = User::find($id)->name;
         $unread_messages = Chat::where('to_id',Auth::user()->id)->where('status',0)->orderBy('id','desc')->get();
         return view('chat.index')->with('unread_messages',$unread_messages)
-                                ->with('messages',$messages)
-                                ->with('id',$id)
-                                ->with('users',User::all())
-                                ->with('name',$name);
+                                 ->with('messages',$messages)
+                                 ->with('id',$id)
+                                 ->with('users',User::all())
+                                 ->with('name',$name);
     }
 
     /**
@@ -83,35 +83,6 @@ class ChatController extends Controller
         $chat->save();
         return [$chat->message,$chat->time,$chat->date];
     }
-
-    // public function AdminMessageStore(Request $request)
-    // {   
-    //     $last = Chat::where('user_id',Auth::user()->id)->orderBy('created_at','desc')->get()->first();
-    //     if ($last != null) {
-    //         $last->status = 1;
-    //         $last->save();
-    //     }
-    //     $i = 0;
-    //     foreach (ChatLog::all() as $ChatLog) {
-    //         if($ChatLog->user_id == $request->user_id){
-    //             $i++;
-    //         }
-    //     }
-    //     if($i == 0){
-    //         $newChatLog = new ChatLog;
-    //         $newChatLog->user_id = $request->user_id;
-    //         $newChatLog->save();
-    //     }
-    //     $chat = new Chat;
-    //     $chat->user_id = Auth::user()->id;
-    //     $chat->admin = Auth::user()->admin;
-    //     $chat->time = Carbon::now()->timezone('Europe/London')->toTimeString();
-    //     $chat->date = Carbon::now()->timezone('Europe/London')->toDateString();
-    //     $chat->to_id = $request->user_id;
-    //     $chat->message = $request->message;
-    //     $chat->save();
-    //     return redirect()->back();
-    // }
 
     /**
      * Display the specified resource.

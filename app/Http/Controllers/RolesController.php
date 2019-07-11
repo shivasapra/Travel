@@ -22,23 +22,22 @@ class RolesController extends Controller
     public function index()
     {
         return view('Role.index')->with('roles',Role::all())
-                                ->with('role',null)
-                                ->with('permissions',Permission::all());
+                                 ->with('role',null)
+                                 ->with('permissions',Permission::all());
     }
 
     public function CreateRole(Request $request)
     {
-        $role = Role::create(['name' => $request->name]);
+        Role::create(['name' => $request->name]);
         Session::flash('success','New Role created');
         return redirect()->back();
     }
 
     public function findRole($id){
         $role = Role::find($id);
-        $permissions = $role->Permissions;
         return view('Role.index')->with('roles',Role::all())
-                                ->with('permissions',Permission::all())
-                                ->with('role',$role);
+                                 ->with('permissions',Permission::all())
+                                 ->with('role',$role);
     }
 
     public function assignPermissions($id,$permission_id){
@@ -59,6 +58,25 @@ class RolesController extends Controller
                                 ->with('permissions',Permission::all());
     }
 
+    public function assignUserRoles(Request $request, $id){
+        $user = User::find($id);
+        foreach($user->roles as $role){
+            $user->removeRole($role);
+        }
+        $user->assignRole($request->roles);
+        Session::flash('success','Role Assigned');
+        return redirect()->back();
+    }
+
+    public function destroyRole($id)
+    {
+        $role = Role::find($id);
+        $role->delete();
+        Session::flash('warning','Role deleted!!');
+        return view('Role.index')->with('roles',Role::all())
+                                 ->with('role',null)
+                                 ->with('permissions',Permission::all());
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -114,29 +132,12 @@ class RolesController extends Controller
         //
     }
 
-    public function assignUserRoles(Request $request, $id){
-        $user = User::find($id);
-        // dd($user->roles);
-        foreach($user->roles as $role){
-            $user->removeRole($role);
-        }
-        $user->assignRole($request->roles);
-        Session::flash('success','Role Assigned');
-        return redirect()->back();
-    }
+    
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroyRole($id)
-    {
-        $role = Role::find($id);
-        $role->delete();
-        Session::flash('warning','Role deleted!!');
-        return view('Role.index')->with('roles',Role::all())
-                                ->with('role',null)
-                                ->with('permissions',Permission::all());
-    }
+    
 }

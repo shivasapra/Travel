@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
 use Auth;
 class UserController extends Controller
 {   
@@ -21,6 +20,31 @@ class UserController extends Controller
     {
         $user = Auth::user();
         return view('profile')->with('user',$user);
+    }
+
+    public function update(Request $request)
+    {
+        $user = Auth::user();
+        $this->validate($request,[
+            'name' =>'required',
+            'email' => 'required|email',
+        ]);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        
+        if($request->hasFile('avatar')){
+            $avatar = $request->avatar;
+            $avatar_new_name = time().$avatar->getClientOriginalName();
+            $avatar->move('uploads/profile',$avatar_new_name);
+            $user->avatar = 'uploads/profile/'.$avatar_new_name;
+            $user->save();
+        }
+        if($request->password != null){
+            $user->password = bcrypt($request->password);
+            $user->save();
+        }
+        $user->save();
+        return redirect()->back()->with('user',$user);
     }
 
     /**
@@ -73,34 +97,6 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
-    {
-        $user = Auth::user();
-        $this->validate($request,[
-            'name' =>'required',
-            'email' => 'required|email',
-
-        ]);
-        $user->name = $request->name;
-        $user->email = $request->email;
-        
-        if($request->hasFile('avatar'))
-        {
-            // dd('true');
-        $avatar = $request->avatar;
-        $avatar_new_name = time().$avatar->getClientOriginalName();
-        $avatar->move('uploads/profile',$avatar_new_name);
-        $user->avatar = 'uploads/profile/'.$avatar_new_name;
-        $user->save();
-        }
-        if($request->password != null)
-        {
-            $user->password = bcrypt($request->password);
-            $user->save();
-        }
-        $user->save();
-        return redirect()->back()->with('user',$user);
-    }
 
     /**
      * Remove the specified resource from storage.

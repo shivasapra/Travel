@@ -17,21 +17,12 @@ class wageController extends Controller
     {
         $this->middleware('auth');
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
-    
-
 
     public function session(){
         $employee = Auth::user()->employee[0];
         $today_wage = wage::where('employee_id',$employee->id)
                     ->where('date',Carbon::now()->toDateString())->get();
         if ($today_wage->count()>0) {
-            $today_wageLogs = wageLog::where('wage_id',$today_wage[0]->id)->get();
             $latest_wageLog = wageLog::where('wage_id',$today_wage[0]->id)
                                         ->orderBy('created_at','desc')
                                         ->first();
@@ -48,6 +39,7 @@ class wageController extends Controller
          }
         return view('wage.session')->with('latest_wageLog',$latest_wageLog)->with('total_hours_this_session',$total_hours_this_session);
     }
+
     public function Logout(Request $request){
         if (Hash::check($request->password,Auth::user()->password)) {
             $wageLog = wageLog::find($request->wageLogId);
@@ -64,6 +56,7 @@ class wageController extends Controller
         Session::flash('success','Session Ends');
         return redirect()->back();
     }
+
     public function Login(Request $request){
         if (Hash::check($request->password,Auth::user()->password)) {
              $employee = Auth::user()->employee[0];
@@ -99,25 +92,55 @@ class wageController extends Controller
                 $wageLog->login_time = Carbon::now()->totimeString();
                 $wageLog->save();
             }
-         }
-         else{
+        }
+        else{
             Session::flash('warning','Wrong Password');
             return redirect()->back();
         }
+
         Session::flash('success','Session Started');
         return redirect()->back();
     }
 
-    
-
     public function index()
     {   
-        // $wage = wage::orderBy('created_at','desc')->first();
-        // $employee = employee::find(1);
-        // $wages = $employee->wage;
-        // dd($wages->orderBy('created_at','desc')->first());
-        return view('wage.index')->with('employees',employee::all());
-                                // ->with('wage',$wage);
+        return view('wage.index')->with('employees',employee::all());                      
+    }
+
+    public function show($id)
+    {
+        $employee = employee::find($id);
+        return view('wage.show')->with('employee',$employee);
+    }
+
+    public function generateSlip(){
+        $employees = employee::where('id',0)->get();
+        return view('wage.slipGenerate')->with('employees',$employees);
+    }
+
+    public function slip(Request $request){
+        $employee = employee::where('unique_id',$request->unique)->take(1)->get();
+        
+        if ($employee->count()>0) {
+            $emp = employee::find($employee[0]->id);
+        }
+        else{
+            return redirect()->route('slip.generate');
+        }
+        $wages = wage::where('unique_id',$request->unique)->get();
+        $total_wage = 0;
+        $total_hours = 0;
+        foreach($wages as $wage){
+            if(substr($wage->date,5,-3) == $request->month){
+                $total_wage = $total_wage + $wage->today_wage;
+                $total_hours = $total_hours + $wage->total_hours;
+            } 
+        }
+        $employees = employee::where('id',0)->get();
+        return view('wage.slip')->with('employee',$emp)
+                                ->with('total_wage',$total_wage)
+                                ->with('total_hours',$total_hours)
+                                ->with('employees',$employees);
     }
 
     /**
@@ -138,20 +161,7 @@ class wageController extends Controller
      */
     public function store(Request $request)
     {
-        
         //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $employee = employee::find($id);
-        return view('wage.show')->with('employee',$employee);
     }
 
     /**
@@ -187,33 +197,5 @@ class wageController extends Controller
     {
         //
     }
-    public function generateSlip(){
-        $employees = employee::where('id',0)->get();
-        return view('wage.slipGenerate')->with('employees',$employees);
-    }
 
-    public function slip(Request $request){
-        $employee = employee::where('unique_id',$request->unique)->take(1)->get();
-        
-        if ($employee->count()>0) {
-            $emp = employee::find($employee[0]->id);
-        }
-        else{
-            return redirect()->route('slip.generate');
-        }
-        $wages = wage::where('unique_id',$request->unique)->get();
-        $total_wage = 0;
-        $total_hours = 0;
-        foreach($wages as $wage){
-            if(substr($wage->date,5,-3) == $request->month){
-                $total_wage = $total_wage + $wage->today_wage;
-                $total_hours = $total_hours + $wage->total_hours;
-            } 
-        }
-        $employees = employee::where('id',0)->get();
-        return view('wage.slip')->with('employee',$emp)
-                                ->with('total_wage',$total_wage)
-                                ->with('total_hours',$total_hours)
-                                ->with('employees',$employees);
-    }
 }

@@ -20,7 +20,7 @@ class TasksController extends Controller
     public function index()
     {
         $tasks = Task::all();
-    return view('tasks.index', compact('tasks'));
+        return view('tasks.index', compact('tasks'));
     }
 
     /**
@@ -42,7 +42,7 @@ class TasksController extends Controller
     public function store(Request $request)
     {
         Task::create($request->all());
-    return redirect()->route('home');
+        return redirect()->route('home');
     }
 
     /**
@@ -55,7 +55,6 @@ class TasksController extends Controller
     {
         $task = Task::find($id);
         $tasks = Task::where('task_date',$task->task_date)->get();
-        // dd($tasks);
         return view('tasks.show')->with('tasks',$tasks);
     }
 
