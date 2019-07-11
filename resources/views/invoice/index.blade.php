@@ -52,7 +52,7 @@ Invoices
 	                    		@else
 	                    		<td><div class="text-danger">{{'Unpaid'}}</div></td>
 								@endif
-								<td>
+								<td class="text-center">
 									<div class="btn-group">
 										<button type="button" class="btn bg-orange">Action</button>
 										<button type="button" class="btn bg-orange dropdown-toggle" data-toggle="dropdown">
@@ -61,10 +61,10 @@ Invoices
 										</button>
 										<ul class="dropdown-menu" role="menu">
 											@can('View Invoices')
-											<li><a href="{{route('invoice.view',['id'=>$invoice->id])}}" style="color:white" class="btn btn-info btn-xs"><span class="fa fa-eye"></span></a></li>
+											<li><a href="{{route('invoice.view',['id'=>$invoice->id])}}" style="color:white" class="btn btn-info btn-xs"><span class="fa fa-eye"></span> View</a></li>
 											@endcan
 											@can('Edit Invoice')
-											<li><a href="{{route('invoice.edit',['id'=>$invoice->id])}}" style="color:white;margin-top:2px;" class="btn btn-primary btn-xs"><span class="fa fa-edit"></span></a></li>
+											<li><a href="{{route('invoice.edit',['id'=>$invoice->id])}}" style="color:white;margin-top:2px;" class="btn btn-primary btn-xs"><span class="fa fa-edit"></span> Edit</a></li>
 											@endcan
 											@if(!Auth::user()->client)
 												@if($invoice->status == 0)
