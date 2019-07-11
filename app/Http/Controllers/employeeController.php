@@ -371,4 +371,34 @@ class employeeController extends Controller
         $employee = employee::find($id);
         return view('employee.attendance')->with('employee',$employee);
     }
+
+    public function resendAccountConfirmation($id){
+        $employee = employee::find($id);
+        $old_invite = Invite::where('email',$employee->email);
+        // dd($old_invite);
+        $old_invite->delete();
+        do {
+            //generate a random string using Laravel's str_random helper
+            $token = str_random();
+        } //check if the token already exists and if it does, try again
+        while (Invite::where('token', $token)->first());
+
+        //create a new invite record
+        $invite = new Invite;
+        $invite->email = $employee->email;
+        $invite->token = $token;
+        $invite->save();
+        $employee->invite_id = $invite->id;
+        $employee->save();
+
+        // send the email
+        $contactEmail = $employee->email;
+        $data = array('token'=>$token, 'name' => $employee->first_name.' '.$employee->last_name);
+        Mail::send('emails.invite', $data, function($message) use ($contactEmail)
+        {  
+            $message->to($contactEmail)->subject('Activate Your Account!!');
+        });
+        Session::flash('success','Confirmation Resent!!');
+        return redirect()->back();
+    }
 }

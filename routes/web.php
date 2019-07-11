@@ -515,6 +515,11 @@ Route::post('/client/settings/update',[
 // 		'as' => 'delete.client'
 // 	]);
 
+Route::get('/resend/employee/account/confirmation/{id}',[
+    'uses' => 'employeeController@resendAccountConfirmation',
+    'as' => 'resend.employee.account.confirmation'
+]);
+
 
 
 Route::get('/products',[

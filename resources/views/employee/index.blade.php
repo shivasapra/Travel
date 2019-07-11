@@ -78,6 +78,7 @@ Employees
 											@endif
 										@endcan
 									@else
+									<a href="{{route('resend.employee.account.confirmation',['id'=>$employee->id])}}" class="btn btn-info btn-xs">Resend Account Confirmation</a>
 									<span class="text-warning">{{'Not Yet Verified'}}</span>
 									@endif
 								</td>
