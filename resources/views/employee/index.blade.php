@@ -30,11 +30,8 @@ Employees
                         <th>Email</th>
                         <th>country</th>
 						<th>Hired For Department</th>
-						<th>Hiring Date</th>
                         <th>Rate Contract</th>
 						<th>Action</th>
-						<th>Letter</th>
-						<th>Tasks</th>	
 						<th>Account Activation</th>	
                       </tr>
                     	</thead>
@@ -49,21 +46,29 @@ Employees
 	                    		<td>{{$employee->email}}</td>
 	                    		<td>{{$employee->country}}</td>
 								<td>{{$employee->hired_for_dep}}</td>
-								<td>{{$employee->hiring_date}}</td>
 	                    		<td>{{$employee->currency.$employee->rate}}</td>
-	                    		<td>
-									@can('View Employees')
-										<a href="{{route('view.employee',['id'=>$employee->id])}}" class="btn btn-success btn-xs"><span class="fa fa-eye"></span></a>
-									@endcan
+	                    		<td class="text-center">
+									<div class="btn-group">
+										<button type="button" class="btn bg-teal">Action</button>
+										<button type="button" class="btn bg-teal dropdown-toggle" data-toggle="dropdown">
+											<span class="caret"></span>
+											<span class="sr-only">Toggle Dropdown</span>
+										</button>
+										<ul class="dropdown-menu" role="menu">
+											@can('View Employees')
+											<li><a href="{{route('view.employee',['id'=>$employee->id])}}" style="color:white" class="btn bg-aqua btn-xs"> View</a></li>
+											@endcan
+											@can('Letter To Employee')
+											<li><a href="{{route('letter.employee',['id'=>$employee->id])}}" style="color:white;margin-top:2px;" class="btn bg-success btn-xs"> Letter</a></li>
+											@endcan
+											<li><a href="{{route('assignments',['id'=>$employee->id])}}" style="color:white;margin-top:2px;" class="btn bg-orange btn-xs"> Tasks</a></li>
+										</ul>
+									</div>
 								</td>
-								<td>
-									@can('Letter To Employee')
-										<a href="{{route('letter.employee',['id'=>$employee->id])}}" class="btn btn-primary btn-xs">Letter</a>
-									@endcan
-								</td>
-								<td>
-										<a href="{{route('assignments',['id'=>$employee->id])}}" class="btn btn-warning btn-xs">Tasks</a>
-								</td>
+								
+								
+										
+								
 									{{-- @can('Edit Employee')
 									<a href="{{route('edit.employee',['id'=>$employee->id])}}" class="btn btn-info btn-xs"><span class="fa fa-edit"></span></a>
 									@endcan --}}
@@ -78,7 +83,7 @@ Employees
 											@endif
 										@endcan
 									@else
-									<a href="{{route('resend.employee.account.confirmation',['id'=>$employee->id])}}" class="btn btn-info btn-xs">Resend</a>
+									<a onClick="return confirm('Are You Sure You Want To Resend Confirmation?')" href="{{route('resend.employee.account.confirmation',['id'=>$employee->id])}}" class="btn btn-info btn-xs">Resend</a>
 									<span class="text-warning">{{'Not Yet Verified'}}</span>
 									@endif
 								</td>
