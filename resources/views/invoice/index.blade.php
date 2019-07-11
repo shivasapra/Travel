@@ -30,13 +30,10 @@ Invoices
                         <th>Invoice Date</th>
                         <th>Receiver Name</th>
                         <th>Total</th>
-                        <th>Status</th>
+						<th>Status</th>
 						<th class="text-center">Action</th>
 						@if(!Auth::user()->client)
-							<th class="text-center">Cancel/Refund Invoice</th>
-							<th class="text-center">Pay</th>
-							<th class="text-center">Reminder</th>
-							<th>##</th>
+							<th>Confirmation</th>
 						@endif
                       </tr>
                     	</thead>
@@ -49,44 +46,56 @@ Invoices
 	                    		<td>{{$invoice->invoice_no}}</td>
 	                    		<td>{{$invoice->invoice_date}}</td>
 	                    		<td>{{$invoice->receiver_name}}</td>
-					                <td>{{$invoice->currency}}{{number_format( (float) ($invoice->discounted_total + $invoice->VAT_amount), 2, '.', '')}}</td>
+								<td>{{$invoice->currency}}{{number_format( (float) ($invoice->discounted_total + $invoice->VAT_amount), 2, '.', '')}}</td>
 	                    		@if($invoice->status == 1)
 	                    		<td><div class="text-success">{{'Paid'}}</div></td>
 	                    		@else
 	                    		<td><div class="text-danger">{{'Unpaid'}}</div></td>
-	                    		@endif
-	                    		{{-- <td><button class="btn btn-xs btn-success" id="pdf">PDF</button></td> --}}
-	                    		<td class="text-center">
-								@can('View Invoices')
-								<a href="{{route('invoice.view',['id'=>$invoice->id])}}" class="btn btn-info btn-xs"><span class="fa fa-eye"></span></a>
-								@endcan
-								@can('Edit Invoice')
-								<a href="{{route('invoice.edit',['id'=>$invoice->id])}}" class="btn btn-info btn-xs"><span class="fa fa-edit"></span></a>
-								@endcan
-							</td>
-							{{-- @if($invoice->status == 0) --}}
+								@endif
+								<td>
+									<div class="btn-group">
+										<button type="button" class="btn bg-orange">Action</button>
+										<button type="button" class="btn bg-orange dropdown-toggle" data-toggle="dropdown">
+											<span class="caret"></span>
+											<span class="sr-only">Toggle Dropdown</span>
+										</button>
+										<ul class="dropdown-menu" role="menu">
+											@can('View Invoices')
+											<li><a href="{{route('invoice.view',['id'=>$invoice->id])}}" style="color:white" class="btn btn-info btn-xs"><span class="fa fa-eye"></span></a></li>
+											@endcan
+											@can('Edit Invoice')
+											<li><a href="{{route('invoice.edit',['id'=>$invoice->id])}}" style="color:white;margin-top:2px;" class="btn btn-primary btn-xs"><span class="fa fa-edit"></span></a></li>
+											@endcan
+											@if(!Auth::user()->client)
+												@if($invoice->status == 0)
+													@can('Cancel Invoice')
+														<li class="test"><a onClick="return confirm('Are You Sure You Want To Cancel This Invoice')" href="{{route('invoice.delete',['id'=>$invoice->id])}}" {{($invoice->status == 1)?"disabled":" "}} style="color:white;margin-top:2px;" class="btn btn-danger btn-xs">Cancel</a></li>
+													@endcan
+													@else
+													@can('Refund Invoice')
+														<li class="test">
+															<input type="text" value="{{$invoice->id}}" class="inv_id" hidden>
+															<input type="text" value="{{$invoice->invoice_no}}" class="inv_no" hidden>
+															<input type="text" value="{{number_format( (float) ($invoice->discounted_total + $invoice->VAT_amount), 2, '.', '')}}" class="inv_total" hidden>
+															<a type="button" onClick="Fun(this);" class="btn btn-success btn-xs" style="color:white;margin-top:2px;">Refund</a>
+														</li>
+													@endcan
+												@endif
+												@if($invoice->status == 0)
+													@can('Pay Invoice')
+														<li><a href="{{route('invoice.pay',['id'=>$invoice->id])}}" style="color:white;margin-top:2px;" class="btn btn-primary btn-xs">Pay</a></li>
+													@endcan
+												
+													@can('Send Reminder For Unpaid Invoice')
+														<li><a href="{{route('invoice.reminder',['id'=>$invoice->id])}}" style="color:white;margin-top:2px;" class="btn btn-warning btn-xs">Send Reminder</a></li>
+													@endcan
+												@endif
+											@endif
+										</ul>
+									</div>
+								</td>
+
 							@if(!Auth::user()->client)
-								<td class="text-center test">
-									@if($invoice->status == 0)
-									@can('Cancel Invoice')
-									<a onClick="return confirm('Are You Sure You Want To Cancel This Invoice')" href="{{route('invoice.delete',['id'=>$invoice->id])}}" {{($invoice->status == 1)?"disabled":" "}} class="btn btn-danger btn-xs">Cancel</a>
-									@endcan
-									@else
-									{{-- <a href="{{route('invoice.refund',['id'=>$invoice->id])}}" {{($invoice->status == 0)?"disabled":" "}} class="btn btn-success btn-xs">Refund</a> --}}
-									<input type="text" value="{{$invoice->id}}" class="inv_id" hidden>
-									<input type="text" value="{{$invoice->invoice_no}}" class="inv_no" hidden>
-									<input type="text" value="{{number_format( (float) ($invoice->discounted_total + $invoice->VAT_amount), 2, '.', '')}}" class="inv_total" hidden>
-									@can('Refund Invoice')
-										<button   type="button" onClick="Fun(this);" class="btn btn-success btn-xs">Refund</button>
-									@endcan
-										@endif
-									</td>
-									@can('Pay Invoice')
-									<td class="text-center"><a href="{{route('invoice.pay',['id'=>$invoice->id])}}" {{($invoice->status == 1)?"disabled":" "}} class="btn btn-primary btn-xs">Pay</a></td>
-									@endcan
-									@can('Send Reminder For Unpaid Invoice')
-									<td class="text-center"><a href="{{route('invoice.reminder',['id'=>$invoice->id])}}" {{($invoice->status == 1)?"disabled":" "}} class="btn btn-warning btn-xs">Send Reminder</a></td>
-									@endcan
 									<td>
 									@if($invoice->confirmation)
 									<span class="text-success"><b>{{'Confirmed By Client'}}</b><br>Through: <br>{{$invoice->confirmation_via}}</span><br>
