@@ -216,7 +216,7 @@ function revoke(temp){
 	var permission_id = $(temp).parents('.parent').find('.permission_id').val();
     console.log(role_id);
     console.log(permission_id);
-    var Url = "http://127.0.0.1:8000/revoke/permissions/"+role_id+"/"+permission_id;
+    var Url = "http://buildatwill.com/cloud/public/revoke/permissions/"+role_id+"/"+permission_id;
         var xhr = new XMLHttpRequest();
         xhr.open('GET', Url, true);
         xhr.send();
@@ -233,7 +233,7 @@ function assign(temp){
 	var permission_id = $(temp).parents('.parent').find('.permission_id').val();
     console.log(role_id);
     console.log(permission_id);
-    var Url = "http://127.0.0.1:8000/assign/permissions/"+role_id+"/"+permission_id;
+    var Url = "http://buildatwill.com/cloud/public/assign/permissions/"+role_id+"/"+permission_id;
         var xhr = new XMLHttpRequest();
         xhr.open('GET', Url, true);
         xhr.send();
