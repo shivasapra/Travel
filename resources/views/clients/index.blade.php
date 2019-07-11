@@ -70,6 +70,7 @@ Clients
                                       <a href="{{ url('/start/reminder', ['id'=>$client->id]) }}" style="color:white;margin-top:2px;" class="btn bg-success btn-xs"> Resume Payment Reminders</a>
                                     @endif
                                   </li>
+                                  @endcan
                                 </ul>
                               </div>
                             </td>
