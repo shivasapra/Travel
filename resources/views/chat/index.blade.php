@@ -144,13 +144,13 @@ Direct Chat
     <!-- /.box-body -->
     <div class="box-footer" @if($messages == null) id="ct" @endif>
         @if($messages != null)
-        <form action="{{route('chat.store')}}" method="post" id="form">
+        <form onsubmit="sendMessage(this);" method="post" id="form">
           @csrf
           <div class="input-group">
             <input name='to_id' value="{{$id}}" id="to_id" hidden>
             <input type="text" name="message" id="message" onkeyup="test(this)" placeholder="Type Message ..." class="form-control" required>
                 <span class="input-group-btn">
-                  <button type="button" onclick="sendMessage(this);" id="button" class="btn btn-danger btn-flat" disabled>Send</button>
+                  <button type="submit"  id="button" class="btn btn-danger btn-flat" disabled>Send</button>
                 </span>
           </div>
         </form>
@@ -308,8 +308,8 @@ window.onload=function(){
 function sendMessage(test){
   
     
-    var to_id = $(test).parents("#form").find('#to_id').val();
-		var message = $(test).parents("#form").find('#message').val();
+    var to_id = $(test).find('#to_id').val();
+		var message = $(test).find('#message').val();
 		var params = 'to_id='+to_id+'&message='+message;
 		var Url = "http://buildatwill.com/cloud/public/chat/store";
 		 var xhr = new XMLHttpRequest();
