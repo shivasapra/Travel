@@ -155,9 +155,9 @@ Direct Chat
           </div>
         </form>
         @else
-        <div id="count_two">
+        
           <strong><span class="text-danger">{{$unread_messages->pluck('user_id')->unique()->count()}}{{' Unread Conversations'}}</span></strong>
-        </div>
+        
         @endif
     </div>
       <!-- /.box-footer-->
@@ -371,7 +371,6 @@ setInterval(function(){
   $("#testing").load(" #testing > *");
   $("#unread").load(" #unread > *");
   $("#count").load(" #count > *");
-  $("#count_two").load("#count_two > *");
 },1000);
 
 
