@@ -3744,8 +3744,8 @@ table.dataTable thead .sorting:after {
 .table>thead>tr>th {
     border-bottom: 0;
     vertical-align: middle;
-    color: #2d2d2d;
-    font-weight: 400;
+    color: #000;
+    font-weight: 600;
 }
 
 .table>tbody>tr>td,

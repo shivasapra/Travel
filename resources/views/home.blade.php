@@ -13,6 +13,7 @@ Dashboard
           </ol>
     </section>
 @stop
+
 @section('content')
 
       @if(Auth::user()->admin)
@@ -79,170 +80,56 @@ Dashboard
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-3">
-          <!-- DIRECT CHAT PRIMARY -->
-  <div class="box box-danger direct-chat direct-chat-danger">
-    <div class="box-header with-border">
-      <h3 class="box-title">Direct Chat</h3>
-
-      <div class="box-tools pull-right">
-
-        <button type="button" class="btn btn-box-tool" data-toggle="tooltip"  data-widget="chat-pane-toggle">
-            <span data-toggle="tooltip" title="{{$unread_messages->pluck('user_id')->unique()->count()}} " class="badge bg-red">{{$unread_messages->pluck('user_id')->unique()->count()}} New Messages</span></button>
-        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-        </button>
-        {{-- <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Contacts" data-widget="chat-pane-toggle"> --}}
-          {{-- <i class="fa fa-comments"></i></button> --}}
-        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-      </div>
-    </div>
-    <!-- /.box-header -->
-    <div class="box-body">
-      <!-- Conversations are loaded here -->
-      <div class="direct-chat-messages" style="height:350px;" id="testing">
-        <!-- Message. Default to the left -->
-        @if($messages != null)
-        @foreach($messages as $message)
-          @if($message->user_id == Auth::user()->id)
-            <div class="direct-chat-msg ">
-              <div class="direct-chat-info clearfix">
-                <span class="direct-chat-name pull-left">{{'You'}}</span>
-              <span class="direct-chat-timestamp pull-right">{{$message->date}}{{' '}}{{$message->time}}</span>
-              </div>
-              <!-- /.direct-chat-info -->
-              <img class="direct-chat-img"
-                @if(Auth::user()->avatar)
-                  src="{{asset(Auth::user()->avatar)}}"
-                @else
-                  src="{{asset('app/images/user-placeholder.jpg')}}"
-              @endif
-              alt="Message User Image">
-              <!-- /.direct-chat-img -->
-              <div class="direct-chat-text">
-                {{$message->message}}
-              </div>
-              <!-- /.direct-chat-text -->
-            </div>
-            <!-- /.direct-chat-msg -->
-          @elseif($message->to_id == Auth::user()->id)
-            <!-- Message to the right -->
-            <div class="direct-chat-msg right">
-              <div class="direct-chat-info clearfix">
-                <span class="direct-chat-name pull-right">{{App\User::find($message->user_id)->name}}</span>
-                <span class="direct-chat-timestamp pull-left">{{$message->date}}{{' '}}{{$message->time}}</span>
-              </div>
-              <!-- /.direct-chat-info -->
-              <img class="direct-chat-img"
-              @if(App\User::find($message->user_id)->avatar)
-                  src="{{asset(App\User::find($message->user_id)->avatar)}}"
-                @else
-                  src="{{asset('app/images/user-placeholder.jpg')}}"
-              @endif
-              alt="Message User Image"><!-- /.direct-chat-img -->
-              <div class="direct-chat-text">
-                  {{$message->message}}
-              </div>
-              <!-- /.direct-chat-text -->
-            </div>
-          @endif
-        @endforeach
-        @endif
-        <!-- /.direct-chat-msg -->
-      </div>
-      <!--/.direct-chat-messages-->
-      <!-- Contacts are loaded here -->
-      <div class="direct-chat-contacts" style="height:350px;">
-        <ul class="contacts-list">
-          @if($unread_messages->count()>0)
-          <?php $notified = collect();?>
-          @foreach($unread_messages as $unread)
-          @if(!$notified->contains($unread->user_id))
-          <li>
-            <a href="{{route('home.message',['id'=>$unread->user_id])}}">
-              <img class="contacts-list-img"
-              @if(App\User::find($unread->user_id)->avatar)
-                  src="{{asset(App\User::find($unread->user_id)->avatar)}}"
-                @else
-                  src="{{asset('app/images/user-placeholder.jpg')}}"
-              @endif
-              alt="User Image">
-
-              <div class="contacts-list-info">
-                    <span class="contacts-list-name">
-                      {{App\User::find($unread->user_id)->name}}
-                      <small class="contacts-list-date pull-right">{{$unread->date}}{{' '}}{{$unread->time}}</small>
-                    </span>
-                <span class="contacts-list-msg"><i class="fa fa-circle text-info"></i> {{$unread->message}}</span>
-              </div>
-              <!-- /.contacts-list-info -->
-            </a>
-          </li>
-          <?php
-              $notified->push($unread->user_id);
-            ?>
-          @endif
-          @endforeach
-          @endif
-          <!-- End Contact Item -->
-        </ul>
-        <!-- /.contatcts-list -->
-      </div>
-      <!-- /.direct-chat-pane -->
-    </div>
-    <!-- /.box-body -->
-    <div class="box-footer">
-        @if($messages != null)
-        <form action="{{route('chat.store')}}" method="post" id="form">
-          @csrf
-          <div class="input-group">
-            <input name='to_id' value="{{$id}}" id="to_id" hidden>
-            <input type="text" name="message" id="message" onkeyup="test(this)" placeholder="Type Message ..." class="form-control" required>
-                <span class="input-group-btn">
-                  <button type="button" onclick="sendMessage(this);" id="button" class="btn btn-danger btn-flat" disabled>Send</button>
-                </span>
-          </div>
-        </form>
-        @else
-        <strong><span class="text-info">{{$unread_messages->pluck('user_id')->unique()->count()}}{{' Unread Conversations'}}</span></strong>
-        @endif
-      </div>
-      <!-- /.box-footer-->
-    </div>
-    <!--/.direct-chat -->
-        </div>
-      <div class="col-md-3">
-        <div class="box box-primary">
+<div class="row">
+      <div class="col-md-6">
+        <div class="box box-primary" style="height:600px;">
             <div class="box-header with-border">
-              <h3 class="box-title"><strong>Expenses({{$expenses->count()}})</strong></h3>
+                <a href="{{route('expenses.get')}}"><h1 class="box-title" style="color:#0066FF;"><strong>Expenses</strong></h1></a>
 
               <div class="box-tools pull-right">
                 <a href="{{route('expenses.report')}}" class="btn btn-xs bg-olive">Report</a>
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                
               </div>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <ul class="products-list product-list-in-box">
-                @if($recent_expenses->count()>0)
-                @foreach($recent_expenses as $expense)
-                <li class="item">
-                  {{-- <div class="product-img">
-                    <img src="dist/img/default-50x50.gif" alt="Product Image">
-                  </div> --}}
-                  <div class="product-info">
-                    {{$expense->description}}
-                      <span class="label label-success pull-right">{{'$'.$expense->amount}}</span>
-                    <span class="product-description">
-                          {{$expense->date}}
-                        </span>
-                  </div>
-                </li>
-                @endforeach
-                @endif
-              </ul>
+                <table class="table table-bordered" id="example">
+                    <thead>
+                      <tr>
+                        <th>Sno.</th>
+                        <th>Date</th>
+                        <th>Description</th>
+                        <th>Company Name</th>
+                        <th>Invoice No</th>
+                        <th>Amount</th>
+                      </tr>
+                    	</thead>
+                    <tbody>
+                    	<?php $i = 1; ?>
+	                    	@foreach(App\expenses::all()->reverse()->take(12) as $expense)
+	                    	<tr>
+	                    		<th>{{$i++}}</th>
+	                    		<td>{{Carbon\Carbon::parse($expense->date)->format('d F Y')}}</td>
+	                    		<td>{{$expense->description}}</td>
+	                    		<td>
+                            @if($expense->company_name)
+                            {{$expense->company_name}}
+	                    			@else
+                            <strong>{{"N/A"}}</strong>
+	                    			@endif
+	                    		</td>
+	                    		<td>
+                            @if($expense->invoice_no)
+                            {{$expense->invoice_no}}
+	                    			@else
+                            <strong>{{"N/A"}}</strong>
+	                    			@endif
+	                    		</td>
+                          <td>{{$expense->amount}}</td>
+                        </tr>
+	                    	@endforeach
+                    </tbody>
+            </table>
             </div>
         </div>
 
@@ -256,7 +143,7 @@ Dashboard
             <section class="content-header">
               {{-- <span class="pull-right"><a href="{{route('invoice.report')}}" class="btn btn-xs bg-maroon">Report</a></span> --}}
               <h1 class="text-center">
-                <a href="{{route('invoice')}}"><span style="color:#0066FF;">Invoices({{$invoices->count()}})</span>
+                <a href="{{route('invoice')}}"><span style="color:#0066FF;">Invoices</span>
                 </a>
               </h1>
 
@@ -475,82 +362,28 @@ Dashboard
       </div>
     </div>
     <div class="row">
-       <div class="col-md-7">
+      {{-- <div class="col-md-7">
 
           <div class="box box-solid bg-black-gradient">
             <div class="box-header">
               <i class="fa fa-calendar"></i>
 
               <h3 class="box-title">Calendar</h3>
-              <!-- tools box -->
               <div class="pull-right box-tools">
-                <!-- button with a dropdown -->
                 <div class="btn-group">
-                  {{-- <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown"> --}}
-                    {{-- <i class="fa fa-bars"></i></button> --}}
-                  {{-- <ul class="dropdown-menu pull-right" role="menu"> --}}
-                    {{-- <li></li> --}}
-                    {{-- <li><a href="#">Clear events</a></li> --}}
-                    {{-- <li class="divider"></li>
-                    <li><a href="#">View calendar</a></li>--}}
-                  {{-- </ul> --}}
                 </div>
                 <button type="button" class="btn btn-lg btn-default" data-toggle="modal" data-target="#modal-info" ><span style="color: white"><strong>Add New Event</strong></span></button>
-                {{-- <button class="btn btn-sm btn-default" id="create"><span style="color: white">Add new event</span></button> --}}
                 <button type="button" class="btn btn-default btn-sm" data-widget="collapse"><span style="color: white"><i class="fa fa-minus"></i></span>
                 </button>
-                {{-- <button type="button" class="btn btn-success btn-sm" data-widget="remove"><i class="fa fa-times"></i> --}}
-                </button>
+                
               </div>
-              <!-- /. tools -->
             </div>
-            <!-- /.box-header -->
             <div class="box-body no-padding">
-              <!--The calendar -->
               <div id="calendar" style="width: 100%"></div>
             </div>
-            <!-- /.box-body -->
-            {{-- <div class="box-footer text-black">
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="clearfix">
-                    <span class="pull-left">Task #1</span>
-                    <small class="pull-right">90%</small>
-                  </div>
-                  <div class="progress xs">
-                    <div class="progress-bar progress-bar-green" style="width: 90%;"></div>
-                  </div>
-
-                  <div class="clearfix">
-                    <span class="pull-left">Task #2</span>
-                    <small class="pull-right">70%</small>
-                  </div>
-                  <div class="progress xs">
-                    <div class="progress-bar progress-bar-green" style="width: 70%;"></div>
-                  </div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="clearfix">
-                    <span class="pull-left">Task #3</span>
-                    <small class="pull-right">60%</small>
-                  </div>
-                  <div class="progress xs">
-                    <div class="progress-bar progress-bar-green" style="width: 60%;"></div>
-                  </div>
-
-                  <div class="clearfix">
-                    <span class="pull-left">Task #4</span>
-                    <small class="pull-right">40%</small>
-                  </div>
-                  <div class="progress xs">
-                    <div class="progress-bar progress-bar-green" style="width: 40%;"></div>
-                  </div>
-                </div>
-              </div>
-            </div> --}}
           </div>
-        </div>
-        <div class="col-md-5">
+      </div> --}}
+        <div class="col-md-6">
         <div class="box box-info">
             <div class="box-header">
               <i class="fa fa-envelope"></i>
@@ -558,14 +391,13 @@ Dashboard
               <h3 class="box-title">Quick Email</h3>
               <!-- tools box -->
               <div class="pull-right box-tools">
-                <button type="button" class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip"
-                        title="Remove">
-                  <i class="fa fa-times"></i></button>
+                
               </div>
               <!-- /. tools -->
             </div>
             <div class="box-body">
               <form action="{{route('send.email')}}" method="post">
+              
                 @csrf
                 <div class="form-group">
                   <input type="email" class="form-control" name="emailto" placeholder="Email to:">
@@ -574,17 +406,18 @@ Dashboard
                   <input type="text" class="form-control" name="subject" placeholder="Subject">
                 </div>
                 <div>
-                  <textarea class="textarea" placeholder="Message" name="message"
-                            style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                    <textarea name="content" id="summernote" class="form-control"></textarea>
                 </div>
 
-            </div>
-            <div class="box-footer clearfix">
-              <button type="submit" class="pull-right btn btn-default" id="sendEmail">Send
-                <i class="fa fa-arrow-circle-right"></i></button>
-            </div>
-            </form>
+                </div>
+                <div class="box-footer clearfix">
+                  <button type="submit" class="pull-right btn btn-default" id="sendEmail">Send
+                    <i class="fa fa-arrow-circle-right"></i></button>
+                </div>
+                
+              </form>
         </div>
+        
         </div>
     </div>
 
@@ -708,7 +541,6 @@ Dashboard
 @section('js')
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js'></script>
 <script>
     // $(document).ready(function(){
     //   $("#create").click(function(){
@@ -718,26 +550,26 @@ Dashboard
     //       });
     //   });
 
-    $(document).ready(function() {
+    // $(document).ready(function() {
       
-      var messageBody = document.querySelector('#testing');
+    //   var messageBody = document.querySelector('#testing');
       
-      messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
+    //   messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
     
-        // page is now ready, initialize the calendar...
-        $('#calendar').fullCalendar({
-            // put your options and callbacks here
-            events : [
-                @foreach($tasks as $task)
-                {
-                    title : '{{ $task->name }}',
-                    start : '{{ $task->task_date }}',
-                    url : '{{ route('tasks.show', $task->id) }}'
-                },
-                @endforeach
-            ]
-        })
-    });
+    //     // page is now ready, initialize the calendar...
+    //     $('#calendar').fullCalendar({
+    //         // put your options and callbacks here
+    //         events : [
+    //             @foreach($tasks as $task)
+    //             {
+    //                 title : '{{ $task->name }}',
+    //                 start : '{{ $task->task_date }}',
+    //                 url : '{{ route('tasks.show', $task->id) }}'
+    //             },
+    //             @endforeach
+    //         ]
+    //     })
+    // });
 
     $(document).ready(function() {
       window.onload=function(){
@@ -802,4 +634,16 @@ Dashboard
     
         
     </script>
+    
+@stop
+@section('css')
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css" rel="stylesheet">
+@stop
+@section('js')
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script>
+<script>
+  $(document).ready(function() {
+  $('#summernote').summernote();
+});
+</script>
 @stop

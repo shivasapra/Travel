@@ -117,7 +117,6 @@ class HomeController extends Controller
                                 ->with('invoice_infos',invoiceInfo::where('service_name','Visa Services')->orderBy('id','desc')->take(7)->get())
                                 ->with('total_wage',$total_wage)
                                 ->with('expenses',expenses::all())
-                                ->with('recent_expenses',expenses::where('auto',0)->orderBy('id','desc')->take(4)->get())
                                 ->with('tasks',$tasks)
                                 ->with('tax',settings::all())
                                 ->with('paid_invoices',$paid_invoices)
@@ -164,86 +163,86 @@ class HomeController extends Controller
         }
     }
 
-    public function HomeWithMessage($id){
-            $dt = Carbon::now();
-            $date_today = $dt->timezone('Europe/London');
-            $date = $date_today->toDateString();
-            $assignments = assignment::where('date',Carbon::now()->timezone('Europe/London')->addDays(-1)->toDateString())->where('status',0)->get();
-            foreach ($assignments as $assignment) {
-                $new_assignment = new assignment;
-                $new_assignment->date = $date_today;
-                $new_assignment->task = $assignment->task;
-                $new_assignment->task_description = $assignment->task_description;
-                $new_assignment->save();
-                $assignment->status = 2;
-                $assignment->save();
-            }
-            $expenses = expenses::where('auto',0)->get();
-            $total_amount = 0;
-            foreach ($expenses as $expense) {
-                $total_amount = $total_amount + $expense->amount;
-            }
-            $wages = wage::where('date',$date)->get();
-            $total_wage = 0;
-            foreach ($wages as $wage) {
-                $total_wage = $total_wage + $wage->today_wage;
-            }
-            $tasks = Task::all();
-            $client_passport_emails = array();
-            $mail_clients = client::where('mail_sent',0)->where('passport_expiry_date',Carbon::now()->addMonths(6)->toDateString())->get();
-            foreach ($mail_clients as $client) {
-               array_push($client_passport_emails,$client->email);
-               $client->mail_sent = 1;
-               $client->save();
-            }
-            $employee_passport_emails = array();
-            $mail_employees = employee::where('mail_sent',0)->where('passport_expiry_date',Carbon::now()->addMonths(6)->toDateString())->get();
-            foreach ($mail_employees as $employee) {
-               array_push($employee_passport_emails,$employee->email);
-               $employee->mail_sent = 1;
-               $employee->save();
-            }
-            $invoice_emails = array();
-            $mail_invoices = invoice::where('status',0)->where('mail_sent',Carbon::now()->addDays(-7)->toDateString())->get();
-            foreach ($mail_invoices as $invoice) {
-               array_push($invoice_emails,$invoice->client->email);
-               $invoice->mail_sent = $date;
-               $invoice->save();
-            }
-            $paid_invoices = invoice::where('status',1)->get();
-            $unpaid_invoices = invoice::where('status',0)->get();
-            $refunded_invoices = invoice::where('refund',1)->get();
-            $canceled_invoices = invoice::onlyTrashed()->get();
+    // public function HomeWithMessage($id){
+    //         $dt = Carbon::now();
+    //         $date_today = $dt->timezone('Europe/London');
+    //         $date = $date_today->toDateString();
+    //         $assignments = assignment::where('date',Carbon::now()->timezone('Europe/London')->addDays(-1)->toDateString())->where('status',0)->get();
+    //         foreach ($assignments as $assignment) {
+    //             $new_assignment = new assignment;
+    //             $new_assignment->date = $date_today;
+    //             $new_assignment->task = $assignment->task;
+    //             $new_assignment->task_description = $assignment->task_description;
+    //             $new_assignment->save();
+    //             $assignment->status = 2;
+    //             $assignment->save();
+    //         }
+    //         $expenses = expenses::where('auto',0)->get();
+    //         $total_amount = 0;
+    //         foreach ($expenses as $expense) {
+    //             $total_amount = $total_amount + $expense->amount;
+    //         }
+    //         $wages = wage::where('date',$date)->get();
+    //         $total_wage = 0;
+    //         foreach ($wages as $wage) {
+    //             $total_wage = $total_wage + $wage->today_wage;
+    //         }
+    //         $tasks = Task::all();
+    //         $client_passport_emails = array();
+    //         $mail_clients = client::where('mail_sent',0)->where('passport_expiry_date',Carbon::now()->addMonths(6)->toDateString())->get();
+    //         foreach ($mail_clients as $client) {
+    //            array_push($client_passport_emails,$client->email);
+    //            $client->mail_sent = 1;
+    //            $client->save();
+    //         }
+    //         $employee_passport_emails = array();
+    //         $mail_employees = employee::where('mail_sent',0)->where('passport_expiry_date',Carbon::now()->addMonths(6)->toDateString())->get();
+    //         foreach ($mail_employees as $employee) {
+    //            array_push($employee_passport_emails,$employee->email);
+    //            $employee->mail_sent = 1;
+    //            $employee->save();
+    //         }
+    //         $invoice_emails = array();
+    //         $mail_invoices = invoice::where('status',0)->where('mail_sent',Carbon::now()->addDays(-7)->toDateString())->get();
+    //         foreach ($mail_invoices as $invoice) {
+    //            array_push($invoice_emails,$invoice->client->email);
+    //            $invoice->mail_sent = $date;
+    //            $invoice->save();
+    //         }
+    //         $paid_invoices = invoice::where('status',1)->get();
+    //         $unpaid_invoices = invoice::where('status',0)->get();
+    //         $refunded_invoices = invoice::where('refund',1)->get();
+    //         $canceled_invoices = invoice::onlyTrashed()->get();
 
-            $messages = Chat::whereIn('user_id',[$id,Auth::user()->id])->WhereIn('to_id',[$id,Auth::user()->id])->orderBy('id','asc')->get();
-            $last = Chat::where('user_id',$id)->where('to_id',Auth::user()->id)->orderBy('id','desc')->get();
-            if ($last->count()>0) {
-                foreach($last as $l){
-                    $l->status = 1;
-                    $l->save();
-                }    
-            }
-            $unread_messages = Chat::where('to_id',Auth::user()->id)->where('status',0)->orderBy('id','desc')->get();
-            return view('home')->with('employees',employee::all())
-                                ->with('clients',client::all())
-                                ->with('expense',$total_amount)
-                                ->with('date',$date)
-                                ->with('invoices',invoice::orderBy('id','desc')->take(7)->get())
-                                ->with('invoice_infos',invoiceInfo::where('service_name','Visa Services')->orderBy('id','desc')->take(7)->get())
-                                ->with('total_wage',$total_wage)
-                                ->with('expenses',expenses::all())
-                                ->with('recent_expenses',expenses::where('auto',0)->orderBy('id','desc')->take(4)->get())
-                                ->with('tasks',$tasks)
-                                ->with('tax',settings::all())
-                                ->with('paid_invoices',$paid_invoices)
-                                ->with('unpaid_invoices',$unpaid_invoices)
-                                ->with('wages',$wages)
-                                ->with('canceled_invoices',$canceled_invoices)
-                                ->with('refunded_invoices',$refunded_invoices)
-                                ->with('unread_messages',$unread_messages)
-                                ->with('messages',$messages)
-                                ->with('id',$id);
-    }
+    //         $messages = Chat::whereIn('user_id',[$id,Auth::user()->id])->WhereIn('to_id',[$id,Auth::user()->id])->orderBy('id','asc')->get();
+    //         $last = Chat::where('user_id',$id)->where('to_id',Auth::user()->id)->orderBy('id','desc')->get();
+    //         if ($last->count()>0) {
+    //             foreach($last as $l){
+    //                 $l->status = 1;
+    //                 $l->save();
+    //             }    
+    //         }
+    //         $unread_messages = Chat::where('to_id',Auth::user()->id)->where('status',0)->orderBy('id','desc')->get();
+    //         return view('home')->with('employees',employee::all())
+    //                             ->with('clients',client::all())
+    //                             ->with('expense',$total_amount)
+    //                             ->with('date',$date)
+    //                             ->with('invoices',invoice::orderBy('id','desc')->take(7)->get())
+    //                             ->with('invoice_infos',invoiceInfo::where('service_name','Visa Services')->orderBy('id','desc')->take(7)->get())
+    //                             ->with('total_wage',$total_wage)
+    //                             ->with('expenses',expenses::all())
+    //                             ->with('recent_expenses',expenses::where('auto',0)->orderBy('id','desc')->take(4)->get())
+    //                             ->with('tasks',$tasks)
+    //                             ->with('tax',settings::all())
+    //                             ->with('paid_invoices',$paid_invoices)
+    //                             ->with('unpaid_invoices',$unpaid_invoices)
+    //                             ->with('wages',$wages)
+    //                             ->with('canceled_invoices',$canceled_invoices)
+    //                             ->with('refunded_invoices',$refunded_invoices)
+    //                             ->with('unread_messages',$unread_messages)
+    //                             ->with('messages',$messages)
+    //                             ->with('id',$id);
+    // }
 
     public function products(){
         return view('products')->with('products',products::orderBy('id','desc')->get());
