@@ -73,23 +73,23 @@ class clientController extends Controller
             'DOB' => array('required','regex:/[0-9]{4,4}\-[0-9]{2}\-[0-9]{2}/'),
             'phone' => 'required',
             ]);
-            if(employee::where('email', $request->email)->first()){
-                $v->errors()->add('Email', 'Email exists as an employee');
+        if(employee::where('email', $request->email)->first()){
+            $v->errors()->add('Email', 'Email exists as an employee');
+            return redirect()->back()->withErrors($v)->withInput();
+        }
+        elseif(client::where('email', $request->email)->first()){
+            $v->errors()->add('Email', 'Email exists as a client');
+            return redirect()->back()->withErrors($v)->withInput();
+        }
+        elseif(User::where('email', $request->email)->first()){
+            $v->errors()->add('Email', 'Email exists as an admin');
+            return redirect()->back()->withErrors($v)->withInput();
+        }
+        else{
+            if ($v->fails()) {
                 return redirect()->back()->withErrors($v)->withInput();
             }
-            elseif(client::where('email', $request->email)->first()){
-                $v->errors()->add('Email', 'Email exists as a client');
-                return redirect()->back()->withErrors($v)->withInput();
-            }
-            elseif(User::where('email', $request->email)->first()){
-                $v->errors()->add('Email', 'Email exists as an admin');
-                return redirect()->back()->withErrors($v)->withInput();
-            }
-            else{
-                if ($v->fails()) {
-                    return redirect()->back()->withErrors($v)->withInput();
-               }
-            }
+        }
 
         $test_client = client::where('unique_id','CLDC0001')->get();
         if ($test_client->count()>0) {

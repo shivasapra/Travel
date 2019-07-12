@@ -38,10 +38,11 @@ Dashboard
         
         <h3>
             @if(App\wage::where('employee_id',Auth::user()->employee[0]->id)->where('date',Carbon\Carbon::now()->toDateString())->get()->count()>0)
-              {{App\wage::where('employee_id',Auth::user()->employee[0]->id)->where('date',Carbon\Carbon::now()->toDateString())->get()[0]->total_hours}}</h3>
+              {{App\wage::where('employee_id',Auth::user()->employee[0]->id)->where('date',Carbon\Carbon::now()->toDateString())->get()[0]->total_hours}}
             @else
               0.00
             @endif
+        </h3>
         <p>Total Hours Today</p>
       </div>
       <div class="icon">

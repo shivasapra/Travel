@@ -93,6 +93,7 @@
                 </div>
               </li> --}}
           <!-- Notifications: style can be found in dropdown.less -->
+        <div id="re">
           @if(App\Chat::where('to_id',Auth::user()->id)->where('status',0)->get()->count() > 0)
           <li class="dropdown messages-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -138,6 +139,7 @@
             </ul>
           </li>
           @endif
+        </div>
           
           <!-- Tasks: style can be found in dropdown.less -->
           {{-- <li class="dropdown tasks-menu">
@@ -721,6 +723,12 @@
             toastr.danger("{{Session::get('danger')}}")
         @endif
     </script>
+
+<script>
+  setInterval(function(){
+    $("#re").load(" #re > *");
+  },1000);
+</script>
 {{-- <script type="text/javascript">
     var notificationsWrapper   = $('.dropdown-notifications');
     var notificationsToggle    = notificationsWrapper.find('a[data-toggle]');
