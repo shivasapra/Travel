@@ -34,6 +34,7 @@ Direct Chat
 
       <div class="box-tools pull-right " id="count">
         @if($messages != null)
+          <input type="text" id="i" value="{{$id}}">
           <button  type="button"  class="btn btn-danger btn-xs" onclick="clearr(this);" title="Clear Chat"><i class="fa fa-trash"></i></button>
         @endif
         <button type="button" class="btn btn-box-tool" data-toggle="tooltip"  data-widget="chat-pane-toggle" >
@@ -377,7 +378,7 @@ setInterval(function(){
 function clearr(temp){
   var foo = confirm('Are You Sure You Want To Clear The Chat? All Previous Records Will Be Deleted!!');
   if(foo){ 
-  var id = {{$id}};
+  var id = $(temp).parents('#count').find('#i').val();;
   var Url = "http://buildatwill.com/cloud/public/clear/chat/"+id;
     var xhr = new XMLHttpRequest();
     xhr.open('GET', Url, true);
