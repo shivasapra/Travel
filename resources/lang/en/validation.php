@@ -127,11 +127,11 @@ return [
     |
     */
 
-    'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
-        ],
-    ],
+    // 'custom' => [
+    //     'email' => [
+    //         'unique' => 'The email has already been taken as an'.App\User::where('email',($request->email))->get(),
+    //     ],
+    // ],
 
     /*
     |--------------------------------------------------------------------------

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\client;
+use App\employee;
 use Session;
 use Validator;
 use Mail;
@@ -61,7 +62,7 @@ class clientController extends Controller
      */
     public function store(Request $request)
     {   
-        Validator::make($request->all(), [
+        $v =Validator::make($request->all(), [
             'first_name' => 'required',
             'last_name' => 'required',
             'address' => 'required',
@@ -70,9 +71,25 @@ class clientController extends Controller
             'county' => 'required',
             'country' => 'required',
             'DOB' => array('required','regex:/[0-9]{4,4}\-[0-9]{2}\-[0-9]{2}/'),
-            'email' => 'unique:users|unique:clients',
             'phone' => 'required',
-            ])->validate();
+            ]);
+            if(employee::where('email', $request->email)->first()){
+                $v->errors()->add('Email', 'Email exists as an employee');
+                return redirect()->back()->withErrors($v)->withInput();
+            }
+            elseif(client::where('email', $request->email)->first()){
+                $v->errors()->add('Email', 'Email exists as a client');
+                return redirect()->back()->withErrors($v)->withInput();
+            }
+            elseif(User::where('email', $request->email)->first()){
+                $v->errors()->add('Email', 'Email exists as an admin');
+                return redirect()->back()->withErrors($v)->withInput();
+            }
+            else{
+                if ($v->fails()) {
+                    return redirect()->back()->withErrors($v)->withInput();
+               }
+            }
 
         $test_client = client::where('unique_id','CLDC0001')->get();
         if ($test_client->count()>0) {

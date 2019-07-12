@@ -11,26 +11,26 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        $user = App\User::create([
+        App\User::create([
         	'name' => 'Shiva Sapra',
         	'email' => 'shivasapra24@gmail.com',
             'password' => bcrypt('password'),
             'admin' => 1
         ]);
 
-        $user = App\User::create([
+        App\User::create([
             'name' => 'himsoft',
             'email' => 'info@himsoftsolution.com',
             'password' => bcrypt('password'),
             'admin' => 1
         ]);
 
-        $tax = App\settings::create([
+        App\settings::create([
             'tax' => 0,
             'enable' => 'yes',
         ]);
 
-        $settings = App\ClientSettings::create([
+        App\ClientSettings::create([
             'corporate_percentage' => 0,
             'individual_percentage' => 0,
         ]);

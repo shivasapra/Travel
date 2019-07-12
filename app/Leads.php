@@ -13,6 +13,7 @@ class Leads extends Model
     {   
     	return $this->belongsTo('App\User');
     }
+    
     public function client()
     {   
     	return $this->belongsTo('App\client');

@@ -11,28 +11,28 @@ class ProductsTableSeeder extends Seeder
      */
     public function run()
     {
-        $product = App\products::create([
+        App\products::create([
             'service' => 'Flight',
         ]);
-        $product = App\products::create([
+        App\products::create([
             'service' => 'Visa Services',
         ]);
-        $product = App\products::create([
+        App\products::create([
             'service' => 'Hotel',
         ]);
-        $product = App\products::create([
+        App\products::create([
             'service' => 'Insurance',
         ]);
-        $product = App\products::create([
+        App\products::create([
             'service' => 'Local Sight Sceen',
         ]);
-        $product = App\products::create([
+        App\products::create([
             'service' => 'Local Transport',
         ]);
-        $product = App\products::create([
+        App\products::create([
             'service' => 'Other Facilities',
         ]);
-        $product = App\products::create([
+        App\products::create([
             'service' => 'Car Rental',
         ]);
     }

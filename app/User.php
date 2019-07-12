@@ -37,7 +37,6 @@ class User extends Authenticatable
         return $this->hasOne('App\client');
     }
 
-    
     public function leads()
     {
         return $this->hasMany('App\Leads');

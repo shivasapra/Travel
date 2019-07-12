@@ -12,17 +12,19 @@ class employee extends Model
     {
     	return $this->hasMany('App\wage');
     }
+
     public function user()
     {
     	return $this->belongsTo('App\User');
     }
+
     public function assignment()
     {
     	return $this->hasMany('App\assignment');
     }
+
     public function leaves()
     {
     	return $this->hasMany('App\Leave');
-    }
-    
+    }  
 }

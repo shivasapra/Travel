@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\employee;
+use App\client;
 use App\User;
 use Carbon\Carbon;
 use Session;
@@ -52,10 +53,26 @@ class employeeController extends Controller
      */
     public function store(Request $request)
     {   
-        Validator::make($request->all(), [
-            'email' => 'unique:users|unique:employees',
+        $v = Validator::make($request->all(), [
             'rate' => 'integer'
-            ])->validate();
+            ]);
+        if(employee::where('email', $request->email)->first()){
+            $v->errors()->add('Email', 'Email exists as an employee');
+            return redirect()->back()->withErrors($v)->withInput();
+        }
+        elseif(client::where('email', $request->email)->first()){
+            $v->errors()->add('Email', 'Email exists as a client');
+            return redirect()->back()->withErrors($v)->withInput();
+        }
+        elseif(User::where('email', $request->email)->first()){
+            $v->errors()->add('Email', 'Email exists as an admin');
+            return redirect()->back()->withErrors($v)->withInput();
+        }
+        else{
+            if ($v->fails()) {
+                return redirect()->back()->withErrors($v)->withInput();
+           }
+        }
 
         $test_employee = employee::where('unique_id','CLDE0001')->get();
         if ($test_employee->count()>0) {
