@@ -144,7 +144,7 @@ Direct Chat
     <!-- /.box-body -->
     <div class="box-footer" @if($messages == null) id="ct" @endif>
         @if($messages != null)
-        <form onsubmit="sendMessage(this);" method="post" id="form">
+        <form onsubmit="sendMessage(this);" action="#" method="post" id="form">
           @csrf
           <div class="input-group">
             <input name='to_id' value="{{$id}}" id="to_id" hidden>
