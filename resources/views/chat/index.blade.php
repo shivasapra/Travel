@@ -22,7 +22,7 @@ Direct Chat
 <div class="row">
 <div class="col-md-6" >
     <!-- DIRECT CHAT PRIMARY --> 
-  <div class="box box-danger direct-chat direct-chat-danger ">
+  <div class="box box-danger direct-chat direct-chat-danger " >
     <div class="box-header with-border">
       <h3 class="box-title">
           @if($name != null)
@@ -155,7 +155,7 @@ Direct Chat
           </div>
         </form>
         @else
-        <div class="re">
+        <div class="count_two">
           <strong><span class="text-danger">{{$unread_messages->pluck('user_id')->unique()->count()}}{{' Unread Conversations'}}</span></strong>
         </div>
         @endif
@@ -370,7 +370,8 @@ setInterval(function(){
   $("#previous").load(" #previous > *");
   $("#testing").load(" #testing > *");
   $("#unread").load(" #unread > *");
-  $(".count").load(" .count > *");
+  $("#count").load(" #count > *");
+  $("#count_two").load("#count_two > *");
 },1000);
 
 
