@@ -307,7 +307,7 @@ window.onload=function(){
 <script>
 function sendMessage(test){
   
-    
+    $('#button').attr('disabled','disabled');
     var to_id = $(test).find('#to_id').val();
 		var message = $(test).find('#message').val();
 		var params = 'to_id='+to_id+'&message='+message;
