@@ -33,9 +33,11 @@ Direct Chat
       </h3>
 
       <div class="box-tools pull-right " id="count">
-        
+        @if($messages != null)
+          <a onClick="return confirm('Are You Sure You Want To Clear The Chat? All Previous Records Will Be Deleted!!')" href="{{route('clear.chat',['id'=>$id])}}" class="btn btn-danger btn-xs" title="Clear Chat"><i class="fa fa-trash"></i></a>
+        @endif
         <button type="button" class="btn btn-box-tool" data-toggle="tooltip"  data-widget="chat-pane-toggle" >
-            <span data-toggle="tooltip" title="{{$unread_messages->pluck('user_id')->unique()->count()}} " class="badge bg-red">{{$unread_messages->pluck('user_id')->unique()->count()}} New Messages </span></button>
+            <span data-toggle="tooltip" title="{{$unread_messages->pluck('user_id')->unique()->count()}} " class="badge bg-red">{{$unread_messages->pluck('user_id')->unique()->count()}} New Messages </span>
         </button>
       </div>
     </div>

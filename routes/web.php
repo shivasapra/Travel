@@ -131,6 +131,10 @@ Route::get('indexWithMessage/{id}',[
 	'uses'=>'ChatController@IndexWithMessage',
 	'as'=>'index.message'
 	])->middleware('permission:Direct Chat');
+Route::get('clear/chat/{id}',[
+	'uses'=>'ChatController@clear',
+	'as'=>'clear.chat'
+	])->middleware('permission:Direct Chat');
 
 
 Route::get('canceled/invoices',['uses'=>'InvoiceController@canceled','as'=>'canceled.invoices'])->middleware('permission:View Canceled Invoice');

@@ -53,9 +53,18 @@ class ChatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function clear($id)
     {
-        //
+        ChatLog::where('user_id',Auth::user()->id)->where('to_id',$id)->delete();
+        ChatLog::where('to_id',Auth::user()->id)->where('user_id',$id)->delete();
+
+        $chat = Chat::whereIn('user_id',[$id,Auth::user()->id])->WhereIn('to_id',[$id,Auth::user()->id])->get();
+        if($chat->count() > 0){
+            foreach($chat as $c){
+               $c->delete();
+            }
+        }
+        return redirect()->back();
     }
 
     /**
