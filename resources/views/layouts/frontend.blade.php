@@ -93,7 +93,7 @@
                 </div>
               </li> --}}
           <!-- Notifications: style can be found in dropdown.less -->
-        <div id="re">
+          <div>
           @if(App\Chat::where('to_id',Auth::user()->id)->where('status',0)->get()->count() > 0)
           <li class="dropdown messages-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
