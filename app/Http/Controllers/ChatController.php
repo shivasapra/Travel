@@ -64,7 +64,7 @@ class ChatController extends Controller
                $c->delete();
             }
         }
-        return redirect()->back();
+        return true;
     }
 
     /**
