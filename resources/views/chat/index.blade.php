@@ -34,7 +34,7 @@ Direct Chat
 
       <div class="box-tools pull-right " id="count">
         @if($messages != null)
-          <button onClick="return confirm('Are You Sure You Want To Clear The Chat? All Previous Records Will Be Deleted!!'); clear();" type="button"  class="btn btn-danger btn-xs" title="Clear Chat"><i class="fa fa-trash"></i></button>
+          <button onClick="clear();" type="button"  class="btn btn-danger btn-xs" title="Clear Chat"><i class="fa fa-trash"></i></button>
         @endif
         <button type="button" class="btn btn-box-tool" data-toggle="tooltip"  data-widget="chat-pane-toggle" >
             <span data-toggle="tooltip" title="{{$unread_messages->pluck('user_id')->unique()->count()}} " class="badge bg-red">{{$unread_messages->pluck('user_id')->unique()->count()}} New Messages </span>
@@ -375,6 +375,8 @@ setInterval(function(){
 },1000);
 
 function clear(){
+  var foo = confirm('Are You Sure You Want To Clear The Chat? All Previous Records Will Be Deleted!!');
+  if(foo){ 
   var id = {{$id}};
   var Url = "http://buildatwill.com/cloud/public/clear/chat/"+id;
     var xhr = new XMLHttpRequest();
@@ -387,6 +389,7 @@ function clear(){
             alert('Chat Deleted');
               }
         }
+    }
 }
     
 </script>
