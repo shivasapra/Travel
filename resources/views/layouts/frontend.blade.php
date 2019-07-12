@@ -71,7 +71,7 @@
       </a>
 
       <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
+        <ul class="nav navbar-nav" id="rel">
           <!-- Messages: style can be found in dropdown.less-->
           {{-- <li class="dropdown dropdown-notifications">
                 <a href="#notifications-panel" class="dropdown-toggle" data-toggle="dropdown">
@@ -772,7 +772,11 @@
       notificationsWrapper.show();
     });
   </script> --}}
-
+<script>
+  setInterval(function(){
+  $("#re").load(" #re > *");
+},1000);
+</script>
 @yield('js')
 </body>
 </html>
