@@ -142,7 +142,7 @@ Direct Chat
       <!-- /.direct-chat-pane -->
     </div>
     <!-- /.box-body -->
-    <div class="box-footer">
+    <div class="box-footer" @if($messages == null) id="ct" @endif>
         @if($messages != null)
         <form action="{{route('chat.store')}}" method="post" id="form">
           @csrf
@@ -155,9 +155,7 @@ Direct Chat
           </div>
         </form>
         @else
-        
-          <strong><span class="text-danger" id="ct">{{$unread_messages->pluck('user_id')->unique()->count()}}{{' Unread Conversations'}}</span></strong>
-        
+          <strong><span class="text-danger" >{{$unread_messages->pluck('user_id')->unique()->count()}}{{' Unread Conversations'}}</span></strong>
         @endif
     </div>
       <!-- /.box-footer-->
