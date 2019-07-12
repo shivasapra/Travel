@@ -384,7 +384,7 @@ function clearr(temp){
     xhr.send();
     xhr.onreadystatechange = processRequest;
     function processRequest(e) {
-          alert('Chat Deleted');
+			 	var response1 = JSON.parse(xhr.responseText);
         }
     }
 }
