@@ -106,7 +106,7 @@ Dashboard
                     	</thead>
                     <tbody>
                     	<?php $i = 1; ?>
-	                    	@foreach(App\expenses::all()->reverse()->take(12) as $expense)
+	                    	@foreach(App\expenses::all()->reverse()->take(8) as $expense)
 	                    	<tr>
 	                    		<th>{{$i++}}</th>
 	                    		<td>{{Carbon\Carbon::parse($expense->date)->format('d F Y')}}</td>
