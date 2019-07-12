@@ -34,7 +34,7 @@ Direct Chat
 
       <div class="box-tools pull-right " id="count">
         @if($messages != null)
-          <input type="text" id="i" value="{{$id}}">
+          <input type="text" id="i" value="{{$id}}" hidden>
           <button  type="button"  class="btn btn-danger btn-xs" onclick="clearr(this);" title="Clear Chat"><i class="fa fa-trash"></i></button>
         @endif
         <button type="button" class="btn btn-box-tool" data-toggle="tooltip"  data-widget="chat-pane-toggle" >

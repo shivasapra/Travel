@@ -71,7 +71,7 @@
       </a>
 
       <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav" id="rel">
+        <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
           {{-- <li class="dropdown dropdown-notifications">
                 <a href="#notifications-panel" class="dropdown-toggle" data-toggle="dropdown">
