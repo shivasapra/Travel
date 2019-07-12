@@ -774,7 +774,7 @@
   </script> --}}
 <script>
   setInterval(function(){
-  $("#re").load(" #re > *");
+  $("#rel").load(" #rel > *");
 },1000);
 </script>
 @yield('js')
