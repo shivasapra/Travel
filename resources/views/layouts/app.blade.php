@@ -16,7 +16,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
-
+    <link href="{{ asset('app/css/toastr.min.css') }}" rel="stylesheet">
     <!-- Styles -->
     <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/toastr.min.css') }}" rel="stylesheet">
@@ -113,6 +113,21 @@
         @endif
         @if(Session::has('info'))
             toastr.info("{{Session::get('info')}}")
+        @endif
+    </script>
+    <script src="{{ asset('app/js/toastr.min.js') }}"></script>
+    <script>
+        @if(Session::has('success'))
+            toastr.success("{{Session::get('success')}}")
+        @endif
+        @if(Session::has('info'))
+            toastr.info("{{Session::get('info')}}")
+        @endif
+        @if(Session::has('warning'))
+            toastr.warning("{{Session::get('warning')}}")
+        @endif
+        @if(Session::has('danger'))
+            toastr.danger("{{Session::get('danger')}}")
         @endif
     </script>
 </body>

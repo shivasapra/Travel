@@ -526,33 +526,41 @@
     <div class="row">
         <div class="col-md-12">
             <br><br>
+            <p>
+              <b>Terms & Conditions</b><br>
+              Can you plz check the spelling of your name Date and the destinations of travel to.
+              then reply back to me to issue your e_tickets for above Mention Airline on the itinerary 
+              once you order (full paid deposit or on accounts) and e_ticket has been issued we won’t make any amendment
+              on the confirmed issued itinerary and you will be liable for all losses occurred full or on during amendment*
+
+
+
+              Note:~
+              Don’t book any travel until you have received your visa
+              We cannot accept responsibility for travel booked before your visa arrives
+              (Check your passport & Visa Matches with your name)
+              if any above detail is wrong in the visa or initial booking and confirmed by you the Cloud Travel®
+              will not take responsibility for any unnecessary losses cause by you
+              on the e_mail or WhatsApp Please check carefully and reply to issue your e_ticket ??
+          </p><hr>
+          <input type="checkbox" name="" onclick="test();" id="check">I Agree To Above Mentioned Terms and Conditions!!
             @if($token != null)
               <h5>If the above information is correct then click on confirm button.</h5>
-              <a href="{{route('confirmInvoice', $token)}}" class="btn btn-success btn-md" style="display:inline-block; border: 1px solid green; border-radius: 4px; padding: 12px 23px; color: #ffffff; font-size: 20px; line-height: 30px; text-decoration: none; white-space: nowrap; font-weight: 600;background-color:green;">Confirm</a>
+              <a href="{{route('confirmInvoice', $token)}}" disabled id="but" class="btn btn-success btn-md" style="display:inline-block; border: 1px solid green; border-radius: 4px; padding: 12px 23px; color: #ffffff; font-size: 20px; line-height: 30px; text-decoration: none; white-space: nowrap; font-weight: 600;background-color:green;">Confirm</a>
               <br><br><h5>If No then <a href="{{route('refuseInvoice', $token)}}">Click Here </a></h5>
             @endif
-             <hr>
-            <p>
-                <b>Terms & Conditions</b><br>
-                Can you plz check the spelling of your name Date and the destinations of travel to.
-                then reply back to me to issue your e_tickets for above Mention Airline on the itinerary 
-                once you order (full paid deposit or on accounts) and e_ticket has been issued we won’t make any amendment
-                on the confirmed issued itinerary and you will be liable for all losses occurred full or on during amendment*
-
-
-
-                Note:~
-                Don’t book any travel until you have received your visa
-                We cannot accept responsibility for travel booked before your visa arrives
-                (Check your passport & Visa Matches with your name)
-                if any above detail is wrong in the visa or initial booking and confirmed by you the Cloud Travel®
-                will not take responsibility for any unnecessary losses cause by you
-                on the e_mail or WhatsApp Please check carefully and reply to issue your e_ticket ??
-            </p>
         </div>
     </div>
 </div>
 </div>
 </section>
+<script>
+  function test(){
+    if($('#check').is(':checked')){
+      console.log('testing');
+      $('#but').removeAttr('disabled');
+    }
+  }
+</script>
 </body>
 </html>
